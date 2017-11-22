@@ -1,9 +1,16 @@
+// Bootstrap overrides 
+$grid-gutter-width: 32px;
+
 // Heights
 $global-header-height: 56px;
 $global-footer-height: 40px;
 $global-main-height: calc(100vh - #{$global-header-height} - #{$global-footer-height});
 
-// Bootstrap overrides 
-$grid-gutter-width: 32px;
-
-$standard-border-radius: 3px;
+// Breakpoints
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+) !default;

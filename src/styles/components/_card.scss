@@ -1,0 +1,15 @@
+.qm-card {
+    @include make-card();
+
+    // Example
+    @media screen and (min-width: #{map-get($grid-breakpoints, 'xl')}) {
+        @content;
+        background-color: green;
+    }
+}
+
+@media screen and (min-width: #{map-get($grid-breakpoints, 'xl')}) {
+    .qm-card {
+        @include make-card($background-color: green);
+    }
+}
