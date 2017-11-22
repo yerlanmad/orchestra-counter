@@ -1,0 +1,15 @@
+.qm-footer {
+    background: $tertiary-color;
+
+    &__content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: $global-footer-height;
+    }
+
+    &__text {
+        color: $light-gray;
+        margin-bottom: 0;
+    }
+}
