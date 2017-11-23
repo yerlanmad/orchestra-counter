@@ -1,0 +1,81 @@
+.qm-button {
+    border: 1px solid transparent;
+    padding: rem($global-standard-padding $global-standard-padding * 2);
+    margin-bottom: rem($global-standard-padding / 2);
+    border-radius: rem($standard-border-radius);
+    cursor: pointer;
+    
+    &__text {
+        &:after {
+            display: block;
+            content: attr(title);
+            font-weight: bold;
+            height: 0;
+            overflow: hidden;
+            visibility: hidden;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        font-weight: bold;
+        outline: 0;
+    }
+
+    &[disabled] {
+        cursor: auto;
+        
+        &:hover,
+        &:focus {
+            font-weight: normal;
+        }
+    }
+
+    & + & {
+        margin-left: rem(8px);
+    }
+
+    & + &--full,
+    &--full + & {
+        margin-left: 0;
+    }
+
+    &--primary {
+        background: $primary-button-background;
+        color: $primary-button-text-color;
+        border-color: $primary-button-border-color;
+
+        &:active {
+            background: $primary-button-active-color;
+            border-color: $primary-button-active-color;
+        }
+
+        &[disabled] {
+            background: $disabled-color;
+            border-color: $disabled-color;
+        }
+    }
+
+    &--secondary {
+        background: $secondary-button-background;
+        color: $secondary-button-text-color;
+        border-color: $secondary-button-border-color;
+
+        &:active {
+            color: $secondary-button-active-color;
+        }
+
+        &[disabled] {
+            border-color: $disabled-color;
+            color: $disabled-color;
+        }
+    }
+
+    &--with-icon {
+        text-align: left;
+    }
+
+    &--full {
+        width: 100%;
+    }
+}
