@@ -72,11 +72,11 @@ $rem-px-only: false !default;
 }
 
 
-@mixin make-card($background-color: $white, $radius: $standard-border-radius) {
+@mixin make-card($background-color: $white, $radius: $standard-border-radius, $max-width: $standard-card-width) {
   background-color: $background-color;
   border-radius: $radius;
   width: 100%;
-  max-width: rem(476px);
+  max-width: rem($max-width);
   padding: rem(40px 32px); 
 }
 
