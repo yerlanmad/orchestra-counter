@@ -4,6 +4,8 @@ $grid-gutter-width: 32px;
 // Heights
 $global-header-height: 56px;
 $global-footer-height: 40px;
+$global-action-bar-height: 84px;
+$global-card-layout-height: calc(100% - #{$global-action-bar-height});
 $global-main-height: calc(100vh - #{$global-header-height} - #{$global-footer-height});
 
 // Breakpoints

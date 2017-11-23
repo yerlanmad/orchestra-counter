@@ -1,0 +1,8 @@
+.qm-action-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $global-action-bar-height;
+    background: $white;
+    box-shadow: -10px -12px 60px -6px rgba(0,0,0,0.75);
+}
