@@ -46,7 +46,10 @@
             <!-- Qmatic Main Right -->
             <div class="qm-main__right">
 
-
+         
+                {% import "partials/button.nunjucks" as button  %}
+                {{button.type('qm-button--secondary')}}
+            
                 <!-- Qmatic Action Buttons -->
                 <button class="qm-button qm-button--primary">
                     <span class="qm-button__text" title="Primary">Primary</span>

@@ -4,6 +4,8 @@ const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
 const del = require('del')
 
+var nunjucksRender = require('gulp-nunjucks-render');
+
 gulp.task('clean:build', function () {
   return del([
     'dist'
@@ -54,10 +56,21 @@ gulp.task('move:vendor-js', function () {
 gulp.task('dev', function () {
   gulp.watch('./src/styles/**/*.scss', ['compile:scss'])
   gulp.watch('./src/scripts/**/*.js', ['compile:js'])
-  gulp.watch('./src/index.html', ['move:html'])
+  gulp.watch('./src/templates/**/*.nunjucks', ['move:html'])
 })
 
-gulp.task('build', ['compile:js', 'compile:scss', 'move:vendor-js', 'move:images', 'move:icons', 'move:html'], function () {
+gulp.task('nunjucks:compile', function() {
+  // Gets .html and .nunjucks files in pages
+  return gulp.src('./src/templates/index.nunjucks')
+  // Renders template with nunjucks
+  .pipe(nunjucksRender({
+      path: ['./src/templates']
+    }))
+  // output files in app folder
+  .pipe(gulp.dest('dist'))
+});
+
+gulp.task('build', ['nunjucks:compile', 'compile:js', 'compile:scss', 'move:vendor-js', 'move:images', 'move:icons'], function () {
   return console.log('build completed.')
 })
 
