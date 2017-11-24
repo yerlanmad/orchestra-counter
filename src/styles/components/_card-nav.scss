@@ -1,0 +1,21 @@
+.qm-card-nav {
+    display: flex;
+    align-items: center;
+
+    &__left {
+        flex: 0 0 24px;
+    }
+
+    &__middle {
+        flex: 1 1 auto;
+        padding: 0 8px;
+    }
+
+    &__right {
+        flex: 0 0 24px;
+    }
+
+    &__title {
+        margin-bottom: 0;
+    }
+}

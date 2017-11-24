@@ -1,15 +1,15 @@
-.qm-button {
+.qm-btn {
     border: 1px solid transparent;
     padding: rem($global-standard-padding $global-standard-padding * 2);
-    margin-bottom: rem($global-standard-padding / 2);
     border-radius: rem($standard-border-radius);
+    white-space: nowrap;
     cursor: pointer;
     
     &__text {
         &:after {
             display: block;
             content: attr(title);
-            font-weight: bold;
+            font-weight: $font-weight-bold;
             height: 0;
             overflow: hidden;
             visibility: hidden;
@@ -18,7 +18,7 @@
 
     &:hover,
     &:focus {
-        font-weight: bold;
+        font-weight: $font-weight-bold;
         outline: 0;
     }
 
@@ -27,7 +27,7 @@
         
         &:hover,
         &:focus {
-            font-weight: normal;
+            font-weight: $font-weight-regular;
         }
     }
 
@@ -51,8 +51,8 @@
         }
 
         &[disabled] {
-            background: $disabled-color;
-            border-color: $disabled-color;
+            background: $button-disabled-color;
+            border-color: $button-disabled-color;
         }
     }
 
@@ -66,13 +66,17 @@
         }
 
         &[disabled] {
-            border-color: $disabled-color;
-            color: $disabled-color;
+            border-color: $button-disabled-color;
+            color: $button-disabled-color;
         }
     }
 
     &--with-icon {
         text-align: left;
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
     }
 
     &--full {

@@ -77,6 +77,23 @@ $rem-px-only: false !default;
   border-radius: $radius;
   width: 100%;
   max-width: rem($max-width);
-  padding: rem(40px 32px); 
+  padding: rem(40px 32px);
+  box-shadow: 0 3px 10px 0 rgba(0,0,0,0.18);
+
+  &__header {
+    margin-bottom: rem(16px);
+  }
+
+  &__content {
+    margin-bottom: rem(16px);
+  }
+
+  &__footer {
+    display: flex;
+
+    &--align-right {
+      justify-content: flex-end;
+    }
+  }
 }
 

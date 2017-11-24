@@ -22,7 +22,7 @@ $text-primary-color: $charcoal;
 
 $line-color: $soft-gray;
 
-$disabled-color: #929596;
+$button-disabled-color: rgba(0, 0, 0, 0.42);
 
 $primary-button-background: $qmatic-bordeaux;
 $primary-button-text-color: $white;
@@ -33,3 +33,7 @@ $secondary-button-background: $white;
 $secondary-button-text-color: $amaranth;
 $secondary-button-border-color: $amaranth;
 $secondary-button-active-color: $charcoal;
+
+$background-gradient-stop1: #3A4F6C; 
+$background-gradient-stop2: #56525C;
+$background-gradient-stop3: #44505E;

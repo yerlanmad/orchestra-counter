@@ -5,7 +5,7 @@
     &__left {
         flex: 0 0 41.66666%;
         height: 100%;
-        background: $pale-blue; // TODO: fix gradient
+        background: linear-gradient(268.62deg, $background-gradient-stop1 0%, $background-gradient-stop2 63.02%, $background-gradient-stop3 100%);
     }
 
     &__right {

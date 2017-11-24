@@ -1,5 +1,7 @@
-{% macro type(activeClass)%}
-<button class="qm-button {{activeClass}}">
-    <span class="qm-button__text" title="Primary">Qmaitc NunJucks Primary</span>
-</button>
+{% macro render(id, type)%}
+    <button 
+        {% if id %} id="{{id}}" {% endif %}
+        class="qm-btn {{type}}">
+        <span class="qm-btn__text" title="Send">Send</span>
+    </button>
 {% endmacro %}

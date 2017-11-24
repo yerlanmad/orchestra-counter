@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="css/main.css" />
 </head>
 
+<!-- Imported partials -->
+{% import "partials/button.nunjucks" as button  %}
+
 <body>
     <div class="qm-app">
         <!-- Qmatic Header -->
@@ -23,17 +26,7 @@
             <!-- Qmatic Main Left -->
             <div class="qm-main__left">
                 <div class="qm-card-layout">
-                    <div class="qm-card">
-                        <header class="qm-card__header">
-                            Hello
-                        </header>
-                        <div class="qm-card__content">
-
-                        </div>
-                        <footer class="qm-card__footer">
-
-                        </footer>
-                    </div>
+                    {% include "partials/ds-card.nunjucks" %}
                 </div>
 
                 <!-- Qmatic Action Bar -->
@@ -46,41 +39,8 @@
             <!-- Qmatic Main Right -->
             <div class="qm-main__right">
 
-         
-                {% import "partials/button.nunjucks" as button  %}
-                {{button.type('qm-button--secondary')}}
+                {{button.render(null, 'qm-btn--primary')}}
             
-                <!-- Qmatic Action Buttons -->
-                <button class="qm-button qm-button--primary">
-                    <span class="qm-button__text" title="Primary">Primary</span>
-                </button>
-                <button class="qm-button qm-button--secondary">
-                    <span class="qm-button__text" title="Secondary">Secondary</span>
-                </button>
-                
-                <!-- Qmatic Action Buttons Full -->
-                <button class="qm-button qm-button--primary qm-button--with-icon qm-button--full">
-                    <i class="qm-button__icon" aria-hidden="true"></i>
-                    <span class="qm-button__text" title="Primary full (icon)">Primary full (icon)</span>
-                </button>
-                <button class="qm-button qm-button--secondary qm-button--with-icon qm-button--full">
-                    <i class="qm-button__icon" aria-hidden="true"></i>
-                    <span class="qm-button__text" title="Secondary full (icon)">Secondary full (icon)</span>
-                </button>
-                <button class="qm-button qm-button--primary qm-button--full">
-                    <span class="qm-button__text" title="Primary full">Primary full</span>
-                </button>
-                <button class="qm-button qm-button--secondary qm-button--full">
-                    <span class="qm-button__text" title="Secondary full">Secondary full</span>
-                </button>
-
-                <!-- Qmatic Action Buttons Disabled -->
-                <button class="qm-button qm-button--primary" disabled>
-                    <span class="qm-button__text" title="Primary">Primary disabled</span>
-                </button>
-                <button class="qm-button qm-button--secondary" disabled>
-                    <span class="qm-button__text" title="Secondary">Secondary disabled</span>
-                </button>
             </div>
         </main>
         <footer class="qm-footer">

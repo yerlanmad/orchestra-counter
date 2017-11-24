@@ -1,0 +1,23 @@
+{% extends "partials/card/card.nunjucks" %}
+{% import "partials/card/card-nav.nunjucks" as cardNav  %}
+
+{% block id %}id="messageCard"{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header">
+        {{cardNav.render('deliveredServicesHeadline')}}
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content">
+        This is the content
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="qm-card__footer qm-card__footer--align-right">
+        {{button.render(null, 'qm-btn--secondary')}}
+        {{button.render(null, 'qm-btn--primary')}}
+    </div>
+{% endblock %}
