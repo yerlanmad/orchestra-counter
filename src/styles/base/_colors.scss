@@ -1,6 +1,5 @@
 // Generic colors
 $white: #FFFFFF;
-$light-gray: #F7F7F7;
 
 $midnight-blue: #1a1c33;
 $pale-blue: #334366;
@@ -8,7 +7,7 @@ $pale-blue: #334366;
 $qmatic-bordeaux: #EC1651;
 $pale-aquamarine: #03996C;
 
-$light-background: #f4f4f4;
+$light-gray: #f4f4f4;
 
 $charcoal: #2b2b2b;
 $soft-gray: #e0e0e0;
@@ -24,6 +23,8 @@ $background-gradient-stop3: #44505E;
 $primary-color: $qmatic-bordeaux;
 $secondary-color: $pale-aquamarine;
 $tertiary-color: $midnight-blue;
+
+$right-background-color: $light-gray;
 
 $text-primary-color: $charcoal;
 
