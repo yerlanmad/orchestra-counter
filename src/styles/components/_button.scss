@@ -1,15 +1,18 @@
 .qm-btn {
     border: 1px solid transparent;
-    padding: rem($global-standard-padding $global-standard-padding * 2);
+    padding: rem($global-standard-padding / 2 $global-standard-padding * 2);
     border-radius: rem($standard-border-radius);
     white-space: nowrap;
     cursor: pointer;
-    
+    font-size: rem($button-font-size);
+    font-weight: $font-weight-light;
+
     &__text {
+        
         &:after {
             display: block;
             content: attr(title);
-            font-weight: $font-weight-bold;
+            font-weight: $font-weight-medium;
             height: 0;
             overflow: hidden;
             visibility: hidden;
@@ -18,7 +21,7 @@
 
     &:hover,
     &:focus {
-        font-weight: $font-weight-bold;
+        font-weight: $font-weight-medium;
         outline: 0;
     }
 
@@ -27,12 +30,12 @@
         
         &:hover,
         &:focus {
-            font-weight: $font-weight-regular;
+            font-weight: $font-weight-light;
         }
     }
 
     & + & {
-        margin-left: rem(8px);
+        margin-left: rem(16px);
     }
 
     & + &--full,
