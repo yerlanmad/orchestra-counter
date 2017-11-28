@@ -1,0 +1,55 @@
+<link rel="stylesheet" type="text/css" href="/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="/css/css3.css">
+        <link rel="stylesheet" type="text/css" href="css/jquery/jquery.ui.all.css"/>
+        <link rel="stylesheet" type="text/css" href="css/dataTable.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/orchestra.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="css/ie7.css"/>
+        <![endif]-->
+        <!-- json2.js include for IE7 which does not have native JSON support, see http://www.json.org/js.html for source code and further info -->
+        <!--[if lt IE 8]>
+        <script type="text/javascript" src="scripts/json2.js"></script>
+        <![endif]-->
+        <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="scripts/jquery/i18n/jquery-ui-i18n.js"></script>
+        <!--[if lt IE 10]>
+		<script type="text/javascript" src="scripts/rest-ie.js"></script>
+		<![endif]-->
+        <!-- New CometD based server-push -->
+        <!-- Per R5, we don't use DWR for server push of events anymore -->
+        <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
+        <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
+        <script type="text/javascript" src="/events/qevents_cometd.js"></script>
+        <script type="text/javascript" src="scripts/init.js"></script>
+        <script type="text/javascript" src="scripts/script.js?2016061415"></script>
+        <script type="text/javascript" src="scripts/util.js?2016022608"></script>
+        <script type="text/javascript" src="scripts/customer.js?20160630"></script>
+        <script type="text/javascript" src="scripts/deliveredServices.js"></script>
+        <script type="text/javascript" src="scripts/customMarks.js"></script>
+		<script type="text/javascript" src="scripts/outcomes.js"></script>
+        <script type="text/javascript" src="scripts/servicePointPool.js?20160630"></script>
+        <script type="text/javascript" src="scripts/userPool.js?20160630"></script>
+        <script type="text/javascript" src="scripts/transfer.js?2016022608"></script>
+        <script type="text/javascript" src="scripts/queues.js?20160630"></script>
+        <!--<script type="text/javascript" src="scripts/projectedVisits.js"></script> -->
+		<script type="text/javascript" src="scripts/chat.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.i18n.properties.js"></script>
+        <script type="text/javascript" src="scripts/i18n-util.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.countdown.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="scripts/i18n.js"></script>
+        <script type="text/javascript" src="scripts/sessvars.js"></script>
+		<script type="text/javascript" src="scripts/ieService.js?2015100609"></script>
+		<script type="text/javascript" src="scripts/settings.js"></script>
+
+        {# Component Links #}
+        <link rel="stylesheet" href="css/main.css" />
+        <script type="text/javascript" src="scripts/main.js"></script>

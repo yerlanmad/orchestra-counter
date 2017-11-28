@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Counter</title>
-    <link rel="stylesheet" href="css/main.css" />
+    {% include "partials/external_links.nunjucks" %}
 </head>
 
 <!-- Imported partials -->
@@ -49,6 +49,9 @@
             </div>
         </footer>
     </div>
+
+    {% include "partials/previous_counter.nunjucks" %}
+
 </body>
 
 </html>

@@ -1,0 +1,816 @@
+
+html, body{margin:0; padding:0;	font-family: Arial, verdana, sans-serif; font-size:12px;}
+a{text-decoration:none; color:#0000FF;}
+a:visited{color:#00F;}
+a:hover{text-decoration:underline;}
+a:active{color:#F00;}
+img{border:0 none;}
+select{-moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+
+/* -- remove the modules by default --*/
+
+#customerModule{
+display: none;
+}
+
+ #servicePointPoolModule , #userPoolModule, #queuesModule, #deliveredServicesModule, #addDeliveredServiceLink,
+ #selectOutcome, #selectOutcomeLabel, #transferBtn, #reinsertBtn, #multiServicesModule, #addMultiServiceLink,
+ #customMarksModule, #addCustomMarkLink, #chatModule
+ {
+    visibility: hidden;
+}
+
+#projectedVisitsModule {
+    visibility: hidden;
+}
+
+ul.direction-flexible-text {
+    padding: 0;
+    margin: 0;
+}
+
+ul.direction-flexible-text li {
+    display: inline-block;
+    list-style-type: none;
+}
+
+.widthPercent100{width:100%;}
+.marginForOngoingVisit{margin-bottom:30px;}
+.normal{font-weight:normal;}
+.bold{font-weight:bold;}
+.alignOppositeNrml{text-align:right;}
+.alignCenter{text-align:center;}
+.fiftyFiftyMarg{margin:0 auto;}
+.roundedCorner3{-moz-border-radius:3px;	-webkit-border-radius:3px; border-radius:3px;}
+.roundedCorner5{-moz-border-radius:5px;	-webkit-border-radius:5px; border-radius:5px;}
+a.closeButton{height:23px; width:26px;float:right; position:relative; top:-2px; right:-7px; background:transparent url(../images/closeButton.png);outline: 0 none;}
+a:hover.closeButton{background:transparent url(../images/closeButtonHover.png);}
+a:active.closeButton{background:transparent url(../images/closeButtonActive.png);}
+a.addButton{height:23px; width:26px;float:right; position:relative; top:-2px; right:-7px; background:transparent url(../images/addButton.png);outline: 0 none;}
+a:hover.addButton{background:transparent url(../images/addButtonHover.png);}
+a:active.addButton{background:transparent url(../images/addButtonActive.png);}
+.dialogueBox{width:400px; background:#fff;}
+.dialogueBoxContent{text-align:center; padding:40px; font-weight:bold; font-size:16px;}
+.dialogueBoxContent p{line-height:1.6em;}
+.dialogueBoxContent a.customButtonSmall{float:none; display:inline-block; margin:30px 30px 0;}
+.dialogueBoxCancelLink{position:absolute; top:178px; right:15px;}
+
+/* Modal popup stuff*/
+.modalPage{position:absolute; top:0; left:0; width:100%; height:100%; display:none;}
+.smallText {font-size:0.8em;}
+.modalContainer{z-index:1300;}
+.modalOpacityDiv{filter:alpha(opacity=70); -moz-opacity:0.7; -khtml-opacity:0.7; opacity:0.7; position:absolute; left:0;
+    top:0; bottom:0; right:0; z-index:1100; background:#999;}
+.modalContainer select{background:#fff; border:1px solid #9cb4d8; font-size:12px; min-width:206px;}
+.branchForm{width:450px;}
+.transferForm{width:600px;}
+.customerForm{width:425px;}
+.confirmCounterHijackingForm{width:400px; text-align: center;}
+.addServicesForm {width:500px;}
+
+td.servicedone { 
+text-decoration:line-through;
+}
+
+#message, #error {
+    position:fixed;
+    z-index: 9999;
+    visibility: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin: 3px 15px 0 15px;
+    width: 98%;
+}
+
+#settingsTable{padding:5px; margin-top:5px; border:0 none;}
+#settingsTable td{height:25px;}
+#confirmSettingsBtnModal, #cancelSettingsBtnModal {
+    margin-top:10px
+}
+.logoutForm{max-width:530px; text-align:center;}
+#loggedOutLink{display:inline-block; margin:100px 20px;}
+#spinnerAnimation {width: 32px; height: 32px; z-index: 1000; top:0; float: right;
+    background: transparent url(../../images/spinner.gif) center center no-repeat;}
+.branchForm, .addServicesForm , .logoutForm, .customerForm, .confirmCounterHijackingForm, .confirmCustomer, .displayQueueSpinner, .transferForm{
+    position:relative; border:1px solid black; background-color:#fefefe; top:0; padding:5px; margin:5% auto; z-index:1310;}
+.displayQueueSpinner{background-color: #f5f5f5; margin-top: 25%; white-space: nowrap; width: 365px; overflow: hidden;
+    text-overflow: ellipsis;}
+/* End modal popup stuff*/
+
+/* Autocomplete styles */
+.ui-autocomplete {
+	max-height: 100px;
+	overflow-y: auto;
+}
+#customerSearchDiv{ max-height: 125px; margin-top:9px; bottom: 0; overflow-y: auto; background: #FFFFFF; color: #444400; font-family: arial,sans-serif; font-size: 10pt; height: 125px; width: 646px; }
+#customerSearchTable{ width: 100%; color: #444400; font-family: arial,sans-serif; font-size: 10pt; margin: 0; padding: 0; border-spacing: 0; border-collapse: collapse; height:10px }
+#customerSearchTable thead tr th { color: #444400; font-family: arial,sans-serif; white-space: nowrap; padding: 0; margin: 0; padding-left: 2px; padding-right: 6px; text-align: left; }
+.dataTables_wrapper {min-height: 100px;}
+.customerSearchHeader { font-size: 12px; font-weight: bold; padding-left: 6px; padding-right: 6px; padding-top: 4px; text-align: left; }
+#customerSearchTable tbody { margin-top: 0; }
+#customerSearchTable tr td { padding-top: 2px; color: #000000; font-family: Arial,Verdana,sans-serif; font-size: 11px; cursor: pointer; white-space: nowrap; text-align: left; }
+.row_selected {background:transparent url(../images/titleBarGradient.png) repeat-x left top; color: #000000; font-family: Arial,Verdana,sans-serif; font-size: 11px; }
+/* End autocomplete */
+
+/*#header{margin-bottom:15px; padding-top:5px; border-bottom:3px solid #EEEEEE;} */
+#headerTable{margin:3px; padding:0;}
+#headerTable select{background:#fff; border:1px solid #9cb4d8; font-size:12px; margin:0; padding:0; height:19px;}
+#userName, #workstation, #branch{font-weight:bold;}
+.applySettingsButton{font-size:11px; height:20px; margin:0 5px; text-transform:uppercase;}
+input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
+#appShortcuts{position:absolute; right:0; left:auto; top:6px; margin:5px 10px;}
+
+#modulesContainer{
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-width:840px;
+    margin:60px 15px;
+}
+
+#modulesContainer h2{
+    background: transparent url(../../images/bg_header.gif) repeat-x;
+    color:white;
+    font-size:16px;
+    line-height:19px;
+    margin:0;
+    padding:4px 10px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+}
+
+.subheader {
+    background: #010101 url(../../images/bg_header.gif) repeat-x;
+    font-weight: bold;
+    color: white;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+#displayQueueSpinnerText {
+    color:black;
+    font-size:16px;
+    line-height:19px;
+    margin:0;
+    padding:5px 10px;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    float: left;
+    width: 80%;
+}
+
+.module{
+    min-height:208px;
+    background:transparent;
+}
+
+.moduleContentContainer{
+    height:180px;
+    overflow:hidden;
+    border: 1px #EDEDED solid;
+    border-top: 0;
+    background: white;
+}
+
+.submodule {
+    min-height:104px;
+    background:transparent;
+}
+
+.submoduleContentContainer{
+    height:76px;
+    overflow:hidden;
+    border: 1px #EDEDED solid;
+    border-top: 0;
+    background: white;
+}
+
+#callButtons{margin:0 0 10px 10px; width: 100%;}
+#callButtons td {float: left;}
+#callButtons .deliveredServiceLink, #callButtons {float: right;}
+.settings {text-align:center; position:relative; bottom:2px;}
+
+/************* Ongoing visit ************************/
+#ongoingVisitModuleWrapper{float:left; width:43%; margin-right:1%; position:relative;}
+#ongoingVisitModule{min-height:206px;background-color:#fffaac; border:1px solid #e2e2d6 !important;}
+#ongoingVisitInfo{margin:10px; padding:4px; color:#444400;}
+#ongoingVisitInfo .descriptionCol{text-align:right;}
+#ongoingVisitInfo table th{text-align: left;}
+#ongoingVisitButtons{bottom:10px; position:absolute; margin:0 10px; white-space:nowrap;}
+#ticketNumber{font-size:20px; font-weight:bold; padding:5px 0 10px;}
+#serviceId{font-size:20px; font-weight:bold; padding:5px 0 10px 3px;}
+#linkedCustomerField{font-size:15px; font-weight:bold;padding:0 0 0 10px;}
+#verticalMessageRow td{font-size:14px; border:1px solid #ccc; padding:4px;}
+
+
+
+/************* Chat ************************/
+#chatModule{float:left; width:23%;}
+#tabs{
+	font-size:10px;
+	height: 80%;	
+	width: 95%;
+	float: left;
+}
+#chatInput{
+	padding-top: 3px;
+	padding-left: 1px;	
+	float: left;
+}
+
+.chatTable{
+	border-spacing: 2px;
+	height: 60%;
+
+}
+
+.chatTable td{
+	vertical-align:bottom;
+	/*border: solid 1px #222222;*/
+
+}
+
+
+.chatTable tr{
+	vertical-align:bottom;
+	/*border: solid 1px #222222;*/
+
+}
+
+.chatNameList{	
+	float: center;
+	text-align: center;
+	margin-left: 4px;
+	font-size:12px;
+	cursor: pointer;
+}
+
+.ui-tabs .ui-tabs-panel{
+	padding: 0px;
+	height: 60%;
+
+}
+
+.ui-closable-tab{
+	white-space: nowrap;
+}
+.ui-icon-close { float: left;}
+
+
+.colorAll{color: blue;}
+.colorMySelf{color: grey;}
+.color1{color: red;}
+.color2{color: green;}
+.color3{color: lightblue;}
+.color4{color: purple;}
+.color5{color: pink;}
+
+/******** End Chat Module  ************/
+
+/************ Notes *****************/
+/*#notesModule{float:left; margin-right:1%; width:32%; margin-top:18px;}*/
+/*#noteInput{height:80%; width:100%;}*/
+/*#notes .firstColumn{text-align:center;}*/
+/*************** Marks ********************/
+/*#marksModule{float:left; width:33%; margin-top:18px;}*/
+/*#marks .firstColumn .firstColumn{text-align:center;}*/
+/*#selectMarkTypeTable .firstColumn{text-align:center; width: 38px !important;}*/
+/*#selectMarkTypeTable .middleColumn{text-align:center;}*/
+#selectCustomMarkTable .firstColumn{text-align:center; width: 38px !important;}
+#selectCustomMarkTable .middleColumn{text-align:center;}
+/*#marks .lastColumn, #selectMarkTypeTable .lastColumn{text-align:center;}*/
+
+#customMarks .firstColumn{text-align:left;}
+#customMarks .middleColumn{text-align:center;}
+#customMarks .lastColumn{text-align:center;}
+
+
+#customMarks .removeMark{
+    background:transparent url(../images/minusIcon.gif) no-repeat center; 
+    padding: 5px 0 0;
+    display:inline-block; 
+    width:30px;
+    height:15px;
+}
+#customMarks .removeMark:hover{
+    background-color: #FFDEAD;
+}
+/*************** Delivered services, module and dialog ********************/
+
+#deliveredServicesModule{float:right; width:32%;}
+#multiServicesModule{float:right; width:32%; margin-top:9px;}
+#customMarksModule{float:right; width:32%; margin-top:9px; margin-right: 2%;}
+#selectDeliveredServiceTable .firstColumn{text-align:center;}
+#deliveredServices .firstColumn{text-align:center;}
+#deliveredServices .middleColumn{text-align:center;}
+#deliveredServices .lastColumn{text-align:center;}
+
+/*************** Outcomes, module and dialog ********************/
+#outcomesModule{float:right; width:22%;}
+#selectOutcomeTable .firstColumn{text-align:center; width: 38px !important;}
+#selectOutcomeTable .lastColumn{text-align:center;}
+#outcomes .firstColumn{text-align:center;}
+#outcomes .lastColumn{text-align:center;}
+
+/*************** Walks *******************/
+#walkDirectServices .firstColumn{text-align:center;}
+#walkDirectServices .lastColumn{text-align:center;}
+
+/*************** Transfers **************/
+#transfers .firstColumn{text-align:center;}
+#transfers .middleColumn{text-align:center;}
+#transfers .lastColumn{text-align:center;}
+
+/************** Customer **********************/ 
+#customerModule{float:left; margin-right: 2%; width:32%; margin-top:9px; clear: both;}
+#customer{margin:0 auto;}
+#customer td{padding:12px 0;}
+#customer input{width:200px;}
+#createCustomerTable input{width:150px;}
+#createCustomerTable select{min-width:150px !important; width:150px !important;}
+#createCustomerButtonsTable{float:right;}
+#createCustomerButtonsTable td{padding-right:5px;}
+#editCustomerTable input{width:150px;}
+#editCustomerTable select{min-width:150px !important; width:150px !important;}
+#editCustomerButtonsTable{float:right;}
+#editCustomerButtonsTable td{padding-right: 5px;}
+.newCust{background:transparent url(../images/newCustIcon.gif) no-repeat center 9px; padding:45px 0 0; display:inline-block; width:80px; min-height:22px;}
+.linkCust{background:transparent url(../images/linkCustIcon.gif) no-repeat center 9px; padding:45px 0 0; display:inline-block; width:80px; min-height:22px;}
+.editCust{background:transparent url(../images/editCustIcon.gif) no-repeat center 9px; padding:45px 0 0; display:inline-block; width:80px; min-height:22px;}
+.deleteCust{background:transparent url(../images/deleteCustIcon.gif) no-repeat center 9px; padding:45px 0 0; display:inline-block; width:80px; min-height:25px;}
+#newCustomerOuter{display:inline-block; width:80px; min-height:70px;}
+#newCustomerOuter:hover{background:transparent url(../images/customerLinkHover.png) no-repeat center top;}
+#linkCustomerOuter{display:inline-block; width:80px; min-height:70px;}
+#linkCustomerOuter:hover{background:transparent url(../images/customerLinkHover.png) no-repeat center top;}
+#editCustomerOuter{display:inline-block; width:80px; min-height:70px;}
+#editCustomerOuter:hover{background:transparent url(../images/customerLinkHover.png) no-repeat center top;}
+#deleteCustomerOuter{display:inline-block; width:80px; min-height:70px;}
+#deleteCustomerOuter:hover{background:transparent url(../images/customerLinkHover.png) no-repeat center top;}
+.ui-autocomplete-loading{background:transparent url(../images/ui-anim_basic_16x16.gif) right center no-repeat;}
+
+/*************** Pools ************************/
+#poolsModule {float: left; width: 32%; margin-top:9px; margin-right: 1%;}
+#poolsModule > table {width: 100%; table-layout:fixed;}
+
+#userPool .firstColumn, #servicePointPool .firstColumn{text-align:center;}
+#userPool .lastColumn, #servicePointPool .lastColumn{text-align:center;}
+#userPool th, #servicePointPool th{padding:5px 10px;}
+#userPool .ticketNumSpan, #servicePointPool .ticketNumSpan{
+    color:#0000FF;
+    cursor: pointer;
+}
+#userPool .ticketNumSpan:hover, #servicePointPool .ticketNumSpan:hover{text-decoration:underline;}
+#userPool .ticketIdDisabled, #servicePointPool .ticketIdDisabled{color:#999; cursor:default;}
+#userPool .ticketIdDisabled:hover, #servicePointPool .ticketIdDisabled:hover{text-decoration:none;}
+
+/*********** Queues ******************/
+#queuesModule{float:right; width: 32%; margin-top:9px;}
+#queues .firstColumn{text-align:center;}
+#queues .middleColumn{text-align:center;}
+#queues .lastColumn{text-align:center;}
+#queues .queueName{color:#0000FF; cursor:pointer;}
+#queues .queueName:hover{text-decoration:underline;}
+#queues .queueNameDisabled{color:#999; cursor:default;}
+#queues .queueNameDisabled:hover{text-decoration:none;}
+#queues th{padding:5px 10px;}
+
+/*********** Projected visits module ******************/
+#projectedVisitsModule{float:right; width: 32%; margin-top:9px;}
+#projectedVisits .firstColumn{text-align:center;}
+#projectedVisits .lastColumn{text-align:center;}
+#projectedVisits th{padding:5px 10px;}
+#projectedVisits .ticketNumSpan{
+    font-size:18px;
+}
+
+/************* Tickets ****************/
+#tickets .firstColumn{text-align:center; height:48px;}
+#tickets .middleColumn{text-align:center; height:48px;}
+#tickets .lastColumn{text-align:center; height:48px;}
+#tickets .ticketNumSpan{
+    font-size:18px;
+}
+/*#tickets .ticketNumSpan:hover{text-decoration:underline;}*/
+
+#tickets .transferTicket{
+    background:transparent url(../images/moveIcon.gif) no-repeat center;
+    padding: 5px 0 0;
+    display:inline-block; 
+    width:45px; 
+    height:40px;
+}
+#tickets .transferTicket:hover{
+    background-color: #FFDEAD;
+}
+
+#tickets .removeTicket{
+    background:transparent url(../images/minusIcon.gif) no-repeat center; 
+    padding: 5px 0 0;
+    display:inline-block; 
+    width:30px;
+    height:40px;
+}
+#tickets .removeTicket:hover{
+    background-color: #FFDEAD;
+}
+
+
+#tickets .callTicket{
+    background:transparent url(../images/cherryPick.gif) no-repeat center; 
+    padding: 5px 0 0;
+    display:inline-block; 
+    width:30px;
+    height:40px;
+}
+#tickets .callTicket:hover{
+    background-color: #FFDEAD;
+}
+/***************** Transfer ticket ******************/
+#transferTicketQueueToQueueTable .firstColumn,
+#transferQueueToServicePointPoolTable .firstColumn,
+#transferQueueToStaffPoolTable .firstColumn,
+#transferQueues .firstColumn,
+#transferTicketToStaffPoolTable .firstColumn,
+#transferTicketToServicePointPoolTable .firstColumn {text-align:center;}
+
+#transferTicketQueueToQueueTable .middleColumn,
+#transferQueueToServicePointPoolTable .middleColumn,
+#transferQueueToStaffPoolTable .middleColumn,
+#transferQueues .middleColumn,
+#transferTicketToStaffPoolTable .middleColumn,
+#transferTicketToServicePointPoolTable .middleColumn {text-align:center;}
+
+/* All action icons on one row */
+#transferTicketQueueToQueueTable .middleColumn {min-width: 100px;}
+
+#transferTicketQueueToQueueTable .lastColumn,
+#transferQueueToServicePointPoolTable .lastColumn,
+#transferQueueToStaffPoolTable .lastColumn,
+#transferQueues .lastColumn,
+#transferTicketToStaffPoolTable .lastColumn,
+#transferTicketToServicePointPoolTable .lastColumn {text-align:center;}
+
+#transferTicketQueueToQueueTable .queueNameSpan,
+#transferQueueToStaffPoolTable .staffNameSpan,
+#transferQueueToServicePointPoolTable .servicePointNameSpan,
+#transferQueues .queueNameSpan,
+#transferTicketToStaffPoolTable .staffNameSpan,
+#transferTicketToServicePointPoolTable .servicePointNameSpan {
+    vertical-align: 50%;
+}
+
+#transferTicketQueueToQueueTable .transferTicketFirst,
+#transferQueueToServicePointPoolTable .transferTicketFirst,
+#transferQueueToStaffPoolTable .transferTicketFirst,
+#transferQueues .transferTicketFirst,
+#transferTicketToStaffPoolTable .transferTicketFirst,
+#transferTicketToServicePointPoolTable .transferTicketFirst{
+    background:transparent url(../images/transferFirstIcon.png) no-repeat center;  
+    display:inline-block; 
+    width:25px;
+    height:25px;
+}
+
+#transferTicketQueueToQueueTable .transferTicketFirst:hover,
+#transferQueueToServicePointPoolTable .transferTicketFirst:hover,
+#transferQueueToStaffPoolTable .transferTicketFirst:hover,
+#transferQueues .transferTicketFirst:hover,
+#transferTicketToStaffPoolTable .transferTicketFirst:hover,
+#transferTicketToServicePointPoolTable .transferTicketFirst:hover{
+    background-color: #FFDEAD;
+}
+
+#transferTicketQueueToQueueTable .transferTicketLast,
+#transferQueues .transferTicketLast{
+    background:transparent url(../images/transferLastIcon.png) no-repeat center;
+    display:inline-block;
+    width:25px;
+    height:25px;
+}
+
+#transferTicketQueueToQueueTable .transferTicketLast:hover,
+#transferQueues .transferTicketLast:hover{
+    background-color: #FFDEAD;
+}
+
+#transferTicketQueueToQueueTable .transferTicketSort,
+#transferQueues .transferTicketSort{
+    background:transparent url(../images/transferSortedIcon.png) no-repeat center;
+    display:inline-block;
+    width:25px;
+    height:25px;
+}
+
+#transferTicketQueueToQueueTable .transferTicketSort:hover,
+#transferQueues .transferTicketSort:hover{
+    background-color: #FFDEAD;
+}
+
+/************ Tables hover highlighting **********/
+/*#selectMarkTypeTable tbody tr.even:hover, */#selectDeliveredServiceTable tbody tr.even:hover,
+                                              #selectOutcomeTable tbody tr.even:hover,
+                                              #walkDirectServices tbody tr.even:hover{
+
+	background-color: #EEE;
+	border: solid 1px #efefef;
+	cursor: pointer;
+}
+
+/*#selectMarkTypeTable tbody tr.odd:hover,*/ #selectDeliveredServiceTable tbody tr.odd:hover,
+                                             #selectOutcomeTable tbody tr.odd:hover,
+                                             #walkDirectServices tbody tr.odd:hover{
+	background-color: #EEE;
+	border: solid 1px #efefef;
+	cursor: pointer;
+}
+
+/************* Generic table stuff ***************/
+/*#notes, #marks, */ #tickets, #outcomes, #deliveredServices, #multiServices, #customMarks, #selectDeliveredServiceTable, #userPool, #servicePointPool,
+                     #queues, #projectedVisits, #transferQueues, #walkDirectServices, #transferTicketToStaffPoolTable, #transferTicketToServicePointPoolTable,
+                     #transferTicketQueueToQueueTable, #nextServices, #transferQueueToServicePointPoolTable, #transferQueueToStaffPoolTable
+                     {width:100%; background:transparent; border-collapse:collapse;}
+/*#notes td, #marks td,*/ #tickets td, #servicePointPool td, #nextServices td, #multiServices td, #customMarks td, #userPool td, #deliveredServices td, #selectDeliveredServiceTable td,
+                          #outcomes td, #selectOutcomeTable td, /*#selectMarkTypeTable td,*/#queues td, #projectedVisits td, #walkDirectServices td,
+                          #transferQueues td, #transferTicketToStaffPoolTable td, #transferTicketToServicePointPoolTable td,
+                          #transferTicketQueueToQueueTable td, #transferQueueToServicePointPoolTable td, #transferQueueToStaffPoolTable td
+                          {padding:5px 10px; border-bottom:1px solid #c0c0c0;}
+/*.evenRow{background:#ebebeb;}*/
+
+.lastCol{text-align:right;}
+.hide{display:none;}
+.margin-top {
+    margin-top: 5px !important;
+}
+/*#notes .lastCol span, #marks .lastCol span{margin-right:10px;} */
+
+/************ Alternative button styles ****************/
+input.customerModuleButton{font-weight:bold !important; height:30px !important; padding:0 15px !important; text-shadow:1px 1px #F7FFFF !important; color:#444 !important;}
+/************ Terminal Custom buttons ******************/
+.customButtonClear{
+	overflow:hidden;
+	width:100%;
+}
+
+.customButton{
+	overflow:hidden;
+	white-space:nowrap;
+}
+.customButton a{
+	color:#000;
+}
+
+a.addService{
+    background:transparent url(../images/back_enabled.jpg) no-repeat center;
+    padding: 5px 0 0;
+    display:inline-block;
+    width:20px;
+    height:20px;
+}
+a.addService:hover{
+    background-color: #FFDEAD;
+}
+
+a.removeService{
+    background:transparent url(../images/forward_enabled.jpg) no-repeat center;
+    padding: 5px 0 0;
+    display:inline-block;
+    width:20px;
+    height:20px;
+}
+a.removeService:hover{
+    background-color: #FFDEAD;
+}
+
+a.customButton{
+    background:transparent url('../images/buttonsRE.png') no-repeat scroll top right;
+    color:#000;
+	text-shadow:1px 1px #f7ffff;
+    display:block;
+    float:left;
+    font:bold 13px sans-serif, arial;
+    height:36px;
+    margin-right:8px;
+    padding-right:22px;
+    text-decoration:none;
+    outline:none;
+}
+ 
+a.customButton span{
+    background:transparent url('../images/buttonsLE.png') no-repeat;
+    display:block;
+    line-height:20px;
+    padding:8px 0 8px 22px;
+    color:#000;
+} 
+ 
+a.customButton:hover{
+	background-position:right -40px;
+	outline:none; 
+    color:#000;
+}
+
+a.customButton:hover span{
+	background-position:0 -39px;
+} 
+ 
+a.customButton:focus, a.customButton:active{
+	background-position:right -79px;
+    color:#000;
+    outline:none;
+}
+
+a.customButton:focus span, a.customButton:active span{
+	background-position:0 -79px;
+    padding:8px 0 7px 22px;
+	line-height:22px;
+}
+
+a.customButtonDisabled{
+    background:transparent url('../images/buttonsRE.png') no-repeat scroll right -117px;
+    display:block;
+    float:left;
+    font:bold 13px sans-serif, arial;
+    height:36px;
+    margin-right:6px;
+    padding-right:22px;
+    text-decoration:none;
+    outline:none;
+    cursor:default;
+}
+ 
+a.customButtonDisabled span{
+    background:transparent url('../images/buttonsLE.png') no-repeat;
+    background-position:0 -117px;
+    display:block;
+    line-height:20px;
+    padding:8px 0 8px 22px;
+    color:#999;
+    cursor:default;
+}
+
+/************* SMALLER BUTTON ***************/
+a.customButtonSmall{
+    background:transparent url('../images/buttonsRE_small.png') no-repeat scroll top right;
+    color:#000;
+	text-shadow:1px 1px #f7ffff;
+    display:block;
+    float:left;
+    font:bold 13px sans-serif, arial;
+    height:30px; /****/
+    margin-right:8px;
+    padding-right:20px; /****/
+    text-decoration:none;
+    outline:none;
+}
+ 
+a.customButtonSmall span{
+    background:transparent url('../images/buttonsLE_small.png') no-repeat;
+    display:block;
+    line-height:14px; /****/
+    padding:8px 0 8px 22px;
+    color:#000;
+} 
+ 
+a.customButtonSmall:hover{
+	background-position:right -40px;  /****/
+	outline:none; 
+    color:#000;
+}
+
+a.customButtonSmall:hover span{
+	background-position:0 -40px;
+} 
+ 
+a.customButtonSmall:focus, a.customButtonSmall:active{
+	background-position:right -79px;
+    color:#000;
+    outline:none;
+}
+
+a.customButtonSmall:focus span, a.customButtonSmall:active span{
+	background-position:0 -79px;
+    padding:9px 0 6px 22px; /****/
+	line-height:14px; /****/
+}
+
+a.customButtonSmallDisabled{
+    background:transparent url('../images/buttonsRE_small.png') no-repeat scroll right -117px;
+    display:block;
+    float:left;
+    font:bold 13px sans-serif, arial;
+    height:31px; /****/
+    margin-right:8px;
+    padding-right:20px; /****/
+    text-decoration:none;
+    outline:none;
+    cursor:default;
+}
+ 
+a.customButtonSmallDisabled span{
+    background:transparent url('../images/buttonsLE_small.png') no-repeat;
+    background-position:0 -117px;
+    display:block;
+    line-height:20px;
+    padding:8px 0 8px 22px;
+    color:#999;
+    cursor:default;
+}
+
+.customLink{
+	/*background:transparent url('/images/common/various/addIcon.png') bottom left no-repeat;
+	display:inline-block;
+	padding-left:18px;*/
+	float:right;
+}
+
+.customLinkDisabled{
+	/*background:transparent url('/images/common/various/addIconDisabled.png') bottom left no-repeat;
+	display:inline-block;
+	padding-left:18px;*/
+	text-decoration:none !important;
+	color:#999 !important;
+	cursor:default;
+	float:right;
+}
+
+.linkDisabled{
+	text-decoration:none !important;
+	color:#999 !important;
+	cursor:default;
+}
+
+.imgDisabled {
+    opacity: 0.5 !important;
+    filter:alpha(opacity=50) !important;
+    cursor:default;
+}
+/* error panel */
+/*#error{*/
+	/*background: none repeat scroll 0 0 #FFDAE1;*/
+	/*color: #FF0000;*/
+	/*z-index: 2100;*/
+	/*position: absolute;*/
+	/*left: 10px;*/
+	/*top: 10px;*/
+    /*border: 1px solid #C18C95;*/
+    /*border-radius: 5px 5px 5px 5px;*/
+    /*padding: 10px;*/
+	/*width: 200px;*/
+	/*height: 150px;*/
+	/*visibility: hidden;*/
+/*}*/
+
+.subTable td{
+    border: 0;
+    border-bottom: 0 !important;
+    padding-left:50px;
+}
+
+.subTable tr:hover{
+    background-color: #FFDEAD;
+    border: solid 1px #efefef;
+    cursor: pointer;
+}
+
+tr.odd {
+    background-color: #F3F7FB;
+}
+
+tr.even {
+    background-color: white;
+}
+
+/*
+    Black Theme part, some stuff is overridden to make better use of available screen height
+*/
+
+.treeMenuMenu {
+    border-right: 1px solid #010101;
+}
+
+.header {
+    min-height:58px !important;
+    height: 64px;
+    background:url(../../images/glow.png) -80px 0 no-repeat;
+    border-bottom:3px #eee solid;
+}
+
+.header table {
+    width: 100%;
+    height: 60px;
+}
+
+.application-name {
+    height: 20px;
+    padding:0 0 0 0;
+}
+
+.warningmessage {
+    padding: 6px;
+    margin-left: 2px;
+    margin-right: 2px;
+    position:relative;
+}
+

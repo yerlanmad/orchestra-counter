@@ -1,0 +1,17 @@
+.customerForm{
+    width:400px;
+    height:auto;
+}
+#createCustomerButtonsTable{
+    float:right;
+    width:50%;
+}
+#createCustomerTable{
+    padding: 0px;
+    border: 0px none none;
+}
+
+#editCustomerTable{
+    padding: 0px;
+    border: 0px none none;
+}

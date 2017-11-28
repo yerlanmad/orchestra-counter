@@ -1,0 +1,1299 @@
+<div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div id="header" class="header">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td class="orch-logo" style="width: 25%;">
+                                    <a href="/" onclick="return servicePoint.handleHome();">
+                                        <img class="logo tr" src="/images/company_logo_header.png" alt="" />
+                                    </a>
+                                </td>
+                                <td class="orch-nav" style="width: 50%;">
+                                    <div id="appName" class="application-name" ></div><br />
+                                    <div class="settings">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <span id="branch"></span>
+                                                </td>
+                                                <td>
+                                                    &nbsp;|&nbsp;
+                                                </td>
+                                                <td>
+                                                    <span id="workstation"></span>
+                                                </td>
+                                                <td>
+                                                    &nbsp;
+                                                    <select id="prioList" style="width: 200px" onchange="javascript:servicePoint.changeProfile($(this).val());this.blur();">
+                                                        <option id="chooseProfileTerminal" value="-1"></option>
+                                                    </select>
+                                                    &nbsp;
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                                <td class="orch-userinfo" style="width: 20%;">
+                                    <span id="userName"></span><br />
+                                    <a href="#" id="settingsLink" onclick="servicePoint.showSettingsWindow();this.blur();"></a><br/>
+									<a id="logoutLink" href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);"></a>
+                                </td>
+                                <td class="orch-actions" style="width: 5%;">
+                                    <div>
+                                        <a id="homeLink" href="/" class="orch-icons" onclick="return servicePoint.handleHome();">
+                                            <img id="homeImage" src="/images/icons/home.png" alt=""/>
+                                        </a>
+                                        <a href="/help" class="orch-icons" target="_blank">
+                                            <img src="/images/icons/help.png" alt=""/>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+		<br> 
+		<div id="modulesContainer">
+			<table id="callButtons">
+				<tbody>
+					<tr>
+                        <td><a class="customButtonDisabled" href="#" id="callNextBtn" name="callNextButton" onclick="servicePoint.checkServicesLeft('callNext');this.blur();"><span id="callNextLabel"> &nbsp;</span></a></td>
+                        <td><a class="customButtonDisabled" href="#" id="walkDirectBtn" name="walkDirectButton" onclick="servicePoint.checkServicesLeft('walkDirectPressed');this.blur();"><span id="walkDirectLabel"> &nbsp;</span></a></td>
+                        <td><a class="customButtonDisabled" href="#" id="endVisitBtn" name="endVisitButton" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();"><span id="endVisitLabel"> &nbsp;</span></a></td>
+                        <td><a class="customButtonDisabled" href="#" id="closeBtn" name="closeWorkstationButton" onclick="servicePoint.checkServicesLeft('handleClose');this.blur();"><span id="closeLabel"> &nbsp;</span></a></td>
+                        <td class="deliveredServiceLink"><a href="#" id="addDeliveredServiceLink" class="customButtonSmallDisabled" onclick="deliveredServices.addDeliveredServicePressed();this.blur();"><span id="addDeliveredServiceLabel"> &nbsp;</span></a></td>
+						<td class="deliveredServiceLink"><a href="#" id="addMultiServiceLink" class="customButtonSmallDisabled" onclick="servicePoint.addMultiServicePressed();this.blur();"><span id="addMultiServiceLabel"> &nbsp;</span></a>&nbsp;</td>
+						<td class="deliveredServiceLink"><a href="#" id="addCustomMarkLink" class="customButtonSmallDisabled" onclick="customMarks.addCustomMarkPressed();this.blur();"><span id="addCustomMarkLabel"> &nbsp;</span></a>&nbsp;</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<!-- Ongoing Visit module -->			
+			<div id="ongoingVisitModuleWrapper">
+				<div id="ongoingVisitModule" class="roundedCorner5">
+					<div id="ongoingVisitInfo">
+                        <table>
+							<tr>
+								<td id="ticketNumber">Loading</td>
+								<td id="serviceId"></td>
+                                <td><span id="linkedCustomerField"></span></td>
+							</tr>
+                        </table>
+                        <table class="widthPercent100 marginForOngoingVisit">
+                            <thead>
+                                <tr>
+                                    <th id="transactionTime" style="font-weight: bold"></th>
+                                    <th id="waitingTimeDesc"style="font-weight: bold"></th>
+                                    <th id="selectOutcomeLabel"style="font-weight: bold"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <ul class="direction-flexible-text">
+                                            <li id="countTransactionTime"></li>
+                                        </ul>
+                                    </td>
+
+                                    <td>
+                                        <ul class="direction-flexible-text">
+                                            <li id="waitingTimeCounter"></li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul class="direction-flexible-text">
+                                            <li>
+                                                <select id="selectOutcome" class="roundedCorner3"
+                                                        onchange="javascript:outcome.selectOutcome($(this).val());">
+                                                    <option id="chooseOutcome" value="-1" disabled></option>
+                                                </select>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr style="display: none;" id="verticalMessageRow">
+                                    <td class="descriptionCol, roundedCorner5" colspan="2">
+                                        <span id="verticalMessage"></span>
+                                    </td>
+                                </tr>
+								 <tr  id="notesRow">
+                                    <td class="descriptionCol, roundedCorner5" colspan="2">
+                                        <span id="notesMessage">&nbsp;</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+					   </table>
+                    </div>
+					<div id="ongoingVisitButtons">
+                        <table>
+                            <tbody>
+                                <tr>
+									<td><a href="#" id="parkBtn" class="customButtonSmallDisabled" onclick="userPool.parkPressed();this.blur();"><span id="parkLabel"> &nbsp;</span></a></td>
+                                    <td><a href="#" id="transferBtn" class="customButtonSmallDisabled" onclick="transfer.transferPressed();this.blur();"><span id="transferLabel"> &nbsp;</span></a></td>
+                                    <td><a href="#" id="noShowBtn" class="customButtonSmallDisabled" onclick="servicePoint.noShow();this.blur();"><span id="noShowLabel"> &nbsp;</span></a></td>
+                                    <td><a href="#" id="recallBtn" class="customButtonSmallDisabled" onclick="servicePoint.recall();this.blur();"><span id="recallLabel"> &nbsp;</span></a></td>
+                                    <td><a href="#" id="reinsertBtn" class="customButtonSmallDisabled" onclick="servicePoint.reinsertClicked();this.blur();"><span id="reinsertLabel"> &nbsp;</span></a></td>
+									<td><a href="#" id="notesBtn" class="customButtonSmallDisabled" onclick="servicePoint.notesPressed();this.blur();"><span id="notesLabel"> &nbsp;</span></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+					</div>
+				</div>
+			</div>
+
+			<!-- Chat module -->
+			 <div id="chatModule" class="module">
+                <h2 id="chatModuleLabel"><a href="#" class="addButton" onclick="javascript:chat.showAvailableUsers();util.showModal('chatPartner');"></a></h2>
+                <div id="chatContainer" class="moduleContentContainer">
+                   <div id="tabs" class="ui-tabs ui-widget ui-widget-content ">
+						<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ">
+						</ul>
+					</div>
+					<div id="chatInput">
+						<input type="text" size="49px" id="messageText" onkeydown="if (event.keyCode == 13) chat.sendMessage();"></input>
+						<!--input type="button" id="sendButton" value="Send" onclick="chat.sendMessage();" disabled></input-->
+					</div>
+                </div>
+            </div>
+
+			<!-- Delivered Services module -->
+            <div id="deliveredServicesModule" class="module">
+                <h2 id="deliveredServicesModuleLabel"></h2>
+                <div id="deliveredServicesContainer" class="moduleContentContainer">
+                    <table id="deliveredServices" class="display">
+                        <thead>
+                            <tr>
+                                <th id="deliveredServiceId"></th>
+                                <th id="deliveredServiceEventTime"></th>
+                                <th id="deliveredServiceOrigId"></th>
+                                <th id="deliveredServiceName"></th>
+                                <th id="deliveredServiceVisitOutcome"></th>
+                                <th id="deliveredServiceVisitOutcomeNeeded"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+			<!-- Multi Services module -->			
+			<div id="multiServicesModule" class="module">
+                <h2 id="multiServicesModuleLabel"></h2>
+                <div id="multiServicesContainer" class="moduleContentContainer">
+                    <table id="multiServices" class="display">
+                        <thead>
+                            <tr>
+								<th id="unServedName" ></th>
+								<th id="servedName"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+			<!-- Custom Marks module -->
+			<div id="customMarksModule" class="module">
+                <h2 id="customMarksModuleLabel"></h2>
+                <div id="customMarksContainer" class="moduleContentContainer">
+                    <table id="customMarks" class="display">
+                        <thead>
+                           <tr>
+                                <th id="customMarkId"></th>
+                                <th id="customMarkEventTime"></th>
+                                <th id="customMarkOrigId"></th>
+                                <th id="customMarkName"></th>
+								<th id="removeCustomMark"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>		
+
+            <!-- Customer module -->
+            <div id="customerModule" class="module">
+                <h2 id="customerModuleLabel"></h2>
+                <div id="customerContainer" class="moduleContentContainer">
+                    <table id="customer">
+                        <tbody>
+                        <tr>
+                            <td colspan="4">
+                                <div class="ui-widget">
+                                    <label id="customerInputLabel" for="customerInput"></label>
+                                    <input id="customerInput"/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="alignCenter"><span id="newCustomerOuter"><a id="createCustomerLink" href="#" class="newCust" onclick="customer.createCustomerPressed();this.blur();"><span id="createNewCustomerLabel"></span></a></span></td>
+                            <td class="alignCenter"><span id="linkCustomerOuter"><a id="linkCustomerLink" href="#" class="linkCust customLinkDisabled" onclick="customer.linkCustomerPressed();this.blur();"><span id="linkCustomerLabel"></span></a></span></td>
+                            <td class="alignCenter"><span id="editCustomerOuter"><a id="editCustomerLink" href="#" class="editCust customLinkDisabled" onclick="customer.editCustomerPressed();this.blur();"><span id="editCustomerLabel"></span></a></span></td>
+                            <td class="alignCenter"><span id="deleteCustomerOuter"><a id="deleteCustomerLink" href="#" class="deleteCust customLinkDisabled" onclick="customer.deleteCustomerPressed();this.blur();"><span id="deleteCustomerLabel"></span></a></span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+			<!-- Pools module -->
+            <div id="poolsModule" class="module">
+                <table id="poolsTable" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td>
+                            <!-- Service point pool module  -->
+                            <div id="servicePointPoolModule" class="submodule">
+                                <h2 id="servicePointPoolModuleLabel"></h2>
+                                <div id="servicePointPoolContainer" class="submoduleContentContainer">
+                                    <table id="servicePointPool" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th id="servicePointPoolTicketId"></th>
+                                                <th id="servicePointPoolTicketTicketId"></th>
+                                                <th id="servicePointPoolTicketWaitingTime"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- end service point pool module-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <!-- User pool module  -->
+                            <div id="userPoolModule" class="submodule">
+                                <h2 id="userPoolModuleLabel"></h2>
+                                <div id="userPoolContainer" class="submoduleContentContainer">
+                                    <table id="userPool" class="display">
+                                        <thead>
+                                            <tr>
+                                                <th id="userPoolTicketId"></th>
+                                                <th id="userPoolTicketTicketId"></th>
+                                                <th id="userPoolTicketWaitingTime"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div><!-- end user pool -->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Queues module  -->
+            <div id="queuesModule" class="module">
+                <h2 id="queuesModuleLabel"></h2>
+                <div id="queuesContainer" class="moduleContentContainer">
+                    <table id="queues" class="display">
+                        <thead>
+                            <tr>
+                                <th id="queueName"></th>
+                                <th id="queueId"></th>
+                                <th id="queueWaitingTime"></th>
+                                <th id="queueCustomersWaiting"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Projected visits module  -->
+            <!-- <div id="projectedVisitsModule" class="module">
+                <h2 id="projectedVisitsModuleLabel"></h2>
+                <div id="projectedVisitsContainer" class="moduleContentContainer">
+                    <table id="projectedVisits" class="display">
+                        <thead>
+                        <tr>
+                            <th id="projectedVisitId"></th>
+                            <th id="projectedTicketId"></th>
+                            <th id="projectedWaitingTime"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div> -->
+
+			<!-- Customer Search Popup -->
+			<div class="ui-widget" id="customerSearchDiv">
+				<table id="customerSearchTable">
+				</table> 
+			</div>
+
+			<!-- Dialogs start here -->
+			
+            <!-- Tickets in queue dialogue -->
+            <div id="ticketsDialogue" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <!-- The close button is added in script.js -->
+                        <h2 id="ticketListHeader"></h2>
+                        <table id="tickets" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th id="ticketVisitId"></th>
+                                    <th id="ticketTicketId"></th>
+                                    <th id="ticketActions"></th>
+                                    <th id="ticketWaitingTime"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+			
+
+			<!-- Add/Edit Notes dialogue -->
+            <div id="notesDialogue" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="notesHeader"></h2>
+                        <table id="notesTable" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+							    <tr>
+									<th ><textarea id="notesEdit" rows="3" cols="50"></textarea></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+						 <table width="100%">
+						  <tr>
+                                <td class="alignOppositeNrml" colspan="2">&nbsp;&nbsp;</td>
+                             </tr>
+                            <tr>
+                                <td class="alignCenter" colspan="2">
+                                    <input id="saveNotesBtnModal" class="applySettingsButton" type="button" onclick="servicePoint.saveNotes();"/>
+                                </td>
+							</tr>
+                            <tr>
+                                <td colspan="2" >
+                                    <input id="cancelNotesBtnModal" class="applySettingsButton"  style="float:right;"  type="button" onclick="servicePoint.hideNotes();"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+			
+			<!-- Additional Service left pop-up -->
+            <div id="nextServicesDialogue" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="nextServicesListHeader"></h2>
+                        <table id="nextServices" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+							    <tr>
+									<th ></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+						 <table class="fiftyFiftyMarg">
+						  <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                             </tr>
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <input id="confirmServicesBtn" class="applySettingsButton" type="button" onclick="servicePoint.confirmServices();"/>
+                                </td>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <!--input id="resortServicesBtn" class="applySettingsButton" type="button" onclick="servicePoint.resortServices();"/-->
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+			<!-- Add/Edit Additional Service dialogue  -->
+            <div id="addEditServicesDialogue" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="addServicesForm  roundedCorner5">
+                        <h2 id="addEditServicesHeader"></h2>
+						<table width="100%" height="100%" class="display">
+							<thead>
+								<tr>
+									<th id="selectedName" ></th>
+									<th ></th>
+									<th id="availableName" ></th>
+								</tr>
+								<tr >
+									<td>
+										<select size="10" id="addEditServicesBox" class="roundedCorner3" >
+										</select>
+									</td>
+									<td> 
+										<a href="#" class="addService"  class="btn" value="" onclick="javascript:servicePoint.addService()"></a>
+										<br><br>
+										<a href="#" class="removeService"  class="btn" value="" onclick="javascript:servicePoint.removeService()"></a>
+									</td>
+									<td >
+										<select size="10" id="listServicesBox" class="roundedCorner3" >
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										&nbsp;&nbsp;
+									</td>
+                            </tr>
+                            <tr>
+                                <td class="alignCenter">
+                                    <input id="closeServicesBtn" class="applySettingsButton" type="button" onclick="servicePoint.closeServices();"/>
+                                </td>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <!--input id="closeResortServicesBtn" class="applySettingsButton" type="button" onclick="servicePoint.closeResortServices();"/-->
+                                </td>
+                            </tr>
+							</thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+			
+            <!-- Transfer queue to queue dialogue -->
+            <div id="transferQueueToQueueDialogue" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="transferForm roundedCorner5">
+                        <h2 id="transferFromQueueHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('transferQueueToQueueDialogue');"></a></h2>
+                        <table id="transferTicketQueueToQueueTable" class="display margin-top" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th id="transferQueueToQueuePoolHeader" class="transferQueueHeader" colspan="5"></th>
+                                </tr>
+                                <tr>
+                                    <th id="transferQueueToQueueQueueName" class="transferQueueName"></th>
+                                    <th id="transferQueueToQueueQueueActions" class="transferQueueActions"></th>
+                                    <th id="transferQueueToQueueQueueId"></th>
+                                    <th id="transferQueueToQueueQueueWaitingTime" class="transferQueueWaitingTime"></th>
+                                    <th id="transferQueueToQueueQueueCustomersWaiting" class="transferQueueCustomerWaiting"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+						<div id="transferQueueToStaffPoolDiv">
+                        	<table id="transferQueueToStaffPoolTable" class="display margin-top" cellpadding="0" cellspacing="0" border="0">
+								<thead>
+								<tr>
+									<th id="transferQueueToStaffPoolHeader" class="transferStaffPoolHeader" colspan="7"></th>
+								</tr>
+								<tr>
+									<th id="transferQueueToStaffPoolStaffId"></th>
+									<th id="transferQueueToStaffPoolStaffUserName" class="transferStaffPoolUserName"></th>
+									<th id="transferQueueToStaffPoolActions" class="transferStaffPoolActions"></th>
+									<th id="transferQueueToStaffPoolStaffFirstName" class="transferStaffPoolFirstName"></th>
+									<th id="transferQueueToStaffPoolStaffLastName" class="transferStaffPoolLastName"></th>
+									<th id="transferQueueToStaffPoolStaffLocale"></th>
+									<th id="transferQueueToStaffPoolStaffDirection"></th>
+								</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+						<div id="transferQueueToServicePointPoolDiv">
+							<table id="transferQueueToServicePointPoolTable" class="display margin-top" cellpadding="0" cellspacing="0" border="0">
+								<thead>
+									<tr>
+										<th id="transferQueueToServicePointPoolHeader" colspan="6" class="transferServicePointPoolHeader"></th>
+									</tr>
+									<tr>
+										<th id="transferQueueToServicePointPoolName" class="transferServicePointPoolName"></th>
+										<th id="transferQueueToServicePointPoolActions" class="transferServicePointPoolActions"></th>
+										<th id="transferQueueToServicePointPoolId"></th>
+										<th id="transferQueueToServicePointPoolUnitId"></th>
+										<th id="transferQueueToServicePointPoolState" class="transferServicePointPoolState"></th>
+										<th id="transferQueueToServicePointPoolParameters"></th>
+									</tr>
+								</thead>
+							<tbody></tbody>
+							</table>
+						</div>
+                    </div>
+                </div>
+            </div>
+
+			<!-- Add Custom Marks dialogue -->
+            <div id="addCustomMarks" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="addCustomMarksHeader"><a href="#" class="closeButton" onclick="javascript:customMarks.hideAddCustomMarks();"></a></h2>
+                        <div></div>
+						<div id="marksQuantityDiv">
+						<table class="widthPercent100">
+                            <thead>
+                                <tr>
+                                   <th id="noOfMarksLabel"style="font-weight: bold"></th>
+								   <th> <input id="noOfMarks" name="noOfMarks" type="text" size="10" maxlength="2" value="1"></th>
+								   <th width="50%" height="30"></th>
+                                </tr>
+                            </thead>
+						</table>
+
+						</div>
+                        <table id="selectCustomMarkTable" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                            <tr>
+                                <th id="addCustomMarkCode"></th>
+                                <th id="addCustomMarkName"></th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+			<!-- Add Delivered Services dialogue -->
+            <div id="addDeliveredServices" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="addDeliveredServicesHeader"><a href="#" class="closeButton" onclick="javascript:deliveredServices.hideAddDeliveredServices();"></a></h2>
+                        <div></div>
+                        <table id="selectDeliveredServiceTable" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                            <tr>
+                                <th id="addDeliveredServiceCode"></th>
+                                <th id="addDeliveredServiceName"></th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+			<!-- Add Outcomes dialogue -->
+            <div id="addOutcomes" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="addOutcomesHeader"><a href="#" class="closeButton" onclick="javascript:outcome.hideAddOutcomes();"></a></h2>
+                        <div></div>
+                        <table id="selectOutcomeTable" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                            <tr>
+                                <th id="addOutcomeCode"></th>
+                                <th id="addOutcomeName"></th>
+                            </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Create customer form -->
+            <div id="createCustomerWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="customerForm roundedCorner5">
+                        <h2 id="createCustomerHeader"><a href="#" class="closeButton" onclick="customer.cancelSaveCustomer();this.blur();"></a></h2>
+                        <form id="createCustomerForm">
+                            <table id="createCustomerTable" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th id="createCustomerFieldName"></th>
+                                        <th id="createCustomerInput"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label id="createFirstNameLabel" for="createfirstName"></label><span style="color: red">* </span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createfirstName" name="firstName" maxlength="50"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createLastNameLabel" for="createlastName"></label><span style="color: red">* </span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createlastName" name="lastName" maxlength="50"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createAddressLine1Label" for="createaddressLine1"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createaddressLine1" name="addressLine1"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createAddressLine2Label" for="createaddressLine2"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createaddressLine2" name="addressLine2"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createAddressLine3Label" for="createaddressLine3"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createaddressLine3" name="addressLine3"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createAddressLine4Label" for="createaddressLine4"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createaddressLine4" name="addressLine4"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createAddressLine5Label" for="createaddressLine5"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createaddressLine5" name="addressLine5"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createAddressPostCodeLabel" for="createaddressPostCode"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createaddressPostCode" name="addressPostCode"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createPhoneNumberLabel" for="createphoneNumber"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createphoneNumber" name="phoneNumber"></input>
+                                        </td>
+                                    </tr>
+                                    <!--tr>
+                                        <td>
+                                            <label id="createPhoneMobileLabel" for="createphoneMobile"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createphoneMobile" name="phoneMobile"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createPhoneHomeLabel" for="createphoneHome"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createphoneHome" name="phoneHome"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createPhoneWorkLabel" for="createphoneWork"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createphoneWork" name="phoneWork"></input>
+                                        </td>
+                                    </tr -->
+                                    <tr>
+                                        <td>
+                                            <label id="createEmailLabel" for="createemail"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createemail" name="email"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createGenderLabel" for="creategender"></label>
+                                        </td>
+                                        <td>
+                                            <select id="creategender" name="gender">
+                                                <option id="createChooseGender" value="-1"></option>
+                                                <option id="createChooseGenderMale" value="Male"></option>
+                                                <option id="createChooseGenderFemale" value="Female"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createDateOfBirthLabel" for="createdateOfBirth"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createdateOfBirth" name="dateOfBirth"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createAccountNumberLabel" for="createaccountNumber"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createaccountNumber" name="accountNumber"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="createCardNumberLabel" for="createcardNumber"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="createcardNumber" name="cardNumber"></input>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table id="createCustomerButtonsTable">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <a class="customLink" href="#" id="saveCustomerLink" name="saveCustomerLinkName" onclick="customer.saveCustomer();this.blur();"><span id="saveCustomerLabel"></span></a>
+                                        </td>
+                                        <td>
+                                            <a class="customLink" href="#" id="saveAndLinkCustomerLink" name="saveAndLinkCustomerLinkName" onclick="customer.saveAndLinkCustomer();this.blur();"><span id="saveAndLinkCustomerLabel"></span></a>
+                                        </td>
+                                        <td>
+                                            <a class="customLink" href="#" id="cancelLink" name="cancelLinkName" onclick="customer.cancelSaveCustomer();this.blur();"><span id="cancelCreateCustomerLabel"></span></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- end create customer window -->
+            
+            <!-- Edit customer form -->
+            <div id="editCustomerWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="customerForm roundedCorner5">
+                        <h2 id="editCustomerHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('editCustomerWindow');"></a></h2>
+                        <form id="editCustomerForm">
+                            <table id="editCustomerTable" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th id="editCustomerFieldName"></th>
+                                        <th id="editCustomerInput"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <label id="editFirstNameLabel" for="editFirstName"></label><span style="color: red">* </span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editfirstName" name="firstName" maxlength="50"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editLastNameLabel" for="editLastName"></label><span style="color: red">* </span>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editlastName" name="lastName" maxlength="50"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editAddressLine1Label" for="editAddressLine1"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editaddressLine1" name="addressLine1"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editAddressLine2Label" for="editAddressLine2"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editaddressLine2" name="addressLine2"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editAddressLine3Label" for="editAddressLine3"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editaddressLine3" name="addressLine3"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editAddressLine4Label" for="editAddressLine4"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editaddressLine4" name="addressLine4"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editAddressLine5Label" for="editAddressLine5"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editaddressLine5" name="addressLine5"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editAddressPostCodeLabel" for="editAddressPostCode"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editaddressPostCode" name="addressPostCode"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editPhoneNumberLabel" for="editphoneNumber"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editphoneNumber" name="phoneNumber"></input>
+                                        </td>
+                                    </tr>
+                                    <!-- tr>
+                                        <td>
+                                            <label id="editPhoneMobileLabel" for="editPhoneMobile"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editphoneMobile" name="phoneMobile"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editPhoneHomeLabel" for="editPhoneHome"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editphoneHome" name="phoneHome"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editPhoneWorkLabel" for="editPhoneWork"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editphoneWork" name="phoneWork"></input>
+                                        </td>
+                                    </tr -->
+                                    <tr>
+                                        <td>
+                                            <label id="editEmailLabel" for="editEmail"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editemail" name="email"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editGenderLabel" for="editGender"></label>
+                                        </td>
+                                        <td>
+                                            <select id="editgender" name="gender">
+                                                <option id="editChooseGender" value="-1"></option>
+                                                <option id="editChooseGenderMale" value="Male"></option>
+                                                <option id="editChooseGenderFemale" value="Female"></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editDateOfBirthLabel" for="editDateOfBirth"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editdateOfBirth" name="dateOfBirth"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editAccountNumberLabel" for="editAccountNumber"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editaccountNumber" name="accountNumber"></input>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label id="editCardNumberLabel" for="editCardNumber"></label>
+                                        </td>
+                                        <td>
+                                            <input type="text" id="editcardNumber" name="cardNumber"></input>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table id="editCustomerButtonsTable">
+                                <tr>
+                                    <td>
+                                        <a class="customLink" href="#" id="modalEditCustomerLink" name="modalEditCustomerLinkName" onclick="customer.editCustomer();this.blur();"><span id="editCustomerWindowLabel"></span></a>
+                                    </td>
+                                    <td>
+                                        <a class="customLink" href="#" id="modalCancelEditLink" name="modalCancelEditLinkName" onclick="customer.cancelEditCustomer();this.blur();"><span id="cancelEditCustomerWindowLabel"></span></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- end edit customer window -->
+
+			<!-- Delete Customer Confirm dialogue -->
+            <div id="deleteCustomerConfirmWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="deleteCustomerConfirmHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('deleteCustomerConfirmWindow');"></a></h2>
+                        <table id="deleteCustomerTable" class="fiftyFiftyMarg">
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <input id="confirmDeleteCustomerBtn" class="applySettingsButton" type="button" onclick="customer.deleteCustomer();"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <input id="cancelDeleteCustomerBtn" class="applySettingsButton" type="button" onclick="javascript:util.hideModal('deleteCustomerConfirmWindow');"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings selection dialogue -->
+            <div id="settingsWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+						<h2 id="workstationSettingsHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('settingsWindow');"></a></h2>
+                        <table id="settingsTable" class="fiftyFiftyMarg">
+                            <tr>
+                                <td id="selectBranchModal" class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td>
+                                    <select id="branchListModal" style="width: 200px" class="roundedCorner3" onchange="javascript:servicePoint.selectBranch($(this).val());">
+                                        <option id="chooseBranch" value="-1"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="selectWorkstationModal" class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td>
+                                    <select id="workstationListModal" style="width: 200px" class="roundedCorner3" onchange="javascript:servicePoint.selectWorkstation($(this).val());">
+                                        <option id="chooseWorkstation" value="-1"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td id="selectProfileModal" class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td>
+                                    <select id="prioListModal"  style="width: 200px">
+                                        <option id="chooseProfile" value="-1"></option>
+                                    </select>
+                                </td>
+							</tr>
+							<!--tr id="selectSkillModalTR">
+                                <td id="selectSkillModal" class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td>
+                                    <select id="skillListModal"  style="width: 200px">
+                                      
+                                    </select>
+                                </td>
+							</tr-->
+							<tr>
+                                <td colspan="2" class="alignCenter">
+                                    <input id="confirmSettingsBtnModal" class="applySettingsButton" type="button" onclick="servicePoint.confirmSettings();"/>
+                                    <input id="cancelSettingsBtnModal" class="applySettingsButton" style="float:right;" type="button" onclick="servicePoint.cancelConfirmSettings();"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div><!-- end settingsWindow -->
+
+			<!-- Waiting for next Customer dialogue -->
+            <div id="waitingForCustomerDialogue" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+						<h2 id="waitingForCustomer"><a href="#" class="closeButton" onclick="servicePoint.cancelWaitingForVisit();this.blur();"></a></h2>
+						<div class="dialogueBoxContent">
+							<p id="waitingForCustomerPrompt" class="dialogueMessage"></p>
+							<a id="cancelCallButton" href="#" class="customButtonSmall dialogueButtons" onclick="servicePoint.cancelWaitingForVisit();this.blur();"><span id="cancelCall"></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Confirm Customer arrival dialogue -->
+            <div id="confirmCustomer" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+						<h2 id="calledCustomerHeader"><a href="#" class="closeButton" onclick="servicePoint.closeConfirmWindow();this.blur();"></a></h2>
+						<div class="dialogueBoxContent">
+							<p id="confirmCustomerPrompt" class="dialogueMessage"></p>
+							<a id="customerConfirmedBtn" href="#" class="customButtonSmall dialogueButtons" onclick="servicePoint.customerConfirmed();this.blur();"><span id="customerArrivedYes"></span></a> <a id="customerNotConfirmedBtn" href="#" class="customButtonSmall dialogueButtons" onclick="servicePoint.customerNotConfirmed();this.blur();"><span id="customerArrivedNo"></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+            
+            <div id="customerOptionsDialogue" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="customerOptionsHeader"><a href="#" class="closeButton" onclick="servicePoint.cancelCustomerOptionsDialogue();this.blur();"></a></h2>
+                        <div class="dialogueBoxContent">
+                            <p id="recallReinsertCallnext" class="dialogueMessage"><span id="notConfirmedOptions"></span><a href="#" id="recallLink" onclick="util.hideModal('customerOptionsDialogue');servicePoint.recall();this.blur();"><span id="recallOption"></span></a><span id="notConfirmedRecallAppendCustomer"></span><br/><span id="notConfirmedRecallAppendOr"></span><a href="#" id="reinsertLink" onclick="servicePoint.reinsertClicked();this.blur();"><span id="reinsertOption"></span></a><span id="notConfirmedReinsertAppendIntoQueue"></span><br/><span id="notConfirmedReinsertAppendOr"></span><a href="#" id="callNextLink" onclick="util.hideModal('customerOptionsDialogue');servicePoint.noShow();servicePoint.callNext();this.blur();"><span id="callNextOption"></span></a><span id="notConfirmedCallNextAppendCustomer"></span></p>
+                            <a id="cancelOptionsLink" href="#" class="dialogueBoxCancelLink" onclick="servicePoint.cancelCustomerOptionsDialogue();this.blur();"><span id="cancelOptions"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<!-- Reinsert dialogue -->
+            <div id="reinsertCustomerWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="reinsertCustomerWindowHeader"><a href="#" class="closeButton" onclick="servicePoint.cancelReinsertCustomer();this.blur();"></a></h2>
+                        <div class="dialogueBoxContent">
+                            <table id="reinsertTable">
+                                <tr>
+                                    <td>
+                                        <a id="reinsertCustomerBtn" href="#" class="customButtonSmall dialogueButtons" onclick="servicePoint.reinsertCustomer();this.blur();"><span id="reinsertCustomerConfirm"></span></a>
+                                    </td>
+                                    <td>
+                                        <a id="cancelReinsertCustomerBtn" href="#" class="customButtonSmall dialogueButtons" onclick="servicePoint.cancelReinsertCustomer();this.blur();"><span id="cancelReinsert"></span></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			<!-- Change Profile dialogue -->
+            <div id="changeProfileConfirmWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="changeSettingsHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('changeProfileConfirmWindow');"></a></h2>
+                        <table id="changeSettingsTable" class="fiftyFiftyMarg">
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <input id="confirmChangeProfileBtn" class="applySettingsButton" type="button" onclick="servicePoint.changeSettings();"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <input id="cancelChangeProfileBtn" class="applySettingsButton" type="button" onclick="servicePoint.cancelChangeSettings();"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+			<!-- Confirm Hijack Service Point dialogue -->
+            <div id="confirmCounterHijackingWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="confirmCounterHijackingForm roundedCorner5">
+                        <h2 id="confirmCounterHijackingHeader"><a href="#" class="closeButton" onclick="util.hideModal('confirmCounterHijackingWindow');util.showModal('settingsWindow');"></a></h2>
+                        <table id="confirmCounterHijackingTable" class="fiftyFiftyMarg">
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <input id="confirmCounterHijackingBtn" class="applySettingsButton" type="button" onclick="util.hideModal('confirmCounterHijackingWindow');servicePoint.confirmSettings(false);"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <input id="cancelCounterHijackingBtn" class="applySettingsButton" type="button" onclick="util.hideModal('confirmCounterHijackingWindow');util.showModal('settingsWindow');"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+			<!-- Logout dialogue -->
+            <div id="logoutWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="logoutWindowHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('logoutWindow');"></a></h2>
+                        <table id="logoutWindowTable" class="fiftyFiftyMarg">
+                            <tr>
+                                <div id="confirmLogoutMessageDiv" class="alignCenter warningmessage"><span id="confirmLogoutMessage"></span></div>
+                            </tr>
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+									<a id="confirmLogoutLink" href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(false, false);"></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                    <a id="cancelLogoutLink" href="#" onclick="util.hideModal('logoutWindow');"></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Walkdirect dialogue -->
+            <div id="walks" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="walkDirectServiceHeader"><a href="#" class="closeButton" onclick="javascript:servicePoint.hideWalks();"></a></h2>
+                        <table id="walkDirectServices" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th id="walkServiceExternalName"></th>
+                                    <th id="walkServiceInternalName"></th>
+                                    <th id="walkServiceId"></th>
+                                    <th id="walkServiceIntDescription"></th>
+                                    <th id="walkServiceExtDescription"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+			<!-- New Chat Partner dialogue -->
+            <div id="chatPartner" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="chatPartnerHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('chatPartner');"></a></h2>
+                        <table id="chatPartner" class="display" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th id="chatPartnerName"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+								<tr>
+									<td>
+										<div id="nameList" class="chatNameList"></div>
+									</td>
+								</tr>
+							</tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+			
+            <!-- Transfer dialogue -->
+            <div id="transfers" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="branchForm roundedCorner5">
+                        <h2 id="transferServiceHeader"><a href="#" class="closeButton" onclick="javascript:transfer.hideTransfers();"></a></h2>
+                        <table id="transferQueues" class="display margin-top" cellpadding="0" cellspacing="0" border="0">
+                            <thead>
+                                <tr>
+                                    <th id="transferQueueHeader" class="transferQueueHeader" colspan="5"></th>
+                                </tr>
+                                <tr>
+                                    <th id="transferQueueName" class="transferQueueName"></th>
+                                    <th id="transferQueueActions" class="transferQueueActions"></th>
+                                    <th id="transferQueueId"></th>
+                                    <!-- <th id="queueDescription"></th> -->
+                                    <!-- <th id="queueBranchId"></th> -->
+                                    <!-- <th id="queueQLNumber"></th> -->
+                                    <th id="transferQueueWaitingTime" class="transferQueueWaitingTime"></th>
+                                    <th id="transferQueueCustomersWaiting" class="transferQueueCustomerWaiting"></th>
+                                    <!-- <th id="queueLetter"></th> -->
+                                    <!-- <th id="queueEstWait"></th> -->
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+						<div id="transferTicketToStaffPoolDiv">
+							<table id="transferTicketToStaffPoolTable" class="display margin-top" cellpadding="0" cellspacing="0" border="0">
+								<thead>
+									<tr>
+										<th id="transferStaffPoolHeader" class="transferStaffPoolHeader" colspan="8"></th>
+									</tr>
+									<tr>
+										<th id="transferTicketToStaffPoolStaffId"></th>
+										<th id="transferTicketToStaffPoolStaffUserName" class="transferStaffPoolUserName"></th>
+										<th id="transferTicketToStaffPoolActions" class="transferStaffPoolActions"></th>
+										<th id="transferTicketToStaffPoolStaffFirstName" class="transferStaffPoolFirstName"></th>
+										<th id="transferTicketToStaffPoolStaffLastName" class="transferStaffPoolLastName"></th>
+										<th id="transferTicketToStaffPoolStaffLocale"></th>
+										<th id="transferTicketToStaffPoolStaffDirection"></th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+						<div id="transferTicketToServicePointPoolDiv">
+							<table id="transferTicketToServicePointPoolTable" class="display margin-top" cellpadding="0" cellspacing="0" border="0">
+								<thead>
+								<tr>
+									<th id="transferServicePointHeader" colspan="5" class="transferServicePointPoolHeader"></th>
+								</tr>
+								<tr>
+									<th id="transferTicketToServicePointPoolName" class="transferServicePointPoolName"></th>
+									<th id="transferTicketToServicePointActions" class="transferServicePointPoolActions"></th>
+									<th id="transferTicketToServicePointPoolId"></th>
+									<th id="transferTicketToServicePointPoolUnitId"></th>
+									<th id="transferTicketToServicePointPoolState" class="transferServicePointPoolState"></th>
+									<th id="transferTicketToServicePointPoolParameters"></th>
+								</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+						</div>
+                        <!-- <a href="#" id="cancelTransferButton" style="margin-top:8px;" class="customButtonSmall" onclick="cancelTransfer();this.blur();"><span id="cancelTransferButtonLabel"></span></a> -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Display Queue Spinner Animation -->
+            <div id="displayQueueSpinnerWindow" class="modalPage">
+                <div class="modalOpacityDiv"></div>
+                <div class="modalContainer">
+                    <div class="displayQueueSpinner roundedCorner5">
+                        <div id="displayQueueSpinnerText"></div>
+                        <div id="spinnerAnimation"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- end modulesContainer -->
+        <div id="message"></div>
+        <div id="error"></div>
+        <div id="footer" class="footer navbar-fixed-bottom"></div>

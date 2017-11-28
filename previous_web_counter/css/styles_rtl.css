@@ -1,0 +1,36 @@
+html, body, form, input, table {
+direction:rtl;
+}
+
+#callButtons td {float: right;}
+#callButtons .deliveredServiceLink {float: left;}
+
+#appShortcuts{position:absolute; left:0; right:auto;}
+
+#ongoingVisitModuleWrapper{float:right;}
+
+/*#notesModule{float:right; margin-left:1%; width:32%; margin-top:18px;}*/
+
+/*#marksModule{float:right; margin-left:1%; width:32%; margin-top:18px;}*/
+
+#deliveredServicesModule{float:left;}
+
+/*#outcomesModule{float:right; margin-left: 1%; width: 32%; margin-top: 18px;}*/
+
+#customerModule{float:right;}
+#createCustomerButtonsTable{float:left;}
+#createCustomerButtonsTable td{padding-left:5px; padding-right: 0;}
+#editCustomerButtonsTable{float:left;}
+#editCustomerButtonsTable td{padding-left: 5px; padding-right: 0;}
+
+#poolsModule {float: right;}
+
+#queuesModule{float:left;}
+
+#ongoingVisitInfo table th {text-align:right;}
+
+.alignOppositeNrml{text-align:left;}
+
+table.display {
+    margin: auto 0;
+}

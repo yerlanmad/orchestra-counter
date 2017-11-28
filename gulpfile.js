@@ -1,21 +1,28 @@
 const gulp = require('gulp')
-
+const gulpsync = require('gulp-sync')(gulp)
+const livereload = require('gulp-livereload')
 const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
 const del = require('del')
-
-var nunjucksRender = require('gulp-nunjucks-render');
+const nunjucksRender = require('gulp-nunjucks-render')
+const connect = require('gulp-connect-multi')
+const proxy = require('gulp-connect-proxy')
+const devServer = connect();
+const url = require('url');
 
 gulp.task('clean:build', function () {
   return del([
-    'dist'
+    './dist'
   ])
 })
 
-gulp.task('compile:js', function () {
-  return gulp.src(['src/scripts/**/*.js', '!src/scripts/vendor/**/*.js'])
-    .pipe(gulp.dest('./dist/scripts'))
-})
+gulp.task('compile:nunjucks', function() {
+  return gulp.src(['./src/templates/index.nunjucks'])
+  .pipe(nunjucksRender({
+      path: ['./src/templates/']
+    }))
+  .pipe(gulp.dest('./dist')).pipe(devServer.reload())
+});
 
 gulp.task('compile:scss', function () {
   return gulp.src('./src/styles/**/*.scss')
@@ -24,11 +31,11 @@ gulp.task('compile:scss', function () {
       browsers: ['last 2 versions'],
       cascade: false
     }))
-    .pipe(gulp.dest('./dist/css'))
+    .pipe(gulp.dest('./dist/css')).pipe(devServer.reload())
 })
 
 gulp.task('move:images', function () {
-  return gulp.src('./src/images/**')
+  return gulp.src(['./src/images/**'])
     .pipe(gulp.dest('./dist/images'))
 })
 
@@ -37,49 +44,66 @@ gulp.task('move:icons', function () {
     .pipe(gulp.dest('./dist/css/icons'))
 })
 
-// gulp.task('move:vendor-css', function () {
-//   return gulp.src('./src/styles/vendor/**')
-//     .pipe(gulp.dest('./dist/css/vendor'))
-// })
+gulp.task('move:js', function () {
+  return gulp.src(['src/scripts/**/*.js'])
+    .pipe(gulp.dest('./dist/scripts')).pipe(devServer.reload())
+})
 
-
-gulp.task('move:html', function () {
-    return gulp.src('./src/index.html')
+gulp.task('move:previous_counter_files', function () {
+  return gulp.src(['./previous_web_counter/**/*', '!./previous_web_counter/index.html'])
     .pipe(gulp.dest('./dist'))
 })
 
-gulp.task('move:vendor-js', function () {
-  return gulp.src('./src/js/vendor/**')
-    .pipe(gulp.dest('./dist/js/vendor'))
-})
-
-gulp.task('dev', function () {
-  gulp.watch('./src/styles/**/*.scss', ['compile:scss'])
-  gulp.watch('./src/scripts/**/*.js', ['compile:js'])
-  gulp.watch('./src/templates/**/*.nunjucks', ['move:html'])
-})
-
-gulp.task('nunjucks:compile', function() {
-  // Gets .html and .nunjucks files in pages
-  return gulp.src('./src/templates/index.nunjucks')
-  // Renders template with nunjucks
-  .pipe(nunjucksRender({
-      path: ['./src/templates']
-    }))
-  // output files in app folder
-  .pipe(gulp.dest('dist'))
-});
-
-gulp.task('build', ['nunjucks:compile', 'compile:js', 'compile:scss', 'move:vendor-js', 'move:images', 'move:icons'], function () {
-  return console.log('build completed.')
+gulp.task('watch:start', function () {
+  gulp.watch(['./src/styles/**/*.scss'], ['compile:scss'])
+  gulp.watch(['src/scripts/**/*.js'], ['move:js'])
+  gulp.watch('./src/templates/**/*.nunjucks', ['compile:nunjucks'])
 })
 
 
-// gulp.task("copy-hbs", function () {
-//   var projs = ["app","main"];
-//   var hbsGlob = path.join("..", "{" + projs.join(",") + "}","**/*.hbs");
+gulp.task('connect', devServer.server({
+    root: ['./dist'],
+    port: 1337,
+    livereload: true,
+    open: {
+        browser: 'Google Chrome' // if not working OS X browser: 'Google Chrome'
+    },
+    middleware: function (connect, opt) {
+        var Proxy = require('proxy-middleware');
+        //opt.route = ['/rest/servicepoint/user', '/rest/servicepoint/user'];
+        //opt.route = '/rest';
+        var proxyOptions = url.parse('http://192.168.5.79:8080/rest');
+        proxyOptions.route = ['/rest', '/css'];
+        var proxy = Proxy(proxyOptions);
+        return [proxy];
+    }
+}));
 
-//   return gulp.src(hbsGlob)
-//      .pipe(gulp.dest('/usr/local/Cellar/tomcat/7.0.50/libexec/webapps/'))
-//      .pipe(notify({message: "task complete", onLast: true}));
-// });
+
+gulp.task('build', gulpsync.sync(
+  [
+    'clean:build', 
+    'compile:nunjucks',
+    'compile:scss', 
+    'move:js', 
+    'move:images', 
+    'move:icons',
+    'move:previous_counter_files'
+    ]), function () {
+  return console.log(`Build Created in folder ./dist`)
+})
+
+gulp.task('build:dev', gulpsync.sync(
+  [
+    'clean:build', 
+    'compile:nunjucks',
+    'compile:scss',
+    'move:js', 
+    'move:images', 
+    'move:icons',
+    'move:previous_counter_files',
+    'watch:start',
+    'connect'
+    ]), function () {
+  return console.log(`Build Created in folder ./dist - Listening to changes in scripts/styles/templates...`)
+})

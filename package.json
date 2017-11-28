@@ -10,12 +10,19 @@
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
+    "gulp-connect-multi": "^1.0.8",
+    "gulp-connect-proxy": "^0.3.1",
+    "gulp-livereload": "^3.8.1",
     "gulp-nunjucks-render": "^2.2.1",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "gulp-sync": "^0.1.4",
+    "proxy-middleware": "^0.15.0",
+    "url": "^0.11.0"
   },
   "author": "Qmatic",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.0.0-beta.2"
+    "bootstrap": "^4.0.0-beta.2",
+    "gulp-order": "^1.1.1"
   }
 }
