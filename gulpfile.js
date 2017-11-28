@@ -69,13 +69,94 @@ gulp.task('connect', devServer.server({
         browser: 'Google Chrome' // if not working OS X browser: 'Google Chrome'
     },
     middleware: function (connect, opt) {
-        var Proxy = require('proxy-middleware');
-        //opt.route = ['/rest/servicepoint/user', '/rest/servicepoint/user'];
-        //opt.route = '/rest';
-        var proxyOptions = url.parse('http://192.168.5.79:8080/rest');
-        proxyOptions.route = ['/rest', '/css'];
-        var proxy = Proxy(proxyOptions);
-        return [proxy];
+        // var Proxy = require('proxy-middleware');
+        // //opt.route = ['/rest/servicepoint/user', '/rest/servicepoint/user'];
+        // //opt.route = '/rest';
+
+        
+
+        // var proxyOptions = url.parse('/css/orchestra.css');
+        // proxyOptions.route = 'http://'+ target +':8080/css/orchestra.css';
+
+        // // var proxyOptions = url.parse('http://'+ target +':8080/css');
+        // // proxyOptions.route = ['/'];
+
+        // var proxy = Proxy(proxyOptions);
+        // return [proxy];
+        var proxy = require('http-proxy-middleware');
+        var target = "192.168.5.29";
+
+        return [
+                proxy('/rest', {
+                    target: 'http://'+ target +':8080',
+                    route: '/rest',
+                    changeOrigin:false,
+                    ws: true 
+                }),
+                proxy('/css/orchestra.css', {
+                    target: 'http://'+ target +':8080',
+                    route: '/css/orchestra.css',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/css/reset.css', {
+                    target: 'http://'+ target +':8080',
+                    route: '/css/reset.css',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/css/css3.css', {
+                    target: 'http://'+ target +':8080',
+                    route: '/css/css3.css',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/events/scripts/org/cometd.js', {
+                    target: 'http://'+ target +':8080',
+                    route: '/events/scripts/org/cometd.js',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/events/scripts/jquery/jquery.cometd.js', {
+                    target: 'http://'+ target +':8080',
+                    route: '/events/scripts/jquery/jquery.cometd.js',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/events/qevents_cometd.js', {
+                    target: 'http://'+ target +':8080',
+                    route: '/events/qevents_cometd.js',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/images/icons/home.png', {
+                    target: 'http://'+ target +':8080',
+                    route: '/images/icons/home.png',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/images/icons/help.png', {
+                    target: 'http://'+ target +':8080',
+                    route: '/images/icons/help.png',
+                    changeOrigin:true,
+                    ws: true 
+                }),
+                proxy('/cometd', {
+                    target: 'http://'+ target +':8080',
+                    route: '/cometd',
+                    changeOrigin:false,
+                    ws: true 
+                }),
+                proxy('/workstationterminal/bundle', {
+                    target: 'http://'+ target +':8080',
+                    route: '/workstationterminal/bundle',
+                    changeOrigin:true,
+                    ws: true 
+                })
+                
+            ]
+
+        
     }
 }));
 

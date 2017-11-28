@@ -16,6 +16,8 @@
     "gulp-nunjucks-render": "^2.2.1",
     "gulp-sass": "^3.1.0",
     "gulp-sync": "^0.1.4",
+    "http-proxy-middleware": "^0.17.4",
+    "http-rewrite-middleware": "^0.1.6",
     "proxy-middleware": "^0.15.0",
     "url": "^0.11.0"
   },

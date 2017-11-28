@@ -52,6 +52,25 @@
 
     {% include "partials/previous_counter.nunjucks" %}
 
+
+
+    <script type="text/javascript">
+            $(document).ready(function() {
+                // If we ever, ever, end up with a 401, we are either timedout due to inactivity
+                // or just plain evil. Anyway we should be logged out.
+                $.ajaxSetup( {
+                    cache : false,
+                    statusCode : {
+                        401: function() {
+                            location.href = "/logout.jsp";
+                        }
+                    }
+                });
+
+                init.init();
+			});
+        </script>   
+
 </body>
 
 </html>
