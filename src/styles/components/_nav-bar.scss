@@ -1,0 +1,28 @@
+.nav-bar {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    align-items: center;
+    background: $tertiary-color;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    &__middle-space {
+        flex-grow: 1;
+        cursor: none;
+    }
+
+    a {
+        padding: 1em;
+        font-size: rem(14px);
+        text-decoration: none;
+        display: block;
+        color: $light-gray;
+    }
+    
+    a:hover {
+        background: darken($tertiary-color, 25%);
+    }
+}

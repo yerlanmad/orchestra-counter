@@ -1,0 +1,9 @@
+<ul class="nav-bar">
+ <li><a href="#">Home</a></li>
+  <li><a href="#">Qmatic</a></li>
+  <li><a href="#">Counter</a></li>
+  <li class="nav-bar__middle-space"></li>
+  <li><a href="#">Help</a></li>
+  <li><a href="#">David Robinson</a></li>
+  <li><a href="#">Logout</a></li>
+</ul>

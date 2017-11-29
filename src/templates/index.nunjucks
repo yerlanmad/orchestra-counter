@@ -16,7 +16,7 @@
     <div class="qm-app">
         <!-- Qmatic Header -->
         <header class="qm-header">
-
+                {% include "partials/header.nunjucks" %}
         </header>
 
 
@@ -38,14 +38,12 @@
 
             <!-- Qmatic Main Right -->
             <div class="qm-main__right">
-
                 {{button.render(null, 'qm-btn--primary')}}
-            
             </div>
         </main>
         <footer class="qm-footer">
             <div class="qm-footer__content">
-                <p class="qm-footer__text">Powered by Qmatic</p>
+                {% include "partials/footer.nunjucks" %}
             </div>
         </footer>
     </div>

@@ -150,6 +150,15 @@ gulp.task('connect', devServer.server({
                 })
             ]
     }
+    // middleware: function (connect, opt) {
+    //     var Proxy = require('proxy-middleware');
+    //     //opt.route = ['/rest/servicepoint/user', '/rest/servicepoint/user'];
+    //     //opt.route = '/rest';
+    //     var proxyOptions = url.parse('http://192.168.5.79:8080/rest');
+    //     proxyOptions.route = ['/rest', '/css'];
+    //     var proxy = Proxy(proxyOptions);
+    //     return [proxy];
+    // }
 }));
 
 
