@@ -1,9 +1,11 @@
-<link rel="stylesheet" type="text/css" href="/css/reset.css">
-        <link rel="stylesheet" type="text/css" href="/css/css3.css">
+        {# Commented out the current stylesheets to know what to reset #}
+        {# <link rel="stylesheet" type="text/css" href="/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="/css/css3.css"> #}
         <link rel="stylesheet" type="text/css" href="css/jquery/jquery.ui.all.css"/>
         <link rel="stylesheet" type="text/css" href="css/dataTable.css"/>
-        <link rel="stylesheet" type="text/css" href="/css/orchestra.css"/>
+        {# <link rel="stylesheet" type="text/css" href="/css/orchestra.css"/> #}
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
+
         <!--[if lt IE 8]>
         <link rel="stylesheet" type="text/css" href="css/ie7.css"/>
         <![endif]-->

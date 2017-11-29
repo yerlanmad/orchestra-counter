@@ -38,6 +38,11 @@ gulp.task('compile:scss', function () {
     .pipe(gulp.dest('./dist/css')).pipe(devServer.reload())
 })
 
+gulp.task('move:assets', function () {
+  return gulp.src('./src/assets/**')
+    .pipe(gulp.dest('./dist/assets'))
+})
+
 gulp.task('move:images', function () {
   return gulp.src(['./src/images/**'])
     .pipe(gulp.dest('./dist/images'))
@@ -70,7 +75,7 @@ gulp.task('connect', devServer.server({
     port: 1337,
     livereload: true,
     open: {
-        browser: 'Google Chrome' // if not working OS X browser: 'Google Chrome'
+        browser: 'Chrome' // if not working OS X browser: 'Google Chrome'
     },
     middleware: function (connect, opt) {
         return [
@@ -150,7 +155,8 @@ gulp.task('build', gulpsync.sync(
     'clean:build', 
     'compile:nunjucks',
     'compile:scss', 
-    'move:js', 
+    'move:js',
+    'move:assets',
     'move:images', 
     'move:icons',
     'move:previous_counter_files'
@@ -164,6 +170,7 @@ gulp.task('build:dev', gulpsync.sync(
     'compile:nunjucks',
     'compile:scss',
     'move:js', 
+    'move:assets',
     'move:images', 
     'move:icons',
     'move:previous_counter_files',

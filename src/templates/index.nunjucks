@@ -50,7 +50,7 @@
         </footer>
     </div>
 
-    {# {% include "partials/previous_counter.nunjucks" %} #}
+    {% include "partials/previous_counter.nunjucks" %}
 
 
 
