@@ -9,6 +9,9 @@ const connect = require('gulp-connect-multi')
 const devServer = connect();
 var proxy = require('http-proxy-middleware');
 
+var isWindows = process.platform === 'win32';
+var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
+
 // Configuration
 require('events').EventEmitter.prototype._maxListeners = 100;
 var targetOrchestra = "192.168.5.57";
@@ -75,7 +78,7 @@ gulp.task('connect', devServer.server({
     port: 1337,
     livereload: true,
     open: {
-        browser: 'Chrome' // if not working OS X browser: 'Google Chrome'
+        browser: chromeBrowser // if not working OS X browser: 'Google Chrome'
     },
     middleware: function (connect, opt) {
         return [
