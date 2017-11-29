@@ -1,0 +1,26 @@
+.qm-form-field {
+    position: relative;
+    margin-bottom: rem($global-standard-margin);
+    
+    &__textarea {
+        width: 100%;
+        max-width: 467px;
+        border: 0;
+        border-bottom: 1px solid $input-border-color;
+        padding-right: 40px;
+        resize: none;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    &__icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 30px;
+        width: 30px;
+        background: red;
+    }
+}

@@ -26,7 +26,7 @@
             <!-- Qmatic Main Left -->
             <div class="qm-main__left">
                 <div class="qm-card-layout">
-                    {% include "partials/ds-card.nunjucks" %}
+                    {% include "partials/visit-card.nunjucks" %}
                 </div>
 
                 <!-- Qmatic Action Bar -->
@@ -50,7 +50,7 @@
         </footer>
     </div>
 
-    {% include "partials/previous_counter.nunjucks" %}
+    {# {% include "partials/previous_counter.nunjucks" %} #}
 
 
 

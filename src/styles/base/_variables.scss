@@ -5,8 +5,10 @@ $global-action-bar-height: 84px;
 $global-card-layout-height: calc(100% - #{$global-action-bar-height});
 $global-main-height: calc(100vh - #{$global-header-height} - #{$global-footer-height});
 
-// Standard padding
+// Standard padding and margin
 $global-standard-padding: 16px;
+$global-standard-margin: 16px;
 
-// Button
+// Font size
 $button-font-size: 24px;
+$h1-font-size: 28px;

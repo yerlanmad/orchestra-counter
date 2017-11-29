@@ -1,0 +1,54 @@
+.qm-card-header {
+
+    &__top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__headline {
+        flex: 0 1 auto;
+        display: flex;
+        overflow: hidden;
+        font-size: rem($h1-font-size);
+        margin-bottom: 0;
+    }
+
+    &__customer-name {
+        flex: 0 1 auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $h1-color;
+        font-weight: $font-weight-medium;
+        text-decoration: none;
+        padding-right: rem($global-standard-padding / 2);
+
+        &:visited {
+            color: $h1-color;
+        }
+
+        &:hover,
+        &:focus {
+            color: $dark-transparent82;
+            text-decoration: underline;
+        }
+    }
+
+    &__ticket {
+        flex: 1 0 auto;
+        font-weight: $font-weight-light;
+        color: $dark-transparent82;
+        text-align: right;
+
+        @at-root [dir='rtl'] & {
+            text-align: left;
+        }
+    }
+
+    &__context-marketing {
+        flex: 0 0 28px;
+        height: 28px;
+        background: red; // TODO: Remove me
+    }
+}

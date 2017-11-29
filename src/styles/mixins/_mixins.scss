@@ -73,26 +73,69 @@ $rem-px-only: false !default;
 
 
 @mixin make-card($background-color: $white, $radius: $standard-border-radius, $max-width: $standard-card-width) {
+  position: relative;
   background-color: $background-color;
   border-radius: $radius;
   width: 100%;
-  max-width: rem($max-width);
-  padding: rem(40px 32px);
+  max-width: $max-width;
+  padding: rem(40px 32px 32px);
   box-shadow: 0 3px 10px 0 rgba(0,0,0,0.18);
 
-  &__header {
+  &__header-section {
     margin-bottom: rem(16px);
   }
 
-  &__content {
+  &__content-section {
     margin-bottom: rem(16px);
   }
 
-  &__footer {
+  &__footer-section {
     display: flex;
-
+    flex-wrap: wrap;
+    
     &--align-right {
       justify-content: flex-end;
+    }
+  }
+
+  // Modifiers
+  &--one-more {
+    &:before {
+      content: "";
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      height: 16px;
+      border-top-left-radius: rem($standard-border-radius);
+      border-top-right-radius: rem($standard-border-radius);
+      background: $light-transparent42;
+    }
+  }
+
+  &--more-than-one {
+    &:before,
+    &:after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        height: 16px;
+        border-top-left-radius: rem($standard-border-radius);
+        border-top-right-radius: rem($standard-border-radius);
+        transform: translateX(-50%);
+    }
+
+    &:before {
+        width: 90%;
+        top: -16px;
+        background: $light-transparent42;
+    }
+
+    &:after {
+        width: 80%;
+        top: -32px;
+        background: $light-transparent12;
     }
   }
 }

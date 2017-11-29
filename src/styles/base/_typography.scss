@@ -6,5 +6,11 @@ $font-weight-bold: 700;
 
 html,
 body {
+    font-size: 16px !important;
     font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    color: $h1-color;
+    font-size: rem($h1-font-size);
 }

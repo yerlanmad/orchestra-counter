@@ -1,0 +1,40 @@
+.qm-tooltip {
+    position: relative;
+
+    &:hover,
+    &:focus {
+        .qm-tooltip__text-container {
+            display: block;
+        }
+    }
+
+    &__text-container {
+        position: absolute;
+        display: none;
+        top: calc(100% + 10px);
+        left: 50%;
+        width: 300px;
+        transform: translateX(-50%);
+        background: $tooltip-background-color;
+    }
+
+    &__text {
+        display: block;
+        position: relative;
+        padding: rem($global-standard-padding);
+        color: $tooltip-color;
+
+        &:before {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; 
+            height: 0; 
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid $tooltip-background-color;
+        }
+    }
+}

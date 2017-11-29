@@ -36,11 +36,23 @@
 
     & + & {
         margin-left: rem(16px);
+
+        @at-root [dir='rtl'] & {
+            margin-right: rem(16px);
+            margin-left: 0;
+        }
     }
 
+    
+
+    
     & + &--full,
     &--full + & {
         margin-left: 0;
+
+        @at-root [dir='rtl'] & {
+            margin-right: 0;
+        }
     }
 
     &--primary {

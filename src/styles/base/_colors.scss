@@ -1,5 +1,4 @@
 // Generic colors
-$white: #FFFFFF;
 
 $midnight-blue: #1a1c33;
 $pale-blue: #334366;
@@ -12,8 +11,20 @@ $light-gray: #f4f4f4;
 $charcoal: #2b2b2b;
 $soft-gray: #e0e0e0;
 
-$black82: rgba(0, 0, 0, 0.82);
-$black42: rgba(0, 0, 0, 0.42);
+
+$white: #FFFFFF;
+$light-transparent75: rgba(255, 255, 255, 0.75);
+$light-transparent50: rgba(255, 255, 255, 0.5);
+$light-transparent42: rgba(255, 255, 255, 0.42);
+$light-transparent12: rgba(255, 255, 255, 0.12);
+
+$black: #000000;
+$dark-transparent82: rgba(0, 0, 0, 0.82);
+$dark-transparent62: rgba(0, 0, 0, 0.62);
+$dark-transparent42: rgba(0, 0, 0, 0.42);
+$dark-transparent12: rgba(0, 0, 0, 0.12);
+$dark-transparent04: rgba(0, 0, 0, 0.04);
+$dark-transparent02: rgba(0, 0, 0, 0.02);
 
 $background-gradient-stop1: #3A4F6C; 
 $background-gradient-stop2: #56525C;
@@ -24,21 +35,28 @@ $primary-color: $qmatic-bordeaux;
 $secondary-color: $pale-aquamarine;
 $tertiary-color: $midnight-blue;
 
+$h1-color: $primary-color;
+
 $right-background-color: $light-gray;
 
 $text-primary-color: $charcoal;
 
-$line-color: $soft-gray;
+$input-border-color: $dark-transparent42;
 
-$button-disabled-color: $black42;
+$button-disabled-color: $dark-transparent42;
 
 $primary-button-background: $qmatic-bordeaux;
 $primary-button-text-color: $white;
 $primary-button-border-color: $qmatic-bordeaux;
-$primary-button-active-color: $black82;
+$primary-button-active-color: $dark-transparent82;
 
 $secondary-button-background: $white;
 $secondary-button-text-color: $qmatic-bordeaux;
 $secondary-button-border-color: $qmatic-bordeaux;
-$secondary-button-active-color: $black82;
+$secondary-button-active-color: $dark-transparent82;
 
+$card-label-color: $dark-transparent42;
+$card-action-item-color: $pale-aquamarine;
+
+$tooltip-background-color: $pale-aquamarine;
+$tooltip-color: $white;

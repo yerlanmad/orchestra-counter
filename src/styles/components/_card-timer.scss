@@ -1,0 +1,30 @@
+.qm-timer {
+    margin-bottom: rem($global-standard-margin);
+
+    &__item {
+        display: flex;
+        margin-bottom: rem(4px);
+    }
+
+    &__icon {
+        flex: 0 22px;
+    }
+
+    &__text {
+        flex: 1 auto;
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
+    }
+
+    &__label {
+        color: $card-label-color;
+        font-weight: $font-weight-light;
+    }
+
+    &__time {
+        color: $card-label-color;
+        font-weight: $font-weight-regular;
+    }
+}

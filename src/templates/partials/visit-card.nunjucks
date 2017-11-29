@@ -1,0 +1,76 @@
+{% extends "partials/card/card.nunjucks" %}
+{% import "partials/card/card-nav.nunjucks" as cardNav  %}
+
+{% block id %}id="visitCard"{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-header">
+            <div class="qm-card-header__top">
+                <h1 class="qm-card-header__headline">
+                    <a href="" class="qm-card-header__customer-name">Karl-Henrik Johansson</a>
+                    <span class="qm-card-header__ticket">A100</span>
+                </h1>
+                <a href="" class="qm-card-header__context-marketing qm-tooltip">
+                    <i class="qm-tooltip__icon" aria-hidden="true"></i>
+                    <div class="qm-tooltip__text-container">
+                        <span class="qm-tooltip__text">This is a context marketing tooltip</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+        <div class="qm-timer">
+            <div class="qm-timer__item">
+                <i class="qm-timer__icon" aria-hidden="true"></i>
+                <div class="qm-timer__text">
+                    <span class="qm-timer__label">Waiting time:</span>
+                    <span class="qm-timer__time">15m 20s</span>
+                </div>
+            </div>
+            <div class="qm-timer__item">
+                <i class="qm-timer__icon" aria-hidden="true"></i>
+                <div class="qm-timer__text">
+                    <span class="qm-timer__label">Transaction time:</span>
+                    <span class="qm-timer__time">20s</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="qm-action-items">
+            <a href="" class="qm-action-item">
+                <i class="qm-action-item__icon" aria-hidden="true"></i>
+                <span class="qm-action-item__text">Add a delivered service</span>
+            </a>
+            <a href="" class="qm-action-item">
+                <i class="qm-action-item__icon" aria-hidden="true"></i>
+                <span class="qm-action-item__text">Add marks</span>
+            </a>
+            <a href="" class="qm-action-item">
+                <i class="qm-action-item__icon" aria-hidden="true"></i>
+                <span class="qm-action-item__text">Add an outcome</span>
+            </a>
+        </div>
+
+        <div class="qm-form-field">
+            <label for="notes" class="sr-only"></label>
+            <textarea id="notes" 
+                    class="qm-form-field__textarea" 
+                    placeholder="Additional notes" rows="1"></textarea>
+            <i class="qm-form-field__icon" aria-hidden="true"></i>
+        </div>
+    </div>
+
+    
+{% endblock %}
+
+{% block footer %}
+    <div class="qm-card__footer-section qm-card__footer-section--align-right">
+        {{button.render(null, 'qm-btn--secondary')}}
+        {{button.render(null, 'qm-btn--primary')}}
+    </div>
+{% endblock %}
