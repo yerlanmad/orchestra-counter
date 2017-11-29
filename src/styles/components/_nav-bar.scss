@@ -11,18 +11,32 @@
 
     &__middle-space {
         flex-grow: 1;
-        cursor: none;
+        cursor: arrow;
     }
 
+    li {
+        height: 100%;
+    }
+
+    li:nth-child(2) a {
+        font-size: rem(24px);
+        color: $h1-color;
+        padding: 0;
+    }
+
+   
+
     a {
-        padding: 1em;
+        padding: 0.5em;
+        align-items: center;
         font-size: rem(14px);
         text-decoration: none;
-        display: block;
+        display: flex;
+        height: 100%;
         color: $light-gray;
     }
-    
-    a:hover {
-        background: darken($tertiary-color, 25%);
+
+    li:nth-child(n+4) a:hover, a:focus {
+        background: $h1-color;
     }
 }
