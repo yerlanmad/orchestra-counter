@@ -13,6 +13,22 @@
         <!--[if lt IE 8]>
         <script type="text/javascript" src="scripts/json2.js"></script>
         <![endif]-->
+
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/vendor/index.js"></script>
+        <script type="text/javascript" src="scripts/utils/index.js"></script>
+        <script type="text/javascript" src="scripts/redux/index.js"></script>
+
+        <script type="text/javascript" src="scripts/vendor/redux-3.7.2.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/object-path.js"></script>
+        <script type="text/javascript" src="scripts/vendor/redux-watch.js"></script>
+
+        <script type="text/javascript" src="scripts/redux/actions/index.js"></script>
+        <script type="text/javascript" src="scripts/redux/reducers/index.js"></script>
+        <script type="text/javascript" src="scripts/redux/store/index.js"></script>
+        <script type="text/javascript" src="scripts/redux/monitor.js"></script>
+        
+
         <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.js"></script>
         <script type="text/javascript" src="scripts/jquery/jquery.ui.core.js"></script>
         <script type="text/javascript" src="scripts/jquery/jquery.ui.widget.js"></script>
@@ -54,4 +70,4 @@
 
         {# Component Links #}
         <link rel="stylesheet" href="css/main.css" />
-        <script type="text/javascript" src="scripts/main.js"></script>
+        

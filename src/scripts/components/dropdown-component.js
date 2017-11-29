@@ -1,6 +1,6 @@
 // Dropdown Component
 
-window.qmCounter.dropdown = (function(){
+window.$Qmatic.components.dropdown = (function(){
 
     var defaultConfigurations = {
         data: [],       // Data component will hold

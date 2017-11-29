@@ -1,4 +1,4 @@
-window.actions = function(){
+window.$Qmatic.redux.actions = (function(){
     return {
         branch: function (){
             return {
@@ -49,4 +49,4 @@ window.actions = function(){
             } 
         }()
     }
-}();
+})();

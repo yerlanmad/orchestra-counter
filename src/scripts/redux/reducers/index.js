@@ -1,4 +1,4 @@
-window.reducers = function(){
+window.$Qmatic.redux.reducers = (function(){
 
     // Shared Default Variables
     var defaultListValue = []
@@ -6,10 +6,13 @@ window.reducers = function(){
     var defaultBooleanValue = false
     var defaultObjectValue = {}
 
-    return {
-        branchListReducer: function (){
+    if(!!!window.Redux)
+        throw new Error("Redux Library Not Loaded!!!")
+
+    return Redux.combineReducers({
+        branchList: function (){
             // Local Default Variables. Emulate Default Varaibles in new ES6 Syntax.
-            return function (state, type){
+            return function (state, action){
 
                 // Set Default Value if user enter something fasely
                 if(!!!state) {
@@ -18,14 +21,14 @@ window.reducers = function(){
 
                 switch (action.type) {
 	                case "ADD_BRANCHES":
-		                return 
+		                return action.payload
 	                default:
 		                return state
 	            }
             } 
         }(),
-        selectedBranchReducer: function (){
-            return function (state, type){
+        selectedBranch: function (){
+            return function (state, action){
 
                 // Set Default Value if user enter something fasely
                 if(!!!state) {
@@ -34,15 +37,15 @@ window.reducers = function(){
 
                 switch (action.type) {
 	                case "ADD_SELECTED_BRANCH":
-		                return 
+		                return action.payload
 	                default:
 		                return state
 	            }
             } 
         }(),
-        workstationListReducer: function (){
+        workstationList: function (){
             // Local Default Variables. Emulate Default Varaibles in new ES6 Syntax.
-            return function (state, type){
+            return function (state, action){
 
                 // Set Default Value if user enter something fasely
                 if(!!!state) {
@@ -51,14 +54,14 @@ window.reducers = function(){
 
                 switch (action.type) {
 	                case "ADD_WORKSTATIONS":
-		                return 
+		                return action.payload
 	                default:
 		                return state
 	            }
             } 
         }(),
-        selectedWorkstationReducer: function (){
-            return function (state, type){
+        selectedWorkstation: function (){
+            return function (state, action){
 
                 // Set Default Value if user enter something fasely
                 if(!!!state) {
@@ -67,15 +70,15 @@ window.reducers = function(){
 
                 switch (action.type) {
 	                case "ADD_SELECTED_WORKSTATION":
-		                return 
+		                return action.payload
 	                default:
 		                return state
 	            }
             } 
         }(),
-        workprofileListReducer: function (){
+        workprofileList: function (){
             // Local Default Variables. Emulate Default Varaibles in new ES6 Syntax.
-            return function (state, type){
+            return function (state, action){
 
                 // Set Default Value if user enter something fasely
                 if(!!!state) {
@@ -84,14 +87,14 @@ window.reducers = function(){
 
                 switch (action.type) {
 	                case "ADD_WORKPROFILES":
-		                return 
+		                return action.payload
 	                default:
 		                return state
 	            }
             } 
         }(),
-        selectedWorkprofileReducer: function (){
-            return function (state, type){
+        selectedWorkprofile: function (){
+            return function (state, action){
 
                 // Set Default Value if user enter something fasely
                 if(!!!state) {
@@ -100,12 +103,12 @@ window.reducers = function(){
 
                 switch (action.type) {
 	                case "ADD_SELECTED_WORKPROFILE":
-		                return 
+		                return action.payload
 	                default:
 		                return state
 	            }
             } 
         }(),
-    }
-}();
+    })
+})();
 
