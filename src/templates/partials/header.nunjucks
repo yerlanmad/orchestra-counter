@@ -2,7 +2,7 @@
  <li><a href="#">Home</a></li>
   <li><a href="#">Qmatic</a></li>
   <li><a href="#">Counter</a></li>
-  <li><a href="#">Malmö Emporia Shoppingcenter > Counter 1 > Call all by waiting time</a></li>
+  <li><a>Malmö Emporia Shoppingcenter > Counter 1 > Call all by waiting time</a></li>
   <li><a href="#">edit</a></li>
   <li class="nav-bar__middle-space"></li>
   <li><a href="#">Help</a></li>
