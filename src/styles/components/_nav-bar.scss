@@ -8,24 +8,31 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: flex-start;
-
     &__middle-space {
         flex-grow: 1;
         cursor: arrow;
     }
-
     li {
         height: 100%;
     }
-
     li:nth-child(2) a {
         font-size: rem(24px);
         color: $h1-color;
         padding: 0;
     }
-
-   
-
+    li:nth-child(4) a {
+        color: $light-transparent50;
+    }
+    li:nth-child(5) {
+        display: flex;
+        align-items: center;
+    }
+    li:nth-child(5) a {
+        border-bottom: 1px solid;
+        height: 30%;
+        color: $light-transparent50;
+        padding: 0 0.1em 0 0.1em;
+    }
     a {
         padding: 0.5em;
         align-items: center;
@@ -35,8 +42,8 @@
         height: 100%;
         color: $light-gray;
     }
-
-    li:nth-child(n+4) a:hover, a:focus {
+    li:nth-child(n+7) a:hover,
+    a:focus {
         background: $h1-color;
     }
 }
