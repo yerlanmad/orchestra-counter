@@ -11,7 +11,7 @@
 
 {% block content %}
     <div class="qm-card__content">
-        This is the content
+        {% include "partials/ds-table.nunjucks" %}
     </div>
 {% endblock %}
 

@@ -1,0 +1,86 @@
+.qm-table {
+    width: 100%;
+
+    &__header {
+        th {
+            font-size: rem(12px);
+            font-weight: $font-weight-medium;
+            color: $dark-transparent62;
+            padding: rem(0 $global-standard-padding);
+        }
+    }
+
+    &__body {
+
+        tr {
+            background: transparent;
+
+            &:hover {
+                background: $table-row-hover-color;
+            }
+        }
+
+        td {
+            font-size: rem(18px);
+            padding: rem($global-standard-padding);
+        }
+    }
+
+    &__queue-name {
+        color: $secondary-color;
+    }
+
+    &__first-column {
+
+    }
+
+    &__middle-column {
+        text-align: right;
+
+        @at-root [dir='rtl'] & {
+            text-align: left;
+        }
+    }
+
+    &__last-column {
+        text-align: right;
+        
+        @at-root [dir='rtl'] & {
+            text-align: left;
+        }
+    }
+
+    &--small {
+
+        .qm-table__header {
+            border-bottom: 1px solid $dark-transparent12;
+
+            th {
+                padding: rem($global-standard-padding 0);
+            }
+        }
+
+        .qm-table__body {
+            tr {
+                background: transparent;
+    
+                &:hover {
+                    background: $dark-transparent04;
+                }
+            }
+    
+            td {
+                font-size: rem(18px);
+                padding: rem($global-standard-padding / 2 0);
+            }
+
+            .qm-table__first-column {
+                padding: rem($global-standard-padding / 2);
+            }
+    
+            .qm-table__last-column {
+                padding: rem($global-standard-padding / 2);
+            }
+        }
+    }
+}

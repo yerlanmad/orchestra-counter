@@ -26,7 +26,7 @@ var deliveredServices = new function() {
                 var t = new Date();
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/deliverableServices?call="+t;
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    nHead.style.borderBottom = "1px solid #c0c0c0";
+                    //nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
                 };
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
@@ -66,7 +66,7 @@ var deliveredServices = new function() {
             }
         } else {
             var columns = [
-/* D.serv. name */     {"sClass": "firstColumn",
+/* D.serv. name */     {"sClass": "qm-table__first-column",
                         "mDataProp": "deliveredServiceName",
                         "sDefaultContent" : null},
 /* D.serv. jiql id */  {"bSearchable": false,
@@ -77,10 +77,10 @@ var deliveredServices = new function() {
                         "bVisible": false,
                         "mDataProp": "deliveredServiceId",
                         "sDefaultContent" : null},
-/* D.serv. outcome */  {"sClass": "middleColumn",
+/* D.serv. outcome */  {"sClass": "qm-table__middle-column",
                         "mDataProp": "visitOutcome",
                         "sDefaultContent" : null},
-/* Delivered time */   {"sClass": "lastColumn",
+/* Delivered time */   {"sClass": "qm-table__last-column",
                         "mDataProp": "eventTime",
                         "sDefaultContent" : null},
 /* D.serv. out req. */ {"bSearchable": false,
@@ -89,7 +89,7 @@ var deliveredServices = new function() {
             ];
             var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                 if(nHead.getElementsByTagName('th')[0].innerHTML.length == 0) {
-                    nHead.style.borderBottom = "1px solid #c0c0c0";
+                    //nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.delivered.service.outcome');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.delivered.service.time');
@@ -145,8 +145,8 @@ var deliveredServices = new function() {
                 "bProcessing": true,
                 "bPaginate": false,
                 "aoColumns": columns,
-                "sScrollX": "95%",
-                "sScrollY": "158px",
+                "sScrollX": "100%",
+                "sScrollY": "100%",
                 "aaData": (sessvars.state.visit != null &&
                     sessvars.state.visit.currentVisitService != null &&
                     sessvars.state.visit.currentVisitService.visitDeliveredServices !== null ?

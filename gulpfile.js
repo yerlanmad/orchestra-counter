@@ -14,7 +14,7 @@ var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
 
 // Configuration
 require('events').EventEmitter.prototype._maxListeners = 100;
-var targetOrchestra = "192.168.5.57";
+var targetOrchestra = "192.168.5.29";
 
 // Tasks
 gulp.task('clean:build', function () {
@@ -66,10 +66,16 @@ gulp.task('move:previous_counter_files', function () {
     .pipe(gulp.dest('./dist'))
 })
 
+gulp.task('move:previous_counter_js', function() {
+  return gulp.src(['./previous_web_counter/scripts/**/*.js', '!./previous_web_counter/scripts/jquery/*.js'])
+    .pipe(gulp.dest('./dist/scripts'))
+});
+
 gulp.task('watch:start', function () {
   gulp.watch(['./src/styles/**/*.scss'], ['compile:scss'])
   gulp.watch(['src/scripts/**/*.js'], ['move:js'])
   gulp.watch('./src/templates/**/*.nunjucks', ['compile:nunjucks'])
+  gulp.watch('./previous_web_counter/scripts/**/*.js', ['move:previous_counter_js'])
 })
 
 

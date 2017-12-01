@@ -17,25 +17,25 @@ var queues = new function() {
                 queuesTable.fnSort(SORTING);
             } else {
                 var columns = [
-                    /* Queue name */        {"sClass": "firstColumn",
+                    /* Queue name */        {"sClass": "qm-table__first-column",
                         "mDataProp": "name",
                         "sDefaultContent" : null},
                     /* Queue id */          {"bSearchable": false,
                         "bVisible": false,
                         "mDataProp": "id",
                         "sDefaultContent" : null},
-                    /* Queue waiting time */{"sClass": "middleColumn",
-                        "mDataProp": "waitingTime",
-                        "sDefaultContent" : null},
-                    /* Queue waiting num */ {"sClass": "lastColumn",
+                    /* Queue waiting num */ {"sClass": "qm-table__middle-column",
                         "mDataProp": "customersWaiting",
+                        "sDefaultContent" : null},
+                    /* Queue waiting time */{"sClass": "qm-table__last-column",
+                        "mDataProp": "waitingTime",
                         "sDefaultContent" : null}
                 ];
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    nHead.style.borderBottom = "1px solid #c0c0c0";
+                    //nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.name.short');
-                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.waiting.time.short');
-                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting.short');
+                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.waiting.short');
+                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting.time.short');
                 };
 				var t= new Date();
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues?call="+t;
@@ -44,25 +44,25 @@ var queues = new function() {
                     if(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                         !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
                         var queueName = $('td:eq(0)', nRow).text();
-                        $('td:eq(0)', nRow).empty().append("<span class=\"queueName\" " +
+                        $('td:eq(0)', nRow).empty().append("<span class=\"qm-table__queue-name\" " +
                             "title=\"" + jQuery.i18n.prop("action.title.queue.click") + "\">" + queueName + "</span>");
 
 							
-                        $('td:eq(0) > span.queueName', nRow).click(function() {
+                        $('td:eq(0) > span.qm-table__queue-name', nRow).click(function() {
                             queueClicked(nRow);
 							
 						
 							
                         });
                     } else {
-                        $('td:eq(0)', nRow).addClass("queueNameDisabled");
+                        $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
                     }
-					
-                    $('td:eq(1)', nRow).html(util.formatIntoHHMM(parseInt(aData.waitingTime)));
+                    
+                    $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
                     return nRow;
                 };
                 queuesTable = util.buildTableJson({"tableId": "queues", "url": url, "rowCallback": rowCallback,
-                    "columns": columns, "filter": false, "headerCallback": headerCallback, "emptyTableLabel": "info.queues.none"});
+                    "columns": columns, "filter": false, "headerCallback": headerCallback, "emptyTableLabel": "info.queues.none", "scrollYHeight": "100%"});
                 queuesTable.fnSort(SORTING);
             }
 
@@ -127,7 +127,7 @@ var queues = new function() {
 						if ( buttonCallFromQueueEnabled  == true ) {						
 							$('td:eq(1)', nRow).append("<span><a href=\"#\" class=\"callTicket\" title=\"" +  jQuery.i18n.prop("action.title.call.ticket")  + "\"></a></span>");
 						}
-                        var formattedTime = util.formatIntoHHMM(parseInt(aData.waitingTime));
+                        var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
                     }
                     $('td:eq(2)', nRow).html(formattedTime);
                     $(nRow).addClass("");

@@ -4,10 +4,7 @@
             <button class="qm-action-btn qm-action-btn--only-icon">Back</button>
         </div>
         <div class="qm-card-nav__middle">
-            <h2 {% if id %}id="{{id}}"{% endif %} class="qm-card-nav__title">Delivered Services</h2>
-        </div>
-        <div class="qm-card-nav__right">
-            <button class="qm-action-btn qm-action-btn--only-icon">X</button>
+            <h2 {% if id %}id="{{id}}"{% endif %} class="qm-card-nav__title">Add delivered services</h2>
         </div>
     </div>
 {% endmacro %}

@@ -1,0 +1,31 @@
+<!-- Tabs -->
+<div class="qm-tabs" id="js-qm-tabs">
+    <div class="qm-tabs__tablist" role="tablist" aria-label="Queues">
+        <button class="qm-tabs__tab" 
+                role="tab"
+                aria-selected="true"
+                aria-controls="myQueuesPanel"
+                id="myQueues">My Queues</button>
+        <button class="qm-tabs__tab"
+                role="tab"
+                aria-selected="false"
+                aria-controls="allQueuesPanel"
+                id="allQueues"
+                tabindex="-1">All Queues</button>
+    </div>
+
+    <!-- Tab panels -->
+    <div class="qm-tabs__tab-panel qm-tabs__tab-panel--is-selected" tabindex="0"
+        role="tabpanel"
+        id="myQueuesPanel"
+        aria-labelledby="myQueues">
+        {% include "partials/all-queues-table.nunjucks" %}
+    </div>
+    <div class="qm-tabs__tab-panel" tabindex="0"
+        role="tabpanel"
+        id="allQueuesPanel"
+        aria-labelledby="allQueues"
+        hidden>
+        Test2
+    </div>
+</div>

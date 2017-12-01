@@ -26,6 +26,7 @@
             <!-- Qmatic Main Left -->
             <div class="qm-main__left">
                 <div class="qm-card-layout">
+                    {# {% include "partials/visit-card.nunjucks" %} #}
                     {% include "partials/visit-card.nunjucks" %}
                 </div>
 
@@ -38,7 +39,8 @@
 
             <!-- Qmatic Main Right -->
             <div class="qm-main__right">
-                {{button.render(null, 'qm-btn--primary')}}
+                {% include "partials/pools.nunjucks" %}
+                {% include "partials/queue-tabs.nunjucks" %}
             </div>
         </main>
         <footer class="qm-footer">
@@ -66,6 +68,12 @@
                 });
 
                 init.init();
+
+                var tabConfig = {
+                    tabComponentId: 'js-qm-tabs'
+                };
+                
+                window.$Qmatic.components.tabs(tabConfig);
 			});
         </script>   
 

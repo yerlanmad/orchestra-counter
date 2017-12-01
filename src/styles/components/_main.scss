@@ -6,11 +6,13 @@
         flex: 1 percentage(5/12);
         height: 100%;
         background: linear-gradient(268.62deg, $background-gradient-stop1 0%, $background-gradient-stop2 63.02%, $background-gradient-stop3 100%);
+        min-width: 0;
     }
 
     &__right {
         flex: 1 percentage(7/12);
         height: 100%;
+        padding: rem(40px 32px 30px);
         background: $right-background-color;
         box-shadow: inset 15px 0px 60px -20px rgba(0,0,0,0.75);
     }

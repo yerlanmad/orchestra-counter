@@ -7,7 +7,7 @@
     }
 
     &__headline {
-        flex: 0 1 auto;
+        flex: 1 1 auto;
         display: flex;
         overflow: hidden;
         font-size: rem($h1-font-size);
@@ -16,13 +16,18 @@
 
     &__customer-name {
         flex: 0 1 auto;
-        white-space: nowrap;
         overflow: hidden;
+        white-space: nowrap;
         text-overflow: ellipsis;
         color: $h1-color;
         font-weight: $font-weight-medium;
         text-decoration: none;
         padding-right: rem($global-standard-padding / 2);
+
+        @at-root [dir='rtl'] & {
+            padding-right: 0;
+            padding-left: rem($global-standard-padding / 2);
+        }
 
         &:visited {
             color: $h1-color;
@@ -39,6 +44,8 @@
         flex: 1 0 auto;
         font-weight: $font-weight-light;
         color: $dark-transparent82;
+        white-space: nowrap;
+        overflow: hidden;
         text-align: right;
 
         @at-root [dir='rtl'] & {

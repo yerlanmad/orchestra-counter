@@ -291,7 +291,7 @@
             </div>
 
             <!-- Queues module  -->
-            <div id="queuesModule" class="module">
+            {# <div id="queuesModule" class="module">
                 <h2 id="queuesModuleLabel"></h2>
                 <div id="queuesContainer" class="moduleContentContainer">
                     <table id="queues" class="display">
@@ -307,7 +307,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div> #}
 
             <!-- Projected visits module  -->
             <!-- <div id="projectedVisitsModule" class="module">

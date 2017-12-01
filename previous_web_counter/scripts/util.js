@@ -70,7 +70,7 @@ var util = new function() {
         var table;
         table = $('#' + tableId).dataTable( {
             "bDestroy": true,
-            "sScrollX": "95%",
+            "sScrollX": "100%",
             "sScrollY": (popup ? "300px" : "158px"),
             "oLanguage": {
                 "sEmptyTable": "",
@@ -119,7 +119,7 @@ var util = new function() {
 //        table = $('#' + config.tableId).dataTable( {
 		var tableConfig = {
             "bDestroy": true,
-            "sScrollX": "95%",
+            "sScrollX": "100%",
             "sScrollY": (config.scrollYHeight ? config.scrollYHeight : "158px"),
             "oLanguage": {
                 "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel): "",
@@ -228,6 +228,17 @@ var util = new function() {
         var minutes = parseInt(remainder / 60);
         var formatted =  (hours < 10 ? "0" : "") + hours
                 + ":" + (minutes < 10 ? "0" : "") + minutes;
+        return formatted;
+    };
+
+    this.formatIntoMM = function(secsIn) {
+        if(secsIn == -1) {
+            return "";
+        }
+
+        var minutes = parseInt(secsIn / 60);
+        var formatted = minutes < 1 ? "< 1 min" : minutes + " min";
+        
         return formatted;
     };
 	
@@ -430,7 +441,7 @@ var util = new function() {
         var table;
         table = $('#' + config.tableId).dataTable( {
             "bDestroy": true,
-            "sScrollX": "95%",
+            "sScrollX": "100%",
             "sScrollY": (config.scrollYHeight ? config.scrollYHeight : "158px"),
             "oLanguage": {
                 "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel): "",

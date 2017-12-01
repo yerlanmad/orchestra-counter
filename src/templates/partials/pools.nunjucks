@@ -1,0 +1,43 @@
+<!-- My pool -->
+<div class="qm-pool">
+    <span class="qm-pool__label" id="myPoolLabel">My pool</span>
+    <div class="qm-pool__content">
+        <ul class="qm-pool__list" aria-labelledby="myPoolLabel" tabindex="0">
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+        </ul>
+    </div>
+    {# <button class="qm-pool__toggle-button">Toggle</button> #}
+</div>
+
+<!-- Counter pool -->
+<div class="qm-pool">
+    <span class="qm-pool__label" id="counterPoolLabel">Counter pool</span>
+    <div class="qm-pool__content">
+        <ul class="qm-pool__list" aria-labelledby="counterPoolLabel" tabindex="0">
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+            <li class="qm-pool__list-item">
+                {% include "partials/pool-item.nunjucks" %}
+            </li>
+        </ul>
+    </div>
+    {# <button class="qm-pool__toggle-button">Toggle</button> #}
+</div>

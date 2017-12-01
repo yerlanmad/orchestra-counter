@@ -1,0 +1,57 @@
+.qm-tabs {
+    &__tablist {
+        display: flex;
+        border-bottom: 1px solid $tab-border-color;
+    }
+
+    &__tab {
+        flex: 1 auto;
+        background: transparent;
+        border: 0;
+        color: $tab-text-color;
+        padding: rem($global-standard-padding / 2 $global-standard-padding);
+        padding-left: 0;
+        font-size: rem(21px);
+        line-height: rem(24px);
+        cursor: pointer;
+        text-align: left;
+
+        @at-root [dir='rtl'] & {
+            padding-right: 0;
+            text-align: right;
+        }
+
+        &:hover {
+            color: $primary-color;
+        }
+
+        &:focus,
+        &:active {
+            outline: 0;
+        }
+
+        &[aria-selected='false'] {
+            color: $tab-disabled-color;
+        }
+
+        & + & {
+            padding-left: rem($global-standard-padding);
+            margin-left: rem($global-standard-margin);
+
+            @at-root [dir='rtl'] & {
+                margin-left: 0;
+                margin-right: rem($global-standard-margin);
+                padding-right: rem($global-standard-padding);
+            }
+        }
+    }
+
+    &__tab-panel {
+        padding-top: rem($global-standard-padding);
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+

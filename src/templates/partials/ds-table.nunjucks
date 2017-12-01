@@ -1,0 +1,17 @@
+<!-- Delivered Services component -->
+<div id="deliveredServicesModule">
+    <table id="deliveredServices" class="qm-table qm-table--small">
+        <thead class="qm-table__header">
+            <tr>
+                <th id="deliveredServiceId"></th>
+                <th id="deliveredServiceEventTime"></th>
+                <th id="deliveredServiceOrigId"></th>
+                <th id="deliveredServiceName"></th>
+                <th id="deliveredServiceVisitOutcome"></th>
+                <th id="deliveredServiceVisitOutcomeNeeded"></th>
+            </tr>
+        </thead>
+        <tbody class="qm-table__body">
+        </tbody>
+    </table>
+</div>

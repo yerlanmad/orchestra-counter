@@ -71,3 +71,5 @@
         {# Component Links #}
         <link rel="stylesheet" href="css/main.css" />
         
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
