@@ -1,7 +1,10 @@
 {% macro render(id)%}
     <div class="qm-card-nav">
         <div class="qm-card-nav__left">
-            <button class="qm-action-btn qm-action-btn--only-icon">Back</button>
+            <button class="qm-action-btn qm-card-nav__back-btn">
+                <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                <span class="sr-only">Back</span>
+            </button>
         </div>
         <div class="qm-card-nav__middle">
             <h2 {% if id %}id="{{id}}"{% endif %} class="qm-card-nav__title">Add delivered services</h2>

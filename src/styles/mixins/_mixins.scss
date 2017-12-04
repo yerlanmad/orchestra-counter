@@ -1,3 +1,15 @@
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+  border: 0;
+}
+
 $rem-baseline: 16px !default;
 $rem-fallback: false !default;
 $rem-px-only: false !default;
@@ -92,9 +104,13 @@ $rem-px-only: false !default;
   &__footer-section {
     display: flex;
     flex-wrap: wrap;
-    
+
     &--align-right {
       justify-content: flex-end;
+    }
+
+    &--space-between {
+      justify-content: space-between;
     }
   }
 

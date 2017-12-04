@@ -46,16 +46,28 @@
         color: $dark-transparent82;
         white-space: nowrap;
         overflow: hidden;
-        text-align: right;
 
         @at-root [dir='rtl'] & {
-            text-align: left;
+            text-align: right;
         }
     }
 
     &__context-marketing {
         flex: 0 0 28px;
         height: 28px;
-        background: red; // TODO: Remove me
+        margin-left: rem(4px);
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        @at-root [dir='rtl'] & {
+            margin-left: 0;
+            margin-right: rem(4px);
+        }
+    }
+
+    &__context-marketing-icon {
+        font-size: rem(28px);
     }
 }

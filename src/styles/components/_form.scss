@@ -12,6 +12,11 @@
 
         &:focus {
             outline: 0;
+            border-bottom: 1px solid $dark-transparent82;
+
+            & + .qm-form-field__icon {
+                color: $dark-transparent82;
+            }
         }
     }
 
@@ -19,8 +24,9 @@
         position: absolute;
         right: 0;
         top: 0;
-        height: 30px;
-        width: 30px;
-        background: red;
+        height: 22px;
+        width: 22px;
+        font-size: rem(22px);
+        color: $input-border-color;
     }
 }

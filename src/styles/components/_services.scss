@@ -1,0 +1,77 @@
+.qm-services {
+    margin-bottom: rem(24px);
+
+    &__current-service-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: rem(2px);
+    }
+    
+    &__current-service-title {
+        font-size: rem(24px);
+    }
+
+    &__add-service {
+        color: $secondary-color;
+        text-decoration: none;
+        font-size: rem(24px);
+
+        &:hover,
+        &:focus {
+            text-decoration: none;
+        }
+
+        &:visited {
+            color: $secondary-color;
+        }
+    }
+
+    &__add-service-icon {
+        margin-left: rem(4px);
+
+        @at-root [dir='rtl'] & {
+            margin-left: 0;
+            margin-right: rem(4px);
+        }
+    }
+
+    &__upcoming-services-container {
+        display: flex;
+        color: $services-color;
+    }
+
+    &__previous-services-container {
+        display: flex;
+        color: $services-color;
+    }
+
+    &__label {
+        margin-right: rem($global-standard-margin / 2);
+
+        @at-root [dir='rtl'] & {
+            margin-right: 0;
+            margin-left: rem($global-standard-margin / 2);
+        }
+    }
+
+    &__services-listing {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: rem(-$global-standard-padding / 2);
+        margin-right: rem(-$global-standard-padding / 2);
+    }
+
+    &__service-item {
+        white-space: nowrap;
+        padding: rem(0 $global-standard-padding / 2);
+
+        & + & {
+            // margin-left: rem($global-standard-margin / 2);
+
+            // @at-root [dir='rtl'] & {
+            //     margin-left: 0;
+            //     margin-right: rem($global-standard-margin / 2);
+            // }
+        }
+    }
+}

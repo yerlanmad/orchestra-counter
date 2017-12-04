@@ -4,6 +4,7 @@
 
     &__left {
         flex: 0 0 24px;
+        height: 24px;
     }
 
     &__middle {
@@ -19,5 +20,16 @@
         font-size: rem(28px);
         font-weight: $font-weight-light;
         margin-bottom: 0;
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
+    }
+
+    &__back-btn {
+        .qm-action-btn__icon {
+            color: $back-button-color;
+            font-size: rem(24px);
+        }
     }
 }

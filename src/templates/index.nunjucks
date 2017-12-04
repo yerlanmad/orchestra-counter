@@ -15,25 +15,21 @@
 <body>
     <div class="qm-app">
         <!-- Qmatic Header -->
-        <header class="qm-header">
-                {% include "partials/header.nunjucks" %}
-        </header>
-
-
+        {% include "partials/global-header.nunjucks" %}
+       
         <!-- Qmatic Main -->
         <main class="qm-main">
 
             <!-- Qmatic Main Left -->
             <div class="qm-main__left">
                 <div class="qm-card-layout">
-                    {# {% include "partials/visit-card.nunjucks" %} #}
                     {% include "partials/visit-card.nunjucks" %}
+                    {# {% include "partials/ds-card.nunjucks" %} #}
+                    {# {% include "partials/mark-card.nunjucks" %} #}
                 </div>
 
                 <!-- Qmatic Action Bar -->
-                <div class="qm-action-bar">
-
-                </div>
+                {% include "partials/action-bar.nunjucks" %}
             </div>
 
 
@@ -49,7 +45,13 @@
             </div>
         </footer>
     </div>
-
+    <div class="wrap">
+        <div class="tooltip mycustomclass" role="tooltip">
+            <div class="tooltip-arrow"></div>
+            <button>hello</button>
+            <div class="tooltip-inner"></div>
+        </div>
+    </div>
     {% include "partials/previous_counter.nunjucks" %}
 
 
@@ -68,6 +70,24 @@
                 });
 
                 init.init();
+                
+                var reference = $('.qm-footer__text');
+                var popper = document.querySelector('.qm-tooltip__text');
+
+                var template = $('.wrap').html();
+                console.log('template: ', template);
+                const refEl = document.getElementById('myQueues');
+                const toolTip = new Tooltip(
+                refEl,
+                {
+                    placement: 'bottom-start',
+                    container: document.body,
+                    html: false,
+                    trigger: 'click', //options.trigger || 'hover',
+                    title: '',
+                    template: template.trim(),
+                }
+                );
 
                 var tabConfig = {
                     tabComponentId: 'js-qm-tabs'
@@ -75,8 +95,7 @@
                 
                 window.$Qmatic.components.tabs(tabConfig);
 			});
-        </script>   
-
+        </script>
 </body>
 
 </html>

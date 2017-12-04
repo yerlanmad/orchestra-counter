@@ -8,6 +8,14 @@
 
     &__icon {
         flex: 0 22px;
+        font-size: rem(20px);
+        line-height: rem(22px);
+        margin-right: rem(4px);
+
+        @at-root [dir='rtl'] & {
+            margin-right: 0;
+            margin-left: rem(4px);
+        }
     }
 
     &__text {

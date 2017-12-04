@@ -14,11 +14,35 @@
                     <span class="qm-card-header__ticket">A100</span>
                 </h1>
                 <a href="" class="qm-card-header__context-marketing qm-tooltip">
-                    <i class="qm-tooltip__icon" aria-hidden="true"></i>
+                    <i class="qm-card-header__context-marketing-icon qm-tooltip__icon icon-announce" aria-hidden="true"></i>
                     <div class="qm-tooltip__text-container">
                         <span class="qm-tooltip__text">This is a context marketing tooltip</span>
                     </div>
                 </a>
+            </div>
+            <div class="qm-services">
+                <div class="qm-services__current-service-container">
+                    <span class="qm-services__current-service-title">Tablets</span>
+                    <a href="#" class="qm-services__add-service">
+                        <i class="qm-services__add-service-icon icon-service-add" aria-hidden="true"></i>
+                        <span class="qm-services__add-service-text sr-only">Add service</span>
+                    </a>
+                </div>
+                <div class="qm-services__upcoming-services-container">
+                    <span class="qm-services__label">Next:</span>
+                    <div class="qm-services__services-listing">
+                        <span class="qm-services__service-item">General support</span>
+                        <span class="qm-services__service-item">Network & routers</span>
+                        <span class="qm-services__service-item">Service 3</span>
+                        <span class="qm-services__service-item">Service 6</span>
+                    </div>
+                </div>
+                <div class="qm-services__previous-services-container">
+                    <span class="qm-services__label">Previous:</span>
+                    <div class="qm-services__services-listing">
+                        <span class="qm-services__service-item">Computers</span>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -26,16 +50,17 @@
 
 {% block content %}
     <div class="qm-card__content-section">
+        <!-- Waiting time and transaction time -->
         <div class="qm-timer">
             <div class="qm-timer__item">
-                <i class="qm-timer__icon" aria-hidden="true"></i>
+                <i class="qm-timer__icon icon-clock-solid" aria-hidden="true"></i>
                 <div class="qm-timer__text">
                     <span class="qm-timer__label">Waiting time:</span>
                     <span class="qm-timer__time">15m 20s</span>
                 </div>
             </div>
             <div class="qm-timer__item">
-                <i class="qm-timer__icon" aria-hidden="true"></i>
+                <i class="qm-timer__icon icon-hourglass" aria-hidden="true"></i>
                 <div class="qm-timer__text">
                     <span class="qm-timer__label">Transaction time:</span>
                     <span class="qm-timer__time">20s</span>
@@ -43,27 +68,28 @@
             </div>
         </div>
 
-        <div class="qm-action-items">
-            <a href="" class="qm-action-item">
-                <i class="qm-action-item__icon" aria-hidden="true"></i>
-                <span class="qm-action-item__text">Add a delivered service</span>
+        <!-- Navigation to screens -->
+        <div class="qm-task-items">
+            <a href="" class="qm-task-item">
+                <i class="qm-task-item__icon icon-briefcase" aria-hidden="true"></i>
+                <span class="qm-task-item__text">Add a delivered service</span>
             </a>
-            <a href="" class="qm-action-item">
-                <i class="qm-action-item__icon" aria-hidden="true"></i>
-                <span class="qm-action-item__text">Add marks</span>
+            <a href="" class="qm-task-item">
+                <i class="qm-task-item__icon icon-mark" aria-hidden="true"></i>
+                <span class="qm-task-item__text">Add marks</span>
             </a>
-            <a href="" class="qm-action-item">
-                <i class="qm-action-item__icon" aria-hidden="true"></i>
-                <span class="qm-action-item__text">Add an outcome</span>
+            <a href="" class="qm-task-item">
+                <i class="qm-task-item__icon icon-outcome" aria-hidden="true"></i>
+                <span class="qm-task-item__text">Add an outcome</span>
             </a>
         </div>
-
+        
         <div class="qm-form-field">
             <label for="notes" class="sr-only"></label>
             <textarea id="notes" 
                     class="qm-form-field__textarea" 
                     placeholder="Additional notes" rows="1"></textarea>
-            <i class="qm-form-field__icon" aria-hidden="true"></i>
+            <i class="qm-form-field__icon icon-edit" aria-hidden="true"></i>
         </div>
     </div>
 
@@ -71,8 +97,34 @@
 {% endblock %}
 
 {% block footer %}
-    <div class="qm-card__footer-section qm-card__footer-section--align-right">
-        {{button.render(null, 'qm-btn--secondary')}}
-        {{button.render(null, 'qm-btn--primary')}}
+    <div class="qm-card__footer-section qm-card__footer-section--space-between">
+        <div class="qm-card-action-layout">
+            <button class="qm-action-btn">
+                <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Recall">Recall</span>
+            </button>
+            <button class="qm-action-btn">
+                <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Recycle">Recycle</span>
+            </button>
+            <button class="qm-action-btn">
+                <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Transfer">Transfer</span>
+            </button>
+            <button class="qm-action-btn">
+                <i class="qm-action-btn__icon icon-pause" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Park">Park</span>
+            </button>
+        </div>
+        <div class="qm-card-action-layout">
+            <button class="qm-action-btn">
+                <i class="qm-action-btn__icon icon-no-show" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="No show">No show</span>
+            </button>
+            <button class="qm-action-btn">
+                <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="No show">Finish</span>
+            </button>
+        </div>
     </div>
 {% endblock %}

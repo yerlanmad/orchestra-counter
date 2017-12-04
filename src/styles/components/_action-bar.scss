@@ -4,5 +4,34 @@
     align-items: center;
     height: $global-action-bar-height;
     background: $white;
+    padding: rem(0 $global-standard-padding);
     box-shadow: -10px -12px 60px -6px rgba(0,0,0,0.75);
+
+    &__left {
+        display: flex;
+        flex: 1;
+        justify-content: space-around;
+    }
+
+    &__middle {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+    }
+
+    &__right {
+        display: flex;
+        flex: 1;
+        justify-content: space-around;
+    }
+
+    &__super {
+        transform: translateY(rem(-22px));
+
+        [class^="icon-"], [class*=" icon-"] {
+            background: $white;
+            border-radius: 50%;
+            border: 3px solid $white;
+        }
+    }
 }

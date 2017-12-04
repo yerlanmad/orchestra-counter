@@ -235,9 +235,14 @@ var util = new function() {
         if(secsIn == -1) {
             return "";
         }
+        var formatted;
 
-        var minutes = parseInt(secsIn / 60);
-        var formatted = minutes < 1 ? "< 1 min" : minutes + " min";
+        if(secsIn == 0) {
+            formatted = "0 min";
+        } else {
+            var minutes = parseInt(secsIn / 60);
+            formatted = minutes < 1 ? "< 1 min" : minutes + " min";
+        }
         
         return formatted;
     };

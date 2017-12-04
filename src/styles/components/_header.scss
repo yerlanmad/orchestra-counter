@@ -1,5 +1,168 @@
 .qm-header {
-    background: $tertiary-color;
     height: $global-header-height;
+    display: flex;
+    justify-content: space-between;
+    
+    background: $header-background-color;
+    padding: rem(0 24px);
 
+    &__left {
+        display: flex;
+        flex: 0 1 auto;
+        align-items: center;
+    }
+
+    &__middle {
+        display: flex;
+        flex: 1 1 auto;
+        min-width: 0;
+        align-items: center;
+        padding-left: rem($global-standard-padding * 2);
+
+        @at-root [dir='rtl'] & {
+            padding-left: 0;
+            padding-right: rem($global-standard-padding * 2);
+        }
+    }
+
+    &__right {
+        display: flex;
+        flex: 0 1 auto;
+        text-align: right;
+        align-items: center;
+    }
+
+    
+    .qm-header-home-btn,
+    .qm-header-help-btn,
+    .qm-header-logout-btn {
+        flex: 1 24px;
+        color: $light-transparent50;
+
+        .qm-action-btn__icon {
+            margin: unset;
+            font-size: rem(26px);
+        }
+
+        &:visited {
+            color: $light-transparent50;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: $white;
+        }
+    }
+
+    // Left side
+    &__brand-logo-container {
+        display: flex;
+        flex: 1 auto;
+        align-items: center;
+        margin-left: rem($global-standard-margin);
+
+        @at-root [dir='rtl'] & {
+            margin-left: 0;
+            margin-right: rem($global-standard-margin);
+        }
+    }
+
+    &__brand-logo {
+        width: 95px;
+    }
+
+    &__application-name {
+        flex: 1 auto;
+        align-self: center;
+        font-size: rem(21px);
+        color: $white;
+        margin-left: rem($global-standard-margin);
+    
+        @at-root [dir='rtl'] & {
+            margin-left: 0;
+            margin-right: rem($global-standard-margin);
+        }
+    }
+
+
+    // Middle
+    &__profile-setting {
+        display: flex;
+        align-items: center;
+        color: $light-transparent50;
+        margin-top: rem(4px);
+        overflow: hidden;
+
+        &--branch {
+            flex: 0 1 auto;
+        }
+
+        &--workstation {
+            flex: 0 1 auto;
+            min-width: 80px;
+        }
+
+        &--profile {
+            flex: 0 0 auto;
+        }
+    }
+
+    &__profile-setting-text {
+        flex: 1 auto;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__profile-setting-caret {
+        flex: 1 16px;
+        height: 16px;
+        padding: rem(0 $global-standard-padding / 2);
+        font-size: rem(16px);
+    }
+
+    &__edit-profile-settings {
+        color: $light-transparent50;
+        text-decoration: underline;
+        margin-left: rem($global-standard-padding / 2);
+
+        @at-root [dir='rtl'] & {
+            margin-left: 0;
+            margin-right: rem($global-standard-padding / 2);
+        }
+
+        &:visited {
+            color: $light-transparent50;
+        }
+
+        &:hover,
+        &:focus {
+            color: $white;
+        }
+    }
+
+    // Right side
+    &-help-btn {
+        margin: rem($global-standard-margin / 2);
+    }
+
+    &__user-name {
+        color: $light-transparent75;
+        margin-right: rem($global-standard-margin / 2);
+        
+        @at-root [dir='rtl'] & {
+            margin-right: 0;
+            margin-left: rem($global-standard-margin / 2);
+        }
+
+        &:visited {
+            color: $light-transparent75;
+        }
+
+        &:hover,
+        &:focus {
+            color: $white;
+        }
+    }
 }

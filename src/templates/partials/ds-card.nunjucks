@@ -4,19 +4,19 @@
 {% block id %}id="messageCard"{% endblock %}
 
 {% block header %}
-    <header class="qm-card__header">
+    <header class="qm-card__header-section">
         {{cardNav.render('deliveredServicesHeadline')}}
     </header>
 {% endblock %}
 
 {% block content %}
-    <div class="qm-card__content">
+    <div class="qm-card__content-section">
         {% include "partials/ds-table.nunjucks" %}
     </div>
 {% endblock %}
 
 {% block footer %}
-    <div class="qm-card__footer qm-card__footer--align-right">
+    <div class="qm-card__footer-section qm-card__footer-section--align-right">
         {{button.render(null, 'qm-btn--secondary')}}
         {{button.render(null, 'qm-btn--primary')}}
     </div>
