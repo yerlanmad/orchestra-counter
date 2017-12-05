@@ -1,0 +1,22 @@
+.qm-transparent-card {
+    @include make-card($background-color: transparent);
+    box-shadow: none;
+    text-align: center;
+
+    &__headline {
+        color: $transparent-card-headline-color;
+        font-weight: $font-weight-medium;
+        font-size: rem(32px);
+    }
+
+    &__text {
+        color: $transparent-card-text-color;
+        font-weight: $font-weight-light;
+        font-size: rem(32px);
+    }
+
+    &__icon {
+        color: $transparent-card-icon-color;
+        font-size: rem(48px);
+    }
+}
