@@ -1,0 +1,10 @@
+#queues {
+    .qm-table__header {
+        th {
+            &:before,
+            &:after {
+                content: none;
+            }
+        }
+    }
+}

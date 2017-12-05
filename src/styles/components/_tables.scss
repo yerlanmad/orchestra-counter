@@ -17,6 +17,7 @@
 
             &:hover {
                 background: $table-row-hover-color;
+                box-shadow: 0 0 4px 0 $dark-transparent12;
             }
         }
 
@@ -28,10 +29,14 @@
 
     &__queue-name {
         color: $secondary-color;
+        cursor: pointer;
     }
 
     &__first-column {
 
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
     }
 
     &__middle-column {
@@ -49,6 +54,55 @@
             text-align: left;
         }
     }
+
+    // DataTables overrides
+    .sorting,
+    .sorting_asc,
+    .sorting_desc {
+        background: none;
+    }
+
+    .sorting_asc {
+        &:after {
+            content: "\e902";
+            @extend .icon-styles;
+            margin-left: rem($global-standard-margin / 2);
+        }
+
+        @at-root [dir='rtl'] & {
+            &:after {
+                content: none;
+            }
+
+            &:before {
+                content: "\e902";
+                @extend .icon-styles;
+                margin-right: rem($global-standard-margin / 2);
+            }   
+        }
+    }
+
+    .sorting_desc {
+        &:after {
+            content: "\e905";
+            @extend .icon-styles;
+            margin-left: rem($global-standard-margin / 2);
+        }
+
+        @at-root [dir='rtl'] & {
+            &:after {
+                content: none;
+            }
+
+            &:before {
+                content: "\e905";
+                @extend .icon-styles;
+                margin-right: rem($global-standard-margin / 2);
+            }   
+        }
+    }
+
+
 
     &--small {
 

@@ -366,7 +366,7 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 #userPool .ticketIdDisabled:hover, #servicePointPool .ticketIdDisabled:hover{text-decoration:none;}
 
 /*********** Queues ******************/
-#queuesModule{float:right; width: 32%; margin-top:9px;}
+/*#queuesModule{float:right; width: 32%; margin-top:9px;}
 #queues .firstColumn{text-align:center;}
 #queues .middleColumn{text-align:center;}
 #queues .lastColumn{text-align:center;}
@@ -375,7 +375,7 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 #queues .queueNameDisabled{color:#999; cursor:default;}
 #queues .queueNameDisabled:hover{text-decoration:none;}
 #queues th{padding:5px 10px;}
-
+*/
 /*********** Projected visits module ******************/
 #projectedVisitsModule{float:right; width: 32%; margin-top:9px;}
 #projectedVisits .firstColumn{text-align:center;}
@@ -528,11 +528,11 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 
 /************* Generic table stuff ***************/
 /*#notes, #marks, */ #tickets, #outcomes, #deliveredServices, #multiServices, #customMarks, #selectDeliveredServiceTable, #userPool, #servicePointPool,
-                     #queues, #projectedVisits, #transferQueues, #walkDirectServices, #transferTicketToStaffPoolTable, #transferTicketToServicePointPoolTable,
+                     /*#queues*/, #projectedVisits, #transferQueues, #walkDirectServices, #transferTicketToStaffPoolTable, #transferTicketToServicePointPoolTable,
                      #transferTicketQueueToQueueTable, #nextServices, #transferQueueToServicePointPoolTable, #transferQueueToStaffPoolTable
                      {width:100%; background:transparent; border-collapse:collapse;}
 /*#notes td, #marks td,*/ #tickets td, #servicePointPool td, #nextServices td, #multiServices td, #customMarks td, #userPool td, #deliveredServices td, #selectDeliveredServiceTable td,
-                          #outcomes td, #selectOutcomeTable td, /*#selectMarkTypeTable td,*/#queues td, #projectedVisits td, #walkDirectServices td,
+                          #outcomes td, #selectOutcomeTable td, /*#selectMarkTypeTable td,#queues td, */#projectedVisits td, #walkDirectServices td,
                           #transferQueues td, #transferTicketToStaffPoolTable td, #transferTicketToServicePointPoolTable td,
                           #transferTicketQueueToQueueTable td, #transferQueueToServicePointPoolTable td, #transferQueueToStaffPoolTable td
                           {padding:5px 10px; border-bottom:1px solid #c0c0c0;}

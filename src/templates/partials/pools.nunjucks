@@ -17,7 +17,10 @@
             </li>
         </ul>
     </div>
-    {# <button class="qm-pool__toggle-button">Toggle</button> #}
+    <button class="qm-action-btn qm-pool__toggle-btn">
+        <i class="qm-action-btn__icon icon-accordion-toggle" aria-hidden="true"></i>
+        <span class="sr-only">Toggle</span>
+    </button>
 </div>
 
 <!-- Counter pool -->
@@ -39,5 +42,8 @@
             </li>
         </ul>
     </div>
-    {# <button class="qm-pool__toggle-button">Toggle</button> #}
+    <button class="qm-action-btn qm-pool__toggle-btn">
+        <i class="qm-action-btn__icon icon-accordion-toggle" aria-hidden="true"></i>
+        <span class="sr-only">Toggle</span>
+    </button>
 </div>

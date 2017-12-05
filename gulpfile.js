@@ -14,7 +14,7 @@ var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
 
 // Configuration
 require('events').EventEmitter.prototype._maxListeners = 100;
-var targetOrchestra = "192.168.5.28";
+var targetOrchestra = "localhost";
 
 // Tasks
 gulp.task('clean:build', function () {

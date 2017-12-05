@@ -1,11 +1,14 @@
 .qm-pool {
     display: flex;
-    height: 42px;
+    position: relative;
+    height: rem(42px);
     overflow: hidden;
     margin-bottom: rem($global-standard-margin);
+    padding-right: rem(48px);
 
-    &--is-open {
-        height: auto;
+    @at-root [dir='rtl'] & {
+        padding-right: 0;
+        padding-left: rem(48px);
     }
 
     &__label {
@@ -40,9 +43,38 @@
         padding: rem(0 4px);
     }
 
-    &__toggle-button {
+    &__toggle-btn {
         position: absolute;
         right: 0;
         top: 8px;
+        color: $dark-transparent42;
+
+        @at-root [dir='rtl'] & {
+            right: unset;
+            left: 0;
+        }
+
+        &:hover,
+        &:focus {
+            color: $dark-transparent82;
+        }
+    }
+
+    .icon-accordion-toggle {
+        font-weight: rem(24px);
+
+        &:before {
+            content: "\e902";
+        }
+    }
+
+    &--is-open {
+        height: auto;
+
+        .icon-accordion-toggle {
+            &:before {
+                content: "\e905";
+            }
+        }
     }
 }

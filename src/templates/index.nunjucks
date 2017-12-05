@@ -70,6 +70,11 @@
                 });
 
                 init.init();
+
+                // Temporary toggle of pools - Move this to a better location and make better implementaion
+                $('.qm-pool__toggle-btn').on('click', function (e) {
+                    $(this).closest('.qm-pool').toggleClass('qm-pool--is-open');
+                });
                 
                 var reference = $('.qm-footer__text');
                 var popper = document.querySelector('.qm-tooltip__text');

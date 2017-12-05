@@ -5,6 +5,8 @@
     }
 
     &__tab {
+        display: flex;
+        align-items: middle;
         flex: 1 auto;
         background: transparent;
         border: 0;
@@ -46,6 +48,10 @@
         }
     }
 
+    &__tab-text {
+        pointer-events: none;
+    }
+
     &__tab-panel {
         padding-top: rem($global-standard-padding);
 
@@ -55,3 +61,30 @@
     }
 }
 
+.qm-tab-information {
+    display: flex;
+    margin-left: rem($global-standard-margin);
+    pointer-events: none;
+
+    @at-root [dir='rtl'] & {
+        margin-left: 0;
+        margin-right: rem($global-standard-margin);
+    }
+
+    &__icon {
+        flex: 0 20px;
+        font-size: rem(20px);
+        color: $text-primary-color;
+        margin-right: rem($global-standard-margin / 2);
+
+        @at-root [dir='rtl'] & {
+            margin-right: 0;
+            margin-left: rem($global-standard-margin / 2);
+        }
+    }
+
+    &__text {
+        color: $text-primary-color;
+        font-size: rem(16px);
+    }
+}

@@ -5,13 +5,25 @@
                 role="tab"
                 aria-selected="true"
                 aria-controls="myQueuesPanel"
-                id="myQueues">My Queues</button>
+                id="myQueues">
+                <span class="qm-tabs__tab-text">My Queues</span>
+                <div class="qm-tab-information">
+                    <i class="qm-tab-information__icon icon-customer-solid" aria-hidden="true"></i>
+                    <span class="qm-tab-information__text">28</span>
+                </div>
+                </button>
         <button class="qm-tabs__tab"
                 role="tab"
                 aria-selected="false"
                 aria-controls="allQueuesPanel"
                 id="allQueues"
-                tabindex="-1">All Queues</button>
+                tabindex="-1">
+                <span class="qm-tabs__tab-text">All Queues</span>
+                <div class="qm-tab-information">
+                    <i class="qm-tab-information__icon icon-customer-solid" aria-hidden="true"></i>
+                    <span class="qm-tab-information__text">128</span>
+                </div>
+        </button>
     </div>
 
     <!-- Tab panels -->
