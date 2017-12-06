@@ -14,7 +14,7 @@ window.$Qmatic.components.BaseComponent.prototype = {
     },
     onDestroy: function(){
         window.$Qmatic.utils.log.warn("Component " + this.getSelector()+ " is being destroyed!!")
-        self.getElem().hide()
+        this.getElem().hide()
     },
     getSelector: function(){
         return this.$selector
