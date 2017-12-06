@@ -57,6 +57,15 @@
 
 
 
+    <!-- Modal Views -->
+    <div id="modal-nav" class="qm-modal-nav">
+        {% include "partials/modals/profileSettings/profile-settings.nunjucks" %}
+        {% include "partials/modals/noWaitingCustomers/no-waiting-customers.nunjucks" %}
+    </div>
+    
+
+
+
     <script type="text/javascript">
             $(document).ready(function() {
                 // If we ever, ever, end up with a 401, we are either timedout due to inactivity

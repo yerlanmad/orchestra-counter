@@ -1,5 +1,4 @@
 // Dropdown Component
-
 window.$Qmatic.components.dropdown = (function(){
 
     var defaultConfigurations = {
@@ -10,9 +9,13 @@ window.$Qmatic.components.dropdown = (function(){
     // Customization parameters, ...
     return function (config) {
         // If no configuratiion object passe, then use component defaults
-        defaultConfigurations = !!config ? config : defaultConfigurations;
+        config = !!config ? config : defaultConfigurations;
+
+        // Dom Eelement
+        this.elem = $(config.selector);
 
         
 
     }  
 })();
+

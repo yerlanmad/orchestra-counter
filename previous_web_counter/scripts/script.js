@@ -168,7 +168,7 @@ var servicePoint = new function() {
 			$("#userName").html(sessvars.currentUser.userName);
 			servicePoint.showSettingsWindow();
 		} else {
-			//$Qmatic.redux.store.dispatch($Qmatic.redux.actions.branch.selectedBranch({id: 1, name: "Sri"}));
+			// $Qmatic.redux.store.dispatch($Qmatic.redux.actions.branch.selectedBranch({id: 1, name: "Sri"}));
 			updateUI();
 		}
 	};

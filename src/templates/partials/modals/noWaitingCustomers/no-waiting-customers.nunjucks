@@ -1,0 +1,12 @@
+<div class="qm-modal" id="no-customers-waiting">
+    <div class="qm-modal__overlay"></div>
+    <div class="qm-modal__layout">
+        <div class="qm-card">
+            <div class="qm-card__header-section">No Customers Waiting Pop up</div>
+            <div class="qm-card__content-section">
+                Content
+            </div>
+            <div class="qm-card__footer-section"></div>
+        </div>
+    </div>
+</div>

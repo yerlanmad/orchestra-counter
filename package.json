@@ -4,6 +4,7 @@
   "description": "Qmatic Counter UI",
   "main": "index.js",
   "scripts": {
+    "start": "gulp build:dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {

@@ -47,6 +47,16 @@ window.$Qmatic.redux.actions = (function(){
                     }
                 }
             } 
+        }(),
+        modal: function (){
+            return {
+                pushToStack: function (modal) {
+                    return {
+                        type: "PUSH_TO_STACK",
+                        payload: modal
+                    }
+                }
+            } 
         }()
     }
 })();

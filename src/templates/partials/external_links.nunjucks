@@ -14,11 +14,7 @@
         <script type="text/javascript" src="scripts/json2.js"></script>
         <![endif]-->
 
-        <script type="text/javascript" src="scripts/main.js"></script>
-        <script type="text/javascript" src="scripts/vendor/index.js"></script>
-        <script type="text/javascript" src="scripts/utils/index.js"></script>
-        <script type="text/javascript" src="scripts/redux/index.js"></script>
-
+        <!--<script type="text/javascript" src="scripts/redux/index.js"></script>
         <script type="text/javascript" src="scripts/vendor/redux-3.7.2.min.js"></script>
         <script type="text/javascript" src="scripts/vendor/object-path.js"></script>
         <script type="text/javascript" src="scripts/vendor/redux-watch.js"></script>
@@ -26,7 +22,7 @@
         <script type="text/javascript" src="scripts/redux/actions/index.js"></script>
         <script type="text/javascript" src="scripts/redux/reducers/index.js"></script>
         <script type="text/javascript" src="scripts/redux/store/index.js"></script>
-        <script type="text/javascript" src="scripts/redux/monitor.js"></script>
+        <script type="text/javascript" src="scripts/redux/monitor.js"></script>-->
         
 
         <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.js"></script>
@@ -46,6 +42,13 @@
 		<![endif]-->
         <!-- New CometD based server-push -->
         <!-- Per R5, we don't use DWR for server push of events anymore -->
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+
+        
+
+
         <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
         <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
         <script type="text/javascript" src="/events/qevents_cometd.js"></script>
@@ -72,7 +75,17 @@
 		<script type="text/javascript" src="scripts/settings.js"></script>
 
         {# Component Links #}
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/utils/index.js"></script>
+        <script type="text/javascript" src="scripts/vendor/index.js"></script>
+        <script type="text/javascript" src="scripts/components/index.js"></script>
+        <script type="text/javascript" src="scripts/components/navigationView/index.js"></script>
+        <script type="text/javascript" src="scripts/components/navigationController/index.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/index.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/profileSettings/index.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/noWaitingCustomers/index.js"></script>
         <link rel="stylesheet" href="css/main.css" />
+        
         
         <script type="text/javascript" src="scripts/main.js"></script>
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>

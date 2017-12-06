@@ -14,7 +14,7 @@ var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
 
 // Configuration
 require('events').EventEmitter.prototype._maxListeners = 100;
-var targetOrchestra = "localhost";
+var targetOrchestra = "10.2.2.210:8080";
 
 // Tasks
 gulp.task('clean:build', function () {
@@ -132,7 +132,7 @@ gulp.task('connect', devServer.server({
                 }),
                 proxy('/images/icons/home.png', {
                     target: 'http://'+ targetOrchestra +':8080',
-                    route: '/images/icons/home.png',
+                    route: '/images/icons/help.png',
                     changeOrigin:true,
                     ws: true 
                 }),
