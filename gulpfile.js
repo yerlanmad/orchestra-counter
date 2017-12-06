@@ -13,69 +13,84 @@ var isWindows = process.platform === 'win32';
 var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
 
 // Configuration
+// =============
+
 require('events').EventEmitter.prototype._maxListeners = 100;
-var targetOrchestra = "10.2.2.210:8080";
+
+try {
+    var config = require('./config.gulp.json');
+    var targetOrchestraIp = config.host ? config.host : "localhost";
+    var targetOrchestraPort = config.port ? config.port : "8080";
+    var targetOrchestraProtocol = config.protocol ? config.protocol : "http";
+    var targetOrchestraUrl = targetOrchestraProtocol + '://' + targetOrchestraIp + ':' + targetOrchestraPort;
+    console.log("Default Configuration Imported. Remote Orchestra is " + targetOrchestraUrl)
+} catch (ex) {
+    var targetOrchestraUrl = "http://localhost:8080";
+    console.log("You are using default gulp configuration. Remote Orchestra is " + targetOrchestraUrl)
+}
 
 // Tasks
+// =====
+
 gulp.task('clean:build', function () {
-  return del([
-    './dist'
-  ])
+    return del([
+        './dist'
+    ])
 })
 
-gulp.task('compile:nunjucks', function() {
-  return gulp.src(['./src/templates/index.nunjucks'])
-  .pipe(nunjucksRender({
-      path: ['./src/templates/']
-    }))
-  .pipe(gulp.dest('./dist')).pipe(devServer.reload())
+gulp.task('compile:nunjucks', function () {
+    return gulp.src(['./src/templates/index.nunjucks'])
+        .pipe(nunjucksRender({
+            path: ['./src/templates/']
+        }))
+        .pipe(gulp.dest('./dist')).pipe(devServer.reload())
 });
 
 gulp.task('compile:scss', function () {
-  return gulp.src('./src/styles/**/*.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
-    }))
-    .pipe(gulp.dest('./dist/css')).pipe(devServer.reload())
+    return gulp.src('./src/styles/**/*.scss')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(gulp.dest('./dist/css')).pipe(devServer.reload())
 })
 
 gulp.task('move:assets', function () {
-  return gulp.src('./src/assets/**')
-    .pipe(gulp.dest('./dist/assets'))
+    return gulp.src('./src/assets/**')
+        .pipe(gulp.dest('./dist/assets'))
 })
 
 gulp.task('move:images', function () {
-  return gulp.src(['./src/images/**'])
-    .pipe(gulp.dest('./dist/images'))
+    return gulp.src(['./src/images/**'])
+        .pipe(gulp.dest('./dist/images'))
 })
 
 gulp.task('move:icons', function () {
-  return gulp.src('./src/icons/**')
-    .pipe(gulp.dest('./dist/css/icons'))
+    return gulp.src('./src/icons/**')
+        .pipe(gulp.dest('./dist/css/icons'))
 })
 
 gulp.task('move:js', function () {
-  return gulp.src(['src/scripts/**/*.js'])
-    .pipe(gulp.dest('./dist/scripts')).pipe(devServer.reload())
+    return gulp.src(['src/scripts/**/*.js'])
+        .pipe(gulp.dest('./dist/scripts')).pipe(devServer.reload())
 })
 
 gulp.task('move:previous_counter_files', function () {
-  return gulp.src(['./previous_web_counter/**/*', '!./previous_web_counter/index.html'])
-    .pipe(gulp.dest('./dist'))
+    return gulp.src(['./previous_web_counter/**/*', '!./previous_web_counter/index.html'])
+        .pipe(gulp.dest('./dist'))
 })
 
-gulp.task('move:previous_counter_js', function() {
-  return gulp.src(['./previous_web_counter/scripts/**/*.js', '!./previous_web_counter/scripts/jquery/*.js'])
-    .pipe(gulp.dest('./dist/scripts'))
+gulp.task('move:previous_counter_js', function () {
+    return gulp.src(['./previous_web_counter/scripts/**/*.js', '!./previous_web_counter/scripts/jquery/*.js'])
+        .pipe(gulp.dest('./dist/scripts'))
 });
 
 gulp.task('watch:start', function () {
-  gulp.watch(['./src/styles/**/*.scss'], ['compile:scss'])
-  gulp.watch(['src/scripts/**/*.js'], ['move:js'])
-  gulp.watch('./src/templates/**/*.nunjucks', ['compile:nunjucks'])
-  gulp.watch('./previous_web_counter/scripts/**/*.js', ['move:previous_counter_js'])
+    gulp.watch(['./src/styles/**/*.scss'], ['compile:scss'])
+    gulp.watch(['src/scripts/**/*.js'], ['move:js'])
+    gulp.watch('./src/templates/**/*.nunjucks', ['compile:nunjucks'])
+    gulp.watch('./previous_web_counter/scripts/**/*.js', ['move:previous_counter_js'])
 })
 
 
@@ -88,112 +103,103 @@ gulp.task('connect', devServer.server({
     },
     middleware: function (connect, opt) {
         return [
-                proxy('/rest', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/rest',
-                    changeOrigin:false,
-                    ws: true 
-                }),
-                proxy('/css/orchestra.css', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/css/orchestra.css',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/css/reset.css', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/css/reset.css',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/css/css3.css', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/css/css3.css',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/events/scripts/org/cometd.js', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/events/scripts/org/cometd.js',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/events/scripts/jquery/jquery.cometd.js', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/events/scripts/jquery/jquery.cometd.js',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/events/qevents_cometd.js', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/events/qevents_cometd.js',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/images/icons/home.png', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/images/icons/help.png',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/images/icons/help.png', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/images/icons/help.png',
-                    changeOrigin:true,
-                    ws: true 
-                }),
-                proxy('/cometd', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/cometd',
-                    changeOrigin:false,
-                    ws: true 
-                }),
-                proxy('/workstationterminal/bundle', {
-                    target: 'http://'+ targetOrchestra +':8080',
-                    route: '/workstationterminal/bundle',
-                    changeOrigin:true,
-                    ws: true 
-                })
-            ]
+            proxy('/rest', {
+                target: targetOrchestraUrl,
+                route: '/rest',
+                changeOrigin: false,
+                ws: true
+            }),
+            proxy('/css/orchestra.css', {
+                target: targetOrchestraUrl,
+                route: '/css/orchestra.css',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/css/reset.css', {
+                target: targetOrchestraUrl,
+                route: '/css/reset.css',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/css/css3.css', {
+                target: targetOrchestraUrl,
+                route: '/css/css3.css',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/events/scripts/org/cometd.js', {
+                target: targetOrchestraUrl,
+                route: '/events/scripts/org/cometd.js',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/events/scripts/jquery/jquery.cometd.js', {
+                target: targetOrchestraUrl,
+                route: '/events/scripts/jquery/jquery.cometd.js',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/events/qevents_cometd.js', {
+                target: targetOrchestraUrl,
+                route: '/events/qevents_cometd.js',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/images/icons/home.png', {
+                target: targetOrchestraUrl,
+                route: '/images/icons/help.png',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/images/icons/help.png', {
+                target: targetOrchestraUrl,
+                route: '/images/icons/help.png',
+                changeOrigin: true,
+                ws: true
+            }),
+            proxy('/cometd', {
+                target: targetOrchestraUrl,
+                route: '/cometd',
+                changeOrigin: false,
+                ws: true
+            }),
+            proxy('/workstationterminal/bundle', {
+                target: targetOrchestraUrl,
+                route: '/workstationterminal/bundle',
+                changeOrigin: true,
+                ws: true
+            })
+        ]
     }
-    // middleware: function (connect, opt) {
-    //     var Proxy = require('proxy-middleware');
-    //     //opt.route = ['/rest/servicepoint/user', '/rest/servicepoint/user'];
-    //     //opt.route = '/rest';
-    //     var proxyOptions = url.parse('http://192.168.5.79:8080/rest');
-    //     proxyOptions.route = ['/rest', '/css'];
-    //     var proxy = Proxy(proxyOptions);
-    //     return [proxy];
-    // }
 }));
 
 
 gulp.task('build', gulpsync.sync(
-  [
-    'clean:build', 
-    'compile:nunjucks',
-    'compile:scss', 
-    'move:js',
-    'move:assets',
-    'move:images', 
-    'move:icons',
-    'move:previous_counter_files'
+    [
+        'clean:build',
+        'compile:nunjucks',
+        'compile:scss',
+        'move:js',
+        'move:assets',
+        'move:images',
+        'move:icons',
+        'move:previous_counter_files'
     ]), function () {
-  return console.log(`Build Created in folder ./dist`)
-})
+        return console.log(`Build Created in folder ./dist`)
+    })
 
 gulp.task('build:dev', gulpsync.sync(
-  [
-    'clean:build', 
-    'compile:nunjucks',
-    'compile:scss',
-    'move:js', 
-    'move:assets',
-    'move:images', 
-    'move:icons',
-    'move:previous_counter_files',
-    'watch:start',
-    'connect'
+    [
+        'clean:build',
+        'compile:nunjucks',
+        'compile:scss',
+        'move:js',
+        'move:assets',
+        'move:images',
+        'move:icons',
+        'move:previous_counter_files',
+        'watch:start',
+        'connect'
     ]), function () {
-  return console.log(`Build Created in folder ./dist - Listening to changes in scripts/styles/templates...`)
-})
+        return console.log(`Build Created in folder ./dist - Listening to changes in scripts/styles/templates...`)
+    })
