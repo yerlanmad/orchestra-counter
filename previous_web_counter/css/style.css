@@ -115,7 +115,7 @@ text-decoration:line-through;
 /*#header{margin-bottom:15px; padding-top:5px; border-bottom:3px solid #EEEEEE;} */
 #headerTable{margin:3px; padding:0;}
 #headerTable select{background:#fff; border:1px solid #9cb4d8; font-size:12px; margin:0; padding:0; height:19px;}
-#userName, #workstation, #branch{font-weight:bold;}
+/*#userName, #workstation, #branch{font-weight:bold;}*/
 .applySettingsButton{font-size:11px; height:20px; margin:0 5px; text-transform:uppercase;}
 input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 #appShortcuts{position:absolute; right:0; left:auto; top:6px; margin:5px 10px;}
