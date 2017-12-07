@@ -13,11 +13,11 @@
 
     &__label {
         flex: 0 120px;
+        color: $dark-transparent82;
         overflow: hidden;
         text-align: right;
         white-space: nowrap;
         text-overflow: ellipsis;
-        font-weight: bold;
 
         @at-root [dir='rtl'] & {
             text-align: left;

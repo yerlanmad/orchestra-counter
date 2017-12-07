@@ -1,0 +1,29 @@
+.qm-action-popover {
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.34);
+
+    &__layout {
+        display: flex;
+        padding: rem($global-standard-padding / 2 $global-standard-padding);
+        background: $popover-background-color;
+    }
+
+
+    &__close {
+        color: $dark-transparent42;
+        margin-left: rem($global-standard-margin * 2) !important;
+
+        @at-root [dir='rtl'] & {
+            margin-left: 0 !important;
+            margin-right: rem($global-standard-margin * 2) !important;
+        }
+
+        &:hover {
+            color: $dark-transparent82;
+        }
+        
+        .qm-action-btn__icon {
+            font-size: rem(16px);
+            margin-bottom: 0;
+        }
+    }
+}

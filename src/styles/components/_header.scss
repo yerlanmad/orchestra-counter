@@ -17,12 +17,7 @@
         flex: 1 1 auto;
         min-width: 0;
         align-items: center;
-        padding-left: rem($global-standard-padding * 2);
-
-        @at-root [dir='rtl'] & {
-            padding-left: 0;
-            padding-right: rem($global-standard-padding * 2);
-        }
+        padding: rem(0 $global-standard-padding 0 $global-standard-padding * 2);
     }
 
     &__right {
@@ -33,9 +28,9 @@
     }
 
     
-    .qm-header-home-btn,
-    .qm-header-help-btn,
-    .qm-header-logout-btn {
+    &__home-btn,
+    &__help-btn,
+    &__logout-btn {
         flex: 1 24px;
         color: $light-transparent50;
 
@@ -148,12 +143,7 @@
 
     &__user-name {
         color: $light-transparent75;
-        margin-right: rem($global-standard-margin / 2);
-        
-        @at-root [dir='rtl'] & {
-            margin-right: 0;
-            margin-left: rem($global-standard-margin / 2);
-        }
+        margin: rem(0 $global-standard-margin / 2);
 
         &:visited {
             color: $light-transparent75;

@@ -46,13 +46,11 @@
             </div>
         </footer>
     </div>
-    <div class="wrap">
-        <div class="tooltip mycustomclass" role="tooltip">
-            <div class="tooltip-arrow"></div>
-            <button>hello</button>
-            <div class="tooltip-inner"></div>
-        </div>
+
+    <div class="qm-popovers qm-hide" aria-hidden="true">
+        {% include "partials/popover-action-bar.nunjucks" %}
     </div>
+    <div class=""></div>
     {% include "partials/previous_counter.nunjucks" %}
 
 
@@ -86,24 +84,59 @@
                     $(this).closest('.qm-pool').toggleClass('qm-pool--is-open');
                 });
                 
-                var reference = $('.qm-footer__text');
-                var popper = document.querySelector('.qm-tooltip__text');
+                
+                function QmPopover (popTarget, template) {
+                    this.template = template;
+                    this.target = popTarget;
+                };
 
-                var template = $('.wrap').html();
-                console.log('template: ', template);
-                const refEl = document.getElementById('myQueues');
-                const toolTip = new Tooltip(
-                refEl,
-                {
-                    placement: 'bottom-start',
-                    container: document.body,
-                    html: false,
-                    trigger: 'click', //options.trigger || 'hover',
-                    title: '',
-                    template: template.trim(),
+                QmPopover.prototype = {
+                    init: function () {
+
+                        this.instance = new Tooltip(actionPopoverTargets[i], {
+                            container: document.body,
+                            trigger: 'manual',
+                            title: ' ',
+                            placement: 'bottom-start',
+                            template: this.template,
+                            offset: '0, 10'
+                        });
+
+                        this._attachTargetEventListeners();
+                    },
+                    _attachCloseBtnEvent: function () {
+                        var closeBtn = this.instance._tooltipNode.querySelector('.tooltip__close');
+                        closeBtn.addEventListener('click', this._toggleInstance.bind(this));
+                    },
+                    _toggleAndAttachClose: function (e) {
+                        var shouldAttachCloseEvent = this.instance._tooltipNode ? false : true; 
+                        this._toggleInstance(e);
+
+                        if(shouldAttachCloseEvent) {
+                            this._attachCloseBtnEvent();
+                        }
+                    },
+                    _attachTargetEventListeners: function () {
+                        this.target.addEventListener('click', this._toggleAndAttachClose.bind(this));
+                    },
+                    _toggleInstance: function (e) {
+                        e.preventDefault();
+                        this.instance.toggle();
+                    }
                 }
-                );
 
+                // Init Action popovers
+                // Ref
+                var actionPopoverTargets = document.querySelectorAll('[data-toggle="popover"]');
+                // Template
+                var actionPopoverTemplate = document.querySelector('.qm-action-popover').outerHTML.trim();
+
+                for(var i = 0; i < actionPopoverTargets.length; i++) {
+                    var popover = new QmPopover(actionPopoverTargets[i], actionPopoverTemplate);
+                    popover.init();
+                }
+
+                // TABS
                 var tabConfig = {
                     tabComponentId: 'js-qm-tabs'
                 };

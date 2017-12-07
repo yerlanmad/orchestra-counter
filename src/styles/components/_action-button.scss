@@ -80,7 +80,7 @@
 
         .qm-action-btn__icon {
             font-size: rem(24px);
-            margin: unset;
+            margin: 0;
             margin-right: rem(4px);
 
             @at-root [dir='rtl'] & {
@@ -90,7 +90,7 @@
         }
 
         .qm-action-btn__text {
-            flex: 1;
+            flex: 1 auto;
             font-size: rem(16px);
         }
     }

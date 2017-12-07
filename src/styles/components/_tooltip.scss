@@ -38,3 +38,51 @@
         }
     }
 }
+
+.tooltip,
+.popper {
+
+    .tooltip__arrow,
+    .popper__arrow {
+        position: absolute;
+        margin: 15px;
+        height: 15px;
+        width: 15px;
+        background: $popover-background-color;
+        transform: rotate(45deg);
+        box-shadow: 0 0 8px 0 rgba(0,0,0,0.34);
+        z-index: -1;
+    }
+
+    &[x-placement^='top'] {
+        .tooltip__arrow,
+        .popper__arrow {
+            bottom: -20px;     
+            left: calc(50% - 24px);
+        }
+    }
+
+    &[x-placement^='right'] {
+        .tooltip__arrow,
+        .popper__arrow {
+            left: -20px;
+            top: calc(50% - 24px);
+        }
+    }
+
+    &[x-placement^='left'] {
+        .tooltip__arrow,
+        .popper__arrow {
+            right: -20px;
+            top: calc(50% - 24px);
+        }
+    }
+    
+    &[x-placement^='bottom'] {
+        .tooltip__arrow,
+        .popper__arrow {
+            top: -20px;
+            left: calc(50% - 24px);
+        }
+    }
+}

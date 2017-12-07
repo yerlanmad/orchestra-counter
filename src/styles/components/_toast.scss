@@ -1,0 +1,63 @@
+// Block
+.qm-toast {
+    padding: rem($global-standard-padding 24px $global-standard-padding);
+    color: $toast-text-color;
+    background: $tertiary-color;
+    display: none;
+    max-width: 570px;
+    width: 100%;
+    z-index: 3;
+    margin: 0 auto;
+
+    & + & {
+        border-top: 1px solid $light-transparent42;
+    }
+
+    // Elements 
+    &__layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+    }
+  
+    &__message {
+        flex: 1 1 auto;
+        padding-right: rem($global-standard-padding * 2);
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+            padding-right: 0;
+            padding-left: rem($global-standard-padding * 2);
+        }
+    }
+  
+    &__close-btn {
+        flex: 0 0 20px;
+        color: $light-transparent42;
+        cursor: pointer;
+        
+        &:hover,
+        &:focus,
+        &:active {
+            .qm-action-btn__icon {
+                color: $toast-text-color;
+            }
+        }
+
+        .qm-action-btn__icon {
+            margin: 0;
+            font-size: rem(16px);
+        }
+    }
+  
+    // Modifiers
+    &--success {
+        background: $toast-success-background-color;
+    }
+  
+    &--danger {
+        background: $toast-error-background-color;
+    }
+}
+  

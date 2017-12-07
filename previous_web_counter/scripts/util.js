@@ -291,47 +291,61 @@ var util = new function() {
     };
 
     this.showMessage = function(text, isError) {
-        var messageDiv = $('<div/>').text(text).css({"width": "auto"});
+        // Build toast
+        var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');
+
         if(isError) {
-            messageDiv.addClass("message errmsg");
+            toast.addClass("qm-toast--danger");
         } else {
-            messageDiv.addClass("message warningmessage");
+            toast.addClass("qm-toast--success");
         }
 
         // Do not show more than 3 messages
         if ($('#message').children().length > 2) {
-            $('#message').children().first().remove();
+            $('#message').children().last().remove();
         }
 
         $("#message").css('left', 0);
         $("#message").css("top", (parseInt($("#header").height())) + "px");
-        messageDiv.appendTo($('#message'));
 
         var removeFunction = function() {
-            messageDiv.remove();
-            if($("#message").children().length == 0) {
-                $("#message").css("visibility", "hidden");
-                $("#message").css("top", 0);
-            }
+            toast.fadeOut(400, function() {
+                toast.remove();
+                if($("#message").children().length == 0) {
+                    $("#message").css("visibility", "hidden");
+                    $("#message").css("top", 0);
+                }
+            });
         };
 
-        hideMessageTime = setTimeout(removeFunction, 5000);
+        // Hide after 2s
+        hideMessageTime = setTimeout(removeFunction, 2000);
 
         // set id to one bigger than last
         var messageId = "message_" + hideMessageTime;
-        messageDiv.prop('id', messageId);
-
-        messageDiv.append('<a href="#" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');" class="dismiss">X</a>');
+        toast.prop('id', messageId);
+        // Append text
+        toast.find('.qm-toast__message').text(text);
+        // Append close button
+        toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">Close</span></button>');
         $('#message').css("visibility", "visible");
+
+        // Append and fadeIn
+        toast.prependTo($('#message'));
+        toast.fadeIn();
     };
 
     this.removeMe = function(toBeRemovedId, hideMessageTime) {
         window.clearTimeout(hideMessageTime);
-        $(toBeRemovedId).remove();
-        if($("#message").children().length == 0) {
-            $("#message").css("visibility", "hidden");
-            $("#message").css("top", 0);
-        }
+        var $elem = $(toBeRemovedId);
+
+        $elem.fadeOut(400, function() {
+            $elem.remove();
+            if($("#message").children().length == 0) {
+                $("#message").css("visibility", "hidden");
+                $("#message").css("top", 0);
+            }
+        });
     };
 
     /**
