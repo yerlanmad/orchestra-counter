@@ -28,8 +28,13 @@
             <i class="qm-action-btn__icon icon-help" aria-hidden="true"></i>
             <span class="sr-only">Help</span>
         </a>
-        <a href="" id="userName" class="qm-header__user-name"></a>
+<<<<<<< HEAD
+        <a href="" id="userName" class="qm-header__user-name">Magnus Magnusson</a>
         <a href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);" class="qm-action-btn qm-header__logout-btn">
+=======
+        <a href="" id="userName" class="qm-header__user-name"></a>
+        <a href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);" class="qm-action-btn qm-header-logout-btn">
+>>>>>>> header functionality
             <i class="qm-action-btn__icon icon-exit" aria-hidden="true"></i>
             <span class="sr-only">Logout</span>
         </a>

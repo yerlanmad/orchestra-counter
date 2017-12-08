@@ -104,7 +104,6 @@
     }
 
     &__profile-setting-text {
-        font-weight: normal !important;
         flex: 0 1 auto;
         white-space: nowrap;
         overflow: hidden;
@@ -143,7 +142,6 @@
     }
 
     &__user-name {
-        font-weight: normal !important;
         flex: 0 1 auto;
         color: $light-transparent75;
         margin: rem(0 $global-standard-margin / 2);
