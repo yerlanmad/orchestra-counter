@@ -99,12 +99,13 @@
         }
 
         &--profile {
-            flex: 0 0 auto;
+            flex: 0 1 auto;
         }
     }
 
     &__profile-setting-text {
-        flex: 1 auto;
+        font-weight: normal !important;
+        flex: 0 1 auto;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -142,6 +143,8 @@
     }
 
     &__user-name {
+        font-weight: normal !important;
+        flex: 0 1 auto;
         color: $light-transparent75;
         margin: rem(0 $global-standard-margin / 2);
 

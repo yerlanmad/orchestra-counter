@@ -166,6 +166,7 @@ var servicePoint = new function() {
 	this.init = function() {
 		if (!isLoggedInToWorkstation()) {
 			$("#userName").html(sessvars.currentUser.userName);
+			document.getElementById("middle").style.display = 'none';
 			servicePoint.showSettingsWindow();
 		} else {
 			// $Qmatic.redux.store.dispatch($Qmatic.redux.actions.branch.selectedBranch({id: 1, name: "Sri"}));
@@ -1912,12 +1913,15 @@ var servicePoint = new function() {
 
 		var branch = $("#branch");
 		var workstation = $("#workstation");
+		var profile = $("#profile");
 		var prioSel = $("#prioList");
 
 		showProfiles(sessvars.branchId, sessvars.servicePointId, prioSel);
 
 		branch.text(sessvars.branchName);
 		workstation.text(sessvars.servicePointName);
+		profile.text(sessvars.state.workProfileName);
+		document.getElementById("middle").style.display = 'inherit';
 
 		prioSel.prop('selectedIndex', $(
 				"#prioList option[value=" + sessvars.workProfileId + "]")
