@@ -99,7 +99,7 @@
         }
 
         &--profile {
-            flex: 0 1 auto;
+            flex: 0 0 auto;
         }
     }
 
@@ -108,6 +108,13 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        &:empty {
+            &+ .qm-header__profile-setting-caret,
+            &+ .qm-header__edit-profile-settings {
+                display: none;
+            }
+        }
     }
 
     &__profile-setting-caret {

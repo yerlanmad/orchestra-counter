@@ -9,7 +9,7 @@
         </div>
         <span id="counter" class="qm-header__application-name">Counter</span>
     </div>
-    <div id="middle" class="qm-header__middle">
+    <div class="qm-header__middle">
         <div class="qm-header__profile-setting qm-header__profile-setting--branch">
             <span id="branch" class="qm-header__profile-setting-text"></span>
             <i class="qm-header__profile-setting-caret icon-caret-right" aria-hidden="true"></i>
