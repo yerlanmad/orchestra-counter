@@ -142,11 +142,9 @@
                     },
                     _navigate: function () {
                         var nextView = this._getLatestAddedView();
-                        var lastView;
-                        
-                        if(this._stackHasPreviousView()) {
-                            lastView = this.navigationStack[this.navigationStack.length - 2];
-                        }
+                        var lastView = this._stackHasPreviousView() ? 
+                                        this.navigationStack[this.navigationStack.length - 2] : '';
+
                         this._hideView(lastView);
                         this._showView(nextView);
                     },
