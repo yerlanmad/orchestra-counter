@@ -57,16 +57,16 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("selectWorkstationModal", 'object.logicWorkstation');
         i18nSafe("selectProfileModal", 'object.profile');
 //		i18nSafe("selectSkillModal", 'object.skill');
-        i18nSafe("chooseBranch", 'field.choose');
-        i18nSafe("chooseWorkstation", 'field.choose');
-        i18nSafe("chooseProfile", 'field.choose');
+        i18nSafe("chooseBranch", 'field.chooseBranch');
+        i18nSafe("chooseWorkstation", 'field.chooseCounter');
+        i18nSafe("chooseProfile", 'field.chooseProfile');
 //		i18nSafe("chooseSkill", 'field.choose');
-        $("#confirmSettingsBtnModal").val(jQuery.i18n.prop('button.apply.settings'));
-        $("#cancelSettingsBtnModal").val(jQuery.i18n.prop('button.cancel'));
+        $("#confirmSettingsBtnModal").text(jQuery.i18n.prop('button.apply.settings'));
+        $("#cancelSettingsBtnModal").text(jQuery.i18n.prop('button.cancel'));
 
         //in terminal labels and selection boxes
         i18nSafe("infoServing", 'info.is.serving');
-        i18nSafe("chooseProfile", 'field.choose');
+        i18nSafe("chooseProfile", 'field.chooseProfile');
         i18nSafe("infoCustomers", 'info.customers.at');
         i18nSafe("infoIn", 'info.in');
         i18nSafe("chooseProfileTerminal", 'field.choose');

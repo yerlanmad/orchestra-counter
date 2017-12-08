@@ -1,12 +1,66 @@
+<!-- Imported partials -->
+{% import "./../../button.nunjucks" as button  %}
+
 <div class="qm-modal hide-on-load" id="profile-settings-modal">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
         <div class="qm-card">
-            <div class="qm-card__header-section">Profile Settings</div>
+            <div class="qm-card__header-section">Select your profile settings</div>
             <div class="qm-card__content-section">
-                Content
+                
+                
+                <div class="qm-drop-down">
+                    <div class="qm-drop-down__header text-ellipsis">
+                        Branch
+                    </div>
+                        <div class="qm-drop-down__component">
+                            <select id="branchListModal" onchange="javascript:servicePoint.selectBranch($(this).val());">
+                                <option id="chooseBranch" value="-1"></option>
+                            </select>
+                        </div>
+                    <div class="qm-drop-down__error invisible-on-load" id="branchListModalErrorMsg">
+                            Branch Info Message
+                    </div>
+                </div>
+
+
+                <div class="qm-drop-down">
+                    <div class="qm-drop-down__header text-ellipsis">
+                        Counter
+                    </div>
+                        <div class="qm-drop-down__component">
+                            <select id="workstationListModal" onchange="javascript:servicePoint.selectWorkstation($(this).val());">
+                                <option id="chooseWorkstation" value="-1"></option>
+                            </select>
+                        </div>
+                    <div class="qm-drop-down__error invisible-on-load" id="workstationListModalErrorMsg">
+                        Counter Info Message
+                    </div>
+                </div>
+
+
+                <div class="qm-drop-down">
+                    <div class="qm-drop-down__header text-ellipsis">
+                        Profile
+                    </div>
+                        <div class="qm-drop-down__component">
+                            <select id="prioListModal">
+                                <option id="chooseProfile" value="-1"></option>
+                            </select>
+                        </div>
+                    <div class="qm-drop-down__error invisible-on-load" id="prioListModalErrorMsg">
+                        Profile Info Message
+                    </div>
+                </div>
             </div>
-            <div class="qm-card__footer-section"></div>
+            <div class="qm-card__footer-section">
+                <div class="qm-btns-container">
+                {{button.render(id="confirmSettingsBtnModal", type="qm-btn--primary", handler="servicePoint.confirmSettings();")}}
+                {{button.render(id="cancelSettingsBtnModal", type="qm-btn--secondary", handler="servicePoint.cancelConfirmSettings();")}}
+                {#<input id="confirmSettingsBtnModal" class="applySettingsButton" type="button" onclick="servicePoint.confirmSettings();"/>
+                <input id="cancelSettingsBtnModal" class="applySettingsButton" style="float:right;" type="button" onclick="servicePoint.cancelConfirmSettings();"/>#}
+                </div>
+            </div>
         </div>
     </div>
 </div>

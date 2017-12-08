@@ -53,7 +53,6 @@
         <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
         <script type="text/javascript" src="/events/qevents_cometd.js"></script>
         <script type="text/javascript" src="scripts/init.js"></script>
-        <script type="text/javascript" src="scripts/script.js?2016061415"></script>
         <script type="text/javascript" src="scripts/util.js?2016022608"></script>
         <script type="text/javascript" src="scripts/customer.js?20160630"></script>
         <script type="text/javascript" src="scripts/deliveredServices.js"></script>
@@ -78,7 +77,14 @@
         <script type="text/javascript" src="scripts/main.js"></script>
         <script type="text/javascript" src="scripts/utils/index.js"></script>
         <script type="text/javascript" src="scripts/vendor/index.js"></script>
+
         <script type="text/javascript" src="scripts/components/index.js"></script>
+
+        <script type="text/javascript" src="scripts/components/dropdown/index.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/branchSelection/index.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/counterSelection/index.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/profileSelection/index.js"></script>
+
         <script type="text/javascript" src="scripts/components/navigationView/index.js"></script>
         <script type="text/javascript" src="scripts/components/navigationController/index.js"></script>
         <script type="text/javascript" src="scripts/components/modal/index.js"></script>
@@ -87,3 +93,5 @@
         <link rel="stylesheet" href="css/main.css" />
         
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
+
+        <script type="text/javascript" src="scripts/script.js?2016061415"></script>

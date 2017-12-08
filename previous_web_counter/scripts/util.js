@@ -286,8 +286,6 @@ var util = new function() {
                 .append($('<option>', { value : typeof metaDataProp !== 'undefined' ? value[metaDataProp] : value.id})
                 .text(value.name));
         });
-        
-        select && select.chosen()
     };
 
     this.showMessage = function(text, isError) {

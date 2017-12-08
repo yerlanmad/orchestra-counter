@@ -990,25 +990,25 @@
                             <tr>
                                 <td id="selectBranchModal" class="alignOppositeNrml">&nbsp;&nbsp;</td>
                                 <td>
-                                    <select id="branchListModal" style="width: 200px" class="roundedCorner3" onchange="javascript:servicePoint.selectBranch($(this).val());">
+                                    {#<select id="branchListModal" style="width: 200px" class="roundedCorner3" onchange="javascript:servicePoint.selectBranch($(this).val());">
                                         <option id="chooseBranch" value="-1"></option>
-                                    </select>
+                                    </select>#}
                                 </td>
                             </tr>
                             <tr>
                                 <td id="selectWorkstationModal" class="alignOppositeNrml">&nbsp;&nbsp;</td>
                                 <td>
-                                    <select id="workstationListModal" style="width: 200px" class="roundedCorner3" onchange="javascript:servicePoint.selectWorkstation($(this).val());">
+                                    {#<select id="workstationListModal" style="width: 200px" class="roundedCorner3" onchange="javascript:servicePoint.selectWorkstation($(this).val());">
                                         <option id="chooseWorkstation" value="-1"></option>
-                                    </select>
+                                    </select>#}
                                 </td>
                             </tr>
                             <tr>
                                 <td id="selectProfileModal" class="alignOppositeNrml">&nbsp;&nbsp;</td>
                                 <td>
-                                    <select id="prioListModal"  style="width: 200px">
+                                    {#<select id="prioListModal"  style="width: 200px">
                                         <option id="chooseProfile" value="-1"></option>
-                                    </select>
+                                    </select>#}
                                 </td>
 							</tr>
 							<!--tr id="selectSkillModalTR">
@@ -1021,8 +1021,8 @@
 							</tr-->
 							<tr>
                                 <td colspan="2" class="alignCenter">
-                                    <input id="confirmSettingsBtnModal" class="applySettingsButton" type="button" onclick="servicePoint.confirmSettings();"/>
-                                    <input id="cancelSettingsBtnModal" class="applySettingsButton" style="float:right;" type="button" onclick="servicePoint.cancelConfirmSettings();"/>
+                                    {#<input id="confirmSettingsBtnModal" class="applySettingsButton" type="button" onclick="servicePoint.confirmSettings();"/>
+                                    <input id="cancelSettingsBtnModal" class="applySettingsButton" style="float:right;" type="button" onclick="servicePoint.cancelConfirmSettings();"/>#}
                                 </td>
                             </tr>
                         </table>

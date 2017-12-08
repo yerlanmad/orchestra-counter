@@ -19,6 +19,18 @@ window.$Qmatic.components.NavController = function (navSelector) {
             this.onDestroy()
     }
 
+    this.popModal = function(modalComponent) {
+        var context = this;
+        this.navigationStack.forEach(function(modal, index){
+            if (modal === modalComponent) {
+                context.navigationStack[index].hide()
+                context.navigationStack.splice(index, 1);
+            }
+        })
+        if (this.navigationStack.length == 0)
+            this.onDestroy()
+    }
+
     this.hideTopModalComponent = function (){
         if (this.navigationStack[this.navigationStack.length - 1])
             this.navigationStack[this.navigationStack.length - 1].hide()

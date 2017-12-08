@@ -52,6 +52,9 @@ var trtUpdateNeeded = true;
 var journeyUpdateNeeded = true;
 var unitMappings;
 
+// Navigation Controllers.... modals, cards, etc
+var modalNavigationController = new $Qmatic.components.NavController("#qm-modal-nav");
+
 var servicePoint = new function() {
 
 	var servicesLeft = false;
@@ -258,37 +261,67 @@ var servicePoint = new function() {
 
 	// display modal popup with settings
 	this.showSettingsWindow = function() {
+
+		// // Initialize chosen
+		// $("#branchListModal").chosen({
+		// 	"disable_search": true
+		// })
+		// // Initialize chosen
+		// $("#workstationListModal").chosen({
+		// 	"disable_search": true
+		// })
+		// // Initialize chosen
+		// $("#prioListModal").chosen({
+		// 	"disable_search": true
+		// })
+
+
 		if (!workstationOffline
 				&& servicePoint.hasValidSettings(false)
 				&& !(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN && servicePoint
 						.isOutcomeOrDeliveredServiceNeeded())
 				&& !(typeof sessvars.singleSettingsOnly !== 'undefined'
 						&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true)) {
+			
+			
+			
+			
 			// the user wants to change the branch, workstation or work profile
 			showBranches();
-			util.showModal("settingsWindow");
+			
+			//util.showModal("settingsWindow");
+			modalNavigationController.push($Qmatic.components.modal.profileSettingsModal)
 			var branchSel = $("#branchListModal");
 			util.setSelect(branchSel, sessvars.branchId);
 			var workstationSel = $("#workstationListModal");
 			var prioSel = $("#prioListModal");
+
+			
+
 			showWorkstations(sessvars.branchId, workstationSel, prioSel);
 			util.setSelect(workstationSel, sessvars.servicePointId);
 			showProfiles(sessvars.branchId, sessvars.servicePointId, prioSel);
 			util.setSelect(prioSel, sessvars.workProfileId);
 			settingsShown = true;
+
 		} else if (!servicePoint.hasValidSettings(false)) {
 			if (showBranches()) {
 				// Not logged in and multiple selection available for one or
 				// many of branch, workstation and work profile
 				sessvars.singleSettingsOnly = false;
-				util.showModal("settingsWindow");
+				// util.showModal("settingsWindow");
+				modalNavigationController.push($Qmatic.components.modal.profileSettingsModal)
 				settingsShown = true;
+
+				
 			} else {
 				// only one of branch, workstation and work profile available
 				sessvars.singleSettingsOnly = true;
 				servicePoint.confirmSettings();
 				// used to disable the settings link
 			}
+
+			
 		}
 	};
 
@@ -320,6 +353,7 @@ var servicePoint = new function() {
 			util.showError(jQuery.i18n.prop('error.no.branches.assigned'));
 		} else {
 			var branchSelect = $("#branchListModal");
+
 			var workstationSelect = $("#workstationListModal");
 			var prioSelect = $("#prioListModal");
 			util.clearSelect(branchSelect);
@@ -339,16 +373,25 @@ var servicePoint = new function() {
 				}
 			}
 		}
+
+		branchSelect.trigger("chosen:updated");
+
 		return isBranchSelectShown;
 	};
 
 	this.selectBranch = function(branchId) {
 		var selectWorkstationModal = $("#workstationListModal");
 		var selectPrioModal = $("#prioListModal");
+
 		util.clearSelect(selectWorkstationModal);
 		util.clearSelect(selectPrioModal);
+
 		selectWorkstationModal.removeAttr('disabled');
 		selectPrioModal.removeAttr('disabled');
+
+		selectWorkstationModal.trigger("chosen:updated");
+		selectPrioModal.trigger("chosen:updated");
+
 		if (branchId != -1) {
 			showWorkstations(branchId, selectWorkstationModal, selectPrioModal);
 		}
@@ -372,12 +415,16 @@ var servicePoint = new function() {
 		util.clearSelect(prioSelect);
 
 		util.populateSettingsSelect(softwareWorkstations, workstationSelect);
+
 		if (softwareWorkstations.length > 1) {
 			workstationSelect.removeAttr('disabled');
 		} else {
 			workstationSelect.attr('disabled', '');
 			servicePoint.selectWorkstation(softwareWorkstations[0].id);
 		}
+
+		workstationSelect.trigger("chosen:updated");
+		prioSelect.trigger("chosen:updated");
 	};
 
 	this.selectWorkstation = function(unitId) {
@@ -386,6 +433,7 @@ var servicePoint = new function() {
 		var branchId = branchSelect.val();
 		var prioSelect = $("#prioListModal");
 		util.clearSelect(prioSelect);
+		prioSelect.trigger("chosen:updated");
 		if (unitId != "-1") {
 			showProfiles(branchId, unitId, prioSelect);
 		}
@@ -408,11 +456,14 @@ var servicePoint = new function() {
 		util.clearSelect(prioSelect);
 
 		util.populateSettingsSelect(profiles, prioSelect);
+
 		if (profiles.length > 1) {
 			prioSelect.removeAttr('disabled');
 		} else {
 			prioSelect.attr('disabled', '');
 		}
+
+		prioSelect.trigger("chosen:updated");
 
 		// add for skill based profiles
 		/*
@@ -546,6 +597,8 @@ var servicePoint = new function() {
 		var prioSel = $("#prioListModal");
 		util.clearSelect(prioSel);
 		util.hideModal('settingsWindow');
+
+		modalNavigationController.popModal($Qmatic.components.modal.profileSettingsModal)
 	};
 
 	this.changeProfile = function(value) {

@@ -1,6 +1,4 @@
 window.$Qmatic.components.NavView = function () {
-    this.$selector;
-    this.$elem;
 
     this.hide = function(){
         this.getElem().hide()

@@ -20,7 +20,7 @@
         </div>
         <div class="qm-header__profile-setting qm-header__profile-setting--profile">
             <span id="profile" class="qm-header__profile-setting-text"></span>
-            <a href="" id="editCustomerHeader" class="qm-header__edit-profile-settings"></a>
+            <a href="" id="editCustomerHeader" class="qm-header__edit-profile-settings" onclick="servicePoint.showSettingsWindow();this.blur();"></a>
         </div>
     </div>
     <div class="qm-header__right">

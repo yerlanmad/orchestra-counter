@@ -1,0 +1,29 @@
+
+#profile-settings-modal {
+
+    .qm-card__header-section {
+            color: rgba(0,0,0,0.82);	
+        font-family: Roboto;	
+        font-size: 28px;	
+        font-weight: 300;	
+        line-height: 32px;
+    }
+
+    .qm-btns-container {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        font-size: 18px;
+        padding: 0;
+        align-items: flex-end;
+
+        .qm-btn--primary{
+            font-size: inherit;
+            margin-left: 10px;
+        }
+        .qm-btn--secondary{
+            font-size: inherit;
+        }
+    }
+}
+

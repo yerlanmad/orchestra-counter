@@ -1,7 +1,8 @@
-{% macro render(id, type)%}
+{% macro render(id, type, handler)%}
     <button 
         {% if id %} id="{{id}}" {% endif %}
-        class="qm-btn {{type}}">
-        <span class="qm-btn__text" title="Send">Send</span>
+        class="qm-btn {{type}}"
+        onclick="{{handler}}">
+        <span class="qm-btn__text" title="Send"></span>
     </button>
 {% endmacro %}

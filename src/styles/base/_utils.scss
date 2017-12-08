@@ -9,3 +9,13 @@
 .qm-hide {
     display: none;
 }
+
+.invisible-on-load {
+    visibility: hidden;
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}

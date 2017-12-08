@@ -1,21 +1,32 @@
 // Dropdown Component
-window.$Qmatic.components.dropdown = (function(){
+window.$Qmatic.components.dropdown = {}
 
-    var defaultConfigurations = {
-        data: [],       // Data component will hold
-        selector: ''    // Selector id on the DOM
+window.$Qmatic.components.dropdown.BaseDropdown = function (selector, config) {
+    
+    // @Override
+    this.onInit = function (selector, config){
+        this.__proto__.onInit(selector)
+        if (config){
+            $(this.getSelector()).chosen(config)
+        }
+        this.clearError()
     }
 
-    // Customization parameters, ...
-    return function (config) {
-        // If no configuratiion object passe, then use component defaults
-        config = !!config ? config : defaultConfigurations;
+    this.onError = function(msg){
+        console.log(msg)
+        console.log(this.getElem())
+        $(this.getSelector()).next().addClass("drop-has-error");
+        $(this.getSelector()).parent().next().removeClass("invisible-on-load");
+        $(this.getSelector()).parent().next().text(msg);
+    }
 
-        // Dom Eelement
-        this.elem = $(config.selector);
+    this.clearError = function(){
+        $(this.getSelector()).next().removeClass("drop-has-error");
+        $(this.getSelector()).parent().next().addClass("invisible-on-load");
+        $(this.getSelector()).parent().next().text("");
+    }
 
-        
+    this.onInit.apply(this, arguments);
+}
 
-    }  
-})();
-
+window.$Qmatic.components.dropdown.BaseDropdown.prototype = new window.$Qmatic.components.BaseComponent();
