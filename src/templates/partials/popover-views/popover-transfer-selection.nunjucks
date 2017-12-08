@@ -1,0 +1,13 @@
+<div class="qm-popover-transfer-selection">
+    <div class="qm-action-popover__layout">
+        <button class="qm-btn qm-btn--secondary qm-btn--full">
+            <span class="qm-btn__text" title="Transfer to queue">Transfer to queue</span>
+        </button>
+        <button class="qm-btn qm-btn--secondary qm-btn--full">
+            <span class="qm-btn__text" title="Transfer to pool">Transfer to pool</span>
+        </button>
+        <button class="qm-btn qm-btn--secondary qm-btn--full">
+            <span class="qm-btn__text" title="Transfer to counter">Transfer to counter</span>
+        </button>
+    </div>
+</div>

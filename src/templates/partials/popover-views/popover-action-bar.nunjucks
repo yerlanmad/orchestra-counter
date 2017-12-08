@@ -1,13 +1,10 @@
-<div id="qm-action-popover-template" class="qm-action-popover tooltip">
-    <div class="tooltip__arrow"></div>
-    
-
+<div class="qm-popover-action-bar">
     <div class="qm-action-popover__layout">
         <button class="qm-action-btn qm-action-btn--laying">
             <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
             <span class="qm-action-btn__text" title="Call">Call</span>
         </button>
-        <button class="qm-action-btn qm-action-btn--laying">
+        <button class="qm-action-btn qm-action-btn--laying popover-transfer">
             <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
             <span class="qm-action-btn__text" title="Transfer">Transfer</span>
         </button>
@@ -15,8 +12,5 @@
             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
             <span class="sr-only" title="Close">Close</span>
         </button>
-    </div>
-
-    <div class="tooltip__inner">
     </div>
 </div>

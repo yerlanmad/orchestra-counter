@@ -26,4 +26,30 @@
             margin-bottom: 0;
         }
     }
+
+    // Will be refactored / removed
+    // Added to show the popover flow.
+    .qm-popover-transfer-selection {
+        display: none;
+    }
+
+    &.qm-show-transfer {
+        .qm-popover-action-bar {
+            display: none;
+        }
+
+        .qm-popover-transfer-selection {
+            display: block;
+
+            .qm-action-popover__layout {
+                display: block;
+                max-width: 350px;
+                padding: 30px;
+
+                & > * {
+                    margin-bottom: 8px;
+                }
+            }
+        }
+    }
 }

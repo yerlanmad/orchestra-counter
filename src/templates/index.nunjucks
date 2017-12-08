@@ -48,7 +48,7 @@
     </div>
 
     <div class="qm-popovers qm-hide" aria-hidden="true">
-        {% include "partials/popover-action-bar.nunjucks" %}
+        {% include "partials/popover-views/popover-action.nunjucks" %}
     </div>
     <div class=""></div>
     {% include "partials/previous_counter.nunjucks" %}
@@ -104,20 +104,26 @@
 
                         this._attachTargetEventListeners();
                     },
-                    _attachCloseBtnEvent: function () {
-                        var closeBtn = this.instance._tooltipNode.querySelector('.tooltip__close');
+                    _attachTemplateEvents: function () {
+                        var closeBtn = this.instance._tooltipNode.querySelector('.tooltip__close'),
+                            transferBtn = this.instance._tooltipNode.querySelector('.popover-transfer');
                         closeBtn.addEventListener('click', this._toggleInstance.bind(this));
+                        transferBtn.addEventListener('click', this._navigateToTransfer.bind(this));
+                        
                     },
-                    _toggleAndAttachClose: function (e) {
+                    _navigateToTransfer: function () {
+                        this.instance._tooltipNode.classList.add('qm-show-transfer');
+                    },
+                    _toggleAndAttachPopoverTemplateEvents: function (e) {
                         var shouldAttachCloseEvent = this.instance._tooltipNode ? false : true; 
                         this._toggleInstance(e);
 
                         if(shouldAttachCloseEvent) {
-                            this._attachCloseBtnEvent();
+                            this._attachTemplateEvents();
                         }
                     },
                     _attachTargetEventListeners: function () {
-                        this.target.addEventListener('click', this._toggleAndAttachClose.bind(this));
+                        this.target.addEventListener('click', this._toggleAndAttachPopoverTemplateEvents.bind(this));
                     },
                     _toggleInstance: function (e) {
                         e.preventDefault();
