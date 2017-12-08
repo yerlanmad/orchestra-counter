@@ -94,4 +94,10 @@
             font-size: rem(16px);
         }
     }
+
+    &--only-icon {
+        .qm-action-btn__icon {
+            margin: 0;
+        }
+    }
 }

@@ -46,6 +46,7 @@
     }
 
     &__label {
+        font-weight: $font-weight-light;
         margin-right: rem($global-standard-margin / 2);
 
         @at-root [dir='rtl'] & {

@@ -44,10 +44,9 @@
     }
 
     
-
-    
     & + &--full,
     &--full + & {
+        margin-top: rem($global-standard-margin / 2);
         margin-left: 0;
 
         @at-root [dir='rtl'] & {

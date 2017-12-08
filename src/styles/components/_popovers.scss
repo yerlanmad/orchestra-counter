@@ -1,55 +1,58 @@
-.qm-action-popover {
+.qm-popover {
     box-shadow: 0 0 8px 0 rgba(0,0,0,0.34);
 
     &__layout {
-        display: flex;
         padding: rem($global-standard-padding / 2 $global-standard-padding);
         background: $popover-background-color;
+
+        &--flex-horizontal {
+            display: flex;
+        }
     }
 
+    &__content {
+        max-width: 350px;
+        width: 100%;
+        padding: rem(50px 45px);
+    }
 
     &__close {
-        color: $dark-transparent42;
-        margin-left: rem($global-standard-margin * 2) !important;
 
-        @at-root [dir='rtl'] & {
-            margin-left: 0 !important;
-            margin-right: rem($global-standard-margin * 2) !important;
-        }
+        &--small {
+            color: $dark-transparent42;
+            margin-left: rem($global-standard-margin * 2) !important;
 
-        &:hover {
-            color: $dark-transparent82;
-        }
-        
-        .qm-action-btn__icon {
-            font-size: rem(16px);
-            margin-bottom: 0;
+            @at-root [dir='rtl'] & {
+                margin-left: 0 !important;
+                margin-right: rem($global-standard-margin * 2) !important;
+            }
+
+            &:hover {
+                color: $dark-transparent82;
+            }
+            
+            .qm-action-btn__icon {
+                font-size: rem(16px);
+                margin-bottom: 0;
+            }
         }
     }
 
-    // Will be refactored / removed
-    // Added to show the popover flow.
+    // All views
+    .qm-popover-action-bar,
     .qm-popover-transfer-selection {
         display: none;
     }
 
-    &.qm-show-transfer {
+    &.popover-show--action-bar {
         .qm-popover-action-bar {
-            display: none;
+            display: block;
         }
+    }
 
+    &.popover-show--transfer-selection {
         .qm-popover-transfer-selection {
             display: block;
-
-            .qm-action-popover__layout {
-                display: block;
-                max-width: 350px;
-                padding: 30px;
-
-                & > * {
-                    margin-bottom: 8px;
-                }
-            }
         }
     }
 }

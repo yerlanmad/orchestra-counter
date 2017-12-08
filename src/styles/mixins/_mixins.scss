@@ -89,6 +89,7 @@ $rem-px-only: false !default;
   background-color: $background-color;
   border-radius: $radius;
   width: 100%;
+  height: auto;
   max-width: $max-width;
   padding: rem(40px 32px 32px);
   box-shadow: 0 3px 10px 0 rgba(0,0,0,0.18);

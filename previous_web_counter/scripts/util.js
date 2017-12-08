@@ -316,8 +316,8 @@ var util = new function() {
             });
         };
 
-        // Hide after 2s
-        hideMessageTime = setTimeout(removeFunction, 2000);
+        // Hide after 5s
+        hideMessageTime = setTimeout(removeFunction, 5000);
 
         // set id to one bigger than last
         var messageId = "message_" + hideMessageTime;
@@ -325,7 +325,7 @@ var util = new function() {
         // Append text
         toast.find('.qm-toast__message').text(text);
         // Append close button
-        toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">Close</span></button>');
+        toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-action-btn--only-icon qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">Close</span></button>');
         $('#message').css("visibility", "visible");
 
         // Append and fadeIn
