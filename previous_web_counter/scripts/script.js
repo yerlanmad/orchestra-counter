@@ -476,6 +476,7 @@ var servicePoint = new function() {
 		var branchSel = $("#branchListModal");
 		var workstationSel = $("#workstationListModal");
 		var profileSel = $("#prioListModal");
+		modalNavigationController.popModal($Qmatic.components.modal.profileSettingsModal);
 		if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
 			var settings = getSettings(branchSel, workstationSel, profileSel);
 			if (typeof warnUser === "undefined") {

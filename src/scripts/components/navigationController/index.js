@@ -1,12 +1,12 @@
 // Generic Class (Needs to be instantiated)
 window.$Qmatic.components.NavController = function (navSelector) {
-    this.onInit.apply(this, arguments);
     this.navigationStack = [];
 
     this.push = function (modalComponent) {
         if (!(modalComponent instanceof window.$Qmatic.components.NavView))
             throw new Error("You are trying to stack a component that does not comform to the NavView protocol")
         this.hideTopModalComponent()
+        $(this.getSelector()).show()
         this.navigationStack.push(modalComponent)
         // Modal components are hidden by default when initialized, so nav controller needs to show it now!
         modalComponent.show()
@@ -48,6 +48,16 @@ window.$Qmatic.components.NavController = function (navSelector) {
     this.peekData = function () {
         return this.navigationStack
     }
+
+    // @Override
+    this.onInit = function (selector){
+        this.__proto__.onInit(selector)
+        console.log("HIDING SELECTOR");
+        console.log(this.getElem())
+        this.getElem().hide()
+    }
+
+    this.onInit.apply(this, arguments);
 };
 
 window.$Qmatic.components.NavController.prototype = new window.$Qmatic.components.BaseComponent()

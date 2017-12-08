@@ -7,7 +7,7 @@
         <div class="qm-header__brand-logo-container">
             <img class="qm-header__brand-logo" src="/images/brand_logo_header.png" alt="" role="presentation"/>
         </div>
-        <span id="counter" class="qm-header__application-name">Counter</span>
+        <span id="appName" class="qm-header__application-name"></span>
     </div>
     <div id="middle" class="qm-header__middle">
         <div class="qm-header__profile-setting qm-header__profile-setting--branch">
@@ -28,8 +28,13 @@
             <i class="qm-action-btn__icon icon-help" aria-hidden="true"></i>
             <span class="sr-only">Help</span>
         </a>
+<<<<<<< HEAD
+        <a href="" id="userName" class="qm-header__user-name"></a>
+        <a href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);" class="qm-action-btn qm-header__logout-btn">
+=======
         <a href="#" id="userName" class="qm-header__user-name" onclick="servicePoint.showSettingsWindow();this.blur();"></a>
         <a href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);" class="qm-action-btn qm-header-logout-btn">
+>>>>>>> 150706964 : profile settings page
             <i class="qm-action-btn__icon icon-exit" aria-hidden="true"></i>
             <span class="sr-only">Logout</span>
         </a>
