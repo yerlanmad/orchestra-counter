@@ -82,9 +82,6 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("logoutLink", 'button.logout');
         i18nSafe("loggedOutLink", 'button.logged.out');
 
-        //header app name
-        i18nSafe("counter", 'info.appname');
-
         // confirm logout dialog
         i18nSafeAppend("logoutWindowHeader", "info.confirm.logout.header");
         i18nSafe("confirmLogoutLink", "info.confirm.logout.proceed");
