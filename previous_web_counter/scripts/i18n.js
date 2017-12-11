@@ -62,7 +62,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("chooseProfile", 'field.chooseProfile');
 //		i18nSafe("chooseSkill", 'field.choose');
         $("#confirmSettingsBtnModal").text(jQuery.i18n.prop('button.apply.settings'));
+        $("#confirmSettingsBtnModal").attr("title", jQuery.i18n.prop('button.apply.settings'));
         $("#cancelSettingsBtnModal").text(jQuery.i18n.prop('button.cancel'));
+        $("#cancelSettingsBtnModal").attr("title", jQuery.i18n.prop('button.cancel'));
 
         //in terminal labels and selection boxes
         i18nSafe("infoServing", 'info.is.serving');

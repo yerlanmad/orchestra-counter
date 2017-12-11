@@ -10,10 +10,8 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
     this.onInit = function (selector){
         console.log("Selector passed into init function - " + selector)
         this.__proto__.__proto__.onInit(selector)
-        $(this.getSelector()).hide()
-    }
-
-    
+        this.hide()
+    }   
 }
 
 //  Base Modal Class Inherits from BaseComponent
