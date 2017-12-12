@@ -261,20 +261,6 @@ var servicePoint = new function() {
 	// display modal popup with settings
 	this.showSettingsWindow = function() {
 
-		// // Initialize chosen
-		// $("#branchListModal").chosen({
-		// 	"disable_search": true
-		// })
-		// // Initialize chosen
-		// $("#workstationListModal").chosen({
-		// 	"disable_search": true
-		// })
-		// // Initialize chosen
-		// $("#prioListModal").chosen({
-		// 	"disable_search": true
-		// })
-
-
 		if (!workstationOffline
 				&& servicePoint.hasValidSettings(false)
 				&& !(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN && servicePoint
@@ -289,7 +275,7 @@ var servicePoint = new function() {
 			showBranches();
 			
 			//util.showModal("settingsWindow");
-			modalNavigationController.push($Qmatic.components.modal.profileSettingsModal)
+			modalNavigationController.push($Qmatic.components.modal.profileSettings)
 			var branchSel = $("#branchListModal");
 			util.setSelect(branchSel, sessvars.branchId);
 			var workstationSel = $("#workstationListModal");
@@ -309,7 +295,7 @@ var servicePoint = new function() {
 				// many of branch, workstation and work profile
 				sessvars.singleSettingsOnly = false;
 				// util.showModal("settingsWindow");
-				modalNavigationController.push($Qmatic.components.modal.profileSettingsModal)
+				modalNavigationController.push($Qmatic.components.modal.profileSettings)
 				settingsShown = true;
 
 				
@@ -475,7 +461,7 @@ var servicePoint = new function() {
 		var branchSel = $("#branchListModal");
 		var workstationSel = $("#workstationListModal");
 		var profileSel = $("#prioListModal");
-		modalNavigationController.popModal($Qmatic.components.modal.profileSettingsModal);
+		modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
 		if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
 			var settings = getSettings(branchSel, workstationSel, profileSel);
 			if (typeof warnUser === "undefined") {
@@ -598,7 +584,7 @@ var servicePoint = new function() {
 		util.clearSelect(prioSel);
 		util.hideModal('settingsWindow');
 
-		modalNavigationController.popModal($Qmatic.components.modal.profileSettingsModal)
+		modalNavigationController.popModal($Qmatic.components.modal.profileSettings)
 	};
 
 	this.changeProfile = function(value) {

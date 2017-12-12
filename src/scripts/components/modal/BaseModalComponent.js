@@ -8,7 +8,6 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
 
     // @Override
     this.onInit = function (selector){
-        console.log("Selector passed into init function - " + selector)
         this.__proto__.__proto__.onInit(selector)
         this.hide()
     }   

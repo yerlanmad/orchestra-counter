@@ -1,4 +1,4 @@
-<div class="qm-modal hide-on-load" id="no-customers-waiting">
+<div class="qm-modal qm-hide" id="no-customers-waiting">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
         <div class="qm-card">

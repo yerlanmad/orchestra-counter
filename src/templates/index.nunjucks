@@ -56,7 +56,7 @@
 
 
     <!-- Modal Views -->
-    <div id="qm-modal-nav" class="qm-modal-nav hide-on-load">
+    <div id="qm-modal-nav" class="qm-modal-nav qm-hide">
         {% include "partials/modals/profileSettings/profile-settings.nunjucks" %}
         {% include "partials/modals/noWaitingCustomers/no-waiting-customers.nunjucks" %}
     </div>

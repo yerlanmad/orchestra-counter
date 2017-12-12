@@ -78,18 +78,18 @@
         <script type="text/javascript" src="scripts/utils/index.js"></script>
         <script type="text/javascript" src="scripts/vendor/index.js"></script>
 
-        <script type="text/javascript" src="scripts/components/index.js"></script>
+        <script type="text/javascript" src="scripts/components/BaseComponent.js"></script>
 
-        <script type="text/javascript" src="scripts/components/dropdown/index.js"></script>
-        <script type="text/javascript" src="scripts/components/dropdown/branchSelection/index.js"></script>
-        <script type="text/javascript" src="scripts/components/dropdown/counterSelection/index.js"></script>
-        <script type="text/javascript" src="scripts/components/dropdown/profileSelection/index.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/BaseDropdownComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/branchSelection/branchSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
 
-        <script type="text/javascript" src="scripts/components/navigationView/index.js"></script>
-        <script type="text/javascript" src="scripts/components/navigationController/index.js"></script>
-        <script type="text/javascript" src="scripts/components/modal/index.js"></script>
-        <script type="text/javascript" src="scripts/components/modal/profileSettings/index.js"></script>
-        <script type="text/javascript" src="scripts/components/modal/noWaitingCustomers/index.js"></script>
+        <script type="text/javascript" src="scripts/components/NavigationView/NavView.js"></script>
+        <script type="text/javascript" src="scripts/components/NavigationController/NavController.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/profileSettings/profileSettings.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/noCustomersWaiting/noCustomersWaiting.js"></script>
         <link rel="stylesheet" href="css/main.css" />
         
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
