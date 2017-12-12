@@ -1667,13 +1667,15 @@ var servicePoint = new function() {
 		customer.updateCustomerModule();
 
 		if (spPoolUpdateNeeded) {
-			servicePointPool.updateServicePointPool();
+			servicePointPool.updateServicePointPool(); // Todo: remove me
+			servicePointPool.renderCounterPool();
 		} else {
 			spPoolUpdateNeeded = true;
 		}
 
 		if (userPoolUpdateNeeded) {
-			userPool.updateUserPool();
+			userPool.updateUserPool(); // TODO: remove me
+			userPool.renderUserPool();
 		} else {
 			userPoolUpdateNeeded = true;
 		}
@@ -2179,11 +2181,13 @@ var servicePoint = new function() {
 			break;
 		case servicePoint.publicEvents.VISIT_TRANSFER_TO_SERVICE_POINT_POOL:
 			sessvars.cfuSelectionSet = true;
-			servicePointPool.updateServicePointPool();
+			servicePointPool.updateServicePointPool(); // Todo: remove me
+			servicePointPool.renderCounterPool();
 			break;
 		case servicePoint.publicEvents.VISIT_TRANSFER_TO_USER_POOL:
 			sessvars.cfuSelectionSet = true;
-			userPool.updateUserPool();
+			userPool.updateUserPool(); // Todo: remove me
+			userPool.renderUserPool();
 			break;
 		case servicePoint.publicEvents.USER_SERVICE_POINT_WORK_PROFILE_SET:
 			// If someone else (e.g. an administrator) sets the work profile for

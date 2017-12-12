@@ -90,6 +90,13 @@
         <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
         <script type="text/javascript" src="scripts/components/modal/profileSettings/profileSettings.js"></script>
         <script type="text/javascript" src="scripts/components/modal/noCustomersWaiting/noCustomersWaiting.js"></script>
+        
+        
+        <script type="text/javascript" src="scripts/components/popover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/poolPopover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/userPoolPopover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/counterPoolPopover/index.js"></script>
+        
         <link rel="stylesheet" href="css/main.css" />
         
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
