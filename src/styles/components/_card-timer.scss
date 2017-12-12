@@ -19,6 +19,7 @@
     }
 
     &__text {
+        display: flex;
         flex: 1 auto;
 
         @at-root [dir='rtl'] & {
@@ -34,5 +35,11 @@
     &__time {
         color: $card-label-color;
         font-weight: $font-weight-regular;
+        margin-left: rem(4px);
+
+        @at-root [dir='rtl'] & {
+            margin-left: 0;
+            margin-right: rem(4px);
+        }
     }
 }

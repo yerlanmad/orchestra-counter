@@ -1,20 +1,9 @@
 <!-- My pool -->
 <div class="qm-pool">
-    <span class="qm-pool__label" id="myPoolLabel">My pool</span>
+    <span class="qm-pool__label" id="userPoolModuleLabel"></span>
     <div class="qm-pool__content">
-        <ul class="qm-pool__list" aria-labelledby="myPoolLabel" tabindex="0">
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
+        <ul id="userPoolList" class="qm-pool__list" aria-labelledby="userPoolModuleLabel">
+            
         </ul>
     </div>
     <button class="qm-action-btn qm-pool__toggle-btn">
@@ -23,23 +12,12 @@
     </button>
 </div>
 
-<!-- Counter pool -->
+<!-- Counter pool id="servicePointPoolModule" -->
 <div class="qm-pool">
-    <span class="qm-pool__label" id="counterPoolLabel">Counter pool</span>
+    <span class="qm-pool__label" id="servicePointPoolModuleLabel"></span>
     <div class="qm-pool__content">
-        <ul class="qm-pool__list" aria-labelledby="counterPoolLabel" tabindex="0">
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
-            <li class="qm-pool__list-item">
-                {% include "partials/pool-item.nunjucks" %}
-            </li>
+        <ul id="counterPoolList" class="qm-pool__list" aria-labelledby="servicePointPoolModuleLabel">
+
         </ul>
     </div>
     <button class="qm-action-btn qm-pool__toggle-btn">

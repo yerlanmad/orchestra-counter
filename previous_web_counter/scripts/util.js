@@ -346,6 +346,10 @@ var util = new function() {
         });
     };
 
+    this.compareTimeInPool = function (a, b) {
+        return b.waitingTime - a.waitingTime;
+    };
+
     /**
      * @param errorMessage the name of a property in
      * graphicalDisplayMessages.properties

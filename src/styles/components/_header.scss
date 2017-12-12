@@ -1,7 +1,11 @@
 .qm-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
     height: $global-header-height;
     display: flex;
     justify-content: space-between;
+    z-index: 90;
     
     background: $header-background-color;
     padding: rem(0 24px);

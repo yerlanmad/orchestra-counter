@@ -2,9 +2,12 @@
     margin-bottom: rem(24px);
 
     &__current-service-container {
-        display: flex;
-        align-items: center;
+        //display: flex;
         margin-bottom: rem(2px);
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
     }
     
     &__current-service-title {
@@ -27,6 +30,7 @@
     }
 
     &__add-service-icon {
+        display: inline-block;
         margin-left: rem(4px);
 
         @at-root [dir='rtl'] & {

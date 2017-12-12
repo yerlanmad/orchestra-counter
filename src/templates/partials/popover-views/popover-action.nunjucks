@@ -1,7 +1,0 @@
-<div id="qm-customer-popover-template" class="qm-popover tooltip">
-    <div class="tooltip__arrow"></div>
-    {% include "partials/popover-views/popover-action-bar.nunjucks" %}
-    {% include "partials/popover-views/popover-transfer-selection.nunjucks" %}
-    <div class="tooltip__inner">
-    </div>
-</div>

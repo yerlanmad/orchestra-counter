@@ -13,6 +13,7 @@
 
     &__label {
         flex: 0 120px;
+        padding-top: rem($global-standard-padding / 2);
         color: $dark-transparent82;
         overflow: hidden;
         text-align: right;
@@ -26,6 +27,12 @@
 
     &__content {
         width: 100%;
+        padding-left: rem($global-standard-padding);
+
+        @at-root [dir='rtl'] & {
+            padding-left: 0;
+            padding-right: rem($global-standard-padding);
+        }
     }
 
     &__list {
@@ -58,6 +65,12 @@
         &:focus {
             color: $dark-transparent82;
         }
+    }
+
+    &__no-result-text {
+        display: inline-block;
+        padding: rem($global-standard-padding / 2 0);
+        color: $dark-transparent42;
     }
 
     .icon-accordion-toggle {

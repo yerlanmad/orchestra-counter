@@ -1,11 +1,12 @@
 .qm-main {
+    margin-top: $global-header-height;
     display: flex;
     height: $global-main-height;
 
     &__left {
         flex: 1 percentage(5/12);
         height: 100%;
-        background: linear-gradient(254.96deg, #32405C 0%, #40526E 34.9%, #374561 62.87%, #394561 77.12%, #484766 100%);
+        background: linear-gradient(254.96deg, $background-gradient-stop1 0%, $background-gradient-stop2 34.9%, $background-gradient-stop3 62.87%, $background-gradient-stop4 77.12%, $background-gradient-stop5 100%);
         min-width: 0;
     }
 

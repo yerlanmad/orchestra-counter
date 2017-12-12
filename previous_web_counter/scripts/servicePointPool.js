@@ -67,6 +67,66 @@ var servicePointPool = new function() {
         customer.positionCustomerResult();
     };
 
+    this.renderCounterPool = function () {
+        var t = new Date();
+        
+        var url = "branches/" + sessvars.branchId + "/servicePoints/" 
+                    + sessvars.servicePointId + "/pool/visits?call=" + t;
+        
+
+        // Get Pool list and empty it
+        var counterPoolList = $('#counterPoolList');
+        counterPoolList.empty();
+        
+        // Templates
+        var counterPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket" data-toggle="popover"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
+        var noResultTemplate = $('<li class="qm-pool__list-item"><span class="qm-pool__no-result-text">No customers waiting</span></li>');
+        var popoverTemplate = document.querySelector('.qm-popover--pool').outerHTML.trim();
+        
+        // Popover options
+        var options = {
+            template: popoverTemplate
+        }
+
+        // Get the data
+        var counterPoolData = spService.get(url);
+        if(counterPoolData.length > 0) {
+            // Sort based on time in pool
+            counterPoolData.sort(util.compareTimeInPool);
+            counterPoolData.forEach(function(data, i) {
+                var template = counterPoolItemTemplate.clone();
+                
+                template.find('.qm-pool-item__content--ticket').text(data.ticketId).attr('data-visitId', data.visitId);
+                template.find('.qm-pool-item__content--wait').text(util.formatIntoMM(data.waitingTime));
+                counterPoolList.append(template);
+    
+
+                // Popover options and initialization
+                options.popTarget = template.get(0).querySelector('.qm-pool-item__content--ticket');
+                if(servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+                    options.disableCall = true;
+                }
+                var popover = new window.$Qmatic.components.popover.CounterPoolPopoverComponent(options);
+                popover.init();
+            });
+        } else {
+            counterPoolList.append(noResultTemplate);
+        }
+    };
+
+    this.callFromPool = function (visitId) {
+        if(servicePoint.hasValidSettings()) {
+            var params = servicePoint.createParams();
+            params.visitId = visitId;
+			userPoolUpdateNeeded = false;
+            sessvars.state = servicePoint.getState(spService.put("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/pool/"+params.visitId));
+            sessvars.statusUpdated = new Date();
+            servicePoint.updateWorkstationStatus();
+            sessvars.currentCustomer = null;
+            customer.updateCustomerModule();
+        }
+    }
+
     var ticketClicked = function(aRowData) {
         if(servicePoint.hasValidSettings()) {
             var params = servicePoint.createParams();
