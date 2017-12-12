@@ -1,5 +1,5 @@
 <!-- My pool -->
-<div class="qm-pool">
+<div id="userPoolModule" class="qm-pool">
     <span class="qm-pool__label" id="userPoolModuleLabel"></span>
     <div class="qm-pool__content">
         <ul id="userPoolList" class="qm-pool__list" aria-labelledby="userPoolModuleLabel">
@@ -13,7 +13,7 @@
 </div>
 
 <!-- Counter pool id="servicePointPoolModule" -->
-<div class="qm-pool">
+<div id="servicePointPoolModule" class="qm-pool">
     <span class="qm-pool__label" id="servicePointPoolModuleLabel"></span>
     <div class="qm-pool__content">
         <ul id="counterPoolList" class="qm-pool__list" aria-labelledby="servicePointPoolModuleLabel">

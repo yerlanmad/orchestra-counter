@@ -76,6 +76,8 @@ function showModules() {
 	
 	if (moduleUserPoolEnabled == true) {
 		$('#userPoolModule').css("visibility","visible");
+	} else {
+		$('#userPoolModule').hide();
 	}
 	if (moduleQueuesEnabled == true) {
 		$('#queuesModule').css("visibility","visible");

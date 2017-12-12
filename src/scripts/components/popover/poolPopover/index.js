@@ -4,6 +4,9 @@ window.$Qmatic.components.popover.PoolPopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
     this.visitId        = options.popTarget.getAttribute('data-visitId');
     this.disableCall    = options.disableCall || false;
+    this.isRTL          = document.getElementsByTagName("html")[0].getAttribute("dir") 
+                        && document.getElementsByTagName("html")[0].getAttribute("dir")
+                                                .indexOf('rtl') > -1 ? true : false;
     this.views          = {
         ACTION_BAR: 'action-bar',
         TRANSFER_SELECTION: 'transfer-selection'
@@ -24,7 +27,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
             container: document.body,
             trigger: 'manual',
             title: ' ',
-            placement: 'bottom-start',
+            placement: this.isRTL ? 'bottom-end' : 'bottom-start',
             template: this.template,
             offset: '0, 10'
         });

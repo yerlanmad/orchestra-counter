@@ -57,7 +57,7 @@
         color: $dark-transparent42;
 
         @at-root [dir='rtl'] & {
-            right: unset;
+            right: auto;
             left: 0;
         }
 
