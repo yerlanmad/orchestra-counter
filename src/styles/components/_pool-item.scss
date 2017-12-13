@@ -5,10 +5,6 @@
     border: 1px solid $box-border-color;
     align-items: center;
     justify-content: space-between;
-    
-    @at-root .qm-main--no-queues & {
-        justify-content: space-between;
-    }
 
     &__content {
         & + & {

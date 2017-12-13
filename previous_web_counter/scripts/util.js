@@ -368,6 +368,8 @@ var util = new function() {
             } else {
                 $poolToggle.hide();
             }
+        } else {
+            $poolToggle.hide();
         }
     };
 
