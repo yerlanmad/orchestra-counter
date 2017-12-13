@@ -1,0 +1,20 @@
+<!-- Imported partials -->
+{% import "./../../button.nunjucks" as button  %}
+
+<div class="qm-modal qm-hide" id="confirm-hijack-modal">
+    <div class="qm-modal__overlay"></div>
+    <div class="qm-modal__layout">
+        <div class="qm-card">
+            <div class="qm-card__header-section" id="confirmCounterHijackingHeader"></div>
+            <div class="qm-card__content-section">
+                <span id="hijackMessagePartOne"></span><span id="hijackUser"></span><span id="hijackMessagePartTwo"></span>
+            </div>
+            <div class="qm-card__footer-section">
+                <div class="qm-btns-container">
+                {{button.render(id="hijackYesBtnModal", type="qm-btn--primary", handler="servicePoint.claseAllModals();servicePoint.confirmSettings(false);")}}
+                {{button.render(id="hijackNoBtnModal", type="qm-btn--secondary", handler="servicePoint.closeHijackModal();")}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

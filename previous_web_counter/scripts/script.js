@@ -541,11 +541,13 @@ var servicePoint = new function() {
 					&& usersOnWantedServicePoint[0].id != currentUser.id) {
 				// the user wants to login to an occupied counter; display
 				// warning message.
-				modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
+				//modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
 				// util.hideModal("settingsWindow");
-				util.showModal("confirmCounterHijackingWindow");
+				//util.showModal("confirmCounterHijackingWindow");
+				$Qmatic.components.modal.hijack.updateLoggedInUser(usersOnWantedServicePoint[0].userName)
+				modalNavigationController.push($Qmatic.components.modal.hijack)
 				// i18n for counter hijacking confirmation window
-				$(document)
+				/*$(document)
 						.ready(
 								function() {
 									document
@@ -566,12 +568,21 @@ var servicePoint = new function() {
 									document
 											.getElementById("cancelCounterHijackingBtn").value = jQuery.i18n
 											.prop('info.confirm.counter.hijacking.cancel');
-								});
+								});*/
 				isHijacking = true;
 			}
 		}
 		return isHijacking;
 	};
+
+	this.closeHijackModal = function () {
+		// or modalNavigationController.pop()
+		modalNavigationController.popModal($Qmatic.components.modal.hijack)
+	}
+
+	this.claseAllModals = function () {
+		modalNavigationController.popAllModals()
+	}
 
 	var unsubscribeAndDisableQueues = function() {
 		// end event subscription and clear queue timer

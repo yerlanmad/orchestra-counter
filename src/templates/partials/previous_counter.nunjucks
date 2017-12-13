@@ -1068,7 +1068,7 @@
             </div>
 
 			<!-- Confirm Hijack Service Point dialogue -->
-            <div id="confirmCounterHijackingWindow" class="modalPage">
+            {#<div id="confirmCounterHijackingWindow" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="confirmCounterHijackingForm roundedCorner5">
@@ -1089,7 +1089,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>#}
 
 			<!-- Logout dialogue -->
             <div id="logoutWindow" class="modalPage">

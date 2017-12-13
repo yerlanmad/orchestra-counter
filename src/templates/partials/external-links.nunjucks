@@ -93,8 +93,10 @@
         <script type="text/javascript" src="scripts/components/modal/index.js"></script>
         <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
         <script type="text/javascript" src="scripts/components/modal/ProfileSettingsModal.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/HijackModal.js"></script>
         <script type="text/javascript" src="scripts/components/modal/profileSettings/profileSettings.js"></script>
         <script type="text/javascript" src="scripts/components/modal/noCustomersWaiting/noCustomersWaiting.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/hijack/hijack.js"></script>
         
         
         <script type="text/javascript" src="scripts/components/popover/index.js"></script>

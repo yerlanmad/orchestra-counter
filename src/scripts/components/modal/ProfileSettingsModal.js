@@ -5,12 +5,6 @@ window.$Qmatic.components.modal.ProfileSettingsModal = function (selector) {
     this.onInit = function (selector){
         window.$Qmatic.components.modal.BaseModalComponent.prototype.onInit.call(this, selector);
         this.hide()
-        this.cleanUp()
-    }  
-
-    this.onDestroy = function (selector){
-        window.$Qmatic.components.modal.BaseModalComponent.prototype.onInit.call(this, selector);
-        this.cleanUp()
     }  
 
     this.cleanUp = function(){
@@ -19,6 +13,14 @@ window.$Qmatic.components.modal.ProfileSettingsModal = function (selector) {
         $Qmatic.components.dropdown.counterSelection.clearError()
         $Qmatic.components.dropdown.profileSelection.clearError()
     } 
+
+    this.onError = function(message) {
+        $(this.getSelector())
+    }
+
+    this.clearError = function () {
+        $(this.getSelector())
+    }
 
     this.onInit.apply(this, arguments);
 }

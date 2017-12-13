@@ -264,6 +264,13 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         $("#cancelDeleteCustomerBtn").val(jQuery.i18n.prop('button.cancel'));
 
         //hijack counter window is i18nized in script.js
+        $("#confirmCounterHijackingHeader").text(jQuery.i18n.prop('info.confirm.counter.hijacking.header'));
+        i18nQmBtn("hijackYesBtnModal", 'info.confirm.counter.hijacking.yes');
+        i18nQmBtn("hijackNoBtnModal", 'info.confirm.counter.hijacking.no');
+        $("#hijackMessagePartOne").text(jQuery.i18n.prop('info.confirm.counter.hijacking.message.part.one'));
+        $("#hijackMessagePartTwo").text(jQuery.i18n.prop('info.confirm.counter.hijacking.message.part.two'));
+        
+        
 
         //confirm customer window
         i18nSafeAppend("calledCustomerHeader", 'info.confirm.customer.header');

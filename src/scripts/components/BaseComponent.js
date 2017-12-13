@@ -10,19 +10,18 @@ window.$Qmatic.components.BaseComponent.prototype = {
     },
     onAwake: function(){
         window.$Qmatic.utils.log.info("Waking up compnent " + this.getSelector())
-        this.cleanUp()
         $(this.getSelector()).show()
     },
     onDestroy: function(){
         window.$Qmatic.utils.log.warn("Component " + this.getSelector()+ " is being destroyed!!")
         this.cleanUp()
-        this.hide()
+        $(this.getSelector()).hide()
     },
     getSelector: function(){
         return this.$selector
     },
     hide: function(){
-        $(this.getSelector()).hide()
+        this.onDestroy()
     },
     show: function(){
         this.onAwake()

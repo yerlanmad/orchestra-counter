@@ -1,6 +1,3 @@
-// Modal Component
-window.$Qmatic.components.modal = {}
-
 // Base Modal Class
 window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
 
