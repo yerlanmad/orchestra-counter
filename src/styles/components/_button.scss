@@ -1,4 +1,5 @@
 .qm-btn {
+    display: inline-flex;
     border: 1px solid transparent;
     padding: rem($global-standard-padding / 2 $global-standard-padding * 2);
     border-radius: rem($standard-border-radius);
@@ -6,6 +7,18 @@
     cursor: pointer;
     font-size: rem($button-font-size);
     font-weight: $font-weight-light;
+    
+
+    &__icon {
+
+        font-size: rem(24px);
+        margin-right: rem($global-standard-padding / 2);
+
+        @at-root [dir='rtl'] & {
+            margin-right: 0;
+            margin-left: rem($global-standard-padding / 2);
+        }
+    }
 
     &__text {
         
@@ -87,6 +100,7 @@
 
     &--with-icon {
         text-align: left;
+        align-items: center;
 
         @at-root [dir='rtl'] & {
             text-align: right;

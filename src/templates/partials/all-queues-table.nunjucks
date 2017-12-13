@@ -1,14 +1,14 @@
-<div id="queuesModule">
-    <table id="queues" class="qm-table">
-        <thead class="qm-table__header">
-            <tr>
-                <th id="queueName"></th>
-                <th id="queueId"></th>
-                <th id="queueWaitingTime"></th>
-                <th id="queueCustomersWaiting"></th>
-            </tr>
-        </thead>
-        <tbody class="qm-table__body">
-        </tbody>
-    </table>
-</div>
+
+<table id="queues" class="qm-table">
+    <thead class="qm-table__header">
+        <tr>
+            <th id="queueName"></th>
+            <th id="queueId"></th>
+            <th id="queueWaitingTime"></th>
+            <th id="queueCustomersWaiting"></th>
+        </tr>
+    </thead>
+    <tbody class="qm-table__body">
+    </tbody>
+</table>
+

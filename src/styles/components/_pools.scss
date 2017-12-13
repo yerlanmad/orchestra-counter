@@ -11,6 +11,11 @@
         padding-left: rem(48px);
     }
 
+    @at-root .qm-main--no-queues & {
+        display: block;
+        height: auto;
+    }
+
     &__label {
         flex: 0 120px;
         padding-top: rem($global-standard-padding / 2);
@@ -23,6 +28,19 @@
         @at-root [dir='rtl'] & {
             text-align: left;
         }
+
+        @at-root .qm-main--no-queues & {
+            display: block;
+            text-align: left;
+            flex: 1 1 100%;
+            font-size: rem(21px);
+            padding-top: 0;
+            margin-bottom: rem(20px);
+
+            @at-root [dir='rtl'] & {
+                text-align: right;
+            }
+        }
     }
 
     &__content {
@@ -32,6 +50,10 @@
         @at-root [dir='rtl'] & {
             padding-left: 0;
             padding-right: rem($global-standard-padding);
+        }
+
+        @at-root .qm-main--no-queues & {
+            padding: 0;
         }
     }
 
@@ -46,8 +68,21 @@
     }
 
     &__list-item {
+        max-width: 153px;
+        width: 100%;    
         margin-bottom: rem(8px);
         padding: rem(0 4px);
+
+        @at-root .qm-main--no-queues & {
+            display: block;
+            padding: 0;
+            margin-bottom: rem(4px);
+        }
+
+        &--auto-width {
+            max-width: none;
+            width: auto;
+        }
     }
 
     &__toggle-btn {
@@ -89,5 +124,13 @@
                 content: "\e905";
             }
         }
+
+        .qm-pool__list {
+            max-height: rem(150px);
+            overflow-y: auto;
+        }
     }
+
+    // If queue view disabled
+    
 }

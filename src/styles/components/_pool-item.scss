@@ -3,6 +3,12 @@
     padding: rem($global-standard-padding / 2);
     background: $box-background-color;
     border: 1px solid $box-border-color;
+    align-items: center;
+    justify-content: space-between;
+    
+    @at-root .qm-main--no-queues & {
+        justify-content: space-between;
+    }
 
     &__content {
         & + & {
@@ -24,7 +30,8 @@
         }
 
         &--wait {
-
+            font-size: rem(14px);
+            color: $dark-transparent42;
         }
     }
 }

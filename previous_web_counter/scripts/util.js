@@ -329,7 +329,7 @@ var util = new function() {
         toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-action-btn--only-icon qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">Close</span></button>');
         $('#message').css("visibility", "visible");
 
-        // Append and fadeIn
+        // Prepend and fadeIn
         toast.prependTo($('#message'));
         toast.fadeIn();
     };
@@ -356,15 +356,18 @@ var util = new function() {
             poolToggle      = pool.find('.qm-pool__toggle-btn');
 
         $(window).on('resize', _.debounce(function() {
-            util.determineIfToggleNeeded(poolList, poolToggle);
+            util.determineIfToggleNeeded(pool, poolList, poolToggle);
         }, 300));
     };
 
-    this.determineIfToggleNeeded = function ($poolList, $poolToggle) {
-        if($poolList.height() > 50) {
-            $poolToggle.fadeIn();
-        } else {
-            $poolToggle.hide();
+    this.determineIfToggleNeeded = function ($pool, $poolList, $poolToggle) {
+        var isPoolView = $('.qm-main').hasClass('qm-main--no-queues');
+        if(!isPoolView) {
+            if($poolList.height() > 50) {
+                $poolToggle.fadeIn();
+            } else {
+                $poolToggle.hide();
+            }
         }
     };
 

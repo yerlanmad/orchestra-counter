@@ -21,4 +21,24 @@
             box-shadow: inset -15px 0px 60px -20px rgba(0,0,0,0.75);
         }
     }
+
+    &--no-queues {
+        .qm-main__left {
+            flex: 1 percentage(10/12);
+        }
+
+        .qm-main__right {
+            flex: 1 percentage(2/12);
+        }
+    }
+
+    &.qm-main--no-queues.qm-main--no-pools {
+        .qm-main__left {
+            flex: 1 100%;
+        }
+
+        .qm-main__right {
+            display: none;
+        }
+    }
 }

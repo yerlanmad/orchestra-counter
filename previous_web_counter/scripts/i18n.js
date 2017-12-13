@@ -58,6 +58,13 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         } catch(e) {}
     };
 
+    var i18nSafeSelectorBtnAppend = function (selector, propName) {
+        try {
+            $(selector).attr('title', jQuery.i18n.prop(propName));
+            $(selector).text(jQuery.i18n.prop(propName));
+        } catch(e) {}
+    };
+
     this.i18nPage = function() {
 
         //document title in web browser header
@@ -313,6 +320,10 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         
         // Pool
         i18nSafeSelectorAppend('.qm-pool__toggle-btn > span', 'application.sr.toggle');
+
+        // Popover
+        i18nSafeSelectorBtnAppend('.js-popover-call > span', 'action.pool.call');
+        i18nSafeSelectorBtnAppend('.js-popover-close > span', 'action.pool.close');
 
         //footer
         sessvars.footer = translate.msg("label.poweredBy", 

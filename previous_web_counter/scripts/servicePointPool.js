@@ -87,7 +87,7 @@ var servicePointPool = new function() {
 
         // Templates
         var counterPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket" data-toggle="popover"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
-        var noResultTemplate = $('<li class="qm-pool__list-item"><span class="qm-pool__no-result-text">' + jQuery.i18n.prop('info.pools.no_customers_in_pool') + '</span></li>');
+        var noResultTemplate = $('<li class="qm-pool__list-item qm-pool__list-item--auto-width"><span class="qm-pool__no-result-text">' + jQuery.i18n.prop('info.pools.no_customers_in_pool') + '</span></li>');
         var popoverTemplate = document.querySelector('.qm-popover--pool').outerHTML.trim();
         
         // Popover options
@@ -119,7 +119,7 @@ var servicePointPool = new function() {
             counterPoolList.append(noResultTemplate);
         }
 
-        util.determineIfToggleNeeded(counterPoolList, counterPoolToggle);
+        util.determineIfToggleNeeded(counterPool, counterPoolList, counterPoolToggle);
     };
 
     this.callFromPool = function (visitId) {

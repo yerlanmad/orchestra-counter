@@ -30,6 +30,7 @@ queueRefeshTime = 30;								// refresh time in seconds, please note that loweri
 
 
 function showModules() {
+	var $main = $('.qm-main');
 
 	if (moduleCustomerEnabled == true) {
 		$('#customerModule').show();
@@ -83,8 +84,16 @@ function showModules() {
 	} else {
 		$('#userPoolModule').hide();
 	}
+
+	if(moduleServicePointPoolEnabled == false && moduleUserPoolEnabled == false) {
+		$main.addClass('qm-main--no-pools');
+	}
+
 	if (moduleQueuesEnabled == true) {
 		$('#queuesModule').css("visibility","visible");
+	} else {
+		$main.addClass('qm-main--no-queues');
+		$('#queuesModule').hide();
 	}
 	if (transferToUserPoolEnabled == false) {
 		$('#transferTicketToStaffPoolDiv').hide();
