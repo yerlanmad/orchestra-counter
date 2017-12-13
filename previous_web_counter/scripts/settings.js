@@ -70,12 +70,16 @@ function showModules() {
 	}
 	if (moduleServicePointPoolEnabled == true) {
 		$('#servicePointPoolModule').css("visibility","visible");
+		var counterPool = $('#userPoolModule');
+		util.poolResizeHandler(counterPool);
 	} else {
 		$('#servicePointPoolModule').hide();
 	}
 	
 	if (moduleUserPoolEnabled == true) {
 		$('#userPoolModule').css("visibility","visible");
+		var userPool = $('#userPoolModule');
+		util.poolResizeHandler(userPool);
 	} else {
 		$('#userPoolModule').hide();
 	}

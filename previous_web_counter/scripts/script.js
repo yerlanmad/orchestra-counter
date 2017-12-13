@@ -2001,7 +2001,9 @@ var servicePoint = new function() {
 		branch.text(sessvars.branchName);
 		workstation.text(sessvars.servicePointName);
 		profile.text(sessvars.state.workProfileName);
-
+		// Used to repaint in IE when values are appended
+		profile.focus().blur();
+		
 		prioSel.prop('selectedIndex', $(
 				"#prioList option[value=" + sessvars.workProfileId + "]")
 				.index());

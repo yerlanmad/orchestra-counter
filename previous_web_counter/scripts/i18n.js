@@ -52,6 +52,12 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         } catch(e) {}
     };
 
+    var i18nSafeSelectorAppend = function (selector, propName) {
+        try {
+            $(selector).text(jQuery.i18n.prop(propName));
+        } catch(e) {}
+    };
+
     this.i18nPage = function() {
 
         //document title in web browser header
@@ -300,6 +306,14 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         i18nSafeAppend("displayQueueSpinnerText", "info.visit.in.display.queue");
        
+        // Header
+        i18nSafeSelectorAppend('.qm-header__home-btn > span', 'button.home');
+        i18nSafeSelectorAppend('.qm-header__help-btn > span', 'application.sr.help');
+        i18nSafeSelectorAppend('.qm-header__logout-btn > span', 'button.logout');
+        
+        // Pool
+        i18nSafeSelectorAppend('.qm-pool__toggle-btn > span', 'application.sr.toggle');
+
         //footer
         sessvars.footer = translate.msg("label.poweredBy", 
         		["Qmatic " + sessvars.systemInformation.productName + " " + sessvars.systemInformation.releaseName + " [" + sessvars.systemInformation.productVersion + "]"]);

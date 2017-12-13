@@ -84,7 +84,6 @@
                 $('.qm-pool__toggle-btn').on('click', function (e) {
                     $(this).closest('.qm-pool').toggleClass('qm-pool--is-open');
                 });
-                
 
                 // TABS
                 var tabConfig = {

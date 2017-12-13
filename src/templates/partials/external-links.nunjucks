@@ -34,6 +34,7 @@
         <script type="text/javascript" src="scripts/jquery/jquery.ui.draggable.js"></script>
         <script type="text/javascript" src="scripts/jquery/jquery.ui.datepicker.js"></script>
         <script type="text/javascript" src="scripts/jquery/i18n/jquery-ui-i18n.js"></script>
+        <script type="text/javascript" src="scripts/vendor/lodash.min.js"></script>
 
         <script type="text/javascript" src="scripts/vendor/popper.1.13.0.min.js"></script>
         <script type="text/javascript" src="scripts/vendor/tooltip.1.1.7.js"></script>

@@ -35,7 +35,7 @@
     &__home-btn,
     &__help-btn,
     &__logout-btn {
-        flex: 1 24px;
+        flex: 1 0 24px;
         color: $light-transparent50;
 
         .qm-action-btn__icon {
@@ -56,7 +56,7 @@
     // Left side
     &__brand-logo-container {
         display: flex;
-        flex: 1 auto;
+        flex: 1 0 auto;
         align-items: center;
         margin-left: rem($global-standard-margin);
 
@@ -67,7 +67,7 @@
     }
 
     &__brand-logo {
-        width: 95px;
+        width: 75px;
     }
 
     &__application-name {
@@ -121,9 +121,10 @@
     }
 
     &__profile-setting-caret {
-        flex: 1 16px;
+        flex: 1 0 16px;
         padding: rem(0 $global-standard-padding / 2);
         font-size: rem(16px);
+        min-height: auto;
     }
 
     &__edit-profile-settings {
@@ -163,6 +164,15 @@
         &:hover,
         &:focus {
             color: $white;
+        }
+    }
+}
+
+@media screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) {
+    .qm-header {
+      
+        &__brand-logo {
+            width: 95px;
         }
     }
 }

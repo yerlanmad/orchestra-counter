@@ -76,13 +76,22 @@ var userPool = new function() {
         var url = "branches/" + sessvars.branchId + "/users/" 
                     + sessvars.currentUser.id + "/pool/visits?call=" + t;
         
-        // Get Pool list and empty it
-        var userPoolList = $('#userPoolList');
+
+        // Get DOM elements
+        var userPool            = $('#userPoolModule'),
+            userPoolList        = userPool.find('.qm-pool__list'),
+            userPoolToggle      = userPool.find('.qm-pool__toggle-btn');
+
+
+        // Empty list
         userPoolList.empty();
+
+        // Clean up popovers
+        $('body > .qm-popover--pool').remove();
         
         // Templates
         var userPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket" data-toggle="popover"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
-        var noResultTemplate = $('<li class="qm-pool__list-item"><span class="qm-pool__no-result-text">No customers waiting</span></li>');
+        var noResultTemplate = $('<li class="qm-pool__list-item"><span class="qm-pool__no-result-text">' + jQuery.i18n.prop('info.pools.no_customers_in_pool') + '</span></li>');
         var popoverTemplate = document.querySelector('.qm-popover--pool').outerHTML.trim();
         
         // Popover options
@@ -114,6 +123,8 @@ var userPool = new function() {
         } else {
             userPoolList.append(noResultTemplate);
         }
+        
+        util.determineIfToggleNeeded(userPoolList, userPoolToggle);
     };
 
     this.callFromPool = function (visitId) {

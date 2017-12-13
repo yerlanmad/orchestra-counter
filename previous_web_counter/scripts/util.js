@@ -351,6 +351,23 @@ var util = new function() {
         return b.waitingTime - a.waitingTime;
     };
 
+    this.poolResizeHandler = function (pool) {
+        var poolList        = pool.find('.qm-pool__list'),
+            poolToggle      = pool.find('.qm-pool__toggle-btn');
+
+        $(window).on('resize', _.debounce(function() {
+            util.determineIfToggleNeeded(poolList, poolToggle);
+        }, 300));
+    };
+
+    this.determineIfToggleNeeded = function ($poolList, $poolToggle) {
+        if($poolList.height() > 50) {
+            $poolToggle.fadeIn();
+        } else {
+            $poolToggle.hide();
+        }
+    };
+
     /**
      * @param errorMessage the name of a property in
      * graphicalDisplayMessages.properties
