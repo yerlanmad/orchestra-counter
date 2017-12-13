@@ -108,7 +108,7 @@ function showModules() {
 	if (buttonTransferEnabled == true) {
 		$('#transferBtn').css("visibility","visible");
 	} else {
-		$('#transferBtn').hide();
+		$('#transferBtn').prop('disabled', true);
 	}
 	if (buttonWalkDirectEnabled == true) {
 		$('#walkDirectBtn').css("visibility","visible");
@@ -119,13 +119,13 @@ function showModules() {
 	if (buttonNoShowsEnabled == true) {
 		$('#noShowBtn').css("visibility","visible");
 	} else {
-		$('#noShowBtn').hide();
+		$("#noShowBtn").prop('disabled', true);
 	}
 
 	if (buttonParkEnabled == true) {
 		$('#parkBtn').css("visibility","visible");
 	} else {
-		$('#parkBtn').hide();
+		$('#parkBtn').prop('disabled', true);
 	}
 	if (buttonNotesEnabled == true) {
 		$('#notesBtn').css("visibility","visible");
@@ -135,7 +135,7 @@ function showModules() {
 	if (buttonRecycleEnabled == true) {
 		$('#reinsertBtn').css("visibility","visible");
 	} else {
-	
+		$('#reinsertBtn').prop('disabled', true);
 	}
   
   	if (multiMarks == false) {

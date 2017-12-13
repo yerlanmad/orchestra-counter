@@ -1462,34 +1462,34 @@ var servicePoint = new function () {
 
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
-				$("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
-				$("#noShowBtn").toggleClass("customButtonSmall", true);
+				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
+				// $("#noShowBtn").toggleClass("customButtonSmall", true);
 				$("#noShowBtn").prop('disabled', false);
 			} else {
-				$("#noShowBtn").toggleClass("customButtonSmall", false);
-				$("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
+				// $("#noShowBtn").toggleClass("customButtonSmall", false);
+				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
 				$("#noShowBtn").prop('disabled', true);
 			}
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
-				$("#recallBtn").toggleClass("customButtonSmallDisabled", false);
-				$("#recallBtn").toggleClass("customButtonSmall", true);
+				// $("#recallBtn").toggleClass("customButtonSmallDisabled", false);
+				// $("#recallBtn").toggleClass("customButtonSmall", true);
 				$("#recallBtn").prop('disabled', false);
 			} else {
-				$("#recallBtn").toggleClass("customButtonSmallDisabled", true);
-				$("#recallBtn").toggleClass("customButtonSmall", false);
+				// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
+				// $("#recallBtn").toggleClass("customButtonSmall", false);
 				$("#recallBtn").prop('disabled', true);
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
-				$("#reinsertBtn").toggleClass("customButtonSmall", true);
-				$("#reinsertBtn").toggleClass("customButtonSmallDisabled",
-					false);
+				// $("#reinsertBtn").toggleClass("customButtonSmall", true);
+				// $("#reinsertBtn").toggleClass("customButtonSmallDisabled",
+				// 		false);
 				$("#reinsertBtn").prop('disabled', false);
 			} else {
-				$("#reinsertBtn").toggleClass("customButtonSmall", false);
-				$("#reinsertBtn")
-					.toggleClass("customButtonSmallDisabled", true);
+				// $("#reinsertBtn").toggleClass("customButtonSmall", false);
+				// $("#reinsertBtn")
+				// 		.toggleClass("customButtonSmallDisabled", true);
 				$("#reinsertBtn").prop('disabled', true);
 			}
 			$("#prioList").prop('disabled', true);
@@ -1596,15 +1596,15 @@ var servicePoint = new function () {
 			$("#notesBtn").prop('disabled', false);
 
 			// is no-show allowed
-			if (sessvars.state.visit.noshowAllowed) {
-				$("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
-				$("#noShowBtn").toggleClass("customButtonSmall", true);
-				$("#noShowBtn").prop('disabled', false);
-			} else {
-				$("#noShowBtn").toggleClass("customButtonSmall", false);
-				$("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
-				$("#noShowBtn").prop('disabled', true);
-			}
+			// if (sessvars.state.visit.noshowAllowed) {
+			// 	$("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
+			// 	$("#noShowBtn").toggleClass("customButtonSmall", true);
+			// 	$("#noShowBtn").prop('disabled', false);
+			// } else {
+			// 	$("#noShowBtn").toggleClass("customButtonSmall", false);
+			// 	$("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
+			// 	$("#noShowBtn").prop('disabled', true);
+			// }
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
 				$("#recallBtn").toggleClass("customButtonSmallDisabled", false);
@@ -1617,14 +1617,14 @@ var servicePoint = new function () {
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
-				$("#reinsertBtn").toggleClass("customButtonSmall", true);
-				$("#reinsertBtn").toggleClass("customButtonSmallDisabled",
-					false);
+				// $("#reinsertBtn").toggleClass("customButtonSmall", true);
+				// $("#reinsertBtn").toggleClass("customButtonSmallDisabled",
+				// 		false);
 				$("#reinsertBtn").prop('disabled', false);
 			} else {
-				$("#reinsertBtn").toggleClass("customButtonSmall", false);
-				$("#reinsertBtn")
-					.toggleClass("customButtonSmallDisabled", true);
+				// $("#reinsertBtn").toggleClass("customButtonSmall", false);
+				// $("#reinsertBtn")
+				// 		.toggleClass("customButtonSmallDisabled", true);
 				$("#reinsertBtn").prop('disabled', true);
 			}
 
@@ -1809,28 +1809,28 @@ var servicePoint = new function () {
 			$("#closeBtn").prop("disabled", true);
 		}
 
-		$("#transferBtn").toggleClass("customButtonSmallDisabled", true);
-		$("#transferBtn").toggleClass("customButtonSmall", false);
+		// $("#transferBtn").toggleClass("customButtonSmallDisabled", true);
+		// $("#transferBtn").toggleClass("customButtonSmall", false);
 		$("#transferBtn").prop("disabled", true);
 
-		$("#parkBtn").toggleClass("customButtonSmallDisabled", true);
-		$("#parkBtn").toggleClass("customButtonSmall", false);
+		// $("#parkBtn").toggleClass("customButtonSmallDisabled", true);
+		// $("#parkBtn").toggleClass("customButtonSmall", false);
 		$("#parkBtn").prop("disabled", true);
 
-		$("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
-		$("#noShowBtn").toggleClass("customButtonSmall", false);
+		// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
+		// $("#noShowBtn").toggleClass("customButtonSmall", false);
 		$("#noShowBtn").prop("disabled", true);
 
 		$("#notesBtn").toggleClass("customButtonSmallDisabled", true);
 		$("#notesBtn").toggleClass("customButtonSmall", false);
 		$("#notesBtn").prop("disabled", true);
 
-		$("#recallBtn").toggleClass("customButtonSmallDisabled", true);
-		$("#recallBtn").toggleClass("customButtonSmall", false);
+		// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
+		// $("#recallBtn").toggleClass("customButtonSmall", false);
 		$("#recallBtn").prop("disabled", true);
 
-		$("#reinsertBtn").toggleClass("customButtonSmallDisabled", true);
-		$("#reinsertBtn").toggleClass("customButtonSmall", false);
+		// $("#reinsertBtn").toggleClass("customButtonSmallDisabled", true);
+		// $("#reinsertBtn").toggleClass("customButtonSmall", false);
 		$("#reinsertBtn").prop("disabled", true);
 
 		$("#prioList").prop("disabled", false);

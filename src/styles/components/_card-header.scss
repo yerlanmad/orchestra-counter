@@ -29,6 +29,10 @@
             padding-left: rem($global-standard-padding / 2);
         }
 
+        &:empty {
+            padding-right: 0;
+        }
+
         &:visited {
             color: $h1-color;
         }

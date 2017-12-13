@@ -17,7 +17,7 @@ display: none;
  #selectOutcome, #selectOutcomeLabel, #transferBtn, #reinsertBtn, #multiServicesModule, #addMultiServiceLink,
  #customMarksModule, #addCustomMarkLink, #chatModule
  {
-    visibility: hidden;
+    visibility: visible;
 }
 
 #projectedVisitsModule {
@@ -199,9 +199,9 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 #ongoingVisitInfo .descriptionCol{text-align:right;}
 #ongoingVisitInfo table th{text-align: left;}
 #ongoingVisitButtons{bottom:10px; position:absolute; margin:0 10px; white-space:nowrap;}
-#ticketNumber{font-size:20px; font-weight:bold; padding:5px 0 10px;}
-#serviceId{font-size:20px; font-weight:bold; padding:5px 0 10px 3px;}
-#linkedCustomerField{font-size:15px; font-weight:bold;padding:0 0 0 10px;}
+/*#ticketNumber{font-size:20px; font-weight:bold; padding:5px 0 10px;}*/
+/*#serviceId{font-size:20px; font-weight:bold; padding:5px 0 10px 3px;}*/
+/*#linkedCustomerField{font-size:15px; font-weight:bold;padding:0 0 0 10px;}*/
 #verticalMessageRow td{font-size:14px; border:1px solid #ccc; padding:4px;}
 
 
@@ -651,16 +651,16 @@ a.customButtonDisabled span{
 }
 
 /************* SMALLER BUTTON ***************/
-a.customButtonSmall{
+/*a.customButtonSmall{
     background:transparent url('../images/buttonsRE_small.png') no-repeat scroll top right;
     color:#000;
 	text-shadow:1px 1px #f7ffff;
     display:block;
     float:left;
     font:bold 13px sans-serif, arial;
-    height:30px; /****/
+    height:30px; 
     margin-right:8px;
-    padding-right:20px; /****/
+    padding-right:20px; 
     text-decoration:none;
     outline:none;
 }
@@ -668,13 +668,13 @@ a.customButtonSmall{
 a.customButtonSmall span{
     background:transparent url('../images/buttonsLE_small.png') no-repeat;
     display:block;
-    line-height:14px; /****/
+    line-height:14px; 
     padding:8px 0 8px 22px;
     color:#000;
 } 
  
 a.customButtonSmall:hover{
-	background-position:right -40px;  /****/
+	background-position:right -40px; 
 	outline:none; 
     color:#000;
 }
@@ -691,24 +691,26 @@ a.customButtonSmall:focus, a.customButtonSmall:active{
 
 a.customButtonSmall:focus span, a.customButtonSmall:active span{
 	background-position:0 -79px;
-    padding:9px 0 6px 22px; /****/
-	line-height:14px; /****/
-}
+    padding:9px 0 6px 22px; 
+	line-height:14px; 
+}*/
 
+/**
 a.customButtonSmallDisabled{
     background:transparent url('../images/buttonsRE_small.png') no-repeat scroll right -117px;
     display:block;
     float:left;
     font:bold 13px sans-serif, arial;
-    height:31px; /****/
+    height:31px; 
     margin-right:8px;
-    padding-right:20px; /****/
+    padding-right:20px;
     text-decoration:none;
     outline:none;
     cursor:default;
 }
+**/
  
-a.customButtonSmallDisabled span{
+/*a.customButtonSmallDisabled span{
     background:transparent url('../images/buttonsLE_small.png') no-repeat;
     background-position:0 -117px;
     display:block;
@@ -716,7 +718,7 @@ a.customButtonSmallDisabled span{
     padding:8px 0 8px 22px;
     color:#999;
     cursor:default;
-}
+}*/
 
 .customLink{
 	/*background:transparent url('/images/common/various/addIcon.png') bottom left no-repeat;

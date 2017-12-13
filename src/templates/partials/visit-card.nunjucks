@@ -8,10 +8,9 @@
         <div class="qm-card-header">
             <div class="qm-card-header__top">
                 <h1 class="qm-card-header__headline">
-                    <a href="" class="qm-card-header__customer-name">
-                        Karl-Henrik Johansson
+                    <a href="" id="linkedCustomerField" class="qm-card-header__customer-name">
                     </a>
-                    <span class="qm-card-header__ticket">A100</span>
+                    <span id="ticketNumber" class="qm-card-header__ticket"></span>
                 </h1>
                 <a href="" class="qm-card-header__context-marketing qm-tooltip">
                     <i class="qm-card-header__context-marketing-icon qm-tooltip__icon icon-announce" aria-hidden="true"></i>
@@ -22,7 +21,7 @@
             </div>
             <div class="qm-services">
                 <div class="qm-services__current-service-container">
-                    <span class="qm-services__current-service-title">Tablets</span>
+                    <span id="serviceId" class="qm-services__current-service-title"></span>
                     <a href="#" class="qm-services__add-service">
                         <i class="qm-services__add-service-icon icon-service-add" aria-hidden="true"></i>
                         <span class="qm-services__add-service-text sr-only">Add service</span>
@@ -56,14 +55,14 @@
                 <i class="qm-timer__icon icon-clock-solid" aria-hidden="true"></i>
                 <div class="qm-timer__text">
                     <span class="qm-timer__label">Waiting time:</span>
-                    <span class="qm-timer__time">15m 20s</span>
+                    <span id="waitingTimeCounter" class="qm-timer__time">15m 20s</span>
                 </div>
             </div>
             <div class="qm-timer__item">
                 <i class="qm-timer__icon icon-hourglass" aria-hidden="true"></i>
                 <div class="qm-timer__text">
                     <span class="qm-timer__label">Transaction time:</span>
-                    <span class="qm-timer__time">20s</span>
+                    <span id="countTransactionTime" class="qm-timer__time">20s</span>
                 </div>
             </div>
         </div>
@@ -99,29 +98,29 @@
 {% block footer %}
     <div class="qm-card__footer-section qm-card__footer-section--space-between">
         <div class="qm-card-action-layout">
-            <button class="qm-action-btn">
+            <button class="qm-action-btn" id="recallBtn">
                 <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Recall">Recall</span>
             </button>
-            <button class="qm-action-btn">
+            <button class="qm-action-btn" id="reinsertBtn">
                 <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Recycle">Recycle</span>
             </button>
-            <button class="qm-action-btn">
+            <button class="qm-action-btn" id="transferBtn">
                 <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Transfer">Transfer</span>
             </button>
-            <button class="qm-action-btn">
+            <button class="qm-action-btn" id="parkBtn">
                 <i class="qm-action-btn__icon icon-pause" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Park">Park</span>
             </button>
         </div>
         <div class="qm-card-action-layout">
-            <button class="qm-action-btn">
+            <button class="qm-action-btn" id="noShowBtn" >
                 <i class="qm-action-btn__icon icon-no-show" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="No show">No show</span>
             </button>
-            <button class="qm-action-btn">
+            <button class="qm-action-btn" id="endVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed')">
                 <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="No show">Finish</span>
             </button>
