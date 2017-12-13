@@ -1,6 +1,4 @@
 $(function() {
-    window.$Qmatic.components.dropdown.profileSelection = new window.$Qmatic.components.dropdown.BaseDropdownComponent('#prioListModal', {
-			"disable_search": true
-		})
+    window.$Qmatic.components.dropdown.profileSelection = new window.$Qmatic.components.dropdown.BaseDropdownComponent('#prioListModal')
 })
 

@@ -261,15 +261,19 @@ var servicePoint = new function() {
 	// display modal popup with settings
 	this.showSettingsWindow = function() {
 
+		$Qmatic.components.dropdown.branchSelection.update({no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound')})
+		$Qmatic.components.dropdown.counterSelection.update({no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound')})
+		$Qmatic.components.dropdown.profileSelection.update({no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound')})
+		$("#branchListModal").trigger("chosen:updated");
+		$("#workstationListModal").trigger("chosen:updated");
+		$("#prioListModal").trigger("chosen:updated");
+
 		if (!workstationOffline
 				&& servicePoint.hasValidSettings(false)
 				&& !(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN && servicePoint
 						.isOutcomeOrDeliveredServiceNeeded())
 				&& !(typeof sessvars.singleSettingsOnly !== 'undefined'
 						&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true)) {
-			
-			
-			
 			
 			// the user wants to change the branch, workstation or work profile
 			showBranches();
@@ -316,6 +320,7 @@ var servicePoint = new function() {
 	var showBranches = function() {
 		var isBranchSelectShown = false;
 		var branches = spService.get("branches");
+		$Qmatic.components.dropdown.branchSelection.onRemoveSingleItem()
 
 		// We "filter" out the branches that do not have any software service
 		// points
@@ -335,7 +340,8 @@ var servicePoint = new function() {
 
 		if (branches.length == 0) {
 			// no branches returned
-			util.showError(jQuery.i18n.prop('error.no.branches.assigned'));
+			//util.showError(jQuery.i18n.prop('error.no.branches.assigned'));
+			$Qmatic.components.dropdown.branchSelection.onError(jQuery.i18n.prop('error.no.branches.assigned'))
 		} else {
 			var branchSelect = $("#branchListModal");
 
@@ -347,6 +353,8 @@ var servicePoint = new function() {
 			if (branches.length > 1) {
 				branchSelect.removeAttr('disabled');
 				isBranchSelectShown = true;
+			} else if (branches.length == 1) {
+				$Qmatic.components.dropdown.branchSelection.onSingleItem()
 			} else {
 				servicePoint.selectBranch(branches[0].id);
 				branchSelect.attr('disabled', '');
@@ -374,16 +382,23 @@ var servicePoint = new function() {
 		selectWorkstationModal.removeAttr('disabled');
 		selectPrioModal.removeAttr('disabled');
 
-		selectWorkstationModal.trigger("chosen:updated");
-		selectPrioModal.trigger("chosen:updated");
-
 		if (branchId != -1) {
 			showWorkstations(branchId, selectWorkstationModal, selectPrioModal);
+			$Qmatic.components.dropdown.branchSelection.clearError()
+		} else {
+			$Qmatic.components.dropdown.counterSelection.onRemoveSingleItem()
+			$Qmatic.components.dropdown.profileSelection.onRemoveSingleItem()
+			selectWorkstationModal.attr('disabled', true);
+			selectPrioModal.attr('disabled', true);
 		}
+
+		selectWorkstationModal.trigger("chosen:updated");
+		selectPrioModal.trigger("chosen:updated");
 	};
 
 	// show workstations in settings window
 	var showWorkstations = function(branchId, workstationSelect, prioSelect) {
+		$Qmatic.components.dropdown.counterSelection.onRemoveSingleItem()
 		var params = {};
 		params.branchId = parseInt(branchId);
 		params.deviceType = "SW_SERVICE_POINT";
@@ -392,7 +407,8 @@ var servicePoint = new function() {
 
 		if (softwareWorkstations.length == 0) {
 			// no workstations returned
-			util.showError(jQuery.i18n.prop('error.no.available.counters'));
+			// util.showError(jQuery.i18n.prop('error.no.available.counters'));
+			$Qmatic.components.dropdown.counterSelection.onError(jQuery.i18n.prop('error.no.available.counters'))
 			return;
 		}
 
@@ -405,6 +421,7 @@ var servicePoint = new function() {
 			workstationSelect.removeAttr('disabled');
 		} else {
 			workstationSelect.attr('disabled', '');
+			$Qmatic.components.dropdown.counterSelection.onSingleItem()
 			servicePoint.selectWorkstation(softwareWorkstations[0].id);
 		}
 
@@ -421,11 +438,13 @@ var servicePoint = new function() {
 		prioSelect.trigger("chosen:updated");
 		if (unitId != "-1") {
 			showProfiles(branchId, unitId, prioSelect);
+			$Qmatic.components.dropdown.counterSelection.clearError()
 		}
 	};
 
 	// show profiles in settings window and in status row
 	var showProfiles = function(branchId, unitId, prioSelect) {
+		$Qmatic.components.dropdown.profileSelection.onRemoveSingleItem()
 		var params = {};
 		params.branchId = parseInt(branchId);
 		var profiles = spService.get("branches/" + params.branchId
@@ -435,7 +454,8 @@ var servicePoint = new function() {
 
 		if (profiles.length == 0) {
 			// no profiles returned
-			util.showError(jQuery.i18n.prop("error.no.available.profiles"));
+			// util.showError(jQuery.i18n.prop("error.no.available.profiles"));
+			$Qmatic.components.dropdown.profileSelection.onError(jQuery.i18n.prop('error.no.available.profiles'))
 			return;
 		}
 		util.clearSelect(prioSelect);
@@ -446,6 +466,7 @@ var servicePoint = new function() {
 			prioSelect.removeAttr('disabled');
 		} else {
 			prioSelect.attr('disabled', '');
+			$Qmatic.components.dropdown.profileSelection.onSingleItem()
 		}
 
 		prioSelect.trigger("chosen:updated");
@@ -456,12 +477,17 @@ var servicePoint = new function() {
 		 */
 	};
 
+	this.selectProfile = function (val) {
+		if (val != "-1") {
+			$Qmatic.components.dropdown.profileSelection.clearError()
+		}
+	}
+
 	this.confirmSettings = function(warnUser) {
 		var isHijacking = false;
 		var branchSel = $("#branchListModal");
 		var workstationSel = $("#workstationListModal");
 		var profileSel = $("#prioListModal");
-		modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
 		if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
 			var settings = getSettings(branchSel, workstationSel, profileSel);
 			if (typeof warnUser === "undefined") {
@@ -515,7 +541,8 @@ var servicePoint = new function() {
 					&& usersOnWantedServicePoint[0].id != currentUser.id) {
 				// the user wants to login to an occupied counter; display
 				// warning message.
-				util.hideModal("settingsWindow");
+				modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
+				// util.hideModal("settingsWindow");
 				util.showModal("confirmCounterHijackingWindow");
 				// i18n for counter hijacking confirmation window
 				$(document)
@@ -568,7 +595,8 @@ var servicePoint = new function() {
 			// start user session. Set profile and update status if all went
 			// well
 			if (startUserSession(settings)) {
-				util.hideModal("settingsWindow");
+				modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
+				// util.hideModal("settingsWindow");
 				isApplied = true;
 			}
 		}
@@ -2233,26 +2261,30 @@ var servicePoint = new function() {
 		if (typeof sessvars.branchId === "undefined"
 				|| sessvars.branchId == null) {
 			if (showMessages) {
-				util.showError(translate.msg("error.no.branch"));
+				// util.showError(translate.msg("error.no.branch"));
+				$Qmatic.components.dropdown.branchSelection.onError(translate.msg("error.no.branch"))
 			}
 			return false;
 		} else if (typeof sessvars.servicePointId === "undefined"
 				|| sessvars.servicePointId == null) {
 			if (showMessages) {
-				util.showError(translate.msg("error.no.workstation"));
+				// util.showError(translate.msg("error.no.workstation"));
+				$Qmatic.components.dropdown.counterSelection.onError(translate.msg("error.no.workstation"))
 			}
 			return false;
 		} else if (typeof sessvars.workProfileId === "undefined"
 				|| sessvars.workProfileId == null) {
 			if (showMessages) {
-				util.showError(translate.msg("error.no.profile"));
+				// util.showError(translate.msg("error.no.profile"));
+				$Qmatic.components.dropdown.profileSelection.onError(translate.msg("error.no.profile"))
 			}
 			return false;
 		} else if (typeof sessvars.state.servicePointDeviceTypes === "undefined"
 			|| sessvars.state.servicePointDeviceTypes == null
 			|| sessvars.state.servicePointDeviceTypes.indexOf("SW_SERVICE_POINT") < 0) {
 			if (showMessages) {
-				util.showError(translate.msg("error.wrong.deviceType"));
+				// util.showError(translate.msg("error.wrong.deviceType"));
+				$Qmatic.components.dropdown.counterSelection.onError(translate.msg("error.wrong.deviceType"))
 			}
 			return false;
 
@@ -2381,13 +2413,16 @@ var servicePoint = new function() {
 			profileSel) {
 
 		if (branchSel.val() == -1) {
-			util.showError(jQuery.i18n.prop("error.no.branch"));
+			// util.showError(jQuery.i18n.prop("error.no.branch"));
+			$Qmatic.components.dropdown.branchSelection.onError(jQuery.i18n.prop("error.no.branch"))
 			return false;
 		} else if (workstationSel.val() == -1) {
-			util.showError(jQuery.i18n.prop("error.no.workstation"));
+			// util.showError(jQuery.i18n.prop("error.no.workstation"));
+			$Qmatic.components.dropdown.counterSelection.onError(jQuery.i18n.prop("error.no.workstation"))
 			return false;
 		} else if (profileSel.val() == -1) {
-			util.showError(jQuery.i18n.prop("error.no.profile"));
+			// util.showError(jQuery.i18n.prop("error.no.profile"));
+			$Qmatic.components.dropdown.profileSelection.onError(jQuery.i18n.prop("error.no.profile"))
 			return false;
 		}
 		return true;

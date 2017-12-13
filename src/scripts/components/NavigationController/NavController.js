@@ -49,13 +49,14 @@ window.$Qmatic.components.NavController = function (navSelector) {
         return this.navigationStack
     }
 
-    this.onInit.apply(this, arguments);
-
     // @Override
     this.onInit = function (selector){
-        this.__proto__.onInit(selector)
+        window.$Qmatic.components.BaseComponent.prototype.onInit.call(this, selector);
         this.hide()
     }
+
+    this.onInit.apply(this, arguments);
 };
 
 window.$Qmatic.components.NavController.prototype = new window.$Qmatic.components.BaseComponent()
+window.$Qmatic.components.NavController.prototype.constructor = window.$Qmatic.components.NavController

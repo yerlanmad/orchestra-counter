@@ -44,7 +44,7 @@
         <!-- Per R5, we don't use DWR for server push of events anymore -->
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.min.js"></script>
+        <script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
 
         
 
@@ -78,8 +78,10 @@
         <script type="text/javascript" src="scripts/utils/index.js"></script>
         <script type="text/javascript" src="scripts/vendor/index.js"></script>
 
+        <script type="text/javascript" src="scripts/components/index.js"></script>
         <script type="text/javascript" src="scripts/components/BaseComponent.js"></script>
 
+        <script type="text/javascript" src="scripts/components/dropdown/index.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/BaseDropdownComponent.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/branchSelection/branchSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
@@ -87,7 +89,10 @@
 
         <script type="text/javascript" src="scripts/components/NavigationView/NavView.js"></script>
         <script type="text/javascript" src="scripts/components/NavigationController/NavController.js"></script>
+
+        <script type="text/javascript" src="scripts/components/modal/index.js"></script>
         <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/ProfileSettingsModal.js"></script>
         <script type="text/javascript" src="scripts/components/modal/profileSettings/profileSettings.js"></script>
         <script type="text/javascript" src="scripts/components/modal/noCustomersWaiting/noCustomersWaiting.js"></script>
         
@@ -98,7 +103,6 @@
         <script type="text/javascript" src="scripts/components/popover/counterPoolPopover/index.js"></script>
         
         <link rel="stylesheet" href="css/main.css" />
-        
-        <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
 
+        <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
         <script type="text/javascript" src="scripts/script.js?2016061415"></script>

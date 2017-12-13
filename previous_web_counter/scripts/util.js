@@ -54,6 +54,7 @@ var util = new function() {
 //                break;
 //            }
 //        }
+        select.trigger("chosen:updated");
     };
 
     /**
