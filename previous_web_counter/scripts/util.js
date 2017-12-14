@@ -510,4 +510,11 @@ var util = new function() {
         } );
         return table;
     };
+
+    /**
+     *  Take User back to home page
+     */
+    this.goToModulesPage = function () {
+        window.location.href = "/"
+    }
 };

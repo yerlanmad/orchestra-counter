@@ -1,12 +1,18 @@
 #profile-settings-modal {
     .qm-card__header-section {
-        color: rgba(0, 0, 0, 0.82);
+        color: $dark-transparent82;
         font-family: $font-family;
         font-size: 28px;
         font-weight: 300;
         line-height: 32px;
+        margin-bottom: 25px;
         @at-root [dir='rtl'] & {
             text-align: right;
+        }
+    }
+    .qm-card__content-section {
+        .error-message{
+            margin: 20px 0;
         }
     }
     .qm-btns-container {

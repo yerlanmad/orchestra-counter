@@ -8,7 +8,7 @@
             <div class="qm-card__header-section" id="workstationSettingsHeader"></div>
             <div class="qm-card__content-section">
                 
-                
+                <div class="error-message">This is an error message!!</div>
                 <div class="qm-drop-down">
                     <div id="selectBranchModal" class="qm-drop-down__header text-ellipsis">
                         

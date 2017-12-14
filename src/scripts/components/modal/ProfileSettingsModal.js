@@ -12,14 +12,15 @@ window.$Qmatic.components.modal.ProfileSettingsModal = function (selector) {
         $Qmatic.components.dropdown.branchSelection.clearError()
         $Qmatic.components.dropdown.counterSelection.clearError()
         $Qmatic.components.dropdown.profileSelection.clearError()
+        this.clearError()
     } 
 
     this.onError = function(message) {
-        $(this.getSelector())
+        $(this.getSelector() + " .error-message").text(message).show()
     }
 
     this.clearError = function () {
-        $(this.getSelector())
+        $(this.getSelector() + " .error-message").hide()
     }
 
     this.onInit.apply(this, arguments);

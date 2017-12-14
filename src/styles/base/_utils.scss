@@ -15,3 +15,8 @@
     overflow: hidden;
     white-space: nowrap;
 }
+
+.error-message {
+    color: $validation-error;
+    font-size: 16px;
+}

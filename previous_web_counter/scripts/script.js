@@ -55,7 +55,7 @@ var unitMappings;
 // Navigation Controllers.... modals, cards, etc
 var modalNavigationController = new $Qmatic.components.NavController("#qm-modal-nav");
 
-var servicePoint = new function() {
+var servicePoint = new function () {
 
 	var servicesLeft = false;
 	var servicesList = '';
@@ -73,100 +73,100 @@ var servicePoint = new function() {
 
 	// Service point states
 	this.servicePointState = {
-		OPEN : 'OPEN',
-		CLOSED : 'CLOSED'
+		OPEN: 'OPEN',
+		CLOSED: 'CLOSED'
 	};
 
 	this.userState = {
 		/** User has not started a session */
-		NO_STARTED_USER_SESSION : "NO_STARTED_USER_SESSION",
+		NO_STARTED_USER_SESSION: "NO_STARTED_USER_SESSION",
 		/** User has not started a session on any Service Point */
-		NO_STARTED_SERVICE_POINT_SESSION : "NO_STARTED_SERVICE_POINT_SESSION",
+		NO_STARTED_SERVICE_POINT_SESSION: "NO_STARTED_SERVICE_POINT_SESSION",
 		/** User has not set a work profile but is logged in */
-		NO_PROFILE_SET : "NO_PROFILE_SET",
+		NO_PROFILE_SET: "NO_PROFILE_SET",
 		/** User has started a service point session but not called any customer */
-		INACTIVE : "INACTIVE",
+		INACTIVE: "INACTIVE",
 		/**
 		 * User called a customer but no customers were waiting. The next
 		 * created visit will be called to the user automatically
 		 */
-		IN_STORE_NEXT : "IN_STORE_NEXT",
+		IN_STORE_NEXT: "IN_STORE_NEXT",
 		/**
 		 * User has called a customer and the customer is NOT confirmed, i.e.
 		 * has NOT reached the ServicePoint
 		 */
-		CALLED : "CALLED",
+		CALLED: "CALLED",
 		/** User has a confirmed customer and is currently serving that customer */
-		SERVING : 'SERVING',
+		SERVING: 'SERVING',
 		/**
 		 * User has served the customer and is doing some kind of wrap up
 		 * activity
 		 */
-		WRAPUP : "WRAPUP",
+		WRAPUP: "WRAPUP",
 		/**
 		 * The current visit is not called. Most probably because of display
 		 * throttling
 		 */
-		VISIT_NOT_CALLED : "VISIT_NOT_CALLED"
+		VISIT_NOT_CALLED: "VISIT_NOT_CALLED"
 	};
 
 	this.visitState = {
 		/** Normal state for a visit. This visit can be ended */
-		OK : "OK",
+		OK: "OK",
 		// /** There is no visit that can be returned by a next visit request */
 		// NO_CALLABLE_VISITS: "NO_CALLABLE_VISITS",
 		/** The visit needs to be confirmed. */
-		CONFIRM_NEEDED : "CONFIRM_NEEDED",
+		CONFIRM_NEEDED: "CONFIRM_NEEDED",
 		/** The visit has a service that requires a delivered service */
-		DELIVERED_SERVICE_NEEDED : "DELIVERED_SERVICE_NEEDED",
+		DELIVERED_SERVICE_NEEDED: "DELIVERED_SERVICE_NEEDED",
 		/** The visit has a service or delivered service that requires an outcome */
-		OUTCOME_NEEDED : "OUTCOME_NEEDED",
+		OUTCOME_NEEDED: "OUTCOME_NEEDED",
 		/** The visit has a delivered service that requires an outcome */
-		OUTCOME_FOR_DELIVERED_SERVICE_NEEDED : "OUTCOME_FOR_DELIVERED_SERVICE_NEEDED",
+		OUTCOME_FOR_DELIVERED_SERVICE_NEEDED: "OUTCOME_FOR_DELIVERED_SERVICE_NEEDED",
 		/**
 		 * The visit has a service that requires a delivered service or an
 		 * outcome
 		 */
-		OUTCOME_OR_DELIVERED_SERVICE_NEEDED : "OUTCOME_OR_DELIVERED_SERVICE_NEEDED",
+		OUTCOME_OR_DELIVERED_SERVICE_NEEDED: "OUTCOME_OR_DELIVERED_SERVICE_NEEDED",
 		/**
 		 * User has served the customer and is doing some kind of wrap up
 		 * activity
 		 */
-		WRAPUP : "WRAPUP",
+		WRAPUP: "WRAPUP",
 		/**
 		 * The current visit is not called. Most probably because of display
 		 * throttling
 		 */
-		VISIT_IN_DISPLAY_QUEUE : "VISIT_IN_DISPLAY_QUEUE"
+		VISIT_IN_DISPLAY_QUEUE: "VISIT_IN_DISPLAY_QUEUE"
 	};
 
 	this.publicEvents = {
-		VISIT_REMOVE : "VISIT_REMOVE",
-		VISIT_CREATE : "VISIT_CREATE",
-		VISIT_CALL : "VISIT_CALL",
-		SERVICE_POINT_CLOSE : "SERVICE_POINT_CLOSE",
-		RESET : "RESET",
-		VISIT_CONFIRM : "VISIT_CONFIRM",
-		VISIT_END : "VISIT_END",
-		VISIT_NOSHOW : "VISIT_NOSHOW",
-		USER_SESSION_START : "USER_SESSION_START",
-		USER_SESSION_END : "USER_SESSION_END",
-		VISIT_NEXT : "VISIT_NEXT",
-		USER_SERVICE_POINT_SESSION_START : "USER_SERVICE_POINT_SESSION_START",
-		USER_SERVICE_POINT_SESSION_END : "USER_SERVICE_POINT_SESSION_END",
-		SERVICE_POINT_OPEN : "SERVICE_POINT_OPEN",
-		USER_SERVICE_POINT_WORK_PROFILE_SET : "USER_SERVICE_POINT_WORK_PROFILE_SET",
-		VISIT_TRANSFER_TO_QUEUE : "VISIT_TRANSFER_TO_QUEUE",
-		VISIT_TRANSFER_TO_SERVICE_POINT_POOL : "VISIT_TRANSFER_TO_SERVICE_POINT_POOL",
-		VISIT_TRANSFER_TO_USER_POOL : "VISIT_TRANSFER_TO_USER_POOL",
-		VISIT_RECYCLE : "VISIT_RECYCLE",
-		CFU_SELECTION_DONE : "CFU_SELECTION_DONE",
-		UNSUPPORTED : "UNSUPPORTED"
+		VISIT_REMOVE: "VISIT_REMOVE",
+		VISIT_CREATE: "VISIT_CREATE",
+		VISIT_CALL: "VISIT_CALL",
+		SERVICE_POINT_CLOSE: "SERVICE_POINT_CLOSE",
+		RESET: "RESET",
+		VISIT_CONFIRM: "VISIT_CONFIRM",
+		VISIT_END: "VISIT_END",
+		VISIT_NOSHOW: "VISIT_NOSHOW",
+		USER_SESSION_START: "USER_SESSION_START",
+		USER_SESSION_END: "USER_SESSION_END",
+		VISIT_NEXT: "VISIT_NEXT",
+		USER_SERVICE_POINT_SESSION_START: "USER_SERVICE_POINT_SESSION_START",
+		USER_SERVICE_POINT_SESSION_END: "USER_SERVICE_POINT_SESSION_END",
+		SERVICE_POINT_OPEN: "SERVICE_POINT_OPEN",
+		USER_SERVICE_POINT_WORK_PROFILE_SET: "USER_SERVICE_POINT_WORK_PROFILE_SET",
+		VISIT_TRANSFER_TO_QUEUE: "VISIT_TRANSFER_TO_QUEUE",
+		VISIT_TRANSFER_TO_SERVICE_POINT_POOL: "VISIT_TRANSFER_TO_SERVICE_POINT_POOL",
+		VISIT_TRANSFER_TO_USER_POOL: "VISIT_TRANSFER_TO_USER_POOL",
+		VISIT_RECYCLE: "VISIT_RECYCLE",
+		CFU_SELECTION_DONE: "CFU_SELECTION_DONE",
+		UNSUPPORTED: "UNSUPPORTED"
 	};
 
 	this.SW_SERVICE_POINT = "SW_SERVICE_POINT";
 
-	this.init = function() {
+	this.init = function () {
 		if (!isLoggedInToWorkstation()) {
 			$("#userName").html(sessvars.currentUser.userName);
 			servicePoint.showSettingsWindow();
@@ -176,7 +176,7 @@ var servicePoint = new function() {
 		}
 	};
 
-	var isLoggedInToWorkstation = function() {
+	var isLoggedInToWorkstation = function () {
 		var isLoggedIn = false;
 		if (servicePoint.hasValidSettings(false)) {
 			isLoggedIn = !(sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION);
@@ -185,27 +185,27 @@ var servicePoint = new function() {
 	};
 
 	// F5 pressed
-	var updateUI = function() {
+	var updateUI = function () {
 		// re-enable app shortcuts
-		$('.orch-userinfo a').each(function() {
+		$('.orch-userinfo a').each(function () {
 			$(this).attr({
-				"disabled" : false
+				"disabled": false
 			});
 		});
 		if (servicePoint.hasValidSettings(true)) {
 			sessvars.state = servicePoint
-					.getState(spService.get("user/status"));
+				.getState(spService.get("user/status"));
 			sessvars.statusUpdated = new Date();
 			if (typeof sessvars.state.servicePointState === 'undefined'
-					|| sessvars.state.servicePointState == null) {
+				|| sessvars.state.servicePointState == null) {
 				var params = servicePoint.createParams();
 				var servicePointStatus = spService.get("branches/"
-						+ params.branchId + "/servicePoints/"
-						+ params.servicePointId);
+					+ params.branchId + "/servicePoints/"
+					+ params.servicePointId);
 				if (typeof servicePointStatus !== 'undefined'
-						&& servicePointStatus != null
-						&& typeof servicePointStatus.state !== 'undefined'
-						&& servicePointStatus.state != null) {
+					&& servicePointStatus != null
+					&& typeof servicePointStatus.state !== 'undefined'
+					&& servicePointStatus.state != null) {
 					sessvars.state.servicePointState = servicePointStatus.state;
 				}
 			}
@@ -216,17 +216,17 @@ var servicePoint = new function() {
 
 			// INIT command to qevents
 			var initCmd = {
-				"M" : "C",
-				"C" : {
-					"CMD" : "INIT",
-					"TGT" : "CFM",
-					"PRM" : {
-						"uid" : "",
-						"type" : "60",
-						"encoding" : "QP_JSON"
+				"M": "C",
+				"C": {
+					"CMD": "INIT",
+					"TGT": "CFM",
+					"PRM": {
+						"uid": "",
+						"type": "60",
+						"encoding": "QP_JSON"
 					}
 				},
-				"N" : "0"
+				"N": "0"
 			};
 			initCmd.C.PRM.uid = sessvars.servicePointUnitId;
 			initCmd.C.PRM.userName = sessvars.currentUser.userName;
@@ -235,15 +235,15 @@ var servicePoint = new function() {
 			// re-subscribe to events
 			qevents.unsubscribe(util.asChannelStrWithUserName(sessvars.servicePointUnitId, sessvars.currentUser.userName));
 			qevents.subscribe(util.asChannelStrWithUserName(sessvars.servicePointUnitId, sessvars.currentUser.userName),
-					receiveEvent);
+				receiveEvent);
 
 			if (!sessvars.queueTimerOn) {
 				sessvars.queueTimerOn = true;
 			}
 
 			queues.updateQueues(true);
-			if(typeof projectedVisits != "undefined") {
-            	projectedVisits.updateProjectedVisits(true);
+			if (typeof projectedVisits != "undefined") {
+				projectedVisits.updateProjectedVisits(true);
 			}
 			if (moduleChatEnabled == true) {
 				// chat.restoreTabs();
@@ -259,34 +259,32 @@ var servicePoint = new function() {
 	};
 
 	// display modal popup with settings
-	this.showSettingsWindow = function() {
+	this.showSettingsWindow = function () {
 
-		$Qmatic.components.dropdown.branchSelection.update({no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound')})
-		$Qmatic.components.dropdown.counterSelection.update({no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound')})
-		$Qmatic.components.dropdown.profileSelection.update({no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound')})
+		$Qmatic.components.dropdown.branchSelection.update({ no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound') })
+		$Qmatic.components.dropdown.counterSelection.update({ no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound') })
+		$Qmatic.components.dropdown.profileSelection.update({ no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound') })
 		$("#branchListModal").trigger("chosen:updated");
 		$("#workstationListModal").trigger("chosen:updated");
 		$("#prioListModal").trigger("chosen:updated");
 
 		if (!workstationOffline
-				&& servicePoint.hasValidSettings(false)
-				&& !(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN && servicePoint
-						.isOutcomeOrDeliveredServiceNeeded())
-				&& !(typeof sessvars.singleSettingsOnly !== 'undefined'
-						&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true)) {
-			
+			&& servicePoint.hasValidSettings(false)
+			&& !(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN && servicePoint
+				.isOutcomeOrDeliveredServiceNeeded())
+			&& !(typeof sessvars.singleSettingsOnly !== 'undefined'
+				&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true)) {
+
 			// the user wants to change the branch, workstation or work profile
 			showBranches();
-			
+
 			//util.showModal("settingsWindow");
 			modalNavigationController.push($Qmatic.components.modal.profileSettings)
 			var branchSel = $("#branchListModal");
-			util.setSelect(branchSel, sessvars.branchId);
 			var workstationSel = $("#workstationListModal");
 			var prioSel = $("#prioListModal");
 
-			
-
+			util.setSelect(branchSel, sessvars.branchId);
 			showWorkstations(sessvars.branchId, workstationSel, prioSel);
 			util.setSelect(workstationSel, sessvars.servicePointId);
 			showProfiles(sessvars.branchId, sessvars.servicePointId, prioSel);
@@ -302,22 +300,36 @@ var servicePoint = new function() {
 				modalNavigationController.push($Qmatic.components.modal.profileSettings)
 				settingsShown = true;
 
-				
+
 			} else {
 				// only one of branch, workstation and work profile available
 				sessvars.singleSettingsOnly = true;
 				servicePoint.confirmSettings();
 				// used to disable the settings link
 			}
-
-			
+		} else {
+			if (servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+				util.showMessage(jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service'));
+			} else {
+				var branchSel = $("#branchListModal");
+				var workstationSel = $("#workstationListModal");
+				var prioSel = $("#prioListModal");
+				showBranches();
+				util.setSelect(branchSel, sessvars.branchId);
+				showWorkstations(sessvars.branchId, workstationSel, prioSel);
+				util.setSelect(workstationSel, sessvars.servicePointId);
+				showProfiles(sessvars.branchId, sessvars.servicePointId, prioSel);
+				util.setSelect(prioSel, sessvars.workProfileId);
+				modalNavigationController.push($Qmatic.components.modal.profileSettings)
+			}
 		}
 	};
 
 	/**
 	 * populates the branch select in the settings window
 	 */
-	var showBranches = function() {
+	var showBranches = function () {
 		var isBranchSelectShown = false;
 		var branches = spService.get("branches");
 		$Qmatic.components.dropdown.branchSelection.onRemoveSingleItem()
@@ -325,13 +337,13 @@ var servicePoint = new function() {
 		// We "filter" out the branches that do not have any software service
 		// points
 		var branches_tmp = [];
-		for ( var i = 0; i < branches.length; i++) {
+		for (var i = 0; i < branches.length; i++) {
 			var params = {};
 			params.branchId = parseInt(branches[i].id);
 			params.deviceType = "SW_SERVICE_POINT";
 			var softwareWorkstations = spService.get("branches/"
-					+ params.branchId + "/servicePoints/deviceTypes/"
-					+ params.deviceType);
+				+ params.branchId + "/servicePoints/deviceTypes/"
+				+ params.deviceType);
 			if (softwareWorkstations.length > 0) {
 				branches_tmp.push(branches[i]);
 			}
@@ -361,7 +373,7 @@ var servicePoint = new function() {
 				// if all settings are set, i.e. there is only one of each
 				// branch, workstation and profile, set settings
 				if (!(branchSelect.val() != -1 && workstationSelect.val() != -1 && prioSelect
-						.val() != -1)) {
+					.val() != -1)) {
 					isBranchSelectShown = true;
 				}
 			}
@@ -372,7 +384,7 @@ var servicePoint = new function() {
 		return isBranchSelectShown;
 	};
 
-	this.selectBranch = function(branchId) {
+	this.selectBranch = function (branchId) {
 		var selectWorkstationModal = $("#workstationListModal");
 		var selectPrioModal = $("#prioListModal");
 
@@ -397,13 +409,13 @@ var servicePoint = new function() {
 	};
 
 	// show workstations in settings window
-	var showWorkstations = function(branchId, workstationSelect, prioSelect) {
+	var showWorkstations = function (branchId, workstationSelect, prioSelect) {
 		$Qmatic.components.dropdown.counterSelection.onRemoveSingleItem()
 		var params = {};
 		params.branchId = parseInt(branchId);
 		params.deviceType = "SW_SERVICE_POINT";
 		var softwareWorkstations = spService.get("branches/" + params.branchId
-				+ "/servicePoints/deviceTypes/" + params.deviceType);
+			+ "/servicePoints/deviceTypes/" + params.deviceType);
 
 		if (softwareWorkstations.length == 0) {
 			// no workstations returned
@@ -429,7 +441,7 @@ var servicePoint = new function() {
 		prioSelect.trigger("chosen:updated");
 	};
 
-	this.selectWorkstation = function(unitId) {
+	this.selectWorkstation = function (unitId) {
 		// get the available profiles for the workstations
 		var branchSelect = $("#branchListModal");
 		var branchId = branchSelect.val();
@@ -443,14 +455,14 @@ var servicePoint = new function() {
 	};
 
 	// show profiles in settings window and in status row
-	var showProfiles = function(branchId, unitId, prioSelect) {
+	var showProfiles = function (branchId, unitId, prioSelect) {
 		$Qmatic.components.dropdown.profileSelection.onRemoveSingleItem()
 		var params = {};
 		params.branchId = parseInt(branchId);
 		var profiles = spService.get("branches/" + params.branchId
-				+ "/workProfiles");
+			+ "/workProfiles");
 		servicePoint.servicesList = spService.get("branches/" + params.branchId
-				+ "/services");
+			+ "/services");
 
 		if (profiles.length == 0) {
 			// no profiles returned
@@ -483,29 +495,33 @@ var servicePoint = new function() {
 		}
 	}
 
-	this.confirmSettings = function(warnUser) {
+	this.confirmSettings = function (warnUser) {
 		var isHijacking = false;
 		var branchSel = $("#branchListModal");
 		var workstationSel = $("#workstationListModal");
 		var profileSel = $("#prioListModal");
-		if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
-			var settings = getSettings(branchSel, workstationSel, profileSel);
-			if (typeof warnUser === "undefined") {
-				warnUser = true;
+		if (sessvars.singleSettingsOnly) {
+			modalNavigationController.popAllModals()
+		} else {
+			if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
+				var settings = getSettings(branchSel, workstationSel, profileSel);
+				if (typeof warnUser === "undefined") {
+					warnUser = true;
+				}
+				isHijacking = confirm(warnUser, settings);
 			}
-			isHijacking = confirm(warnUser, settings);
 		}
 		return isHijacking;
 	};
 
-	var confirm = function(warnUser, settings) {
+	var confirm = function (warnUser, settings) {
 		var isHijacking = false;
 
 		var wantedWorkstation = spService.get("branches/" + settings.branchId
-				+ "/servicePoints/" + settings.servicePointId);
+			+ "/servicePoints/" + settings.servicePointId);
 
 		if (typeof wantedWorkstation !== 'undefined'
-				&& null != wantedWorkstation) {
+			&& null != wantedWorkstation) {
 			if (warnUser) {
 				isHijacking = isHijack(wantedWorkstation, settings);
 			}
@@ -513,7 +529,7 @@ var servicePoint = new function() {
 				// unsubscribe to events for old unit id if changed to avoid
 				// being thrown out
 				if (typeof sessvars.servicePointUnitId !== 'undefined' && sessvars.servicePointUnitId != null
-						&& sessvars.servicePointUnitId != wantedWorkstation.unitId) {
+					&& sessvars.servicePointUnitId != wantedWorkstation.unitId) {
 					unsubscribeAndDisableQueues();
 				}
 				if (isApplied(settings)) {
@@ -521,24 +537,25 @@ var servicePoint = new function() {
 					setProfile(servicePoint.createParams());
 					updateUI();
 				} else {
-					util.showModal('settingsWindow');
+					//util.showModal('settingsWindow');
+					modalNavigationController.pop()
 				}
 			}
 		}
 		return isHijacking;
 	};
 
-	var isHijack = function(wantedWorkstation, params) {
+	var isHijack = function (wantedWorkstation, params) {
 		var isHijacking = false;
 		if (null != wantedWorkstation.state
-				&& wantedWorkstation.state != servicePoint.servicePointState.CLOSED) {
+			&& wantedWorkstation.state != servicePoint.servicePointState.CLOSED) {
 			var currentUser = spService.get("user");
 			var usersOnWantedServicePoint = spService.get("branches/"
-					+ params.branchId + "/servicePoints/"
-					+ params.servicePointId + "/users");
+				+ params.branchId + "/servicePoints/"
+				+ params.servicePointId + "/users");
 			if (usersOnWantedServicePoint != null
-					&& usersOnWantedServicePoint.length > 0
-					&& usersOnWantedServicePoint[0].id != currentUser.id) {
+				&& usersOnWantedServicePoint.length > 0
+				&& usersOnWantedServicePoint[0].id != currentUser.id) {
 				// the user wants to login to an occupied counter; display
 				// warning message.
 				//modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
@@ -546,29 +563,6 @@ var servicePoint = new function() {
 				//util.showModal("confirmCounterHijackingWindow");
 				$Qmatic.components.modal.hijack.updateLoggedInUser(usersOnWantedServicePoint[0].userName)
 				modalNavigationController.push($Qmatic.components.modal.hijack)
-				// i18n for counter hijacking confirmation window
-				/*$(document)
-						.ready(
-								function() {
-									document
-											.getElementById("confirmCounterHijackingHeader").innerHTML = '<a href="#" class="closeButton" onclick="util.hideModal(\'confirmCounterHijackingWindow\');util.showModal(\'settingsWindow\');"></a>';
-									document
-											.getElementById("confirmCounterHijackingHeader").innerHTML = document
-											.getElementById("confirmCounterHijackingHeader").innerHTML
-											+ jQuery.i18n
-													.prop('info.confirm.counter.hijacking.header');
-									document
-											.getElementById("confirmCounterHijackingBtn").value = jQuery.i18n
-											.prop('info.confirm.counter.hijacking.login')
-											+ " ("
-											+ usersOnWantedServicePoint[0].userName
-											+ " "
-											+ jQuery.i18n
-													.prop('info.confirm.counter.hijacking.login.continued');
-									document
-											.getElementById("cancelCounterHijackingBtn").value = jQuery.i18n
-											.prop('info.confirm.counter.hijacking.cancel');
-								});*/
 				isHijacking = true;
 			}
 		}
@@ -584,7 +578,7 @@ var servicePoint = new function() {
 		modalNavigationController.popAllModals()
 	}
 
-	var unsubscribeAndDisableQueues = function() {
+	var unsubscribeAndDisableQueues = function () {
 		// end event subscription and clear queue timer
 		if (servicePoint.hasValidSettings(false)) {
 			qevents.unsubscribe(util.asChannelStrWithUserName(sessvars.servicePointUnitId, sessvars.currentUser.userName));
@@ -593,14 +587,14 @@ var servicePoint = new function() {
 		}
 	};
 
-	var isApplied = function(settings) {
+	var isApplied = function (settings) {
 		var isApplied = false;
 		if (typeof sessvars.currentUser === 'undefined'
-				|| sessvars.currentUser == null) {
+			|| sessvars.currentUser == null) {
 			sessvars.currentUser = spService.get("user");
 		}
 		if (typeof sessvars.currentUser !== 'undefined'
-				&& sessvars.currentUser.hasOwnProperty("userName")) {
+			&& sessvars.currentUser.hasOwnProperty("userName")) {
 			settings.userName = sessvars.currentUser.userName;
 
 			// start user session. Set profile and update status if all went
@@ -614,7 +608,7 @@ var servicePoint = new function() {
 		return isApplied;
 	};
 
-	this.cancelConfirmSettings = function() {
+	this.cancelConfirmSettings = function () {
 		var branchSel = $("#branchListModal");
 		util.clearSelect(branchSel);
 		var workstationSel = $("#workstationListModal");
@@ -623,10 +617,15 @@ var servicePoint = new function() {
 		util.clearSelect(prioSel);
 		util.hideModal('settingsWindow');
 
-		modalNavigationController.popModal($Qmatic.components.modal.profileSettings)
+		if (servicePoint.hasValidSettings()) {
+			modalNavigationController.popModal($Qmatic.components.modal.profileSettings)
+		} else {
+			util.goToModulesPage()
+			servicePoint.handleHome()
+		}
 	};
 
-	this.changeProfile = function(value) {
+	this.changeProfile = function (value) {
 		if (value != -1 && value != sessvars.workProfileId) {
 			if (servicePoint.hasValidSettings()) {
 				if (servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
@@ -638,7 +637,7 @@ var servicePoint = new function() {
 	};
 
 	// set new profile
-	this.changeSettings = function() {
+	this.changeSettings = function () {
 		// Create params and set new values in sessvars
 		var profileSel = $("#prioList");
 		if (util.validateProfile(profileSel)) {
@@ -647,8 +646,8 @@ var servicePoint = new function() {
 			var params = servicePoint.createParams();
 			setProfile(params);
 			if (typeof sessvars.state.servicePointState === 'undefined'
-					|| sessvars.state.servicePointState == null
-					|| sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
+				|| sessvars.state.servicePointState == null
+				|| sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
 				confirm(true, params);
 			}
 			servicePoint.updateWorkstationStatus(false);
@@ -657,31 +656,31 @@ var servicePoint = new function() {
 			updateWorkstationSettings();
 			util.hideModal("changeProfileConfirmWindow");
 			util.showMessage(jQuery.i18n.prop('info.changed.settings.success')
-					+ ': ' + sessvars.branchName + ', '
-					+ sessvars.servicePointName + ', ' + sessvars.profileName);
+				+ ': ' + sessvars.branchName + ', '
+				+ sessvars.servicePointName + ', ' + sessvars.profileName);
 
 			/* update projected visits */
-			if(typeof projectedVisits !== undefined) {
+			if (typeof projectedVisits !== undefined) {
 				projectedVisits.updateProjectedVisits(true);
 			}
-			
+
 		}
 	};
 
-	this.cancelChangeSettings = function() {
+	this.cancelChangeSettings = function () {
 		updateWorkstationSettings();
 		util.hideModal("changeProfileConfirmWindow");
 	};
 
-	this.noShow = function() {
+	this.noShow = function () {
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.userState == servicePoint.userState.SERVING
-				&& sessvars.state.visit.noshowAllowed) {
+			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& sessvars.state.visit.noshowAllowed) {
 			var params = servicePoint.createParams();
 			params.visitId = sessvars.state.visit.id;
 			sessvars.state = servicePoint.getState(spService
-					.putCallback("branches/" + params.branchId + "/visits/"
-							+ params.visitId + "/noshow"));
+				.putCallback("branches/" + params.branchId + "/visits/"
+				+ params.visitId + "/noshow"));
 			sessvars.statusUpdated = new Date();
 			sessvars.cfuSelectionSet = true;
 			servicePoint.updateWorkstationStatus(false);
@@ -690,15 +689,15 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.recall = function() {
+	this.recall = function () {
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.userState == servicePoint.userState.SERVING
-				&& sessvars.state.visit.recallAllowed) {
+			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& sessvars.state.visit.recallAllowed) {
 			var params = servicePoint.createParams();
 			sessvars.state = servicePoint.getState(spService
-					.putCallback("branches/" + params.branchId
-							+ "/servicePoints/" + params.servicePointId
-							+ "/visit/recall"));
+				.putCallback("branches/" + params.branchId
+				+ "/servicePoints/" + params.servicePointId
+				+ "/visit/recall"));
 			sessvars.statusUpdated = new Date();
 			delServUpdateNeeded = false;
 			outcomeUpdateNeeded = false;
@@ -711,16 +710,16 @@ var servicePoint = new function() {
 		}
 	};
 
-	var setProfile = function(params) {
+	var setProfile = function (params) {
 		sessvars.state = servicePoint.getState(spService.put('branches/'
-				+ params.branchId + '/users/' + params.userName
-				+ '/workProfile/' + params.workProfileId));
+			+ params.branchId + '/users/' + params.userName
+			+ '/workProfile/' + params.workProfileId));
 		sessvars.statusUpdated = new Date();
 	};
 
 	// multi services add/edit
 
-	this.addMultiServicePressed = function() {
+	this.addMultiServicePressed = function () {
 
 		var len = sessvars.state.visit.unservedVisitServices.length;
 		var len1 = sessvars.state.visit.servedVisitServices.length;
@@ -735,7 +734,7 @@ var servicePoint = new function() {
 			opt.value = sessvars.state.visit.unservedVisitServices[i].id;
 			try {
 				select.add(opt, null); // standards compliant; doesn't work in
-										// IE
+				// IE
 			} catch (ex) {
 				select.add(opt); // IE only
 			}
@@ -770,7 +769,7 @@ var servicePoint = new function() {
 
 				try {
 					select.add(opt, null); // standards compliant; doesn't work
-											// in IE
+					// in IE
 				} catch (ex) {
 					select.add(opt); // IE only
 				}
@@ -781,7 +780,7 @@ var servicePoint = new function() {
 		util.showModal('addEditServicesDialogue');
 	};
 
-	this.addService = function() {
+	this.addService = function () {
 		if (listServicesBox.options[listServicesBox.selectedIndex].value != undefined) {
 			var addServiceId = listServicesBox.options[listServicesBox.selectedIndex].value;
 			addParams = servicePoint.createParams();
@@ -789,15 +788,15 @@ var servicePoint = new function() {
 			addParams.visitId = sessvars.state.visit.id;
 			addParams.serviceId = addServiceId;
 			sessvars.state = spService.post("branches/" + addParams.branchId
-					+ "/visits/" + addParams.visitId + "/services/"
-					+ addParams.serviceId);
+				+ "/visits/" + addParams.visitId + "/services/"
+				+ addParams.serviceId);
 			sessvars.statusUpdated = new Date();
 			servicePoint.updateWorkstationStatus();
 			servicePoint.addMultiServicePressed();
 		}
 	};
 
-	this.removeService = function() {
+	this.removeService = function () {
 		if (addEditServicesBox.options[addEditServicesBox.selectedIndex].value != undefined) {
 			var removeServiceId = addEditServicesBox.options[addEditServicesBox.selectedIndex].value;
 			removeParams = servicePoint.createParams();
@@ -805,8 +804,8 @@ var servicePoint = new function() {
 			removeParams.visitId = sessvars.state.visit.id;
 			removeParams.visitServiceId = removeServiceId;
 			var returnInfo = spService.del("branches/" + removeParams.branchId
-					+ "/visits/" + removeParams.visitId + "/services/"
-					+ removeParams.visitServiceId);
+				+ "/visits/" + removeParams.visitId + "/services/"
+				+ removeParams.visitServiceId);
 			if (returnInfo != undefined) {
 				sessvars.state = returnInfo;
 				sessvars.statusUpdated = new Date();
@@ -816,19 +815,19 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.closeResortServices = function() {
+	this.closeResortServices = function () {
 		servicePoint.getQueuesAndService();
 	};
 
-	this.getQueuesAndService = function() {
+	this.getQueuesAndService = function () {
 		// currently not used, todo.
 		sortParams = servicePoint.createParams();
 		sortParams.branchId = sessvars.branchId;
 		var queues = spService.get("branches/" + sortParams.branchId
-				+ "/queues");
+			+ "/queues");
 		sortParams.name = "queueAndServices";
 		var returnInfo = spService.get("branches/" + sortParams.branchId
-				+ "/variables/" + sortParams.name);
+			+ "/variables/" + sortParams.name);
 		var t = returnInfo.split('|');
 		var len = sessvars.state.visit.unservedVisitServices.length;
 		var listId = '';
@@ -864,7 +863,7 @@ var servicePoint = new function() {
 				listTime = r;
 			} else {
 				listId += ","
-						+ sessvars.state.visit.unservedVisitServices[i].id;
+					+ sessvars.state.visit.unservedVisitServices[i].id;
 				listTime += "," + r;
 			}
 		}
@@ -892,7 +891,7 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.sortServices = function(value) {
+	this.sortServices = function (value) {
 		sessvars.state = value;
 		sessvars.statusUpdated = new Date();
 		servicePoint.updateWorkstationStatus();
@@ -900,13 +899,13 @@ var servicePoint = new function() {
 		util.hideModal("addEditServicesDialogue");
 	};
 
-	this.closeServices = function() {
+	this.closeServices = function () {
 		util.hideModal("addEditServicesDialogue");
 	};
 
 	// commands like next needs to be checked for multi service to show popup.
 
-	this.checkServicesLeft = function(command) {
+	this.checkServicesLeft = function (command) {
 		this.command = command;
 		if (this.servicesLeft == true && moduleMultiServicesEnabled == true) {
 			var len = sessvars.state.visit.unservedVisitServices.length;
@@ -920,8 +919,8 @@ var servicePoint = new function() {
 				}
 
 				s += '<td align="center">'
-						+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
-						+ '</td>';
+					+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
+					+ '</td>';
 				s += '</tr>';
 				$('#nextServices').append(s);
 			}
@@ -931,7 +930,7 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.executeCommand = function() {
+	this.executeCommand = function () {
 
 		if (servicePoint.command == 'callNext') {
 			servicePoint.callNext();
@@ -948,23 +947,23 @@ var servicePoint = new function() {
 	};
 
 	// pop-up with info where customer to go next.
-	this.resortServices = function() {
+	this.resortServices = function () {
 		util.hideModal("nextServicesDialogue");
 	};
 
-	this.confirmServices = function() {
+	this.confirmServices = function () {
 		this.executeCommand();
 		util.hideModal("nextServicesDialogue");
 
 	};
 
-	this.callNext = function() {
+	this.callNext = function () {
 		var params = servicePoint.createParams();
 		if (servicePoint.hasValidSettings()
-				&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED)) {
+			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED)) {
 			sessvars.state = servicePoint.getState(spService.post("branches/"
-					+ params.branchId + "/servicePoints/"
-					+ params.servicePointId + "/visits/next"));
+				+ params.branchId + "/servicePoints/"
+				+ params.servicePointId + "/visits/next"));
 			sessvars.statusUpdated = new Date();
 			if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
 				util.showMessage(jQuery.i18n.prop("info.call.next.to.quick"));
@@ -975,33 +974,33 @@ var servicePoint = new function() {
 					// the service point will be closed after application login
 					// since it's a single session service point
 					sessvars.state = servicePoint.getState(spService
-							.putCallback("branches/" + params.branchId
-									+ "/servicePoints/" + params.servicePointId
-									+ "/users/" + params.userName));
+						.putCallback("branches/" + params.branchId
+						+ "/servicePoints/" + params.servicePointId
+						+ "/users/" + params.userName));
 					sessvars.statusUpdated = new Date();
 					servicePoint.updateWorkstationStatus();
 					sessvars.state = servicePoint.getState(spService
-							.post("branches/" + params.branchId
-									+ "/servicePoints/" + params.servicePointId
-									+ "/visits/next"));
+						.post("branches/" + params.branchId
+						+ "/servicePoints/" + params.servicePointId
+						+ "/visits/next"));
 					sessvars.statusUpdated = new Date();
 				} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-						&& sessvars.state.visit == null) {
+					&& sessvars.state.visit == null) {
 					// no tickets left in the queue(s) for the selected prio
 					util.showMessage(jQuery.i18n
-							.prop("info.no.waiting.customers"));
+						.prop("info.no.waiting.customers"));
 
 					// NEW 20131203. Send APPLICATION event
 					var noCustWaitingEvent = {
-						"M" : "E",
-						"E" : {
-							"evnt" : "NO_CUSTOMERS_WAITING",
-							"type" : "APPLICATION",
-							"prm" : {}
+						"M": "E",
+						"E": {
+							"evnt": "NO_CUSTOMERS_WAITING",
+							"type": "APPLICATION",
+							"prm": {}
 						}
 					};
 					noCustWaitingEvent.E.prm.uid = sessvars.servicePointUnitId
-							+ ":" + this.SW_SERVICE_POINT;
+						+ ":" + this.SW_SERVICE_POINT;
 					qevents.publish('/events/APPLICATION', noCustWaitingEvent);
 				}
 				servicePoint.updateWorkstationStatus();
@@ -1011,34 +1010,34 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.customerConfirmed = function() {
+	this.customerConfirmed = function () {
 		util.hideModal("confirmCustomer");
 		if (servicePoint.hasValidSettings()) {
 			var params = servicePoint.createParams();
 			params.visitId = sessvars.state.visit.id;
 			sessvars.state = servicePoint.getState(spService
-					.putCallback("branches/" + params.branchId + "/visits/"
-							+ params.visitId + "/confirm"));
+				.putCallback("branches/" + params.branchId + "/visits/"
+				+ params.visitId + "/confirm"));
 			sessvars.statusUpdated = new Date();
 			servicePoint.updateWorkstationStatus();
 		}
 	};
 
-	this.customerNotConfirmed = function() {
+	this.customerNotConfirmed = function () {
 		util.hideModal("confirmCustomer");
 		if (servicePoint.hasValidSettings()) {
 			util.showModal("customerOptionsDialogue");
 		}
 	};
 
-	this.closeConfirmWindow = function() {
+	this.closeConfirmWindow = function () {
 		util.hideModal("confirmCustomer");
 		if (servicePoint.hasValidSettings()) {
 			servicePoint.noShow();
 		}
 	};
 
-	this.cancelCustomerOptionsDialogue = function() {
+	this.cancelCustomerOptionsDialogue = function () {
 		util.hideModal("customerOptionsDialogue");
 		if (servicePoint.hasValidSettings()) {
 			servicePoint.noShow();
@@ -1048,25 +1047,25 @@ var servicePoint = new function() {
 	/*
 	 * Recycle really.
 	 */
-	this.reinsertClicked = function() {
+	this.reinsertClicked = function () {
 		if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
 			util.hideModal("customerOptionsDialogue");
 		}
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.userState == servicePoint.userState.SERVING
-				&& sessvars.state.visit.recycleAllowed) {
+			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& sessvars.state.visit.recycleAllowed) {
 			sessvars.cfuSelectionSet = true;
 			servicePoint.reinsertCustomer();
 		}
 	};
 
-	this.reinsertCustomer = function() {
+	this.reinsertCustomer = function () {
 		if (servicePoint.hasValidSettings()) {
 			var params = servicePoint.createParams();
 			sessvars.state = servicePoint.getState(spService
-					.putCallback("branches/" + params.branchId
-							+ "/servicePoints/" + params.servicePointId
-							+ "/visit/recycle"));
+				.putCallback("branches/" + params.branchId
+				+ "/servicePoints/" + params.servicePointId
+				+ "/visit/recycle"));
 			sessvars.statusUpdated = new Date();
 
 			spPoolUpdateNeeded = false;
@@ -1079,30 +1078,30 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.cancelReinsertCustomer = function() {
+	this.cancelReinsertCustomer = function () {
 		util.hideModal("reinsertCustomerWindow");
 		if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
 			util.showModal("customerOptionsDialogue");
 		}
 	};
 
-	this.cancelWaitingForVisit = function() {
+	this.cancelWaitingForVisit = function () {
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
+			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 			var params = servicePoint.createParams();
 			sessvars.state = servicePoint.getState(spService
-					.putCallback("branches/" + params.branchId
-							+ "/servicePoints/" + params.servicePointId
-							+ "/visit/cancelWait"));
+				.putCallback("branches/" + params.branchId
+				+ "/servicePoints/" + params.servicePointId
+				+ "/visit/cancelWait"));
 			sessvars.statusUpdated = new Date();
 			servicePoint.updateWorkstationStatus();
 		}
 		util.hideModal("waitingForCustomerDialogue");
 	};
 
-	this.walkDirectPressed = function() {
+	this.walkDirectPressed = function () {
 		if (servicePoint.hasValidSettings()
-				&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
+			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
 																		 * !(sessvars.state.userState ==
 																		 * servicePoint.userState.SERVING &&
 																		 * sessvars.forceMark &&
@@ -1113,53 +1112,53 @@ var servicePoint = new function() {
 			if (typeof walkTable === "undefined") {
 				var columns = [
 				/* Service ext name */{
-					"bSearchable" : false,
-					"bVisible" : false,
-					"mDataProp" : "externalName"
-				},
+						"bSearchable": false,
+						"bVisible": false,
+						"mDataProp": "externalName"
+					},
 				/* Service int name */{
-					"sClass" : "firstColumn",
-					"mDataProp" : "internalName"
-				},
+						"sClass": "firstColumn",
+						"mDataProp": "internalName"
+					},
 				/* Service id */{
-					"bSearchable" : false,
-					"bVisible" : false,
-					"mDataProp" : "id"
-				},
+						"bSearchable": false,
+						"bVisible": false,
+						"mDataProp": "id"
+					},
 				/* Service int desc */{
-					"sClass" : "lastColumn",
-					"mDataProp" : "internalDescription"
-				},
+						"sClass": "lastColumn",
+						"mDataProp": "internalDescription"
+					},
 				/* Service ext desc */{
-					"bSearchable" : false,
-					"bVisible" : false,
-					"mDataProp" : "externalDescription"
-				} ];
+						"bSearchable": false,
+						"bVisible": false,
+						"mDataProp": "externalDescription"
+					}];
 				var t = new Date();
 				var url = "/rest/servicepoint/branches/" + sessvars.branchId
-						+ "/services?call=" + t;
-				var headerCallback = function(nHead, aasData, iStart, iEnd,
-						aiDisplay) {
+					+ "/services?call=" + t;
+				var headerCallback = function (nHead, aasData, iStart, iEnd,
+					aiDisplay) {
 					nHead.style.borderBottom = "1px solid #c0c0c0";
 					nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n
-							.prop('info.service.name');
+						.prop('info.service.name');
 					nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n
-							.prop('info.service.description');
+						.prop('info.service.description');
 				};
-				var rowCallback = function(nRow, aData, iDisplayIndex) {
+				var rowCallback = function (nRow, aData, iDisplayIndex) {
 					/* Set onclick action */
 					nRow.onclick = walkServiceClicked;
 					return nRow;
 				};
 				walkTable = util.buildTableJson({
-					"tableId" : "walkDirectServices",
-					"url" : url,
-					"rowCallback" : rowCallback,
-					"columns" : columns,
-					"filter" : true,
-					"headerCallback" : headerCallback,
-					"scrollYHeight" : "300px",
-					"infoFiltered" : "info.filtered.fromEntries"
+					"tableId": "walkDirectServices",
+					"url": url,
+					"rowCallback": rowCallback,
+					"columns": columns,
+					"filter": true,
+					"headerCallback": headerCallback,
+					"scrollYHeight": "300px",
+					"infoFiltered": "info.filtered.fromEntries"
 				});
 			}
 			var sorting = [[1, 'asc']];
@@ -1167,15 +1166,15 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.endVisitPressed = function() {
+	this.endVisitPressed = function () {
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.userState == servicePoint.userState.SERVING
-				&& !servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& !servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			var params = servicePoint.createParams();
 			params.visitId = sessvars.state.visit.id;
 			sessvars.state = servicePoint.getState(spService
-					.putCallback("branches/" + params.branchId + "/visits/"
-							+ params.visitId + "/end"));
+				.putCallback("branches/" + params.branchId + "/visits/"
+				+ params.visitId + "/end"));
 			sessvars.statusUpdated = new Date();
 			spPoolUpdateNeeded = false;
 			userPoolUpdateNeeded = false;
@@ -1187,10 +1186,10 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.handleClose = function() {
+	this.handleClose = function () {
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
+			&& sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
 																		 * !(sessvars.state.userState ==
 																		 * servicePoint.userState.SERVING &&
 																		 * sessvars.forceMark &&
@@ -1208,31 +1207,31 @@ var servicePoint = new function() {
 		}
 	};
 
-	var walkServiceClicked = function() {
+	var walkServiceClicked = function () {
 		if (servicePoint.hasValidSettings()) {
 			var walkParams = servicePoint.createParams();
 
 			var serviceIdArray = [];
 			serviceIdArray[0] = walkTable.fnGetData(this).id;
 			walkParams.json = '{"services":[' + serviceIdArray + ']}'; // service
-																		// id
+			// id
 			spPoolUpdateNeeded = false;
 			userPoolUpdateNeeded = false;
 			queuesUpdateNeeded = false;
 			sessvars.state = servicePoint.getState(spService
-					.postParams("branches/" + walkParams.branchId
-							+ "/servicePoints/" + walkParams.servicePointId
-							+ "/visits", walkParams));
+				.postParams("branches/" + walkParams.branchId
+				+ "/servicePoints/" + walkParams.servicePointId
+				+ "/visits", walkParams));
 			if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
 				sessvars.statusUpdated = new Date();
 			}
 			if (sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
 				if (startUserSession(servicePoint.createParams())) {
 					sessvars.state = servicePoint.getState(spService
-							.postParams("branches/" + walkParams.branchId
-									+ "/servicePoints/"
-									+ walkParams.servicePointId + "/visits",
-									walkParams));
+						.postParams("branches/" + walkParams.branchId
+						+ "/servicePoints/"
+						+ walkParams.servicePointId + "/visits",
+						walkParams));
 					if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
 						sessvars.statusUpdated = new Date();
 					}
@@ -1252,23 +1251,23 @@ var servicePoint = new function() {
 			if (!sessvars.state.servicePointState == servicePoint.servicePointState.OPEN) {
 				util.hideModal("walks");
 				sessvars.state = servicePoint.getState(spService
-						.putCallback("branches/" + walkParams.branchId
-								+ "/servicePoints/" + walkParams.servicePointId
-								+ "/users/" + walkParams.userName));
+					.putCallback("branches/" + walkParams.branchId
+					+ "/servicePoints/" + walkParams.servicePointId
+					+ "/users/" + walkParams.userName));
 				spPoolUpdateNeeded = false;
 				userPoolUpdateNeeded = false;
 				queuesUpdateNeeded = false;
 				sessvars.state = servicePoint.getState(spService.postParams(
-						"branches/" + walkParams.branchId + "/servicePoints/"
-								+ walkParams.servicePointId + "/visits",
-						walkParams));
+					"branches/" + walkParams.branchId + "/servicePoints/"
+					+ walkParams.servicePointId + "/visits",
+					walkParams));
 				if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
 					sessvars.statusUpdated = new Date();
 					sessvars.currentCustomer = null;
 					servicePoint.updateWorkstationStatus();
 				}
 			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-					|| sessvars.state.userState == servicePoint.userState.SERVING) {
+				|| sessvars.state.userState == servicePoint.userState.SERVING) {
 				util.hideModal("walks");
 				if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
 					sessvars.currentCustomer = null;
@@ -1284,48 +1283,48 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.hideWalks = function() {
+	this.hideWalks = function () {
 		util.hideModal("walks");
 	};
 
-	this.notesPressed = function() {
+	this.notesPressed = function () {
 		if (isNotesButtonEnabled()) {
 			util.showModal("notesDialogue");
 		}
 	};
 
-	var isNotesButtonEnabled = function() {
+	var isNotesButtonEnabled = function () {
 		return $('#notesBtn[class*=Disabled]').length == 0;
 	};
 
-	this.hideNotes = function() {
+	this.hideNotes = function () {
 		util.hideModal("notesDialogue");
 	};
 
-	this.saveNotes = function() {
+	this.saveNotes = function () {
 		util.hideModal("notesDialogue");
 		var newNotes = document.getElementById("notesEdit").value;
 		var params = {};
 		params.branchId = sessvars.branchId;
 		params.visitId = sessvars.state.visit.id;
 		params.$entity = {
-			'custom1' : newNotes
+			'custom1': newNotes
 		};
 		params.json = '{"custom1":"' + newNotes + '"}';
 		newNotes = spService.putParams("branches/" + params.branchId + "/visits/"
 			+ params.visitId + "/parameters", params);
 
-		if(newNotes !== null) {
+		if (newNotes !== null) {
 			document.getElementById("notesMessage").innerHTML = newNotes.parameterMap.custom1;
 		} else {
 			document.getElementById("notesMessage").innerHTML = "";
 		}
 	};
 
-	this.endUserServicePointSession = function() {
+	this.endUserServicePointSession = function () {
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
+			&& sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
 																		 * && !(
 																		 * sessvars.state.userState ==
 																		 * this.SERVING &&
@@ -1335,9 +1334,9 @@ var servicePoint = new function() {
 			try {
 				var params = servicePoint.createParams();
 				sessvars.state = servicePoint.getState(spService
-						.del("branches/" + params.branchId + "/servicePoints/"
-								+ params.servicePointId + "/users/"
-								+ params.userName));
+					.del("branches/" + params.branchId + "/servicePoints/"
+					+ params.servicePointId + "/users/"
+					+ params.userName));
 
 				sessvars.statusUpdated = new Date();
 			} catch (ex) {
@@ -1347,21 +1346,21 @@ var servicePoint = new function() {
 		}
 	};
 
-	var startUserSession = function(params) {
+	var startUserSession = function (params) {
 		var isUserSessionStarted = false;
 		try {
 			var newState = servicePoint.getState(spService.putCallback("branches/" + params.branchId
-					+ "/servicePoints/" + params.servicePointId + "/users/"
-					+ params.userName));
-            // validate that state was set correctly for e.g. branch id, service point id etc
+				+ "/servicePoints/" + params.servicePointId + "/users/"
+				+ params.userName));
+			// validate that state was set correctly for e.g. branch id, service point id etc
 			if (newState.servicePointState == servicePoint.servicePointState.OPEN &&
-                newState.branchId == params.branchId && newState.servicePointId == params.servicePointId) {
+				newState.branchId == params.branchId && newState.servicePointId == params.servicePointId) {
 				isUserSessionStarted = true;
 				sessvars.state = newState;
 				sessvars.statusUpdated = new Date();
 			}
 		} catch (ex) {
-			util.showError(translate.msg('error.no.login', [ ex ]));
+			util.showError(translate.msg('error.no.login', [ex]));
 		}
 		return isUserSessionStarted;
 	};
@@ -1376,48 +1375,48 @@ var servicePoint = new function() {
 	 *            only be updated and no timeout will be created
 	 * 
 	 */
-	this.updateWorkstationStatus = function(isRefresh) {
+	this.updateWorkstationStatus = function (isRefresh) {
 		clearOngoingVisit();
 
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.closed'));
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
+			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 			util.showModal("waitingForCustomerDialogue");
 			$("#ticketNumber").html(
-					jQuery.i18n.prop('info.waiting.for.customer'));
+				jQuery.i18n.prop('info.waiting.for.customer'));
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
+			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.inactive'));
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& sessvars.state.visitState == servicePoint.visitState.NO_CALLABLE_VISITS) {
+			&& sessvars.state.visitState == servicePoint.visitState.NO_CALLABLE_VISITS) {
 			$("#ticketNumber")
-					.html(jQuery.i18n.prop('info.no.customer.called'));
+				.html(jQuery.i18n.prop('info.no.customer.called'));
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& sessvars.state.visitState == servicePoint.visitState.NO_CALLABLE_VISITS) {
+			&& sessvars.state.visitState == servicePoint.visitState.NO_CALLABLE_VISITS) {
 			$("#ticketNumber")
-					.html(jQuery.i18n.prop('info.no.customer.called'));
+				.html(jQuery.i18n.prop('info.no.customer.called'));
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&&
+			&&
 
-				sessvars.state.userState == servicePoint.userState.SERVING
-				&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+			sessvars.state.userState == servicePoint.userState.SERVING
+			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED) {
 				util.showMessage(jQuery.i18n.prop('error.no.outcome'));
 			} else if (sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED) {
 				util
-						.showMessage(jQuery.i18n
-								.prop('error.no.delivered.service'));
+					.showMessage(jQuery.i18n
+						.prop('error.no.delivered.service'));
 			} else if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_FOR_DELIVERED_SERVICE_NEEDED) {
 				util.showMessage(jQuery.i18n
-						.prop('error.no.outcome.for.delivered.service'));
+					.prop('error.no.outcome.for.delivered.service'));
 			} else if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_OR_DELIVERED_SERVICE_NEEDED) {
 				util.showMessage(jQuery.i18n
-						.prop('error.no.outcome.or.delivered.service'));
+					.prop('error.no.outcome.or.delivered.service'));
 			} else if (cfuForceSelection || !sessvars.cfuSelectionSet) {
 				util.showMessage(jQuery.i18n.prop('error.no.cfu.selection'));
 			}
@@ -1425,7 +1424,7 @@ var servicePoint = new function() {
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
 					$("#notesEdit").val(
-							sessvars.state.visit.parameterMap.custom1);
+						sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1;
 					}
@@ -1433,9 +1432,9 @@ var servicePoint = new function() {
 			}
 
 			$("#waitingTimeCounter").html(
-					util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
-																				// -
-																				// callTime
+				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
+			// -
+			// callTime
 			$("#callNextBtn").toggleClass("customButtonDisabled", true);
 			$("#callNextBtn").toggleClass("customButton", false);
 			$("#callNextBtn").prop('disabled', true);
@@ -1485,12 +1484,12 @@ var servicePoint = new function() {
 			if (sessvars.state.visit.recycleAllowed) {
 				$("#reinsertBtn").toggleClass("customButtonSmall", true);
 				$("#reinsertBtn").toggleClass("customButtonSmallDisabled",
-						false);
+					false);
 				$("#reinsertBtn").prop('disabled', false);
 			} else {
 				$("#reinsertBtn").toggleClass("customButtonSmall", false);
 				$("#reinsertBtn")
-						.toggleClass("customButtonSmallDisabled", true);
+					.toggleClass("customButtonSmallDisabled", true);
 				$("#reinsertBtn").prop('disabled', true);
 			}
 			$("#prioList").prop('disabled', true);
@@ -1502,36 +1501,36 @@ var servicePoint = new function() {
 			if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
 				$("#addOutcomeLink").toggleClass("customButtonSmall", true);
 				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-						false);
+					false);
 				$("#addOutcomeLink").prop('disabled', false);
 			} else {
 				$("#addOutcomeLink").toggleClass("customButtonSmall", false);
 				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-						true);
+					true);
 				$("#addOutcomeLink").prop('disabled', true);
 			}
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-						true);
+					true);
 				$("#addDeliveredServiceLink").toggleClass(
-						"customButtonSmallDisabled", false);
+					"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
 			} else {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-						false);
+					false);
 				$("#addDeliveredServiceLink").toggleClass(
-						"customButtonSmallDisabled", true);
+					"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
 			}
 
 			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
 			$("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
-					false);
+				false);
 			$("#addMultiServiceLink").prop('disabled', false);
 
 			$("#addCustomMarkLink").toggleClass("customButtonSmall", true);
 			$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
-					false);
+				false);
 			$("#addCustomMarkLink").prop('disabled', false);
 		} else {
 			if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
@@ -1542,26 +1541,26 @@ var servicePoint = new function() {
 				util.showModal("displayQueueSpinnerWindow");
 				if (displayQueueTimeout > 0) {
 					displayQueueTimeoutId = window
-							.setTimeout(
-									function() {
-										if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
-											util
-													.log('Timed out waiting for visit to be displayed, about to check user status.');
-											sessvars.state = servicePoint
-													.getState(spService
-															.get("user/status"));
-											sessvars.statusUpdated = new Date();
-											servicePoint
-													.updateWorkstationStatus(false);
-										}
-									}, displayQueueTimeout * 1000);
+						.setTimeout(
+						function () {
+							if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
+								util
+									.log('Timed out waiting for visit to be displayed, about to check user status.');
+								sessvars.state = servicePoint
+									.getState(spService
+										.get("user/status"));
+								sessvars.statusUpdated = new Date();
+								servicePoint
+									.updateWorkstationStatus(false);
+							}
+						}, displayQueueTimeout * 1000);
 				}
 			}
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
 					$("#notesEdit").val(
-							sessvars.state.visit.parameterMap.custom1);
+						sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1;
 					}
@@ -1569,9 +1568,9 @@ var servicePoint = new function() {
 			}
 
 			$("#waitingTimeCounter").html(
-					util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
-																				// -
-																				// callTime
+				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
+			// -
+			// callTime
 			$("#callNextBtn").toggleClass("customButton", true);
 			$("#callNextBtn").toggleClass("customButtonDisabled", false);
 			$("#callNextBtn").prop('disabled', false);
@@ -1620,48 +1619,48 @@ var servicePoint = new function() {
 			if (sessvars.state.visit.recycleAllowed) {
 				$("#reinsertBtn").toggleClass("customButtonSmall", true);
 				$("#reinsertBtn").toggleClass("customButtonSmallDisabled",
-						false);
+					false);
 				$("#reinsertBtn").prop('disabled', false);
 			} else {
 				$("#reinsertBtn").toggleClass("customButtonSmall", false);
 				$("#reinsertBtn")
-						.toggleClass("customButtonSmallDisabled", true);
+					.toggleClass("customButtonSmallDisabled", true);
 				$("#reinsertBtn").prop('disabled', true);
 			}
 
 			if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
 				$("#addOutcomeLink").toggleClass("customButtonSmall", true);
 				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-						false);
+					false);
 				$("#addOutcomeLink").prop('disabled', false);
 			} else {
 				$("#addOutcomeLink").toggleClass("customButtonSmall", false);
 				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-						true);
+					true);
 				$("#addOutcomeLink").prop('disabled', true);
 			}
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-						true);
+					true);
 				$("#addDeliveredServiceLink").toggleClass(
-						"customButtonSmallDisabled", false);
+					"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
 			} else {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-						false);
+					false);
 				$("#addDeliveredServiceLink").toggleClass(
-						"customButtonSmallDisabled", true);
+					"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
 			}
 
 			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
 			$("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
-					false);
+				false);
 			$("#addMultiServiceLink").prop('disabled', false);
 
 			$("#addCustomMarkLink").toggleClass("customButtonSmall", true);
 			$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
-					false);
+				false);
 			$("#addCustomMarkLink").prop('disabled', false);
 		}
 		updateTop();
@@ -1684,7 +1683,7 @@ var servicePoint = new function() {
 		} else {
 			delServUpdateNeeded = true;
 		}
-		
+
 		customMarks.updateCustomMarks()
 
 		if (outcomeUpdateNeeded) {
@@ -1692,7 +1691,7 @@ var servicePoint = new function() {
 		} else {
 			outcomeUpdateNeeded = true;
 		}
-		
+
 
 		if (!isRefresh) {
 			if (queuesUpdateNeeded) {
@@ -1721,35 +1720,35 @@ var servicePoint = new function() {
 		resetLogoffCounter();
 	};
 
-	var updateTop = function() {
+	var updateTop = function () {
 		var isDisabled = sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& sessvars.state.userState == servicePoint.userState.SERVING
-				&& servicePoint.isOutcomeOrDeliveredServiceNeeded();
+			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& servicePoint.isOutcomeOrDeliveredServiceNeeded();
 		$("#prioList").prop('disabled', isDisabled);
 		$("#homeLink").toggleClass("linkDisabled", isDisabled);
 		$("#homeImage").toggleClass("imgDisabled", isDisabled);
 		$("#settingsLink")
-				.toggleClass(
-						"linkDisabled",
-						isDisabled
-								|| (typeof sessvars.singleSettingsOnly !== 'undefined'
-										&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true));
+			.toggleClass(
+			"linkDisabled",
+			isDisabled
+			|| (typeof sessvars.singleSettingsOnly !== 'undefined'
+				&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true));
 		$("#logoutLink").toggleClass("linkDisabled", isDisabled);
 	};
 
 	// Resets the logout counter
-	var resetLogoffCounter = function() {
+	var resetLogoffCounter = function () {
 		if (logoffTimer != null) {
 			window.clearTimeout(logoffTimer);
 		}
 		if (typeof autoClose === 'undefined' || autoClose == null
-				|| autoClose == 0) {
+			|| autoClose == 0) {
 			return;
 		}
 		var lastUpdate = new Date();
 		var now = new Date();
 		if (typeof sessvars.statusUpdated !== 'undefined'
-				&& sessvars.statusUpdated != null) {
+			&& sessvars.statusUpdated != null) {
 			lastUpdate = sessvars.statusUpdated;
 		}
 		var timeSinceLastUpdate = now.getTime() - lastUpdate.getTime();
@@ -1759,7 +1758,7 @@ var servicePoint = new function() {
 			timeSinceLastUpdate = timeSinceLastUpdate / 1000;
 		}
 		var timeUntilLogoff = (autoClose - timeSinceLastUpdate) * 1000;
-		logoffTimer = window.setTimeout(function() {
+		logoffTimer = window.setTimeout(function () {
 			servicePoint.handleLogoutQES(true, true);
 			window.location.href = "/logout.jsp";
 		}, timeUntilLogoff);
@@ -1767,7 +1766,7 @@ var servicePoint = new function() {
 	};
 
 	// clean the GUI on refresh or when a button is pressed
-	var clearOngoingVisit = function() {
+	var clearOngoingVisit = function () {
 		$("#ticketNumber").empty();
 		$("#serviceId").empty();
 		$("#multiServices").find("tr:gt(0)").remove();
@@ -1796,7 +1795,7 @@ var servicePoint = new function() {
 		$("#endVisitBtn").prop("disabled", true);
 
 		$("#addMultiServiceLink")
-				.toggleClass("customButtonSmallDisabled", true);
+			.toggleClass("customButtonSmallDisabled", true);
 		$("#addMultiServiceLink").toggleClass("customButtonSmall", false);
 		$("#addMultiServiceLink").prop('disabled', true);
 
@@ -1841,7 +1840,7 @@ var servicePoint = new function() {
 		$("#addOutcomeLink").prop('disabled', true);
 		$("#addDeliveredServiceLink").toggleClass("customButtonSmall", false);
 		$("#addDeliveredServiceLink").toggleClass("customButtonSmallDisabled",
-				true);
+			true);
 		$("#addDeliveredServiceLink").prop('disabled', true);
 
 		$("#addCustomMarkLink").toggleClass("customButtonSmall", false);
@@ -1856,7 +1855,7 @@ var servicePoint = new function() {
 		$("#linkCustomerLink").prop("disabled", true);
 	};
 
-	var updateService = function() {
+	var updateService = function () {
 		if (sessvars.state.userState == servicePoint.userState.SERVING) {
 			var service = sessvars.state.visit.currentVisitService.serviceInternalName;
 			$("#serviceId").html(service);
@@ -1893,16 +1892,16 @@ var servicePoint = new function() {
 						 * sortedName + '</td>';
 						 */
 						s += '<td align="center">'
-								+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
-								+ '</td>';
+							+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
+							+ '</td>';
 					} else {
 						s += '<td ></td>';
 					}
 
 					if (i < len2) {
 						s += '<td class="servicedone" align="center">'
-								+ sessvars.state.visit.servedVisitServices[i].serviceInternalName
-								+ '</td>';
+							+ sessvars.state.visit.servedVisitServices[i].serviceInternalName
+							+ '</td>';
 					} else {
 						s += '<td ></td>';
 					}
@@ -1914,22 +1913,22 @@ var servicePoint = new function() {
 		}
 	};
 
-	var updateTransactionTime = function() {
+	var updateTransactionTime = function () {
 		var timeRelativeToCallNext = -1;
 		if (sessvars.state.userState == servicePoint.userState.SERVING) {
 			if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				$("#countTransactionTime").empty().text(
-						translate.msg("info.visit.not.called.yet"));
+					translate.msg("info.visit.not.called.yet"));
 			} else {
 				// Use the fields in the UserState to find out how long since
 				// the ticket was called
 				var now;
 				if (sessvars.state.visit.timeSinceCalled != null
-						&& sessvars.state.visit.waitingTime != null
-						&& sessvars.statusUpdated != null) {
+					&& sessvars.state.visit.waitingTime != null
+					&& sessvars.statusUpdated != null) {
 					now = new Date();
 					timeRelativeToCallNext = sessvars.statusUpdated.getTime()
-							- now.getTime();
+						- now.getTime();
 					// Has the ticket has been called in the future?
 					if (timeRelativeToCallNext > 0) {
 						timeRelativeToCallNext = 0;
@@ -1947,34 +1946,34 @@ var servicePoint = new function() {
 		}
 		if (timeRelativeToCallNext != -1) {
 			jQuery('#countTransactionTime').countdown({
-				since : timeRelativeToCallNext,
-				compact : true,
-				format : 'HMS'
+				since: timeRelativeToCallNext,
+				compact: true,
+				format: 'HMS'
 			});
 		}
 	};
 
-	var htmlEncodeNewLines = function(text) {
+	var htmlEncodeNewLines = function (text) {
 		return text.replace(/\n/g, '<br />');
 	};
 
-	var updateVerticalMessage = function() {
+	var updateVerticalMessage = function () {
 		if (servicePoint.hasValidSettings()
-				&& sessvars.state.userState == servicePoint.userState.SERVING
-				&& typeof sessvars.state.visit.currentVisitService.serviceId !== 'undefined'
-				&& sessvars.state.visit.currentVisitService.serviceId != null) {
+			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& typeof sessvars.state.visit.currentVisitService.serviceId !== 'undefined'
+			&& sessvars.state.visit.currentVisitService.serviceId != null) {
 			var params = {
-				"branchId" : parseInt(sessvars.branchId),
-				"serviceId" : sessvars.state.visit.currentVisitService.serviceId
+				"branchId": parseInt(sessvars.branchId),
+				"serviceId": sessvars.state.visit.currentVisitService.serviceId
 			};
 			var verticalMessage = spService.get("branches/" + sessvars.branchId
-					+ "/services/"
-					+ sessvars.state.visit.currentVisitService.serviceId
-					+ "/journey");
+				+ "/services/"
+				+ sessvars.state.visit.currentVisitService.serviceId
+				+ "/journey");
 			if (typeof verticalMessage !== 'undefined'
-					&& verticalMessage != null
-					&& typeof verticalMessage.workstationMessage !== 'undefined'
-					&& verticalMessage.workstationMessage != null) {
+				&& verticalMessage != null
+				&& typeof verticalMessage.workstationMessage !== 'undefined'
+				&& verticalMessage.workstationMessage != null) {
 				$('#verticalMessageRow').show();
 				document.getElementById("verticalMessage").innerHTML = verticalMessage.workstationMessage;
 			} else {
@@ -1987,7 +1986,7 @@ var servicePoint = new function() {
 
 	// Update user name, workstation name, branch name and profile drop down box
 	// in the UI
-	var updateWorkstationSettings = function() {
+	var updateWorkstationSettings = function () {
 		var user = spService.get("user");
 		$("#userName").text(user.firstName + " " + user.lastName);
 
@@ -2005,35 +2004,35 @@ var servicePoint = new function() {
 		profile.focus().blur();
 		
 		prioSel.prop('selectedIndex', $(
-				"#prioList option[value=" + sessvars.workProfileId + "]")
-				.index());
+			"#prioList option[value=" + sessvars.workProfileId + "]")
+			.index());
 		prioSel.prop("disabled", false);
 	};
 
-	var doEndUserSession = function() {
+	var doEndUserSession = function () {
 		try {
 			var params = servicePoint.createParams();
 			sessvars.state = servicePoint.getState(spService.del("branches/"
-					+ params.branchId + "/users/" + params.userName));
+				+ params.branchId + "/users/" + params.userName));
 			sessvars.statusUpdated = new Date();
 		} catch (ex) {
 			util.showError(jQuery.i18n.prop('error.logout.workstation.failed')
-					+ ": " + ex);
+				+ ": " + ex);
 			return false;
 		}
 	};
 
-	this.handleHome = function() {
+	this.handleHome = function () {
 		if (workstationOffline
-				|| (servicePoint.hasValidSettings() && servicePoint
-						.isOutcomeOrDeliveredServiceNeeded())) {
+			|| (servicePoint.hasValidSettings() && servicePoint
+				.isOutcomeOrDeliveredServiceNeeded())) {
 			return false;
 		}
 		workstationOffline = true;
 		sessvars.$.clearMem();
 	};
 
-	this.handleLogoutQES = function(warn, force) {
+	this.handleLogoutQES = function (warn, force) {
 		var isLogout = false;
 		if (force) {
 			servicePoint.forceCleanAndLogout();
@@ -2043,7 +2042,7 @@ var servicePoint = new function() {
 		var hasValidSettings = servicePoint.hasValidSettings();
 		// close workstation if settings have been applied
 		if (!workstationOffline
-				&& !servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+			&& !servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (hasValidSettings) {
 				var displayDialog = false;
 				if (warn) {
@@ -2053,27 +2052,27 @@ var servicePoint = new function() {
 					if (!isServicePointPoolEmpty && !isUserPoolEmpty) {
 						displayDialog = true;
 						warningMessage = translate
-								.msg(
-										"info.confirm.logout.visits.still.in.both.pools",
-										[
-												translate
-														.msg("info.confirm.logout.service.point.pool"),
-												translate
-														.msg("info.confirm.logout.user.pool") ]);
+							.msg(
+							"info.confirm.logout.visits.still.in.both.pools",
+							[
+								translate
+									.msg("info.confirm.logout.service.point.pool"),
+								translate
+									.msg("info.confirm.logout.user.pool")]);
 					} else if (!isServicePointPoolEmpty) {
 						displayDialog = true;
 						warningMessage = translate
-								.msg(
-										"info.confirm.logout.visits.still.in.pool",
-										[ translate
-												.msg("info.confirm.logout.service.point.pool") ]);
+							.msg(
+							"info.confirm.logout.visits.still.in.pool",
+							[translate
+								.msg("info.confirm.logout.service.point.pool")]);
 					} else if (!isUserPoolEmpty) {
 						displayDialog = true;
 						warningMessage = translate
-								.msg(
-										"info.confirm.logout.visits.still.in.pool",
-										[ translate
-												.msg("info.confirm.logout.user.pool") ]);
+							.msg(
+							"info.confirm.logout.visits.still.in.pool",
+							[translate
+								.msg("info.confirm.logout.user.pool")]);
 					}
 				}
 				if (displayDialog) {
@@ -2102,7 +2101,7 @@ var servicePoint = new function() {
 		return isLogout;
 	};
 
-	this.cleanAndLogout = function() {
+	this.cleanAndLogout = function () {
 		if (sessvars.servicePointUnitId) {
 			qevents.unsubscribe(util.asChannelStrWithUserName(sessvars.servicePointUnitId, sessvars.currentUser.userName));
 		}
@@ -2111,24 +2110,23 @@ var servicePoint = new function() {
 		workstationOffline = true;
 	};
 
-	this.forceCleanAndLogout = function() {
+	this.forceCleanAndLogout = function () {
 		if (sessvars.servicePointUnitId) {
 			qevents.unsubscribe(util.asChannelStrWithUserName(sessvars.servicePointUnitId, sessvars.currentUser.userName));
 		}
 		sessvars.$.clearMem();
 		$.ajax({
-			type : "PUT",
-			url : "/rest/servicepoint/logout;force=true;timeout=true",
-			dataType : 'json',
-			async : false,
-			success : function(data) {
+			type: "PUT",
+			url: "/rest/servicepoint/logout;force=true;timeout=true",
+			dataType: 'json',
+			async: false,
+			success: function (data) {
 
 			},
-			error : function(jqXHR, textStatus, errorThrown) {
+			error: function (jqXHR, textStatus, errorThrown) {
 				if (jqXHR.status == 503) {
 					customer.customerDbOnline = false;
-					util.showError(jQuery.i18n
-							.prop('error.central.server.unavailable'));
+					util.showError(jQuery.i18n.prop('error.central.server.unavailable'));
 					util.hideModal("customerSearchDiv");
 				}
 			}
@@ -2152,7 +2150,7 @@ var servicePoint = new function() {
 	 * 
 	 * 
 	 */
-	var receiveEvent = function(event) {
+	var receiveEvent = function (event) {
 		var processedEvent;
 
 		try {
@@ -2165,128 +2163,128 @@ var servicePoint = new function() {
 		}
 
 		if (typeof processedEvent.E === "undefined"
-				|| typeof processedEvent.E.evnt === "undefined") {
+			|| typeof processedEvent.E.evnt === "undefined") {
 			return;
 		}
 		switch (processedEvent.E.evnt) {
-		case servicePoint.publicEvents.VISIT_CALL:
-			// NEXT
-			if (sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
-				// if (window.console) console.log("Case is store next, event
-				// is: " + processedEvent.E.evnt);
-				util.hideModal("waitingForCustomerDialogue");
-				sessvars.state = servicePoint.getState(spService
+			case servicePoint.publicEvents.VISIT_CALL:
+				// NEXT
+				if (sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
+					// if (window.console) console.log("Case is store next, event
+					// is: " + processedEvent.E.evnt);
+					util.hideModal("waitingForCustomerDialogue");
+					sessvars.state = servicePoint.getState(spService
 						.get("user/status"));
-				sessvars.statusUpdated = new Date();
-				servicePoint.updateWorkstationStatus(false);
-				break;
-			}
-			if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
-				util
-						.log('About to handle a visit call event when in state VISIT_IN_DISPLAY_QUEUE');
-				window.clearTimeout(displayQueueTimeoutId);
-				util.hideModal("displayQueueSpinnerWindow");
-				sessvars.state = servicePoint.getState(spService
-						.get("user/status"));
-				sessvars.statusUpdated = new Date();
-
-				if (processedEvent.E.prm.workProfile == undefined) {
-					delServUpdateNeeded = false;
-					outcomeUpdateNeeded = false;
-					spPoolUpdateNeeded = false;
-					userPoolUpdateNeeded = false;
-					queuesUpdateNeeded = false;
-					journeyUpdateNeeded = false;
-					trtUpdateNeeded = false;
+					sessvars.statusUpdated = new Date();
+					servicePoint.updateWorkstationStatus(false);
+					break;
 				}
+				if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
+					util
+						.log('About to handle a visit call event when in state VISIT_IN_DISPLAY_QUEUE');
+					window.clearTimeout(displayQueueTimeoutId);
+					util.hideModal("displayQueueSpinnerWindow");
+					sessvars.state = servicePoint.getState(spService
+						.get("user/status"));
+					sessvars.statusUpdated = new Date();
 
-				servicePoint.updateWorkstationStatus(false);
+					if (processedEvent.E.prm.workProfile == undefined) {
+						delServUpdateNeeded = false;
+						outcomeUpdateNeeded = false;
+						spPoolUpdateNeeded = false;
+						userPoolUpdateNeeded = false;
+						queuesUpdateNeeded = false;
+						journeyUpdateNeeded = false;
+						trtUpdateNeeded = false;
+					}
+
+					servicePoint.updateWorkstationStatus(false);
+					break;
+				}
+				if (cfuForceSelection) {
+					sessvars.cfuSelectionSet = false;
+					servicePoint.updateWorkstationStatus();
+				} else {
+					sessvars.cfuSelectionSet = true;
+				}
 				break;
-			}
-			if (cfuForceSelection) {
-				sessvars.cfuSelectionSet = false;
-				servicePoint.updateWorkstationStatus();
-			} else {
+			case servicePoint.publicEvents.USER_SERVICE_POINT_SESSION_END:
+				// Someone or something has caused us to log off this servicepoint,
+				// could either be someone else stealing it or the current user
+				// logging out somewhere else, or just a logout
+				sessvars.$.clearMem();
 				sessvars.cfuSelectionSet = true;
-			}
-			break;
-		case servicePoint.publicEvents.USER_SERVICE_POINT_SESSION_END:
-			// Someone or something has caused us to log off this servicepoint,
-			// could either be someone else stealing it or the current user
-			// logging out somewhere else, or just a logout
-			sessvars.$.clearMem();
-			sessvars.cfuSelectionSet = true;
-			// we can't call the logout service by ourselves, as it might be us
-			// that have logged in somewhere else
-			window.location.replace("/logout.jsp");
-			break;
-		case servicePoint.publicEvents.VISIT_TRANSFER_TO_SERVICE_POINT_POOL:
-			sessvars.cfuSelectionSet = true;
-			servicePointPool.updateServicePointPool(); // Todo: remove me
-			servicePointPool.renderCounterPool();
-			break;
-		case servicePoint.publicEvents.VISIT_TRANSFER_TO_USER_POOL:
-			sessvars.cfuSelectionSet = true;
-			userPool.updateUserPool(); // Todo: remove me
-			userPool.renderUserPool();
-			break;
-		case servicePoint.publicEvents.USER_SERVICE_POINT_WORK_PROFILE_SET:
-			// If someone else (e.g. an administrator) sets the work profile for
-			// the user, do some updates.
-			if (typeof processedEvent.E.prm !== 'undefined'
+				// we can't call the logout service by ourselves, as it might be us
+				// that have logged in somewhere else
+				window.location.replace("/logout.jsp");
+				break;
+			case servicePoint.publicEvents.VISIT_TRANSFER_TO_SERVICE_POINT_POOL:
+				sessvars.cfuSelectionSet = true;
+				servicePointPool.updateServicePointPool(); // Todo: remove me
+				servicePointPool.renderCounterPool();
+				break;
+			case servicePoint.publicEvents.VISIT_TRANSFER_TO_USER_POOL:
+				sessvars.cfuSelectionSet = true;
+				userPool.updateUserPool(); // Todo: remove me
+				userPool.renderUserPool();
+				break;
+			case servicePoint.publicEvents.USER_SERVICE_POINT_WORK_PROFILE_SET:
+				// If someone else (e.g. an administrator) sets the work profile for
+				// the user, do some updates.
+				if (typeof processedEvent.E.prm !== 'undefined'
 					&& processedEvent.E.prm != null
 					&& typeof processedEvent.E.prm.workProfileOrigId !== 'undefined'
 					&& processedEvent.E.prm.workProfileOrigId != null) {
-				var workProfileId = processedEvent.E.prm.workProfileOrigId;
-				if (typeof sessvars.workProfileId !== "undefined") {
-					// If work profile has changed, update state, set the new
-					// workProfile
-					// on the sessvars, change in UI and show notification
-					// message
-					if (sessvars.workProfileId != workProfileId) {
-						var params = {};
-						sessvars.state = servicePoint.getState(spService
+					var workProfileId = processedEvent.E.prm.workProfileOrigId;
+					if (typeof sessvars.workProfileId !== "undefined") {
+						// If work profile has changed, update state, set the new
+						// workProfile
+						// on the sessvars, change in UI and show notification
+						// message
+						if (sessvars.workProfileId != workProfileId) {
+							var params = {};
+							sessvars.state = servicePoint.getState(spService
 								.get("user/status"));
-						sessvars.statusUpdated = new Date();
-						sessvars.workProfileId = workProfileId;
-						updateWorkstationSettings();
-						var profileSel = $('#prioList');
-						sessvars.profileName = $("option:selected", profileSel)
+							sessvars.statusUpdated = new Date();
+							sessvars.workProfileId = workProfileId;
+							updateWorkstationSettings();
+							var profileSel = $('#prioList');
+							sessvars.profileName = $("option:selected", profileSel)
 								.text();
-						util.showMessage(jQuery.i18n
+							util.showMessage(jQuery.i18n
 								.prop('info.changed.settings.success.admin')
 								+ ': ' + sessvars.profileName);
+						}
 					}
 				}
-			}
-			break;
-		case servicePoint.publicEvents.CFU_SELECTION_DONE:
-			util.showMessage(jQuery.i18n.prop('message.cfu.selected'));
-			sessvars.cfuSelectionSet = true;
-			servicePoint.updateWorkstationStatus();
-			break;
-		default:
-			break;
+				break;
+			case servicePoint.publicEvents.CFU_SELECTION_DONE:
+				util.showMessage(jQuery.i18n.prop('message.cfu.selected'));
+				sessvars.cfuSelectionSet = true;
+				servicePoint.updateWorkstationStatus();
+				break;
+			default:
+				break;
 		}
 	};
 
-	this.hasValidSettings = function(showMessages) {
+	this.hasValidSettings = function (showMessages) {
 		if (typeof sessvars.branchId === "undefined"
-				|| sessvars.branchId == null) {
+			|| sessvars.branchId == null) {
 			if (showMessages) {
 				// util.showError(translate.msg("error.no.branch"));
 				$Qmatic.components.dropdown.branchSelection.onError(translate.msg("error.no.branch"))
 			}
 			return false;
 		} else if (typeof sessvars.servicePointId === "undefined"
-				|| sessvars.servicePointId == null) {
+			|| sessvars.servicePointId == null) {
 			if (showMessages) {
 				// util.showError(translate.msg("error.no.workstation"));
 				$Qmatic.components.dropdown.counterSelection.onError(translate.msg("error.no.workstation"))
 			}
 			return false;
 		} else if (typeof sessvars.workProfileId === "undefined"
-				|| sessvars.workProfileId == null) {
+			|| sessvars.workProfileId == null) {
 			if (showMessages) {
 				// util.showError(translate.msg("error.no.profile"));
 				$Qmatic.components.dropdown.profileSelection.onError(translate.msg("error.no.profile"))
@@ -2305,58 +2303,58 @@ var servicePoint = new function() {
 		return !workstationOffline;
 	};
 
-	var readServicePointSettingsFromWorkstation = function() {
+	var readServicePointSettingsFromWorkstation = function () {
 		if (typeof sessvars.branchId === 'undefined'
-				|| sessvars.branchId == null
-				|| typeof sessvars.servicePointId === 'undefined'
-				|| sessvars.servicePointId == null) {
+			|| sessvars.branchId == null
+			|| typeof sessvars.servicePointId === 'undefined'
+			|| sessvars.servicePointId == null) {
 			return;
 		}
 		var params = {};
 		params.branchId = sessvars.branchId;
 		params.servicePointId = sessvars.servicePointId;
 		var userServicePoint = spService.get("branches/" + params.branchId
-				+ "/servicePoints/" + params.servicePointId);
+			+ "/servicePoints/" + params.servicePointId);
 		// Parse settings for confirm needed and storeNext
 		if (typeof userServicePoint !== 'undefined' && userServicePoint != null
-				&& typeof userServicePoint.parameters !== 'undefined'
-				&& userServicePoint.parameters != null) {
+			&& typeof userServicePoint.parameters !== 'undefined'
+			&& userServicePoint.parameters != null) {
 			var parameters = userServicePoint.parameters;
 			if (typeof parameters.confirmNeeded !== 'undefined'
-					&& parameters.confirmNeeded != null
-					&& parameters.confirmNeeded == true) {
+				&& parameters.confirmNeeded != null
+				&& parameters.confirmNeeded == true) {
 				confirmNeeded = true;
 			} else {
 				confirmNeeded = false;
 			}
 			if (typeof parameters.cfuForceSelection !== 'undefined'
-					&& parameters.cfuForceSelection != null
-					&& parameters.cfuForceSelection == true) {
+				&& parameters.cfuForceSelection != null
+				&& parameters.cfuForceSelection == true) {
 				cfuForceSelection = true;
 				if (sessvars.cfuSelectionSet == undefined
-						|| sessvars.cfuSelectionSet == null) {
+					|| sessvars.cfuSelectionSet == null) {
 					sessvars.cfuSelectionSet = true;
 				}
 			} else {
 				cfuForceSelection = false;
 			}
 			if (typeof parameters.storeNext !== 'undefined'
-					&& parameters.storeNext != null
-					&& parameters.storeNext == true) {
+				&& parameters.storeNext != null
+				&& parameters.storeNext == true) {
 				storeNext = true;
 			} else {
 				storeNext = false;
 			}
 			if (typeof parameters.autoClose !== 'undefined'
-					&& parameters.autoClose != null
-					&& !isNaN(parseInt(parameters.autoClose))) {
+				&& parameters.autoClose != null
+				&& !isNaN(parseInt(parameters.autoClose))) {
 				autoClose = parseInt(parameters.autoClose);
 			} else {
 				autoClose = 0;
 			}
 			if (typeof parameters.displayQueueTimeout !== 'undefined'
-					&& parameters.displayQueueTimeout != null
-					&& !isNaN(parseInt(parameters.displayQueueTimeout))) {
+				&& parameters.displayQueueTimeout != null
+				&& !isNaN(parseInt(parameters.displayQueueTimeout))) {
 				displayQueueTimeout = parseInt(parameters.displayQueueTimeout);
 			} else {
 				displayQueueTimeout = -1;
@@ -2364,10 +2362,10 @@ var servicePoint = new function() {
 		}
 	};
 
-	this.storeSettingsInSession = function(sessvarsInfo) {
+	this.storeSettingsInSession = function (sessvarsInfo) {
 		sessvars.branchId = sessvarsInfo.branchId;
 		if (typeof sessvarsInfo.branchName === 'undefined'
-				|| sessvarsInfo.branchName == null) {
+			|| sessvarsInfo.branchName == null) {
 			var branch = spService.get("branches/" + sessvarsInfo.branchId);
 			sessvars.branchName = branch.name;
 		} else {
@@ -2379,19 +2377,19 @@ var servicePoint = new function() {
 		params.branchId = sessvars.branchId;
 		params.servicePointId = sessvars.servicePointId;
 		var userServicePoint = spService.get("branches/" + params.branchId
-				+ "/servicePoints/" + params.servicePointId);
+			+ "/servicePoints/" + params.servicePointId);
 
 		setUnitTypeModules(userServicePoint);
 
 		sessvars.servicePointUnitId = typeof userServicePoint !== 'undefined'
-				|| userServicePoint != null ? userServicePoint.unitId : "";
+			|| userServicePoint != null ? userServicePoint.unitId : "";
 		sessvars.servicePointName = sessvarsInfo.servicePointName;
 
 		sessvars.workProfileId = sessvarsInfo.workProfileId;
 		sessvars.profileName = sessvarsInfo.profileName;
 	};
 
-	this.resetSettings = function() {
+	this.resetSettings = function () {
 		sessvars.branchId = null;
 		sessvars.branchName = null;
 		sessvars.servicePointId = null;
@@ -2402,19 +2400,19 @@ var servicePoint = new function() {
 		sessvars.singleSettingsOnly = null;
 	};
 
-	var getSettings = function(branchSel, workstationSel, profileSel) {
+	var getSettings = function (branchSel, workstationSel, profileSel) {
 		var settings = {};
 		settings.branchId = parseInt(branchSel.val());
 		settings.branchName = branchSel.children("option").filter(":selected")
-				.text();
+			.text();
 
 		settings.servicePointId = parseInt(workstationSel.val());
 		settings.servicePointName = workstationSel.children("option").filter(
-				":selected").text();
+			":selected").text();
 
 		settings.workProfileId = parseInt(profileSel.val());
 		settings.profileName = profileSel.children("option")
-				.filter(":selected").text();
+			.filter(":selected").text();
 		return settings;
 	};
 
@@ -2422,8 +2420,8 @@ var servicePoint = new function() {
 	 * Use sessvars stored settings to create the params object used by the
 	 * RESTeasy generated JavaScript connector code.
 	 */
-	var hasValidDropboxSettings = function(branchSel, workstationSel,
-			profileSel) {
+	var hasValidDropboxSettings = function (branchSel, workstationSel,
+		profileSel) {
 
 		if (branchSel.val() == -1) {
 			// util.showError(jQuery.i18n.prop("error.no.branch"));
@@ -2441,7 +2439,7 @@ var servicePoint = new function() {
 		return true;
 	};
 
-	this.createParams = function() {
+	this.createParams = function () {
 		var params = {};
 		params.branchId = parseInt(sessvars.branchId);
 		params.branchName = sessvars.branchName;
@@ -2453,35 +2451,35 @@ var servicePoint = new function() {
 		params.profileName = sessvars.profileName;
 
 		if (typeof sessvars.currentUser === 'undefined'
-				|| sessvars.currentUser == null) {
+			|| sessvars.currentUser == null) {
 			sessvars.currentUser = spService.get("user");
 		}
 		if (typeof sessvars.currentUser !== 'undefined'
-				&& sessvars.currentUser.hasOwnProperty("userName")) {
+			&& sessvars.currentUser.hasOwnProperty("userName")) {
 			params.userName = sessvars.currentUser.userName;
 		}
 
 		return params;
 	};
 
-	this.isOutcomeOrDeliveredServiceNeeded = function() {
+	this.isOutcomeOrDeliveredServiceNeeded = function () {
 		return sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED
-				|| sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED
-				|| sessvars.state.visitState == servicePoint.visitState.OUTCOME_OR_DELIVERED_SERVICE_NEEDED
-				|| sessvars.state.visitState == servicePoint.visitState.OUTCOME_FOR_DELIVERED_SERVICE_NEEDED
-				|| (cfuForceSelection && !sessvars.cfuSelectionSet);
+			|| sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED
+			|| sessvars.state.visitState == servicePoint.visitState.OUTCOME_OR_DELIVERED_SERVICE_NEEDED
+			|| sessvars.state.visitState == servicePoint.visitState.OUTCOME_FOR_DELIVERED_SERVICE_NEEDED
+			|| (cfuForceSelection && !sessvars.cfuSelectionSet);
 	};
 
-	this.isOutcomeOrDeliveredServiceAdded = function() {
+	this.isOutcomeOrDeliveredServiceAdded = function () {
 		return sessvars.state.visit != null
-				&& sessvars.state.visit.currentVisitService != null
-				&& (sessvars.state.visit.currentVisitService.visitDeliveredServices != null || sessvars.state.visit.currentVisitService.visitOutcome != null)
-				&& (!cfuForceSelection || sessvars.cfuSelectionSet);
+			&& sessvars.state.visit.currentVisitService != null
+			&& (sessvars.state.visit.currentVisitService.visitDeliveredServices != null || sessvars.state.visit.currentVisitService.visitOutcome != null)
+			&& (!cfuForceSelection || sessvars.cfuSelectionSet);
 	};
 
-	this.hasDefinedOutcomeOrDeliveredService = function() {
+	this.hasDefinedOutcomeOrDeliveredService = function () {
 		return sessvars.state.visit.currentVisitService.outcomeExists
-				|| sessvars.state.visit.currentVisitService.deliveredServiceExists;
+			|| sessvars.state.visit.currentVisitService.deliveredServiceExists;
 	};
 
 	/**
@@ -2490,7 +2488,7 @@ var servicePoint = new function() {
 	 * 
 	 * @param returnValue
 	 */
-	this.getState = function(returnValue) {
+	this.getState = function (returnValue) {
 		if (typeof returnValue === 'undefined' || returnValue == null || returnValue.length == 0) {
 			returnValue = spService.get("user/status");
 		}
@@ -2499,7 +2497,7 @@ var servicePoint = new function() {
 
 	// DWR status handler, needs to be overwritten since we dont use the same
 	// html elements for error boxes as other modules
-	this.cometDWSPollStatusHandler = function(status, message) {
+	this.cometDWSPollStatusHandler = function (status, message) {
 		if (status) {
 			try {
 				setWorkstationOnline();
@@ -2512,7 +2510,7 @@ var servicePoint = new function() {
 		}
 	};
 
-	var setWorkstationOffline = function() {
+	var setWorkstationOffline = function () {
 		if (!workstationOffline) {
 			var err = jQuery.i18n.prop('error.communication_error');
 			util.showPermanentError(err);
@@ -2526,31 +2524,31 @@ var servicePoint = new function() {
 			servicePointPool.emptyPool();
 			userPool.emptyPool();
 			// disable call buttons
-			$('#callButtons a').each(function() {
-				$(this).addClass("customLinkDisabled").click(function(e) {
+			$('#callButtons a').each(function () {
+				$(this).addClass("customLinkDisabled").click(function (e) {
 					e.preventDefault();
 				});
 				$(this).attr({
-					"class" : "customButtonDisabled",
-					"disabled" : true
+					"class": "customButtonDisabled",
+					"disabled": true
 				});
 			});
 			// disable visit buttons
-			$('#ongoingVisitButtons a').each(function() {
-				$(this).addClass("customLinkDisabled").click(function(e) {
+			$('#ongoingVisitButtons a').each(function () {
+				$(this).addClass("customLinkDisabled").click(function (e) {
 					e.preventDefault();
 				});
 				$(this).attr({
-					"class" : "customButtonSmallDisabled",
-					"disabled" : true
+					"class": "customButtonSmallDisabled",
+					"disabled": true
 				});
 			});
 			// disable home/settings/logout links
-			$('.orch-userinfo a').each(function() {
+			$('.orch-userinfo a').each(function () {
 				$(this).prop("disabled", true);
 				$(this).toggleClass("linkDisabled", true);
 			});
-			$('.orch-actions a').each(function() {
+			$('.orch-actions a').each(function () {
 				$(this).prop("disabled", true);
 				$(this).toggleClass("imgDisabled", true);
 			});
@@ -2568,76 +2566,76 @@ var servicePoint = new function() {
 		}
 	};
 
-    var setWorkstationOnline = function() {
-        if (workstationOffline) {
-            util.hideError();
-            workstationOffline = false;
-            // try one resource, if we get anything but a HTTP code 200-399 here
-            // redirect to the login screen
-            // this small check is needed in the case our network drops towards
-            // orchestra, but our session is still valid
-            $
-                .ajax({
-                    type : "GET",
-                    async : false,
-						url : "css/style.css",
-						error : function(data, status, xhr) {
+	var setWorkstationOnline = function () {
+		if (workstationOffline) {
+			util.hideError();
+			workstationOffline = false;
+			// try one resource, if we get anything but a HTTP code 200-399 here
+			// redirect to the login screen
+			// this small check is needed in the case our network drops towards
+			// orchestra, but our session is still valid
+			$
+				.ajax({
+					type: "GET",
+					async: false,
+					url: "css/style.css",
+					error: function (data, status, xhr) {
 
-							// always succeeds
+						// always succeeds
 
-						},
-						success : function(data, status, xhr) {
-							// in jQuery 1.7.0 ONLY xhr is a non-null object -
-							// 1.8.3/1.9.0 receive a null object as a parameter
-							if (xhr.status > 399 || xhr.status < 200
-									|| xhr.status == 302) {
-								// authentication error, send user to
-								// login/start screen...probably not going to
-								// end up here
-								// form authentication means browsers will
-								// handle the 302 transparently
-                                reloadOnReconnect();
+					},
+					success: function (data, status, xhr) {
+						// in jQuery 1.7.0 ONLY xhr is a non-null object -
+						// 1.8.3/1.9.0 receive a null object as a parameter
+						if (xhr.status > 399 || xhr.status < 200
+							|| xhr.status == 302) {
+							// authentication error, send user to
+							// login/start screen...probably not going to
+							// end up here
+							// form authentication means browsers will
+							// handle the 302 transparently
+							reloadOnReconnect();
+						} else {
+							// this is a huge hack to work around the fact
+							// that web browsers handling redirect
+							// transparently
+							var isRedirect = false;
+							try {
+								$
+									.each(
+									$(xhr.responseText)
+										.filter(
+										function () {
+											return this.nodeType == 8;
+										}),
+									function (index, element) {
+										if (typeof element.textContent !== "undefined"
+											&& element.textContent != null
+											&& element.textContent
+												.trim() == "Fixed navbar") {
+											// found comment in
+											// login page, note
+											// that if that
+											// comment is
+											// removed, this
+											// hack won't work
+											// anymore
+											isRedirect = true;
+										}
+									});
+							} catch (ex) {
+								// parsing failed, not a redirect
+							}
+							if (!isRedirect) {
+								updateUI();
 							} else {
-								// this is a huge hack to work around the fact
-								// that web browsers handling redirect
-								// transparently
-								var isRedirect = false;
-								try {
-									$
-											.each(
-													$(xhr.responseText)
-															.filter(
-																	function() {
-																		return this.nodeType == 8;
-																	}),
-													function(index, element) {
-														if (typeof element.textContent !== "undefined"
-																&& element.textContent != null
-																&& element.textContent
-																		.trim() == "Fixed navbar") {
-															// found comment in
-															// login page, note
-															// that if that
-															// comment is
-															// removed, this
-															// hack won't work
-															// anymore
-															isRedirect = true;
-														}
-													});
-								} catch (ex) {
-									// parsing failed, not a redirect
-								}
-								if (!isRedirect) {
-									updateUI();
-								} else {
-									// not authenticated any longer, send user
-									// to login page
-                                    reloadOnReconnect();
-                                }
+								// not authenticated any longer, send user
+								// to login page
+								reloadOnReconnect();
 							}
 						}
-					});
+					}
+				});
 
 			/*
 			 * below is code thats very experimental designed to handle some
@@ -2663,26 +2661,26 @@ var servicePoint = new function() {
 		}
 	};
 
-    var reloadOnReconnect = function() {
-        if (sessvars.servicePointUnitId) {
-            qevents.unsubscribe(util.asChannelStr(sessvars.servicePointUnitId));
-        }
+	var reloadOnReconnect = function () {
+		if (sessvars.servicePointUnitId) {
+			qevents.unsubscribe(util.asChannelStr(sessvars.servicePointUnitId));
+		}
 
-        qevents.disconnect(function(disconnectReply) {
-            util.log("Disconnect done. Reply from CometD: " + JSON.stringify(disconnectReply));
-            sessvars.$.clearMem();
-            window.location.reload();
-        });
+		qevents.disconnect(function (disconnectReply) {
+			util.log("Disconnect done. Reply from CometD: " + JSON.stringify(disconnectReply));
+			sessvars.$.clearMem();
+			window.location.reload();
+		});
 
-        // safeguard in case server doesn't reply
-        window.setTimeout(function() {
-            util.log("No response from server for disconnect request within 3 seconds, reloading anyway.");
-            sessvars.$.clearMem();
-            window.location.reload();
-        }, 3000);
-    };
+		// safeguard in case server doesn't reply
+		window.setTimeout(function () {
+			util.log("No response from server for disconnect request within 3 seconds, reloading anyway.");
+			sessvars.$.clearMem();
+			window.location.reload();
+		}, 3000);
+	};
 
-	this.getWorkstationOffline = function() {
+	this.getWorkstationOffline = function () {
 		return workstationOffline;
 	};
 };

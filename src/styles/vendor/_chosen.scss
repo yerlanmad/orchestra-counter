@@ -1,6 +1,3 @@
-$chosen-sprite: url('chosen-sprite.png') !default;
-$chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
-
 /* @group Base */
 .chosen-container {
   position: relative;
@@ -86,7 +83,6 @@ $chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
     display: block;
     width: 12px;
     height: 12px;
-    background: $chosen-sprite -42px 1px no-repeat;
     font-size: 1px;
     &:hover {
       background-position: -42px -10px;
@@ -106,7 +102,6 @@ $chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
       display: block;
       width: 100%;
       height: 100%;
-      background: $chosen-sprite no-repeat 0px 2px;
     }
   }
   .chosen-search {
@@ -123,7 +118,6 @@ $chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
       height: auto;
       outline: 0;
       border: 1px solid #aaa;
-      background: $chosen-sprite no-repeat 100% -20px;
       font-size: 1em;
       font-family: sans-serif;
       line-height: normal;
@@ -258,7 +252,6 @@ $chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
         display: block;
         width: 12px;
         height: 12px;
-        background: $chosen-sprite -42px 1px no-repeat;
         font-size: 1px;
         &:hover {
           background-position: -42px -10px;
@@ -388,7 +381,6 @@ $chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
   }
   .chosen-search input[type="text"] {
     padding: 4px 5px 4px 20px;
-    background: $chosen-sprite no-repeat -30px -20px;
     direction: rtl;
   }
   &.chosen-container-single{
@@ -414,7 +406,6 @@ $chosen-sprite-retina: url('chosen-sprite@2x.png') !default;
   .chosen-container-multi .chosen-choices .search-choice .search-choice-close,
   .chosen-container .chosen-results-scroll-down span,
   .chosen-container .chosen-results-scroll-up span {
-    background-image: $chosen-sprite-retina !important;
     background-size: 52px 37px !important;
     background-repeat: no-repeat !important;
   }

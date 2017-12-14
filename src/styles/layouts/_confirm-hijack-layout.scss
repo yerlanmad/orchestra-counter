@@ -26,10 +26,6 @@
         .qm-btn--primary {
             font-size: inherit;
             margin: 0 10px;
-            @at-root [dir='rtl'] & {
-                margin-left: 0px;
-                margin-right: 10px;
-            }
         }
         .qm-btn--secondary {
             font-size: inherit;
