@@ -8,9 +8,15 @@ const nunjucksRender = require('gulp-nunjucks-render')
 const connect = require('gulp-connect-multi')
 const devServer = connect();
 var proxy = require('http-proxy-middleware');
+const zip = require('gulp-zip');
+var sftp = require('gulp-sftp');
 
 var isWindows = process.platform === 'win32';
 var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
+var remoteDeploymentDefaultPath = "C:\\qmatic\\orchestra\\system\\custdeploy"
+var remoteDeploymentDefaultLangPath = "C:\\qmatic\\orchestra\\system\\conf\\lang"
+var remoteDeploymentDefaultHost = "localhost"
+var remoteDeploymentPlatform = "windows"
 
 // Configuration
 // =============
@@ -19,13 +25,24 @@ require('events').EventEmitter.prototype._maxListeners = 100;
 
 try {
     var config = require('./config.gulp.json');
-    var targetOrchestraIp = config.host ? config.host : "localhost";
-    var targetOrchestraPort = config.port ? config.port : "8080";
-    var targetOrchestraProtocol = config.protocol ? config.protocol : "http";
+
+    var targetOrchestraIp = config.proxy.host ? config.proxy.host : "localhost";
+    var targetOrchestraPort = config.proxy.port ? config.proxy.port : "8080";
+    var targetOrchestraProtocol = config.proxy.protocol ? config.proxy.protocol : "http";
     var targetOrchestraUrl = targetOrchestraProtocol + '://' + targetOrchestraIp + ':' + targetOrchestraPort;
+
+    // Must be provided via config file
+    var remoteDeployHost = config.remote_deploy.host ? config.remote_deploy.host : remoteDeploymentDefaultHost;
+    var remoteDeployUsername = config.remote_deploy.username
+    var remoteDeployPassword = config.remote_deploy.password
+
+
     console.log("Default Configuration Imported. Remote Orchestra is " + targetOrchestraUrl)
 } catch (ex) {
+
     var targetOrchestraUrl = "http://localhost:8080";
+    var remoteDeployHost = remoteDeploymentDefaultHost;
+
     console.log("You are using default gulp configuration. Remote Orchestra is " + targetOrchestraUrl)
 }
 
@@ -35,6 +52,12 @@ try {
 gulp.task('clean:build', function () {
     return del([
         './dist'
+    ])
+})
+
+gulp.task('clean:war', function () {
+    return del([
+        './dist/**/*', '!./dist/workstationterminal.war'
     ])
 })
 
@@ -84,6 +107,17 @@ gulp.task('move:previous_counter_files', function () {
 gulp.task('move:previous_counter_js', function () {
     return gulp.src(['./previous_web_counter/scripts/**/*.js', '!./previous_web_counter/scripts/jquery/*.js'])
         .pipe(gulp.dest('./dist/scripts'))
+});
+
+gulp.task('move:lang', function () {
+    return gulp.src(['./src/lang/*'])
+        .pipe(gulp.dest('./dist'))
+})
+
+gulp.task('util:war', function () {
+    return gulp.src(['dist/**', '!dist/lang'])
+        .pipe(zip('workstationterminal.war'))
+        .pipe(gulp.dest('dist/'))
 });
 
 gulp.task('watch:start', function () {
@@ -174,6 +208,29 @@ gulp.task('connect', devServer.server({
 }));
 
 
+gulp.task('deploy:war', function () {
+    return gulp.src('./dist/workstationterminal.war')
+        .pipe(sftp({
+            remotePath: remoteDeploymentDefaultPath,
+            remotePlatform: remoteDeploymentPlatform,
+            host: remoteDeployHost,
+            user: remoteDeployUsername,
+            pass: remoteDeployPassword
+        }));
+});
+
+gulp.task('deploy:lang', function () {
+    return gulp.src('./dist/workstationTerminalMessages.properties')
+        .pipe(sftp({
+            remotePath: remoteDeploymentDefaultLangPath,
+            remotePlatform: remoteDeploymentPlatform,
+            host: remoteDeployHost,
+            user: remoteDeployUsername,
+            pass: remoteDeployPassword
+        }));
+});
+
+
 gulp.task('build', gulpsync.sync(
     [
         'clean:build',
@@ -202,4 +259,40 @@ gulp.task('build:dev', gulpsync.sync(
         'connect'
     ]), function () {
         return console.log(`Build Created in folder ./dist - Listening to changes in scripts/styles/templates...`)
+    })
+
+
+gulp.task('build:war', gulpsync.sync(
+    [
+        'clean:build',
+        'compile:nunjucks',
+        'compile:scss',
+        'move:js',
+        'move:assets',
+        'move:images',
+        'move:icons',
+        'move:previous_counter_files',
+        'util:war',
+        'clean:war',
+        'move:lang'
+    ]), function () {
+        return console.log(`workstationterminal.war file created in dist folder`)
+    })
+gulp.task('deploy', gulpsync.sync(
+    [
+        'clean:build',
+        'compile:nunjucks',
+        'compile:scss',
+        'move:js',
+        'move:assets',
+        'move:images',
+        'move:icons',
+        'move:previous_counter_files',
+        'util:war',
+        'clean:war',
+        'move:lang',
+        'deploy:war',
+        'deploy:lang'
+    ]), function () {
+        return console.log(`workstationterminal.war file created in dist folder`)
     })
