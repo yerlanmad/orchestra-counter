@@ -1401,10 +1401,8 @@ var servicePoint = new function () {
 				.html(jQuery.i18n.prop('info.no.customer.called'));
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-			&&
-
-			sessvars.state.userState == servicePoint.userState.SERVING
-			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+				&& sessvars.state.userState == servicePoint.userState.SERVING
+				&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED) {
 				util.showMessage(jQuery.i18n.prop('error.no.outcome'));
 			} else if (sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED) {
@@ -1423,8 +1421,8 @@ var servicePoint = new function () {
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
-					$("#notesEdit").val(
-						sessvars.state.visit.parameterMap.custom1);
+					// $("#notesEdit").val(
+					// 		sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1;
 					}
@@ -1456,8 +1454,8 @@ var servicePoint = new function () {
 			$("#parkBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#parkBtn").prop('disabled', false);
 
-			$("#notesBtn").toggleClass("customButtonSmall", true);
-			$("#notesBtn").toggleClass("customButtonSmallDisabled", false);
+			// $("#notesBtn").toggleClass("customButtonSmall", true);
+			// $("#notesBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#notesBtn").prop('disabled', false);
 
 			// is no-show allowed
@@ -1559,8 +1557,8 @@ var servicePoint = new function () {
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
-					$("#notesEdit").val(
-						sessvars.state.visit.parameterMap.custom1);
+					// $("#notesEdit").val(
+					// 		sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1;
 					}
@@ -1591,28 +1589,28 @@ var servicePoint = new function () {
 			$("#parkBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#parkBtn").prop('disabled', false);
 
-			$("#notesBtn").toggleClass("customButtonSmall", true);
-			$("#notesBtn").toggleClass("customButtonSmallDisabled", false);
-			$("#notesBtn").prop('disabled', false);
+			// $("#notesBtn").toggleClass("customButtonSmall", true);
+			// $("#notesBtn").toggleClass("customButtonSmallDisabled", false);
+			$("#notesMessage").prop('disabled', false);
 
 			// is no-show allowed
-			// if (sessvars.state.visit.noshowAllowed) {
-			// 	$("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
-			// 	$("#noShowBtn").toggleClass("customButtonSmall", true);
-			// 	$("#noShowBtn").prop('disabled', false);
-			// } else {
-			// 	$("#noShowBtn").toggleClass("customButtonSmall", false);
-			// 	$("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
-			// 	$("#noShowBtn").prop('disabled', true);
-			// }
+			if (sessvars.state.visit.noshowAllowed) {
+ 				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
+ 				// $("#noShowBtn").toggleClass("customButtonSmall", true);
+				$("#noShowBtn").prop('disabled', false);
+			} else {
+				// $("#noShowBtn").toggleClass("customButtonSmall", false);
+			 	// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
+				$("#noShowBtn").prop('disabled', true);
+			}
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
-				$("#recallBtn").toggleClass("customButtonSmallDisabled", false);
-				$("#recallBtn").toggleClass("customButtonSmall", true);
+				// $("#recallBtn").toggleClass("customButtonSmallDisabled", false);
+				// $("#recallBtn").toggleClass("customButtonSmall", true);
 				$("#recallBtn").prop('disabled', false);
 			} else {
-				$("#recallBtn").toggleClass("customButtonSmallDisabled", true);
-				$("#recallBtn").toggleClass("customButtonSmall", false);
+				// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
+				// $("#recallBtn").toggleClass("customButtonSmall", false);
 				$("#recallBtn").prop('disabled', true);
 			}
 			// is recycle allowed
@@ -1821,8 +1819,8 @@ var servicePoint = new function () {
 		// $("#noShowBtn").toggleClass("customButtonSmall", false);
 		$("#noShowBtn").prop("disabled", true);
 
-		$("#notesBtn").toggleClass("customButtonSmallDisabled", true);
-		$("#notesBtn").toggleClass("customButtonSmall", false);
+		// $("#notesBtn").toggleClass("customButtonSmallDisabled", true);
+		// $("#notesBtn").toggleClass("customButtonSmall", false);
 		$("#notesBtn").prop("disabled", true);
 
 		// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);

@@ -106,43 +106,43 @@ function showModules() {
 	}
 
 	if (buttonTransferEnabled == true) {
-		$('#transferBtn').css("visibility","visible");
+		$('#transferBtn').show();
 	} else {
-		$('#transferBtn').prop('disabled', true);
+		$('#transferBtn').hide();
 	}
 	if (buttonWalkDirectEnabled == true) {
-		$('#walkDirectBtn').css("visibility","visible");
+		$('#walkDirectBtn').show();
 	} else {
 		$('#walkDirectBtn').hide();
 	}
 
 	if (buttonNoShowsEnabled == true) {
-		$('#noShowBtn').css("visibility","visible");
+		$('#noShowBtn').show();
 	} else {
-		$("#noShowBtn").prop('disabled', true);
+		$("#noShowBtn").hide();
 	}
 
 	if (buttonParkEnabled == true) {
-		$('#parkBtn').css("visibility","visible");
+		$('#parkBtn').show();
 	} else {
-		$('#parkBtn').prop('disabled', true);
+		$('#parkBtn').hide();
 	}
 	if (buttonNotesEnabled == true) {
-		$('#notesBtn').css("visibility","visible");
+		$('#notesBtn').show();
 	} else {
 		$('#notesBtn').hide();
 	}
 	if (buttonRecycleEnabled == true) {
-		$('#reinsertBtn').css("visibility","visible");
+		$('#reinsertBtn').show();
 	} else {
-		$('#reinsertBtn').prop('disabled', true);
+		$('#reinsertBtn').hide();
 	}
   
   	if (multiMarks == false) {
 		$('#marksQuantityDiv').hide();
 	}
 	if (moduleChatEnabled == true){
-		$('#chatModule').css("visibility","visible");
+		$('#chatModule').show();
 	} else {
 		$('#chatModule').hide();
 	}

@@ -83,9 +83,9 @@
             </a>
         </div>
         
-        <div class="qm-form-field">
+        <div id="notesBtn" class="qm-form-field">
             <label for="notes" class="sr-only"></label>
-            <textarea id="notes" 
+            <textarea id="notesMessage" 
                     class="qm-form-field__textarea" 
                     placeholder="Additional notes" rows="1"></textarea>
             <i class="qm-form-field__icon icon-edit" aria-hidden="true"></i>
@@ -98,25 +98,25 @@
 {% block footer %}
     <div class="qm-card__footer-section qm-card__footer-section--space-between">
         <div class="qm-card-action-layout">
-            <button class="qm-action-btn" id="recallBtn">
+            <button class="qm-action-btn" id="recallBtn" onclick="servicePoint.recall()">
                 <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Recall">Recall</span>
             </button>
-            <button class="qm-action-btn" id="reinsertBtn">
+            <button class="qm-action-btn" id="reinsertBtn" onclick="servicePoint.reinsertClicked()">
                 <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Recycle">Recycle</span>
             </button>
-            <button class="qm-action-btn" id="transferBtn">
+            <button class="qm-action-btn" id="transferBtn" onclick="transfer.transferPressed()">
                 <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Transfer">Transfer</span>
             </button>
-            <button class="qm-action-btn" id="parkBtn">
+            <button class="qm-action-btn" id="parkBtn" onclick="userPool.parkPressed()">
                 <i class="qm-action-btn__icon icon-pause" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Park">Park</span>
             </button>
         </div>
         <div class="qm-card-action-layout">
-            <button class="qm-action-btn" id="noShowBtn" >
+            <button class="qm-action-btn" id="noShowBtn" onclick="servicePoint.noShow()" >
                 <i class="qm-action-btn__icon icon-no-show" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="No show">No show</span>
             </button>
