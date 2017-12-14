@@ -83,7 +83,12 @@ var servicePointPool = new function() {
         counterPoolList.empty();
 
         // Clean up popovers
-        $('body > .qm-popover--pool').remove();
+        if(window.counterPoolPopovers && window.counterPoolPopovers.length > 0) { 
+            _.each(window.counterPoolPopovers, function(popover) {
+                popover.instance.dispose();
+            });
+        }
+        window.counterPoolPopovers = [];
 
         // Templates
         var counterPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket" data-toggle="popover"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
@@ -97,6 +102,7 @@ var servicePointPool = new function() {
 
         // Get the data
         var counterPoolData = spService.get(url);
+
         if(counterPoolData.length > 0) {
             // Sort based on time in pool
             counterPoolData.sort(util.compareTimeInPool);
@@ -113,6 +119,7 @@ var servicePointPool = new function() {
                     options.disableCall = true;
                 }
                 var popover = new window.$Qmatic.components.popover.CounterPoolPopoverComponent(options);
+                window.counterPoolPopovers.push(popover);
                 popover.init();
             });
         } else {

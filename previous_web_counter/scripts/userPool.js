@@ -87,7 +87,12 @@ var userPool = new function() {
         userPoolList.empty();
 
         // Clean up popovers
-        $('body > .qm-popover--pool').remove();
+        if(window.userPoolPopovers && window.userPoolPopovers.length > 0) { 
+            _.each(window.userPoolPopovers, function(popover) {
+                popover.instance.dispose();
+            });
+        }
+        window.userPoolPopovers = [];
         
         // Templates
         var userPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket" data-toggle="popover"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
@@ -118,6 +123,7 @@ var userPool = new function() {
                     options.disableCall = true;
                 }
                 var popover = new window.$Qmatic.components.popover.UserPoolPopoverComponent(options);
+                window.userPoolPopovers.push(popover);
                 popover.init();
             });
         } else {
