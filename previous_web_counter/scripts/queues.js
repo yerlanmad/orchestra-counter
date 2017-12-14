@@ -211,7 +211,7 @@ var queues = new function() {
 			sessvars.state = servicePoint.getState(spService.post("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId));
 			queues.updateQueues(false);
 			if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-				util.showMessage(jQuery.i18n.prop("info.call.next.to.quick"));
+				util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
 			} else {
 				sessvars.statusUpdated = new Date();
 				servicePoint.updateWorkstationStatus();

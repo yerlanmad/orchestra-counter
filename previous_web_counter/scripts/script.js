@@ -966,7 +966,7 @@ var servicePoint = new function () {
 				+ params.servicePointId + "/visits/next"));
 			sessvars.statusUpdated = new Date();
 			if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-				util.showMessage(jQuery.i18n.prop("info.call.next.to.quick"));
+				util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
 			} else {
 				// TODO: Calling should always start a user service point
 				// session if none is started, implement in connectors
@@ -1278,7 +1278,7 @@ var servicePoint = new function () {
 				}
 			}
 			if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-				util.showMessage(jQuery.i18n.prop("info.call.next.to.quick"));
+				util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
 			}
 		}
 	};
