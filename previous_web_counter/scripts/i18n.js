@@ -323,7 +323,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         // Popover
         i18nSafeSelectorBtnAppend('.js-popover-call > span', 'action.pool.call');
-        i18nSafeSelectorBtnAppend('.js-popover-close > span', 'action.pool.close');
+        i18nSafeSelectorBtnAppend('.js-popover-close > span', 'application.sr.close');
 
         //footer
         sessvars.footer = translate.msg("label.poweredBy", 

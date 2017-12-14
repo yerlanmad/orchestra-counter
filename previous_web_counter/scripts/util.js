@@ -300,19 +300,20 @@ var util = new function() {
         }
 
         // Do not show more than 3 messages
-        if ($('#message').children().length > 2) {
-            $('#message').children().last().remove();
+        var $messageContainer = $('#message');
+        if ($messageContainer.children().length > 2) {
+            $messageContainer.children().last().remove();
         }
 
-        $("#message").css('left', 0);
-        $("#message").css("top", (parseInt($("#header").height())) + "px");
+        $messageContainer.css('left', 0);
+        $messageContainer.css("top", (parseInt($("#header").height())) + "px");
 
         var removeFunction = function() {
             toast.fadeOut(400, function() {
                 toast.remove();
-                if($("#message").children().length == 0) {
-                    $("#message").css("visibility", "hidden");
-                    $("#message").css("top", 0);
+                if($messageContainer.children().length == 0) {
+                    $messageContainer.css("visibility", "hidden");
+                    $messageContainer.css("top", 0);
                 }
             });
         };
@@ -326,11 +327,11 @@ var util = new function() {
         // Append text
         toast.find('.qm-toast__message').text(text);
         // Append close button
-        toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-action-btn--only-icon qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">Close</span></button>');
-        $('#message').css("visibility", "visible");
+        toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-action-btn--only-icon qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">' + jQuery.i18n.prop('application.sr.close') + '</span></button>');
+        $messageContainer.css("visibility", "visible");
 
         // Prepend and fadeIn
-        toast.prependTo($('#message'));
+        toast.prependTo($messageContainer);
         toast.fadeIn();
     };
 
@@ -387,14 +388,49 @@ var util = new function() {
      * @param paramArray
      */
     this.showCometDError = function(errorMessage, paramArray) {
+
+        var toast = $('<div class="qm-toast qm-toast--danger"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');
+        
         if(typeof paramArray === 'undefined' || !paramArray) {
-            var errorDiv = $('<div/>').text(translate.msg(errorMessage));
+            toast.find('.qm-toast__message').text(translate.msg(errorMessage));
+            //var errorDiv = $('<div/>').text(translate.msg(errorMessage));
         } else {
-            var errorDiv = $('<div/>').text(translate.msg(errorMessage, paramArray));
+            toast.find('.qm-toast__message').text(translate.msg(errorMessage, paramArray));
+            //var errorDiv = $('<div/>').text(translate.msg(errorMessage, paramArray));
         }
-        errorDiv.appendTo($('#error'));
-        var removeFunction = function() { errorDiv.remove(); };
-        var hideErrorTime = setTimeout(removeFunction, 15000);
+
+        var $messageContainer = $('#error');
+
+        if ($messageContainer.children().length > 2) {
+            $messageContainer.children().last().remove();
+        }
+
+        $messageContainer.css('left', 0);
+        $messageContainer.css("top", (parseInt($("#header").height())) + "px");
+
+        var removeFunction = function() {
+            toast.fadeOut(400, function() {
+                toast.remove();
+                if($messageContainer.children().length == 0) {
+                    $messageContainer.css("visibility", "hidden");
+                    $messageContainer.css("top", 0);
+                }
+            });
+        };
+        
+        // Hide after 15s
+        hideErrorTime = setTimeout(removeFunction, 15000);
+
+        // Set id
+        var messageId = "cometdErrorMessage_" + hideErrorTime;
+        toast.prop('id', messageId);
+
+        // Add close button
+        toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-action-btn--only-icon qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideErrorTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">' + jQuery.i18n.prop('application.sr.close') + '</span></button>');
+        $messageContainer.css("visibility", "visible");
+
+        toast.prependTo($messageContainer);
+        toast.fadeIn();
     };
 
     /**
@@ -413,16 +449,24 @@ var util = new function() {
     };
 
     var setError = function(text) {
-        var err = $("#error");
-        var errorTextDiv = $("<div/>").text(text).css({"width": "auto"});;
-        errorTextDiv.prop("id", 'text');
-        errorTextDiv.addClass("message errmsg");
-        err.css('left', 0);
-        err.css("top", (parseInt($("#header").height())) + "px");
+        var toast = $('<div class="qm-toast qm-toast--danger"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');
+        toast.prop('id', 'text');
+       
+        toast.find('.qm-toast__message').text(text);
 
-        errorTextDiv.appendTo(err);
+        var $messageContainer = $('#error');
 
-        err.css("visibility", "visible");
+        if ($messageContainer.children().length > 2) {
+            $messageContainer.children().last().remove();
+        }
+
+        $messageContainer.css('left', 0);
+        $messageContainer.css("top", (parseInt($("#header").height())) + "px");
+
+        $messageContainer.css("visibility", "visible");
+
+        toast.prependTo($messageContainer);
+        toast.fadeIn();
     };
 
     this.hideError = function() {
