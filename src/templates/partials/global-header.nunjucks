@@ -5,7 +5,7 @@
             <span class="sr-only">Home</span>
         </a>
         <div class="qm-header__brand-logo-container">
-            <img class="qm-header__brand-logo" src="/images/brand_logo_header.png" alt="" role="presentation"/>
+            <img class="qm-header__brand-logo" src="./images/brand_logo_header.png" alt="" role="presentation"/>
         </div>
         <span id="appName" class="qm-header__application-name"></span>
     </div>
