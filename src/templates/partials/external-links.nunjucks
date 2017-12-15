@@ -88,8 +88,8 @@
         <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
 
-        <script type="text/javascript" src="scripts/components/NavigationView/NavView.js"></script>
-        <script type="text/javascript" src="scripts/components/NavigationController/NavController.js"></script>
+        <script type="text/javascript" src="scripts/components/NavView.js"></script>
+        <script type="text/javascript" src="scripts/components/NavController.js"></script>
 
         <script type="text/javascript" src="scripts/components/modal/index.js"></script>
         <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
@@ -108,6 +108,11 @@
         <script type="text/javascript" src="scripts/components/popover/poolPopover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/userPoolPopover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/counterPoolPopover/index.js"></script>
+
+        <script type="text/javascript" src="scripts/components/card/index.js"></script>
+        <script type="text/javascript" src="scripts/components/card/CardBaseComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/visitCard/visitCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/closeCard/closeCard.js"></script>
         
         <link rel="stylesheet" href="css/main.css" />
 

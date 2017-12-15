@@ -299,7 +299,7 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 }
 /*************** Delivered services, module and dialog ********************/
 
-#deliveredServicesModule{float:right; width:32%;}
+/*#deliveredServicesModule{float:right; width:32%;}*/
 #multiServicesModule{float:right; width:32%; margin-top:9px;}
 #customMarksModule{float:right; width:32%; margin-top:9px; margin-right: 2%;}
 #selectDeliveredServiceTable .firstColumn{text-align:center;}

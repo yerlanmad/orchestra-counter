@@ -54,6 +54,7 @@ var unitMappings;
 
 // Navigation Controllers.... modals, cards, etc
 var modalNavigationController = new $Qmatic.components.NavController("#qm-modal-nav");
+var cardNavigationController = new $Qmatic.components.NavController('#qm-card-nav');
 
 var servicePoint = new function () {
 
@@ -1384,7 +1385,7 @@ var servicePoint = new function () {
 
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.closed'));
-
+			cardNavigationController.push($Qmatic.components.card.closeCard);
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 			modalNavigationController.push($Qmatic.components.modal.storeNext)
@@ -1394,7 +1395,7 @@ var servicePoint = new function () {
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.inactive'));
-
+			cardNavigationController.push($Qmatic.components.card.closeCard);
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.visitState == servicePoint.visitState.NO_CALLABLE_VISITS) {
 			$("#ticketNumber")
@@ -1561,6 +1562,7 @@ var servicePoint = new function () {
 						}, displayQueueTimeout * 1000);
 				}
 			}
+			cardNavigationController.push($Qmatic.components.card.visitCard);
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {

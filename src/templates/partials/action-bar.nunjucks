@@ -1,6 +1,7 @@
 <div class="qm-action-bar">
     <div class="qm-action-bar__left">
-        <button class="qm-action-btn qm-action-btn--large" id="walkDirectBtn" name="walkDirectButton">
+        <button class="qm-action-btn qm-action-btn--large" id="walkDirectBtn" name="walkDirectButton"
+        onclick="servicePoint.checkServicesLeft('walkDirectPressed')">
             <i class="qm-action-btn__icon icon-walk-in" aria-hidden="true"></i>
             <span class="qm-action-btn__text" title="Walk in">Walk in</span>
         </button>
@@ -14,7 +15,7 @@
         </div>
     </div>
     <div class="qm-action-bar__right">
-        <button class="qm-action-btn qm-action-btn--large" id="closeBtn" name="closeWorkstationButton">
+        <button class="qm-action-btn qm-action-btn--large" id="closeBtn" name="closeWorkstationButton" onclick="servicePoint.checkServicesLeft('handleClose')">
             <i class="qm-action-btn__icon icon-close-square" aria-hidden="true"></i>
             <span class="qm-action-btn__text" title="Close counter">Close counter</span>
         </button>

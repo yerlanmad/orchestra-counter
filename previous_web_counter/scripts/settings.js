@@ -37,10 +37,10 @@ function showModules() {
 	}
 
 	if (moduleDeliveredServicesEnabled == true) {
-		$('#deliveredServicesModule').css("visibility","visible");
-		$('#addDeliveredServiceLink').css("visibility","visible");
+		$('#deliveredServicesModule').show();
+		// $('#addDeliveredServiceLink').css("visibility","visible");
 	} else {
-//		$('#deliveredServicesModule').hide();
+		$('#deliveredServicesModule').hide();
 	}
 
 	if (moduleMultiServicesEnabled == true) {
@@ -55,19 +55,22 @@ function showModules() {
 	
 	
 	if (moduleCustomMarksEnabled == true) {
-		$('#customMarksModule').css("visibility","visible");
-		$('#addCustomMarkLink').css("visibility","visible");
+		// $('#customMarksModule').css("visibility","visible");
+		$('#addCustomMarkLink').show();
 		if (moduleDeliveredServicesEnabled == false) {
 			$('#deliveredServicesModule').hide();
 		}
 	} else {
-		$('#customMarksModule').hide();
+		// $('#customMarksModule').hide();
+		$('#addCustomMarkLink').hide();
 	}
 	
-	
+
 	if (moduleOutcomeEnabled == true) {
-		$('#selectOutcome').css("visibility","visible");
-		$('#selectOutcomeLabel').css("visibility","visible");
+		$('#selectOutcome').show();
+	}
+	else {
+		$('#selectOutcome').hide();
 	}
 	if (moduleServicePointPoolEnabled == true) {
 		$('#servicePointPoolModule').css("visibility","visible");
