@@ -57,8 +57,6 @@
                 <div class="qm-btns-container">
                 {{button.render(id="confirmSettingsBtnModal", type="qm-btn--primary", handler="servicePoint.confirmSettings();")}}
                 {{button.render(id="cancelSettingsBtnModal", type="qm-btn--secondary", handler="servicePoint.cancelConfirmSettings();")}}
-                {#<input id="confirmSettingsBtnModal" class="applySettingsButton" type="button" onclick="servicePoint.confirmSettings();"/>
-                <input id="cancelSettingsBtnModal" class="applySettingsButton" style="float:right;" type="button" onclick="servicePoint.cancelConfirmSettings();"/>#}
                 </div>
             </div>
         </div>

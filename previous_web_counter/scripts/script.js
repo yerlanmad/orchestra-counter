@@ -1011,7 +1011,8 @@ var servicePoint = new function () {
 	};
 
 	this.customerConfirmed = function () {
-		util.hideModal("confirmCustomer");
+		// util.hideModal("confirmCustomer");
+		modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer)
 		if (servicePoint.hasValidSettings()) {
 			var params = servicePoint.createParams();
 			params.visitId = sessvars.state.visit.id;
@@ -1024,14 +1025,16 @@ var servicePoint = new function () {
 	};
 
 	this.customerNotConfirmed = function () {
-		util.hideModal("confirmCustomer");
+		// util.hideModal("confirmCustomer");
 		if (servicePoint.hasValidSettings()) {
-			util.showModal("customerOptionsDialogue");
+			// util.showModal("customerOptionsDialogue");
+			modalNavigationController.push($Qmatic.components.modal.customerOptions)
 		}
 	};
 
 	this.closeConfirmWindow = function () {
-		util.hideModal("confirmCustomer");
+		// util.hideModal("confirmCustomer");
+		modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer)
 		if (servicePoint.hasValidSettings()) {
 			servicePoint.noShow();
 		}
@@ -1096,7 +1099,8 @@ var servicePoint = new function () {
 			sessvars.statusUpdated = new Date();
 			servicePoint.updateWorkstationStatus();
 		}
-		util.hideModal("waitingForCustomerDialogue");
+		//util.hideModal("waitingForCustomerDialogue");
+		modalNavigationController.popModal($Qmatic.components.modal.storeNext)
 	};
 
 	this.walkDirectPressed = function () {
@@ -1383,7 +1387,8 @@ var servicePoint = new function () {
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
-			util.showModal("waitingForCustomerDialogue");
+			modalNavigationController.push($Qmatic.components.modal.storeNext)
+			//util.showModal("waitingForCustomerDialogue");
 			$("#ticketNumber").html(
 				jQuery.i18n.prop('info.waiting.for.customer'));
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
@@ -1532,11 +1537,13 @@ var servicePoint = new function () {
 			$("#addCustomMarkLink").prop('disabled', false);
 		} else {
 			if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
-				util.showModal("confirmCustomer");
+				//util.showModal("confirmCustomer");
+				modalNavigationController.push($Qmatic.components.modal.confirmCustomer)
 			} else if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				// display spinner with text stating that the visit is about to
 				// be called
-				util.showModal("displayQueueSpinnerWindow");
+				// util.showModal("displayQueueSpinnerWindow");
+				modalNavigationController.push($Qmatic.components.modal.visitInDisplayQueue)
 				if (displayQueueTimeout > 0) {
 					displayQueueTimeoutId = window
 						.setTimeout(
@@ -2170,7 +2177,8 @@ var servicePoint = new function () {
 				if (sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 					// if (window.console) console.log("Case is store next, event
 					// is: " + processedEvent.E.evnt);
-					util.hideModal("waitingForCustomerDialogue");
+					modalNavigationController.popModal($Qmatic.components.modal.storeNext)
+					// util.hideModal("waitingForCustomerDialogue");
 					sessvars.state = servicePoint.getState(spService
 						.get("user/status"));
 					sessvars.statusUpdated = new Date();
@@ -2181,7 +2189,8 @@ var servicePoint = new function () {
 					util
 						.log('About to handle a visit call event when in state VISIT_IN_DISPLAY_QUEUE');
 					window.clearTimeout(displayQueueTimeoutId);
-					util.hideModal("displayQueueSpinnerWindow");
+					//util.hideModal("displayQueueSpinnerWindow");
+					modalNavigationController.popModal($Qmatic.components.modal.visitInDisplayQueue)
 					sessvars.state = servicePoint.getState(spService
 						.get("user/status"));
 					sessvars.statusUpdated = new Date();

@@ -148,7 +148,7 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
     border-radius: 5px 5px 5px 5px;
 }
 
-#displayQueueSpinnerText {
+/*#displayQueueSpinnerText {
     color:black;
     font-size:16px;
     line-height:19px;
@@ -159,7 +159,7 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
     border-radius:5px;
     float: left;
     width: 80%;
-}
+}*/
 
 .module{
     min-height:208px;

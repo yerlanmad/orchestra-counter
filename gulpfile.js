@@ -13,6 +13,8 @@ var sftp = require('gulp-sftp');
 
 var isWindows = process.platform === 'win32';
 var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
+
+// Remote Deployment Defaults
 var remoteDeploymentDefaultPath = "C:\\qmatic\\orchestra\\system\\custdeploy"
 var remoteDeploymentDefaultLangPath = "C:\\qmatic\\orchestra\\system\\conf\\lang"
 var remoteDeploymentDefaultHost = "localhost"
@@ -31,18 +33,17 @@ try {
     var targetOrchestraProtocol = config.proxy.protocol ? config.proxy.protocol : "http";
     var targetOrchestraUrl = targetOrchestraProtocol + '://' + targetOrchestraIp + ':' + targetOrchestraPort;
 
-    // Must be provided via config file
+    // Must be provided via config.gulp.json file
     var remoteDeployHost = config.remote_deploy.host ? config.remote_deploy.host : remoteDeploymentDefaultHost;
     var remoteDeployUsername = config.remote_deploy.username
     var remoteDeployPassword = config.remote_deploy.password
 
-
     console.log("Default Configuration Imported. Remote Orchestra is " + targetOrchestraUrl)
 } catch (ex) {
 
+    // For those who don't provide an external configuration, use the following default. 
+    // Assuming Orchestra is running on local machine
     var targetOrchestraUrl = "http://localhost:8080";
-    var remoteDeployHost = remoteDeploymentDefaultHost;
-
     console.log("You are using default gulp configuration. Remote Orchestra is " + targetOrchestraUrl)
 }
 
@@ -230,7 +231,9 @@ gulp.task('deploy:lang', function () {
         }));
 });
 
-
+/**
+ * Create development build in dist
+ */
 gulp.task('build', gulpsync.sync(
     [
         'clean:build',
@@ -245,6 +248,9 @@ gulp.task('build', gulpsync.sync(
         return console.log(`Build Created in folder ./dist`)
     })
 
+/**
+ * Create development build in dist and start watching files for changes
+ */
 gulp.task('build:dev', gulpsync.sync(
     [
         'clean:build',
@@ -261,7 +267,9 @@ gulp.task('build:dev', gulpsync.sync(
         return console.log(`Build Created in folder ./dist - Listening to changes in scripts/styles/templates...`)
     })
 
-
+/**
+ * Create war file for release
+ */
 gulp.task('build:war', gulpsync.sync(
     [
         'clean:build',
@@ -278,6 +286,11 @@ gulp.task('build:war', gulpsync.sync(
     ]), function () {
         return console.log(`workstationterminal.war file created in dist folder`)
     })
+
+/**
+ *  Deploy war and lang file to a remote Orchestra System
+ *  Note - For this to work you need to have openssh installed on the remote server.
+ */
 gulp.task('deploy', gulpsync.sync(
     [
         'clean:build',

@@ -1,0 +1,19 @@
+<!-- Imported partials -->
+{% import "./../../button.nunjucks" as button  %}
+
+<div class="qm-modal qm-hide" id="store-next-modal">
+    <div class="qm-modal__overlay"></div>
+    <div class="qm-modal__layout">
+        <div class="qm-card">
+            <div class="qm-card__header-section"></div>
+            <div class="qm-card__content-section">
+                <p id="waitingForCustomerPrompt"></p> 
+            </div>
+            <div class="qm-card__footer-section">
+                <div class="qm-btns-container">
+                {{button.render(id="cancelCall", type="qm-btn--secondary", handler="servicePoint.cancelWaitingForVisit();this.blur();")}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

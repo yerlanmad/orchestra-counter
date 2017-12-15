@@ -2,15 +2,17 @@
 window.$Qmatic.components.modal.HijackModal = function (selector) {
 
     // @Override
-    this.onInit = function (selector){
-        window.$Qmatic.components.modal.BaseModalComponent.prototype.onInit.call(this, selector);
-        this.hide()
-    }  
+    this.onInit = function (selector) {
+        if (selector) {
+            window.$Qmatic.components.modal.BaseModalComponent.prototype.onInit.call(this, selector);
+            this.hide()
+        }
+    }
 
-    this.cleanUp = function(){
+    this.cleanUp = function () {
         window.$Qmatic.components.modal.BaseModalComponent.prototype.cleanUp.call(this, selector);
         $(this.getSelector() + " #hijackUser").text("")
-    } 
+    }
 
     this.updateLoggedInUser = function (name) {
         $(this.getSelector() + " #hijackUser").text(name)

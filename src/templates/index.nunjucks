@@ -60,6 +60,11 @@
         {% include "partials/modals/profileSettings/profile-settings.nunjucks" %}
         {% include "partials/modals/noWaitingCustomers/no-waiting-customers.nunjucks" %}
         {% include "partials/modals/confirmHijack/confirm-hijack.nunjucks" %}
+
+        {% include "partials/modals/confirmCustomer/confirm-customer.nunjucks" %}
+        {% include "partials/modals/customerOptions/customer-options.nunjucks" %}
+        {% include "partials/modals/storeNext/store-next.nunjucks" %}
+        {% include "partials/modals/visitInDisplayQueue/visit-in-display-queue.nunjucks" %}
     </div>
     
 

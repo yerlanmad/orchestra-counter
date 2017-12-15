@@ -2,20 +2,22 @@
 window.$Qmatic.components.modal.ProfileSettingsModal = function (selector) {
 
     // @Override
-    this.onInit = function (selector){
-        window.$Qmatic.components.modal.BaseModalComponent.prototype.onInit.call(this, selector);
-        this.hide()
-    }  
+    this.onInit = function (selector) {
+        if (selector) {
+            window.$Qmatic.components.modal.BaseModalComponent.prototype.onInit.call(this, selector);
+            this.hide()
+        }
+    }
 
-    this.cleanUp = function(){
+    this.cleanUp = function () {
         window.$Qmatic.components.modal.BaseModalComponent.prototype.cleanUp.call(this, selector);
         $Qmatic.components.dropdown.branchSelection.clearError()
         $Qmatic.components.dropdown.counterSelection.clearError()
         $Qmatic.components.dropdown.profileSelection.clearError()
         this.clearError()
-    } 
+    }
 
-    this.onError = function(message) {
+    this.onError = function (message) {
         $(this.getSelector() + " .error-message").text(message).show()
     }
 

@@ -981,7 +981,7 @@
             </div>
 
 			<!-- Waiting for next Customer dialogue -->
-            <div id="waitingForCustomerDialogue" class="modalPage">
+            <!--<div id="waitingForCustomerDialogue" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="branchForm roundedCorner5">
@@ -992,10 +992,10 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 
 			<!-- Confirm Customer arrival dialogue -->
-            <div id="confirmCustomer" class="modalPage">
+            <!--<div id="confirmCustomer" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="branchForm roundedCorner5">
@@ -1019,7 +1019,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
 			<!-- Reinsert dialogue -->
             <div id="reinsertCustomerWindow" class="modalPage">
@@ -1233,7 +1233,7 @@
             </div>
 
             <!-- Display Queue Spinner Animation -->
-            <div id="displayQueueSpinnerWindow" class="modalPage">
+            <!--<div id="displayQueueSpinnerWindow" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="displayQueueSpinner roundedCorner5">
@@ -1241,7 +1241,7 @@
                         <div id="spinnerAnimation"></div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
         </div><!-- end modulesContainer -->
         <div id="message"></div>

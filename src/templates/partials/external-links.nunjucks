@@ -98,6 +98,10 @@
         <script type="text/javascript" src="scripts/components/modal/profileSettings/profileSettings.js"></script>
         <script type="text/javascript" src="scripts/components/modal/noCustomersWaiting/noCustomersWaiting.js"></script>
         <script type="text/javascript" src="scripts/components/modal/hijack/hijack.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/confirmCustomer/confirmCustomer.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/customerOptions/customerOptions.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/storeNext/storeNext.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/visitInDisplayQueue/visitInDisplayQueue.js"></script>
         
         
         <script type="text/javascript" src="scripts/components/popover/index.js"></script>
