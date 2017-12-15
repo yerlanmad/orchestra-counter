@@ -365,8 +365,10 @@ var servicePoint = new function () {
 			if (branches.length > 1) {
 				branchSelect.removeAttr('disabled');
 				isBranchSelectShown = true;
-			} else if (branches.length == 1) {
-				$Qmatic.components.dropdown.branchSelection.onSingleItem()
+				// TODO
+				//else if (branches.length == 1) {
+				 //$Qmatic.components.dropdown.branchSelection.onSingleItem()
+			//}
 			} else {
 				servicePoint.selectBranch(branches[0].id);
 				branchSelect.attr('disabled', '');
