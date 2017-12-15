@@ -8,3 +8,25 @@
         }
     }
 }
+
+
+#queuesModule {
+    height: 100%;
+
+    .dataTables_scrollBody {
+        height: calc(100% - 18px) !important;
+    }
+
+    #queues_wrapper {
+        height: 100%;
+    }
+
+    .dataTables_scroll {
+        height: 100%;
+    }
+
+    .dataTables_scrollHeadInner {
+        width: 100% !important;
+    }
+    
+}

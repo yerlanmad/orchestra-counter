@@ -76,8 +76,8 @@
     }
 
     &__list-item {
-        max-width: 153px;
-        width: 100%;    
+        min-width: 153px;
+        width: auto;
         margin-bottom: rem(8px);
         padding: rem(0 4px);
 

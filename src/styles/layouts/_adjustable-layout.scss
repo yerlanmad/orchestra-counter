@@ -1,0 +1,15 @@
+.qm-adjustable-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &__top {
+        flex: 0 0 auto;
+    }
+
+    &__bottom {
+        flex: 1 1 auto;
+        height: 100%;
+        overflow: hidden;
+    }
+}

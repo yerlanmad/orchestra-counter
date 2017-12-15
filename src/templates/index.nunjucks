@@ -36,8 +36,14 @@
 
             <!-- Qmatic Main Right -->
             <div class="qm-main__right">
-                {% include "partials/pools.nunjucks" %}
-                {% include "partials/queue-tabs.nunjucks" %}
+                <div class="qm-adjustable-layout">
+                    <div class="qm-adjustable-layout__top">
+                        {% include "partials/pools.nunjucks" %}
+                    </div>
+                    <div class="qm-adjustable-layout__bottom">
+                        {% include "partials/queue-tabs.nunjucks" %}
+                    </div>
+                </div>
             </div>
         </main>
         <footer class="qm-footer">
@@ -50,7 +56,6 @@
     <div class="qm-popovers qm-hide" aria-hidden="true">
         {% include "partials/popover-views/popover-action.nunjucks" %}
     </div>
-    <div class=""></div>
     {% include "partials/previous_counter.nunjucks" %}
 
 

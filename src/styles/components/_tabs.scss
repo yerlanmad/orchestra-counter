@@ -1,7 +1,10 @@
 .qm-tabs {
+    height: 100%;
+
     &__tablist {
         display: flex;
         border-bottom: 1px solid $tab-border-color;
+        margin-bottom: rem($global-standard-padding);
     }
 
     &__tab {
@@ -53,8 +56,8 @@
     }
 
     &__tab-panel {
-        padding-top: rem($global-standard-padding);
-
+        height: calc(100% - 57px);
+        
         &:focus {
             outline: 0;
         }
