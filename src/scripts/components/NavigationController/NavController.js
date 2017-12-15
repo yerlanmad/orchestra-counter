@@ -34,10 +34,10 @@ window.$Qmatic.components.NavController = function (navSelector) {
     }
 
     this.popAllModals = function () {
-        var context = this;
-        this.navigationStack.forEach(function (modal) {
-            context.navigationStack.pop().hide()
-        })
+        var count = this.navigationStack.length
+        for (var i = 0; i < count; i++) {
+            this.navigationStack.pop().hide()
+        }
         this.hide()
     }
 

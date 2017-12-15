@@ -7,7 +7,7 @@
         <div class="qm-card">
             <div class="qm-card__header-section"></div>
             <div class="qm-card__content-section">
-                <p id="confirmCustomerPrompt"></p>
+                <span id="confirmCustomerPrompt"></span>
             </div>
             <div class="qm-card__footer-section">
                 <div class="qm-btns-container">

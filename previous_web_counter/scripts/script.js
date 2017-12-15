@@ -1041,7 +1041,8 @@ var servicePoint = new function () {
 	};
 
 	this.cancelCustomerOptionsDialogue = function () {
-		util.hideModal("customerOptionsDialogue");
+		// util.hideModal("customerOptionsDialogue");
+		modalNavigationController.popAllModals()
 		if (servicePoint.hasValidSettings()) {
 			servicePoint.noShow();
 		}
@@ -1052,7 +1053,8 @@ var servicePoint = new function () {
 	 */
 	this.reinsertClicked = function () {
 		if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
-			util.hideModal("customerOptionsDialogue");
+			// util.hideModal("customerOptionsDialogue");
+			modalNavigationController.popAllModals()
 		}
 		if (servicePoint.hasValidSettings()
 			&& sessvars.state.userState == servicePoint.userState.SERVING

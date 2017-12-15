@@ -1,20 +1,55 @@
 <!-- Imported partials -->
 {% import "./../../button.nunjucks" as button  %}
 
-<div class="qm-modal qm-hide" id="confirm-customer-modal">
+<div class="qm-modal qm-hide" id="customer-options-modal">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
         <div class="qm-card">
             <div class="qm-card__header-section"></div>
             <div class="qm-card__content-section">
-                <p> Customer Options Dialog</p>
+                <p id="recallReinsertCallnext" class="dialogueMessage">
+                    <span id="notConfirmedOptions"></span>
+                    <strong onclick="modalNavigationController.popAllModals();servicePoint.recall();this.blur();">
+                    <span id="recallOption"></span></strong>
+                    <span id="notConfirmedRecallAppendCustomer"></span>
+                    <br/>
+                    <span id="notConfirmedRecallAppendOr"></span>
+                    <strong id="reinsertLink" onclick="servicePoint.reinsertClicked();this.blur();"><span id="reinsertOption"></span></strong>
+                    <span id="notConfirmedReinsertAppendIntoQueue"></span>
+                    <br/>
+                    <span id="notConfirmedReinsertAppendOr"></span>
+                    <strong id="callNextLink" onclick="modalNavigationController.popAllModals();servicePoint.noShow();servicePoint.callNext();this.blur();">
+                    <span id="callNextOption"></span>
+                    </strong>
+                    <span id="notConfirmedCallNextAppendCustomer"></span>
+                </p>
             </div>
-            <div class="qm-card__footer-section">
-                <div class="qm-btns-container">
-                {#{{button.render(id="customerArrivedYes", type="qm-btn--primary", handler="servicePoint.customerConfirmed();this.blur();")}}
-                {{button.render(id="customerArrivedNo", type="qm-btn--secondary", handler="servicePoint.customerNotConfirmed();this.blur();")}}#}
-                </div>
-            </div>
+            <div class="qm-card__footer-section qm-card__footer-section--space-between">
+        <div class="qm-card-action-layout">
+            <button class="qm-action-btn" id="customerOptionBack" onclick="modalNavigationController.pop()">
+                <i class="qm-action-btn__icon icon-previous" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Go back">Go back</span>
+            </button>
+            <button class="qm-action-btn" id="customerOptionCancel" onclick="servicePoint.cancelCustomerOptionsDialogue();this.blur();">
+                <i class="qm-action-btn__icon icon-close-circle" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Cancel">Cancel</span>
+            </button>
+        </div>
+        <div class="qm-card-action-layout">
+            <button class="qm-action-btn" id="customerOptionRecall" onclick="modalNavigationController.popAllModals();servicePoint.recall();this.blur();" >
+                <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Recall">Recall</span>
+            </button>
+            <button class="qm-action-btn" id="customerOptionRecycle" onclick="servicePoint.reinsertClicked();this.blur();" >
+                <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Recycle">Recycle</span>
+            </button>
+            <button class="qm-action-btn" id="customerOptionCallnext" onclick="modalNavigationController.popAllModals();servicePoint.noShow();servicePoint.callNext();this.blur();">
+                <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title="Call next">Call next</span>
+            </button>
+        </div>
+    </div>
         </div>
     </div>
 </div>
