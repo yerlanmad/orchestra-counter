@@ -9,16 +9,16 @@
             <div class="qm-card__content-section">
                 <p id="recallReinsertCallnext" class="dialogueMessage">
                     <span id="notConfirmedOptions"></span>
-                    <strong onclick="modalNavigationController.popAllModals();servicePoint.recall();this.blur();">
-                    <span id="recallOption"></span></strong>
+                    <strong>
+                    <span>recall</span></strong>
                     <span id="notConfirmedRecallAppendCustomer"></span>
                     <br/>
                     <span id="notConfirmedRecallAppendOr"></span>
-                    <strong id="reinsertLink" onclick="servicePoint.reinsertClicked();this.blur();"><span id="reinsertOption"></span></strong>
+                    <strong id="reinsertLink"><span>recycle</span></strong>
                     <span id="notConfirmedReinsertAppendIntoQueue"></span>
                     <br/>
                     <span id="notConfirmedReinsertAppendOr"></span>
-                    <strong id="callNextLink" onclick="modalNavigationController.popAllModals();servicePoint.noShow();servicePoint.callNext();this.blur();">
+                    <strong id="callNextLink">
                     <span id="callNextOption"></span>
                     </strong>
                     <span id="notConfirmedCallNextAppendCustomer"></span>
@@ -28,25 +28,25 @@
         <div class="qm-card-action-layout">
             <button class="qm-action-btn" id="customerOptionBack" onclick="modalNavigationController.pop()">
                 <i class="qm-action-btn__icon icon-previous" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Go back">Go back</span>
+                <span class="qm-action-btn__text" title="Go back"></span>
             </button>
-            <button class="qm-action-btn" id="customerOptionCancel" onclick="servicePoint.cancelCustomerOptionsDialogue();this.blur();">
+            <button class="qm-action-btn" id="cancelOptions" onclick="servicePoint.cancelCustomerOptionsDialogue();this.blur();">
                 <i class="qm-action-btn__icon icon-close-circle" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Cancel">Cancel</span>
+                <span class="qm-action-btn__text" title="Cancel"></span>
             </button>
         </div>
         <div class="qm-card-action-layout">
-            <button class="qm-action-btn" id="customerOptionRecall" onclick="modalNavigationController.popAllModals();servicePoint.recall();this.blur();" >
+            <button class="qm-action-btn" id="recallOption" onclick="modalNavigationController.popAllModals();servicePoint.recall();this.blur();" >
                 <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Recall">Recall</span>
+                <span class="qm-action-btn__text" title="Recall"></span>
             </button>
-            <button class="qm-action-btn" id="customerOptionRecycle" onclick="servicePoint.reinsertClicked();this.blur();" >
+            <button class="qm-action-btn" id="reinsertOption" onclick="servicePoint.reinsertClicked();this.blur();" >
                 <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Recycle">Recycle</span>
+                <span class="qm-action-btn__text" title="Recycle"></span>
             </button>
-            <button class="qm-action-btn" id="customerOptionCallnext" onclick="modalNavigationController.popAllModals();servicePoint.noShow();servicePoint.callNext();this.blur();">
+            <button class="qm-action-btn" id="customerOptionsCallNext" onclick="modalNavigationController.popAllModals();servicePoint.noShow();servicePoint.callNext();this.blur();">
                 <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Call next">Call next</span>
+                <span class="qm-action-btn__text" title="Call next"></span>
             </button>
         </div>
     </div>

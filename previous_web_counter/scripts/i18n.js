@@ -294,15 +294,17 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         //customer did not arrive window
         i18nSafeAppend("customerOptionsHeader", 'info.not.confirmed.customer.header');
         i18nSafePrepend("notConfirmedOptions", "info.not.confirmed.customer.options", " ");
-        i18nSafe("recallOption", "info.not.confirmed.customer.options.recall", " ");
+        i18nQmBtn("recallOption", "info.not.confirmed.customer.options.recall", " ");
         i18nSafe("notConfirmedRecallAppendCustomer", "info.not.confirmed.customer.options.recall.append.customer");
         i18nSafe("notConfirmedRecallAppendOr", "info.not.confirmed.customer.options.recall.append.or", " ");
-        i18nSafe("reinsertOption", "info.not.confirmed.customer.options.reinsert", " ");
+        i18nQmBtn("reinsertOption", "info.not.confirmed.customer.options.reinsert", " ");
         i18nSafe("notConfirmedReinsertAppendIntoQueue", "info.not.confirmed.customer.options.reinsert.append.into.queue");
         i18nSafe("notConfirmedReinsertAppendOr", "info.not.confirmed.customer.options.reinsert.append.or", " ");
         i18nSafe("callNextOption", "info.not.confirmed.customer.options.callnext", " ");
         i18nSafe("notConfirmedCallNextAppendCustomer", "info.not.confirmed.customer.options.callnext.append.customer", " ");
-        i18nSafe("cancelOptions", "info.not.confirmed.customer.options.cancel");
+        i18nQmBtn("cancelOptions", "info.not.confirmed.customer.options.cancel");
+        i18nQmBtn("customerOptionsCallNext", "info.not.confirmed.customer.options.callNext");
+        i18nQmBtn("customerOptionBack", "info.not.confirmed.customer.options.goBack");
 
         //reinsert customer window
         i18nSafeAppend("reinsertCustomerWindowHeader", 'info.reinsert.customer.header');
