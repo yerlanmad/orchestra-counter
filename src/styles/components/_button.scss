@@ -7,21 +7,15 @@
     cursor: pointer;
     font-size: rem($button-font-size);
     font-weight: $font-weight-light;
-    
-
     &__icon {
-
         font-size: rem(24px);
         margin-right: rem($global-standard-padding / 2);
-
         @at-root [dir='rtl'] & {
             margin-right: 0;
             margin-left: rem($global-standard-padding / 2);
         }
     }
-
     &__text {
-        
         &:after {
             display: block;
             content: attr(title);
@@ -31,82 +25,65 @@
             visibility: hidden;
         }
     }
-
     &:hover,
     &:focus {
         font-weight: $font-weight-medium;
         outline: 0;
     }
-
     &[disabled] {
         cursor: auto;
-        
         &:hover,
         &:focus {
             font-weight: $font-weight-light;
         }
     }
-
-    & + & {
+    &+& {
         margin-left: rem(16px);
-
         @at-root [dir='rtl'] & {
             margin-right: rem(16px);
             margin-left: 0;
         }
     }
-
-    
-    & + &--full,
-    &--full + & {
+    &+&--full,
+    &--full+& {
         margin-top: rem($global-standard-margin / 2);
         margin-left: 0;
-
         @at-root [dir='rtl'] & {
             margin-right: 0;
         }
     }
-
     &--primary {
         background: $primary-button-background;
         color: $primary-button-text-color;
         border-color: $primary-button-border-color;
-
         &:active {
             background: $primary-button-active-color;
             border-color: $primary-button-active-color;
         }
-
         &[disabled] {
             background: $button-disabled-color;
             border-color: $button-disabled-color;
         }
     }
-
     &--secondary {
         background: $secondary-button-background;
         color: $secondary-button-text-color;
         border-color: $secondary-button-border-color;
-
         &:active {
             color: $secondary-button-active-color;
         }
-
         &[disabled] {
             border-color: $button-disabled-color;
             color: $button-disabled-color;
         }
     }
-
     &--with-icon {
         text-align: left;
         align-items: center;
-
         @at-root [dir='rtl'] & {
             text-align: right;
         }
     }
-
     &--full {
         width: 100%;
     }
