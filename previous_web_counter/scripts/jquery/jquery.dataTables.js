@@ -1952,12 +1952,15 @@
         function _fnFeatureHtmlFilter ( oSettings )
         {
             var oPreviousSearch = oSettings.oPreviousSearch;
-
+            console.log(oSettings)
+            console.error(oSettings)
             var sSearchStr = oSettings.oLanguage.sSearch;
+            var sSearchPlaceholder = oSettings.oLanguage.sSearchPlaceholder ? oSettings.oLanguage.sSearchPlaceholder : "";
             sSearchStr = (sSearchStr.indexOf('_INPUT_') !== -1) ?
                 sSearchStr.replace('_INPUT_', '<input type="text" />') :
-                sSearchStr==="" ? '<input type="text" />' : sSearchStr+' <input type="text" />';
+                sSearchStr==="" ? '<input type="text" placeholder="' + "sSearchPlaceholder" + '"/>' : "sSearchStr"+' <input type="text"  placeholder="' + "sSearchPlaceholder" + '"/>';
 
+                console.error(sSearchStr)
             var nFilter = document.createElement( 'div' );
             nFilter.className = oSettings.oClasses.sFilter;
             nFilter.innerHTML = '<label>'+sSearchStr+'</label>';
@@ -13789,12 +13792,15 @@
         function _fnFeatureHtmlFilter ( oSettings )
         {
             var oPreviousSearch = oSettings.oPreviousSearch;
-
+            console.log(oSettings)
+            console.error(oSettings)
             var sSearchStr = oSettings.oLanguage.sSearch;
+            var sSearchPlaceholder = oSettings.oLanguage.sSearchPlaceholder ? oSettings.oLanguage.sSearchPlaceholder : "";
             sSearchStr = (sSearchStr.indexOf('_INPUT_') !== -1) ?
                 sSearchStr.replace('_INPUT_', '<input type="text" />') :
-                sSearchStr==="" ? '<input type="text" />' : sSearchStr+' <input type="text" />';
+                sSearchStr==="" ? '<input type="text" placeholder="' + sSearchPlaceholder + '"/>' : sSearchStr+' <input type="text"  placeholder="' + sSearchPlaceholder + '"/>';
 
+                
             var nFilter = document.createElement( 'div' );
             nFilter.className = oSettings.oClasses.sFilter;
             nFilter.innerHTML = '<label>'+sSearchStr+'</label>';

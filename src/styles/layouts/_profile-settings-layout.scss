@@ -11,10 +11,10 @@
         align-items: flex-end;
         .qm-btn--primary {
             font-size: inherit;
-            margin-left: 10px;
+            margin-left: rem(10px);
             @at-root [dir='rtl'] & {
-                margin-left: 0px;
-                margin-right: 10px;
+                margin-left: rem(0px);
+                margin-right: rem(10px);
             }
         }
         .qm-btn--secondary {

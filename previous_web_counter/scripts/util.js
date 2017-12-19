@@ -78,7 +78,9 @@ var util = new function() {
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sZeroRecords": "",
-                "sSearch": jQuery.i18n.prop('info.search')
+                // "sSearch": jQuery.i18n.prop('info.search')
+                "sSearch": "",
+                "sSearchPlaceholder": config.placeholder ? config.placeholder : ""
             },
             "bFilter": filter,
             "fnRowCallback": rowCallback,
@@ -127,7 +129,9 @@ var util = new function() {
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sZeroRecords": "",
-                "sSearch": jQuery.i18n.prop('info.search')
+                // "sSearch": jQuery.i18n.prop('info.search')
+                "sSearch": "",
+                "sSearchPlaceholder": config.placeholder ? config.placeholder : ""
             },
             "bFilter": config.filter,
             "fnRowCallback": config.rowCallback,
@@ -529,6 +533,7 @@ var util = new function() {
      */
     this.buildTableJsonNoUrl = function(config) {
         var table;
+
         table = $('#' + config.tableId).dataTable( {
             "bDestroy": true,
             "sScrollX": "100%",
@@ -538,7 +543,8 @@ var util = new function() {
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sZeroRecords": "",
-                "sSearch": jQuery.i18n.prop('info.search')
+                "sSearch": "",
+                "sSearchPlaceholder": config.placeholder ? config.placeholder : ""
             },
             "bFilter": config.filter,
             "fnRowCallback": config.rowCallback,

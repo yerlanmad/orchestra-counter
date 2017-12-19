@@ -26,6 +26,7 @@
                     <div id="qm-card-nav">
                      {% include "partials/card/closeCard/close-card.nunjucks" %} 
                         {% include "partials/card/visitCard/visit-card.nunjucks" %}
+                        {% include "partials/card/walkInCard/walk-in-card.nunjucks" %}
                      {#{% include "partials/ds-card.nunjucks" %} #}
                      {#{% include "partials/mark-card.nunjucks" %} #}
                      </div>

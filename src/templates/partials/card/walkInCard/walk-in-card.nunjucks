@@ -1,0 +1,45 @@
+{% extends "partials/card/card.nunjucks" %}
+{% import "partials/card/card-nav.nunjucks" as cardNav  %}
+
+{% block id %}id="walkInCard"{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-header">
+            <div class="qm-card-header__headline" id="walkInHeader">
+            </div>
+            <div class="qm-card-header__sub-heading" id="walkInSubHeader"> 
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+         <table id="walkDirectServices">
+                            <thead>
+                                <tr>
+                                    <th id="walkServiceExternalName"></th>
+                                    <th id="walkServiceInternalName"></th>
+                                    <th id="walkServiceId"></th>
+                                    <th id="walkServiceIntDescription"></th>
+                                    <th id="walkServiceExtDescription"></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+    </div>    
+{% endblock %}
+
+{% block footer %}
+    <div class="qm-card__footer-section qm-card__footer-section--space-between">
+        <div class="qm-card-action-layout">
+            <button class="qm-action-btn"  id="cancelWalkIn" onclick="cardNavigationController.pop();this.blur();">
+                <i class="qm-action-btn__icon icon-close-circle" aria-hidden="true"></i>
+                <span class="qm-action-btn__text" title=""></span>
+            </button>
+        </div>
+        <div class="qm-card-action-layout">
+        </div>
+    </div>
+{% endblock %}

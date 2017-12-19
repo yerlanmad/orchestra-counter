@@ -1119,7 +1119,7 @@
             </div>
             
             <!-- Walkdirect dialogue -->
-            <div id="walks" class="modalPage">
+            <!--<div id="walks" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="branchForm roundedCorner5">
@@ -1138,7 +1138,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>-->
             
 			<!-- New Chat Partner dialogue -->
             <div id="chatPartner" class="modalPage">

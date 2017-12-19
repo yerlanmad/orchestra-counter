@@ -1,0 +1,110 @@
+#walkInCard {
+    .qm-card {
+        &__header-section {
+            .qm-card-header {
+                &__headline {
+                    color: $dark-transparent82;
+                    font-size: rem(28px);
+                    font-weight: 300;
+                    line-height: rem(32px);
+                    margin-bottom: rem(15px);
+                }
+                &__sub-heading {
+                    color: $dark-transparent82;
+                    font-size: rem(20px);
+                    font-weight: 300;
+                    line-height: rem(24px);
+                    margin-bottom: rem(12px);
+                    @at-root [dir='rtl'] & {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+        &__content-section {
+            input {
+                box-sizing: border-box;
+                height: rem(45px);
+                border: 1px solid $dark-transparent12;
+                box-shadow: 0 0 4px 0 $dark-transparent04;
+                color: $dark-transparent42;
+                font-size: rem(18px);
+                padding: rem(10px) 0;
+                font-weight: 300;
+                &:focus {
+                    outline: 0;
+                }
+            }
+            .dataTables_filter {
+                padding-left: 0px;
+                padding-right: 0px;
+                label {
+                    input {
+                        padding-right: rem(35px);
+                        padding-left: rem(10px);
+                        @at-root [dir='rtl'] & {
+                            padding-left: rem(35px);
+                            padding-right: rem(10px);
+                        }
+                    }
+                    &:after {
+                        background: transparent;
+                        content: "\e92f";
+                        font-family: 'icomoon';
+                        font-size: rem(24px);
+                        position: absolute;
+                        right: rem(12px);
+                        left: auto;
+                        top: rem(11px);
+                        color: $dark-transparent42;
+                        @at-root [dir='rtl'] & {
+                            left: rem(12px);
+                            right: auto;
+                        }
+                    }
+                }
+            }
+            .dataTable {
+                color: $dark-transparent82;
+                font-family: $font-family;
+                font-size: rem(18px);
+                font-weight: 300;
+                width: 100% !important;
+                table-layout: fixed;
+                tbody {
+                    max-height: rem(300px);
+                    height: rem(300px);
+                    overflow: scroll;
+                    overflow-x: hidden;
+                    display: block;
+                    td {
+                        padding: rem(10px) !important;
+                        text-align: left !important;
+                        background: $white;
+                        border: none !important;
+                        width: 100%;
+                        display: block;
+                        &:hover {
+                            background: $dark-transparent04;
+                        }
+                        @at-root [dir='rtl'] & {
+                            text-align: right !important;
+                        }
+                    }
+                    tr {
+                        border: none;
+                        background: $white;
+                        display: block;
+                        width: 100%;
+                    }
+                }
+            }
+            .dataTables_info{
+                display: none;
+            }
+        }
+        &__footer-section {
+            margin-top: rem(30px);
+        }
+    }
+}

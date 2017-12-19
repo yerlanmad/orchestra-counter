@@ -45,7 +45,7 @@
         <!-- Per R5, we don't use DWR for server push of events anymore -->
 
 
-        <script src="https://harvesthq.github.io/chosen/chosen.jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.jquery.min.js"></script>
 
         
 
@@ -113,6 +113,7 @@
         <script type="text/javascript" src="scripts/components/card/CardBaseComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/visitCard/visitCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/closeCard/closeCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/walkInCard/walkInCard.js"></script>
         
         <link rel="stylesheet" href="css/main.css" />
 

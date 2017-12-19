@@ -1113,7 +1113,8 @@ var servicePoint = new function () {
 																		 * !hasMark())
 																		 */) {
 
-			util.showModal("walks");
+			// util.showModal("walks");
+			cardNavigationController.push($Qmatic.components.card.walkInCard)
 			if (typeof walkTable === "undefined") {
 				var columns = [
 				/* Service ext name */{
@@ -1132,7 +1133,9 @@ var servicePoint = new function () {
 					},
 				/* Service int desc */{
 						"sClass": "lastColumn",
-						"mDataProp": "internalDescription"
+						"mDataProp": "internalDescription",
+						"bSearchable": false,
+						"bVisible": false
 					},
 				/* Service ext desc */{
 						"bSearchable": false,
@@ -1144,11 +1147,11 @@ var servicePoint = new function () {
 					+ "/services?call=" + t;
 				var headerCallback = function (nHead, aasData, iStart, iEnd,
 					aiDisplay) {
-					nHead.style.borderBottom = "1px solid #c0c0c0";
-					nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n
-						.prop('info.service.name');
-					nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n
-						.prop('info.service.description');
+					// nHead.style.borderBottom = "1px solid #c0c0c0";
+					// nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n
+					// 	.prop('info.service.name');
+					// nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n
+					// 	.prop('info.service.description');
 				};
 				var rowCallback = function (nRow, aData, iDisplayIndex) {
 					/* Set onclick action */
@@ -1162,8 +1165,9 @@ var servicePoint = new function () {
 					"columns": columns,
 					"filter": true,
 					"headerCallback": headerCallback,
-					"scrollYHeight": "300px",
-					"infoFiltered": "info.filtered.fromEntries"
+					"scrollYHeight": "auto",
+					"infoFiltered": "info.filtered.fromEntries",
+					"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search")
 				});
 			}
 			var sorting = [[1, 'asc']];
@@ -1289,7 +1293,8 @@ var servicePoint = new function () {
 	};
 
 	this.hideWalks = function () {
-		util.hideModal("walks");
+		// util.hideModal("walks");
+		cardNavigationController.pop()
 	};
 
 	this.notesPressed = function () {

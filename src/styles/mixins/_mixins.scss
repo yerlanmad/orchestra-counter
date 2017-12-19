@@ -148,23 +148,23 @@ $rem-px-only: false !default;
     .qm-card__header-section {
         color: $dark-transparent82;
         font-family: $font-family;
-        font-size: 28px;
+        font-size: rem(28px);
         font-weight: 300;
-        line-height: 32px;
-        margin-bottom: 25px;
+        line-height: rem(32px);
+        margin-bottom: rem(18px);
         @at-root [dir='rtl'] & {
             text-align: right;
         }
     }
     .qm-card__content-section {
-        padding: 25px 0;
-        font-size: 24px;
+        padding: rem(25px) 0 rem(10px) 0;
+        font-size: rem(24px);
         font-weight: 300;
         color: $dark-transparent82;
     }
     .qm-btns-container {
         width: 100%;
-        font-size: 18px;
+        font-size: rem(18px);
         padding: 0;
     }
 }

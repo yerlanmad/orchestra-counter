@@ -126,6 +126,10 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         //walk direct form
         i18nSafeAppend("walkDirectServiceHeader", 'action.walk.direct');
+        i18nSafeAppend("walkInHeader", 'info.card.header.walkin');
+        i18nSafeAppend("walkInSubHeader", 'info.card.sub.header.walkin');
+        i18nQmBtn("cancelWalkIn", 'button.cancel');
+        
 
         //transfer form
         i18nSafeAppend("transferServiceHeader", 'action.transfer');
