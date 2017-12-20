@@ -62,7 +62,9 @@ var deliveredServices = new function() {
         if(typeof deliveredServicesTable != 'undefined') {
             deliveredServicesTable.fnClearTable();
             if(sessvars.state.visit != null && sessvars.state.visit.currentVisitService.visitDeliveredServices != null) {
-                deliveredServicesTable.fnAddData(sessvars.state.visit.currentVisitService.visitDeliveredServices);
+                if (sessvars.state.visit.currentVisitService.visitDeliveredServices.length > 0) {
+                    deliveredServicesTable.fnAddData(sessvars.state.visit.currentVisitService.visitDeliveredServices);
+                }
             }
         } else {
             var columns = [

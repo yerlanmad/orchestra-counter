@@ -72,8 +72,12 @@
                 width: 100% !important;
                 table-layout: fixed;
                 tbody {
-                    max-height: rem(300px);
-                    height: rem(300px);
+                    max-height: rem(calc(100vh - 600px));
+                    height: rem(calc(100vh - 600px));
+                    @media screen and (max-width: #{map-get($grid-breakpoints, 'md')}) {
+                        max-height: rem(300px);
+                        height: rem(300px);
+                    }
                     overflow: scroll;
                     overflow-x: hidden;
                     display: block;
@@ -99,7 +103,7 @@
                     }
                 }
             }
-            .dataTables_info{
+            .dataTables_info {
                 display: none;
             }
         }

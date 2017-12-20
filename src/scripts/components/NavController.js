@@ -5,12 +5,16 @@ window.$Qmatic.components.NavController = function (navSelector) {
     this.push = function (modalComponent) {
         if (!(modalComponent instanceof window.$Qmatic.components.NavView))
             throw new Error("You are trying to stack a component that does not comform to the NavView protocol (" + typeof modalComponent + ")")
-        this.hideTopModalComponent()
-        if (this.navigationStack.length == 0)
-            this.show()
-        this.navigationStack.push(modalComponent)
-        // Modal components are hidden by default when initialized, so nav controller needs to show it now!
-        modalComponent.show()
+
+        // Don't stack components that are already on the top
+        if (this.navigationStack[this.navigationStack.length - 1] !== modalComponent) {
+            this.hideTopModalComponent()
+            if (this.navigationStack.length == 0)
+                this.show()
+            this.navigationStack.push(modalComponent)
+            // Modal components are hidden by default when initialized, so nav controller needs to show it now!
+            modalComponent.show()
+        }
     }
 
     this.pop = function () {
