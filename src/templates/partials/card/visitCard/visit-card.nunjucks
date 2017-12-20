@@ -98,29 +98,29 @@
 {% block footer %}
     <div class="qm-card__footer-section qm-card__footer-section--space-between">
         <div class="qm-card-action-layout">
-            <button class="qm-action-btn" id="recallBtn" onclick="servicePoint.recall()">
+            <button class="qm-action-btn" id="recallBtn" onclick="servicePoint.recall();this.blur();">
                 <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Recall">Recall</span>
             </button>
-            <button class="qm-action-btn" id="reinsertBtn" onclick="servicePoint.reinsertClicked()">
+            <button class="qm-action-btn" id="reinsertBtn" onclick="servicePoint.reinsertClicked();this.blur();">
                 <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Recycle">Recycle</span>
             </button>
-            <button class="qm-action-btn" id="transferBtn" onclick="transfer.transferPressed()">
+            <button class="qm-action-btn" id="transferBtn" onclick="transfer.transferPressed();this.blur();">
                 <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Transfer">Transfer</span>
             </button>
-            <button class="qm-action-btn" id="parkBtn" onclick="userPool.parkPressed()">
+            <button class="qm-action-btn" id="parkBtn" onclick="userPool.parkPressed();this.blur();">
                 <i class="qm-action-btn__icon icon-pause" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="Park">Park</span>
             </button>
         </div>
         <div class="qm-card-action-layout">
-            <button class="qm-action-btn" id="noShowBtn" onclick="servicePoint.noShow()" >
+            <button class="qm-action-btn" id="noShowBtn" onclick="servicePoint.noShow();this.blur();" >
                 <i class="qm-action-btn__icon icon-no-show" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="No show">No show</span>
             </button>
-            <button class="qm-action-btn" id="endVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed')">
+            <button class="qm-action-btn" id="endVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();">
                 <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title="No show">Finish</span>
             </button>
