@@ -13,11 +13,12 @@ var queues = new function() {
         if(!servicePoint.getWorkstationOffline() && servicePoint.hasValidSettings()) {
 
             if(typeof queuesTable !== 'undefined' && typeof myQueuesTable !== 'undefined') {
-
+                
                 // All Queues
                 queuesTable.fnClearTable();
                 var queuesData = spService.get("branches/" + sessvars.branchId + "/queues");
                 queuesTable.fnAddData(queuesData);
+                allQueuesInitFn(queuesData);
                 queuesTable.fnSort(SORTING);
                 queuesTable.fnAdjustColumnSizing();
 
@@ -25,6 +26,7 @@ var queues = new function() {
                 myQueuesTable.fnClearTable();
                 var myQueuesData = myQueuesFilterFn(queuesData);
                 myQueuesTable.fnAddData(myQueuesData);
+                myQueuesInitFn(myQueuesData);
                 myQueuesTable.fnSort(SORTING);
                 myQueuesTable.fnAdjustColumnSizing();
             } else {
@@ -120,6 +122,11 @@ var queues = new function() {
         setNumberOfWaitingCustomers('#myQueuesTab .qm-tab-information__text', waitingCustomers);
     };
 
+    var queueDetailInitFn = function (queues) {
+        var waitingCustomers = queues.length;
+        setNumberOfWaitingCustomers('#queueDetailView .qm-tab-information__text', waitingCustomers);
+    };
+
     var getNumberOfWaitingCustomers = function (queues) {
         return _.reduce(queues, function(sum, queue) {
             return sum + queue.customersWaiting; 
@@ -144,7 +151,7 @@ var queues = new function() {
             //util.showModal("ticketsDialogue");
             $('#queuesModule').hide();
             $('#queueDetailView').show();
-            window.queuePopovers = [];
+            
             if(typeof ticketsTable !== 'undefined') {
                 //empty the tickets table and populate with new data from server if table is not created
                 ticketsTable.fnClearTable();
@@ -153,6 +160,7 @@ var queues = new function() {
                 params.queueId = sessvars.clickedQueueId;
                 var tickets = spService.get("branches/" + params.branchId + "/queues/" + params.queueId + "/visits/full");
                 ticketsTable.fnAddData(tickets);
+                queueDetailInitFn(tickets);
                 ticketsTable.fnAdjustColumnSizing();
             } else {
                 var columns = [
@@ -226,13 +234,12 @@ var queues = new function() {
                         }
 
                         var popover = new window.$Qmatic.components.popover.QueuePopoverComponent(options);
-                        window.queuePopovers.push(popover);
                         popover.init();
 
                         var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
                     }
 
-                    if(aData.parameterMap['customers'] !== undefined) {
+                    if(aData.parameterMap && aData.parameterMap['customers'] !== undefined) {
                         $('td:eq(1)', nRow).html(aData.parameterMap['customers']);
                     }
 
@@ -243,7 +250,7 @@ var queues = new function() {
                 //create new table since not defined
                 ticketsTable = util.buildTableJson({"tableId": "tickets", "url": url, "rowCallback": rowCallback,
                     "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "100%",
-                    "emptyTableLabel": "info.queue.tickets.empty"});
+                    "emptyTableLabel": "info.queue.tickets.empty", "initFn": queueDetailInitFn});
             }
 
             //kill old event handlers

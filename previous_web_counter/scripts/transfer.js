@@ -850,9 +850,9 @@ var transfer = new function() {
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
             }
             //destroy old event handlers
-            $('tbody tr td span button.transferTicketFirst', $(selector)).die('click');
+            $('tbody tr td button.transferTicketFirst', $(selector)).die('click');
             //make new ones
-            $('tbody tr td span button.transferTicketFirst', $(selector)).live('click',function(){
+            $('tbody tr td button.transferTicketFirst', $(selector)).live('click',function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
                 transferVisitInQueueToServicePointPoolClicked("FIRST", aData, visitId);
@@ -899,6 +899,7 @@ var transfer = new function() {
     };
 
     var transferVisitInQueueToServicePointPoolClicked = function(sortType, aRowData, visitId) {
+        
         if(servicePoint.hasValidSettings()) {
             var transferParams = servicePoint.createParams();
             transferParams.servicePointId = aRowData.id;
