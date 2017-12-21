@@ -1245,20 +1245,23 @@ var servicePoint = new function () {
 						sessvars.statusUpdated = new Date();
 					}
 				} else {
-					util.hideModal("walks");
+					cardNavigationController.popModal($Qmatic.components.card.walkInCard)
+					// util.hideModal("walks");
 					return;
 				}
 			}
 			if (sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
 				util.showError(jQuery.i18n.prop("error.not.loggedin"));
-				util.hideModal("walks");
+				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
+				// util.hideModal("walks");
 				clearOngoingVisit();
 				$("#closeBtn").toggleClass("customButtonSmallDisabled");
 				$("#closeBtn").prop('disabled', true);
 				return;
 			}
 			if (!sessvars.state.servicePointState == servicePoint.servicePointState.OPEN) {
-				util.hideModal("walks");
+				// util.hideModal("walks");
+				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
 				sessvars.state = servicePoint.getState(spService
 					.putCallback("branches/" + walkParams.branchId
 					+ "/servicePoints/" + walkParams.servicePointId
@@ -1277,7 +1280,8 @@ var servicePoint = new function () {
 				}
 			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 				|| sessvars.state.userState == servicePoint.userState.SERVING) {
-				util.hideModal("walks");
+				// util.hideModal("walks");
+				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
 				if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
 					sessvars.currentCustomer = null;
 					spPoolUpdateNeeded = false;
