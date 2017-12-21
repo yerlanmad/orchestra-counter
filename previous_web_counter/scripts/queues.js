@@ -164,8 +164,8 @@ var queues = new function() {
                         "mDataProp": "ticketId"},
                     /* Customer name */
                         {"sClass": "qm-table__middle-column",
-                        "mDataProp": null},
-
+                        "mData": null,
+                        "sDefaultContent": ""},
                     /* Actions */      {"sClass": "qm-table__middle-column",
                         "mDataProp": "currentVisitService.serviceExternalName"},
                     /* Waiting time */      {"sClass": "qm-table__last-column",
