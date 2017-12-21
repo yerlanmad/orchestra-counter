@@ -1,0 +1,1262 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!--
+    
+    All modifications to this unit type must be added here.
+
+    The version number of the unit type template (utt) has the format X.Y.Z.n, for example 6.2.0.0, where:
+    -   X.Y stands for the Orchestra version, e.g. 6.2, 6.1 etc. First version of an utt for Orchestra 6.2
+        has version 6.2.0.0
+    -   Z stands for fix version, incremented for each update. First version of an utt that is 6.2.0.0 gets
+        version 6.2.1.0 when it is updated.
+    -   n is the serial number that should be updated as soon as the utt has been adapted/customised to better
+        suit your needs. Customising an utt that has version 6.2.1.0 receives version 6.2.1.1, then 6.2.1.2 etc.
+    -   When several versions of Orchestra are updated with the same utt, the lowest version number should be used. If,
+        for example, a new utt is added to version 6.0, 6.1 and 6.2 of Orchestra, it should have version number 6.0.0.0
+        in all Orchestra versions.
+
+    Below is a table with examples of how versions should be set:
+    | 6.0     | 6.1     | 6.2    | Fix                 |
+    |=========|=========|========|=====================|
+    | 2.3.0   | 2.3.0   | 2.3.0  | Starting point      |
+    |         |         | 6.2.0  | A (only 6.2)        |
+    |         | 6.1.0   | 6.2.1  | B (6.1 and 6.2)     |
+    |=========|=========|========|=====================|
+    | 2.3.0   | 2.3.0   | 2.3.0  | Starting point      |
+    |         | 6.1.0   | 6.1.0  | C (6.1 and 6.2)     |
+    |         |         | 6.2.0  | D (only 6.2)        |
+    |=========|=========|========|=====================|
+    | 2.3.0   | 2.3.0   | 2.3.0  | Starting point      |
+    | 6.0.0   | 6.0.0   | 6.0.0  | E (6.0, 6.1 and 6.2)|
+    |         | 6.1.0   | 6.1.0  | F (6.1 and 6.2)     |
+    |         |         | 6.2.0  | G (only 6.2)        |
+    | 6.0.1   | 6.1.1   | 6.2.1  | H (6.0, 6.1 and 6.2)|
+
+      
+    Version history in descending order:
+    ====================================
+    Version    Date         Comments                                  Signature
+    =========  ===========  ========================================  =========
+	4.0.0.0    2018-12-20   label and tooltip tweaks for reskin       lakcal
+	
+    2.13.0     2016-12-02   Added correction for QP-5223              olacar
+
+    2.12.0     2016-11-18   USER_SERVICE_POINT_SESSION_END is now     johper, marwah
+                            only sent to the affected user
+
+    2.11.0     2016-06-01   Changed from unit event                   petbac
+                            PUBLIC.USER_SERVICE_POINT_WORK_PROFILE_SET
+                            to SET_WORK_PROFILE
+
+    2.10.0     2016-04-05   Added changes for story 113454543         malgus
+
+    2.9.0      2016-03-18   Added correction for QP-4745              olacar
+    
+    2.8.0      2015-01-13   Improved correction for QP-3808           olacar
+
+    2.7.0      2014-12-18   Added changes for QP-4101                 olacar
+
+    2.6.0      2014-11-07   Added correction for QP-2307              olacar
+
+    2.5.0      2014-10-30   Added correction for QP-3808              olacar
+
+    2.4.0      2014-02-25   Added Force selection                     olacar
+                            Added support for configurable
+                            reception and terminal
+
+    2.3.0      2013-12-12   First version for R5.3                    olacar
+    ===========================================================================  
+
+-->
+
+<unit name="WebServicePoint_Expressia_D924"
+      frameworkVersion="2"
+      unitVersion="4.0.0.0"
+      type="SERVICE_POINT"
+      defaultNoUnits="1"
+      maxNoUnits="127"
+      description="Web Servicepoint Terminal with Expressia and a display D924">
+
+  <parameters>
+  
+    <parameter name="unitId"
+      sortOrder="1"
+      type="UnitId"
+      defaultValue="ServicePoint_Expressia_D924"
+      label="Unit id"
+      description="Unique id of the unit"
+      writeLevel="profile"
+      readLevel="branch"
+      privilege="install:adminAdmin"
+      size="20"/>
+    
+    
+        <parameter name="minTimeBetweenCalls"
+          sortOrder="6"
+          type="Integer"
+          defaultValue="3"
+          label="Min time between call next"
+          description="Defines the time that must elapse between two call next on a service point for a specific user (seconds)"
+          writeLevel="global"
+          privilege="install:adminAdmin"
+          size="4" />
+        <parameter name="storeNext"
+          sortOrder="3"
+          type="Boolean"
+          defaultValue="false"
+          label="Store next"
+          description="Defines if store next is enabled or not"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="confirmNeeded"
+          sortOrder="4"
+          type="Boolean"
+          defaultValue="false"
+          label="Confirm Needed"
+          description="The visit needs to be confirmed that it has arrived"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="autoClose"
+          sortOrder="8200"
+          type="Integer"
+          defaultValue="1800"
+          label="Auto close"
+          description="Automatically close service point after this time of inactivity (seconds)"
+          writeLevel="profile"
+          privilege="install:adminAdmin"
+          size="4" />
+        <parameter name="singleSession"
+          sortOrder="19999"
+          type="Boolean"
+          defaultValue="true"
+          label="Single session"
+          description="Defines if more than one user can be logged in at the same service point."
+          privilege="install:adminAdmin"/>
+      
+    
+        <parameter name="mdCus"
+          type="Boolean"
+          defaultValue="true"
+          label="Customer information"
+          description="Customer information edit/selection"
+          sortOrder="5010"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="mdMultiServ"
+          type="Boolean"
+          defaultValue="false"
+          label="Multi Services"
+          description="The Multi Services Panel and Popup"
+          sortOrder="5012"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="mdServPool"
+          type="Boolean"
+          defaultValue="true"
+          label="Counter Pool view"
+          description="Counter Pool view"
+          sortOrder="5014"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="mdUserPool"
+          type="Boolean"
+          defaultValue="true"
+          label="Staff Pool view"
+          description="Staff Pool view"
+          sortOrder="5015"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="mdQueues"
+          type="Boolean"
+          defaultValue="true"
+          label="Queues view"
+          description="Queues Overview"
+          sortOrder="5016"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="mdMarks"
+          type="Boolean"
+          defaultValue="false"
+          label="Custom Marks"
+          description="To be able to add Marks"
+          sortOrder="5017"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="marksType"
+          type="String"
+          defaultValue="Marks"
+          label="Marks type"
+          description="Mark type to be used for the custom Marks"
+          sortOrder="5018"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="multiMarks"
+          type="Boolean"
+          defaultValue="false"
+          label="Multi Marks"
+          description="Add a x number of Marks at once"
+          sortOrder="5019"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="trUserPool"
+          type="Boolean"
+          defaultValue="true"
+          label="Staff Pool transfer controls"
+          description="Make transfer to Staff Pool Controls visible"
+          sortOrder="5020"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="trServPool"
+          type="Boolean"
+          defaultValue="true"
+          label="Counter Pool transfer controls"
+          description="Make transfer to Counter Pool Controls visible"
+          sortOrder="5021"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnTransfer"
+          type="Boolean"
+          defaultValue="true"
+          label="Transfer Button"
+          description="Transfer button"
+          sortOrder="5022"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnRecycle"
+          type="Boolean"
+          defaultValue="true"
+          label="Recycle Button"
+          description="Button to Recycle a visit"
+          sortOrder="5023"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnRecall"
+          type="Boolean"
+          defaultValue="true"
+          label="Recall Button"
+          description="Button to Recall a visit"
+          sortOrder="5023"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnNotes"
+          type="Boolean"
+          defaultValue="false"
+          label="Notes Button"
+          description="Edit/Add Notes Button"
+          sortOrder="5024"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnPark"
+          type="Boolean"
+          defaultValue="false"
+          label="Park Button"
+          description="Send a customer to your User Pool"
+          sortOrder="5025"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnNoShows"
+          type="Boolean"
+          defaultValue="true"
+          label="No Show Button"
+          description="No Show button"
+          sortOrder="5026"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnWalkDirect"
+          type="Boolean"
+          defaultValue="true"
+          label="Walk In button"
+          description="Walk In button"
+          sortOrder="5027"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnQueueRemove"
+          type="Boolean"
+          defaultValue="true"
+          label="Remove from Queue"
+          description="Remove a specific ticket from the queue"
+          sortOrder="5028"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnQueueTransfer"
+          type="Boolean"
+          defaultValue="true"
+          label="Transfer from Queue"
+          description="Transfer a specific ticket from the queue"
+          sortOrder="5029"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnQueueCall"
+          type="Boolean"
+          defaultValue="true"
+          label="Call from Queue"
+          description="Call a specific ticket from the queue"
+          sortOrder="5030"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnTransferFirst"
+          type="Boolean"
+          defaultValue="true"
+          label="Transfer First"
+          description="Transfer to the first position in the queue"
+          sortOrder="5031"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnTransferLast"
+          type="Boolean"
+          defaultValue="true"
+          label="Transfer Last"
+          description="Transfer to the last position in the queue"
+          sortOrder="5032"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnTransferSort"
+          type="Boolean"
+          defaultValue="true"
+          label="Transfer Sorted"
+          description="Transfer sorted according to enter time into the queue"
+          sortOrder="5033"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="allowUserPoolTransfer"
+          sortOrder="5034"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Allow Staff Pool transfer"
+          description="Defines if it is possible to transfer to staff pools on this service point"
+          privilege="install:adminAdmin"/>
+        <parameter name="allowServicePointPoolTransfer"
+          sortOrder="5035"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Allow Counter Pool transfer"
+          description="Defines if it is possible to transfer to counter pools on this service point"
+          privilege="install:adminAdmin"/>
+      
+    
+    <parameter name="idCode"
+      sortOrder="2"
+      type="IdCode"
+      defaultValue="1"
+      description="Starting ID code. Valid values: 1-125."
+      label="ID Code LED display"
+      writeLevel="branch"
+      privilege="install"
+      size="4" />
+    
+    
+        <parameter name="flashTime" 
+          sortOrder="8190" 
+          type="Integer" 
+          defaultValue="10" 
+          description="LED display flash time (seconds)" 
+          label="LED flash time"
+          writeLevel="profile" 
+          privilege="install" 
+          size="4" />
+        <parameter name="timeLEDOff" 
+          sortOrder="8192" 
+          type="Integer" 
+          defaultValue="900" 
+          description="Automatically turn off service point display after this time of inactivity (seconds)." 
+          label="LED turn off time"
+          writeLevel="profile" 
+          privilege="install" 
+          size="4" />
+      
+    
+        <parameter name="showOnCall" 
+           sortOrder="8100" 
+           description="What to show on LED display when calling a visit" 
+           label="LED show when calling" 
+           defaultValue="NUM" 
+           type="Options" 
+           mandatory="true" 
+           writeLevel="profile" 
+           privilege="branchAdmin" multiSelection="false">
+            <options>
+              <option label="Ticket id">NUM</option>
+              <option label="Service point id">SP</option>
+            </options>
+        </parameter>
+      
+    
+        <!-- LED Open text -->
+        <parameter sortOrder="8110" name="textOpen" type="String"  defaultValue="" description="Text on LED display when service point is open but not serving any visit. Leave empty if not used." label="LED Open text" writeLevel="profile" privilege="install" size="30" />
+        <parameter sortOrder="8111" name="textOpenScroll" description="Scrolling for text" label="LED Open scroll direction" defaultValue="PM" type="Options" mandatory="true" writeLevel="profile" privilege="branchAdmin" multiSelection="false"><options><option label="Scroll right to left">PM</option><option label="Scroll left to right">PMR</option><option label="No scrolling">PC</option></options></parameter>
+        <parameter sortOrder="8112" name="textOpenScrollspeed" description="Scrolling speed for text" label="LED Open scroll speed" defaultValue="1" type="Options" mandatory="true" writeLevel="profile" privilege="branchAdmin" multiSelection="false"><options><option label="Speed 1 (fastest)">1</option><option label="Speed 2">2</option><option label="Speed 3">3</option><option label="Speed 4">4</option><option label="Speed 5 (slowest)">5</option></options></parameter>
+      
+    
+        <!-- LED Waiting text -->
+        <parameter sortOrder="8120" name="textWaiting" type="String"  defaultValue="" description="Text on LED display when service point is waiting for visit (in Store Next mode). Leave empty if not used." label="LED Waiting text" writeLevel="profile" privilege="install" size="30" />
+        <parameter sortOrder="8121" name="textWaitingScroll" description="Scrolling for text" label="LED Waiting scroll direction" defaultValue="PM" type="Options" mandatory="true" writeLevel="profile" privilege="branchAdmin" multiSelection="false"><options><option label="Scroll right to left">PM</option><option label="Scroll left to right">PMR</option><option label="No scrolling">PC</option></options></parameter>
+        <parameter sortOrder="8122" name="textWaitingScrollspeed" description="Scrolling speed for text" label="LED Waiting scroll speed" defaultValue="1" type="Options" mandatory="true" writeLevel="profile" privilege="branchAdmin" multiSelection="false"><options><option label="Speed 1 (fastest)">1</option><option label="Speed 2">2</option><option label="Speed 3">3</option><option label="Speed 4">4</option><option label="Speed 5 (slowest)">5</option></options></parameter>
+      
+    
+        <!-- LED Closed text -->
+        <parameter sortOrder="8130" name="textClosed" type="String"  defaultValue="" description="Text on LED display when service point is closed. Leave empty if not used." label="LED Closed text" writeLevel="profile" privilege="install" size="30" />
+        <parameter sortOrder="8131" name="textClosedScroll" description="Scrolling for text" label="LED Closed scroll direction" defaultValue="PM" type="Options" mandatory="true" writeLevel="profile" privilege="branchAdmin" multiSelection="false"><options><option label="Scroll right to left">PM</option><option label="Scroll left to right">PMR</option><option label="No scrolling">PC</option></options></parameter>
+        <parameter sortOrder="8132" name="textClosedScrollspeed" description="Scrolling speed for text" label="LED Closed scroll speed" defaultValue="1" type="Options" mandatory="true" writeLevel="profile" privilege="branchAdmin" multiSelection="false"><options><option label="Speed 1 (fastest)">1</option><option label="Speed 2">2</option><option label="Speed 3">3</option><option label="Speed 4">4</option><option label="Speed 5 (slowest)">5</option></options></parameter>
+      
+    
+        <parameter name="idCodeExpressia"
+          sortOrder="3"
+          type="IdCode"
+          defaultValue="11"
+          description="Starting ID code for Expressia. Valid values: 1-125."
+          label="ID Code Expressia"
+          writeLevel="branch"
+          privilege="install"
+          size="4" />
+        <parameter name="expressiaMarkName"
+          type="String"
+          defaultValue="Expressia"
+          label="Expressia mark name"
+          description="Mark name to be used for Expressia"
+          sortOrder="3999"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="key1" sortOrder="4000" label="Expressia Key 1 (Excellent)" description="Mapping of key 1. Specify the mark code for Excellent." defaultValue="1" type="Integer" size="4" writeLevel="profile" privilege="branchAdmin"/>
+        <parameter name="key2" sortOrder="4010" label="Expressia Key 2 (Good)" description="Mapping of key 2. Specify the mark code for Good." defaultValue="2" type="Integer" size="4" writeLevel="profile" privilege="branchAdmin"/>
+        <parameter name="key3" sortOrder="4020" label="Expressia Key 3 (Acceptable)" description="Mapping of key 3. Specify the mark code for Acceptable." defaultValue="3" type="Integer" size="4" writeLevel="profile" privilege="branchAdmin"/>
+        <parameter name="key4" sortOrder="4030" label="Expressia Key 4 (Poor)" description="Mapping of key 4. Specify the mark code for Poor." defaultValue="4" type="Integer" size="4" writeLevel="profile" privilege="branchAdmin"/>
+        <parameter name="key5" sortOrder="4040" label="Expressia Key 5 (Unacceptable)" description="Mapping of key 5. Specify the mark code for Unacceptable." defaultValue="5" type="Integer" size="4" writeLevel="profile" privilege="branchAdmin"/>
+        <parameter name="cfuForceSelection"
+          type="Boolean"
+          defaultValue="false"
+          description="Must make a selection on the Expressia before ending current visit."
+          label="Expressia force selection"
+          sortOrder="4050"
+          writeLevel="profile"
+          privilege="install:adminAdmin" />
+      
+    
+    <parameter name="unitName" 
+      type="UnitName"
+      label="Unit name"
+      defaultValue="${unit:name} ${unit:index}" />
+    
+    
+        <parameter name="deviceController" 
+          type="DeviceController" 
+          label="Device Controller"
+          mandatory="true"
+          sortOrder="9999" 
+          writeLevel="profile" 
+          readLevel="branch" 
+          privilege="install:adminAdmin" />
+      
+  
+  </parameters>
+
+  <devices>
+    <device id="1" name="Web service point" type="SW_SERVICE_POINT" resources="SERVICE_POINT">
+      <parameters>
+        <parameter name="refreshInterval" type="Integer" description="The number of seconds between refreshes">30</parameter>
+      </parameters>
+      <deviceCommandHandlers>
+        <deviceCommandHandler handlerType="GROOVY" name="SET_MARK">
+          <![CDATA[
+          isWebServicePoint = true
+          
+        import com.qmatic.qp.api.device.DeviceEvent
+        import com.qmatic.qp.api.device.DeviceCommand
+        import com.qmatic.qp.api.connectors.device.ServicePointDeviceResource
+
+        ServicePointDeviceResource resource = device.getResource("SERVICE_POINT")
+        branchId = device.getBranchId()
+        visitId = device.getState("VISIT_ID")
+        expressiaMarkCode = command.getParameter("markCode")
+        servicePointLogicId = device.getUnit().getLogicId()
+        expressiaMarkName = device.getUnit().getConfiguration().get("expressiaMarkName")
+        try {
+          resource.addMarkByCode(branchId, visitId, expressiaMarkName, expressiaMarkCode, servicePointLogicId)
+          device.setState("CFU_SELECTION", expressiaMarkCode)
+          if(isWebServicePoint) {
+            DeviceEvent de = new DeviceEvent()
+            de.setUnitId(device.getId())
+            de.setEventName("CFU_SELECTION_DONE")
+            de.setParameter("CFU_SELECTION", expressiaMarkCode)
+            try {
+              device.sendEvent(de)
+            } catch(e) {
+              //  not ok
+              device.log("ERROR", "Could not send event CFU_SELECTION_DONE to terminal.")
+            }
+          }
+        } catch(e) {
+          device.log("ERROR", "Could not set mark! Does the mark code " + expressiaMarkCode + " exist? Does the mark name " + expressiaMarkName + " exist? Parameters used when trying to set mark: branchId: " + branchId + ", visitId: " + visitId + ", expressiaMarkCode: " + expressiaMarkCode + ", expressiaMarkName: " + expressiaMarkName + ", servicePointLogicId: " + servicePointLogicId + ".")
+        }
+      
+          ]]>
+        </deviceCommandHandler>
+      </deviceCommandHandlers>
+    </device>
+
+    <device id="2" name="Expressia" type="KT" controllerId="deviceController" resources="EVENT_SCHEDULER">
+      <parameters>
+        <parameter name="id" type="Integer" evaluate="true">${idCodeExpressia}+${unit:index}-1</parameter>
+      </parameters>
+      <deviceEventHandlers>
+        <deviceEventHandler name="KEY" handlerType="GROOVY">
+          <![CDATA[
+          String servicePointDevice = "Web service point"
+          
+        import com.qmatic.qp.api.device.DeviceCommand
+        import com.qmatic.qp.api.connectors.device.ServicePointDeviceResource
+        timerToggleLED = device.getState("TIMER_LEDS_TOGGLE")
+        if(timerToggleLED) {
+          device.getResource("EVENT_SCHEDULER").remove(timerToggleLED)
+        }
+        if(device.getState("LEDS") == "ON") {
+          device.setState("LED_VALUE", 1)
+          device.setState("FLASHES", 0)
+          device.setState("LEDS", event.getParameter("id"))
+          DeviceCommand cmdLEDS = new DeviceCommand(device.getId(), "LEDS_OUTPUT")
+          device.executeCommand(cmdLEDS)
+          expressiaMarkCode = device.getUnit().getConfiguration().get("key"+event.getParameter("id"))
+          spdExpressia = device.getUnit().getDevice(servicePointDevice)
+          DeviceCommand cmdSETMARK = new DeviceCommand(spdExpressia.getId(), "SET_MARK")
+          cmdSETMARK.setParameter("markCode", expressiaMarkCode)
+          device.executeCommand(cmdSETMARK)
+        }
+      
+          ]]>
+        </deviceEventHandler>
+      </deviceEventHandlers>
+
+      <deviceCommandHandlers>
+				<deviceCommandHandler handlerType="GROOVY" name="LEDS_INIT">
+					<![CDATA[
+					
+        import com.qmatic.qp.api.device.DeviceCommand
+        device.setState("LED_VALUE", 1)
+        device.setState("LEDS", "ON")
+        DeviceCommand cmdLEDS = new DeviceCommand(device.getId(), "LEDS_OUTPUT")
+        device.executeCommand(cmdLEDS)
+      
+					]]>
+				</deviceCommandHandler>
+				<deviceCommandHandler handlerType="GROOVY" name="LEDS_OFF">
+					<![CDATA[
+					
+        import com.qmatic.qp.api.device.DeviceCommand
+        device.setState("LED_VALUE", 0)
+        device.setState("LEDS", "ON")
+        DeviceCommand cmdLEDS = new DeviceCommand(device.getId(), "LEDS_OUTPUT")
+        device.executeCommand(cmdLEDS)
+      
+					]]>
+				</deviceCommandHandler>
+        <deviceCommandHandler handlerType="GROOVY" name="LEDS_OUTPUT">
+          <![CDATA[
+          
+        import com.qmatic.qp.api.device.DeviceCommand
+        import com.qmatic.qp.api.device.DeviceEvent
+        import java.io.ByteArrayOutputStream
+
+        byte s1 = 32 + 0
+        byte s2 = 32 + 0
+        byte s3 = 32 + 0
+        byte s4 = 32 + 0
+
+        // byte s5
+        //  1: LED 1
+        //  2: LED 2
+        //  4: LED 3
+        //  8: LED 4
+        // 16: LED 5
+        byte s5 = 32
+
+        String leds = device.getState("LEDS")
+        switch(leds) {
+          case "ON":
+            s5 += 31
+            break;
+          case "1":
+            s5 += 1
+            break;
+          case "2":
+            s5 += 2
+            break;
+          case "3":
+            s5 += 4
+            break;
+          case "4":
+            s5 += 8
+            break;
+          case "5":
+            s5 += 16
+            break;
+          default:
+            break;
+        }
+        if(!device.getState("LED_VALUE")) {
+          s5 = 32
+        }
+
+        // 2 bytes
+        String StartOfInput = "I "
+
+        // output should be 21 bytes long here
+        String output = StartOfInput + "                   "
+
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream()
+        outStream.write(output.getBytes() )
+
+        // Append the 5 sign bytes
+        outStream.write(s1)
+        outStream.write(s2)
+        outStream.write(s3)
+        outStream.write(s4)
+        outStream.write(s5)
+
+        DeviceEvent LEDEvent = new DeviceEvent(device.getId(),"TERMINAL")
+        def autoAmFm = true
+        def info =  [[outStream.toByteArray(), autoAmFm]] as Object[][]
+        LEDEvent.setParameter("info", info)
+        LEDEvent.setParameter("output", outStream.toByteArray())
+        device.sendEvent(LEDEvent)
+      
+          ]]>
+        </deviceCommandHandler>
+      </deviceCommandHandlers>
+    </device>
+
+		<device id="1" type="DMATRIX" name="LED" controllerId="deviceController" resources="EVENT_SCHEDULER">
+			<parameters>
+				<parameter type="Integer" name="id" evaluate="true">${idCode}+${unit:index}-1</parameter>
+				<parameter type="Integer" name="subId">1</parameter>
+			</parameters>
+
+      <deviceEventHandlers>
+        <deviceEventHandler handlerType="GROOVY" name="STOP_FLASH">
+          <![CDATA[
+          
+        import com.qmatic.qp.api.device.DeviceCommand
+        DeviceCommand displayCommand = new DeviceCommand(device.getId(), "OUTPUT_LED")
+        displayCommand.setParameters(event.getParameters())
+        displayCommand.setParameter("bell", false)
+        displayCommand.setParameter("displayFlash", false)
+        device.setState("DISPLAY_FLASH", false)
+        device.executeCommand(displayCommand)
+      
+          ]]>
+        </deviceEventHandler>
+        <deviceEventHandler handlerType="GROOVY" name="DISPLAY_OFF">
+          <![CDATA[
+          
+        import com.qmatic.qp.api.device.DeviceCommand
+
+        // remove any old flash timer
+        timerStopDisplayFlash = device.getState("TIMER_STOP_DISPLAY_FLASH")
+        if(timerStopDisplayFlash) {
+          device.getResource("EVENT_SCHEDULER").remove(timerStopDisplayFlash)
+        }
+
+        DeviceCommand displayCommand = new DeviceCommand(device.getId(), "OUTPUT_LED")
+        displayCommand.setParameters(event.getParameters())
+        displayCommand.setParameter("displayEnabled", false)
+        device.executeCommand(displayCommand)
+      
+          ]]>
+        </deviceEventHandler>
+      </deviceEventHandlers>
+
+      <deviceCommandHandlers>
+        <deviceCommandHandler handlerType="GROOVY" name="SHOW_VISIT">
+          <![CDATA[
+          
+        import com.qmatic.qp.api.device.DeviceCommand
+        import com.qmatic.qp.api.device.DeviceEvent
+
+        // remove any old flash timer
+        timerStopDisplayFlash = device.getState("TIMER_STOP_DISPLAY_FLASH")
+        if(timerStopDisplayFlash) {
+          device.getResource("EVENT_SCHEDULER").remove(timerStopDisplayFlash)
+        }
+
+        DeviceCommand displayCommand = new DeviceCommand(device.getId(), "OUTPUT_LED")
+        displayCommand.setParameters(command.getParameters())
+        device.executeCommand(displayCommand)
+
+        // restart timer to flash display
+        if(command.getParameter("displayFlash")) {
+          DeviceEvent eDisplayFlash = new DeviceEvent(device.getId(), "STOP_FLASH")
+          eDisplayFlash.setParameters(command.getParameters())
+          timerStopDisplayFlash = device.getResource("EVENT_SCHEDULER").scheduleEvent(device.getUnit().getConfiguration().get("flashTime"), eDisplayFlash)
+          device.setState("TIMER_STOP_DISPLAY_FLASH", timerStopDisplayFlash)
+        }
+
+        // restart timer to turn off display
+        if(device.getUnit().getConfiguration().get("timeLEDOff") > 0) {
+          DeviceCommand cmdDisplayOffTimerReset = new DeviceCommand(device.getId(), "DISPLAY_OFF_TIMER_RESET")
+          device.executeCommand(cmdDisplayOffTimerReset)
+        }
+
+      
+          ]]>
+        </deviceCommandHandler>
+        <deviceCommandHandler handlerType="GROOVY" name="DISPLAY_OFF_TIMER_RESET">
+          <![CDATA[
+          
+        import com.qmatic.qp.api.device.DeviceEvent
+        timerDisplayOff = device.getState("TIMER_DISPLAY_OFF")
+        if(timerDisplayOff) {
+          device.getResource("EVENT_SCHEDULER").remove(timerDisplayOff)
+        }
+        DeviceEvent e = new DeviceEvent(device.getId(), "DISPLAY_OFF")
+        timerDisplayOff = device.getResource("EVENT_SCHEDULER").scheduleEvent(device.getUnit().getConfiguration().get("timeLEDOff"), e)
+        device.setState("TIMER_DISPLAY_OFF", timerDisplayOff)
+      
+          ]]>
+        </deviceCommandHandler>
+        <deviceCommandHandler handlerType="GROOVY" name="DISPLAY_OPEN">
+          <![CDATA[
+          
+        import com.qmatic.qp.api.device.DeviceCommand
+        DeviceCommand displayCommand = new DeviceCommand(device.getId(), "OUTPUT_LED")
+        displayCommand.setParameters(command.getParameters())
+        displayCommand.setParameter("displayEnabled", true)
+        device.setState("USER_STATE", "INACTIVE")
+        device.executeCommand(displayCommand)
+      
+          ]]>
+        </deviceCommandHandler>
+        <deviceCommandHandler handlerType="GROOVY" name="DISPLAY_CLOSE">
+          <![CDATA[
+          
+        import com.qmatic.qp.api.device.DeviceCommand
+        DeviceCommand displayCommand = new DeviceCommand(device.getId(), "OUTPUT_LED")
+        displayCommand.setParameters(command.getParameters())
+        displayCommand.setParameter("displayEnabled", true)
+        device.setState("USER_STATE", "")
+        device.executeCommand(displayCommand)
+      
+          ]]>
+        </deviceCommandHandler>
+        <deviceCommandHandler handlerType="GROOVY" name="DISPLAY_LOGOUT">
+          <![CDATA[
+          
+          import com.qmatic.qp.api.device.DeviceCommand
+          DeviceCommand displayCommand = new DeviceCommand(device.getId(), "OUTPUT_LED")
+          displayCommand.setParameters(command.getParameters())
+          displayCommand.setParameter("displayEnabled", true)
+          device.setState("USER_STATE", "LOGOUT")
+          device.executeCommand(displayCommand)
+        
+          ]]>
+        </deviceCommandHandler>
+        <deviceCommandHandler handlerType="GROOVY" name="OUTPUT_LED">
+          <![CDATA[
+          
+          import com.qmatic.qp.api.device.DeviceEvent
+          import com.qmatic.qp.api.device.DeviceCommand
+
+          displayEnabled = command.getParameter("displayEnabled")
+          displayFlash = command.getParameter("displayFlash")
+          servicePointFlash = device.getUnit().getConfiguration().get("flashServicePointId")
+
+          // set default display script to turn off display
+          displayScript = " D- "
+
+          if(displayEnabled) {
+          
+            servicePointLogicId = device.getUnit().getLogicId()
+            
+            device.setState("TICKET", "")
+
+            switch(device.getState("USER_STATE")) {
+              case "SERVING":
+              case "CALLED":
+
+                String ticketId = command.getParameter("ticket")
+                String displayText = ""
+                String displayNUM = ticketId
+                String displaySP = servicePointLogicId.toString()
+                
+                device.setState("TICKET", ticketId)
+
+                switch(device.getUnit().getConfiguration().get("showOnCall")) {
+                  case "NUM":
+                    // show ticket id if not null
+                    if ( ticketId != null ) {
+                        String ticketIdLetter= String.format("%1\$1.1s", ticketId)
+                        // check if ticketId is too large to fit on a D924
+                        if( ticketId.size() > 4) {
+                            if(ticketIdLetter.isNumber()) {
+                                displayNUM = String.format("%1\$4.4s", ticketId.substring(0))
+                            } else {
+                                displayNUM = String.format("%1\$4.4s", ticketId.substring(1))
+                            }
+                        }
+                        displayText = (displayFlash ? "" + (char)27 + "f+" : "") + displayNUM
+                    }
+                    break
+                  case "SP":
+                    // show service point id
+                    displayText = (displayFlash ? "" + (char)27 + "f+" : "") + displaySP
+                    break
+                  case "SPNUM":
+                    // show service point id and ticket id
+                    displayText = (displayFlash && servicePointFlash ? "" + (char)27 + "f+" : "") + displaySP + " " + (char)27 + "f" + (displayFlash ? "+" : "-") + displayNUM
+                    break
+                  case "NUMSP":
+                    // show service point id and ticket id
+                    displayText = (displayFlash ? "" + (char)27 + "f+" : "") + displayNUM + " " + (char)27 + "f" + (displayFlash && servicePointFlash ? "+" : "-") + displaySP
+                    break
+                }
+                displayScript = (command.getParameter("bell") ? " B" : "") + " PC I " + displayText
+                break
+              case "IN_STORE_NEXT":
+                txt = device.getUnit().getConfiguration().get("textWaiting")
+                txt = txt.replaceAll("\\{servicePointId\\}", servicePointLogicId.toString())
+                txtscroll = device.getUnit().getConfiguration().get("textWaitingScroll")
+                txtspeed = device.getUnit().getConfiguration().get("textWaitingScrollspeed")
+                displayScript = "F- " + txtscroll + " SMS " + txtspeed + " I [" + txt + "]"
+                break
+              case "INACTIVE":
+              case "NO_CALLABLE_VISITS":
+                txt = device.getUnit().getConfiguration().get("textOpen")
+                txt = txt.replaceAll("\\{servicePointId\\}", servicePointLogicId.toString())
+                txtscroll = device.getUnit().getConfiguration().get("textOpenScroll")
+                txtspeed = device.getUnit().getConfiguration().get("textOpenScrollspeed")
+                displayScript = "F- " + txtscroll + " SMS " + txtspeed + " I [" + txt + "]"
+                break
+              default:
+                txt = device.getUnit().getConfiguration().get("textClosed")
+                txt = txt.replaceAll("\\{servicePointId\\}", servicePointLogicId.toString())
+                txtscroll = device.getUnit().getConfiguration().get("textClosedScroll")
+                txtspeed = device.getUnit().getConfiguration().get("textClosedScrollspeed")
+                displayScript = "F- " + txtscroll + " SMS " + txtspeed + " I [" + txt + "]"
+                break
+            }
+
+          }
+
+          displayCommand = []
+          displayCommand.add([displayScript])
+          toDisplay(displayCommand)
+
+          def toDisplay(s) {
+            def output = s as Object[][]
+            DeviceEvent displayEvent = new DeviceEvent(device.getId(),"DISPLAY")
+            displayEvent.setParameter("output",output)
+            result = true
+            try {
+               result = device.sendEvent(displayEvent)
+            } catch(e) {
+               device.log("ERROR", e.getMessage())
+               result = false
+            }
+          }
+      
+          ]]>
+        </deviceCommandHandler>
+        <deviceCommandHandler handlerType="GROOVY" name="DISPLAY_IN_STORE_NEXT">
+          <![CDATA[
+          
+          import com.qmatic.qp.api.device.DeviceCommand
+          DeviceCommand displayCommand = new DeviceCommand(device.getId(), "OUTPUT_LED")
+          displayCommand.setParameters(command.getParameters())
+          displayCommand.setParameter("displayEnabled", true)
+          if(command.getParameter("storeNext") == true) {
+            device.setState("USER_STATE", "IN_STORE_NEXT")
+            device.executeCommand(displayCommand)
+          }
+        
+          ]]>
+        </deviceCommandHandler>
+      </deviceCommandHandlers>
+		</device>
+
+  </devices>
+
+  <unitEvents>
+    <unitEvent name="VISIT_TRANSFER_TO_QUEUE">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        try {
+          deviceExpressia = unit.getDevice("Expressia")
+          DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
+          deviceExpressia.executeCommand(cmdLEDS)
+        }  catch (e) {
+          // not ok
+        }
+      
+        
+        if(!("VISIT_CALL" in event.getParameter("eventSiblings"))) {
+          // change the LED only if there is not a VISIT_CALL coming...
+          led = unit.getDevice("LED")
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          led.executeCommand(displayCommand)
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="VISIT_RECYCLE">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        try {
+          deviceExpressia = unit.getDevice("Expressia")
+          DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
+          deviceExpressia.executeCommand(cmdLEDS)
+        }  catch (e) {
+          // not ok
+        }
+      
+        
+        if(!("VISIT_CALL" in event.getParameter("eventSiblings"))) {
+          // change the LED only if there is not a VISIT_CALL coming...
+          led = unit.getDevice("LED")
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          led.executeCommand(displayCommand)
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="VISIT_TRANSFER_TO_SERVICE_POINT_POOL">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceEvent
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+          wsp = unit.getDevice("Web service point")
+          DeviceEvent de = new DeviceEvent()
+          de.setUnitId(wsp.getId())
+          de.setEventName(event.getEventName())
+          de.setParameters(event.getParameters())
+          try {
+            wsp.sendEvent(de)
+          } catch(e) {
+            //  not ok
+          }
+      
+        
+        try {
+          deviceExpressia = unit.getDevice("Expressia")
+          DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
+          deviceExpressia.executeCommand(cmdLEDS)
+        }  catch (e) {
+          // not ok
+        }
+      
+        
+        // This event is fired for both the sending and receiving service point
+        // Make sure that the LED for only the sending service point is updated by comparing the ticket id
+        led = unit.getDevice("LED")
+        if(event.getParameter("ticket") == led.getState("TICKET") && !("VISIT_CALL" in event.getParameter("eventSiblings"))) {
+          // change the LED only if there is not a VISIT_CALL coming...
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          led.executeCommand(displayCommand)
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="VISIT_TRANSFER_TO_USER_POOL">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceEvent
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        wsp = unit.getDevice("Web service point")
+        DeviceEvent de = new DeviceEvent()
+        de.setUnitId(wsp.getId())
+        de.setEventName(event.getEventName())
+        de.setParameters(event.getParameters())
+        try {
+          wsp.sendEvent(de)
+        } catch(e) {
+          //  not ok
+        }
+      
+        
+        try {
+          deviceExpressia = unit.getDevice("Expressia")
+          DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
+          deviceExpressia.executeCommand(cmdLEDS)
+        }  catch (e) {
+          // not ok
+        }
+      
+        
+        // This event is fired for both the sending and receiving service point
+        // Make sure that the LED for only the sending service point is updated by comparing the ticket id
+        led = unit.getDevice("LED")
+        if(event.getParameter("ticket") == led.getState("TICKET") && !("VISIT_CALL" in event.getParameter("eventSiblings"))) {
+          // change the LED only if there is not a VISIT_CALL coming...
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          led.executeCommand(displayCommand)
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="VISIT_END">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        try {
+          deviceExpressia = unit.getDevice("Expressia")
+          DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
+          deviceExpressia.executeCommand(cmdLEDS)
+        }  catch (e) {
+          // not ok
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="VISIT_NOSHOW">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        try {
+          deviceExpressia = unit.getDevice("Expressia")
+          DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
+          deviceExpressia.executeCommand(cmdLEDS)
+        }  catch (e) {
+          // not ok
+        }
+      
+        
+        if(!("VISIT_CALL" in event.getParameter("eventSiblings"))) {
+          // change the LED only if there is not a VISIT_CALL coming...
+          led = unit.getDevice("LED")
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          led.executeCommand(displayCommand)
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="USER_SERVICE_POINT_SESSION_END">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceEvent
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        import com.qmatic.qp.api.device.DeviceUserEvent
+        import com.qmatic.qp.constants.QPConstants
+
+        wsp = unit.getDevice("Web service point")
+        try {
+          DeviceEvent endServicePointSessionEvent = new DeviceUserEvent(event.getParameter(QPConstants.PRM_USER_NAME))
+          endServicePointSessionEvent.setUnitId(wsp.getId())
+          endServicePointSessionEvent.setEventName(event.getEventName())
+          params = event.getParameters()
+          parameters = ["user": event.getParameters().get("userId"), "servicePointId": unit.getLogicId()]
+          endServicePointSessionEvent.setParameters(parameters)
+          wsp.sendEvent(endServicePointSessionEvent)
+        } catch (Throwable t) {
+          wsp.log("DEBUG", "Unable to send USER_SERVICE_POINT_SESSION_END event to web terminal, error:" + t.getMessage())
+        }
+      
+        
+        led = unit.getDevice("LED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_CLOSE")
+        led.executeCommand(displayCommand)
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="USER_SESSION_END">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        led = unit.getDevice("LED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_LOGOUT")
+        led.executeCommand(displayCommand)
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="VISIT_CALL">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceEvent
+        import com.qmatic.qp.api.device.DeviceCommand
+        String servicePointDevice = "Web service point"
+        
+        wsp = unit.getDevice("Web service point")
+        DeviceEvent wspDeviceEvent = new DeviceEvent()
+        wspDeviceEvent.setUnitId(wsp.getId())
+        wspDeviceEvent.setEventName("VISIT_CALL")
+        wspDeviceEvent.setParameters(event.getParameters())
+        try {
+          wsp.sendEvent(wspDeviceEvent)
+          result = true
+        } catch(e) {
+          //  not ok
+          result = false
+        }
+      
+        
+        spdExpressia = unit.getDevice(servicePointDevice)
+        spdExpressia.setState("VISIT_ID", event.getParameter("visitId"))
+        spdExpressia.setState("CFU_SELECTION", "0")
+        deviceExpressia = unit.getDevice("Expressia")
+        DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_INIT")
+        deviceExpressia.executeCommand(cmdLEDS)
+      
+        
+        led = unit.getDevice("LED")
+        led.setState("USER_STATE", "CALLED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "SHOW_VISIT")
+        displayCommand.setParameters(event.getParameters())
+        displayCommand.setParameter("bell", true)
+        displayCommand.setParameter("displayEnabled", true)
+        if(unit.getConfiguration().get("flashTime") > 0) {
+          displayCommand.setParameter("displayFlash", true)
+          led.setState("DISPLAY_FLASH", true)
+        } else {
+          displayCommand.setParameter("displayFlash", false)
+          led.setState("DISPLAY_FLASH", false)
+        }
+        led.executeCommand(displayCommand)
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="VISIT_END">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        if(!("VISIT_CALL" in event.getParameter("eventSiblings"))) {
+          // change the LED only if there is not a VISIT_CALL coming...
+          led = unit.getDevice("LED")
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          led.executeCommand(displayCommand)
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="SET_WORK_PROFILE">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        
+        import com.qmatic.qp.api.device.DeviceEvent
+        wsp = unit.getDevice("Web service point")
+        try {
+          Long unitId = event.getUnitId()
+          // only send this event to the affected unit
+          if (unitId == null || wsp == null || wsp.getUnit() == null || ! unitId.equals(wsp.getUnit().getId())) {
+            return;
+          }
+          DeviceEvent wspDeviceEvent = new DeviceEvent()
+          wspDeviceEvent.setUnitId(wsp.getId())
+          wspDeviceEvent.setEventName("USER_SERVICE_POINT_WORK_PROFILE_SET")
+          wspDeviceEvent.setParameters(event.getParameters())
+          try {
+            wsp.sendEvent(wspDeviceEvent)
+          } catch(e) {
+            wsp.log("WARN", "Unable to notify web terminal of changed work profile. error=" + e.getMessage())
+          }
+        } catch (Throwable t) {
+          wsp.log("WARN", "Unable to notify web terminal of changed work profile. throwable=" + t.getMessage())
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="CHAT_SEND">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        
+        import com.qmatic.qp.api.device.DeviceEvent                    		
+        wsp = unit.getDevice("Web service point")					
+        try{
+          DeviceEvent receiveChatEvent = new DeviceEvent()
+          receiveChatEvent.setParameters(event.getParameters())
+          receiveChatEvent.setUnitId(wsp.getId())
+          receiveChatEvent.setEventName("CHAT_RECEIVE")
+          wsp.sendEvent(receiveChatEvent)
+        } catch (Throwable t) {
+          wsp.log("WARN", "Unable to send CHAT_RECEIVE event to web terminal, error:" + t.getMessage())
+        }
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="ADD_USER_TO_STORE_NEXT">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        led = unit.getDevice("LED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_IN_STORE_NEXT")
+        displayCommand.setParameter("storeNext", true)
+        led.executeCommand(displayCommand)          
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="REMOVE_USER_FROM_STORE_NEXT">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        led = unit.getDevice("LED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_IN_STORE_NEXT")
+        displayCommand.setParameter("storeNext", false)
+        led.executeCommand(displayCommand)          
+      
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+  </unitEvents>
+
+  <unitCommands>
+    <unitCommand name="USER_SERVICE_POINT_SESSION_END">
+      <unitCommandHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        led = unit.getDevice("LED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_CLOSE")
+        led.executeCommand(displayCommand)
+      
+        ]]>
+      </unitCommandHandler>
+    </unitCommand>
+    <unitCommand name="SERVICE_POINT_OPEN">
+      <unitCommandHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        led = unit.getDevice("LED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+        led.executeCommand(displayCommand)
+      
+        ]]>
+      </unitCommandHandler>
+    </unitCommand>
+    <unitCommand name="SERVICE_POINT_CLOSE">
+      <unitCommandHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        
+        led = unit.getDevice("LED")
+        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_CLOSE")
+        led.executeCommand(displayCommand)
+      
+        ]]>
+      </unitCommandHandler>
+    </unitCommand>
+  </unitCommands>
+
+</unit>
