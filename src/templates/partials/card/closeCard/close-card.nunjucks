@@ -5,13 +5,12 @@
 
 {% block header %}
     <header class="qm-transparent-card__header-section">
-        <h1 class="qm-transparent-card__headline">Your counter is closed</h1>
+        <h1 class="qm-transparent-card__headline" id="closedCardTitle"></h1>
     </header>
 {% endblock %}
 
 {% block content %}
     <div class="qm-transparent-card__content-section">
-        <p class="qm-transparent-card__text">Click "Walk in" or "Call next" to start serving</p>
-        <i class="qm-transparent-card__icon icon-caret-down" aria-hidden="true"></i>
+        <p class="qm-transparent-card__text" id="closedCardSubTitle"></p>
     </div>
 {% endblock %}

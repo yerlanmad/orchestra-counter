@@ -1,7 +1,7 @@
 var i18n = new function () {// helper method (that doesnt bomb) for setting innerHTML text on a html element
     var i18nQmBtn = function(elementName, propName) {
         $("#" + elementName + " span").attr("title", jQuery.i18n.prop(propName))
-        $("#" + elementName + " span").text(jQuery.i18n.prop(propName))
+        i18nSafe(elementName + " span", propName)
     };
     
     
@@ -130,6 +130,14 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeAppend("walkInSubHeader", 'info.card.sub.header.walkin');
         i18nQmBtn("cancelWalkIn", 'button.cancel');
         
+        //card details
+        // Closed Card
+        i18nSafe("closedCardTitle", 'info.card.closedCard.title');
+        i18nSafe("closedCardSubTitle", 'info.card.closedCard.subTitle');
+
+        // Inactive Card
+        i18nSafe("inactiveCardTitle", 'info.card.inactiveCard.title');
+        i18nSafe("inactiveCardSubTitle", 'info.card.inactiveCard.subTitle');
 
         //transfer form
         i18nSafeAppend("transferServiceHeader", 'action.transfer');
@@ -140,8 +148,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         //add and edit notes dialogue
         i18nSafeAppend("notesHeader", 'info.note');
         i18nSafe("notesModuleLabel", 'info.notes');
-        $("#saveNotesBtnModal").val(jQuery.i18n.prop('button.save.notes'));
-        $("#cancelNotesBtnModal").val(jQuery.i18n.prop('button.cancel.save.notes'));
+        i18nSafe("saveNotesBtnModal", 'button.save.notes');
+        i18nSafe("cancelNotesBtnModal", 'button.cancel.save.notes');
 
         //chat
 		i18nSafeAppend("chatModuleLabel", 'info.chat');
@@ -168,8 +176,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 		i18nSafe("nextServicesListHeader", "action.services.list");
 		i18nSafe("unServedName",'info.unserved.name');
 		i18nSafe("servedName",'info.served.name');
-        $("#confirmServicesBtn").val(jQuery.i18n.prop('button.confirm.services'));
-        $("#resortServicesBtn").val(jQuery.i18n.prop('button.resort.services'));
+        i18nSafe("confirmServicesBtn",'button.confirm.services');
+        i18nSafe("resortServicesBtn",'button.resort.services');
 		i18nSafe("selectedName",'info.selected.name');
 		i18nSafe("availableName",'info.available.name');
 
@@ -277,17 +285,15 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         //delete customer confirmation window
         i18nSafeAppend("deleteCustomerConfirmHeader", 'customer.delete.confirm');
-        $("#confirmDeleteCustomerBtn").val(jQuery.i18n.prop('customer.delete'));
-        $("#cancelDeleteCustomerBtn").val(jQuery.i18n.prop('button.cancel'));
+        i18nSafe("confirmDeleteCustomerBtn", "customer.delete");
+        i18nSafe("cancelDeleteCustomerBtn", "button.cancel");
 
         //hijack counter window is i18nized in script.js
-        $("#confirmCounterHijackingHeader").text(jQuery.i18n.prop('info.confirm.counter.hijacking.header'));
+        i18nSafe("confirmCounterHijackingHeader",'info.confirm.counter.hijacking.header');
         i18nQmBtn("hijackYesBtnModal", 'info.confirm.counter.hijacking.yes');
         i18nQmBtn("hijackNoBtnModal", 'info.confirm.counter.hijacking.no');
-        $("#hijackMessagePartOne").text(jQuery.i18n.prop('info.confirm.counter.hijacking.message.part.one'));
-        $("#hijackMessagePartTwo").text(jQuery.i18n.prop('info.confirm.counter.hijacking.message.part.two'));
-        
-        
+        i18nSafe("hijackMessagePartOne",'info.confirm.counter.hijacking.message.part.one');
+        i18nSafe("hijackMessagePartTwo",'info.confirm.counter.hijacking.message.part.two');
 
         //confirm customer window
         i18nSafeAppend("calledCustomerHeader", 'info.confirm.customer.header');

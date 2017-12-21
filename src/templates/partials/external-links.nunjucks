@@ -113,6 +113,7 @@
         <script type="text/javascript" src="scripts/components/card/CardBaseComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/visitCard/visitCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/closeCard/closeCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/inactiveCard/inactiveCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/walkInCard/walkInCard.js"></script>
         
         <link rel="stylesheet" href="css/main.css" />

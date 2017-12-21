@@ -5,14 +5,14 @@
 @import '_main';
 @import '_footer';
 
-@import '_card';
-@import '_transparent-card';
-@import '_card-header';
+@import 'card/_card';
+@import 'card/_transparent-card';
+@import 'card/_card-header';
 @import '_tooltip';
 @import '_toast';
-@import '_card-nav';
+@import 'card/_card-nav';
 @import '_services';
-@import '_card-timer';
+@import 'card/_card-timer';
 @import '_form';
 @import '_task-items';
 @import '_action-bar';

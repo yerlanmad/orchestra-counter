@@ -1404,7 +1404,7 @@ var servicePoint = new function () {
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.inactive'));
-			cardNavigationController.push($Qmatic.components.card.closeCard);
+			cardNavigationController.push($Qmatic.components.card.inactiveCard);
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.visitState == servicePoint.visitState.NO_CALLABLE_VISITS) {
 			$("#ticketNumber")
