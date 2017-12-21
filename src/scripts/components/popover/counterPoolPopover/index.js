@@ -12,7 +12,7 @@ window.$Qmatic.components.popover.CounterPoolPopoverComponent.prototype.construc
     = window.$Qmatic.components.popover.CounterPoolPopoverComponent;
 
 window.$Qmatic.components.popover.CounterPoolPopoverComponent.prototype._call = function () {
-    this._toggleInstance();
+    this.disposeInstance();
     servicePointPool.callFromPool(this.visitId);
 };
 

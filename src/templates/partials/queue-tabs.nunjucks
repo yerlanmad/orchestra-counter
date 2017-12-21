@@ -6,23 +6,23 @@
                     role="tab"
                     aria-selected="true"
                     aria-controls="myQueuesPanel"
-                    id="myQueues">
+                    id="myQueuesTab">
                     <span class="qm-tabs__tab-text">My Queues</span>
                     <div class="qm-tab-information">
                         <i class="qm-tab-information__icon icon-customer-solid" aria-hidden="true"></i>
-                        <span class="qm-tab-information__text">28</span>
+                        <span class="qm-tab-information__text"></span>
                     </div>
                     </button>
             <button class="qm-tabs__tab"
                     role="tab"
                     aria-selected="false"
                     aria-controls="allQueuesPanel"
-                    id="allQueues"
+                    id="allQueuesTab"
                     tabindex="-1">
                     <span class="qm-tabs__tab-text">All Queues</span>
                     <div class="qm-tab-information">
                         <i class="qm-tab-information__icon icon-customer-solid" aria-hidden="true"></i>
-                        <span class="qm-tab-information__text">128</span>
+                        <span class="qm-tab-information__text"></span>
                     </div>
             </button>
         </div>
@@ -31,15 +31,15 @@
         <div class="qm-tabs__tab-panel qm-tabs__tab-panel--is-selected" tabindex="0"
             role="tabpanel"
             id="myQueuesPanel"
-            aria-labelledby="myQueues">
-            {% include "partials/all-queues-table.nunjucks" %}
+            aria-labelledby="myQueuesTab">
+            {% include "partials/my-queues-table.nunjucks" %}
         </div>
         <div class="qm-tabs__tab-panel" tabindex="0"
             role="tabpanel"
             id="allQueuesPanel"
-            aria-labelledby="allQueues"
+            aria-labelledby="allQueuesTab"
             hidden>
-            Test2
+            {% include "partials/all-queues-table.nunjucks" %}
         </div>
     </div>
 </div>

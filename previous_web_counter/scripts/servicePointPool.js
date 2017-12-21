@@ -73,7 +73,6 @@ var servicePointPool = new function() {
         var url = "branches/" + sessvars.branchId + "/servicePoints/" 
                     + sessvars.servicePointId + "/pool/visits?call=" + t;
         
-
         // Get DOM elements
         var counterPool         = $('#servicePointPoolModule'),
             counterPoolList     = counterPool.find('.qm-pool__list'),
@@ -82,16 +81,8 @@ var servicePointPool = new function() {
         // Empty list    
         counterPoolList.empty();
 
-        // Clean up popovers
-        if(window.counterPoolPopovers && window.counterPoolPopovers.length > 0) { 
-            _.each(window.counterPoolPopovers, function(popover) {
-                popover.instance.dispose();
-            });
-        }
-        window.counterPoolPopovers = [];
-
         // Templates
-        var counterPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket" data-toggle="popover"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
+        var counterPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
         var noResultTemplate = $('<li class="qm-pool__list-item qm-pool__list-item--auto-width"><span class="qm-pool__no-result-text">' + jQuery.i18n.prop('info.pools.no_customers_in_pool') + '</span></li>');
         var popoverTemplate = document.querySelector('.qm-popover--pool').outerHTML.trim();
         
@@ -102,14 +93,14 @@ var servicePointPool = new function() {
 
         // Get the data
         var counterPoolData = spService.get(url);
-
+        
         if(counterPoolData.length > 0) {
             // Sort based on time in pool
             counterPoolData.sort(util.compareTimeInPool);
             counterPoolData.forEach(function(data, i) {
                 var template = counterPoolItemTemplate.clone();
                 
-                template.find('.qm-pool-item__content--ticket').text(data.ticketId).attr('data-visitId', data.visitId);
+                template.find('.qm-pool-item__content--ticket').text(data.ticketId);
                 template.find('.qm-pool-item__content--wait').text(util.formatIntoMM(data.waitingTime));
                 counterPoolList.append(template);
     
@@ -118,8 +109,9 @@ var servicePointPool = new function() {
                 if(servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
                     options.disableCall = true;
                 }
+                options.visitId = data.visitId;
                 var popover = new window.$Qmatic.components.popover.CounterPoolPopoverComponent(options);
-                window.counterPoolPopovers.push(popover);
+                
                 popover.init();
             });
         } else {
@@ -167,5 +159,13 @@ var servicePointPool = new function() {
 
     this.emptyPool = function() {
         servicePointPoolTable.fnClearTable();
+
+        // Get DOM elements
+        var counterPool         = $('#servicePointPoolModule'),
+            counterPoolList     = counterPool.find('.qm-pool__list'),
+            counterPoolToggle   = counterPool.find('.qm-pool__toggle-btn');
+
+        // Empty list    
+        counterPoolList.empty();
     }
 };

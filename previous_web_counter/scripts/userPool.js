@@ -1,6 +1,7 @@
 var userPool = new function() {
 
     var userPoolTable;
+    
 
     this.updateUserPool = function() {
         if(typeof userPoolTable != 'undefined') {
@@ -54,6 +55,7 @@ var userPool = new function() {
         //kill old event handlers
         $('tbody td span.ticketNumSpan', $('#userPool')).die('click');
 
+
         //callbacks for calling, transferring and removing tickets
         $('tbody td span.ticketNumSpan', $('#userPool')).live('click', function() {
             var nTr = $(this).closest("tr").get(0);
@@ -82,20 +84,11 @@ var userPool = new function() {
             userPoolList        = userPool.find('.qm-pool__list'),
             userPoolToggle      = userPool.find('.qm-pool__toggle-btn');
 
-
         // Empty list
         userPoolList.empty();
 
-        // Clean up popovers
-        if(window.userPoolPopovers && window.userPoolPopovers.length > 0) { 
-            _.each(window.userPoolPopovers, function(popover) {
-                popover.instance.dispose();
-            });
-        }
-        window.userPoolPopovers = [];
-        
         // Templates
-        var userPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket" data-toggle="popover"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
+        var userPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
         var noResultTemplate = $('<li class="qm-pool__list-item qm-pool__list-item--auto-width"><span class="qm-pool__no-result-text">' + jQuery.i18n.prop('info.pools.no_customers_in_pool') + '</span></li>');
         var popoverTemplate = document.querySelector('.qm-popover--pool').outerHTML.trim();
         
@@ -112,18 +105,17 @@ var userPool = new function() {
             userPoolData.forEach(function(data, i) {
                 var template = userPoolItemTemplate.clone();
                 
-                template.find('.qm-pool-item__content--ticket').text(data.ticketId).attr('data-visitId', data.visitId);
+                template.find('.qm-pool-item__content--ticket').text(data.ticketId);
                 template.find('.qm-pool-item__content--wait').text(util.formatIntoMM(data.waitingTime));
                 userPoolList.append(template);
                 
-
                 // Popover options and initialization
                 options.popTarget = template.get(0).querySelector('.qm-pool-item__content--ticket');
                 if(servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
                     options.disableCall = true;
                 }
+                options.visitId = data.visitId;
                 var popover = new window.$Qmatic.components.popover.UserPoolPopoverComponent(options);
-                window.userPoolPopovers.push(popover);
                 popover.init();
             });
         } else {
@@ -192,6 +184,13 @@ var userPool = new function() {
     };
 
     this.emptyPool = function() {
-        userPoolTable.fnClearTable();
+        userPoolTable.fnClearTable(); // TODO: Remove me
+
+        var userPool            = $('#userPoolModule'),
+            userPoolList        = userPool.find('.qm-pool__list'),
+            userPoolToggle      = userPool.find('.qm-pool__toggle-btn');
+
+        // Empty list
+        userPoolList.empty();
     }
 };

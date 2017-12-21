@@ -66,8 +66,14 @@
 
 .qm-tab-information {
     display: flex;
-    margin-left: rem($global-standard-margin);
+    align-items: center;
+    margin-left: rem($global-standard-margin / 2);
     pointer-events: none;
+    color: $text-primary-color;
+
+    @at-root [aria-selected='false'] & {
+        color: $tab-disabled-color;
+    }
 
     @at-root [dir='rtl'] & {
         margin-left: 0;
@@ -77,17 +83,17 @@
     &__icon {
         flex: 0 20px;
         font-size: rem(20px);
-        color: $text-primary-color;
-        margin-right: rem($global-standard-margin / 2);
+        color: inherit;
+        margin-right: rem(4px);
 
         @at-root [dir='rtl'] & {
             margin-right: 0;
-            margin-left: rem($global-standard-margin / 2);
+            margin-left: rem(4px);
         }
     }
 
     &__text {
-        color: $text-primary-color;
         font-size: rem(16px);
+        line-height: rem(19px);
     }
 }

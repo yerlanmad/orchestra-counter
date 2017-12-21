@@ -4,6 +4,7 @@
     padding: rem($global-standard-padding / 2 $global-standard-padding * 2);
     border-radius: rem($standard-border-radius);
     white-space: nowrap;
+    justify-content: center;
     cursor: pointer;
     font-size: rem($button-font-size);
     font-weight: $font-weight-light;
@@ -78,7 +79,7 @@
         }
     }
     &--with-icon {
-        text-align: left;
+        justify-content: flex-start;
         align-items: center;
         @at-root [dir='rtl'] & {
             text-align: right;

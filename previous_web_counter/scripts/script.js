@@ -241,7 +241,13 @@ var servicePoint = new function () {
 			if (!sessvars.queueTimerOn) {
 				sessvars.queueTimerOn = true;
 			}
-
+			
+			var myQueues = spService.get('branches/' + sessvars.branchId 
+							+ '/workProfiles/' 
+							+ sessvars.workProfileId + '/queues') || [];
+			
+			window.myQueueIds = _.map(myQueues, 'id');
+			
 			queues.updateQueues(true);
 			if (typeof projectedVisits != "undefined") {
 				projectedVisits.updateProjectedVisits(true);

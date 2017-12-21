@@ -145,7 +145,10 @@ var util = new function() {
             "fnServerData": function(sSource, aoData, fnCallback) {
                 $.getJSON(sSource, aoData, function(json) {
                     if(typeof config.filterData !== 'undefined' ){
-                        config.filterData(json);
+                        json = config.filterData(json);
+                    }
+                    if(typeof config.initFn !== 'undefined') {
+                        config.initFn(json);
                     }
                     fnCallback({"iTotalRecords":json.length,"iTotalDisplayRecords":json.length, "aaData":json});
                 });
@@ -155,7 +158,11 @@ var util = new function() {
         if(typeof config.infoFiltered !== 'undefined') {
         	tableConfig.oLanguage.sInfoFiltered = translate.msg(config.infoFiltered, ["_MAX_"]);
         }
-        table = $('#' + config.tableId).dataTable(tableConfig);
+        if(typeof config.tableSelector !== 'undefined') {
+            table = $(config.tableSelector).dataTable(tableConfig);
+        } else {
+            table = $('#' + config.tableId).dataTable(tableConfig);
+        }
         $(window).bind('resize', function () {
             table.fnAdjustColumnSizing();
         } );

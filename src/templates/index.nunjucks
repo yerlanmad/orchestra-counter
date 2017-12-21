@@ -46,6 +46,7 @@
                     </div>
                     <div class="qm-adjustable-layout__bottom">
                         {% include "partials/queue-tabs.nunjucks" %}
+                        {% include "partials/queue-detail-view.nunjucks" %}
                     </div>
                 </div>
             </div>
@@ -56,9 +57,9 @@
             </div>
         </footer>
     </div>
-
+    <div id="js-popover-overlay" class="qm-popover-overlay"></div>
     <div class="qm-popovers qm-hide" aria-hidden="true">
-        {% include "partials/popover-views/popover-action.nunjucks" %}
+        {% include "partials/popovers/popover-root-templates.nunjucks" %}
     </div>
     {% include "partials/previous_counter.nunjucks" %}
 
@@ -97,6 +98,12 @@
                 // Temporary toggle of pools - Move this to a better location and make better implementaion
                 $('.qm-pool__toggle-btn').on('click', function (e) {
                     $(this).closest('.qm-pool').toggleClass('qm-pool--is-open');
+                });
+
+                // back btn queue detail
+                $('.js-queue-detail-back').on('click', function() {
+                    $('#queuesModule').show();
+                    $('#queueDetailView').hide();
                 });
 
                 // TABS

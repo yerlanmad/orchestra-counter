@@ -5,12 +5,6 @@
             <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
             <span class="qm-action-btn__text"></span>
         </button>
-        <!--
-        <button class="qm-action-btn qm-action-btn--laying js-popover-transfer">
-            <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
-            <span class="qm-action-btn__text" title="Transfer">Transfer</span>
-        </button>
-        -->
         <button class="qm-action-btn qm-popover__close--small js-popover-close">
             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
             <span class="sr-only"></span>

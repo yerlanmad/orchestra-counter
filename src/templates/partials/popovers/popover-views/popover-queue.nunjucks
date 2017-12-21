@@ -1,4 +1,4 @@
-<div class="qm-popover-transfer-selection">
+<div class="qm-popover-queue">
     <div class="qm-popover__layout">
         <div class="qm-card-nav qm-card-nav--popover">
             <div class="qm-card-nav__left">
@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="qm-card-nav__middle">
-                <h2 class="qm-card-nav__title">Where to transfer?</h2>
+                <h2 class="qm-card-nav__title">Transfer to Queue</h2>
             </div>
             <div class="qm-card-nav__right">
                 <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__close-btn js-popover-close">
@@ -19,15 +19,17 @@
         </div>
     
         <div class="qm-popover__content">
-            <button class="qm-btn qm-btn--secondary qm-btn--full">
-                <span class="qm-btn__text" title="Transfer to queue">Transfer to queue</span>
-            </button>
-            <button class="qm-btn qm-btn--secondary qm-btn--full">
-                <span class="qm-btn__text" title="Transfer to pool">Transfer to pool</span>
-            </button>
-            <button class="qm-btn qm-btn--secondary qm-btn--full">
-                <span class="qm-btn__text" title="Transfer to counter">Transfer to counter</span>
-            </button>
+        
+            <table class="qm-table qm-table--small js-popover-table-queues">
+                <thead class="qm-table__header">
+                    <tr>
+                        <th class="transferQueueName"></th>
+                        <th class="transferQueueToQueueQueueId"></th>
+                        <th class="transferQueueActions"></th>
+                    </tr>
+                </thead>
+                <tbody class="qm-table__body"></tbody>
+            </table>
         </div>
     </div>
 </div>

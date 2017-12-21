@@ -1,7 +1,7 @@
 
 html, body{margin:0; padding:0;	font-family: Arial, verdana, sans-serif; font-size:12px;}
-a{text-decoration:none; color:#0000FF;}
-a:visited{color:#00F;}
+a{text-decoration:none;/* color:#0000FF;*/}
+/*a:visited{color:#00F;}*/
 a:hover{text-decoration:underline;}
 a:active{color:#F00;}
 img{border:0 none;}
@@ -386,15 +386,15 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 }
 
 /************* Tickets ****************/
-#tickets .firstColumn{text-align:center; height:48px;}
+/* #tickets .firstColumn{text-align:center; height:48px;}
 #tickets .middleColumn{text-align:center; height:48px;}
 #tickets .lastColumn{text-align:center; height:48px;}
 #tickets .ticketNumSpan{
     font-size:18px;
-}
+} */
 /*#tickets .ticketNumSpan:hover{text-decoration:underline;}*/
 
-#tickets .transferTicket{
+/* #tickets .transferTicket{
     background:transparent url(../images/moveIcon.gif) no-repeat center;
     padding: 5px 0 0;
     display:inline-block; 
@@ -426,7 +426,7 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 }
 #tickets .callTicket:hover{
     background-color: #FFDEAD;
-}
+} */
 /***************** Transfer ticket ******************/
 #transferTicketQueueToQueueTable .firstColumn,
 #transferQueueToServicePointPoolTable .firstColumn,
@@ -527,11 +527,11 @@ input::-moz-focus-inner /*Remove button padding in FF*/{border: 0; padding: 0;}
 }
 
 /************* Generic table stuff ***************/
-/*#notes, #marks, */ #tickets, #outcomes, #deliveredServices, #multiServices, #customMarks, #selectDeliveredServiceTable, #userPool, #servicePointPool,
+/*#notes, #marks, #tickets,*/  #outcomes, #deliveredServices, #multiServices, #customMarks, #selectDeliveredServiceTable, #userPool, #servicePointPool,
                      /*#queues*/, #projectedVisits, #transferQueues, #walkDirectServices, #transferTicketToStaffPoolTable, #transferTicketToServicePointPoolTable,
                      #transferTicketQueueToQueueTable, #nextServices, #transferQueueToServicePointPoolTable, #transferQueueToStaffPoolTable
                      {width:100%; background:transparent; border-collapse:collapse;}
-/*#notes td, #marks td,*/ #tickets td, #servicePointPool td, #nextServices td, #multiServices td, #customMarks td, #userPool td, #deliveredServices td, #selectDeliveredServiceTable td,
+/*#notes td, #marks td, #tickets td, */ #servicePointPool td, #nextServices td, #multiServices td, #customMarks td, #userPool td, #deliveredServices td, #selectDeliveredServiceTable td,
                           #outcomes td, #selectOutcomeTable td, /*#selectMarkTypeTable td,#queues td, */#projectedVisits td, #walkDirectServices td,
                           #transferQueues td, #transferTicketToStaffPoolTable td, #transferTicketToServicePointPoolTable td,
                           #transferTicketQueueToQueueTable td, #transferQueueToServicePointPoolTable td, #transferQueueToStaffPoolTable td

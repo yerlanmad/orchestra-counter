@@ -1,4 +1,5 @@
 .qm-popover {
+    z-index: 110;
     box-shadow: 0 0 8px 0 rgba(0,0,0,0.34);
 
     &__layout {
@@ -11,9 +12,12 @@
     }
 
     &__content {
-        max-width: 350px;
+        max-width: 400px;
         width: 100%;
-        padding: rem(50px 45px);
+
+        &--narrow {
+            padding: rem(30px 45px 50px);
+        }
     }
 
     &__close {
@@ -40,19 +44,56 @@
 
     // All views
     .qm-popover-action-bar,
-    .qm-popover-transfer-selection {
+    .qm-popover-transfer-selection,
+    .qm-popover-queue,
+    .qm-popover-user-pool,
+    .qm-popover-counter-pool {
         display: none;
     }
 
-    &.popover-show--action-bar {
+    &.popover-show--action-bar-view {
         .qm-popover-action-bar {
             display: block;
         }
     }
 
-    &.popover-show--transfer-selection {
+    &.popover-show--transfer-selection-view {
         .qm-popover-transfer-selection {
             display: block;
         }
+    }
+
+    &.popover-show--queue-view {
+        .qm-popover-queue {
+            display: block;
+        }
+    }
+
+    &.popover-show--user-pool-view {
+        .qm-popover-user-pool {
+            display: block;
+        }
+    }
+
+    &.popover-show--counter-pool-view {
+        .qm-popover-counter-pool {
+            display: block;
+        }
+    }
+
+    .qm-popover-queue,
+    .qm-popover-user-pool,
+    .qm-popover-counter-pool {
+        width: 400px;
+    }
+
+    &-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
     }
 }

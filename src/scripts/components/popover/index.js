@@ -5,6 +5,7 @@ window.$Qmatic.components.popover = {}
 window.$Qmatic.components.popover.BasePopoverComponent = function (options) {
     this.template           = options.template;
     this.target             = options.popTarget;
+    this.popoverOverlay     = document.getElementById('js-popover-overlay')
     this.navigationStack    = [];
 }
 
@@ -22,9 +23,13 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
             this._navigate();
         }
     },
-    _navigateTo: function (view) {
+    _navigateTo: function (view, initFn) {
         this.navigationStack.push(view);
         this._navigate();
+        
+        if(initFn !== null && typeof initFn == "function") {
+            initFn();
+        }
     },
     _navigate: function () {
         var nextView = this._getLatestAddedView();
@@ -43,11 +48,11 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
     _toggleInstance: function () {
         if(this.instance._isOpen) {
             // Clean up navigation
-            var lastVisitedView = this._getLatestAddedView();
-            this._hideView(lastVisitedView);
-            this.navigationStack = [];
+            this.disposeInstance();
+            this.popoverOverlay.style.display = "none";
+            return;
         }
-
+        this.popoverOverlay.style.display = "block";
         this.instance.toggle();
     }
 }

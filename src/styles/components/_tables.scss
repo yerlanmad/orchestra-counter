@@ -23,13 +23,22 @@
 
         td {
             font-size: rem(18px);
-            padding: rem($global-standard-padding);
+            padding: rem(12px $global-standard-padding);
         }
     }
 
-    &__queue-name {
+    &__queue-name,
+    &__ticket-code {
         color: $secondary-color;
-        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            color: $secondary-color;
+        }
+    }
+
+    &__ticket-code {
+        font-weight: $font-weight-bold;
     }
 
     &__first-column {
@@ -40,10 +49,17 @@
     }
 
     &__middle-column {
-        text-align: right;
 
         @at-root [dir='rtl'] & {
-            text-align: left;
+            text-align: right;
+        }
+
+        &--right-align {
+            text-align: right;
+
+            @at-root [dir='rtl'] & {
+                text-align: left;
+            }
         }
     }
 
@@ -110,7 +126,8 @@
             border-bottom: 1px solid $dark-transparent12;
 
             th {
-                padding: rem($global-standard-padding 0);
+                font-size: rem(16px);
+                padding: rem($global-standard-padding / 2 0);
             }
         }
 
@@ -134,6 +151,24 @@
     
             .qm-table__last-column {
                 padding: rem($global-standard-padding / 2);
+            }
+        }
+    }
+
+    &--simple {
+        .qm-table__body {
+            tr {
+                background: $table-row-hover-color;
+                border-bottom: 3px solid $right-background-color;
+                
+                &:hover {
+                    box-shadow: none;    
+                }
+            }
+
+            td {
+                font-size: rem(16px);
+                padding: rem(12px $global-standard-padding);
             }
         }
     }

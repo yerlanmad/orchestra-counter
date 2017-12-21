@@ -1,0 +1,36 @@
+<div class="qm-popover-user-pool">
+    <div class="qm-popover__layout">
+        <div class="qm-card-nav qm-card-nav--popover">
+            <div class="qm-card-nav__left">
+                <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__back-btn js-popover-back">
+                    <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                    <span class="sr-only"></span>
+                </button>
+            </div>
+            <div class="qm-card-nav__middle">
+                <h2 class="qm-card-nav__title">Transfer to User Pool</h2>
+            </div>
+            <div class="qm-card-nav__right">
+                <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__close-btn js-popover-close">
+                    <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                    <span class="sr-only"></span>
+                </button>
+            </div>
+        </div>
+    
+        <div class="qm-popover__content">
+            <table class="qm-table qm-table--small js-popover-table-user-pool" cellpadding="0" cellspacing="0" border="0">
+                <thead class="qm-table__header">
+                    <tr>
+                        <th class="transferQueueToStaffPoolStaffId"></th>
+                        <th class="transferStaffPoolName"></th>
+                        <th class="transferStaffPoolActions"></th>
+                        <th class="transferQueueToStaffPoolStaffLocale"></th>
+                        <th class="transferQueueToStaffPoolStaffDirection"></th>
+                    </tr>
+                </thead>
+                <tbody class="qm-table__body"></tbody>
+            </table>
+        </div>
+    </div>
+</div>

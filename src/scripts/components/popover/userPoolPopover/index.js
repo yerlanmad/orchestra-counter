@@ -12,6 +12,6 @@ window.$Qmatic.components.popover.UserPoolPopoverComponent.prototype.constructor
     = window.$Qmatic.components.popover.UserPoolPopoverComponent;
 
 window.$Qmatic.components.popover.UserPoolPopoverComponent.prototype._call = function () {
-    this._toggleInstance();
+    this.disposeInstance();
     userPool.callFromPool(this.visitId);
 };

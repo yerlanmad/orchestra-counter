@@ -1,0 +1,17 @@
+<div class="qm-popover qm-popover--pool tooltip">
+    <div class="tooltip__arrow"></div>
+    {% include "partials/popovers/popover-views/popover-pool-action-bar.nunjucks" %}
+    <div class="tooltip__inner">
+    </div>
+</div>
+
+<div class="qm-popover qm-popover--queue tooltip">
+    <div class="tooltip__arrow"></div>
+    {% include "partials/popovers/popover-views/popover-queue-action-bar.nunjucks" %}
+    {% include "partials/popovers/popover-views/popover-transfer-selection.nunjucks" %}
+    {% include "partials/popovers/popover-views/popover-queue.nunjucks" %}
+    {% include "partials/popovers/popover-views/popover-user-pool.nunjucks" %}
+    {% include "partials/popovers/popover-views/popover-counter-pool.nunjucks" %}
+    <div class="tooltip__inner">
+    </div>
+</div>

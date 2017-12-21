@@ -2,6 +2,10 @@
     display: flex;
     align-items: center;
 
+    &--popover {
+        padding: rem($global-standard-padding / 2 0);
+    }
+
     &__left {
         flex: 0 0 24px;
         height: 24px;
@@ -14,6 +18,8 @@
 
     &__right {
         flex: 0 0 24px;
+        display: flex;
+        align-items: center;
     }
 
     &__title {
@@ -24,12 +30,32 @@
         @at-root [dir='rtl'] & {
             text-align: right;
         }
+
+        @at-root .qm-popover & {
+            color: $popover-header-color;
+            font-size: rem(21px);
+            font-weight: $font-weight-medium;
+            text-transform: uppercase;
+        }
     }
 
     &__back-btn {
         .qm-action-btn__icon {
             color: $back-button-color;
             font-size: rem(24px);
+
+            @at-root .qm-popover & {
+                color: $primary-color;
+            }
+        }
+    }
+
+    &__close-btn {
+        .qm-action-btn__icon {
+
+            @at-root .qm-popover & {
+                font-size: rem(24px);
+            }
         }
     }
 }

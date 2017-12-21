@@ -2,14 +2,13 @@
 // Pool
 window.$Qmatic.components.popover.PoolPopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
-    this.visitId        = options.popTarget.getAttribute('data-visitId');
+    this.visitId        = options.visitId;
     this.disableCall    = options.disableCall || false;
     this.isRTL          = document.getElementsByTagName("html")[0].getAttribute("dir") 
                         && document.getElementsByTagName("html")[0].getAttribute("dir")
                                                 .indexOf('rtl') > -1 ? true : false;
     this.views          = {
-        ACTION_BAR: 'action-bar',
-        TRANSFER_SELECTION: 'transfer-selection'
+        ACTION_BAR: 'action-bar-view'
     }
 }
 
@@ -23,34 +22,43 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype.constructor
 window.$Qmatic.components.popover.PoolPopoverComponent.prototype 
     = $.extend(window.$Qmatic.components.popover.BasePopoverComponent.prototype, {
     init: function () {
-        this.instance = new Tooltip(this.target, {
-            container: document.body,
-            trigger: 'manual',
-            title: ' ',
-            placement: this.isRTL ? 'bottom-end' : 'bottom-start',
-            template: this.template,
-            offset: '0, 10'
-        });
-
+        this._attachOverlayEvent();
         this._attachTargetEventListeners();
     },
     _attachTargetEventListeners: function () {
         this.target.addEventListener('click', this._toggleAndAttachPopoverTemplateEvents.bind(this));
     },
     _toggleAndAttachPopoverTemplateEvents: function (e) {
-        var shouldAttachCloseEvent = this.instance._tooltipNode ? false : true; 
-        this._toggleInstance(e);
-        this._navigateTo(this.views.ACTION_BAR);
+        if(this.instance && this.instance._isOpen) {
+            this._toggleInstance();
+        } else {
+            this.instance = new Tooltip(this.target, {
+                container: document.body,
+                trigger: 'manual',
+                title: ' ',
+                placement: this.isRTL ? 'bottom-end' : 'bottom-start',
+                template: this.template,
+                offset: '0, 10'
+            });
+    
 
-        if(shouldAttachCloseEvent) {
-            this._attachTemplateEvents();
+            var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true; 
+            
+            this._toggleInstance();
+            this._navigateTo(this.views.ACTION_BAR);
+    
+            if(shouldAttachTemplateEvents) {
+                this._attachTemplateEvents();
+            }
         }
+    },
+    _attachOverlayEvent: function () {
+        this.popoverOverlay.addEventListener('click', this.disposeInstance.bind(this));
     },
     _attachTemplateEvents: function () {
         var closeBtns   = this.instance._tooltipNode.querySelectorAll('.js-popover-close'),
             callBtn     = this.instance._tooltipNode.querySelector('.js-popover-call'),
             backBtns    = this.instance._tooltipNode.querySelectorAll('.js-popover-back');
-            //transferBtn = this.instance._tooltipNode.querySelector('.js-popover-transfer'),
 
         for(var i = 0; i < closeBtns.length; i ++) {
             closeBtns[i].addEventListener('click', this._toggleInstance.bind(this));
@@ -64,9 +72,10 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
         } else {
             callBtn.addEventListener('click', this._call.bind(this));
         }
-        
-        
-        //transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.TRANSFER_SELECTION));
-        
+    },
+    disposeInstance: function () {
+        this.navigationStack = [];
+        this.instance && this.instance.dispose();
+        this.popoverOverlay.style.display = "none";
     }
 });
