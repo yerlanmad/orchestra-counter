@@ -241,13 +241,13 @@ var servicePoint = new function () {
 			if (!sessvars.queueTimerOn) {
 				sessvars.queueTimerOn = true;
 			}
-			
-			var myQueues = spService.get('branches/' + sessvars.branchId 
-							+ '/workProfiles/' 
-							+ sessvars.workProfileId + '/queues') || [];
-			
+
+			var myQueues = spService.get('branches/' + sessvars.branchId
+				+ '/workProfiles/'
+				+ sessvars.workProfileId + '/queues') || [];
+
 			window.myQueueIds = _.map(myQueues, 'id');
-			
+
 			queues.updateQueues(true);
 			if (typeof projectedVisits != "undefined") {
 				projectedVisits.updateProjectedVisits(true);
@@ -1403,7 +1403,7 @@ var servicePoint = new function () {
 			cardNavigationController.push($Qmatic.components.card.closeCard);
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
-				cardNavigationController.push($Qmatic.components.card.inactiveCard);
+			cardNavigationController.push($Qmatic.components.card.inactiveCard);
 		} else {
 			cardNavigationController.push($Qmatic.components.card.visitCard);
 		}
@@ -1430,8 +1430,8 @@ var servicePoint = new function () {
 				.html(jQuery.i18n.prop('info.no.customer.called'));
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& sessvars.state.userState == servicePoint.userState.SERVING
-				&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED) {
 				util.showMessage(jQuery.i18n.prop('error.no.outcome'));
 			} else if (sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED) {
@@ -1585,7 +1585,7 @@ var servicePoint = new function () {
 						}, displayQueueTimeout * 1000);
 				}
 			}
-	
+
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
@@ -1627,12 +1627,12 @@ var servicePoint = new function () {
 
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
- 				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
- 				// $("#noShowBtn").toggleClass("customButtonSmall", true);
+				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
+				// $("#noShowBtn").toggleClass("customButtonSmall", true);
 				$("#noShowBtn").prop('disabled', false);
 			} else {
 				// $("#noShowBtn").toggleClass("customButtonSmall", false);
-			 	// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
+				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
 				$("#noShowBtn").prop('disabled', true);
 			}
 			// is recall allowed
@@ -1735,7 +1735,7 @@ var servicePoint = new function () {
 		customer.updateCustomerModule();
 
 		// Set Highlight class to customer name if present else set to ticket number
-		if (sessvars.state.visit && sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != ""){
+		if (sessvars.state.visit && sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != "") {
 			$("#linkedCustomerField").addClass("qm-card-header__highlighted");
 			$("#ticketNumber").removeClass("qm-card-header__highlighted");
 		} else {
@@ -1761,28 +1761,30 @@ var servicePoint = new function () {
 	};
 
 	var updateNextAndPreviousServices = function () {
-		var nextServices = sessvars.state.visit.unservedVisitServices;
-		var previousServices = sessvars.state.visit.servedVisitServices;
-		
+		if (sessvars.state.visit) {
+			var nextServices = sessvars.state.visit.unservedVisitServices;
+			var previousServices = sessvars.state.visit.servedVisitServices;
 
-		if (nextServices.length > 0) {
-			$("#nextVisitServices").show()
-			$("#nextVisitServices .qm-services__services-listing").html("")
-			nextServices.forEach(function (service) {
-				$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName  + '</span>')
-			});
-		} else {
-			$("#nextVisitServices").hide()
-		}
 
-		if (previousServices.length > 0) {
-			$("#previousVisitServices").show()
-			$("#previousVisitServices .qm-services__services-listing").html("")
-			previousServices.forEach(function (service) {
-				$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName  + '</span>')
-			});
-		} else {
-			$("#previousVisitServices").hide()
+			if (nextServices.length > 0) {
+				$("#nextVisitServices").show()
+				$("#nextVisitServices .qm-services__services-listing").html("")
+				nextServices.forEach(function (service) {
+					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>')
+				});
+			} else {
+				$("#nextVisitServices").hide()
+			}
+
+			if (previousServices.length > 0) {
+				$("#previousVisitServices").show()
+				$("#previousVisitServices .qm-services__services-listing").html("")
+				previousServices.forEach(function (service) {
+					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>')
+				});
+			} else {
+				$("#previousVisitServices").hide()
+			}
 		}
 	}
 
@@ -2068,7 +2070,7 @@ var servicePoint = new function () {
 		profile.text(sessvars.state.workProfileName);
 		// Used to repaint in IE when values are appended
 		profile.focus().blur();
-		
+
 		prioSel.prop('selectedIndex', $(
 			"#prioList option[value=" + sessvars.workProfileId + "]")
 			.index());
