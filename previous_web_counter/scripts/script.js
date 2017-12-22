@@ -56,6 +56,8 @@ var unitMappings;
 var modalNavigationController = new $Qmatic.components.NavController("#qm-modal-nav");
 var cardNavigationController = new $Qmatic.components.NavController('#qm-card-nav');
 
+var tooltipController = new $Qmatic.components.TooltipController();
+
 var servicePoint = new function () {
 
 	var servicesLeft = false;
@@ -1469,26 +1471,35 @@ var servicePoint = new function () {
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -
 			// callTime
-			$("#callNextBtn").toggleClass("customButtonDisabled", true);
-			$("#callNextBtn").toggleClass("customButton", false);
-			$("#callNextBtn").prop('disabled', true);
-			$("#walkDirectBtn").toggleClass("customButtonDisabled", true);
-			$("#walkDirectBtn").toggleClass("customButton", false);
-			$("#walkDirectBtn").prop('disabled', true);
-			$("#endVisitBtn").toggleClass("customButtonDisabled", true);
-			$("#endVisitBtn").toggleClass("customButton", false);
-			$("#endVisitBtn").prop('disabled', true);
+			// $("#callNextBtn").toggleClass("customButtonDisabled", true);
+			// $("#callNextBtn").toggleClass("customButton", false);
+			var $callNextBtn = $("#callNextBtn");
+			$callNextBtn.prop('disabled', true);
+			tooltipController.init('callnext', $callNextBtn.closest('.button-tooltip'), { text: 'You need to set an outcome or delivered service' });
+			// $("#walkDirectBtn").toggleClass("customButtonDisabled", true);
+			// $("#walkDirectBtn").toggleClass("customButton", false);
+			var $walkDirectBtn = $("#walkDirectBtn"); 
+			$walkDirectBtn.prop('disabled', true);
+			tooltipController.init('walkin', $walkDirectBtn.closest('.button-tooltip'), { text: 'You need to set an outcome or delivered service' });
+			// $("#endVisitBtn").toggleClass("customButtonDisabled", true);
+			// $("#endVisitBtn").toggleClass("customButton", false);
+			var $endVisitBtn = $("#endVisitBtn");
+			$endVisitBtn.prop('disabled', true);
+			tooltipController.init('endvisit', $endVisitBtn.closest('.button-tooltip'), { text: 'Need outcome' });
+			// $("#closeBtn").toggleClass("customButtonDisabled", true);
+			// $("#closeBtn").toggleClass("customButton", false);
+			var $closeBtn = $("#closeBtn"); 
+			$closeBtn.prop('disabled', true);
+			tooltipController.init('closecounter', $closeBtn.closest('.button-tooltip'), { text: 'You need to set an outcome or delivered service before closing' });
+			// $("#transferBtn").toggleClass("customButtonSmall", true);
+			// $("#transferBtn").toggleClass("customButtonSmallDisabled", false);
+			var $transferBtn = $("#transferBtn");
+			$transferBtn.prop('disabled', false);
 
-			$("#closeBtn").toggleClass("customButtonDisabled", true);
-			$("#closeBtn").toggleClass("customButton", false);
-			$("#closeBtn").prop('disabled', true);
-			$("#transferBtn").toggleClass("customButtonSmall", true);
-			$("#transferBtn").toggleClass("customButtonSmallDisabled", false);
-			$("#transferBtn").prop('disabled', false);
-
-			$("#parkBtn").toggleClass("customButtonSmall", true);
-			$("#parkBtn").toggleClass("customButtonSmallDisabled", false);
-			$("#parkBtn").prop('disabled', false);
+			// $("#parkBtn").toggleClass("customButtonSmall", true);
+			// $("#parkBtn").toggleClass("customButtonSmallDisabled", false);
+			var $parkBtn = $("#parkBtn"); 
+			$parkBtn.prop('disabled', false);
 
 			// $("#notesBtn").toggleClass("customButtonSmall", true);
 			// $("#notesBtn").toggleClass("customButtonSmallDisabled", false);
@@ -1611,19 +1622,23 @@ var servicePoint = new function () {
 			$("#callNextBtn").toggleClass("customButton", true);
 			$("#callNextBtn").toggleClass("customButtonDisabled", false);
 			$("#callNextBtn").prop('disabled', false);
+			tooltipController.dispose('callnext');
 			$("#walkDirectBtn").toggleClass("customButton", true);
 			$("#walkDirectBtn").toggleClass("customButtonDisabled", false);
 			$("#walkDirectBtn").prop('disabled', false);
+			tooltipController.dispose('walkin');
 			$("#endVisitBtn").toggleClass("customButton", true);
 			$("#endVisitBtn").toggleClass("customButtonDisabled", false);
 			$("#endVisitBtn").prop('disabled', false);
+			tooltipController.dispose('endvisit');
 			$("#closeBtn").toggleClass("customButton", true);
 			$("#closeBtn").toggleClass("customButtonDisabled", false);
 			$("#closeBtn").prop('disabled', false);
+			tooltipController.dispose('closecounter');
 			$("#transferBtn").toggleClass("customButtonSmall", true);
 			$("#transferBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#transferBtn").prop('disabled', false);
-
+			tooltipController.dispose('transfer');
 			$("#parkBtn").toggleClass("customButtonSmall", true);
 			$("#parkBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#parkBtn").prop('disabled', false);
@@ -1647,10 +1662,12 @@ var servicePoint = new function () {
 				// $("#recallBtn").toggleClass("customButtonSmallDisabled", false);
 				// $("#recallBtn").toggleClass("customButtonSmall", true);
 				$("#recallBtn").prop('disabled', false);
+				tooltipController.dispose('recall');
 			} else {
 				// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
 				// $("#recallBtn").toggleClass("customButtonSmall", false);
 				$("#recallBtn").prop('disabled', true);
+				tooltipController.init('recall', $('#recallBtn').closest('.button-tooltip'), {text:  'hello'});
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {

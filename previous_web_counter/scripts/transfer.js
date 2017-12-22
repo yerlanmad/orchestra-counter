@@ -880,7 +880,8 @@ var transfer = new function() {
 
 			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + visitId + ',"sortPolicy":"'+sortType + '"}';			
 			spService.putParams('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
-			queues.updateQueues();
+            queues.updateQueues();
+            
             //util.hideModal("transferQueueToQueueDialogue");
         }
     };

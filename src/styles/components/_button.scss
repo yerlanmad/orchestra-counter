@@ -9,7 +9,7 @@
     font-size: rem($button-font-size);
     font-weight: $font-weight-light;
     &__icon {
-        font-size: rem(24px);
+        font-size: rem(32px);
         margin-right: rem($global-standard-padding / 2);
         @at-root [dir='rtl'] & {
             margin-right: 0;

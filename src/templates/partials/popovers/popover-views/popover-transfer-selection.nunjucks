@@ -19,13 +19,16 @@
         </div>
     
         <div class="qm-popover__content qm-popover__content--narrow">
-            <button class="qm-btn qm-btn--secondary qm-btn--full js-popover-transferToQueue">
+            <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-popover-transferToQueue">
+                <i class="qm-btn__icon icon-queue" aria-hidden="true"></i>
                 <span class="qm-btn__text" title="Transfer to queue">Transfer to queue</span>
             </button>
-            <button class="qm-btn qm-btn--secondary qm-btn--full js-popover-transferToUserPool">
+            <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-popover-transferToUserPool">
+                <i class="qm-btn__icon icon-customer-solid" aria-hidden="true"></i>
                 <span class="qm-btn__text" title="Transfer to pool">Transfer to pool</span>
             </button>
-            <button class="qm-btn qm-btn--secondary qm-btn--full js-popover-transferToCounterPool">
+            <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-popover-transferToCounterPool">
+                <i class="qm-btn__icon icon-screen" aria-hidden="true"></i>
                 <span class="qm-btn__text" title="Transfer to counter">Transfer to counter</span>
             </button>
         </div>

@@ -206,7 +206,7 @@ var queues = new function() {
                             ticketId: aData.ticketId,
                             visitId: aData.id
                         };
-
+                        
                         // Popover options and initialization
                         if ( buttonTransferFromQueueEnabled  == true ) {						
                             //$('td:eq(1)', nRow).append("<span><a href=\"#\" class=\"transferTicket\" title=\"" + jQuery.i18n.prop("action.title.transfer") + "\"></a></span>");
