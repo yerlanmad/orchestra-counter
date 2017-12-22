@@ -2,15 +2,11 @@
     @include set-default-height-for-card-layout ();
     @include set-default-width-for-card-layout ();
 
-    // Override width
-    // max-width: 95%;
-    // margin: 0 auto;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     
-    .qm-transparent-card__headline {
+    .qm-card__headline {
         font-size: rem(32px);
         color: $midnight-blue;
         line-height: rem(48px);

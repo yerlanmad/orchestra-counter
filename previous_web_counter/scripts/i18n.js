@@ -83,6 +83,11 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("confirmSettingsBtnModal", 'button.apply.settings');
         i18nQmBtn("cancelSettingsBtnModal", 'button.cancel');
 
+        //action bar
+        i18nQmBtn("walkDirectBtn", 'info.actionbar.walkIn');
+        i18nQmBtn("callNextBtn", 'info.actionbar.callNext');
+        i18nQmBtn("closeBtn", 'info.actionbar.closeCounter');
+
         //in terminal labels and selection boxes
         i18nSafe("infoServing", 'info.is.serving');
         i18nSafe("chooseProfile", 'field.chooseProfile');
@@ -134,6 +139,26 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         // Closed Card
         i18nSafe("closedCardTitle", 'info.card.closedCard.title');
         i18nSafe("closedCardSubTitle", 'info.card.closedCard.subTitle');
+
+        // Visit Card
+        i18nSafe("nextServiceLbl", 'info.card.visitCard.nextServiceLbl');
+        i18nSafe("previousServiceLbl", 'info.card.visitCard.previousServiceLbl');
+        i18nSafe("visitWaitingTime", 'info.waiting.time');
+        i18nSafe("visitTransactionTime", 'info.transaction.time');
+        i18nSafe("visitAddDsLbl", 'info.card.visitCard.addDs');
+        i18nSafe("visitAddMarksLbl", 'info.card.visitCard.addMarks');
+        i18nSafe("visitAddOutcomesLbl", 'info.card.visitCard.addOutcomes');
+        i18nQmBtn("recallBtn", 'action.recall');
+        i18nQmBtn("reinsertBtn", 'action.reinsert');
+        i18nQmBtn("transferBtn", 'action.transfer');
+        i18nQmBtn("parkBtn", 'action.parkBtn');
+        i18nQmBtn("noShowBtn", 'action.noshow');
+        i18nQmBtn("endVisitBtn", 'action.finish.visit');
+        
+        
+        
+        
+         
 
         // Inactive Card
         i18nSafe("inactiveCardTitle", 'info.card.inactiveCard.title');

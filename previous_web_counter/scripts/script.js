@@ -992,7 +992,7 @@ var servicePoint = new function () {
 				} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 					&& sessvars.state.visit == null) {
 					// no tickets left in the queue(s) for the selected prio
-					util.showMessage(jQuery.i18n
+					util.showError(jQuery.i18n
 						.prop("info.no.waiting.customers"));
 
 					// NEW 20131203. Send APPLICATION event
@@ -1398,9 +1398,18 @@ var servicePoint = new function () {
 	this.updateWorkstationStatus = function (isRefresh) {
 		clearOngoingVisit();
 
+		// Card Navigation - There are types types of cards (CLOSED, INACTIVE and VISIT)
+		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
+			cardNavigationController.push($Qmatic.components.card.closeCard);
+		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
+				cardNavigationController.push($Qmatic.components.card.inactiveCard);
+		} else {
+			cardNavigationController.push($Qmatic.components.card.visitCard);
+		}
+
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.closed'));
-			cardNavigationController.push($Qmatic.components.card.closeCard);
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 			modalNavigationController.push($Qmatic.components.modal.storeNext)
@@ -1410,7 +1419,6 @@ var servicePoint = new function () {
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.inactive'));
-			cardNavigationController.push($Qmatic.components.card.inactiveCard);
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.visitState == servicePoint.visitState.NO_CALLABLE_VISITS) {
 			$("#ticketNumber")
@@ -1577,7 +1585,7 @@ var servicePoint = new function () {
 						}, displayQueueTimeout * 1000);
 				}
 			}
-			cardNavigationController.push($Qmatic.components.card.visitCard);
+	
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
@@ -1726,6 +1734,15 @@ var servicePoint = new function () {
 		customer.updateCustomer();
 		customer.updateCustomerModule();
 
+		// Set Highlight class to customer name if present else set to ticket number
+		if (sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != ""){
+			$("#linkedCustomerField").addClass("qm-card-header__highlighted");
+			$("#ticketNumber").removeClass("qm-card-header__highlighted");
+		} else {
+			$("#linkedCustomerField").removeClass("qm-card-header__highlighted");
+			$("#ticketNumber").addClass("qm-card-header__highlighted");
+		}
+
 		if (spPoolUpdateNeeded) {
 			servicePointPool.updateServicePointPool(); // Todo: remove me
 			servicePointPool.renderCounterPool();
@@ -1740,7 +1757,34 @@ var servicePoint = new function () {
 			userPoolUpdateNeeded = true;
 		}
 		resetLogoffCounter();
+		updateNextAndPreviousServices();
 	};
+
+	var updateNextAndPreviousServices = function () {
+		var nextServices = sessvars.state.visit.unservedVisitServices;
+		var previousServices = sessvars.state.visit.servedVisitServices;
+		
+
+		if (nextServices.length > 0) {
+			$("#nextVisitServices").show()
+			$("#nextVisitServices .qm-services__services-listing").html("")
+			nextServices.forEach(function (service) {
+				$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName  + '</span>')
+			});
+		} else {
+			$("#nextVisitServices").hide()
+		}
+
+		if (previousServices.length > 0) {
+			$("#previousVisitServices").show()
+			$("#previousVisitServices .qm-services__services-listing").html("")
+			previousServices.forEach(function (service) {
+				$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName  + '</span>')
+			});
+		} else {
+			$("#previousVisitServices").hide()
+		}
+	}
 
 	var updateTop = function () {
 		var isDisabled = sessvars.state.servicePointState == servicePoint.servicePointState.OPEN

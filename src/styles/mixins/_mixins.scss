@@ -90,6 +90,7 @@ $rem-px-only: false !default;
     max-width: $max-width;
     padding: rem(40px 32px 32px);
     box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.18);
+    word-break: break-word;
     &__header-section {
         margin-bottom: rem(16px);
     }

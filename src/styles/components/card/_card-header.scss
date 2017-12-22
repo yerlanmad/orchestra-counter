@@ -14,13 +14,16 @@
         margin-bottom: 0;
     }
 
+    &__highlighted {
+        color: $h1-color !important;
+        font-weight: $font-weight-medium !important;
+    }
+
     &__customer-name {
         flex: 0 1 auto;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
-        color: $h1-color;
-        font-weight: $font-weight-medium;
         text-decoration: none;
         padding-right: rem($global-standard-padding / 2);
 

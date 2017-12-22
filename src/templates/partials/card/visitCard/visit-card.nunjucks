@@ -27,8 +27,8 @@
                         <span class="qm-services__add-service-text sr-only">Add service</span>
                     </a>
                 </div>
-                <div class="qm-services__upcoming-services-container">
-                    <span class="qm-services__label">Next:</span>
+                <div id="nextVisitServices" class="qm-services__upcoming-services-container">
+                    <span class="qm-services__label" id="nextServiceLbl"></span>
                     <div class="qm-services__services-listing">
                         <span class="qm-services__service-item">General support</span>
                         <span class="qm-services__service-item">Network & routers</span>
@@ -36,8 +36,8 @@
                         <span class="qm-services__service-item">Service 6</span>
                     </div>
                 </div>
-                <div class="qm-services__previous-services-container">
-                    <span class="qm-services__label">Previous:</span>
+                <div id="previousVisitServices" class="qm-services__previous-services-container">
+                    <span class="qm-services__label" id="previousServiceLbl"></span>
                     <div class="qm-services__services-listing">
                         <span class="qm-services__service-item">Computers</span>
                     </div>
@@ -54,14 +54,14 @@
             <div class="qm-timer__item">
                 <i class="qm-timer__icon icon-clock-solid" aria-hidden="true"></i>
                 <div class="qm-timer__text">
-                    <span class="qm-timer__label">Waiting time:</span>
+                    <span class="qm-timer__label"><span id="visitWaitingTime"></span><span>:</span></span>
                     <span id="waitingTimeCounter" class="qm-timer__time">15m 20s</span>
                 </div>
             </div>
             <div class="qm-timer__item">
                 <i class="qm-timer__icon icon-hourglass" aria-hidden="true"></i>
                 <div class="qm-timer__text">
-                    <span class="qm-timer__label">Transaction time:</span>
+                    <span class="qm-timer__label"><span id="visitTransactionTime"></span><span>:</span></span>
                     <span id="countTransactionTime" class="qm-timer__time">20s</span>
                 </div>
             </div>
@@ -71,15 +71,15 @@
         <div class="qm-task-items">
             <a href="" class="qm-task-item" id="deliveredServicesModule">
                 <i class="qm-task-item__icon icon-briefcase" aria-hidden="true"></i>
-                <span class="qm-task-item__text">Add a delivered service</span>
+                <span class="qm-task-item__text" id="visitAddDsLbl"></span>
             </a>
             <a href="" class="qm-task-item" id="addCustomMarkLink">
                 <i class="qm-task-item__icon icon-mark" aria-hidden="true"></i>
-                <span class="qm-task-item__text">Add marks</span>
+                <span class="qm-task-item__text" id="visitAddMarksLbl"></span>
             </a>
             <a href="" class="qm-task-item" id="selectOutcome">
                 <i class="qm-task-item__icon icon-outcome" aria-hidden="true"></i>
-                <span class="qm-task-item__text">Add an outcome</span>
+                <span class="qm-task-item__text" id="visitAddOutcomesLbl"></span>
             </a>
         </div>
         
@@ -100,29 +100,29 @@
         <div class="qm-card-action-layout">
             <button class="qm-action-btn" id="recallBtn" onclick="servicePoint.recall();this.blur();">
                 <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Recall">Recall</span>
+                <span class="qm-action-btn__text" title=""></span>
             </button>
             <button class="qm-action-btn" id="reinsertBtn" onclick="servicePoint.reinsertClicked();this.blur();">
                 <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Recycle">Recycle</span>
+                <span class="qm-action-btn__text" title=""></span>
             </button>
             <button class="qm-action-btn" id="transferBtn" onclick="transfer.transferPressed();this.blur();">
                 <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Transfer">Transfer</span>
+                <span class="qm-action-btn__text" title=""></span>
             </button>
             <button class="qm-action-btn" id="parkBtn" onclick="userPool.parkPressed();this.blur();">
                 <i class="qm-action-btn__icon icon-pause" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Park">Park</span>
+                <span class="qm-action-btn__text" title=""></span>
             </button>
         </div>
         <div class="qm-card-action-layout">
             <button class="qm-action-btn" id="noShowBtn" onclick="servicePoint.noShow();this.blur();" >
                 <i class="qm-action-btn__icon icon-no-show" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="No show">No show</span>
+                <span class="qm-action-btn__text" title=""></span>
             </button>
             <button class="qm-action-btn" id="endVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();">
                 <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="No show">Finish</span>
+                <span class="qm-action-btn__text" title=""></span>
             </button>
         </div>
     </div>
