@@ -1735,7 +1735,7 @@ var servicePoint = new function () {
 		customer.updateCustomerModule();
 
 		// Set Highlight class to customer name if present else set to ticket number
-		if (sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != ""){
+		if (sessvars.state.visit && sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != ""){
 			$("#linkedCustomerField").addClass("qm-card-header__highlighted");
 			$("#ticketNumber").removeClass("qm-card-header__highlighted");
 		} else {
