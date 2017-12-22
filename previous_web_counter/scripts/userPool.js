@@ -10,7 +10,9 @@ var userPool = new function() {
             var params = servicePoint.createParams();
             params.userId = sessvars.currentUser.id;
             var tickets = spService.get("branches/"+params.branchId+"/users/"+params.userId+"/pool/visits");
-            userPoolTable.fnAddData(tickets);
+            if (tickets.length > 0){
+                userPoolTable.fnAddData(tickets);
+            }
         } else {
             var columns = [
                 /* Id */                {"bSearchable": false,

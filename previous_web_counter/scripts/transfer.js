@@ -115,8 +115,10 @@ var transfer = new function() {
                 var callParams = servicePoint.createParams();
                 callParams.onlyServicePoints = 'true';
                 var users = spService.get("branches/" + callParams.branchId + "/users/validForUserPoolTransfer/");
-                transferToStaffPoolTable.fnAddData(users);
-                transferToStaffPoolTable.fnAdjustColumnSizing();
+                if(users.length > 0) {
+                    transferToStaffPoolTable.fnAddData(users);
+                    transferToStaffPoolTable.fnAdjustColumnSizing();
+                }
             } else {
                 var staffPoolColumns = [
                     /* Id */         {"bSearchable": false,
@@ -186,8 +188,10 @@ var transfer = new function() {
                 transferToServicePointPoolTable.fnClearTable();
                 var params = servicePoint.createParams();
                 var servicePoints = spService.get("branches/"+params.branchId+"/servicePoints/validForServicePointPoolTransfer/");
+                if (servicePoints.length > 0){
                 transferToServicePointPoolTable.fnAddData(servicePoints);
                 transferToServicePointPoolTable.fnAdjustColumnSizing();
+                }
             } else {
                 var servicePointColumns = [
                     /* Name */        {"sClass": "firstColumn",

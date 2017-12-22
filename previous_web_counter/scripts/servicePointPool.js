@@ -8,7 +8,9 @@ var servicePointPool = new function() {
             servicePointPoolTable.fnClearTable();
             var params = servicePoint.createParams();
             var tickets = spService.get("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/pool/visits");
-            servicePointPoolTable.fnAddData(tickets);
+            if(tickets.length > 0) {
+                servicePointPoolTable.fnAddData(tickets);
+            }
         } else {
             var columns = [
 /* Id */                {"bSearchable": false,
