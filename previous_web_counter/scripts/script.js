@@ -966,51 +966,55 @@ var servicePoint = new function () {
 		var params = servicePoint.createParams();
 		if (servicePoint.hasValidSettings()
 			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED)) {
-			sessvars.state = servicePoint.getState(spService.post("branches/"
+			var callNextResponse = spService.post("branches/"
 				+ params.branchId + "/servicePoints/"
-				+ params.servicePointId + "/visits/next"));
-			sessvars.statusUpdated = new Date();
-			if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-				util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
-			} else {
-				// TODO: Calling should always start a user service point
-				// session if none is started, implement in connectors
-				if (sessvars.state.userState == servicePoint.userState.NO_STARTED_SERVICE_POINT_SESSION) {
-					// the service point will be closed after application login
-					// since it's a single session service point
-					sessvars.state = servicePoint.getState(spService
-						.putCallback("branches/" + params.branchId
-						+ "/servicePoints/" + params.servicePointId
-						+ "/users/" + params.userName));
-					sessvars.statusUpdated = new Date();
-					servicePoint.updateWorkstationStatus();
-					sessvars.state = servicePoint.getState(spService
-						.post("branches/" + params.branchId
-						+ "/servicePoints/" + params.servicePointId
-						+ "/visits/next"));
-					sessvars.statusUpdated = new Date();
-				} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-					&& sessvars.state.visit == null) {
-					// no tickets left in the queue(s) for the selected prio
-					util.showError(jQuery.i18n
-						.prop("info.no.waiting.customers"));
+				+ params.servicePointId + "/visits/next")
+			if (callNextResponse) {
+				sessvars.state = servicePoint.getState(callNextResponse);
+				sessvars.statusUpdated = new Date();
 
-					// NEW 20131203. Send APPLICATION event
-					var noCustWaitingEvent = {
-						"M": "E",
-						"E": {
-							"evnt": "NO_CUSTOMERS_WAITING",
-							"type": "APPLICATION",
-							"prm": {}
-						}
-					};
-					noCustWaitingEvent.E.prm.uid = sessvars.servicePointUnitId
-						+ ":" + this.SW_SERVICE_POINT;
-					qevents.publish('/events/APPLICATION', noCustWaitingEvent);
+				if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
+					util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
+				} else {
+					// TODO: Calling should always start a user service point
+					// session if none is started, implement in connectors
+					if (sessvars.state.userState == servicePoint.userState.NO_STARTED_SERVICE_POINT_SESSION) {
+						// the service point will be closed after application login
+						// since it's a single session service point
+						sessvars.state = servicePoint.getState(spService
+							.putCallback("branches/" + params.branchId
+							+ "/servicePoints/" + params.servicePointId
+							+ "/users/" + params.userName));
+						sessvars.statusUpdated = new Date();
+						servicePoint.updateWorkstationStatus();
+						sessvars.state = servicePoint.getState(spService
+							.post("branches/" + params.branchId
+							+ "/servicePoints/" + params.servicePointId
+							+ "/visits/next"));
+						sessvars.statusUpdated = new Date();
+					} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+						&& sessvars.state.visit == null) {
+						// no tickets left in the queue(s) for the selected prio
+						util.showError(jQuery.i18n
+							.prop("info.no.waiting.customers"));
+
+						// NEW 20131203. Send APPLICATION event
+						var noCustWaitingEvent = {
+							"M": "E",
+							"E": {
+								"evnt": "NO_CUSTOMERS_WAITING",
+								"type": "APPLICATION",
+								"prm": {}
+							}
+						};
+						noCustWaitingEvent.E.prm.uid = sessvars.servicePointUnitId
+							+ ":" + this.SW_SERVICE_POINT;
+						qevents.publish('/events/APPLICATION', noCustWaitingEvent);
+					}
+					servicePoint.updateWorkstationStatus();
+					sessvars.currentCustomer = null;
+					customer.updateCustomerModule();
 				}
-				servicePoint.updateWorkstationStatus();
-				sessvars.currentCustomer = null;
-				customer.updateCustomerModule();
 			}
 		}
 	};
@@ -1404,7 +1408,8 @@ var servicePoint = new function () {
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 			cardNavigationController.push($Qmatic.components.card.inactiveCard);
-		} else {
+		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+			&& sessvars.state.userState == servicePoint.userState.SERVING) {
 			cardNavigationController.push($Qmatic.components.card.visitCard);
 		}
 
@@ -1447,7 +1452,9 @@ var servicePoint = new function () {
 			} else if (cfuForceSelection || !sessvars.cfuSelectionSet) {
 				util.showMessage(jQuery.i18n.prop('error.no.cfu.selection'));
 			}
-			$("#ticketNumber").html(sessvars.state.visit.ticketId);
+			if (sessvars.state.visit) {
+				$("#ticketNumber").html(sessvars.state.visit.ticketId);
+			}
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
 					// $("#notesEdit").val(
@@ -2360,7 +2367,12 @@ var servicePoint = new function () {
 				$Qmatic.components.dropdown.profileSelection.onError(translate.msg("error.no.profile"))
 			}
 			return false;
-		} else if (typeof sessvars.state.servicePointDeviceTypes === "undefined"
+		}
+		/*
+		*	This logic is commented out to address scenarion A in story https://www.pivotaltracker.com/story/show/152068908
+		*	The below logic is checking if the user has valid deviceType in the session, but this is not always the case as
+		*	the user might call to check for valid settings in a closed state(i.e. no servicepoint type)
+		* else if (typeof sessvars.state.servicePointDeviceTypes === "undefined"
 			|| sessvars.state.servicePointDeviceTypes == null
 			|| sessvars.state.servicePointDeviceTypes.indexOf("SW_SERVICE_POINT") < 0) {
 			if (showMessages) {
@@ -2369,7 +2381,7 @@ var servicePoint = new function () {
 			}
 			return false;
 
-		}
+		}*/
 		return !workstationOffline;
 	};
 
