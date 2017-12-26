@@ -1474,23 +1474,27 @@ var servicePoint = new function () {
 			// $("#callNextBtn").toggleClass("customButtonDisabled", true);
 			// $("#callNextBtn").toggleClass("customButton", false);
 			var $callNextBtn = $("#callNextBtn");
-			$callNextBtn.prop('disabled', true);
-			tooltipController.init('callnext', $callNextBtn.closest('.button-tooltip'), { text: 'You need to set an outcome or delivered service' });
+			$callNextBtn.prop('disabled', true); 
+			tooltipController.init('callnext', $callNextBtn.closest('.button-tooltip'), { text: jQuery.i18n
+								.prop('error.no.outcome.or.delivered.service') });
 			// $("#walkDirectBtn").toggleClass("customButtonDisabled", true);
 			// $("#walkDirectBtn").toggleClass("customButton", false);
 			var $walkDirectBtn = $("#walkDirectBtn"); 
 			$walkDirectBtn.prop('disabled', true);
-			tooltipController.init('walkin', $walkDirectBtn.closest('.button-tooltip'), { text: 'You need to set an outcome or delivered service' });
+			tooltipController.init('walkin', $walkDirectBtn.closest('.button-tooltip'), { text: jQuery.i18n
+								.prop('error.no.outcome.or.delivered.service') });
 			// $("#endVisitBtn").toggleClass("customButtonDisabled", true);
 			// $("#endVisitBtn").toggleClass("customButton", false);
 			var $endVisitBtn = $("#endVisitBtn");
 			$endVisitBtn.prop('disabled', true);
-			tooltipController.init('endvisit', $endVisitBtn.closest('.button-tooltip'), { text: 'Need outcome' });
+			tooltipController.init('endvisit', $endVisitBtn.closest('.button-tooltip'), { text: jQuery.i18n
+								.prop('error.no.outcome.or.delivered.service') });
 			// $("#closeBtn").toggleClass("customButtonDisabled", true);
 			// $("#closeBtn").toggleClass("customButton", false);
 			var $closeBtn = $("#closeBtn"); 
 			$closeBtn.prop('disabled', true);
-			tooltipController.init('closecounter', $closeBtn.closest('.button-tooltip'), { text: 'You need to set an outcome or delivered service before closing' });
+			tooltipController.init('closecounter', $closeBtn.closest('.button-tooltip'), { text: jQuery.i18n
+								.prop('error.no.outcome.or.delivered.service') });
 			// $("#transferBtn").toggleClass("customButtonSmall", true);
 			// $("#transferBtn").toggleClass("customButtonSmallDisabled", false);
 			var $transferBtn = $("#transferBtn");
