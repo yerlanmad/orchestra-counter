@@ -189,8 +189,7 @@ var userPool = new function() {
         userPoolTable.fnClearTable(); // TODO: Remove me
 
         var userPool            = $('#userPoolModule'),
-            userPoolList        = userPool.find('.qm-pool__list'),
-            userPoolToggle      = userPool.find('.qm-pool__toggle-btn');
+            userPoolList        = userPool.find('.qm-pool__list');
 
         // Empty list
         userPoolList.empty();

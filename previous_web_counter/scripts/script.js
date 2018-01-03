@@ -57,6 +57,8 @@ var modalNavigationController = new $Qmatic.components.NavController("#qm-modal-
 var cardNavigationController = new $Qmatic.components.NavController('#qm-card-nav');
 
 var tooltipController = new $Qmatic.components.TooltipController();
+var queueViewController = new $Qmatic.components.QueueNavController();
+var notesController = new $Qmatic.components.NotesController();
 
 var servicePoint = new function () {
 
@@ -1013,6 +1015,7 @@ var servicePoint = new function () {
 							+ ":" + this.SW_SERVICE_POINT;
 						qevents.publish('/events/APPLICATION', noCustWaitingEvent);
 					}
+					queueViewController.navigateToOverview();
 					servicePoint.updateWorkstationStatus();
 					sessvars.currentCustomer = null;
 					customer.updateCustomerModule();
@@ -1221,7 +1224,7 @@ var servicePoint = new function () {
 			spPoolUpdateNeeded = false;
 			userPoolUpdateNeeded = false;
 			queuesUpdateNeeded = false;
-
+			queueViewController.navigateToOverview();																
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
 			customer.updateCustomerModule();
@@ -1328,7 +1331,7 @@ var servicePoint = new function () {
 	};
 
 	this.saveNotes = function () {
-		util.hideModal("notesDialogue");
+		//util.hideModal("notesDialogue"); TODO: remove me
 		var newNotes = document.getElementById("notesEdit").value;
 		var params = {};
 		params.branchId = sessvars.branchId;
@@ -1340,10 +1343,10 @@ var servicePoint = new function () {
 		newNotes = spService.putParams("branches/" + params.branchId + "/visits/"
 			+ params.visitId + "/parameters", params);
 
-		if (newNotes !== null) {
+		if (newNotes !== null && newNotes.parameterMap !== null && newNotes.parameterMap.custom1 !== "") {
 			document.getElementById("notesMessage").innerHTML = newNotes.parameterMap.custom1;
 		} else {
-			document.getElementById("notesMessage").innerHTML = "";
+			document.getElementById("notesMessage").innerHTML = jQuery.i18n.prop('button.add.note');
 		}
 	};
 
@@ -1462,7 +1465,7 @@ var servicePoint = new function () {
 					// $("#notesEdit").val(
 					// 		sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
-						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1;
+						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? sessvars.state.visit.parameterMap.custom1 : jQuery.i18n.prop('button.add.note');
 					}
 				}
 			}
@@ -1616,7 +1619,8 @@ var servicePoint = new function () {
 					// $("#notesEdit").val(
 					// 		sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
-						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1;
+						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? sessvars.state.visit.parameterMap.custom1 : jQuery.i18n.prop('button.add.note');
+						document.getElementById("notesEdit").value = sessvars.state.visit.parameterMap.custom1;
 					}
 				}
 			}
@@ -1895,7 +1899,8 @@ var servicePoint = new function () {
 		$("#outcome").empty();
 		$("#verticalMessage").empty();
 		$("#notesEdit").val('');
-		document.getElementById("notesMessage").innerHTML = '';
+		notesController.navigateToPresentational();
+		document.getElementById("notesMessage").innerHTML = jQuery.i18n.prop('button.add.note');
 		util.hideModal("displayQueueSpinnerWindow");
 		$("#callNextBtn").toggleClass("customButton", true);
 		$("#callNextBtn").toggleClass("customButtonDisabled", false);

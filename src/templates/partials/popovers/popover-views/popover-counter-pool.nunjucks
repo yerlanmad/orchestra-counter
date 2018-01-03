@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="qm-card-nav__middle">
-                <h2 class="qm-card-nav__title">Transfer to Counter Pool</h2>
+                <h2 class="qm-card-nav__title js-popover-counter-pool-header"></h2>
             </div>
             <div class="qm-card-nav__right">
                 <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__close-btn js-popover-close">
@@ -19,7 +19,7 @@
         </div>
     
         <div class="qm-popover__content">
-            <table class="qm-table qm-table--small js-popover-table-counter-pool" cellpadding="0" cellspacing="0" border="0">
+            <table class="qm-table qm-table--small js-popover-table-counter-pool">
                 <thead class="qm-table__header">
                     <tr>
                         <th class="transferServicePointPoolName"></th>

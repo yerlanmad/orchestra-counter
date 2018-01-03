@@ -100,12 +100,6 @@
                     $(this).closest('.qm-pool').toggleClass('qm-pool--is-open');
                 });
 
-                // back btn queue detail
-                $('.js-queue-detail-back').on('click', function() {
-                    $('#queuesModule').show();
-                    $('#queueDetailView').hide();
-                });
-
                 // TABS
                 var tabConfig = {
                     tabComponentId: 'js-qm-tabs'

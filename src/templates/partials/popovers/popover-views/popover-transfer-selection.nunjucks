@@ -4,16 +4,16 @@
             <div class="qm-card-nav__left">
                 <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__back-btn js-popover-back">
                     <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
-                    <span class="sr-only">Back</span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
             <div class="qm-card-nav__middle">
-                <h2 class="qm-card-nav__title">Where to transfer?</h2>
+                <h2 class="qm-card-nav__title js-popover-transfer-header"></h2>
             </div>
             <div class="qm-card-nav__right">
                 <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__close-btn js-popover-close">
                     <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
-                    <span class="sr-only">Close</span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
         </div>
@@ -21,15 +21,15 @@
         <div class="qm-popover__content qm-popover__content--narrow">
             <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-popover-transferToQueue">
                 <i class="qm-btn__icon icon-queue" aria-hidden="true"></i>
-                <span class="qm-btn__text" title="Transfer to queue">Transfer to queue</span>
+                <span class="qm-btn__text"></span>
             </button>
             <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-popover-transferToUserPool">
                 <i class="qm-btn__icon icon-customer-solid" aria-hidden="true"></i>
-                <span class="qm-btn__text" title="Transfer to pool">Transfer to pool</span>
+                <span class="qm-btn__text"></span>
             </button>
             <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-popover-transferToCounterPool">
                 <i class="qm-btn__icon icon-screen" aria-hidden="true"></i>
-                <span class="qm-btn__text" title="Transfer to counter">Transfer to counter</span>
+                <span class="qm-btn__text"></span>
             </button>
         </div>
     </div>

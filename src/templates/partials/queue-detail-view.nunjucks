@@ -3,7 +3,7 @@
     <div class="qm-queue-detail__header">
         <button class="qm-action-btn qm-action-btn--only-icon qm-queue-detail__back-btn js-queue-detail-back">
             <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
-            <span class="sr-only">Back</span>
+            <span class="sr-only"></span>
         </button>
         <h2 id="ticketListHeader" class="qm-queue-detail__headline"></h2>
         <div class="qm-tab-information">

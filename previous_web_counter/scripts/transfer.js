@@ -735,7 +735,7 @@ var transfer = new function() {
                     /* Id */         {"bSearchable": false,
                         "bVisible": false,
                         "mDataProp": "id"},
-                    /* User name  */ {"sClass": ".qm-table__first-column",
+                    /* User name  */ {"sClass": "qm-table__first-column",
                         "mDataProp": "fullName"},
                     /* Actions */      {"sClass": "qm-table__last-column",
                         "mData": null,
@@ -877,10 +877,11 @@ var transfer = new function() {
                 "visitId": visitId,
                 "sortPolicy" : sortType
             };
-
 			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + visitId + ',"sortPolicy":"'+sortType + '"}';			
 			spService.putParams('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
             queues.updateQueues();
+            queueViewController.navigateToOverview();
+            util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
             
             //util.hideModal("transferQueueToQueueDialogue");
         }
@@ -899,6 +900,9 @@ var transfer = new function() {
 			spPoolUpdateNeeded = false;
             transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + visitId + '}';
             spService.putParams('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
+            queues.updateQueues();
+            queueViewController.navigateToOverview();
+            util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
             //util.hideModal("transferQueueToQueueDialogue");
         }
     };
@@ -916,6 +920,9 @@ var transfer = new function() {
 			userPoolUpdateNeeded = false;
             transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + visitId + '}';
             spService.putParams('branches/' +  transferParams.branchId + '/servicePoints/' +  transferParams.servicePointId + '/visits/',transferParams);
+            queues.updateQueues();
+            queueViewController.navigateToOverview();
+            util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
             //util.hideModal("transferQueueToQueueDialogue");
         }
     };

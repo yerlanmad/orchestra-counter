@@ -29,9 +29,13 @@
         transform: translateY(rem(-22px));
 
         [class^="icon-"], [class*=" icon-"] {
-            background: $white;
-            border-radius: 50%;
-            border: 3px solid $white;
+            padding: rem(4px);
+            
+            &:before {
+                background: $white;
+                border-radius: 50%;
+                border: 3px solid $white;
+            }
         }
     }
 }

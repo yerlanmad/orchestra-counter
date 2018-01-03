@@ -149,9 +149,8 @@ var queues = new function() {
             !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
             sessvars.clickedQueueId = queueTableContainingRow.fnGetData(rowClicked).id; //ql queue id
             //util.showModal("ticketsDialogue");
-            $('#queuesModule').hide();
-            $('#queueDetailView').show();
-            
+            queueViewController.navigateToDetail();
+
             if(typeof ticketsTable !== 'undefined') {
                 //empty the tickets table and populate with new data from server if table is not created
                 ticketsTable.fnClearTable();
@@ -269,7 +268,7 @@ var queues = new function() {
 					var nTr = $(this).closest("tr").get(0);
 					var aData = ticketsTable.fnGetData(nTr);
 					transfer.transferTicketToQueueClicked(aData);
-					util.hideModal('ticketsDialogue');
+					//util.hideModal('ticketsDialogue');
 					return false;
 				});
 			}			
@@ -279,7 +278,7 @@ var queues = new function() {
 					var nTr = $(this).closest("tr").get(0);
 					var aData = ticketsTable.fnGetData(nTr);
 					removeTicketClicked(aData);
-					util.hideModal('ticketsDialogue');
+					//util.hideModal('ticketsDialogue');
 					return false;
 				});
 			}
@@ -289,12 +288,12 @@ var queues = new function() {
 					var nTr = $(this).closest("tr").get(0);
 					var aData = ticketsTable.fnGetData(nTr);
 					callTicketClicked(aData);
-					util.hideModal('ticketsDialogue');
+					//util.hideModal('ticketsDialogue');
 					return false;
 				});
 			}
             $("#ticketListHeader").empty();
-            $("#ticketListHeader").html(translate.msg("info.list.of.tickets.in", [queueTableContainingRow.fnGetData(rowClicked).name]));
+            $("#ticketListHeader").html(queueTableContainingRow.fnGetData(rowClicked).name);
         }
     };
 

@@ -118,7 +118,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
             transferToCounterPoolBtn    = this.instance._tooltipNode.querySelector('.js-popover-transferToCounterPool'),
             popoverQueueTable           = this.instance._tooltipNode.querySelector('.js-popover-table-queues'),
             popoverUserPoolTable        = this.instance._tooltipNode.querySelector('.js-popover-table-user-pool'),
-            popoverCounterPoolTable        = this.instance._tooltipNode.querySelector('.js-popover-table-counter-pool');
+            popoverCounterPoolTable     = this.instance._tooltipNode.querySelector('.js-popover-table-counter-pool');
             
 
         transferToQueueBtn.addEventListener('click', this._navigateTo.bind(this, this.views.QUEUE, this._initQueuesTable.bind(this, popoverQueueTable)));
@@ -128,20 +128,25 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     },
     _initQueuesTable: function (selector) {
         this.queueTable = transfer.buildTransferToQueueTable(this, selector, this.queueTable, this.ticketId, this.visitId);
+        queueViewController.resetTimer();
     },
     _initUserPoolTable: function (selector) {
         this.userPoolTable = transfer.buildTransferToUserPoolTable(this, selector, this.userPoolTable, this.ticketId, this.visitId);
+        queueViewController.resetTimer();
     },
     _initCounterPoolTable: function (selector) {
         this.counterPoolTable = transfer.buildTransferToCounterPoolTable(this, selector, this.counterPoolTable, this.ticketId, this.visitId);
+        queueViewController.resetTimer();
     },
     _call: function () {
         this.disposeInstance();
         queues.callFromQueue(this.visitId);
+        queueViewController.navigateToOverview();
     },
     _delete: function () {
         this.disposeInstance();
         queues.removeTicket(this.visitId);
+        queueViewController.navigateToOverview();
     },
     disposeInstance: function () {
         this.navigationStack    = [];

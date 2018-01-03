@@ -1,9 +1,15 @@
 .dataTables_scrollBody {
     .qm-table__header {
+        height: 0;
+
         th {
             &:before,
             &:after {
                 content: none;
+
+                @at-root [dir='rtl'] & {
+                    content: none;
+                }
             }
         }
     }

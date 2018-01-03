@@ -121,7 +121,7 @@
                                 </tr>
 								 <tr  id="notesRow">
                                     <td class="descriptionCol, roundedCorner5" colspan="2">
-                                        <span id="notesMessage">&nbsp;</span>
+                                        {# <span id="notesMessage">&nbsp;</span> #}
                                     </td>
                                 </tr>
                             </tbody>

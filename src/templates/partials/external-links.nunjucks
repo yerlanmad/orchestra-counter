@@ -105,7 +105,10 @@
         <script type="text/javascript" src="scripts/components/modal/storeNext/storeNext.js"></script>
         <script type="text/javascript" src="scripts/components/modal/visitInDisplayQueue/visitInDisplayQueue.js"></script>
         
+        <script type="text/javascript" src="scripts/components/queue/index.js"></script>
+        <script type="text/javascript" src="scripts/components/notes/index.js"></script>
         
+
         <script type="text/javascript" src="scripts/components/popover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/poolPopover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/userPoolPopover/index.js"></script>

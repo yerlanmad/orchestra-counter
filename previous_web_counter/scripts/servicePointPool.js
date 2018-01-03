@@ -164,8 +164,7 @@ var servicePointPool = new function() {
 
         // Get DOM elements
         var counterPool         = $('#servicePointPoolModule'),
-            counterPoolList     = counterPool.find('.qm-pool__list'),
-            counterPoolToggle   = counterPool.find('.qm-pool__toggle-btn');
+            counterPoolList     = counterPool.find('.qm-pool__list');
 
         // Empty list    
         counterPoolList.empty();

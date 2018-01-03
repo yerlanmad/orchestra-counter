@@ -88,4 +88,8 @@
     &--full {
         width: 100%;
     }
+    &--small {
+        font-size: rem(14px);
+        padding: rem(6px $global-standard-padding);
+    }
 }

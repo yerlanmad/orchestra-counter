@@ -149,7 +149,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("recallBtn", 'action.recall');
         i18nQmBtn("reinsertBtn", 'action.reinsert');
         i18nQmBtn("transferBtn", 'action.transfer');
-        i18nQmBtn("parkBtn", 'action.parkBtn');
+        i18nQmBtn("parkBtn", 'button.park');
         i18nQmBtn("noShowBtn", 'action.noshow');
         i18nQmBtn("endVisitBtn", 'action.finish.visit');
         
@@ -358,10 +358,31 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         
         // Pool
         i18nSafeSelectorAppend('.qm-pool__toggle-btn > span', 'application.sr.toggle');
-
+        
         // Popover
+        i18nSafeSelectorAppend('.js-popover-transfer-header', 'info.transfer.selection.header');
+        i18nSafeSelectorAppend('.js-popover-queue-header', 'info.transfer.queue.header');
+        i18nSafeSelectorAppend('.js-popover-user-pool-header', 'info.transfer.user.pool.header');
+        i18nSafeSelectorAppend('.js-popover-counter-pool-header', 'info.transfer.counter.pool.header');
+        
+        
+
         i18nSafeSelectorBtnAppend('.js-popover-call > span', 'action.pool.call');
+        i18nSafeSelectorBtnAppend('.js-popover-transfer > span', 'action.pool.transfer');
+        i18nSafeSelectorBtnAppend('.js-popover-delete > span', 'action.pool.delete');
         i18nSafeSelectorBtnAppend('.js-popover-close > span', 'application.sr.close');
+        i18nSafeSelectorBtnAppend('.js-popover-back > span', 'application.sr.back');
+        
+        i18nSafeSelectorBtnAppend('.js-popover-transferToQueue > span', 'action.transfer.to.queue');
+        i18nSafeSelectorBtnAppend('.js-popover-transferToUserPool > span', 'action.transfer.to.user');
+        i18nSafeSelectorBtnAppend('.js-popover-transferToCounterPool > span', 'action.transfer.to.counter');
+
+        // Notes
+        i18nSafeSelectorBtnAppend('.js-notes-save-btn > span', 'button.save.notes');
+        i18nSafeSelectorBtnAppend('.js-notes-cancel-btn > span', 'button.cancel');
+        
+        // Queue detail view
+        i18nSafeSelectorBtnAppend('.qm-queue-detail__back-btn > span', 'application.sr.back');
 
         //footer
         sessvars.footer = translate.msg("label.poweredBy", 

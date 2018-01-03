@@ -40,44 +40,30 @@ var init = new function() {
         try{
             if(sessvars.currentUser.direction == "rtl") {
                 document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
-                // TODO: Remove this
-                // var styles_rtl_file = document.createElement("link");
-                // styles_rtl_file.setAttribute("href", "css/styles_rtl.css");
-                // styles_rtl_file.setAttribute("type", "text/css");
-                // styles_rtl_file.setAttribute("rel", "stylesheet");
-                // if(typeof styles_rtl_file != "undefined") {
-                //     document.getElementsByTagName("head")[0].appendChild(styles_rtl_file);
-                // }
-                // var orch_rtl_ref = document.createElement("link");
-                // orch_rtl_ref.setAttribute("href", "/css/rtl.css");
-                // orch_rtl_ref.setAttribute("type", "text/css");
-                // orch_rtl_ref.setAttribute("rel", "stylesheet");
-                // if(typeof orch_rtl_ref != "undefined") {
-                //     document.getElementsByTagName("head")[0].appendChild(orch_rtl_ref);
-                // }
             }
         } catch(e) {
             //nothing found; rtl prop not set
         }
 
         //make stuff draggable
-        $(".branchForm, .logoutForm, .customerForm, .confirmCounterHijackingForm, .confirmCustomer, .transferForm").draggable({
-            containment: "window",
-            handle: "h2",
-            cancel: "a"
-        });
+        // $(".branchForm, .logoutForm, .customerForm, .confirmCounterHijackingForm, .confirmCustomer, .transferForm").draggable({
+        //     containment: "window",
+        //     handle: "h2",
+        //     cancel: "a"
+        // });
 		// chrome hack to allow for proper dragging, QP-892
-        $('.branchForm, .logoutForm, .customerForm, .confirmCounterHijackingForm, .confirmCustomer, .transferForm').each(function(i){
-			var x = ($(window).width() - $(this).width()) / 2;
-			$(this).css({position:"absolute",top:100,left:x});
-        });
+        // $('.branchForm, .logoutForm, .customerForm, .confirmCounterHijackingForm, .confirmCustomer, .transferForm').each(function(i){
+		// 	var x = ($(window).width() - $(this).width()) / 2;
+		// 	$(this).css({position:"absolute",top:100,left:x});
+        // });
 
         initSessvars();
         customer.init();
+        queueViewController.init();
+        notesController.init();
         servicePoint.init();
 		if (moduleChatEnabled == true) {
 			chat.init();
-			
 		}
     };
 

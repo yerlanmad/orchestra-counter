@@ -131,9 +131,11 @@ function showModules() {
 		$('#parkBtn').hide();
 	}
 	if (buttonNotesEnabled == true) {
-		$('#notesBtn').show();
+		$('#notesBtn').show(); // TODO: Remove me
+		$('.js-notes').show();
 	} else {
-		$('#notesBtn').hide();
+		$('#notesBtn').hide(); // TODO: Remove me
+		$('.js-notes').hide();
 	}
 	if (buttonRecycleEnabled == true) {
 		$('#reinsertBtn').show();

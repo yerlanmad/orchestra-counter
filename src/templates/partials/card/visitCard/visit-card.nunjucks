@@ -89,13 +89,32 @@
                 <span class="qm-task-item__text" id="visitAddOutcomesLbl"></span>
             </a>-->
         </div>
-        
-        <div id="notesBtn" class="qm-form-field">
-            <label for="notes" class="sr-only"></label>
-            <textarea id="notesMessage" 
-                    class="qm-form-field__textarea" 
-                    placeholder="Additional notes" rows="1"></textarea>
-            <i class="qm-form-field__icon icon-edit" aria-hidden="true"></i>
+        <!-- Notes -->
+        <div class="qm-notes js-notes">
+            <div class="qm-notes__edit-container">
+                <div class="qm-notes-layout">
+                    <label class="qm-notes__label" for="notes">Add notes</label>
+                    <div class="qm-notes__nr-of-character-container">
+                        <span class="qm-notes__characters js-notes-written-characters">0</span>
+                        <span class="qm-notes__characters js-notes-max-characters"></span>
+                    </div>
+                </div>
+                <textarea id="notesEdit" class="qm-notes__textarea" rows="5"></textarea>
+                <div class="qm-notes__action-container">
+                    <button class="qm-btn qm-btn--secondary qm-btn--small js-notes-cancel-btn">
+                        <span class="qm-btn__text"></span>
+                    </button>
+                    <button class="qm-btn qm-btn--primary qm-btn--small js-notes-save-btn">
+                        <span class="qm-btn__text"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="qm-notes__presentation-container">
+                <button class="qm-notes-btn">
+                    <span id="notesMessage" class="qm-notes-btn__text"></span>
+                    <i class="qm-notes-btn__icon icon-edit" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </div>
 
