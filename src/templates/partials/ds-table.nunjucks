@@ -3,12 +3,12 @@
     <table id="deliveredServices" class="qm-table qm-table--small">
         <thead class="qm-table__header">
             <tr>
-                <th id="deliveredServiceId"></th>
-                <th id="deliveredServiceEventTime"></th>
-                <th id="deliveredServiceOrigId"></th>
-                <th id="deliveredServiceName"></th>
-                <th id="deliveredServiceVisitOutcome"></th>
-                <th id="deliveredServiceVisitOutcomeNeeded"></th>
+                <th width="20" id="deliveredServiceId"></th>
+                <th width="20" id="deliveredServiceEventTime"></th>
+                <th width="20" id="deliveredServiceOrigId"></th>
+                <th width="20" id="deliveredServiceName"></th>
+                <th width="20" id="deliveredServiceVisitOutcome"></th>
+                <th width="20" id="deliveredServiceVisitOutcomeNeeded"></th>
             </tr>
         </thead>
         <tbody class="qm-table__body">

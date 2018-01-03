@@ -1,0 +1,44 @@
+{% extends "partials/card/card.nunjucks" %}
+{% import "partials/card/card-nav.nunjucks" as cardNav  %}
+
+{% block id %}id="dsCard"{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-header">
+            <div class="qm-card-header__headline">
+                <span class="qm-card-header__headline__back-icon" onclick="cardNavigationController.pop();this.blur();">
+                    <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                </span><span id="addDeliveredServices"></span>
+            </div>
+            <div class="qm-card-header__sub-heading"> 
+                <div class="qm-drop-down">
+                        <div class="qm-drop-down__component">
+                            <select id="deliveredServicesFilter" onchange="javascript:deliveredServices.selectDeliveredService($(this).val());">
+                                <option id="selectADeliveredService" value="-1"></option>
+                            </select>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+         <table id="deliveredServices" class="display">
+                        <thead>
+                            <tr>
+                                <th id="deliveredServiceId"></th>
+                                <th id="deliveredServiceEventTime"></th>
+                                <th id="deliveredServiceOrigId"></th>
+                                <th id="deliveredServiceName"></th>
+                                <th id="deliveredServiceVisitOutcome"></th>
+                                <th id="deliveredServiceVisitOutcomeNeeded"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+    </div>    
+{% endblock %}

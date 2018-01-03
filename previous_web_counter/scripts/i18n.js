@@ -145,9 +145,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("previousServiceLbl", 'info.card.visitCard.previousServiceLbl');
         i18nSafe("visitWaitingTime", 'info.waiting.time');
         i18nSafe("visitTransactionTime", 'info.transaction.time');
-        i18nSafe("visitAddDsLbl", 'info.card.visitCard.addDs');
         i18nSafe("visitAddMarksLbl", 'info.card.visitCard.addMarks');
-        i18nSafe("visitAddOutcomesLbl", 'info.card.visitCard.addOutcomes');
         i18nQmBtn("recallBtn", 'action.recall');
         i18nQmBtn("reinsertBtn", 'action.reinsert');
         i18nQmBtn("transferBtn", 'action.transfer');
@@ -193,6 +191,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         //add delivered services table
         i18nSafeAppend("addDeliveredServicesHeader", 'info.delivered.services');
+        i18nSafeAppend("addDeliveredServices", 'info.ds.addDs');
+        i18nSafeAppend("selectADeliveredService", 'info.ds.selectDs');
+        
 		
 		 // multi services 
 		 i18nSafeAppend("addMultiServicesHeader", 'info.multi.services');

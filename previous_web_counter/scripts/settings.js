@@ -67,10 +67,10 @@ function showModules() {
 	
 
 	if (moduleOutcomeEnabled == true) {
-		$('#selectOutcome').show();
+		$('#selectOutcome').parent().show();
 	}
 	else {
-		$('#selectOutcome').hide();
+		$('#selectOutcome').parent().hide();
 	}
 	if (moduleServicePointPoolEnabled == true) {
 		$('#servicePointPoolModule').css("visibility","visible");

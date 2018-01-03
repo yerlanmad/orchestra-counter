@@ -2,18 +2,18 @@
  * www.datatables.net contains documentation and source code of the data table model used in
  * e.g. the walk direct table
  */
-var util = new function() {
+var util = new function () {
 
     var hideErrorTime;
     var hideMessageTime;
 
-    this.disableOnChange = function(select) {
+    this.disableOnChange = function (select) {
         //Temporarily remove selection box event listeners to avoid firing the onchange event...
-        if(select.removeEventListener) {
+        if (select.removeEventListener) {
             //...in nice browsers...
             select.removeEventListener('onchange', select.onchange, false);
         }
-        else if(select.detachEvent) {
+        else if (select.detachEvent) {
             //...in crappy browsers
             select.detachEvent('onchange', select.onchange);
         }
@@ -22,13 +22,13 @@ var util = new function() {
         }
     };
 
-    this.enableOnChange = function(select) {
+    this.enableOnChange = function (select) {
         //Enable selection box firing of the onchange event...
-        if(select.addEventListener) {
+        if (select.addEventListener) {
             //...in nice browsers...
             select.addEventListener('onchange', select.onchange, false);
         }
-        else if(select.attachEvent) {
+        else if (select.attachEvent) {
             //...in crappy browsers
             select.attachEvent('onchange', select.onchange);
         }
@@ -37,7 +37,7 @@ var util = new function() {
         }
     };
 
-    this.clearSelect = function(select) {
+    this.clearSelect = function (select) {
         select.find('option[value != "-1"]').remove();
     };
 
@@ -46,14 +46,14 @@ var util = new function() {
      * @param select the jquery select object
      * @param value the value to set
      */
-    this.setSelect = function(select, value) {
+    this.setSelect = function (select, value) {
         select.prop('selectedIndex', $("#" + select.prop('id') + " option[value=" + value + "]").index());
-//        for(i = 0; i < select.length; i++) {
-//            if(select.options[i].value == value) {
-//                select.selectedIndex = select.options[i].index;
-//                break;
-//            }
-//        }
+        //        for(i = 0; i < select.length; i++) {
+        //            if(select.options[i].value == value) {
+        //                select.selectedIndex = select.options[i].index;
+        //                break;
+        //            }
+        //        }
         select.trigger("chosen:updated");
     };
 
@@ -67,9 +67,9 @@ var util = new function() {
      * headerCallback: modifies the table header. Called each time the table is drawn
      * popup: if the table should be placed in a popup, the scroll height is bigger
      */
-    this.buildTable = function(tableId, url, rowCallback, columns, filter, headerCallback, popup) {
+    this.buildTable = function (tableId, url, rowCallback, columns, filter, headerCallback, popup) {
         var table;
-        table = $('#' + tableId).dataTable( {
+        table = $('#' + tableId).dataTable({
             "bDestroy": true,
             "sScrollX": "100%",
             "sScrollY": (popup ? "300px" : "158px"),
@@ -90,9 +90,9 @@ var util = new function() {
             "aoColumns": columns,
             "bProcessing": true,
             "sAjaxSource": url,
-            "fnServerData": function(sSource, aoData, fnCallback) {
-                $.getJSON(sSource, aoData, function(json) {
-                    fnCallback({"iTotalRecords":json.length,"iTotalDisplayRecords":json.length, "aaData":json});
+            "fnServerData": function (sSource, aoData, fnCallback) {
+                $.getJSON(sSource, aoData, function (json) {
+                    fnCallback({ "iTotalRecords": json.length, "iTotalDisplayRecords": json.length, "aaData": json });
                 });
             }
         });
@@ -109,23 +109,23 @@ var util = new function() {
      * filter: boolean to enable a search field in the table
      * headerCallback: modifies the table header. Called each time the table is drawn
      */
-    this.buildTableJson = function(config) {
-    	// QP-1285, IE caches things way too aggressively
-    	if (typeof lowfiie !== 'undefined' && lowfiie) {
-	    	if (config.url.indexOf('?') == -1) {
-	    		config.url = config.url + '?breakcache=' + Math.random();
-	    	} else {
-	    		config.url = config.url + '&breakcache=' + Math.random();
-	    	}
-	    }
+    this.buildTableJson = function (config) {
+        // QP-1285, IE caches things way too aggressively
+        if (typeof lowfiie !== 'undefined' && lowfiie) {
+            if (config.url.indexOf('?') == -1) {
+                config.url = config.url + '?breakcache=' + Math.random();
+            } else {
+                config.url = config.url + '&breakcache=' + Math.random();
+            }
+        }
         var table;
-//        table = $('#' + config.tableId).dataTable( {
-		var tableConfig = {
+        //        table = $('#' + config.tableId).dataTable( {
+        var tableConfig = {
             "bDestroy": true,
             "sScrollX": "100%",
             "sScrollY": (config.scrollYHeight ? config.scrollYHeight : "158px"),
             "oLanguage": {
-                "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel): "",
+                "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel) : "",
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sZeroRecords": "",
@@ -142,30 +142,30 @@ var util = new function() {
             "bProcessing": true,
             "aaSorting": [],
             "sAjaxSource": config.url,
-            "fnServerData": function(sSource, aoData, fnCallback) {
-                $.getJSON(sSource, aoData, function(json) {
-                    if(typeof config.filterData !== 'undefined' ){
+            "fnServerData": function (sSource, aoData, fnCallback) {
+                $.getJSON(sSource, aoData, function (json) {
+                    if (typeof config.filterData !== 'undefined') {
                         json = config.filterData(json);
                     }
-                    if(typeof config.initFn !== 'undefined') {
+                    if (typeof config.initFn !== 'undefined') {
                         config.initFn(json);
                     }
-                    fnCallback({"iTotalRecords":json.length,"iTotalDisplayRecords":json.length, "aaData":json});
+                    fnCallback({ "iTotalRecords": json.length, "iTotalDisplayRecords": json.length, "aaData": json });
                 });
             }
- //       });
-         };
-        if(typeof config.infoFiltered !== 'undefined') {
-        	tableConfig.oLanguage.sInfoFiltered = translate.msg(config.infoFiltered, ["_MAX_"]);
+            //       });
+        };
+        if (typeof config.infoFiltered !== 'undefined') {
+            tableConfig.oLanguage.sInfoFiltered = translate.msg(config.infoFiltered, ["_MAX_"]);
         }
-        if(typeof config.tableSelector !== 'undefined') {
+        if (typeof config.tableSelector !== 'undefined') {
             table = $(config.tableSelector).dataTable(tableConfig);
         } else {
             table = $('#' + config.tableId).dataTable(tableConfig);
         }
         $(window).bind('resize', function () {
             table.fnAdjustColumnSizing();
-        } );
+        });
         return table;
     };
 
@@ -179,14 +179,14 @@ var util = new function() {
      * @param headerCallback
      * @param popup
      */
-    this.buildSubtable = function(table, data, rowCallback, subtableId, columns) {
+    this.buildSubtable = function (table, data, rowCallback, subtableId, columns) {
         var subtable = $('<table class="subTable" cellpadding="0" cellspacing="0"><tbody></tbody></table>');
-        $.each(data, function(i, item) {
-            if(typeof item[columns.id] !== 'undefined') {
+        $.each(data, function (i, item) {
+            if (typeof item[columns.id] !== 'undefined') {
                 subtable.find('tbody')
-                    .append($('<tr>').prop('id', item[columns.id]).click(function() {
-                    rowCallback(item[columns.id]);
-                })
+                    .append($('<tr>').prop('id', item[columns.id]).click(function () {
+                        rowCallback(item[columns.id]);
+                    })
                         .append($('<td>')
                             .append($('<span>' + item[columns.name] + '</span>')
                             )
@@ -197,82 +197,82 @@ var util = new function() {
         return subtable;
     };
 
-    this.clearTable = function(table) {
-        if(typeof table != "undefined") {
-            if(table != null) {
-                if(table.fnClearTable instanceof Function) {
+    this.clearTable = function (table) {
+        if (typeof table != "undefined") {
+            if (table != null) {
+                if (table.fnClearTable instanceof Function) {
                     table.fnClearTable();
                 }
             }
         }
     };
 
-    this.buttonHover = function(button) {
-        if(button.className != button.id+"_dim")
-            button.className = button.id+"_over";
+    this.buttonHover = function (button) {
+        if (button.className != button.id + "_dim")
+            button.className = button.id + "_over";
     };
 
-    this.buttonOut = function(button) {
-        if(button.className != button.id+"_dim")
+    this.buttonOut = function (button) {
+        if (button.className != button.id + "_dim")
             button.className = button.id;
     };
 
-    this.formatIntoHHMMSS = function(secsIn) {
-        if(secsIn == -1) {
+    this.formatIntoHHMMSS = function (secsIn) {
+        if (secsIn == -1) {
             return "";
         }
         var hours = parseInt(secsIn / 3600);
         var remainder = secsIn % 3600;
         var minutes = parseInt(remainder / 60);
         var seconds = remainder % 60;
-        var formatted =  (hours < 10 ? "0" : "") + hours
-                + ":" + (minutes < 10 ? "0" : "") + minutes
-                + ":" + (seconds< 10 ? "0" : "") + seconds;
+        var formatted = (hours < 10 ? "0" : "") + hours
+            + ":" + (minutes < 10 ? "0" : "") + minutes
+            + ":" + (seconds < 10 ? "0" : "") + seconds;
         return formatted;
     };
 
-    this.formatIntoHHMM = function(secsIn) {
-        if(secsIn == -1) {
+    this.formatIntoHHMM = function (secsIn) {
+        if (secsIn == -1) {
             return "";
         }
         var hours = parseInt(secsIn / 3600);
         var remainder = secsIn % 3600;
         var minutes = parseInt(remainder / 60);
-        var formatted =  (hours < 10 ? "0" : "") + hours
-                + ":" + (minutes < 10 ? "0" : "") + minutes;
+        var formatted = (hours < 10 ? "0" : "") + hours
+            + ":" + (minutes < 10 ? "0" : "") + minutes;
         return formatted;
     };
 
-    this.formatIntoMM = function(secsIn) {
-        if(secsIn == -1) {
+    this.formatIntoMM = function (secsIn) {
+        if (secsIn == -1) {
             return "";
         }
         var formatted;
 
-        if(secsIn == 0) {
+        if (secsIn == 0) {
             formatted = "0 min";
         } else {
             var minutes = parseInt(secsIn / 60);
             formatted = minutes < 1 ? "< 1 min" : minutes + " min";
         }
-        
-        return formatted;
-    };
-	
-	this.formatDateIntoHHMMSS = function(timeAsDateObject) {
-        if(timeAsDateObject == null) {
-            return "";
-        }
-        var hours = timeAsDateObject.getHours();        
-        var minutes = timeAsDateObject.getMinutes();
-		var seconds = timeAsDateObject.getSeconds();		
-        var formatted =  (hours < 10 ? "0" : "") + hours
-                + ":" + (minutes < 10 ? "0" : "") + minutes
-				+ ":" + (seconds < 10 ? "0" : "") + seconds;
+
         return formatted;
     };
 
-    this.validateProfile = function(profileSel) {
+    this.formatDateIntoHHMMSS = function (timeAsDateObject) {
+        if (timeAsDateObject == null) {
+            return "";
+        }
+        var hours = timeAsDateObject.getHours();
+        var minutes = timeAsDateObject.getMinutes();
+        var seconds = timeAsDateObject.getSeconds();
+        var formatted = (hours < 10 ? "0" : "") + hours
+            + ":" + (minutes < 10 ? "0" : "") + minutes
+            + ":" + (seconds < 10 ? "0" : "") + seconds;
+        return formatted;
+    };
+
+    this.validateProfile = function (profileSel) {
         if (profileSel.val() == -1) {
             util.showError(jQuery.i18n.prop("error.no.profile"));
             return false;
@@ -280,9 +280,9 @@ var util = new function() {
         return true;
     };
 
-    this.populateSettingsSelect = function(items, select) {
+    this.populateSettingsSelect = function (items, select) {
         util.populateSelect(items, select);
-        if(items.length <= 1) {
+        if (items.length <= 1) {
             select.prop('selectedIndex', 1);
         }
     };
@@ -292,19 +292,19 @@ var util = new function() {
      * @param items
      * @param select
      */
-    this.populateSelect = function(items, select, metaDataProp) {
-        $.each(items, function(key, value) {
+    this.populateSelect = function (items, select, metaDataProp) {
+        $.each(items, function (key, value) {
             select
-                .append($('<option>', { value : typeof metaDataProp !== 'undefined' ? value[metaDataProp] : value.id})
-                .text(value.name));
+                .append($('<option>', { value: typeof metaDataProp !== 'undefined' ? value[metaDataProp] : value.id })
+                    .text(value.name));
         });
     };
 
-    this.showMessage = function(text, isError) {
+    this.showMessage = function (text, isError) {
         // Build toast
         var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');
 
-        if(isError) {
+        if (isError) {
             toast.addClass("qm-toast--danger");
         } else {
             toast.addClass("qm-toast--success");
@@ -319,10 +319,10 @@ var util = new function() {
         $messageContainer.css('left', 0);
         $messageContainer.css("top", (parseInt($("#header").height())) + "px");
 
-        var removeFunction = function() {
-            toast.fadeOut(400, function() {
+        var removeFunction = function () {
+            toast.fadeOut(400, function () {
                 toast.remove();
-                if($messageContainer.children().length == 0) {
+                if ($messageContainer.children().length == 0) {
                     $messageContainer.css("visibility", "hidden");
                     $messageContainer.css("top", 0);
                 }
@@ -346,13 +346,13 @@ var util = new function() {
         toast.fadeIn();
     };
 
-    this.removeMe = function(toBeRemovedId, hideMessageTime) {
+    this.removeMe = function (toBeRemovedId, hideMessageTime) {
         window.clearTimeout(hideMessageTime);
         var $elem = $(toBeRemovedId);
 
-        $elem.fadeOut(400, function() {
+        $elem.fadeOut(400, function () {
             $elem.remove();
-            if($("#message").children().length == 0) {
+            if ($("#message").children().length == 0) {
                 $("#message").css("visibility", "hidden");
                 $("#message").css("top", 0);
             }
@@ -364,18 +364,18 @@ var util = new function() {
     };
 
     this.poolResizeHandler = function (pool) {
-        var poolList        = pool.find('.qm-pool__list'),
-            poolToggle      = pool.find('.qm-pool__toggle-btn');
+        var poolList = pool.find('.qm-pool__list'),
+            poolToggle = pool.find('.qm-pool__toggle-btn');
 
-        $(window).on('resize', _.debounce(function() {
+        $(window).on('resize', _.debounce(function () {
             util.determineIfToggleNeeded(pool, poolList, poolToggle);
         }, 300));
     };
 
     this.determineIfToggleNeeded = function ($pool, $poolList, $poolToggle) {
         var isPoolView = $('.qm-main').hasClass('qm-main--no-queues');
-        if(!isPoolView) {
-            if($poolList.height() > 50) {
+        if (!isPoolView) {
+            if ($poolList.height() > 50) {
                 $poolToggle.fadeIn();
             } else {
                 $poolToggle.hide();
@@ -389,7 +389,7 @@ var util = new function() {
      * @param errorMessage the name of a property in
      * graphicalDisplayMessages.properties
      */
-    this.showError = function(errorMessage) {
+    this.showError = function (errorMessage) {
         util.showMessage(errorMessage, true);
     };
 
@@ -398,11 +398,11 @@ var util = new function() {
      * @param errorMessage
      * @param paramArray
      */
-    this.showCometDError = function(errorMessage, paramArray) {
+    this.showCometDError = function (errorMessage, paramArray) {
 
         var toast = $('<div class="qm-toast qm-toast--danger"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');
-        
-        if(typeof paramArray === 'undefined' || !paramArray) {
+
+        if (typeof paramArray === 'undefined' || !paramArray) {
             toast.find('.qm-toast__message').text(translate.msg(errorMessage));
             //var errorDiv = $('<div/>').text(translate.msg(errorMessage));
         } else {
@@ -419,16 +419,16 @@ var util = new function() {
         $messageContainer.css('left', 0);
         $messageContainer.css("top", (parseInt($("#header").height())) + "px");
 
-        var removeFunction = function() {
-            toast.fadeOut(400, function() {
+        var removeFunction = function () {
+            toast.fadeOut(400, function () {
                 toast.remove();
-                if($messageContainer.children().length == 0) {
+                if ($messageContainer.children().length == 0) {
                     $messageContainer.css("visibility", "hidden");
                     $messageContainer.css("top", 0);
                 }
             });
         };
-        
+
         // Hide after 15s
         hideErrorTime = setTimeout(removeFunction, 15000);
 
@@ -447,22 +447,22 @@ var util = new function() {
     /**
      * Turns a Unit ID such as "GBG:WDP:1" into "GBG/WDP/1"
      */
-    this.asChannelStr = function(str) {
-        return str.replace(new RegExp(':', 'g'),'/');
+    this.asChannelStr = function (str) {
+        return str.replace(new RegExp(':', 'g'), '/');
     };
 
-    this.asChannelStrWithUserName = function(unitId, userName) {
+    this.asChannelStrWithUserName = function (unitId, userName) {
         return this.asChannelStr(unitId) + "/" + userName;
     }
 
-    this.showPermanentError = function(text) {
+    this.showPermanentError = function (text) {
         setError(text);
     };
 
-    var setError = function(text) {
+    var setError = function (text) {
         var toast = $('<div class="qm-toast qm-toast--danger"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');
         toast.prop('id', 'text');
-       
+
         toast.find('.qm-toast__message').text(text);
 
         var $messageContainer = $('#error');
@@ -480,12 +480,12 @@ var util = new function() {
         toast.fadeIn();
     };
 
-    this.hideError = function() {
+    this.hideError = function () {
         $("#text").remove();
         $("#error").css("visibility", "hidden");
     };
 
-    this.showModal = function(divId) {
+    this.showModal = function (divId) {
         window.onscroll = function () {
             $("#" + divId).css("top", document.body.scrollTop);
         };
@@ -493,33 +493,33 @@ var util = new function() {
         $("#" + divId).css("top", document.body.scrollTop);
     };
 
-    this.hideModal = function(divId) {
+    this.hideModal = function (divId) {
         $("#" + divId).hide();
     };
 
-    this.zeroPad = function(num,count) {
+    this.zeroPad = function (num, count) {
         var numZeropad = num + '';
-        while(numZeropad.length < count) {
+        while (numZeropad.length < count) {
             numZeropad = "0" + numZeropad;
         }
         return numZeropad;
     };
 
-    this.secondsToHms = function(secs) {
-        var t = new Date(1970,0,1);
+    this.secondsToHms = function (secs) {
+        var t = new Date(1970, 0, 1);
         t.setSeconds(secs);
-        return t.toTimeString().substr(0,8);
+        return t.toTimeString().substr(0, 8);
     };
 
-    this.secondsToHm = function(secs) {
-        var t = new Date(1970,0,1);
+    this.secondsToHm = function (secs) {
+        var t = new Date(1970, 0, 1);
         t.setSeconds(secs);
-        return t.toTimeString().substr(0,5);
+        return t.toTimeString().substr(0, 5);
     };
 
-    this.log = function(object) {
+    this.log = function (object) {
         if (typeof console !== 'undefined' && console.log) {
-            if(typeof Date.now === 'function') {
+            if (typeof Date.now === 'function') {
                 var timestamp = '[' + Date.now() + '] ';
                 console.log(timestamp, object);
             } else {
@@ -538,15 +538,15 @@ var util = new function() {
      * filter: boolean to enable a search field in the table
      * headerCallback: modifies the table header. Called each time the table is drawn
      */
-    this.buildTableJsonNoUrl = function(config) {
+    this.buildTableJsonNoUrl = function (config) {
         var table;
 
-        table = $('#' + config.tableId).dataTable( {
+        table = $('#' + config.tableId).dataTable({
             "bDestroy": true,
             "sScrollX": "100%",
             "sScrollY": (config.scrollYHeight ? config.scrollYHeight : "158px"),
             "oLanguage": {
-                "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel): "",
+                "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel) : "",
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sZeroRecords": "",
@@ -564,7 +564,7 @@ var util = new function() {
         });
         $(window).bind('resize', function () {
             table.fnAdjustColumnSizing();
-        } );
+        });
         return table;
     };
 
@@ -574,4 +574,37 @@ var util = new function() {
     this.goToModulesPage = function () {
         window.location.href = "/"
     }
+
+    this.sortArrayCaseInsensitive = function (array, property, sortOrder, multiplier = 0) {
+        return array.sort(function (a, b) {
+            return a[property].toLowerCase().localeCompare(b[property].toLowerCase());
+        });
+    }
+
+    this.getLimitedArrayWithRemainingCount = function (array, maxCount) {
+            var maxShowDsItemCount = maxCount; 
+            var filteredDsList = array.slice(0).filter(function (val, i) {
+               if (i > maxShowDsItemCount - 1){
+                    return false 
+               } else {
+                    return true
+               }
+            });
+
+            var diffCount = array.length - maxShowDsItemCount;
+            if (diffCount > 0)
+            filteredDsList.push(diffCount); 
+            return filteredDsList;
+    };
+
+    this.mapDsNameAndOutcomes = function (array) {
+        return $.map(array.slice(0), function ( val, i) {
+            if ( val['outcomeExists'] && val['outcomeExists'] == true ) {
+               return val['deliveredServiceName'] + ' (' + ( val['visitOutcome'] != null ? val['visitOutcome']['outcomeName'] : '?' ) + ')';
+            } else {
+               return val['deliveredServiceName'] 
+            }
+        });
+    };
+
 };

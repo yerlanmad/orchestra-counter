@@ -106,10 +106,10 @@
                                     <td>
                                         <ul class="direction-flexible-text">
                                             <li>
-                                                <select id="selectOutcome" class="roundedCorner3"
+                                                <!--<select id="selectOutcome" class="roundedCorner3"
                                                         onchange="javascript:outcome.selectOutcome($(this).val());">
                                                     <option id="chooseOutcome" value="-1" disabled></option>
-                                                </select>
+                                                </select>-->
                                             </li>
                                         </ul>
                                     </td>
@@ -160,7 +160,7 @@
             </div>
 
 			<!-- Delivered Services module -->
-            <div id="deliveredServicesModule" class="module">
+            {#<div id="deliveredServicesModule" class="module">
                 <h2 id="deliveredServicesModuleLabel"></h2>
                 <div id="deliveredServicesContainer" class="moduleContentContainer">
                     <table id="deliveredServices" class="display">
@@ -178,7 +178,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div>#}
 
 			<!-- Multi Services module -->			
 			<div id="multiServicesModule" class="module">

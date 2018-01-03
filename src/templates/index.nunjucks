@@ -28,7 +28,7 @@
                         {% include "partials/card/visitCard/visit-card.nunjucks" %}
                         {% include "partials/card/walkInCard/walk-in-card.nunjucks" %}
                         {% include "partials/card/inactiveCard/inactive-card.nunjucks" %}
-                        {#{% include "partials/ds-card.nunjucks" %} #}
+                        {% include "partials/card/deliveredServicesCard/delivered-services-card.nunjucks" %}
                         {#{% include "partials/mark-card.nunjucks" %} #}
                      </div>
                 </div>

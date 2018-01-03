@@ -70,9 +70,14 @@ var outcome = new function() {
         }
     };
 
+
     this.updateOutcomes = function() {
         var outcomeSelect = $("#selectOutcome");
+		$Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') })
+        outcomeSelect.parent().removeClass("optionSelected");
+        outcomeSelect.parent().hide();
         util.clearSelect(outcomeSelect);
+        
         if(sessvars.state.userState == servicePoint.userState.SERVING && typeof sessvars.state.visit !== "undefined" &&
             sessvars.state.visit != null) {
             var params = servicePoint.createParams();
@@ -81,8 +86,10 @@ var outcome = new function() {
             if(typeof outcomes !== 'undefined' && outcomes != null && outcomes.length > 0) {
                 outcomeSelect.removeAttr('disabled');
                 util.populateSelect(outcomes, outcomeSelect, "code");
+                outcomeSelect.parent().show();
                 if(null != sessvars.state.visit.currentVisitService.visitOutcome) {
                     outcomeSelect.val(sessvars.state.visit.currentVisitService.visitOutcome.outcomeCode);
+                    outcomeSelect.parent().addClass("optionSelected");
                 } else {
                     outcomeSelect.val("-1");
                 }
@@ -94,6 +101,9 @@ var outcome = new function() {
             outcomeSelect.val("-1");
             outcomeSelect.attr('disabled', '');
         }
+
+        outcomeSelect.find("option:first").prop('disabled', true);
+        outcomeSelect.trigger("chosen:updated");
     };
 
     this.updateOutcomesTable = function() {

@@ -87,6 +87,8 @@
         <script type="text/javascript" src="scripts/components/dropdown/branchSelection/branchSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/deliveredServicesSelection/deliveredServicesSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/singleOutcomeSelection/singleOutcomeSelection.js"></script>
 
         <script type="text/javascript" src="scripts/components/NavView.js"></script>
         <script type="text/javascript" src="scripts/components/NavController.js"></script>
@@ -118,6 +120,7 @@
         <script type="text/javascript" src="scripts/components/card/closeCard/closeCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/inactiveCard/inactiveCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/walkInCard/walkInCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/deliveredServicesCard/deliveredServicesCard.js"></script>
         
         <link rel="stylesheet" href="css/main.css" />
 

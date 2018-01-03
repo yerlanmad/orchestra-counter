@@ -1,0 +1,196 @@
+#dsCard {
+    @include set-default-width-for-card-layout ();
+    .qm-card {
+        &__header-section {
+            .qm-card-header {
+                &__headline {
+                    color: $dark-transparent82;
+                    font-size: rem(28px);
+                    font-weight: 300;
+                    line-height: rem(32px);
+                    margin-bottom: rem(15px);
+                    &__back-icon {
+                        i {
+                            &:before {
+                                font-size: rem(22px);
+                                vertical-align: middle;
+                            }
+                        }
+                        margin-right: rem(10px);
+                        margin-left: 0;
+                        @at-root [dir='rtl'] & {
+                            margin-right: 0;
+                            margin-left: rem(10px);
+                        }
+                        color: $dark-transparent82;
+                    }
+                }
+                &__sub-heading {
+                    color: $dark-transparent82;
+                    font-size: rem(20px);
+                    font-weight: 300;
+                    line-height: rem(24px);
+                    margin-bottom: rem(12px);
+                    @at-root [dir='rtl'] & {
+                        text-align: right;
+                    }
+                }
+            }
+        }
+        &__content-section {
+            * {
+                &:focus {
+                    outline: 0;
+                }
+            }
+            .dataTables_scrollHeadInner {
+                width: 100% !important;
+            }
+            .dataTables_scrollBody {
+                max-height: rem(calc(100vh - 600px));
+                height: rem(calc(100vh - 600px));
+                overflow: scroll;
+                overflow-x: hidden;
+            }
+            .dataTables_scrollHeadInner {
+                thead {
+                    tr {
+                        th {
+                            color: $dark-transparent62;
+                            font-weight: 500;
+                            font-size: rem(12px);
+                            line-height: rem(30px);
+                            &.sorting {
+                                background: $white;
+                                position: relative;
+                                &:after {
+                                    content: "";
+                                    font-family: 'icomoon';
+                                    color: $dark-transparent82;
+                                    width: 10px;
+                                    position: absolute;
+                                    right: 0;
+                                }
+                            }
+                            &.sorting_desc {
+                                background: $white;
+                                position: relative;
+                                &:after {
+                                    content: "\e902";
+                                    font-family: 'icomoon';
+                                    color: $dark-transparent82;
+                                    ;
+                                    width: 10px;
+                                    position: absolute;
+                                    right: 0;
+                                }
+                            }
+                            &.sorting_asc {
+                                background: $white;
+                                position: relative;
+                                &:after {
+                                    content: "\e905";
+                                    font-family: 'icomoon';
+                                    color: $dark-transparent82;
+                                    width: 10px;
+                                    position: absolute;
+                                    right: 0;
+                                }
+                            }
+                        }
+                        border-bottom: rem(1.5px) solid $dark-transparent12;
+                    }
+                }
+            }
+            .dataTable {
+                color: $dark-transparent82;
+                font-family: $font-family;
+                font-size: rem(18px);
+                font-weight: 300;
+                width: 100% !important;
+                table-layout: fixed;
+                @media screen and (max-width: #{map-get($grid-breakpoints, 'md')}) {
+                    max-height: rem(300px);
+                    height: rem(300px);
+                }
+                tbody {
+                    td {
+                        padding: rem(10px) !important;
+                        text-align: left !important;
+                        background: transparent;
+                        border: none !important;
+                        @at-root [dir='rtl'] & {
+                            text-align: right !important;
+                        }
+                        &:nth-child(3) {
+                            text-align: right !important;
+                            @at-root [dir='rtl'] & {
+                                text-align: left !important;
+                            }
+                        }
+                        label {
+                        width: 100%;
+                            
+                        select {
+                            background: $white;
+                            border-radius: 3;
+                            border: 0;
+                            border: 1px solid $dark-transparent12;
+                            width: 100%;
+                            -webkit-box-sizing: border-box;
+                            box-sizing: border-box;
+                            -webkit-box-shadow: 0 0 4px 0 $dark-transparent04;
+                            box-shadow: 0 0 4px 0 $dark-transparent04;
+                            border-radius: 0;
+                            -webkit-appearance: inherit;
+                            padding: 4px 30px 4px 8px;
+                            color: $dark-transparent42;
+                            font-weight: 300;
+                            cursor: pointer;
+                            word-wrap: break-word;      /* IE*/
+                            white-space: -moz-pre-wrap; /* Firefox */
+                            white-space: pre-wrap;      /* other browsers */
+                            display:inline-block;
+                            @at-root [dir='rtl'] & {
+                                padding: 4px 8px 4px 30px;
+                            }
+                        }
+                        .selectdiv {
+                            position: relative;
+                        }
+                        select::-ms-expand {
+                            display: none;
+                        }
+                        .selectdiv:after {
+                            content: "\e902";
+                            font-family: 'icomoon';
+                            color: $dark-transparent82;
+                            right: rem(8px);
+                            @at-root [dir='rtl'] & {
+                            left: rem(8px);
+                            right: auto;
+                        }
+                            top: 5px;
+                            padding: 0 0 2px;
+                            position: absolute;
+                            pointer-events: none;
+                        }
+                    }
+                    }
+                    tr {
+                        background: $white;
+                        &:hover {
+                            background: $dark-transparent04;
+                        }
+                    }
+                }
+            }
+            .dataTables_info {
+                display: none;
+            }
+        }
+        &__footer-section {
+            margin-top: rem(30px);
+        }
+    }
+}

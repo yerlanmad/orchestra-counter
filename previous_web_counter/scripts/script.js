@@ -1564,12 +1564,14 @@ var servicePoint = new function () {
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
+                $("#deliveredServicesModule").show()
 			} else {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
 					false);
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
+                $("#deliveredServicesModule").hide()
 			}
 
 			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
@@ -1671,7 +1673,6 @@ var servicePoint = new function () {
 				// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
 				// $("#recallBtn").toggleClass("customButtonSmall", false);
 				$("#recallBtn").prop('disabled', true);
-				tooltipController.init('recall', $('#recallBtn').closest('.button-tooltip'), {text:  'hello'});
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
@@ -1703,12 +1704,14 @@ var servicePoint = new function () {
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
+                $("#deliveredServicesModule").show()
 			} else {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
 					false);
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
+                $("#deliveredServicesModule").hide()
 			}
 
 			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
@@ -1786,7 +1789,23 @@ var servicePoint = new function () {
 		}
 		resetLogoffCounter();
 		updateNextAndPreviousServices();
+        updateSelectedDs("#visitAddDsLbl");
 	};
+
+    var updateSelectedDs = function (idSelector) {
+        if (deliveredServices.getDataTable() && deliveredServices.getDataTable().fnGetData().length > 0){
+            var dsNameMappedArray =  util.mapDsNameAndOutcomes(deliveredServices.getDataTable().fnGetData().slice(0))
+            var selectedDsArray =  util.getLimitedArrayWithRemainingCount(dsNameMappedArray, 3) 
+            if (selectedDsArray.length > 3) {
+                selectedDsArray[selectedDsArray.length - 1] = ' + ' + selectedDsArray[selectedDsArray.length - 1] + ' ' + jQuery.i18n.prop('info.card.visitCard.others');
+                $(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedDsArray.slice(0, -1).join(', ') + selectedDsArray.slice(-1)));
+            } else {
+                $(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedDsArray.slice(0).join(', ')));
+            }
+        } else {
+            $(idSelector).text(jQuery.i18n.prop('info.card.visitCard.addDs'));
+        }
+    }
 
 	var updateNextAndPreviousServices = function () {
 		if (sessvars.state.visit) {
@@ -1938,6 +1957,7 @@ var servicePoint = new function () {
 		$("#addDeliveredServiceLink").toggleClass("customButtonSmallDisabled",
 			true);
 		$("#addDeliveredServiceLink").prop('disabled', true);
+        $("#deliveredServicesModule").hide()
 
 		$("#addCustomMarkLink").toggleClass("customButtonSmall", false);
 		$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled", true);

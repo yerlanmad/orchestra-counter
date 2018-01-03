@@ -14,7 +14,7 @@ display: none;
 }
 
  #servicePointPoolModule , #userPoolModule, #queuesModule, #deliveredServicesModule, #addDeliveredServiceLink,
- #selectOutcome, #selectOutcomeLabel, #transferBtn, #reinsertBtn, #multiServicesModule, #addMultiServiceLink,
+ #transferBtn, #reinsertBtn, #multiServicesModule, #addMultiServiceLink,
  #customMarksModule, #addCustomMarkLink, #chatModule
  {
     visibility: visible;

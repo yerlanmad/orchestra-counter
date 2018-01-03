@@ -26,7 +26,7 @@
         text-decoration: none;
 
         &:before {
-            background: $dark-transparent04;
+            background: rgba($pale-aquamarine, 0.04);
         }
     }
 
@@ -52,5 +52,8 @@
     &__text {
         flex: 1 auto;
         font-weight: $font-weight-light;
+        .listItemValueSelected{
+            color: $dark-transparent82;
+        }
     }
 }

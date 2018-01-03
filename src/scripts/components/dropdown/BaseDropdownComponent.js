@@ -3,7 +3,8 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
 
     // DefaultConfiguration
     this.chosenConfig = {
-        disable_search_threshold: 5
+        disable_search_threshold: 5,
+        single_disable: true
     }
 
     // @Override
@@ -27,10 +28,10 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
 
     this.activate = function (config) {
 
-        this.chosenConfig = config ? config : this.chosenConfig        
+        this.chosenConfig = config ? $.extend( this.chosenConfig , config ) : this.chosenConfig        
         $(this.getSelector()).chosen(this.chosenConfig)
 
-        if ($(this.getSelector()).children().length == 1){
+        if (this.chosenConfig.single_disable && $(this.getSelector()).children().length == 1){
             $(this.getSelector()).prop('disabled', true).trigger("chosen:updated");
         } else {
             $(this.getSelector()).prop('disabled', false).trigger("chosen:updated");

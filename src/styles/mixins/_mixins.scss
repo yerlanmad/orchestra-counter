@@ -176,6 +176,7 @@ $rem-px-only: false !default;
 }
 
 @mixin set-default-width-for-card-layout {
-    max-width: 90%;
+    max-width: 500px;
+    width: 100%;
     margin: 0 auto;
 }

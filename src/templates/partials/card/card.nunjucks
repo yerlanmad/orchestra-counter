@@ -1,5 +1,5 @@
 
-<div {% block id %}{% endblock %} class="qm-card {% block cardModifier %}{% endblock %}">
+<div {% block id %}{% endblock %} class="qm-card qm-card--more-than-one {% block cardModifier %}{% endblock %}">
     
     {% block header %}{% endblock %}
     
