@@ -1444,6 +1444,7 @@ var servicePoint = new function () {
 			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED) {
 				util.showMessage(jQuery.i18n.prop('error.no.outcome'));
+				
 			} else if (sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED) {
 				util
 					.showMessage(jQuery.i18n
@@ -1466,10 +1467,14 @@ var servicePoint = new function () {
 					// 		sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? sessvars.state.visit.parameterMap.custom1 : jQuery.i18n.prop('button.add.note');
+						document.getElementById("notesEdit").value = sessvars.state.visit.parameterMap.custom1;
 					}
 				}
 			}
 
+			spPoolUpdateNeeded = true;
+			userPoolUpdateNeeded = true;
+			
 			$("#waitingTimeCounter").html(
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -

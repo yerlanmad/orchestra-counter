@@ -4,12 +4,12 @@ window.$Qmatic.components.popover.QueuePopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
     this.visitId            = options.visitId;
     this.ticketId           = options.ticketId;
-    this.showCallBtn        = options.showCallBtn || true;
-    this.showTransferBtn    = options.showTransferBtn || true;
-    this.showDeleteBtn      = options.showDeleteBtn || true;
-    this.disableCall        = options.disableCall || false;
-    this.disableTransfer    = options.disableTransfer || false;
-    this.disableDelete      = options.disableRemove || false;
+    this.showCallBtn        = options.showCallBtn !== undefined ? options.showCallBtn : true;
+    this.showTransferBtn    = options.showTransferBtn !== undefined ? options.showTransferBtn : true;
+    this.showDeleteBtn      = options.showDeleteBtn !== undefined ? options.showDeleteBtn : true;
+    this.disableCall        = options.disableCall !== undefined ? options.disableCall : false;
+    this.disableTransfer    = options.disableTransfer !== undefined ? options.disableTransfer : false;
+    this.disableDelete      = options.disableRemove !== undefined ? options.disableRemove : false;
 
     //Tables
     this.queueTable         = null;
@@ -100,9 +100,11 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         } else {
             deleteBtn.addEventListener('click', this._delete.bind(this));
         }
-
+        console.log('stepo');
+        console.log('this showCall', this.showCallBtn);
         if(!this.showCallBtn) {
             callBtn.remove();
+            console.log('removing call btn');
         }
         if(!this.showTransferBtn) {
             transferBtn.remove();
@@ -124,6 +126,14 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         transferToQueueBtn.addEventListener('click', this._navigateTo.bind(this, this.views.QUEUE, this._initQueuesTable.bind(this, popoverQueueTable)));
         transferToUserPoolBtn.addEventListener('click', this._navigateTo.bind(this, this.views.USER_POOL, this._initUserPoolTable.bind(this, popoverUserPoolTable)));
         transferToCounterPoolBtn.addEventListener('click', this._navigateTo.bind(this, this.views.COUNTER_POOL, this._initCounterPoolTable.bind(this, popoverCounterPoolTable)));
+
+        if (transferToUserPoolEnabled == false) {
+            transferToUserPoolBtn.remove();
+        }
+    
+        if (transferToServicePointPoolEnabled == false) {
+            transferToCounterPoolBtn.remove();
+        }
 
     },
     _initQueuesTable: function (selector) {

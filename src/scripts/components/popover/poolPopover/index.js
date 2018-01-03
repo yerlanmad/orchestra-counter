@@ -3,7 +3,7 @@
 window.$Qmatic.components.popover.PoolPopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
     this.visitId        = options.visitId;
-    this.disableCall    = options.disableCall || false;
+    this.disableCall    = options.disableCall !== undefined ? options.disableCall : false;
     this.isRTL          = document.getElementsByTagName("html")[0].getAttribute("dir") 
                         && document.getElementsByTagName("html")[0].getAttribute("dir")
                                                 .indexOf('rtl') > -1 ? true : false;

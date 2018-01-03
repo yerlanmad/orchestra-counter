@@ -158,9 +158,11 @@ var queues = new function() {
                 params.branchId = sessvars.branchId;
                 params.queueId = sessvars.clickedQueueId;
                 var tickets = spService.get("branches/" + params.branchId + "/queues/" + params.queueId + "/visits/full");
-                ticketsTable.fnAddData(tickets);
-                queueDetailInitFn(tickets);
-                ticketsTable.fnAdjustColumnSizing();
+                if(tickets.length > 0) {
+                    ticketsTable.fnAddData(tickets);
+                    queueDetailInitFn(tickets);
+                    ticketsTable.fnAdjustColumnSizing();
+                }
             } else {
                 var columns = [
                     /* Id */                {"bSearchable": false,
@@ -219,7 +221,7 @@ var queues = new function() {
 						} else {
                             options.showDeleteBtn = false;
                         }
-						if ( buttonCallFromQueueEnabled  == true ) {						
+						if ( buttonCallFromQueueEnabled == true ) {						
                             //$('td:eq(1)', nRow).append("<span><a href=\"#\" class=\"callTicket\" title=\"" +  jQuery.i18n.prop("action.title.call.ticket")  + "\"></a></span>");
                             options.showCallBtn = true;
 						} else {
