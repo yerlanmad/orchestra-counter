@@ -99,7 +99,7 @@
                         <span class="qm-notes__characters js-notes-max-characters"></span>
                     </div>
                 </div>
-                <textarea id="notesEdit" class="qm-notes__textarea" rows="5"></textarea>
+                <textarea id="notesEdit" class="qm-notes__textarea" maxlength="255" rows="5"></textarea>
                 <div class="qm-notes__action-container">
                     <button class="qm-btn qm-btn--secondary qm-btn--small js-notes-cancel-btn">
                         <span class="qm-btn__text"></span>
