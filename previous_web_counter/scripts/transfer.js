@@ -902,7 +902,7 @@ var transfer = new function() {
             spService.putParams('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
             queues.updateQueues();
             queueViewController.navigateToOverview();
-            util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
+            util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.fullName]), false);
             //util.hideModal("transferQueueToQueueDialogue");
         }
     };
