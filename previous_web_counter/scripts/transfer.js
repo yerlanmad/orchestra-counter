@@ -772,6 +772,8 @@ var transfer = new function() {
                     "url": staffPoolUrl, "rowCallback": staffPoolRowCallback, "columns": staffPoolColumns,
                     "filter": false, "headerCallback": staffPoolHeaderCallback, "scrollYHeight": "300px",
                     "emptyTableLabel":"info.transfer.staff.pool.empty"});
+
+                table.fnSort([1, 'asc']);
             }
             //destroy old event handlers
             $('tbody tr td button.transferTicketFirst', $(selector)).die('click');
@@ -852,6 +854,7 @@ var transfer = new function() {
                     "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns,
                     "filter": false, "headerCallback": servicePointHeaderCallback, "scrollYHeight": "300px",
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
+                table.fnSort([4, 'desc']); // open counters first
             }
             //destroy old event handlers
             $('tbody tr td button.transferTicketFirst', $(selector)).die('click');

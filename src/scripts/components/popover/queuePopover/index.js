@@ -4,12 +4,12 @@ window.$Qmatic.components.popover.QueuePopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
     this.visitId            = options.visitId;
     this.ticketId           = options.ticketId;
-    this.showCallBtn        = options.showCallBtn !== undefined ? options.showCallBtn : true;
-    this.showTransferBtn    = options.showTransferBtn !== undefined ? options.showTransferBtn : true;
-    this.showDeleteBtn      = options.showDeleteBtn !== undefined ? options.showDeleteBtn : true;
-    this.disableCall        = options.disableCall !== undefined ? options.disableCall : false;
-    this.disableTransfer    = options.disableTransfer !== undefined ? options.disableTransfer : false;
-    this.disableDelete      = options.disableRemove !== undefined ? options.disableRemove : false;
+    this.showCallBtn        = _.isBoolean(options.showCallBtn) ? options.showCallBtn : true;
+    this.showTransferBtn    = _.isBoolean(options.showTransferBtn) ? options.showTransferBtn : true;
+    this.showDeleteBtn      = _.isBoolean(options.showDeleteBtn) ? options.showDeleteBtn : true;
+    this.disableCall        = _.isBoolean(options.disableCall) ? options.disableCall : false;
+    this.disableTransfer    = _.isBoolean(options.disableTransfer) ? options.disableTransfer : false;
+    this.disableDelete      = _.isBoolean(options.disableRemove) ? options.disableRemove : false;
 
     //Tables
     this.queueTable         = null;
@@ -100,11 +100,8 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         } else {
             deleteBtn.addEventListener('click', this._delete.bind(this));
         }
-        console.log('stepo');
-        console.log('this showCall', this.showCallBtn);
         if(!this.showCallBtn) {
             callBtn.remove();
-            console.log('removing call btn');
         }
         if(!this.showTransferBtn) {
             transferBtn.remove();

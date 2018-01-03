@@ -27,7 +27,7 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
         this.navigationStack.push(view);
         this._navigate();
         
-        if(initFn !== null && typeof initFn == "function") {
+        if(initFn !== null && _.isFunction(initFn)) {
             initFn();
         }
     },
