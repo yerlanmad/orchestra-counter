@@ -163,6 +163,11 @@ var util = new function () {
         } else {
             table = $('#' + config.tableId).dataTable(tableConfig);
         }
+        if (config.filter && config.customFilter) {
+            $("#"+config.tableId+"_filter input").on('keyup change', function(){
+                table.api().search($(this).val()).draw();
+            })
+        }
         $(window).bind('resize', function () {
             table.fnAdjustColumnSizing();
         });

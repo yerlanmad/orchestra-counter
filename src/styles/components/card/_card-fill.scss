@@ -1,0 +1,15 @@
+.qm-card-fill {
+        height: 100%;
+        height: calc(100% - #{rem($height-of-card-stack)});
+        .qm-card {
+                height: inherit;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin-top: rem($height-of-card-stack);
+
+                &--justify-top {
+                    justify-content: flex-start !important;
+                }
+        }
+}

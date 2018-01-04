@@ -2,6 +2,7 @@
     @include set-default-width-for-card-layout ();
     .qm-card {
         &__header-section {
+            margin-bottom: 5px;
             .qm-card-header {
                 &__headline {
                     color: $dark-transparent82;
@@ -23,47 +24,10 @@
             }
         }
         &__content-section {
-            input {
-                box-sizing: border-box;
-                height: rem(45px);
-                border: 1px solid $dark-transparent12;
-                box-shadow: 0 0 4px 0 $dark-transparent04;
-                color: $dark-transparent42;
-                font-size: rem(18px);
-                padding: rem(10px) 0;
-                font-weight: 300;
-                &:focus {
-                    outline: 0;
-                }
-            }
+            flex-grow: 1;
+            overflow: auto;
             .dataTables_filter {
-                padding-left: 0px;
-                padding-right: 0px;
-                label {
-                    input {
-                        padding-right: rem(35px);
-                        padding-left: rem(10px);
-                        @at-root [dir='rtl'] & {
-                            padding-left: rem(35px);
-                            padding-right: rem(10px);
-                        }
-                    }
-                    &:after {
-                        background: transparent;
-                        content: "\e92f";
-                        font-family: 'icomoon';
-                        font-size: rem(24px);
-                        position: absolute;
-                        right: rem(12px);
-                        left: auto;
-                        top: rem(11px);
-                        color: $dark-transparent42;
-                        @at-root [dir='rtl'] & {
-                            left: rem(12px);
-                            right: auto;
-                        }
-                    }
-                }
+                display: none;
             }
             .dataTable {
                 color: $dark-transparent82;
@@ -73,15 +37,7 @@
                 width: 100% !important;
                 table-layout: fixed;
                 tbody {
-                    max-height: rem(calc(100vh - 600px));
-                    height: rem(calc(100vh - 600px));
-                    overflow: scroll;
-                    overflow-x: hidden;
                     display: block;
-                    @media screen and (max-width: #{map-get($grid-breakpoints, 'md')}) {
-                        max-height: rem(300px);
-                        height: rem(300px);
-                    }
                     td {
                         padding: rem(10px) !important;
                         text-align: left !important;
@@ -109,7 +65,7 @@
             }
         }
         &__footer-section {
-            margin-top: rem(30px);
+            min-height: rem(50px);
         }
     }
 }

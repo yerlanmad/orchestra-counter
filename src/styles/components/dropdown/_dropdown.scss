@@ -209,12 +209,6 @@
         }
     }
     &__component {
-        width: calc(100% + 22px) !important;
-        right: 11px;
-        position: relative;
-        @at-root [dir='rtl'] & {
-            right: -11px;
-        }
         select {
             width: 100% !important;
             box-sizing: border-box;
@@ -224,7 +218,16 @@
             box-shadow: 0 0 4px 0 $dark-transparent04;
         }
         &.selectOutcome {
+        width: calc(100% + 22px) !important;
+        right: 11px;
+        position: relative;
+        @at-root [dir='rtl'] & {
+            right: -11px;
+        }
             .chosen-single {
+                div {
+                    display: none;
+                }
                 border: 0;
                 -webkit-box-shadow: none;
                 -moz-box-shadow: none;
@@ -277,6 +280,9 @@
                 background: $dark-transparent04 !important;
             }
             .chosen-with-drop {
+                div {
+                    display: block;
+                }
                 .chosen-single {
                     outline: none;
                     -webkit-box-shadow: inset 0px 0px 4px #ccc;
@@ -286,6 +292,9 @@
                     &.chosen-default {
                         span {
                             color: $dark-transparent42 !important;
+                            &:before {
+                                display: none;
+                            }
                         }
                     }
                     span {

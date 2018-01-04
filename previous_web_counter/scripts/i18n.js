@@ -1,9 +1,12 @@
 var i18n = new function () {// helper method (that doesnt bomb) for setting innerHTML text on a html element
-    var i18nQmBtn = function(elementName, propName) {
-        $("#" + elementName + " span").attr("title", jQuery.i18n.prop(propName))
-        i18nSafe(elementName + " span", propName)
+    var i18nQmBtn = function(elemId, propName) {
+        $("#" + elemId + " span").attr("title", jQuery.i18n.prop(propName))
+        i18nSafe(elemId + " span", propName)
     };
-    
+
+    var i18nPlaceholder = function(elem, propName) {
+        elem.prop("placeholder", jQuery.i18n.prop(propName))
+    };
     
     var i18nSafe = function(elementName, propName, padding) {
         try {
@@ -134,6 +137,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeAppend("walkInHeader", 'info.card.header.walkin');
         i18nSafeAppend("walkInSubHeader", 'info.card.sub.header.walkin');
         i18nQmBtn("cancelWalkIn", 'button.cancel');
+        i18nPlaceholder($("#walkDirectServices_filter input"), "info.placeholder.walkdirect.search");
         
         //card details
         // Closed Card

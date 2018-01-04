@@ -6,6 +6,11 @@
     flex-direction: column;
     justify-content: center;
     
+    &.qm-card {
+        padding-top: rem(90px);
+        padding-bottom: rem(90px);
+    }
+
     .qm-card__headline {
         font-size: rem(32px);
         color: $midnight-blue;

@@ -14,6 +14,9 @@ window.$Qmatic.components.NavController = function (navSelector) {
             this.navigationStack.push(modalComponent)
             // Modal components are hidden by default when initialized, so nav controller needs to show it now!
             modalComponent.show()
+        } else if (isComponentInStack(modalComponent)) {
+        // If component is not on top check if exist inside the stach and reset 0th index to pushing component
+        
         }
     }
 
@@ -69,6 +72,10 @@ window.$Qmatic.components.NavController = function (navSelector) {
             window.$Qmatic.components.BaseComponent.prototype.onInit.call(this, selector);
             this.hide()
         }
+    }
+
+    function isComponentInStack (component) {
+        return true;
     }
 
     this.onInit.apply(this, arguments);

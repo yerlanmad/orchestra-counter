@@ -1,7 +1,7 @@
-{% extends "partials/card/card.nunjucks" %}
-{% import "partials/card/card-nav.nunjucks" as cardNav  %}
+{% extends "partials/card/fill-parent-card.nunjucks" %}
 
 {% block id %}id="walkInCard"{% endblock %}
+{% block cardModifier %}qm-card--more-than-one qm-card--justify-top{% endblock %}
 
 {% block header %}
     <header class="qm-card__header-section">
@@ -10,6 +10,11 @@
             </div>
             <div class="qm-card-header__sub-heading" id="walkInSubHeader"> 
             </div>
+        </div>
+        <div id="walkDirectServices_filter" class="search-filter">
+            <label>
+                <input type="search" placeholder="" aria-controls="walkDirectServices">
+            </label>
         </div>
     </header>
 {% endblock %}

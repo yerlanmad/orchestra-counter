@@ -1179,6 +1179,7 @@ var servicePoint = new function () {
 					"rowCallback": rowCallback,
 					"columns": columns,
 					"filter": true,
+					"customFilter": true,
 					"headerCallback": headerCallback,
 					"scrollYHeight": "auto",
 					"infoFiltered": "info.filtered.fromEntries",

@@ -1,7 +1,8 @@
-{% extends "partials/card/card.nunjucks" %}
-{% import "partials/card/card-nav.nunjucks" as cardNav  %}
+{% extends "partials/card/fill-parent-card.nunjucks" %}
 
 {% block id %}id="inactiveCard"{% endblock %}
+{% block cardModifier %}qm-card--more-than-one{% endblock %}
+
 
 {% block header %}
     <header class="qm-card__header-section">
@@ -14,3 +15,5 @@
         <p class="qm-card__text" id="inactiveCardSubTitle"></p>
     </div>
 {% endblock %}
+
+Ï

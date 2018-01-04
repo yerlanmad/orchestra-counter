@@ -1,7 +1,7 @@
-{% extends "partials/card/transparent-card.nunjucks" %}
-{% import "partials/card/card-nav.nunjucks" as cardNav  %}
+{% extends "partials/card/scroll-card.nunjucks" %}
 
 {% block id %}id="closedCard"{% endblock %}
+{% block cardModifier %}qm-transparent-card{% endblock %}
 
 {% block header %}
     <header class="qm-transparent-card__header-section">

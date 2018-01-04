@@ -171,12 +171,12 @@ $rem-px-only: false !default;
 }
 
 @mixin set-default-height-for-card-layout {
-    max-height: rem(calc(100vh - 400px));
-    height: rem(calc(100vh - 400px));
+    // max-height: rem(calc(100vh - 400px));
+    // height: rem(calc(100vh - 400px));
 }
 
 @mixin set-default-width-for-card-layout {
-    max-width: 500px;
-    width: 100%;
-    margin: 0 auto;
+    // max-width: 500px;
+    // width: 100%;
+    // margin: 0 auto;
 }
