@@ -4,7 +4,11 @@
     justify-content: center;
     align-items: center;
     padding: rem($global-standard-padding);
+    padding-bottom: 0;
     overflow-y: auto;
+    .qm-card {
+        margin-bottom: rem($global-standard-padding);
+    }
 }
 
 .qm-card-action-layout {
