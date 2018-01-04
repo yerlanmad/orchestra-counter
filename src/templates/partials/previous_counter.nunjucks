@@ -1,4 +1,4 @@
-<div class="navbar navbar-fixed-top">
+<div class="navbar navbar-fixed-top qm-hide">
             <div class="navbar-inner">
                 <div id="header" class="header">
                     <table cellspacing="0" cellpadding="0">
@@ -55,8 +55,8 @@
                 </div>
             </div>
         </div>
-		<br> 
-		<div id="modulesContainer">
+		<br class="qm-hide"> 
+		<div id="modulesContainer" class="qm-hide">
 			<table id="callButtons">
 				<tbody>
 					<tr>

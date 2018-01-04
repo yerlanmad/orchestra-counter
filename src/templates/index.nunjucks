@@ -77,7 +77,6 @@
     {% include "partials/previous_counter.nunjucks" %}
 
 
-
     <!-- Modal Views -->
     <div id="qm-modal-nav" class="qm-modal-nav qm-hide">
         {% include "partials/modals/profileSettings/profile-settings.nunjucks" %}
