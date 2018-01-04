@@ -23,27 +23,15 @@
             <!-- Qmatic Main Left -->
             <div class="qm-main__left">
                 <div class="qm-card-layout">
-                    
-                    {#<div class="qm-card-scroll">
-                        <div class="qm-card-scroll-container">
-                            <div class="qm-card-scroll-container__content">#}
-
-
-                                <div id="qm-card-nav" class="qm-hide qm-card-stack">
-                                    {% include "partials/card/closeCard/close-card.nunjucks" %} 
-                                    {% include "partials/card/visitCard/visit-card.nunjucks" %}
-                                    {% include "partials/card/walkInCard/walk-in-card.nunjucks" %}
-                                    {% include "partials/card/inactiveCard/inactive-card.nunjucks" %}
-                                    {% include "partials/card/deliveredServicesCard/delivered-services-card.nunjucks" %}
-                                    {#{% include "partials/mark-card.nunjucks" %} #}
-                                </div>
-
-
-                            {#</div> 
-                        </div>
-                    </div>#}
-
-
+                    <div id="qm-card-nav" class="qm-hide qm-card-stack">
+                        {% include "partials/card/closeCard/close-card.nunjucks" %} 
+                        {% include "partials/card/visitCard/visit-card.nunjucks" %}
+                        {% include "partials/card/walkInCard/walk-in-card.nunjucks" %}
+                        {% include "partials/card/inactiveCard/inactive-card.nunjucks" %}
+                        {% include "partials/card/deliveredServicesCard/delivered-services-card.nunjucks" %}
+                        {#{% include "partials/mark-card.nunjucks" %} #}
+                    </div>
+                    <div class="qm-card-layout__shadow"></div>
                 </div>
 
                 <!-- Qmatic Action Bar -->

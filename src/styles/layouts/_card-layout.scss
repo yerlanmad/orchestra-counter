@@ -6,8 +6,17 @@
     padding: rem($global-standard-padding);
     padding-bottom: 0;
     overflow-y: auto;
+    position: relative;
     .qm-card {
-        margin-bottom: rem($global-standard-padding);
+        margin-bottom: rem($global-standard-padding + $global-standard-card-shadow-height);
+    }
+    &__shadow {
+        background: linear-gradient(to top, $dark-transparent82, $dark-transparent02);
+        width: 100%;
+        height: rem($global-standard-card-shadow-height);
+        bottom: 0;
+        position: absolute;
+        opacity: 0.3;
     }
 }
 
