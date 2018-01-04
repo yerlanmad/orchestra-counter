@@ -8,10 +8,6 @@
     position: relative;
     overflow-x: hidden;
     width: 100%;
-
-    .qm-card {
-        margin-bottom: rem($global-standard-padding + $global-standard-card-shadow-height);
-    }
 }
 
 .qm-card-action-layout {
