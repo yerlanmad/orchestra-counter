@@ -1,0 +1,10 @@
+.qm-card-shadow {
+    background: linear-gradient(to top, $dark-transparent82, $dark-transparent02);
+    width: 100%;
+    height: rem($global-standard-card-shadow-height);
+    left: 0;
+    bottom: $global-action-bar-height;
+    position: absolute;
+    opacity: 0.3;
+    pointer-events: none;
+}

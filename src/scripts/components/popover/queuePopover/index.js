@@ -152,7 +152,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     },
     _delete: function () {
         this.disposeInstance();
-        queues.removeTicket(this.visitId);
+        queues.removeTicket(this.visitId, this.ticketId);
         queueViewController.navigateToOverview();
     },
     disposeInstance: function () {

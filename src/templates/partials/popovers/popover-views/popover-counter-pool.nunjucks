@@ -23,7 +23,7 @@
                 <thead class="qm-table__header">
                     <tr>
                         <th class="transferServicePointPoolName"></th>
-                        <th class="transferServicePointPoolActions"></th>
+                        {# <th class="transferServicePointPoolActions"></th> #}
                         <th class="transferQueueToServicePointPoolId"></th>
                         <th class="transferQueueToServicePointPoolUnitId"></th>
                         <th class="transferServicePointPoolState"></th>

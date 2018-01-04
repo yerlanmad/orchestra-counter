@@ -24,7 +24,7 @@
                     <tr>
                         <th class="transferQueueToStaffPoolStaffId"></th>
                         <th class="transferStaffPoolName"></th>
-                        <th class="transferStaffPoolActions"></th>
+                        {# <th class="transferStaffPoolActions"></th> #}
                         <th class="transferQueueToStaffPoolStaffLocale"></th>
                         <th class="transferQueueToStaffPoolStaffDirection"></th>
                     </tr>

@@ -4,7 +4,6 @@
     left: 0;
     bottom: 0;
     right: 0;
-    overflow-x: hidden;
     height: 100%;
     .qm-card {
         margin-bottom: rem($global-standard-padding + $global-standard-card-shadow-height);
@@ -15,12 +14,8 @@
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
     .qm-card-scroll-container {
-        display: -ms-flexbox;
         display: flex;
         flex-direction: column;
-        xalign-items: center;
-        xjustify-content: center;
-        overflow-x: hidden;
         height: 100%;
         &::-webkit-scrollbar {
             width: 0px;

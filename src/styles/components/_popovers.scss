@@ -87,6 +87,15 @@
         width: 400px;
     }
 
+    .qm-popover-user-pool,
+    .qm-popover-counter-pool {
+        .qm-table__body {
+            td {
+                cursor: pointer;
+            }
+        }
+    }
+
     &-overlay {
         display: none;
         position: fixed;

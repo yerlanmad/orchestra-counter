@@ -369,6 +369,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.js-popover-user-pool-header', 'info.transfer.user.pool.header');
         i18nSafeSelectorAppend('.js-popover-counter-pool-header', 'info.transfer.counter.pool.header');
         
+        i18nSafeSelectorAppend('#allQueuesTab .qm-tabs__tab-text', 'button.all.queues');
+        i18nSafeSelectorAppend('#myQueuesTab .qm-tabs__tab-text', 'button.my.queues');
         
 
         i18nSafeSelectorBtnAppend('.js-popover-call > span', 'action.pool.call');

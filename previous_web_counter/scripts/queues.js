@@ -314,13 +314,16 @@ var queues = new function() {
         }
     };
 
-    this.removeTicket = function (visitId) {
+    this.removeTicket = function (visitId, ticketId) {
         if(servicePoint.hasValidSettings()) {
             var params = servicePoint.createParams();
             params.queueId = sessvars.clickedQueueId;
             params.visitId = visitId;
             spService.del("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId);
             queues.updateQueues(false);
+            console.log('params: ', params);
+            
+            util.showMessage(translate.msg("info.successful.delete", [ticketId]), false);
         }
     };
 
