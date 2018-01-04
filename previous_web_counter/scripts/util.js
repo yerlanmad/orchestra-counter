@@ -580,7 +580,7 @@ var util = new function () {
         window.location.href = "/"
     }
 
-    this.sortArrayCaseInsensitive = function (array, property, sortOrder, multiplier = 0) {
+    this.sortArrayCaseInsensitive = function (array, property, sortOrder) {
         return array.sort(function (a, b) {
             return a[property].toLowerCase().localeCompare(b[property].toLowerCase());
         });
