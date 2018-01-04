@@ -16,6 +16,18 @@ window.$Qmatic.utils = (function () {
                     console.debug(typeof val === 'object' ? JSON.stringify(val) : val)
                 }
             }
-        })()
+        })(),
+        containsObject: function (obj, list) {
+            if (!!list) {
+                var i;
+                for (i = 0; i < list.length; i++) {
+                    if (list[i] === obj) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 })();

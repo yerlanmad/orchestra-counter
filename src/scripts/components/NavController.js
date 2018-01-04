@@ -8,15 +8,20 @@ window.$Qmatic.components.NavController = function (navSelector) {
 
         // Don't stack components that are already on the top
         if (this.navigationStack[this.navigationStack.length - 1] !== modalComponent) {
+
+            if (this.isComponentInStack(modalComponent)) {
+                // If component exist inside the stack then empty stack to reset 0th index to pushing component
+                // Note: Added to avoid any memory leaks, incase the view is not popped before pushing again.
+                this.popAllModals();
+            }
+            
             this.hideTopModalComponent()
             if (this.navigationStack.length == 0)
                 this.show()
+            
             this.navigationStack.push(modalComponent)
             // Modal components are hidden by default when initialized, so nav controller needs to show it now!
             modalComponent.show()
-        } else if (isComponentInStack(modalComponent)) {
-        // If component is not on top check if exist inside the stach and reset 0th index to pushing component
-        
         }
     }
 
@@ -63,7 +68,7 @@ window.$Qmatic.components.NavController = function (navSelector) {
     }
 
     this.peekData = function () {
-        return this.navigationStack
+        return this.navigationStack.slice(0)
     }
 
     // @Override
@@ -74,8 +79,8 @@ window.$Qmatic.components.NavController = function (navSelector) {
         }
     }
 
-    function isComponentInStack (component) {
-        return true;
+    this.isComponentInStack = function (component) {
+        return window.$Qmatic.utils.containsObject(component, this.navigationStack);
     }
 
     this.onInit.apply(this, arguments);

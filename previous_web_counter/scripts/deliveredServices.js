@@ -30,7 +30,6 @@ var deliveredServices = new function () {
             var t = new Date();
             var url = "branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/deliverableServices?call=" + t;
             var dsResponse = spService.get(url)
-            console.log(dsResponse)
             var dsServices = util.sortArrayCaseInsensitive(dsResponse, "name")
 
             util.populateSelect(dsServices, dsFilter);
