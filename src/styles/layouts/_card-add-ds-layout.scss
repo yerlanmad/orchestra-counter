@@ -10,6 +10,7 @@
                     line-height: rem(32px);
                     margin-bottom: rem(15px);
                     &__back-icon {
+                        cursor: pointer;
                         i {
                             &:before {
                                 font-size: rem(22px);

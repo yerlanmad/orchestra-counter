@@ -72,10 +72,12 @@
             <a href="#" class="qm-task-item" id="deliveredServicesModule" onclick="deliveredServices.addDeliveredServicePressed();this.blur();">
                 <i class="qm-task-item__icon icon-briefcase" aria-hidden="true"></i>
                 <span class="qm-task-item__text" id="visitAddDsLbl"></span>
+                <span class="sr-only"></span>
             </a>
             <a href="#" class="qm-task-item" id="addCustomMarkLink">
                 <i class="qm-task-item__icon icon-mark" aria-hidden="true"></i>
                 <span class="qm-task-item__text" id="visitAddMarksLbl"></span>
+                <span class="sr-only"></span>
             </a>
             <div class="qm-drop-down">
                 <div class="qm-drop-down__component selectOutcome">
@@ -84,10 +86,6 @@
                     </select>
                 </div>
             </div>
-            <!--<a href="#" class="qm-task-item" id="selectOutcome">
-                <i class="qm-task-item__icon icon-outcome" aria-hidden="true"></i>
-                <span class="qm-task-item__text" id="visitAddOutcomesLbl"></span>
-            </a>-->
         </div>
         <!-- Notes -->
         <div class="qm-notes js-notes">
@@ -128,24 +126,28 @@
                 <button class="qm-action-btn" id="recallBtn" onclick="servicePoint.recall();this.blur();">
                     <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="reinsertBtn" onclick="servicePoint.reinsertClicked();this.blur();">
                     <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="transferBtn" onclick="transfer.transferPressed();this.blur();">
                     <i class="qm-action-btn__icon icon-transfer" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="parkBtn" onclick="userPool.parkPressed();this.blur();">
                     <i class="qm-action-btn__icon icon-pause" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
         </div>
@@ -154,12 +156,14 @@
                 <button class="qm-action-btn" id="noShowBtn" onclick="servicePoint.noShow();this.blur();" >
                     <i class="qm-action-btn__icon icon-no-show" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="endVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();">
                     <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
+                    <span class="sr-only"></span>
                 </button>
             </div>
         </div>
