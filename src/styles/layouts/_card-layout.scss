@@ -7,9 +7,7 @@
     padding-bottom: 0;
     overflow-y: auto;
     position: relative;
-    .qm-card {
-        margin-bottom: rem($global-standard-padding + $global-standard-card-shadow-height);
-    }
+    overflow-x: hidden;
     &__shadow {
         background: linear-gradient(to top, $dark-transparent82, $dark-transparent02);
         width: 100%;

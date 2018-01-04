@@ -2,6 +2,7 @@
     @include set-default-width-for-card-layout ();
     .qm-card {
         &__header-section {
+            margin-bottom: 0;
             .qm-card-header {
                 &__headline {
                     color: $dark-transparent82;
@@ -95,7 +96,7 @@
                                 }
                             }
                         }
-                        border-bottom: rem(1.5px) solid $dark-transparent12;
+                        border-bottom: 2px solid $dark-transparent12;
                     }
                 }
             }
@@ -122,53 +123,56 @@
                             }
                         }
                         label {
-                        width: 100%;
-                            
-                        select {
-                            background: $white;
-                            border-radius: 3;
-                            border: 0;
-                            border: 1px solid $dark-transparent12;
                             width: 100%;
-                            -webkit-box-sizing: border-box;
-                            box-sizing: border-box;
-                            -webkit-box-shadow: 0 0 4px 0 $dark-transparent04;
-                            box-shadow: 0 0 4px 0 $dark-transparent04;
-                            border-radius: 0;
-                            -webkit-appearance: inherit;
-                            padding: 4px 30px 4px 8px;
-                            color: $dark-transparent42;
-                            font-weight: 300;
-                            cursor: pointer;
-                            word-wrap: break-word;      /* IE*/
-                            white-space: -moz-pre-wrap; /* Firefox */
-                            white-space: pre-wrap;      /* other browsers */
-                            display:inline-block;
-                            @at-root [dir='rtl'] & {
-                                padding: 4px 8px 4px 30px;
+                            select {
+                                background: $white;
+                                border-radius: 3;
+                                border: 0;
+                                border: 1px solid $dark-transparent12;
+                                width: 100%;
+                                -webkit-box-sizing: border-box;
+                                box-sizing: border-box;
+                                -webkit-box-shadow: 0 0 4px 0 $dark-transparent04;
+                                box-shadow: 0 0 4px 0 $dark-transparent04;
+                                border-radius: 0;
+                                -webkit-appearance: inherit;
+                                padding: 4px 30px 4px 8px;
+                                color: $dark-transparent42;
+                                font-weight: 300;
+                                cursor: pointer;
+                                word-wrap: break-word;
+                                /* IE*/
+                                white-space: -moz-pre-wrap;
+                                /* Firefox */
+                                white-space: pre-wrap;
+                                /* other browsers */
+                                 -ms-word-break: break-all;
+                                display: inline-block;
+                                @at-root [dir='rtl'] & {
+                                    padding: 4px 8px 4px 30px;
+                                }
+                            }
+                            .selectdiv {
+                                position: relative;
+                            }
+                            select::-ms-expand {
+                                display: none;
+                            }
+                            .selectdiv:after {
+                                content: "\e902";
+                                font-family: 'icomoon';
+                                color: $dark-transparent82;
+                                right: rem(8px);
+                                @at-root [dir='rtl'] & {
+                                    left: rem(8px);
+                                    right: auto;
+                                }
+                                top: 5px;
+                                padding: 0 0 2px;
+                                position: absolute;
+                                pointer-events: none;
                             }
                         }
-                        .selectdiv {
-                            position: relative;
-                        }
-                        select::-ms-expand {
-                            display: none;
-                        }
-                        .selectdiv:after {
-                            content: "\e902";
-                            font-family: 'icomoon';
-                            color: $dark-transparent82;
-                            right: rem(8px);
-                            @at-root [dir='rtl'] & {
-                            left: rem(8px);
-                            right: auto;
-                        }
-                            top: 5px;
-                            padding: 0 0 2px;
-                            position: absolute;
-                            pointer-events: none;
-                        }
-                    }
                     }
                     tr {
                         background: $white;

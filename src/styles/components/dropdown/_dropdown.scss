@@ -86,7 +86,7 @@
                 display: block;
                 width: rem(30px);
                 height: 100%;
-                 @at-root [dir='rtl'] & {
+                @at-root [dir='rtl'] & {
                     right: auto;
                     left: rem(3px);
                 }
@@ -218,12 +218,12 @@
             box-shadow: 0 0 4px 0 $dark-transparent04;
         }
         &.selectOutcome {
-        width: calc(100% + 22px) !important;
-        right: 11px;
-        position: relative;
-        @at-root [dir='rtl'] & {
-            right: -11px;
-        }
+            width: calc(100% + 22px) !important;
+            right: 11px;
+            position: relative;
+            @at-root [dir='rtl'] & {
+                right: -11px;
+            }
             .chosen-single {
                 div {
                     display: none;
@@ -233,8 +233,8 @@
                 -moz-box-shadow: none;
                 box-shadow: none;
                 span {
-                        line-height: 15px;
-                        &:before {
+                    line-height: 15px;
+                    &:before {
                         content: "\e928";
                         font-family: 'icomoon';
                         font-size: rem(24px);
@@ -248,9 +248,9 @@
                             margin-right: 0;
                         }
                     }
-                        @at-root [dir='rtl'] & {
-                            display: list-item;
-                        }
+                    @at-root [dir='rtl'] & {
+                        display: list-item;
+                    }
                 }
                 &.chosen-default {
                     span {
