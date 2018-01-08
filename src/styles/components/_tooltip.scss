@@ -1,48 +1,12 @@
 .qm-tooltip {
-    position: relative;
-
-    &:hover,
-    &:focus {
-        .qm-tooltip__text-container {
-            display: block;
-        }
-    }
-
-    &__text-container {
-        position: absolute;
-        display: none;
-        top: calc(100% + 10px);
-        left: 50%;
-        width: 300px;
-        transform: translateX(-50%);
-        background: $tooltip-background-color;
-    }
-
-    &__text {
-        display: block;
-        position: relative;
-        padding: rem($global-standard-padding);
-        color: $tooltip-color;
-
-        &:before {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0; 
-            height: 0; 
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 10px solid $tooltip-background-color;
-        }
-    }
+    
 }
 
 .tooltip,
 .popper {
 
     &.qm-popover {
+
         .tooltip__arrow,
         .tooltip-arrow,
         .popper__arrow,
@@ -94,6 +58,17 @@
             .popper-arrow {
                 top: -20px;
                 left: calc(50% - 24px);
+            }
+        }
+
+        &--context-marketing {
+            border-radius: $standard-border-radius;
+            
+            .tooltip__arrow,
+            .tooltip-arrow,
+            .popper__arrow,
+            .popper-arrow {
+                background: $pale-aquamarine;
             }
         }
     }
@@ -187,10 +162,10 @@
             .tooltip-arrow,
             .popper__arrow,
             .popper-arrow {
-                border-width: 10px 10px 0 10px;
+                border-width: 0 10px 10px 10px;
                 border-left-color: transparent;
                 border-right-color: transparent;
-                border-bottom-color: transparent;
+                border-top-color: transparent;
                 margin-top: 0;
                 margin-bottom: 0;
                 top: -10px;

@@ -114,6 +114,7 @@
         <script type="text/javascript" src="scripts/components/popover/userPoolPopover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/counterPoolPopover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/queuePopover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/contextMarketingPopover/index.js"></script>
         
         <script type="text/javascript" src="scripts/components/tooltip/index.js"></script>
 

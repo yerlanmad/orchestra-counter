@@ -12,11 +12,8 @@
                     </a>
                     <span id="ticketNumber" class="qm-card-header__ticket"></span>
                 </h1>
-                <a href="" class="qm-card-header__context-marketing qm-tooltip" id="verticalMessageRow">
+                <a href="#" class="qm-card-header__context-marketing qm-tooltip" id="verticalMessageRow">
                     <i class="qm-card-header__context-marketing-icon qm-tooltip__icon icon-announce" aria-hidden="true"></i>
-                    <div class="qm-tooltip__text-container">
-                        <span class="qm-tooltip__text">This is a context marketing tooltip</span>
-                    </div>
                 </a>
             </div>
             <div class="qm-services">

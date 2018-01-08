@@ -50,6 +50,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         } else {
             this.instance = new Tooltip(this.target, {
                 container: document.body,
+                boundariesElement: 'viewport',
                 trigger: 'manual',
                 title: ' ',
                 placement: this.isRTL ? 'bottom-end' : 'bottom-start',

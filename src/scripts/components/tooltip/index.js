@@ -1,7 +1,6 @@
 
 // Base Tooltip Class
 window.$Qmatic.components.TooltipController = function () {
-    this.instance = null;
     this.instances = {};
 }
 

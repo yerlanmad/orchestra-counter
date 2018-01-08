@@ -59,6 +59,7 @@ var cardNavigationController = new $Qmatic.components.NavController('#qm-card-na
 var tooltipController = new $Qmatic.components.TooltipController();
 var queueViewController = new $Qmatic.components.QueueNavController();
 var notesController = new $Qmatic.components.NotesController();
+var contextMarketingController = new $Qmatic.components.popover.ContextMarketingPopoverController();
 
 var servicePoint = new function () {
 
@@ -2101,13 +2102,23 @@ var servicePoint = new function () {
 				&& verticalMessage != null
 				&& typeof verticalMessage.workstationMessage !== 'undefined'
 				&& verticalMessage.workstationMessage != null) {
-				$('#verticalMessageRow').show();
-				document.getElementById("verticalMessage").innerHTML = verticalMessage.workstationMessage;
+				var $contextMarketing = $('#verticalMessageRow');
+				$contextMarketing.show();
+				var contextTemplate = document.querySelector('.qm-popover--context-marketing').outerHTML.trim();
+				contextMarketingController.init("contextmarketing", 
+												$contextMarketing, 
+												{
+													template: contextTemplate, 
+													text: verticalMessage.workstationMessage, 
+													placement: "right-start"
+												});
 			} else {
 				$('#verticalMessageRow').hide();
+				contextMarketingController.dispose("contextmarketing");
 			}
 		} else {
 			$('#verticalMessageRow').hide();
+			contextMarketingController.dispose("contextmarketing");
 		}
 	};
 

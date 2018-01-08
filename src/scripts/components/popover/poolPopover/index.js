@@ -34,6 +34,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
         } else {
             this.instance = new Tooltip(this.target, {
                 container: document.body,
+                boundariesElement: 'viewport',
                 trigger: 'manual',
                 title: ' ',
                 placement: this.isRTL ? 'bottom-end' : 'bottom-start',

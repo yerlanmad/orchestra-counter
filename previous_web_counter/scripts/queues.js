@@ -47,9 +47,9 @@ var queues = new function() {
                 ];
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     //nHead.style.borderBottom = "1px solid #c0c0c0";
-                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.name.short');
-                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.waiting.short');
-                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting.time.short');
+                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.name');
+                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.waiting');
+                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
                 };
 				var t= new Date();
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues?call="+t;

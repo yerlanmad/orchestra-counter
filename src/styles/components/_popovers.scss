@@ -96,6 +96,44 @@
         }
     }
 
+    &-context-marketing {
+        max-width: 500px;
+        border-radius: $standard-border-radius;
+        padding: rem($global-standard-padding 48px $global-standard-padding $global-standard-padding);
+        width: 100%;
+        background: $pale-aquamarine;
+
+        @at-root [dir='rtl'] & {
+            padding: rem($global-standard-padding $global-standard-padding $global-standard-padding 48px); 
+        }
+
+        &__text {
+            margin-bottom: 0;
+            color: $white;
+        }
+
+        &__close-btn {
+            position: absolute;
+            top: rem($global-standard-padding + 2);
+            right: rem($global-standard-padding);
+            color: $light-transparent50;
+
+            @at-root [dir='rtl'] & {
+                right: auto;
+                left: rem($global-standard-padding);
+            }
+
+            .qm-action-btn__icon {
+                font-size: rem(18px);
+            }
+
+            &:hover,
+            &:focus {
+                color: $white;
+            }
+        }
+    }
+
     &-overlay {
         display: none;
         position: fixed;
