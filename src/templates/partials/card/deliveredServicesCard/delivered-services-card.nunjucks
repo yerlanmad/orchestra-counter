@@ -29,7 +29,7 @@
     <div class="qm-card__content-section">
          <table id="deliveredServices" class="display">
                         <thead>
-                            <tr>
+                            <tr class="table-header__border">
                                 <th id="deliveredServiceId"></th>
                                 <th id="deliveredServiceEventTime"></th>
                                 <th id="deliveredServiceOrigId"></th>

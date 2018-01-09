@@ -75,6 +75,7 @@ var deliveredServices = new function () {
         if (dsId != -1) {
             resetDsFilterSeleciton();
             deliveredServiceClicked(dsId);
+            this.updateDeliveredServices();
         }
     }
 
@@ -91,7 +92,7 @@ var deliveredServices = new function () {
             if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                 sessvars.state.userState == servicePoint.userState.SERVING) {
             }
-            servicePoint.updateWorkstationStatus();
+            servicePoint.updateWorkstationStatus(false, true);
         }
     };
 
@@ -161,16 +162,19 @@ var deliveredServices = new function () {
                     params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
                     params.deliveredServiceId = aData["deliveredServiceId"];
                     var possibleOutcomes = spService.get("branches/" + params.branchId + "/services/" + params.serviceId + "/deliveredServices/" + params.deliveredServiceId + "/outcomes");
+
                     $.each(possibleOutcomes, function (i, outcome) {
                         html.append($("<option></option>")
                             .prop("value", outcome.code)
                             .text(outcome.name))
                     });
+
                     if (null != aData[outcomeDataIndex]) {
                         html.val(aData[outcomeDataIndex].outcomeCode);
                     } else {
                         html.val("-1");
                     }
+
                     html.change(function () {
                         if ($(this).val() != -1) {
                             var params = servicePoint.createParams();
@@ -180,13 +184,15 @@ var deliveredServices = new function () {
                             params.visitDeliveredServiceId = parseInt(aData["id"]);
                             params.outcomeCode = $(this).val();
                             sessvars.state = servicePoint.getState(spService.putCallback("branches/" + params.branchId + "/visits/" + params.visitId + "/deliveredServices/" + params.visitDeliveredServiceId + "/outcome/" + params.outcomeCode));
-                            servicePoint.updateWorkstationStatus();
+                            servicePoint.updateWorkstationStatus(false, true);
+                            $(this).prev('div').text($(this).find(":selected").text());
                         }
                     });
 
                     $('td:eq(1)', nRow).html(html);
-                    html.wrap("<label></label>").wrap('<div class="selectdiv"><div>')
-                    // html.chosen()
+                    html.wrap("<div class='cross-browser-select'></div>")
+                    html.before($("<div class='native-like-select select-carrot-icon'>" + html.find(":selected").text() + "</div>")
+                    );
                 }
             };
             deliveredServicesTable = $('#deliveredServices').dataTable({
@@ -206,7 +212,7 @@ var deliveredServices = new function () {
                 "aoColumns": columns,
                 "sScrollX": "100%",
                 "sScrollY": "100%",
-                "bAutoWidth" : false, 
+                "bAutoWidth": false,
                 "aaData": (sessvars.state.visit != null &&
                     sessvars.state.visit.currentVisitService != null &&
                     sessvars.state.visit.currentVisitService.visitDeliveredServices !== null ?
@@ -230,9 +236,8 @@ var deliveredServices = new function () {
     this.clearTable = function () {
         util.clearTable(deliveredServicesTable);
     };
-    
+
     this.getDataTable = function () {
         return deliveredServicesTable;
     }
-
 };

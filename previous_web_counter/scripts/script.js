@@ -1226,7 +1226,7 @@ var servicePoint = new function () {
 			spPoolUpdateNeeded = false;
 			userPoolUpdateNeeded = false;
 			queuesUpdateNeeded = false;
-			queueViewController.navigateToOverview();																
+			queueViewController.navigateToOverview();
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
 			customer.updateCustomerModule();
@@ -1406,18 +1406,20 @@ var servicePoint = new function () {
 	 *            only be updated and no timeout will be created
 	 * 
 	 */
-	this.updateWorkstationStatus = function (isRefresh) {
+	this.updateWorkstationStatus = function (isRefresh, blockCardChange) {
 		clearOngoingVisit();
 
-		// Card Navigation - There are types types of cards (CLOSED, INACTIVE and VISIT)
-		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
-			cardNavigationController.push($Qmatic.components.card.closeCard);
-		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
-			cardNavigationController.push($Qmatic.components.card.inactiveCard);
-		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-			&& sessvars.state.userState == servicePoint.userState.SERVING) {
-			cardNavigationController.push($Qmatic.components.card.visitCard);
+		if (!blockCardChange) {
+			// Card Navigation - There are types types of cards (CLOSED, INACTIVE and VISIT)
+			if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
+				cardNavigationController.push($Qmatic.components.card.closeCard);
+			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+				&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
+				cardNavigationController.push($Qmatic.components.card.inactiveCard);
+			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+				&& sessvars.state.userState == servicePoint.userState.SERVING) {
+				cardNavigationController.push($Qmatic.components.card.visitCard);
+			}
 		}
 
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
@@ -1446,7 +1448,7 @@ var servicePoint = new function () {
 			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED) {
 				util.showMessage(jQuery.i18n.prop('error.no.outcome'));
-				
+
 			} else if (sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED) {
 				util
 					.showMessage(jQuery.i18n
@@ -1476,7 +1478,7 @@ var servicePoint = new function () {
 
 			spPoolUpdateNeeded = true;
 			userPoolUpdateNeeded = true;
-			
+
 			$("#waitingTimeCounter").html(
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -
@@ -1484,27 +1486,35 @@ var servicePoint = new function () {
 			// $("#callNextBtn").toggleClass("customButtonDisabled", true);
 			// $("#callNextBtn").toggleClass("customButton", false);
 			var $callNextBtn = $("#callNextBtn");
-			$callNextBtn.prop('disabled', true); 
-			tooltipController.init('callnext', $callNextBtn.closest('.button-tooltip'), { text: jQuery.i18n
-								.prop('error.no.outcome.or.delivered.service') });
+			$callNextBtn.prop('disabled', true);
+			tooltipController.init('callnext', $callNextBtn.closest('.button-tooltip'), {
+				text: jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service')
+			});
 			// $("#walkDirectBtn").toggleClass("customButtonDisabled", true);
 			// $("#walkDirectBtn").toggleClass("customButton", false);
-			var $walkDirectBtn = $("#walkDirectBtn"); 
+			var $walkDirectBtn = $("#walkDirectBtn");
 			$walkDirectBtn.prop('disabled', true);
-			tooltipController.init('walkin', $walkDirectBtn.closest('.button-tooltip'), { text: jQuery.i18n
-								.prop('error.no.outcome.or.delivered.service') });
+			tooltipController.init('walkin', $walkDirectBtn.closest('.button-tooltip'), {
+				text: jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service')
+			});
 			// $("#endVisitBtn").toggleClass("customButtonDisabled", true);
 			// $("#endVisitBtn").toggleClass("customButton", false);
 			var $endVisitBtn = $("#endVisitBtn");
 			$endVisitBtn.prop('disabled', true);
-			tooltipController.init('endvisit', $endVisitBtn.closest('.button-tooltip'), { text: jQuery.i18n
-								.prop('error.no.outcome.or.delivered.service') });
+			tooltipController.init('endvisit', $endVisitBtn.closest('.button-tooltip'), {
+				text: jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service')
+			});
 			// $("#closeBtn").toggleClass("customButtonDisabled", true);
 			// $("#closeBtn").toggleClass("customButton", false);
-			var $closeBtn = $("#closeBtn"); 
+			var $closeBtn = $("#closeBtn");
 			$closeBtn.prop('disabled', true);
-			tooltipController.init('closecounter', $closeBtn.closest('.button-tooltip'), { text: jQuery.i18n
-								.prop('error.no.outcome.or.delivered.service') });
+			tooltipController.init('closecounter', $closeBtn.closest('.button-tooltip'), {
+				text: jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service')
+			});
 			// $("#transferBtn").toggleClass("customButtonSmall", true);
 			// $("#transferBtn").toggleClass("customButtonSmallDisabled", false);
 			var $transferBtn = $("#transferBtn");
@@ -1512,7 +1522,7 @@ var servicePoint = new function () {
 
 			// $("#parkBtn").toggleClass("customButtonSmall", true);
 			// $("#parkBtn").toggleClass("customButtonSmallDisabled", false);
-			var $parkBtn = $("#parkBtn"); 
+			var $parkBtn = $("#parkBtn");
 			$parkBtn.prop('disabled', false);
 
 			// $("#notesBtn").toggleClass("customButtonSmall", true);
@@ -1574,14 +1584,14 @@ var servicePoint = new function () {
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
-                $("#deliveredServicesModule").show()
+				$("#deliveredServicesModule").show()
 			} else {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
 					false);
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
-                $("#deliveredServicesModule").hide()
+				$("#deliveredServicesModule").hide()
 			}
 
 			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
@@ -1715,14 +1725,14 @@ var servicePoint = new function () {
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
-                $("#deliveredServicesModule").show()
+				$("#deliveredServicesModule").show()
 			} else {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
 					false);
 				$("#addDeliveredServiceLink").toggleClass(
 					"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
-                $("#deliveredServicesModule").hide()
+				$("#deliveredServicesModule").hide()
 			}
 
 			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
@@ -1800,23 +1810,23 @@ var servicePoint = new function () {
 		}
 		resetLogoffCounter();
 		updateNextAndPreviousServices();
-        updateSelectedDs("#visitAddDsLbl");
+		updateSelectedDs("#visitAddDsLbl");
 	};
 
-    var updateSelectedDs = function (idSelector) {
-        if (deliveredServices.getDataTable() && deliveredServices.getDataTable().fnGetData().length > 0){
-            var dsNameMappedArray =  util.mapDsNameAndOutcomes(deliveredServices.getDataTable().fnGetData().slice(0))
-            var selectedDsArray =  util.getLimitedArrayWithRemainingCount(dsNameMappedArray, 3) 
-            if (selectedDsArray.length > 3) {
-                selectedDsArray[selectedDsArray.length - 1] = ' + ' + selectedDsArray[selectedDsArray.length - 1] + ' ' + jQuery.i18n.prop('info.card.visitCard.others');
-                $(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedDsArray.slice(0, -1).join(', ') + selectedDsArray.slice(-1)));
-            } else {
-                $(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedDsArray.slice(0).join(', ')));
-            }
-        } else {
-            $(idSelector).text(jQuery.i18n.prop('info.card.visitCard.addDs'));
-        }
-    }
+	var updateSelectedDs = function (idSelector) {
+		if (deliveredServices.getDataTable() && deliveredServices.getDataTable().fnGetData().length > 0) {
+			var dsNameMappedArray = util.mapDsNameAndOutcomes(deliveredServices.getDataTable().fnGetData().slice(0))
+			var selectedDsArray = util.getLimitedArrayWithRemainingCount(dsNameMappedArray, 3)
+			if (selectedDsArray.length > 3) {
+				selectedDsArray[selectedDsArray.length - 1] = ' + ' + selectedDsArray[selectedDsArray.length - 1] + ' ' + jQuery.i18n.prop('info.card.visitCard.others');
+				$(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedDsArray.slice(0, -1).join(', ') + selectedDsArray.slice(-1)));
+			} else {
+				$(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedDsArray.slice(0).join(', ')));
+			}
+		} else {
+			$(idSelector).text(jQuery.i18n.prop('info.card.visitCard.addDs'));
+		}
+	}
 
 	var updateNextAndPreviousServices = function () {
 		if (sessvars.state.visit) {
@@ -1969,7 +1979,7 @@ var servicePoint = new function () {
 		$("#addDeliveredServiceLink").toggleClass("customButtonSmallDisabled",
 			true);
 		$("#addDeliveredServiceLink").prop('disabled', true);
-        $("#deliveredServicesModule").hide()
+		$("#deliveredServicesModule").hide()
 
 		$("#addCustomMarkLink").toggleClass("customButtonSmall", false);
 		$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled", true);
