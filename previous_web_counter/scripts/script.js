@@ -1225,8 +1225,9 @@ var servicePoint = new function () {
 			servicePoint.endUserServicePointSession();
 			spPoolUpdateNeeded = false;
 			userPoolUpdateNeeded = false;
-			queuesUpdateNeeded = false;
-			queueViewController.navigateToOverview();
+			//queuesUpdateNeeded = false;
+			queuesUpdateNeeded = true;
+			queueViewController.navigateToOverview();																
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
 			customer.updateCustomerModule();
@@ -1476,9 +1477,9 @@ var servicePoint = new function () {
 				}
 			}
 
-			spPoolUpdateNeeded = true;
-			userPoolUpdateNeeded = true;
-
+			// spPoolUpdateNeeded = true;
+			// userPoolUpdateNeeded = true;
+			
 			$("#waitingTimeCounter").html(
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -
@@ -1796,14 +1797,14 @@ var servicePoint = new function () {
 		}
 
 		if (spPoolUpdateNeeded) {
-			servicePointPool.updateServicePointPool(); // Todo: remove me
+			//servicePointPool.updateServicePointPool(); // Todo: remove me
 			servicePointPool.renderCounterPool();
 		} else {
 			spPoolUpdateNeeded = true;
 		}
 
 		if (userPoolUpdateNeeded) {
-			userPool.updateUserPool(); // TODO: remove me
+			//userPool.updateUserPool(); // TODO: remove me
 			userPool.renderUserPool();
 		} else {
 			userPoolUpdateNeeded = true;

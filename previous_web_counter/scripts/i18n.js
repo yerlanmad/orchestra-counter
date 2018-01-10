@@ -312,7 +312,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         //buttons
         i18nSafe("editCustomerWindowLabel", "customer.save");
         i18nSafe("cancelEditCustomerWindowLabel", "customer.cancel");
-
+        
         //delete customer confirmation window
         i18nSafeAppend("deleteCustomerConfirmHeader", 'customer.delete.confirm');
         i18nSafe("confirmDeleteCustomerBtn", "customer.delete");
@@ -371,7 +371,6 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         
         i18nSafeSelectorAppend('#allQueuesTab .qm-tabs__tab-text', 'button.all.queues');
         i18nSafeSelectorAppend('#myQueuesTab .qm-tabs__tab-text', 'button.my.queues');
-        
 
         i18nSafeSelectorBtnAppend('.js-popover-call > span', 'action.pool.call');
         i18nSafeSelectorBtnAppend('.js-popover-transfer > span', 'action.pool.transfer');
@@ -382,6 +381,25 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-popover-transferToQueue > span', 'action.transfer.to.queue');
         i18nSafeSelectorBtnAppend('.js-popover-transferToUserPool > span', 'action.transfer.to.user');
         i18nSafeSelectorBtnAppend('.js-popover-transferToCounterPool > span', 'action.transfer.to.counter');
+
+        // Card transfer
+        i18nSafe("transferVisitLabel", "action.title.transfer")
+        i18nSafe("transferVisitToQueueLabel", "info.card.transferQueueCard.label")
+        i18nSafe("transferVisitToUserPoolLabel", "info.card.transferUserPoolCard.label")
+        i18nSafe("transferVisitToCounterPoolLabel", "info.card.transferCounterPoolCard.label")
+        i18nSafeSelectorAppend('#transferOptionsCard .qm-card-description', 'info.card.transferOptionsCard.description');
+        i18nSafeSelectorAppend('#transferQueueCard .qm-card-description', 'info.card.transferQueueCard.description');
+        i18nSafeSelectorAppend('#transferUserPoolCard .qm-card-description', 'info.card.transferUserPoolCard.description');
+        i18nSafeSelectorAppend('#transferCounterPoolCard .qm-card-description', 'info.card.transferCounterPoolCard.description');
+        i18nPlaceholder($("#transferToQueues_filter input"), "info.placeholder.transfer.search");
+        
+        i18nSafeSelectorBtnAppend('.js-back-btn > span', 'application.sr.back');
+        i18nSafeSelectorBtnAppend('.js-cancel-btn > span', 'button.cancel');
+        
+        i18nSafeSelectorBtnAppend('.js-transferToQueue > span', 'action.transfer.to.queue');
+        i18nSafeSelectorBtnAppend('.js-transferToUserPool > span', 'action.transfer.to.user');
+        i18nSafeSelectorBtnAppend('.js-transferToCounterPool > span', 'action.transfer.to.counter');
+
 
         // Notes
         i18nSafeSelectorBtnAppend('.js-notes-save-btn > span', 'button.save.notes');

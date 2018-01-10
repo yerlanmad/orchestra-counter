@@ -38,6 +38,7 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
 
         this._hideView(lastView);
         this._showView(nextView);
+        this.instance.popperInstance.update();
     },
     _showView: function (view) {
         this.instance._tooltipNode.classList.add('popover-show--' + view);

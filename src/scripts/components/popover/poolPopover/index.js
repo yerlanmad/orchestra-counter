@@ -33,7 +33,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
             this._toggleInstance();
         } else {
             this.instance = new Tooltip(this.target, {
-                container: document.body,
+                container: document.getElementById('renderedPopovers'),
                 boundariesElement: 'viewport',
                 trigger: 'manual',
                 title: ' ',

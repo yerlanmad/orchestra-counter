@@ -173,4 +173,14 @@
             }
         }
     }
+
+    &--no-header {
+        .qm-table__header {
+            display: none;
+        }
+    }
+}
+
+.qm-table-filter {
+    margin-bottom: rem($global-standard-margin);
 }

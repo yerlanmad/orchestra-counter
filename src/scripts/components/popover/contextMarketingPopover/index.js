@@ -19,6 +19,9 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
         referenceElement.on('click', this.toggle.bind(this, key));
     },
     _create: function (key, refElement, config) {
+        if(!_.isEmpty(config.placement) && config.placement === "right" && this.isRTL) {
+            config.placement = "left";
+        }
         var instance = new Tooltip(refElement, {
             container: document.body,
             trigger: 'manual',
@@ -36,7 +39,6 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
     },
     _attachTemplateEvents: function (key) {
         if(this._hasInstance(key)) {
-            console.log('this instance: ', this.instances[key]);
             var closeBtn = this.instances[key]._tooltipNode.querySelector('.js-popover-close');
             closeBtn.addEventListener('click', this.close.bind(this, key));
         }
@@ -81,7 +83,6 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
     toggle: function (key) {
         if(this._hasInstance(key)) {
             this.instances[key].toggle();
-            console.log('toggled');
         }
     },
     dispose: function (key) {
@@ -91,58 +92,3 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
         }
     }
 };
-
-
-
-
-//     init: function () {
-//         this._attachOverlayEvent();
-//         this._attachTargetEventListeners();
-//     },
-//     _attachTargetEventListeners: function () {
-//         this.target.addEventListener('click', this._toggleAndAttachPopoverTemplateEvents.bind(this));
-//     },
-//     _toggleAndAttachPopoverTemplateEvents: function (e) {
-//         if(this.instance && this.instance._isOpen) {
-//             this._toggleInstance();
-//         } else {
-            
-    
-
-//             var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true; 
-            
-//             this._toggleInstance();
-//             this._navigateTo(this.views.ACTION_BAR);
-    
-//             if(shouldAttachTemplateEvents) {
-//                 this._attachTemplateEvents();
-//             }
-//         }
-//     },
-//     _attachOverlayEvent: function () {
-//         this.popoverOverlay.addEventListener('click', this.disposeInstance.bind(this));
-//     },
-//     _attachTemplateEvents: function () {
-        
-//             callBtn     = this.instance._tooltipNode.querySelector('.js-popover-call'),
-//             backBtns    = this.instance._tooltipNode.querySelectorAll('.js-popover-back');
-
-//         for(var i = 0; i < closeBtns.length; i ++) {
-//             closeBtns[i].addEventListener('click', this._toggleInstance.bind(this));
-//         }
-
-//         for(var j = 0; j < backBtns.length; j ++) {
-//             backBtns[j].addEventListener('click', this._navigateBack.bind(this));
-//         }
-//         if(this.disableCall) {
-//             callBtn.disabled = true;
-//         } else {
-//             callBtn.addEventListener('click', this._call.bind(this));
-//         }
-//     },
-//     disposeInstance: function () {
-//         this.navigationStack = [];
-//         this.instance && this.instance.dispose();
-//         this.popoverOverlay.style.display = "none";
-//     }
-// });

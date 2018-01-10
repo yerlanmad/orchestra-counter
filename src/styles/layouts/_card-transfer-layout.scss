@@ -1,0 +1,39 @@
+
+// #transferOptionsCard.qm-card-fill {
+//     .qm-card--transfer {
+//         justify-content: initial;
+
+//         .qm-card__content-section {
+//             flex: 1 1 100%;
+//         }
+
+//         .qm-card__footer-section {
+//             justify-self: flex-end;
+//         }
+//     }
+// }
+
+.qm-card {
+    &__content-narrow {
+        max-width: rem(365px);
+        width: 100%;
+        margin: 0 auto 200px;
+    }
+    &__content-section {
+        .dataTables_filter {
+            display: none;
+        }
+        .dataTables_info {
+            display: none;
+        }
+    }
+}
+
+#transferTicketToUserPoolTable,
+#transferTicketToCounterPoolTable {
+    .qm-table__body {
+        td {
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,51 @@
+{% extends "partials/card/scroll-card.nunjucks" %}
+
+{% block id %}id="transferOptionsCard"{% endblock %}
+{% block cardModifier %}qm-card--transfer qm-card--more-than-one{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-nav">
+            <div class="qm-card-nav__left">
+                <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__back-btn js-back-btn" onclick="cardNavigationController.pop();this.blur();">
+                    <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                    <span class="sr-only"></span>
+                </button>
+            </div>
+            <div class="qm-card-nav__middle">
+                <h2 id="transferVisitLabel" class="qm-card-nav__title"></h2>
+            </div>
+        </div>
+        <span class="qm-card-description"></span>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+        <div class="qm-card__content-narrow">
+            <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-transferToQueue" onclick="transfer.navigateToQueueView();this.blur();">
+                <i class="qm-btn__icon icon-queue" aria-hidden="true"></i>
+                <span class="qm-btn__text"></span>
+            </button>
+            <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-transferToUserPool" onclick="transfer.navigateToUserPoolView();this.blur();">
+                <i class="qm-btn__icon icon-customer-solid" aria-hidden="true"></i>
+                <span class="qm-btn__text"></span>
+            </button>
+            <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-transferToCounterPool" onclick="transfer.navigateToCounterPoolView();this.blur();">
+                <i class="qm-btn__icon icon-screen" aria-hidden="true"></i>
+                <span class="qm-btn__text"></span>
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="qm-card__footer-section qm-card__footer-section--space-between">
+        <div class="qm-card-action-layout">
+            <button class="qm-action-btn js-cancel-btn" onclick="cardNavigationController.pop();this.blur();">
+                <i class="qm-action-btn__icon icon-close-circle" aria-hidden="true"></i>
+                <span class="qm-action-btn__text"></span>
+            </button>
+        </div>
+    </div>
+{% endblock %}

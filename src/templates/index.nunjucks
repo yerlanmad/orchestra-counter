@@ -30,6 +30,11 @@
                             {% include "partials/card/walkInCard/walk-in-card.nunjucks" %}
                             {% include "partials/card/inactiveCard/inactive-card.nunjucks" %}
                             {% include "partials/card/deliveredServicesCard/delivered-services-card.nunjucks" %}
+                            {% include "partials/card/transferCard/views/transfer-options.nunjucks" %}
+                            {% include "partials/card/transferCard/views/transfer-queue.nunjucks" %}
+                            {% include "partials/card/transferCard/views/transfer-user-pool.nunjucks" %}
+                            {% include "partials/card/transferCard/views/transfer-counter-pool.nunjucks" %}
+
                             {#{% include "partials/mark-card.nunjucks" %} #}
                         </div>
                     </div>
@@ -63,6 +68,7 @@
     <div class="qm-popovers qm-hide" aria-hidden="true">
         {% include "partials/popovers/popover-root-templates.nunjucks" %}
     </div>
+    <div id="renderedPopovers" class="qm-rendered-popovers"></div>
     {% include "partials/previous_counter.nunjucks" %}
 
 

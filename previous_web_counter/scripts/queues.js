@@ -13,22 +13,17 @@ var queues = new function() {
         if(!servicePoint.getWorkstationOffline() && servicePoint.hasValidSettings()) {
 
             if(typeof queuesTable !== 'undefined' && typeof myQueuesTable !== 'undefined') {
-                
                 // All Queues
                 queuesTable.fnClearTable();
-                var queuesData = spService.get("branches/" + sessvars.branchId + "/queues");
+                var queuesData = spService.get("branches/" + sessvars.branchId + "/queues") 
                 queuesTable.fnAddData(queuesData);
                 allQueuesInitFn(queuesData);
-                queuesTable.fnSort(SORTING);
-                queuesTable.fnAdjustColumnSizing();
 
                 // My Queues
                 myQueuesTable.fnClearTable();
                 var myQueuesData = myQueuesFilterFn(queuesData);
                 myQueuesTable.fnAddData(myQueuesData);
                 myQueuesInitFn(myQueuesData);
-                myQueuesTable.fnSort(SORTING);
-                myQueuesTable.fnAdjustColumnSizing();
             } else {
                 var columns = [
                     /* Queue name */        {"sClass": "qm-table__first-column",
@@ -269,7 +264,7 @@ var queues = new function() {
 				$('tbody td span a.transferTicket', $('#tickets')).live('click', function() {
 					var nTr = $(this).closest("tr").get(0);
 					var aData = ticketsTable.fnGetData(nTr);
-					transfer.transferTicketToQueueClicked(aData);
+					//transfer.transferTicketToQueueClicked(aData);
 					//util.hideModal('ticketsDialogue');
 					return false;
 				});
@@ -321,8 +316,6 @@ var queues = new function() {
             params.visitId = visitId;
             spService.del("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId);
             queues.updateQueues(false);
-            console.log('params: ', params);
-            
             util.showMessage(translate.msg("info.successful.delete", [ticketId]), false);
         }
     };
