@@ -7,11 +7,35 @@ var customMarks = new function () {
 	var selectCustomMarkTable;
 	var customMarksParams;
 	var multiMarkCounter;
+	var dropdownFilter = null;
+
+	function initFilter() {
+		if (!dropdownFilter)
+			dropdownFilter = new window.$Qmatic.components.dropdown.AddMarksDropdownComponent('#marksFilter', {
+				single_disable: false,
+				allow_single_deselect: false,
+				placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.selectMark')
+			}).get$Elem();
+	}
+
+	function clearFilter() {
+		util.clearSelect(dropdownFilter);
+		dropdownFilter.trigger("chosen:updated");
+	}
+
+	function resetFilterSeleciton() {
+		dropdownFilter.val('').trigger('chosen:updated');
+	}
 
 	this.addCustomMarkPressed = function () {
+		initFilter()
+		clearFilter()
+		customMarksTable.fnAdjustColumnSizing();
+
 		if (servicePoint.hasValidSettings()
 			&& sessvars.state.userState == servicePoint.userState.SERVING) {
-			util.showModal("addCustomMarks");
+			//util.showModal("addCustomMarks");
+			cardNavigationController.push($Qmatic.components.card.marksCard)
 			if (typeof selectCustomMarkTable != 'undefined') {
 
 			} else {
@@ -25,58 +49,36 @@ var customMarks = new function () {
 						markTypeId = markTypesArray[i].id;
 					}
 				}
-				// ----------
-				var columns = [
-				/* D. ser. name. */{
-						"mDataProp": "name",
-						"sClass": "firstColumn"
-					},
-				/* D. ser. id */{
-						"bSearchable": false,
-						"bVisible": false,
-						"mDataProp": "id"
-					}
 
-				];
 				// marks of type according to setting in settings.js
 				var t = new Date();
-				var url = "/rest/servicepoint/branches/" + sessvars.branchId
+				var url = "branches/" + sessvars.branchId
 					+ "/markTypes/" + markTypeId + "/marks?call=" + t;
-				var headerCallback = function (nHead, aasData, iStart, iEnd,
-					aiDisplay) {
-					nHead.style.borderBottom = "1px solid #c0c0c0";
-					nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n
-						.prop('info.delivered.service.name');
-				};
-				var rowCallback = function (nRow, aData, iDisplayIndex) {
-					/* Set onclick action */
-					nRow.onclick = customMarkClicked;
-					nRow.style.cursor = "pointer";
-					return nRow;
-				};
-				selectCustomMarkTable = util.buildTableJson({
-					"tableId": "selectCustomMarkTable",
-					"url": url,
-					"rowCallback": rowCallback,
-					"columns": columns,
-					"filter": true,
-					"headerCallback": headerCallback,
-					"scrollYHeight": "300px",
-					"emptyTableLabel": "info.no.custom.marks.defined"
-				});
+				var marksResponse = spService.get(url)
+
+				var marks = util.sortArrayCaseInsensitive(marksResponse, "name")
+
+				util.populateSelect(marks, dropdownFilter);
+				dropdownFilter.trigger("chosen:updated");
 			}
 		}
 	};
 
-	var customMarkClicked = function () {
+	this.showAddedMarksTable = function () {
+		customMarksTable.show();
+	}
+
+	this.hideAddedMarksTable = function () {
+		customMarksTable.hide();
+	}
+
+	this.customMarkClicked = function (id, numberOfMarks) {
 		if (servicePoint.hasValidSettings()) {
 			customMarksParams = servicePoint.createParams();
 			customMarksParams.visitId = sessvars.state.visit.id;
 			customMarksParams.servicePointId = sessvars.state.servicePointId;
-			customMarksParams.markId = selectCustomMarkTable.fnGetData(this).id;
-			var t = $('#noOfMarks').val();
-			multiMarkCounter = parseInt(t);
-			$('#noOfMarks').val('1');
+			customMarksParams.markId = id;
+			multiMarkCounter = parseInt(numberOfMarks);
 			if (multiMarks == true && multiMarkCounter > 1) {
 				customMarks.addMultiMarks();
 			} else {
@@ -86,7 +88,8 @@ var customMarks = new function () {
 					+ customMarksParams.servicePointId + "/visits/"
 					+ customMarksParams.visitId + "/marks/"
 					+ customMarksParams.markId));
-				util.hideModal("addCustomMarks");
+				// util.hideModal("addCustomMarks");
+				// cardNavigationController.pop();
 				customMarks.getUserStateWorkaround();
 			}
 		}
@@ -105,7 +108,8 @@ var customMarks = new function () {
 				+ customMarksParams.servicePointId + "/visits/"
 				+ customMarksParams.visitId + "/marks/"
 				+ customMarksParams.markId));
-			util.hideModal("addCustomMarks");
+			// util.hideModal("addCustomMarks");
+			// cardNavigationController.pop();
 			customMarks.getUserStateWorkaround();
 		}
 
@@ -138,7 +142,7 @@ var customMarks = new function () {
 		journeyUpdateNeeded = false;
 		trtUpdateNeeded = false;
 		sessvars.statusUpdated = new Date();
-		servicePoint.updateWorkstationStatus(false);
+		servicePoint.updateWorkstationStatus(false, true);
 	};
 
 	this.updateCustomMarks = function () {
@@ -156,7 +160,8 @@ var customMarks = new function () {
 			/* D.serv. name */{
 					"sClass": "firstColumn",
 					"mDataProp": "markName",
-					"sDefaultContent": null
+					"sDefaultContent": null,
+					"sWidth": "70%"
 				},
 			/* D.serv. visit mark id */{
 					"bSearchable": false,
@@ -173,35 +178,52 @@ var customMarks = new function () {
 			/* Delivered time */{
 					"sClass": "middleColumn",
 					"mDataProp": "eventTime",
-					"sDefaultContent": null
+					"sDefaultContent": null,
+					"sWidth": "30%",
+					"createdCell": function (td, cellData, rowData, row, col) {
+
+						$(td).append(
+							"<span class=\"removeMarkBtn\" " + "title=\""
+							+ jQuery.i18n.prop("action.remove.mark.click")
+							+ "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
+                             + '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
+                             + '<span class="sr-only"></span>'
+                             + '</button>' + "</span>");
+
+						$(td).find(".removeMarkBtn").click(function () {
+							customMarkRemove(row);
+						});
+					}
 				}, {
 					"sClass": "lastColumn",
 					"bSearchable": false,
 					"mDataProp": "id",
+					"bVisible": false,
 					"sDefaultContent": ""
 				}];
 			var headerCallback = function (nHead, aasData, iStart, iEnd,
 				aiDisplay) {
 				if (nHead.getElementsByTagName('th')[0].innerHTML.length == 0) {
-					nHead.style.borderBottom = "1px solid #c0c0c0";
 					nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n
 						.prop('info.custom.mark.name');
 					nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n
 						.prop('info.custom.mark.time');
-					nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n
-						.prop('info.custom.mark.remove');
+					// nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n
+					// .prop('info.custom.mark.remove');
 				}
 			};
 			var rowCallback = function (nRow, aData, iDisplayIndex) {
-				var visitMarkId = $('td:eq(2)', nRow).text();
-				$('td:eq(2)', nRow).empty().append(
-					"<span class=\"removeMark\" " + "title=\""
-					+ jQuery.i18n.prop("action.remove.mark.click")
-					+ "\"> </span>");
+				// var visitMarkId = $('td:eq(1)', nRow).text();
+				// $('td:eq(1)', nRow).html(
+				// 		"<span class=\"removeMark\" " + "title=\""
+				// 				+ jQuery.i18n.prop("action.remove.mark.click")
+				// 				+ "\"> </span>");
 
-				$('td:eq(2) > span.removeMark', nRow).click(function () {
-					customMarkRemove(nRow);
-				});
+				// $('td:eq(1) > span.removeMark', nRow).click(function() {
+				// 	customMarkRemove(nRow);
+				// });
+
+				// $(nRow).find("td").append("HI")
 
 				return nRow;
 			};
@@ -225,15 +247,16 @@ var customMarks = new function () {
 					"bProcessing": true,
 					"bPaginate": false,
 					"aoColumns": columns,
-					"sScrollX": "95%",
-					"sScrollY": "158px",
+					"sScrollX": "100%",
+					"sScrollY": "100%",
+					"bAutoWidth": false,
 					"aaData": (sessvars.state.visit != null
 						&& sessvars.state.visit.currentVisitService != null
 						&& sessvars.state.visit.visitMarks !== null ? sessvars.state.visit.visitMarks
 						: null)
 				});
 			$(window).bind('resize', function () {
-				customMarksTable.fnAdjustColumnSizing();
+				//customMarksTable.fnAdjustColumnSizing();
 			});
 		}
 		$(document).ready(function () {
@@ -253,5 +276,9 @@ var customMarks = new function () {
 	this.clearTable = function () {
 		util.clearTable(customMarksTable);
 	};
+
+	this.getDataTable = function () {
+        return customMarksTable;
+    }
 
 };

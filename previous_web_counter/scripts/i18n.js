@@ -149,7 +149,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("previousServiceLbl", 'info.card.visitCard.previousServiceLbl');
         i18nSafe("visitWaitingTime", 'info.waiting.time');
         i18nSafe("visitTransactionTime", 'info.transaction.time');
-        i18nSafe("visitAddMarksLbl", 'info.card.visitCard.addMarks');
+        i18nSafe("visitCardAddMarksLbl", 'info.card.visitCard.addMarks');
+        i18nSafe("visitSelectMarksLbl", 'info.card.visitCard.selectMark');
         i18nQmBtn("recallBtn", 'action.recall');
         i18nQmBtn("reinsertBtn", 'action.reinsert');
         i18nQmBtn("transferBtn", 'action.transfer');
@@ -157,7 +158,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("noShowBtn", 'action.noshow');
         i18nQmBtn("endVisitBtn", 'action.finish.visit');
         
-        
+        // Add Marks Card
+        i18nQmBtn("addMarksToVisitBtn", 'button.add.markToVisit');
         
         
          

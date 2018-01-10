@@ -164,7 +164,7 @@ var util = new function () {
             table = $('#' + config.tableId).dataTable(tableConfig);
         }
         if (config.filter && config.customFilter) {
-            $("#"+config.tableId+"_filter input").on('keyup change', function(){
+            $("#" + config.tableId + "_filter input").on('keyup change', function () {
                 table.api().search($(this).val()).draw();
             })
         }
@@ -587,29 +587,56 @@ var util = new function () {
     }
 
     this.getLimitedArrayWithRemainingCount = function (array, maxCount) {
-            var maxShowDsItemCount = maxCount; 
-            var filteredDsList = array.slice(0).filter(function (val, i) {
-               if (i > maxShowDsItemCount - 1){
-                    return false 
-               } else {
-                    return true
-               }
-            });
+        var maxShowDsItemCount = maxCount;
+        var filteredDsList = array.slice(0).filter(function (val, i) {
+            if (i > maxShowDsItemCount - 1) {
+                return false
+            } else {
+                return true
+            }
+        });
 
-            var diffCount = array.length - maxShowDsItemCount;
-            if (diffCount > 0)
-            filteredDsList.push(diffCount); 
-            return filteredDsList;
+        var diffCount = array.length - maxShowDsItemCount;
+        if (diffCount > 0)
+            filteredDsList.push(diffCount);
+        return filteredDsList;
     };
 
     this.mapDsNameAndOutcomes = function (array) {
-        return $.map(array.slice(0), function ( val, i) {
-            if ( val['outcomeExists'] && val['outcomeExists'] == true ) {
-               return val['deliveredServiceName'] + ' (' + ( val['visitOutcome'] != null ? val['visitOutcome']['outcomeName'] : '?' ) + ')';
+        return $.map(array.slice(0), function (val, i) {
+            if (val['outcomeExists'] && val['outcomeExists'] == true) {
+                return val['deliveredServiceName'] + ' (' + (val['visitOutcome'] != null ? val['visitOutcome']['outcomeName'] : '?') + ')';
             } else {
-               return val['deliveredServiceName'] 
+                return val['deliveredServiceName']
             }
         });
+    };
+
+    this.mapMarksAndAmount = function (array) {
+
+        var mapOfMarkAndCount = {};
+
+        array.slice(0).forEach(function (val, i) {
+            if (mapOfMarkAndCount[val["markName"]] == undefined) {
+                mapOfMarkAndCount[val["markName"]] = 1;
+            } else {
+                mapOfMarkAndCount[val["markName"]] += 1;;
+            }
+        });
+
+        var arrayOfMappedMarksAndCount = [];
+
+        for (var key in mapOfMarkAndCount) {
+            if (mapOfMarkAndCount.hasOwnProperty(key)) {
+                if (mapOfMarkAndCount[key] > 1) {
+                    arrayOfMappedMarksAndCount.push(key + "(" + mapOfMarkAndCount[key] + ")")
+                } else {
+                    arrayOfMappedMarksAndCount.push(key)
+                }
+            }
+        }
+
+        return arrayOfMappedMarksAndCount;
     };
 
 };

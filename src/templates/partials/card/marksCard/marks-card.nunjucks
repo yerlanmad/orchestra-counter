@@ -1,0 +1,76 @@
+{% extends "partials/card/fill-parent-card.nunjucks" %}
+
+{% block id %}id="marksCard"{% endblock %}
+{% block cardModifier %}qm-card--more-than-one qm-card--justify-top{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-header">
+            <div class="qm-card-header__headline">
+                <span class="qm-card-header__headline__back-icon" onclick="cardNavigationController.pop();this.blur();">
+                    <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                    <span class="sr-only"></span>
+                </span><span id="visitCardAddMarksLbl"></span>
+            </div>
+            <div class="qm-card-header__sub-heading"> 
+                <div class="qm-drop-down">
+                        <div class="qm-drop-down__component qm-drop-down__add-marks">
+                            <div class="main">
+                                
+                                <div class="main__top">
+                                
+                                    <span class="selected-text">
+                                    
+                                    </span>
+                                
+                                    <span class="cross-icon">
+                                        <button class="qm-action-btn qm-action-btn--only-icon">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only">Clear Field</span>
+                                        </button>
+                                    </span>
+                                
+                                </div>
+
+                                <div class="main__bottom">
+                                    <div class="main__bottom-inner-container">
+                                        <div class="main__bottom-inner-container__input">
+                                            <label for="noMarkCount" class="display-text" id="noOfMarksLabel">
+                                            
+                                            </label>
+                                            <input id="noMarkCount" class="count-input" type="number" min="0"/>
+                                        </div>
+
+                                        <div class="main__bottom-inner-container__btn">
+                                            {{button.render(id="addMarksToVisitBtn", type="qm-btn--secondary")}}
+                                        </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <select id="marksFilter">
+                                <option value="-1"></option>
+                            </select>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+         <table id="customMarks" class="display">
+                        <thead>
+                           <tr class="table-header__border">
+                                <th id="customMarkId"></th>
+                                <th id="customMarkEventTime"></th>
+                                <th id="customMarkOrigId"></th>
+                                <th id="customMarkName"></th>
+								<th id="removeCustomMark"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+    </div>    
+{% endblock %}

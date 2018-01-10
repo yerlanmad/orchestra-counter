@@ -3,24 +3,24 @@ var deliveredServices = new function () {
     var deliveredServicesTable;
     var selectDeliveredServiceTable;
     var SORTING = [[4, 'desc'], [1, 'desc']];
-    var dsFilter = null;
+    var dropdownFilter = null;
 
-    function initDsFilter() {
-        dsFilter = $("#deliveredServicesFilter");
+    function initFilter() {
+        dropdownFilter = $("#deliveredServicesFilter");
     }
 
-    function clearDsFilter() {
-        util.clearSelect(dsFilter);
-        dsFilter.trigger("chosen:updated");
+    function clearFilter() {
+        util.clearSelect(dropdownFilter);
+        dropdownFilter.trigger("chosen:updated");
     }
 
-    function resetDsFilterSeleciton() {
-        dsFilter.val('').trigger('chosen:updated');
+    function resetFilterSeleciton() {
+        dropdownFilter.val('').trigger('chosen:updated');
     }
 
     this.addDeliveredServicePressed = function () {
-        initDsFilter()
-        clearDsFilter()
+        initFilter()
+        clearFilter()
         deliveredServicesTable.fnAdjustColumnSizing();
 
         if (servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING &&
@@ -32,48 +32,14 @@ var deliveredServices = new function () {
             var dsResponse = spService.get(url)
             var dsServices = util.sortArrayCaseInsensitive(dsResponse, "name")
 
-            util.populateSelect(dsServices, dsFilter);
-            dsFilter.trigger("chosen:updated");
-
-
-            //             util.showModal("addDeliveredServices");
-            //             if(typeof selectDeliveredServiceTable != 'undefined') {
-            //                 selectDeliveredServiceTable.fnClearTable();
-            //                 var params = servicePoint.createParams();
-            //                 params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
-            //                 var deliverableServices = spService.get("branches/"+params.branchId+"/services/"+params.serviceId+"/deliverableServices");
-            //                 selectDeliveredServiceTable.fnAddData(deliverableServices);
-            //                 selectDeliveredServiceTable.fnAdjustColumnSizing();
-            //             } else {
-            //                 var columns = [
-            // /* D. ser. name.*/  {"mDataProp": "name",
-            //                      "sClass": "firstColumn"},
-            // /* D. ser. id */    {"bSearchable": false,
-            //                      "bVisible": false,
-            //                      "mDataProp": "id"}
-            //                 ];
-            //                 var t = new Date();
-            //                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/deliverableServices?call="+t;
-            //                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-            //                     //nHead.style.borderBottom = "1px solid #c0c0c0";
-            //                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
-            //                 };
-            //                 var rowCallback = function(nRow, aData, iDisplayIndex) {
-            //                     /* Set onclick action */
-            //                     nRow.onclick = deliveredServiceClicked;
-            //                     return nRow;
-            //                 };
-            //                 selectDeliveredServiceTable = util.buildTableJson({"tableId": "selectDeliveredServiceTable", "url": url,
-            //                     "rowCallback": rowCallback, "columns":columns, "filter": true, "headerCallback": headerCallback,
-            //                     "scrollYHeight": "300px", "emptyTableLabel": "info.no.delivered.services.defined"});
-            //             }
-
+            util.populateSelect(dsServices, dropdownFilter);
+            dropdownFilter.trigger("chosen:updated");
         }
     };
 
     this.selectDeliveredService = function (dsId) {
         if (dsId != -1) {
-            resetDsFilterSeleciton();
+            resetFilterSeleciton();
             deliveredServiceClicked(dsId);
             this.updateDeliveredServices();
         }

@@ -4,7 +4,7 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
     // @Override
     this.onInit = function (selector){
         if (selector){
-            window.$Qmatic.components.NavView.prototype.onInit.call(this, selector);
+            window.$Qmatic.components.modal.BaseModalComponent.prototype.onInit.call(this, selector);
             this.hide()
         }
     }   

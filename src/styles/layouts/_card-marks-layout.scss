@@ -1,4 +1,4 @@
-#dsCard {
+#marksCard {
     @include set-default-width-for-card-layout ();
     .qm-card {
         &__header-section {
@@ -72,6 +72,11 @@
                             font-size: rem(12px);
                             line-height: rem(30px);
                             border-bottom: 0;
+                            width: 15px;
+                            @at-root [dir='rtl'] & {
+                                padding: 3px 10px 3px 18px;
+                                text-align: right;
+                            }
                             &.sorting {
                                 background: $white;
                                 position: relative;
@@ -79,10 +84,14 @@
                                     content: "";
                                     font-family: 'icomoon';
                                     color: $dark-transparent82;
-                                    width: 10px;
                                     position: absolute;
                                     right: 0;
+                                    @at-root [dir='rtl'] & {
+                                        left: 0;
+                                        right: auto;
+                                    }
                                 }
+                                
                             }
                             &.sorting_desc {
                                 background: $white;
@@ -91,10 +100,12 @@
                                     content: "\e902";
                                     font-family: 'icomoon';
                                     color: $dark-transparent82;
-                                    ;
-                                    width: 10px;
                                     position: absolute;
                                     right: 0;
+                                    @at-root [dir='rtl'] & {
+                                        left: 0;
+                                        right: auto;
+                                    }
                                 }
                             }
                             &.sorting_asc {
@@ -104,9 +115,12 @@
                                     content: "\e905";
                                     font-family: 'icomoon';
                                     color: $dark-transparent82;
-                                    width: 10px;
                                     position: absolute;
                                     right: 0;
+                                    @at-root [dir='rtl'] & {
+                                        left: 0;
+                                        right: auto;
+                                    }
                                 }
                             }
                         }
@@ -120,7 +134,8 @@
                 font-weight: 300;
                 width: 100% !important;
                 table-layout: fixed;
-                tbody {
+                tbody,
+                thead {
                     td {
                         padding: rem(10px) !important;
                         text-align: left !important;
@@ -129,10 +144,32 @@
                         @at-root [dir='rtl'] & {
                             text-align: right !important;
                         }
-                        &:nth-child(3) {
-                            text-align: right !important;
+                        &:nth-child(2) {
+                            padding-right: 0 !important;
                             @at-root [dir='rtl'] & {
-                                text-align: left !important;
+                                padding-right: auto !important;
+                                padding-left: 0 !important;
+                            }
+                        }
+                        .removeMarkBtn {
+                            display: block;
+                            height: 100%;
+                            cursor: pointer;
+                            margin-left: rem(15px);
+                            float: right;
+                            @at-root [dir='rtl'] & {
+                                margin-left: rem(0px);
+                                margin-right: rem(15px);
+                                float: left;
+                            }
+                            button {
+                                vertical-align: middle;
+                                i {
+                                    width: rem(24px);
+                                    height: rem(24px);
+                                    color: $dark-transparent12;
+                                    font-size: rem(22px);
+                                }
                             }
                         }
                     }

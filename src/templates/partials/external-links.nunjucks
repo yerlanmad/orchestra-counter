@@ -47,9 +47,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.jquery.min.js"></script>
 
-        
-
-
         <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
         <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
         <script type="text/javascript" src="/events/qevents_cometd.js"></script>
@@ -91,6 +88,7 @@
 
         <script type="text/javascript" src="scripts/components/dropdown/index.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/BaseDropdownComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/AddMarksDropdownComponent.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/branchSelection/branchSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
@@ -134,7 +132,7 @@
         <script type="text/javascript" src="scripts/components/card/transferCards/transferQueueCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferUserPoolCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferCounterPoolCard.js"></script>
-        
+        <script type="text/javascript" src="scripts/components/card/marksCard/marksCard.js"></script>
         <link rel="stylesheet" href="css/main.css" />
 
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>

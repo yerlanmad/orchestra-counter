@@ -1812,7 +1812,23 @@ var servicePoint = new function () {
 		resetLogoffCounter();
 		updateNextAndPreviousServices();
 		updateSelectedDs("#visitAddDsLbl");
+		updateSelectedMarks("#visitAddMarksLbl");
 	};
+
+	var updateSelectedMarks = function (idSelector) {
+		if (customMarks.getDataTable() && customMarks.getDataTable().fnGetData().length > 0) {
+			var allMarksArray = util.mapMarksAndAmount(customMarks.getDataTable().fnGetData().slice(0))
+			var selectedMarksArray = util.getLimitedArrayWithRemainingCount(allMarksArray, 3)
+			if (selectedMarksArray.length > 3) {
+				selectedMarksArray[selectedMarksArray.length - 1] = ' + ' + selectedMarksArray[selectedMarksArray.length - 1] + ' ' + jQuery.i18n.prop('info.card.visitCard.others');
+				$(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedMarksArray.slice(0, -1).join(', ') + selectedMarksArray.slice(-1)));
+			} else {
+				$(idSelector).html($("<span class='listItemValueSelected'></span>").text(selectedMarksArray.slice(0).join(', ')));
+			}
+		} else {
+			$(idSelector).text(jQuery.i18n.prop('info.card.visitCard.addAMark'));
+		}
+	}
 
 	var updateSelectedDs = function (idSelector) {
 		if (deliveredServices.getDataTable() && deliveredServices.getDataTable().fnGetData().length > 0) {

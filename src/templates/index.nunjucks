@@ -35,7 +35,7 @@
                             {% include "partials/card/transferCard/views/transfer-user-pool.nunjucks" %}
                             {% include "partials/card/transferCard/views/transfer-counter-pool.nunjucks" %}
 
-                            {#{% include "partials/mark-card.nunjucks" %} #}
+                            {% include "partials/card/marksCard/marks-card.nunjucks" %} 
                         </div>
                     </div>
                 </div>

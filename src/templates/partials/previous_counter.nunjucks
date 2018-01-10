@@ -197,7 +197,7 @@
                 </div>
             </div>
 
-			<!-- Custom Marks module -->
+			<!-- Custom Marks module
 			<div id="customMarksModule" class="module">
                 <h2 id="customMarksModuleLabel"></h2>
                 <div id="customMarksContainer" class="moduleContentContainer">
@@ -215,7 +215,7 @@
                         </tbody>
                     </table>
                 </div>
-            </div>		
+            </div>-->	
 
             <!-- Customer module -->
             <div id="customerModule" class="module">
@@ -536,7 +536,7 @@
             </div>
 
 			<!-- Add Custom Marks dialogue -->
-            <div id="addCustomMarks" class="modalPage">
+            <!--<div id="addCustomMarks" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="branchForm roundedCorner5">
@@ -565,7 +565,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
 			<!-- Add Delivered Services dialogue -->
             <div id="addDeliveredServices" class="modalPage">

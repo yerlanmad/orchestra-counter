@@ -1,0 +1,110 @@
+.qm-drop-down {
+    &__add-marks {
+        position: relative;
+        .main {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            background: $white;
+            height: auto;
+            &__top {
+                height: inherit;
+                border: 1px solid $dark-transparent12;
+                background-color: $white;
+                box-shadow: 0 0 4px 0 $dark-transparent04;
+                display: flex;
+                .selected-text {
+                    flex-grow: 1;
+                    font-size: rem(18px);
+                    padding: rem(10px);
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                }
+                .icon-close {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    height: rem(42px);
+                    width: rem(42px);
+                    cursor: pointer;
+
+                    &:before{
+                        font-size: 20px;
+                        color: $dark-transparent42;
+                    }
+                }
+            }
+            &__bottom {
+                background: $white;
+                height: rem(56px);
+                border: 1px solid $dark-transparent12;	
+                border-top: 0;
+                box-shadow: 0 0 8px 0 $dark-transparent02;
+                &-inner-container {
+                    background: $dark-transparent04;
+                    display: flex;
+                    height: inherit;
+                    &__input {
+                        flex: 2;
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        display: flex;
+                        width: 0;
+                        .display-text{
+                            font-size: rem(14px);
+                            padding: 0 rem(10px);
+                            margin: 0;
+                            vertical-align: middle;
+                            align-items: center;
+                            display: flex;
+                        }
+                        input {
+                            width: rem(50px);
+                            height: rem(41px);
+                            font-size: rem(18px);
+                            outline: 0;
+                            padding: rem(5px);
+                            color: $dark-transparent82;
+                            border: 1px solid $dark-transparent12;	
+                            box-shadow: 0 0 8px 0 $dark-transparent04;
+                            text-align: right;
+                            font-weight: 300;
+                            @at-root [dir='rtl'] & {
+                                text-align: left;
+                            }
+
+                            &.invalid {
+                                border-color: $validation-error;
+                            }
+                        }
+                    }
+                    &__btn {
+                        flex: 1;
+                        justify-content: center;
+                        flex-direction: column;
+                        align-items: flex-end;
+                        display: flex;
+                        width: 0;
+                        button{
+                            height: rem(30px);
+                            line-height: rem(30px);
+                            padding: 0;
+                            margin: 0 15px;
+                            font-size: rem(14px);
+                            span {
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            display: inline-block;
+                            }
+                            width: 95%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

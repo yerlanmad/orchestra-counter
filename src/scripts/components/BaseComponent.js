@@ -20,6 +20,9 @@ window.$Qmatic.components.BaseComponent.prototype = {
     getSelector: function(){
         return this.$selector
     },
+    get$Elem: function (){
+        return $(this.$selector)
+    },
     hide: function(){
         this.onDestroy()
     },

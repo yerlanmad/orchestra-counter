@@ -9,7 +9,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
 
     // @Override
     this.onInit = function (selector, choosenConfig) {
-        window.$Qmatic.components.BaseComponent.prototype.onInit.call(this, selector);
+        window.$Qmatic.components.dropdown.BaseDropdownComponent.prototype.onInit.call(this, selector);
         this.activate(choosenConfig)
         this.clearError()
     }
