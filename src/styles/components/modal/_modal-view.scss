@@ -26,6 +26,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            .qm-card{
+                max-width: rem(475px);
+            }
         }
     }
 }
