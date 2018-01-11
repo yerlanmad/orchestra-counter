@@ -382,6 +382,7 @@ var servicePoint = new function () {
 				branchSelect.attr('disabled', '');
 				// if all settings are set, i.e. there is only one of each
 				// branch, workstation and profile, set settings
+				$Qmatic.components.dropdown.branchSelection.onSingleItem()
 				if (!(branchSelect.val() != -1 && workstationSelect.val() != -1 && prioSelect
 					.val() != -1)) {
 					isBranchSelectShown = true;
@@ -512,14 +513,14 @@ var servicePoint = new function () {
 		var profileSel = $("#prioListModal");
 		if (sessvars.singleSettingsOnly) {
 			modalNavigationController.popAllModals()
-		} else {
-			if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
-				var settings = getSettings(branchSel, workstationSel, profileSel);
-				if (typeof warnUser === "undefined") {
-					warnUser = true;
-				}
-				isHijacking = confirm(warnUser, settings);
+		}
+
+		if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
+			var settings = getSettings(branchSel, workstationSel, profileSel);
+			if (typeof warnUser === "undefined") {
+				warnUser = true;
 			}
+			isHijacking = confirm(warnUser, settings);
 		}
 		return isHijacking;
 	};
@@ -1227,7 +1228,7 @@ var servicePoint = new function () {
 			userPoolUpdateNeeded = false;
 			//queuesUpdateNeeded = false;
 			queuesUpdateNeeded = true;
-			queueViewController.navigateToOverview();																
+			queueViewController.navigateToOverview();
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
 			customer.updateCustomerModule();
@@ -1479,7 +1480,7 @@ var servicePoint = new function () {
 
 			// spPoolUpdateNeeded = true;
 			// userPoolUpdateNeeded = true;
-			
+
 			$("#waitingTimeCounter").html(
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -
@@ -2132,13 +2133,13 @@ var servicePoint = new function () {
 				var $contextMarketing = $('#verticalMessageRow');
 				$contextMarketing.show();
 				var contextTemplate = document.querySelector('.qm-popover--context-marketing').outerHTML.trim();
-				contextMarketingController.init("contextmarketing", 
-												$contextMarketing, 
-												{
-													template: contextTemplate, 
-													text: verticalMessage.workstationMessage, 
-													placement: "right-start"
-												});
+				contextMarketingController.init("contextmarketing",
+					$contextMarketing,
+					{
+						template: contextTemplate,
+						text: verticalMessage.workstationMessage,
+						placement: "right-start"
+					});
 			} else {
 				$('#verticalMessageRow').hide();
 				contextMarketingController.dispose("contextmarketing");
