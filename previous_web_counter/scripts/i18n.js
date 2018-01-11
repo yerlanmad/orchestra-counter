@@ -2,6 +2,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
     var i18nQmBtn = function(elemId, propName) {
         $("#" + elemId + " span").attr("title", jQuery.i18n.prop(propName))
         i18nSafe(elemId + " span", propName)
+        i18nSafe(elemId + " .sr-only", propName)
     };
 
     var i18nPlaceholder = function(elem, propName) {

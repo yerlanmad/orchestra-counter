@@ -2,7 +2,6 @@
     margin-top: $global-header-height;
     display: flex;
     height: $global-main-height;
-
     &__left {
         position: relative;
         flex: 1 percentage(5/12);
@@ -10,19 +9,16 @@
         background: linear-gradient(254.96deg, $background-gradient-stop1 0%, $background-gradient-stop2 34.9%, $background-gradient-stop3 62.87%, $background-gradient-stop4 77.12%, $background-gradient-stop5 100%);
         min-width: 0;
     }
-
     &__right {
         flex: 1 percentage(7/12);
         height: 100%;
         padding: rem(40px 32px 30px);
         background: $right-background-color;
-        box-shadow: inset 15px 0px 60px -20px rgba(0,0,0,0.75);
-    
+        box-shadow: inset 15px 0px 60px -20px rgba(0, 0, 0, 0.75);
         @at-root [dir='rtl'] & {
-            box-shadow: inset -15px 0px 60px -20px rgba(0,0,0,0.75);
+            box-shadow: inset -15px 0px 60px -20px rgba(0, 0, 0, 0.75);
         }
     }
-
     &__scroll-container {
         display: flex;
         height: $global-card-layout-height;
@@ -30,22 +26,36 @@
         overflow-y: auto;
         width: 100%;
     }
-
     &--no-queues {
         .qm-main__left {
             flex: 1 percentage(10/12);
+            .qm-card {
+                width: 75%;
+            }
         }
-
         .qm-main__right {
             flex: 1 percentage(2/12);
         }
     }
-
     &.qm-main--no-queues.qm-main--no-pools {
         .qm-main__left {
             flex: 1 100%;
+            @media (max-width: #{map-get($grid-breakpoints, 'md')}) {
+                 .qm-card {
+                    width: 90%;
+                }   
+            }
+            @media screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'xl')}) {
+                 .qm-card {
+                    width: 80%;
+                }   
+            }
+            @media screen and (min-width: #{map-get($grid-breakpoints, 'xl')}) {
+                 .qm-card {
+                    width: 60%;
+                }   
+            }
         }
-
         .qm-main__right {
             display: none;
         }
