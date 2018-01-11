@@ -8,20 +8,26 @@
         <div class="qm-card-header">
             <div class="qm-card-header__top">
                 <h1 class="qm-card-header__headline">
-                    <a href="" id="linkedCustomerField" class="qm-card-header__customer-name">
-                    </a>
+                    <a href="" id="linkedCustomerField" class="qm-card-header__customer-name"></a>
                     <span id="ticketNumber" class="qm-card-header__ticket"></span>
                 </h1>
-                <a href="#" class="qm-card-header__context-marketing qm-tooltip" id="verticalMessageRow">
-                    <i class="qm-card-header__context-marketing-icon qm-tooltip__icon icon-announce" aria-hidden="true"></i>
+                <a href="#" class="qm-card-header__add-customer">
+                    <i class="qm-card-header__add-customer-icon icon-customer-add" aria-hidden="true"></i>
                 </a>
             </div>
             <div class="qm-services">
                 <div class="qm-services__current-service-container">
-                    <span id="serviceId" class="qm-services__current-service-title"></span>
-                    <a href="#" class="qm-services__add-service">
-                        <i class="qm-services__add-service-icon icon-service-add" aria-hidden="true"></i>
-                        <span class="qm-services__add-service-text sr-only">Add service</span>
+                    <div class="qm-services__current-services">
+                        <div class="qm-services__current-service-title-container">
+                            <span id="serviceId" class="qm-services__current-service-title"></span>
+                        </div>
+                        <a href="#" class="qm-services__add-service">
+                            <i class="qm-services__add-service-icon icon-service-add" aria-hidden="true"></i>
+                            <span class="qm-services__add-service-text sr-only">Add service</span>
+                        </a>
+                    </div>
+                    <a href="#" class="qm-context-marketing" id="verticalMessageRow">
+                        <i class="qm-context-marketing__icon icon-announce" aria-hidden="true"></i>
                     </a>
                 </div>
                 <div id="nextVisitServices" class="qm-services__upcoming-services-container">

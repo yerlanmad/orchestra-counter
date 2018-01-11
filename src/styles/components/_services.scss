@@ -2,19 +2,34 @@
     margin-bottom: rem(24px);
 
     &__current-service-container {
-        //display: flex;
+        display: flex;
+        justify-content: space-between;
         margin-bottom: rem(2px);
 
         @at-root [dir='rtl'] & {
             text-align: right;
         }
     }
+
+    &__current-services {
+        display: flex;
+        flex: 0 1 auto;
+        overflow: hidden;
+    }
     
+    &__current-service-title-container {
+        flex: 0 1 auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     &__current-service-title {
         font-size: rem(24px);
+        white-space: nowrap;
     }
 
     &__add-service {
+        flex: 1 0 auto;
         color: $secondary-color;
         text-decoration: none;
         font-size: rem(24px);

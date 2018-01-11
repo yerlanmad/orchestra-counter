@@ -59,8 +59,9 @@
         }
     }
 
-    &__context-marketing {
+    &__add-customer {
         flex: 0 0 28px;
+        color: $pale-aquamarine;
         margin-left: rem(4px);
 
         &:hover {
@@ -73,10 +74,10 @@
         }
     }
 
-    &__context-marketing-icon {
+    &__add-customer-icon {
         font-size: rem(28px);
     }
-
+    
     &__sub-heading {
         font-size: rem(28px);
     }
