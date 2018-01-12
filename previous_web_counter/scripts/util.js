@@ -629,7 +629,7 @@ var util = new function () {
         for (var key in mapOfMarkAndCount) {
             if (mapOfMarkAndCount.hasOwnProperty(key)) {
                 if (mapOfMarkAndCount[key] > 1) {
-                    arrayOfMappedMarksAndCount.push(key + "(" + mapOfMarkAndCount[key] + ")")
+                    arrayOfMappedMarksAndCount.push(key + " - " + mapOfMarkAndCount[key])
                 } else {
                     arrayOfMappedMarksAndCount.push(key)
                 }
