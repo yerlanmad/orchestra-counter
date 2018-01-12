@@ -65,7 +65,7 @@
                         <td><a class="customButtonDisabled" href="#" id="endVisitBtn" name="endVisitButton" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();"><span id="endVisitLabel"> &nbsp;</span></a></td>
                         <td><a class="customButtonDisabled" href="#" id="closeBtn" name="closeWorkstationButton" onclick="servicePoint.checkServicesLeft('handleClose');this.blur();"><span id="closeLabel"> &nbsp;</span></a></td>
                         <td class="deliveredServiceLink"><a href="#" id="addDeliveredServiceLink" class="customButtonSmallDisabled" onclick="deliveredServices.addDeliveredServicePressed();this.blur();"><span id="addDeliveredServiceLabel"> &nbsp;</span></a></td>
-						<td class="deliveredServiceLink"><a href="#" id="addMultiServiceLink" class="customButtonSmallDisabled" onclick="servicePoint.addMultiServicePressed();this.blur();"><span id="addMultiServiceLabel"> &nbsp;</span></a>&nbsp;</td>
+						{#<td class="deliveredServiceLink"><a href="#" id="addMultiServiceLink" class="customButtonSmallDisabled" onclick="servicePoint.addMultiServicePressed();this.blur();"><span id="addMultiServiceLabel"> &nbsp;</span></a>&nbsp;</td>#}
 						<td class="deliveredServiceLink"><a href="#" id="addCustomMarkLink" class="customButtonSmallDisabled" onclick="customMarks.addCustomMarkPressed();this.blur();"><span id="addCustomMarkLabel"> &nbsp;</span></a>&nbsp;</td>
 					</tr>
 				</tbody>
@@ -393,7 +393,7 @@
 
 			
 			<!-- Additional Service left pop-up -->
-            <div id="nextServicesDialogue" class="modalPage">
+            <!--<div id="nextServicesDialogue" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="branchForm roundedCorner5">
@@ -417,16 +417,16 @@
                                 </td>
                                 <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
                                 <td class="alignCenter">
-                                    <!--input id="resortServicesBtn" class="applySettingsButton" type="button" onclick="servicePoint.resortServices();"/-->
+                                    
                                 </td>
                             </tr>
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>-->
             
 			<!-- Add/Edit Additional Service dialogue  -->
-            <div id="addEditServicesDialogue" class="modalPage">
+            <!-- <div id="addEditServicesDialogue" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="addServicesForm  roundedCorner5">
@@ -464,14 +464,14 @@
                                 </td>
                                 <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
                                 <td class="alignCenter">
-                                    <!--input id="closeResortServicesBtn" class="applySettingsButton" type="button" onclick="servicePoint.closeResortServices();"/-->
+
                                 </td>
                             </tr>
 							</thead>
                         </table>
                     </div>
                 </div>
-            </div>
+            </div> -->
 			
             <!-- Transfer queue to queue dialogue -->
             <div id="transferQueueToQueueDialogue" class="modalPage">

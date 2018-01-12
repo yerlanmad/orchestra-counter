@@ -1,4 +1,3 @@
-// Base Modal Class
 window.$Qmatic.components.modal.HijackModal = function (selector) {
 
     // @Override

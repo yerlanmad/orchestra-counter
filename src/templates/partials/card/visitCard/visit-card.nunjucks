@@ -17,7 +17,13 @@
             </div>
             <div class="qm-services">
                 <div class="qm-services__current-service-container">
-                    <div class="qm-services__current-services">
+<span id="serviceId" class="qm-services__current-service-title"></span>
+                    <a href="#" id="addMultiServiceLink" class="qm-services__add-service"  onclick="servicePoint.addMultiServicePressed();this.blur();">
+                        <i class="qm-services__add-service-icon icon-service-add" aria-hidden="true"></i>
+                        <span class="sr-only">Add services</span>
+                        <span class="qm-services__add-service-text" id="addServicesLbl"></span>                    
+
+<div class="qm-services__current-services">
                         <div class="qm-services__current-service-title-container">
                             <span id="serviceId" class="qm-services__current-service-title"></span>
                         </div>

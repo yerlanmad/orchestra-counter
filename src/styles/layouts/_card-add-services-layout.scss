@@ -1,0 +1,90 @@
+#addServicesCard {
+    @include set-default-width-for-card-layout ();
+    .qm-card {
+        display: flex;
+        flex-direction: column;
+        &__header-section {
+            margin-bottom: 0;
+            .qm-card-header {
+                &__headline {
+                    color: $dark-transparent82;
+                    font-size: rem(28px);
+                    font-weight: 300;
+                    line-height: rem(32px);
+                    margin-bottom: rem(15px);
+                    &__back-icon {
+                        cursor: pointer;
+                        i {
+                            &:before {
+                                font-size: rem(22px);
+                                vertical-align: middle;
+                            }
+                        }
+                        margin-right: rem(10px);
+                        margin-left: 0;
+                        @at-root [dir='rtl'] & {
+                            margin-right: 0;
+                            margin-left: rem(10px);
+                        }
+                        color: $dark-transparent82;
+                    }
+                }
+                &__sub-heading {
+                    color: $dark-transparent82;
+                    font-size: rem(20px);
+                    font-weight: 300;
+                    line-height: rem(24px);
+                    margin-bottom: rem(12px);
+                    @at-root [dir='rtl'] & {
+                        text-align: right;
+                    }
+                }
+            }
+            .custom-list-header {
+                vertical-align: middle;
+                color: $dark-transparent82;
+                font-size: rem(16px);
+                padding: rem(10px 5px);
+            }
+        }
+        &__content-section {
+            flex-grow: 1;
+            overflow-y: scroll;
+            &::-webkit-scrollbar {
+                width: 0px;
+                background: transparent;
+                -ms-overflow-style: -ms-autohiding-scrollbar;
+            }
+            #unServedServices {
+                .list {
+                    &--item {
+                        display: flex;
+                        padding: rem(5px);
+                        &:hover {
+                            background: $dark-transparent04;
+                        }
+                        &-text {
+                            flex-grow: 1;
+                            font-size: rem(18px);
+                            font-weight: 300;
+                        }
+                        &-icon {
+                            i:before {
+                                color: $dark-transparent12;
+                                font-size: 20px;
+                            }
+                            &:hover {
+                                i:before {
+                                    color: $dark-transparent42;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        &__footer-section {
+            margin-top: rem(30px);
+        }
+    }
+}

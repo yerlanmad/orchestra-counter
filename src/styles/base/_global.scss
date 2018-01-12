@@ -1,9 +1,15 @@
+// ::-webkit-scrollbar {
+//     width: 6px;
+// }
+
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 0px;
+    background: transparent;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
 ::-webkit-scrollbar-track {
-    box-shadow: none; 
+    box-shadow: none;
     border-radius: 0;
     width: 6px;
     background-color: $dark-transparent12;

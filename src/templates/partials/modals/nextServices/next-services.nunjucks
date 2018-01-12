@@ -1,0 +1,49 @@
+<!-- Imported partials -->
+{% import "./../../button.nunjucks" as button  %}
+
+<div class="qm-modal qm-hide" id="next-services-modal">
+    <div class="qm-modal__overlay"></div>
+    <div class="qm-modal__layout">
+        <div class="qm-card">
+            <div class="qm-card__header-section" id="nextServicesListHeader"></div>
+            <div class="qm-card__content-section">
+                
+                <div id="nextServicesList">
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                    <div class="nextServicesList-row">
+                        Next Service Item
+                    </div>
+                </div>
+
+            </div>
+            <div class="qm-card__footer-section">
+                <div class="qm-btns-container">
+                {{button.render(id="confirmServicesBtn", type="qm-btn--primary", handler="servicePoint.confirmServices();")}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

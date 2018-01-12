@@ -1,0 +1,27 @@
+#next-services-modal {
+    @include default-card-modal-layout();
+    .qm-card__content-section {
+        padding-top: rem(10px);
+        padding-bottom: rem(20px);
+        #nextServicesList {
+            max-height: calc(100vh - 300px);
+            overflow-y: scroll;
+            .nextServicesList-row {
+                font-size: rem(18px);
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            } 
+        }
+    }
+    .qm-btns-container {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        .qm-btn--primary {
+            font-size: inherit;
+            margin: auto;
+        }
+    }
+}

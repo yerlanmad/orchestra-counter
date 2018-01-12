@@ -5,6 +5,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: rem(2px);
+        align-items: center;
 
         @at-root [dir='rtl'] & {
             text-align: right;
@@ -32,7 +33,13 @@
         flex: 1 0 auto;
         color: $secondary-color;
         text-decoration: none;
-        font-size: rem(24px);
+        font-size: rem(22px);
+        display: flex;
+        width: 200px;
+
+        &-text {
+            font-size: rem(14px);
+        }
 
         &:hover,
         &:focus {
@@ -57,11 +64,17 @@
     &__upcoming-services-container {
         display: flex;
         color: $services-color;
+        span {
+            min-width: rem(40px);
+        }
     }
 
     &__previous-services-container {
         display: flex;
         color: $services-color;
+        span {
+            min-width: rem(70px);
+        }
     }
 
     &__label {

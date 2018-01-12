@@ -91,7 +91,6 @@
                                         right: auto;
                                     }
                                 }
-                                
                             }
                             &.sorting_desc {
                                 background: $white;
@@ -169,6 +168,13 @@
                                     height: rem(24px);
                                     color: $dark-transparent12;
                                     font-size: rem(22px);
+                                }
+                            }
+                            &:hover {
+                                i {
+                                    &:before {
+                                        color: $dark-transparent42;
+                                    }
                                 }
                             }
                         }

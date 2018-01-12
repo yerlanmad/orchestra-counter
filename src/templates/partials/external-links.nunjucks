@@ -94,6 +94,7 @@
         <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/deliveredServicesSelection/deliveredServicesSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/singleOutcomeSelection/singleOutcomeSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/addServiceSelection/addServiceSelection.js"></script>
 
         <script type="text/javascript" src="scripts/components/NavView.js"></script>
         <script type="text/javascript" src="scripts/components/NavController.js"></script>
@@ -101,6 +102,7 @@
         <script type="text/javascript" src="scripts/components/modal/index.js"></script>
         <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
         <script type="text/javascript" src="scripts/components/modal/ProfileSettingsModal.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/NextServicesModal.js"></script>
         <script type="text/javascript" src="scripts/components/modal/HijackModal.js"></script>
         <script type="text/javascript" src="scripts/components/modal/profileSettings/profileSettings.js"></script>
         <script type="text/javascript" src="scripts/components/modal/noCustomersWaiting/noCustomersWaiting.js"></script>
@@ -109,6 +111,7 @@
         <script type="text/javascript" src="scripts/components/modal/customerOptions/customerOptions.js"></script>
         <script type="text/javascript" src="scripts/components/modal/storeNext/storeNext.js"></script>
         <script type="text/javascript" src="scripts/components/modal/visitInDisplayQueue/visitInDisplayQueue.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/nextServices/nextServices.js"></script>
         
         <script type="text/javascript" src="scripts/components/queue/index.js"></script>
         <script type="text/javascript" src="scripts/components/notes/index.js"></script>
@@ -127,6 +130,7 @@
         <script type="text/javascript" src="scripts/components/card/inactiveCard/inactiveCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/walkInCard/walkInCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/deliveredServicesCard/deliveredServicesCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/addServicesCard/addServicesCard.js"></script>
 
         <script type="text/javascript" src="scripts/components/card/transferCards/transferOptionsCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferQueueCard.js"></script>

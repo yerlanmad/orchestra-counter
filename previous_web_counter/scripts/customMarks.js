@@ -14,7 +14,7 @@ var customMarks = new function () {
 			dropdownFilter = new window.$Qmatic.components.dropdown.AddMarksDropdownComponent('#marksFilter', {
 				single_disable: false,
 				allow_single_deselect: false,
-				placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.selectMark')
+				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark')
 			}).get$Elem();
 	}
 
@@ -187,7 +187,7 @@ var customMarks = new function () {
 							+ jQuery.i18n.prop("action.remove.mark.click")
 							+ "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
                              + '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
-                             + '<span class="sr-only"></span>'
+                             + '<span class="sr-only">delete button</span>'
                              + '</button>' + "</span>");
 
 						$(td).find(".removeMarkBtn").click(function () {

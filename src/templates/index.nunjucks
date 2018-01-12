@@ -34,7 +34,7 @@
                             {% include "partials/card/transferCard/views/transfer-queue.nunjucks" %}
                             {% include "partials/card/transferCard/views/transfer-user-pool.nunjucks" %}
                             {% include "partials/card/transferCard/views/transfer-counter-pool.nunjucks" %}
-
+                            {% include "partials/card/addServicesCard/add-services-card.nunjucks" %}
                             {% include "partials/card/marksCard/marks-card.nunjucks" %} 
                         </div>
                     </div>
@@ -82,6 +82,7 @@
         {% include "partials/modals/customerOptions/customer-options.nunjucks" %}
         {% include "partials/modals/storeNext/store-next.nunjucks" %}
         {% include "partials/modals/visitInDisplayQueue/visit-in-display-queue.nunjucks" %}
+        {% include "partials/modals/nextServices/next-services.nunjucks" %}
     </div>
     
 

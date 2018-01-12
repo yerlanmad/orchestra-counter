@@ -734,47 +734,80 @@ var servicePoint = new function () {
 
 		var len = sessvars.state.visit.unservedVisitServices.length;
 		var len1 = sessvars.state.visit.servedVisitServices.length;
-		var select = document.getElementById("addEditServicesBox");
-		while (select.length > 0) { // clear current list
-			select.remove(select.length - 1);
-		}
+		// var select = document.getElementById("addEditServicesBox");
+		// var select = document.getElementById("availableServicesFilter");
 
+		// while (select.length > 0) { // clear current list
+		// 	select.remove(select.length - 1);
+		// }
+
+		$("#unServedServices").find(".list").empty();
 		for (i = 0; i < len; i++) {
 			var opt = document.createElement("option");
 			opt.text = sessvars.state.visit.unservedVisitServices[i].serviceInternalName;
 			opt.value = sessvars.state.visit.unservedVisitServices[i].id;
-			try {
-				select.add(opt, null); // standards compliant; doesn't work in
-				// IE
-			} catch (ex) {
-				select.add(opt); // IE only
-			}
+			// try {
+			// 	select.add(opt, null); // standards compliant; doesn't work in
+			// 	// IE
+			// } catch (ex) {
+			// 	select.add(opt); // IE only
+			// }
+
+			$("#unServedServices").find(".list").append(
+			'<div class="list--item">' +
+			'<span class="list--item-text">' +
+			opt.text +
+			'</span>' +
+			'<span class="list--item-icon">' +
+			'<button class="qm-action-btn qm-action-btn--only-icon" onClick="servicePoint.removeService('+ opt.value +', '+ i +')">' +
+			'<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>' +
+			'<span class="sr-only">delete button</span>' +
+			'</button>' +
+			'</span>' +
+			'</div>'
+		);
 		}
 
-		var select = document.getElementById("listServicesBox");
-		while (select.length > 0) {// clear current list
-			select.remove(select.length - 1);
-		}
+		var select = document.getElementById("availableServicesFilter");
+		// while (select.length > 0) {// clear current list
+		// 	select.remove(select.length - 1);
+		// }
+
+		util.clearSelect($("#availableServicesFilter"));
+		$Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') })
 
 		for (i = 0; i < servicePoint.servicesList.length; i++) {
 
-			var found = 0;
-			for (j = 0; j < len; j++) {
-				if (servicePoint.servicesList[i].id == sessvars.state.visit.unservedVisitServices[j].serviceId) {
-					found = 1; // do not show this service in the list
-				}
-			}
+			// var found = 0;
+			// for (j = 0; j < len; j++) {
+			// 	if (servicePoint.servicesList[i].id == sessvars.state.visit.unservedVisitServices[j].serviceId) {
+			// 		found = 1; // do not show this service in the list
+			// 	}
+			// }
 
-			for (j = 0; j < len1; j++) {
-				if (servicePoint.servicesList[i].id == sessvars.state.visit.servedVisitServices[j].serviceId) {
-					found = 1; // do not show this service in the list
-				}
-			}
-			if (servicePoint.servicesList[i].id == sessvars.state.visit.currentVisitService.serviceId) {
-				found = 1; // do not show this service in the list
-			}
-			if (found == 0) {
-				var opt = document.createElement("option");
+			// for (j = 0; j < len1; j++) {
+			// 	if (servicePoint.servicesList[i].id == sessvars.state.visit.servedVisitServices[j].serviceId) {
+			// 		found = 1; // do not show this service in the list
+			// 	}
+			// }
+			// if (servicePoint.servicesList[i].id == sessvars.state.visit.currentVisitService.serviceId) {
+			// 	found = 1; // do not show this service in the list
+			// }
+			// if (found == 0) {
+			// 	var opt = document.createElement("option");
+			// 	opt.value = servicePoint.servicesList[i].id;
+			// 	opt.text = servicePoint.servicesList[i].internalName;
+
+			// 	try {
+			// 		select.add(opt, null); // standards compliant; doesn't work
+			// 		// in IE
+			// 	} catch (ex) {
+			// 		select.add(opt); // IE only
+			// 	}
+			// }
+
+
+			var opt = document.createElement("option");
 				opt.value = servicePoint.servicesList[i].id;
 				opt.text = servicePoint.servicesList[i].internalName;
 
@@ -784,16 +817,17 @@ var servicePoint = new function () {
 				} catch (ex) {
 					select.add(opt); // IE only
 				}
-
-			}
 		}
-
-		util.showModal('addEditServicesDialogue');
+				
+		// util.showModal('addEditServicesDialogue');
+		$("#availableServicesFilter").trigger("chosen:updated");
+		cardNavigationController.push($Qmatic.components.card.addServicesCard)
 	};
 
-	this.addService = function () {
-		if (listServicesBox.options[listServicesBox.selectedIndex].value != undefined) {
-			var addServiceId = listServicesBox.options[listServicesBox.selectedIndex].value;
+	this.addService = function (serviceId) {
+		// if (listServicesBox.options[listServicesBox.selectedIndex].value != undefined) {
+			// var addServiceId = listServicesBox.options[listServicesBox.selectedIndex].value;
+			var addServiceId = serviceId;
 			addParams = servicePoint.createParams();
 			addParams.branchId = sessvars.branchId;
 			addParams.visitId = sessvars.state.visit.id;
@@ -804,16 +838,19 @@ var servicePoint = new function () {
 			sessvars.statusUpdated = new Date();
 			servicePoint.updateWorkstationStatus();
 			servicePoint.addMultiServicePressed();
-		}
+		// }
 	};
 
-	this.removeService = function () {
-		if (addEditServicesBox.options[addEditServicesBox.selectedIndex].value != undefined) {
-			var removeServiceId = addEditServicesBox.options[addEditServicesBox.selectedIndex].value;
+	this.removeService = function (serviceId, index) {
+		// if (addEditServicesBox.options[addEditServicesBox.selectedIndex].value != undefined) {
+			// var removeServiceId = addEditServicesBox.options[addEditServicesBox.selectedIndex].value;
+			var removeServiceId = serviceId;
 			removeParams = servicePoint.createParams();
 			removeParams.branchId = sessvars.branchId;
 			removeParams.visitId = sessvars.state.visit.id;
 			removeParams.visitServiceId = removeServiceId;
+			if (index != undefined)
+			var serviceName = sessvars.state.visit.unservedVisitServices[index].serviceInternalName;
 			var returnInfo = spService.del("branches/" + removeParams.branchId
 				+ "/visits/" + removeParams.visitId + "/services/"
 				+ removeParams.visitServiceId);
@@ -822,8 +859,11 @@ var servicePoint = new function () {
 				sessvars.statusUpdated = new Date();
 				servicePoint.updateWorkstationStatus();
 				servicePoint.addMultiServicePressed();
+				if (serviceName)
+				util.showMessage('"'+ serviceName +'" ' + jQuery.i18n
+								.prop('info.card.addServicesCard.wasRemoved'));
 			}
-		}
+		// }
 	};
 
 	this.closeResortServices = function () {
@@ -919,23 +959,25 @@ var servicePoint = new function () {
 	this.checkServicesLeft = function (command) {
 		this.command = command;
 		if (this.servicesLeft == true && moduleMultiServicesEnabled == true) {
-			var len = sessvars.state.visit.unservedVisitServices.length;
-			$("#nextServices").find("tr:gt(0)").remove();
-			for (i = 0; i < len; i++) {
-				var s = '';
-				if (i % 2 == 1) {
-					s += '<tr class="even">';
-				} else {
-					s += '<tr class="odd">';
-				}
+			// var len = sessvars.state.visit.unservedVisitServices.length;
+			// $("#nextServices").find("tr:gt(0)").remove();
+			// for (i = 0; i < len; i++) {
+			// 	var s = '';
+			// 	if (i % 2 == 1) {
+			// 		s += '<tr class="even">';
+			// 	} else {
+			// 		s += '<tr class="odd">';
+			// 	}
 
-				s += '<td align="center">'
-					+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
-					+ '</td>';
-				s += '</tr>';
-				$('#nextServices').append(s);
-			}
-			util.showModal("nextServicesDialogue");
+			// 	s += '<td align="center">'
+			// 		+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
+			// 		+ '</td>';
+			// 	s += '</tr>';
+			// 	$('#nextServices').append(s);
+			// }
+			// util.showModal("nextServicesDialogue");
+			$Qmatic.components.modal.nextServices.updateList(sessvars.state.visit.unservedVisitServices);
+			modalNavigationController.push($Qmatic.components.modal.nextServices);
 		} else {
 			this.executeCommand();
 		}
@@ -959,12 +1001,14 @@ var servicePoint = new function () {
 
 	// pop-up with info where customer to go next.
 	this.resortServices = function () {
-		util.hideModal("nextServicesDialogue");
+		// util.hideModal("nextServicesDialogue");
+		modalNavigationController.popModal($Qmatic.components.modal.nextServices);
 	};
 
 	this.confirmServices = function () {
 		this.executeCommand();
-		util.hideModal("nextServicesDialogue");
+		// util.hideModal("nextServicesDialogue");
+		modalNavigationController.popModal($Qmatic.components.modal.nextServices);
 
 	};
 

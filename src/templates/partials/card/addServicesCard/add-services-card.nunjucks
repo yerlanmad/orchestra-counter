@@ -1,0 +1,86 @@
+{% extends "partials/card/fill-parent-card.nunjucks" %}
+
+{% block id %}id="addServicesCard"{% endblock %}
+{% block cardModifier %}qm-card--more-than-one qm-card--justify-top{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-header">
+            <div class="qm-card-header__headline">
+                <span class="qm-card-header__headline__back-icon" onclick="cardNavigationController.pop();this.blur();">
+                    <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                    <span class="sr-only">Back</span>
+                </span><span id="visitCardAddServicesLbl"></span>
+            </div>
+            <div class="qm-card-header__sub-heading"> 
+                <div class="qm-drop-down">
+                        <div class="qm-drop-down__component">
+                            <select id="availableServicesFilter">
+                                <option value="-1"></option>
+                            </select>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <div class="custom-list-header" id="unServedServicesLabel"></div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+
+            <div id="unServedServices">
+                    <div class="list">
+                        <div class="list--item">
+                            <span class="list--item-text">
+                                General support
+                            </span>
+                            <span class="list--item-icon">
+                                <button class="qm-action-btn qm-action-btn--only-icon">
+                                    <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                    <span class="sr-only">delete button</span>
+                                </button>
+                            </span>
+                        </div>
+                </div>
+            </div>
+
+         <!--<table width="100%" height="100%" class="display">
+							<thead>
+								<tr>
+									<th id="selectedName" ></th>
+									<th ></th>
+									<th id="availableName" ></th>
+								</tr>
+								<tr >
+									<td>
+										<select size="10" id="addEditServicesBox" class="roundedCorner3" >
+										</select>
+									</td>
+									<td> 
+										<a href="#" class="addService"  class="btn" value="" onclick="javascript:servicePoint.addService()"></a>
+										<br><br>
+										<a href="#" class="removeService"  class="btn" value="" onclick="javascript:servicePoint.removeService()"></a>
+									</td>
+									<td >
+										<select size="10" id="listServicesBox" class="roundedCorner3" >
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="3">
+										&nbsp;&nbsp;
+									</td>
+                            </tr>
+                            <tr>
+                                <td class="alignCenter">
+                                    <input id="closeServicesBtn" class="applySettingsButton" type="button" onclick="servicePoint.closeServices();"/>
+                                </td>
+                                <td class="alignOppositeNrml">&nbsp;&nbsp;</td>
+                                <td class="alignCenter">
+                                </td>
+                            </tr>
+							</thead>
+                        </table>-->
+    </div>    
+{% endblock %}
