@@ -383,6 +383,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-popover-delete > span', 'action.pool.delete');
         i18nSafeSelectorBtnAppend('.js-popover-close > span', 'application.sr.close');
         i18nSafeSelectorBtnAppend('.js-popover-back > span', 'application.sr.back');
+        i18nSafeSelectorBtnAppend('.js-add-customer > span', 'application.sr.add.customer');
+        i18nSafeSelectorBtnAppend('#verticalMessageRow > span', 'application.sr.toggle.context.marketing');
         
         i18nSafeSelectorBtnAppend('.js-popover-transferToQueue > span', 'action.transfer.to.queue');
         i18nSafeSelectorBtnAppend('.js-popover-transferToUserPool > span', 'action.transfer.to.user');
