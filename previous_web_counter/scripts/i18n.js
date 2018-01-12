@@ -402,6 +402,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nPlaceholder($("#transferToQueues_filter input"), "info.placeholder.transfer.search");
         
         i18nSafeSelectorBtnAppend('.js-back-btn > .sr-only', 'application.sr.back');
+        i18nSafeSelectorBtnAppend('.js-add-services-btn > .sr-only', 'application.sr.addServices');
         i18nSafeSelectorBtnAppend('.js-cancel-btn > span', 'button.cancel');
         
         i18nSafeSelectorBtnAppend('.js-transferToQueue > span', 'action.transfer.to.queue');

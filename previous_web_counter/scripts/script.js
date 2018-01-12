@@ -736,24 +736,34 @@ var servicePoint = new function () {
 		var len1 = sessvars.state.visit.servedVisitServices.length;
 
 		$("#unServedServices").find(".list").empty();
-		for (i = 0; i < len; i++) {
-			var opt = document.createElement("option");
-			opt.text = sessvars.state.visit.unservedVisitServices[i].serviceInternalName;
-			opt.value = sessvars.state.visit.unservedVisitServices[i].id;
+		if (len > 0) {
+			for (i = 0; i < len; i++) {
+				var opt = document.createElement("option");
+				opt.text = sessvars.state.visit.unservedVisitServices[i].serviceInternalName;
+				opt.value = sessvars.state.visit.unservedVisitServices[i].id;
 
+				$("#unServedServices").find(".list").append(
+					'<div class="list--item">' +
+					'<span class="list--item-text">' +
+					opt.text +
+					'</span>' +
+					'<span class="list--item-icon">' +
+					'<button class="qm-action-btn qm-action-btn--only-icon" onClick="servicePoint.removeService(' + opt.value + ', ' + i + ')">' +
+					'<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>' +
+					'<span class="sr-only">delete button</span>' +
+					'</button>' +
+					'</span>' +
+					'</div>'
+				);
+			}
+		} else {
 			$("#unServedServices").find(".list").append(
-			'<div class="list--item">' +
-			'<span class="list--item-text">' +
-			opt.text +
-			'</span>' +
-			'<span class="list--item-icon">' +
-			'<button class="qm-action-btn qm-action-btn--only-icon" onClick="servicePoint.removeService('+ opt.value +', '+ i +')">' +
-			'<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>' +
-			'<span class="sr-only">delete button</span>' +
-			'</button>' +
-			'</span>' +
-			'</div>'
-		);
+				'<div class="list--item">' +
+				'<span class="list--item-empty">' +
+				jQuery.i18n.prop('info.card.addServicesCard.noAddedServices') +
+				'</span>' +
+				'</div>'
+			);
 		}
 
 		var select = document.getElementById("availableServicesFilter");
@@ -764,62 +774,62 @@ var servicePoint = new function () {
 		for (i = 0; i < servicePoint.servicesList.length; i++) {
 
 			var opt = document.createElement("option");
-				opt.value = servicePoint.servicesList[i].id;
-				opt.text = servicePoint.servicesList[i].internalName;
+			opt.value = servicePoint.servicesList[i].id;
+			opt.text = servicePoint.servicesList[i].internalName;
 
-				try {
-					select.add(opt, null); // standards compliant; doesn't work
-					// in IE
-				} catch (ex) {
-					select.add(opt); // IE only
-				}
+			try {
+				select.add(opt, null); // standards compliant; doesn't work
+				// in IE
+			} catch (ex) {
+				select.add(opt); // IE only
+			}
 		}
-				
+
 		// util.showModal('addEditServicesDialogue');
 		$("#availableServicesFilter").trigger("chosen:updated");
 		cardNavigationController.push($Qmatic.components.card.addServicesCard)
 	};
 
 	this.addService = function (serviceId) {
-			var addServiceId = serviceId;
-			addParams = servicePoint.createParams();
-			addParams.branchId = sessvars.branchId;
-			addParams.visitId = sessvars.state.visit.id;
-			addParams.serviceId = addServiceId;
-			sessvars.state = spService.post("branches/" + addParams.branchId
-				+ "/visits/" + addParams.visitId + "/services/"
-				+ addParams.serviceId);
-			sessvars.statusUpdated = new Date();
-			servicePoint.updateWorkstationStatus();
-			servicePoint.addMultiServicePressed();
+		var addServiceId = serviceId;
+		addParams = servicePoint.createParams();
+		addParams.branchId = sessvars.branchId;
+		addParams.visitId = sessvars.state.visit.id;
+		addParams.serviceId = addServiceId;
+		sessvars.state = spService.post("branches/" + addParams.branchId
+			+ "/visits/" + addParams.visitId + "/services/"
+			+ addParams.serviceId);
+		sessvars.statusUpdated = new Date();
+		servicePoint.updateWorkstationStatus();
+		servicePoint.addMultiServicePressed();
 	};
 
 	this.removeService = function (serviceId, index) {
-			var removeServiceId = serviceId;
-			removeParams = servicePoint.createParams();
-			removeParams.branchId = sessvars.branchId;
-			removeParams.visitId = sessvars.state.visit.id;
-			removeParams.visitServiceId = removeServiceId;
-			if (index != undefined)
+		var removeServiceId = serviceId;
+		removeParams = servicePoint.createParams();
+		removeParams.branchId = sessvars.branchId;
+		removeParams.visitId = sessvars.state.visit.id;
+		removeParams.visitServiceId = removeServiceId;
+		if (index != undefined)
 			var serviceName = sessvars.state.visit.unservedVisitServices[index].serviceInternalName;
-			var returnInfo = spService.del("branches/" + removeParams.branchId
-				+ "/visits/" + removeParams.visitId + "/services/"
-				+ removeParams.visitServiceId);
-			if (returnInfo != undefined) {
-				sessvars.state = returnInfo;
-				sessvars.statusUpdated = new Date();
-				servicePoint.updateWorkstationStatus();
-				servicePoint.addMultiServicePressed();
-				if (serviceName) {
-					if (sessvars.currentUser.direction == "rtl") {
-						util.showMessage(jQuery.i18n
-								.prop('info.card.addServicesCard.wasRemoved') + ' "'+ serviceName +'"');
-					} else {
-						util.showMessage('"'+ serviceName +'" ' + jQuery.i18n
-								.prop('info.card.addServicesCard.wasRemoved'));
-					}
+		var returnInfo = spService.del("branches/" + removeParams.branchId
+			+ "/visits/" + removeParams.visitId + "/services/"
+			+ removeParams.visitServiceId);
+		if (returnInfo != undefined) {
+			sessvars.state = returnInfo;
+			sessvars.statusUpdated = new Date();
+			servicePoint.updateWorkstationStatus();
+			servicePoint.addMultiServicePressed();
+			if (serviceName) {
+				if (sessvars.currentUser.direction == "rtl") {
+					util.showMessage(jQuery.i18n
+						.prop('info.card.addServicesCard.wasRemoved') + ' "' + serviceName + '"');
+				} else {
+					util.showMessage('"' + serviceName + '" ' + jQuery.i18n
+						.prop('info.card.addServicesCard.wasRemoved'));
 				}
 			}
+		}
 	};
 
 	this.closeResortServices = function () {

@@ -46,8 +46,8 @@
                 font-size: rem(16px);
                 padding: rem(10px 5px);
                 @at-root [dir='rtl'] & {
-                                text-align: right;
-                            }
+                    text-align: right;
+                }
             }
         }
         &__content-section {
@@ -73,6 +73,10 @@
                             @at-root [dir='rtl'] & {
                                 text-align: right;
                             }
+                        }
+                        &-empty {
+                            flex-grow: 1;
+                            text-align: center;
                         }
                         &-icon {
                             i:before {
