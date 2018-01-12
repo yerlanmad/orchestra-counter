@@ -40,17 +40,17 @@
     &.qm-main--no-queues.qm-main--no-pools {
         .qm-main__left {
             flex: 1 100%;
-            @media (max-width: #{map-get($grid-breakpoints, 'md')}) {
+            @media all and (max-width: #{map-get($grid-breakpoints, 'md')}) {
                  .qm-card {
                     width: 90%;
                 }   
             }
-            @media screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'xl')}) {
+            @media all and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'xl')}) {
                  .qm-card {
                     width: 80%;
                 }   
             }
-            @media screen and (min-width: #{map-get($grid-breakpoints, 'xl')}) {
+            @media all and (min-width: #{map-get($grid-breakpoints, 'xl')}) {
                  .qm-card {
                     width: 60%;
                 }   
