@@ -17,6 +17,7 @@ buttonRecycleEnabled = true;						// Recycle button
 buttonParkEnabled = false;							// Park Button
 buttonNotesEnabled = false;							// Edit/Add Notes Button
 buttonNoShowsEnabled = true;						// No Shows Button
+buttonRecallEnabled = false;						// Recall Button
 buttonWalkDirectEnabled = true;						// Walk Direct Button
 buttonRemoveFromQueueEnabled = true;				// Remove from Queue Button 
 buttonTransferFromQueueEnabled = true;				// Transfer from Queue Button 
@@ -140,10 +141,21 @@ function showModules() {
 		//$('#notesBtn').hide(); // TODO: Remove me
 		$('.js-notes').hide();
 	}
+	
 	if (buttonRecycleEnabled == true) {
 		$('#reinsertBtn').show();
+		$('#reinsertOption').show();
 	} else {
 		$('#reinsertBtn').hide();
+		$('#reinsertOption').hide();
+	}
+
+	if (buttonRecallEnabled == true) {
+		$('#recallBtn').show();
+		$('#recallOption').show();
+	} else {
+		$('#recallBtn').hide();
+		$('#recallOption').hide();
 	}
   
   	if (multiMarks == false) {
@@ -203,6 +215,9 @@ function showModules() {
 		}
 		if ( params.btnRecycle != undefined) {
 			buttonRecycleEnabled = params.btnRecycle;					// Recycle button
+		}
+		if ( params.btnRecall != undefined) {
+			buttonRecallEnabled = params.btnRecall;						// Recall button
 		}
 		if ( params.btnPark != undefined) {
 			buttonParkEnabled = params.btnPark;							// Park Button

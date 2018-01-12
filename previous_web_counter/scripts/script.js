@@ -810,9 +810,15 @@ var servicePoint = new function () {
 				sessvars.statusUpdated = new Date();
 				servicePoint.updateWorkstationStatus();
 				servicePoint.addMultiServicePressed();
-				if (serviceName)
-				util.showMessage('"'+ serviceName +'" ' + jQuery.i18n
+				if (serviceName) {
+					if (sessvars.currentUser.direction == "rtl") {
+						util.showMessage(jQuery.i18n
+								.prop('info.card.addServicesCard.wasRemoved') + ' "'+ serviceName +'"');
+					} else {
+						util.showMessage('"'+ serviceName +'" ' + jQuery.i18n
 								.prop('info.card.addServicesCard.wasRemoved'));
+					}
+				}
 			}
 	};
 
