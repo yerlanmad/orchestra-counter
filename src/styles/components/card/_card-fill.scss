@@ -1,6 +1,7 @@
 .qm-card-fill {
         height: 100%;
         height: calc(100% - #{rem($height-of-card-stack)});
+        width: 100%;
         .qm-card {
                 height: inherit;
                 display: flex;
