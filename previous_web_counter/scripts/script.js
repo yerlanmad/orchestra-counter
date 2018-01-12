@@ -734,24 +734,12 @@ var servicePoint = new function () {
 
 		var len = sessvars.state.visit.unservedVisitServices.length;
 		var len1 = sessvars.state.visit.servedVisitServices.length;
-		// var select = document.getElementById("addEditServicesBox");
-		// var select = document.getElementById("availableServicesFilter");
-
-		// while (select.length > 0) { // clear current list
-		// 	select.remove(select.length - 1);
-		// }
 
 		$("#unServedServices").find(".list").empty();
 		for (i = 0; i < len; i++) {
 			var opt = document.createElement("option");
 			opt.text = sessvars.state.visit.unservedVisitServices[i].serviceInternalName;
 			opt.value = sessvars.state.visit.unservedVisitServices[i].id;
-			// try {
-			// 	select.add(opt, null); // standards compliant; doesn't work in
-			// 	// IE
-			// } catch (ex) {
-			// 	select.add(opt); // IE only
-			// }
 
 			$("#unServedServices").find(".list").append(
 			'<div class="list--item">' +
@@ -769,43 +757,11 @@ var servicePoint = new function () {
 		}
 
 		var select = document.getElementById("availableServicesFilter");
-		// while (select.length > 0) {// clear current list
-		// 	select.remove(select.length - 1);
-		// }
 
 		util.clearSelect($("#availableServicesFilter"));
 		$Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') })
 
 		for (i = 0; i < servicePoint.servicesList.length; i++) {
-
-			// var found = 0;
-			// for (j = 0; j < len; j++) {
-			// 	if (servicePoint.servicesList[i].id == sessvars.state.visit.unservedVisitServices[j].serviceId) {
-			// 		found = 1; // do not show this service in the list
-			// 	}
-			// }
-
-			// for (j = 0; j < len1; j++) {
-			// 	if (servicePoint.servicesList[i].id == sessvars.state.visit.servedVisitServices[j].serviceId) {
-			// 		found = 1; // do not show this service in the list
-			// 	}
-			// }
-			// if (servicePoint.servicesList[i].id == sessvars.state.visit.currentVisitService.serviceId) {
-			// 	found = 1; // do not show this service in the list
-			// }
-			// if (found == 0) {
-			// 	var opt = document.createElement("option");
-			// 	opt.value = servicePoint.servicesList[i].id;
-			// 	opt.text = servicePoint.servicesList[i].internalName;
-
-			// 	try {
-			// 		select.add(opt, null); // standards compliant; doesn't work
-			// 		// in IE
-			// 	} catch (ex) {
-			// 		select.add(opt); // IE only
-			// 	}
-			// }
-
 
 			var opt = document.createElement("option");
 				opt.value = servicePoint.servicesList[i].id;
@@ -825,8 +781,6 @@ var servicePoint = new function () {
 	};
 
 	this.addService = function (serviceId) {
-		// if (listServicesBox.options[listServicesBox.selectedIndex].value != undefined) {
-			// var addServiceId = listServicesBox.options[listServicesBox.selectedIndex].value;
 			var addServiceId = serviceId;
 			addParams = servicePoint.createParams();
 			addParams.branchId = sessvars.branchId;
@@ -838,12 +792,9 @@ var servicePoint = new function () {
 			sessvars.statusUpdated = new Date();
 			servicePoint.updateWorkstationStatus();
 			servicePoint.addMultiServicePressed();
-		// }
 	};
 
 	this.removeService = function (serviceId, index) {
-		// if (addEditServicesBox.options[addEditServicesBox.selectedIndex].value != undefined) {
-			// var removeServiceId = addEditServicesBox.options[addEditServicesBox.selectedIndex].value;
 			var removeServiceId = serviceId;
 			removeParams = servicePoint.createParams();
 			removeParams.branchId = sessvars.branchId;
@@ -863,7 +814,6 @@ var servicePoint = new function () {
 				util.showMessage('"'+ serviceName +'" ' + jQuery.i18n
 								.prop('info.card.addServicesCard.wasRemoved'));
 			}
-		// }
 	};
 
 	this.closeResortServices = function () {
@@ -947,11 +897,13 @@ var servicePoint = new function () {
 		sessvars.statusUpdated = new Date();
 		servicePoint.updateWorkstationStatus();
 		servicePoint.addMultiServicePressed();
-		util.hideModal("addEditServicesDialogue");
+		// util.hideModal("addEditServicesDialogue");
+		cardNavigationController.popModal($Qmatic.components.card.addServicesCard)
 	};
 
 	this.closeServices = function () {
-		util.hideModal("addEditServicesDialogue");
+		// util.hideModal("addEditServicesDialogue");
+		cardNavigationController.popModal($Qmatic.components.card.addServicesCard)
 	};
 
 	// commands like next needs to be checked for multi service to show popup.
