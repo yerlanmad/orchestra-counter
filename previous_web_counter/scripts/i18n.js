@@ -401,7 +401,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('#transferCounterPoolCard .qm-card-description', 'info.card.transferCounterPoolCard.description');
         i18nPlaceholder($("#transferToQueues_filter input"), "info.placeholder.transfer.search");
         
-        i18nSafeSelectorBtnAppend('.js-back-btn > span', 'application.sr.back');
+        i18nSafeSelectorBtnAppend('.js-back-btn > .sr-only', 'application.sr.back');
         i18nSafeSelectorBtnAppend('.js-cancel-btn > span', 'button.cancel');
         
         i18nSafeSelectorBtnAppend('.js-transferToQueue > span', 'action.transfer.to.queue');
