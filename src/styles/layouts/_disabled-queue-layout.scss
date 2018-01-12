@@ -1,0 +1,13 @@
+.qm-main {
+    &--no-queues {
+        .qm-main__left {
+            flex: 1 1 percentage(10/12);
+            .qm-card {
+                width: 75%;
+            }
+        }
+        .qm-main__right {
+            flex: 1 1 percentage(2/12);
+        }
+    }
+}

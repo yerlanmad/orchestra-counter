@@ -18,12 +18,13 @@ window.$Qmatic.components.QueueNavController.prototype = {
         if(this.queueOverviewView === null && this.queueDetailView === null) {
             this.queueOverviewView  = document.getElementById('queuesModule');
             this.queueDetailView    = document.getElementById('queueDetailView');
+            this.queueTableContent  = document.querySelector('.qm-queue-detail__content');
             this.queueDetailBackBtn = document.querySelector('.js-queue-detail-back');
             this._attachEventListeners();
         }
     },
     _attachEventListeners: function () {
-        this.queueDetailView.addEventListener('click', this._handleClickInsideDetailView.bind(this));
+        this.queueTableContent.addEventListener('click', this._handleClickInsideDetailView.bind(this));
         this.queueDetailBackBtn.addEventListener('click', this.navigateToOverview.bind(this));
     },
     navigateToOverview: function () {

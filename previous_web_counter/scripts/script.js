@@ -1220,9 +1220,11 @@ var servicePoint = new function () {
 																		 */) {
 			servicePoint.endVisitPressed();
 			servicePoint.endUserServicePointSession();
-			spPoolUpdateNeeded = false;
-			userPoolUpdateNeeded = false;
+			// spPoolUpdateNeeded = false;
+			// userPoolUpdateNeeded = false;
 			//queuesUpdateNeeded = false;
+			spPoolUpdateNeeded = true;
+			userPoolUpdateNeeded = true;
 			queuesUpdateNeeded = true;
 			queueViewController.navigateToOverview();
 			servicePoint.updateWorkstationStatus();

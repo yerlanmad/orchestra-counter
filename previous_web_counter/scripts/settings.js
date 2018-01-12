@@ -44,8 +44,8 @@ function showModules() {
 	}
 
 	if (moduleMultiServicesEnabled == true) {
-		$('#multiServicesModule').css("visibility","visible");
-		$('#addMultiServiceLink').css("visibility","visible");
+		$('#multiServicesModule').attr("style","");
+		$('#addMultiServiceLink').attr("style","");
 		if (moduleDeliveredServicesEnabled == false) {
 			$('#deliveredServicesModule').hide();
 		}
@@ -73,7 +73,7 @@ function showModules() {
 		$('#selectOutcome').parent().hide();
 	}
 	if (moduleServicePointPoolEnabled == true) {
-		$('#servicePointPoolModule').css("visibility","visible");
+		$('#servicePointPoolModule').attr("style","");
 		var counterPool = $('#userPoolModule');
 		util.poolResizeHandler(counterPool);
 	} else {
@@ -81,7 +81,7 @@ function showModules() {
 	}
 	
 	if (moduleUserPoolEnabled == true) {
-		$('#userPoolModule').css("visibility","visible");
+		$('#userPoolModule').attr("style", "");
 		var userPool = $('#userPoolModule');
 		util.poolResizeHandler(userPool);
 	} else {
@@ -90,10 +90,13 @@ function showModules() {
 
 	if(moduleServicePointPoolEnabled == false && moduleUserPoolEnabled == false) {
 		$main.addClass('qm-main--no-pools');
+	} else {
+		$main.removeClass('qm-main--no-pools');
 	}
 
 	if (moduleQueuesEnabled == true) {
-		$('#queuesModule').css("visibility","visible");
+		$('#queuesModule').attr("style","");
+		$main.removeClass('qm-main--no-queues');
 	} else {
 		$main.addClass('qm-main--no-queues');
 		$('#queuesModule').hide();
@@ -131,10 +134,10 @@ function showModules() {
 		$('#parkBtn').hide();
 	}
 	if (buttonNotesEnabled == true) {
-		$('#notesBtn').show(); // TODO: Remove me
+		//$('#notesBtn').show(); // TODO: Remove me
 		$('.js-notes').show();
 	} else {
-		$('#notesBtn').hide(); // TODO: Remove me
+		//$('#notesBtn').hide(); // TODO: Remove me
 		$('.js-notes').hide();
 	}
 	if (buttonRecycleEnabled == true) {

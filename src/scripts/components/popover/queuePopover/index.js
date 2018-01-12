@@ -9,7 +9,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent = function(options) {
     this.showDeleteBtn      = _.isBoolean(options.showDeleteBtn) ? options.showDeleteBtn : true;
     this.disableCall        = _.isBoolean(options.disableCall) ? options.disableCall : false;
     this.disableTransfer    = _.isBoolean(options.disableTransfer) ? options.disableTransfer : false;
-    this.disableDelete      = _.isBoolean(options.disableRemove) ? options.disableRemove : false;
+    this.disableDelete      = _.isBoolean(options.disableDelete) ? options.disableDelete : false;
 
     //Tables
     this.queueTable         = null;

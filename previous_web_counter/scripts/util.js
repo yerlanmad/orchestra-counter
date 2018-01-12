@@ -365,7 +365,15 @@ var util = new function () {
     };
 
     this.compareTimeInPool = function (a, b) {
-        return b.waitingTime - a.waitingTime;
+        var a1 = a.waitingTime;
+        var a2 = a.ticketId;
+        var b1 = b.waitingTime;
+        var b2 = b.ticketId;
+        if (a1 < b1) return 1;
+        if (a1 > b1) return -1;
+        if (a2 < b2) return -1;
+        if (a2 > b2) return 1;
+        return 0;
     };
 
     this.poolResizeHandler = function (pool) {

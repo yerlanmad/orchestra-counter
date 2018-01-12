@@ -12,9 +12,13 @@
     }
 
     @at-root .qm-main--no-queues & {
-        display: block;
+        display: flex;
+        //flex: 1 1 auto;
+        //flex-wrap: wrap;
         height: auto;
+        max-height: 50%;
         padding-right: 0;
+        flex-direction: column;
     }
 
     @at-root [dir='rtl'] .qm-main--no-queues & {
@@ -22,7 +26,7 @@
     }
 
     &__label {
-        flex: 0 110px;
+        flex: 0 0 110px;
         padding-top: rem($global-standard-padding / 2);
         color: $dark-transparent82;
         overflow: hidden;
@@ -37,7 +41,7 @@
         @at-root .qm-main--no-queues & {
             display: block;
             text-align: left;
-            flex: 1 1 100%;
+            flex: 0 0 auto;
             font-size: rem(21px);
             padding-top: 0;
             margin-bottom: rem(20px);
@@ -60,9 +64,9 @@
 
         @at-root .qm-main--no-queues & {
             padding: 0;
-            max-height: rem(230px);
-            height: 100%;
+            height: calc(100% - 51px);
             overflow: auto;
+            flex: auto;
         }
     }
 
@@ -83,6 +87,7 @@
         padding: rem(0 4px);
 
         @at-root .qm-main--no-queues & {
+            width: 100%;
             display: block;
             padding: 0;
             margin-bottom: rem(4px);

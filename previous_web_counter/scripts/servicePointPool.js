@@ -108,7 +108,7 @@ var servicePointPool = new function() {
     
                 // Popover options and initialization
                 options.popTarget = template.get(0).querySelector('.qm-pool-item__content--ticket');
-                if(servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+                if(servicePoint.isOutcomeOrDeliveredServiceNeeded()  || sessvars.state.servicePointState === "CLOSED") {
                     options.disableCall = true;
                 }
                 options.visitId = data.visitId;

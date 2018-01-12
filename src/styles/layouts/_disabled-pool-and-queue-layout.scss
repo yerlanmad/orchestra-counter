@@ -1,0 +1,23 @@
+.qm-main--no-queues.qm-main--no-pools {
+    .qm-main__left {
+        flex: 1 1 100%;
+        @media all and (max-width: #{map-get($grid-breakpoints, 'md')}) {
+             .qm-card {
+                width: 90%;
+            }   
+        }
+        @media all and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'xl')}) {
+             .qm-card {
+                width: 80%;
+            }   
+        }
+        @media all and (min-width: #{map-get($grid-breakpoints, 'xl')}) {
+             .qm-card {
+                width: 60%;
+            }   
+        }
+    }
+    .qm-main__right {
+        display: none;
+    }
+}

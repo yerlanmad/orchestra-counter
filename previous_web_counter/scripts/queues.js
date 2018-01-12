@@ -3,7 +3,7 @@ var queues = new function() {
     var myQueuesTable;
     var queuesTable;
     var ticketsTable;
-    var SORTING = [[2, 'desc'], [3, 'desc'], [0, 'asc']];
+    var SORTING = [[3, 'desc'], [2, 'desc'], [0, 'asc']];
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.
@@ -155,9 +155,9 @@ var queues = new function() {
                 var tickets = spService.get("branches/" + params.branchId + "/queues/" + params.queueId + "/visits/full");
                 if(tickets.length > 0) {
                     ticketsTable.fnAddData(tickets);
-                    queueDetailInitFn(tickets);
                     ticketsTable.fnAdjustColumnSizing();
                 }
+                queueDetailInitFn(tickets);
             } else {
                 var columns = [
                     /* Id */                {"bSearchable": false,
@@ -247,6 +247,7 @@ var queues = new function() {
                 ticketsTable = util.buildTableJson({"tableId": "tickets", "url": url, "rowCallback": rowCallback,
                     "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "100%",
                     "emptyTableLabel": "info.queue.tickets.empty", "initFn": queueDetailInitFn});
+
             }
 
             //kill old event handlers

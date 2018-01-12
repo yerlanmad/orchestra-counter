@@ -6,6 +6,11 @@
     align-items: center;
     justify-content: space-between;
 
+    @at-root .qm-main--no-queues & {
+        max-width: 153px;
+        width: auto;
+    }
+
     &__content {
         & + & {
             margin-left: rem($global-standard-margin / 2);
