@@ -12,7 +12,6 @@ window.$Qmatic.components.card.TransferCardComponent = function (selector) {
     // @Override
     this.cleanUp = function () {
         window.$Qmatic.components.card.CardBaseComponent.prototype.cleanUp.call(this, selector);
-        window.$Qmatic.utils.log.info("Cleaning up compnent " + this.getSelector())
         var filterInput = $(this.getSelector()).find('.js-table-filter-input');
         filterInput.val('');
         filterInput.trigger('keyup');

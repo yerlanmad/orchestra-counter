@@ -986,7 +986,7 @@ var servicePoint = new function () {
 			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED)) {
 			var callNextResponse = spService.post("branches/"
 				+ params.branchId + "/servicePoints/"
-				+ params.servicePointId + "/visits/next")
+				+ params.servicePointId + "/visits/next");
 			if (callNextResponse) {
 				sessvars.state = servicePoint.getState(callNextResponse);
 				sessvars.statusUpdated = new Date();

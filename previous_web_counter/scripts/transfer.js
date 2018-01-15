@@ -8,6 +8,16 @@ var transfer = new function() {
     var transferQueueToServicePointPoolTable;
 
     this.transferPressed = function () {
+        if(transferToUserPoolEnabled) {
+            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').attr('style', '');
+        } else {
+            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').css('display', 'none');
+        }
+        if(transferToServicePointPoolEnabled) {
+            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').attr('style', '');
+        } else {
+            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').css('display', 'none');
+        }
         cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
     }
 

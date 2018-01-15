@@ -16,14 +16,19 @@ var queues = new function() {
                 // All Queues
                 queuesTable.fnClearTable();
                 var queuesData = spService.get("branches/" + sessvars.branchId + "/queues") 
-                queuesTable.fnAddData(queuesData);
+                if(queuesData.length > 0) {
+                    queuesTable.fnAddData(queuesData);
+                }
                 allQueuesInitFn(queuesData);
 
                 // My Queues
                 myQueuesTable.fnClearTable();
                 var myQueuesData = myQueuesFilterFn(queuesData);
-                myQueuesTable.fnAddData(myQueuesData);
+                if(myQueuesData.length > 0) {
+                    myQueuesTable.fnAddData(myQueuesData);
+                }
                 myQueuesInitFn(myQueuesData);
+                
             } else {
                 var columns = [
                     /* Queue name */        {"sClass": "qm-table__first-column",
