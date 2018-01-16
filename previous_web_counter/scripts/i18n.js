@@ -104,7 +104,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("transactionTime", 'info.transaction.time');
         i18nSafe("chooseOutcome", "field.choose");
         i18nSafe("selectOutcomeLabel", 'info.outcomes');
-        i18nSafe("noOfMarksLabel", 'info.custom.mark.quantity');
+        i18nSafe("noOfMarksLabel", 'info.custom.mark.quantity', " (");
+        i18nSafeAppend("noOfMarksLabel", 'info.custom.mark.maxLbl', "10)");
+        
         //header links
         i18nSafe("settingsLink", 'menu.tab.settings');
         i18nSafe("logoutLink", 'button.logout');

@@ -45,7 +45,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
         });
 
         $marksAddBtn.click(function() {
-            if (parentContext.noOfMarksToBeAdded > 0) {
+            if (parentContext.noOfMarksToBeAdded > 0 && parentContext.noOfMarksToBeAdded <= parseInt($markCountInputField.attr('max'))) {
                 customMarks.customMarkClicked(parentContext.selectedId, parentContext.noOfMarksToBeAdded);
                 parentContext.resetSelected();
             } else {

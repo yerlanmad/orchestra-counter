@@ -35,10 +35,11 @@
                                 <div class="main__bottom">
                                     <div class="main__bottom-inner-container">
                                         <div class="main__bottom-inner-container__input">
-                                            <label for="noMarkCount" class="display-text" id="noOfMarksLabel">
-                                            
+                                            <label for="noMarkCount" class="display-text">
+                                                <span id="noOfMarksLabel"></span>
                                             </label>
-                                            <input id="noMarkCount" class="count-input" type="number" min="0"/>
+                                            
+                                            <input id="noMarkCount" class="count-input" type="number" min="0" max="10"/>
                                         </div>
 
                                         <div class="main__bottom-inner-container__btn">
