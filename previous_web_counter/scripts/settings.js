@@ -54,9 +54,6 @@ function showModules() {
 	if (moduleCustomMarksEnabled == true) {
 		// $('#customMarksModule').css("visibility","visible");
 		$('#addCustomMarkLink').show();
-		if (moduleDeliveredServicesEnabled == false) {
-			$('#deliveredServicesModule').hide();
-		}
 	} else {
 		// $('#customMarksModule').hide();
 		$('#addCustomMarkLink').hide();
