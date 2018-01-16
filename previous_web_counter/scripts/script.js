@@ -2017,7 +2017,9 @@ var servicePoint = new function () {
 		$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled", true);
 		$("#addCustomMarkLink").prop('disabled', true);
 
-		outcome.clearOutcome();
+		if (outcomeUpdateNeeded) {
+			outcome.clearOutcome();
+		}
 
 		deliveredServices.clearTable();
 		customMarks.clearTable();

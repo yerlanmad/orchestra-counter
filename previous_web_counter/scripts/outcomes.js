@@ -6,7 +6,7 @@ var outcome = new function() {
     this.addOutcomePressed = function() {
         if(servicePoint.hasValidSettings() && (sessvars.state.userState == servicePoint.userState.SERVING &&
             (sessvars.state.visit.currentVisitService.outcomeExists == true))) {
-            util.showModal("addOutcomes");
+            // util.showModal("addOutcomes");
             if(typeof selectOutcomeTable != 'undefined') {
                 selectOutcomeTable.fnClearTable();
                 //var enquiryMarks = WorkstationService.getMarksOfType({'markType': 'enquiry'});
@@ -179,6 +179,7 @@ var outcome = new function() {
 
     this.clearOutcome = function() {
         util.clearSelect($("#selectOutcome"));
+        $("#selectOutcome").trigger("chosen:updated");
     };
 
 };
