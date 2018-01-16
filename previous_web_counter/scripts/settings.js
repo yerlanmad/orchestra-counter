@@ -45,13 +45,9 @@ function showModules() {
 	}
 
 	if (moduleMultiServicesEnabled == true) {
-		$('#multiServicesModule').attr("style","");
-		$('#addMultiServiceLink').attr("style","");
-		if (moduleDeliveredServicesEnabled == false) {
-			$('#deliveredServicesModule').hide();
-		}
+		$('#addMultiServiceLink').show();
 	} else {
-		$('#multiServicesModule').hide();
+		$('#addMultiServiceLink').hide();
 	}
 	
 	
