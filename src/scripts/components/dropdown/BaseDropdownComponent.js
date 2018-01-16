@@ -4,7 +4,8 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     // DefaultConfiguration
     this.chosenConfig = {
         disable_search_threshold: 5,
-        single_disable: true
+        single_disable: true,
+        search_contains: true
     }
 
     // @Override
