@@ -37,7 +37,9 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
-	4.0.0.0    2018-12-20   label and tooltip tweaks for reskin       lakcal
+    4.0.0.1    2018-01-17   bug in pivotal #154323479                 lakcal
+
+	  4.0.0.0    2018-12-20   label and tooltip tweaks for reskin       lakcal
 	
     2.13.0     2016-12-02   Added correction for QP-5223              olacar
 
@@ -71,7 +73,7 @@
 
 <unit name="WebServicePoint_Expressia_D924"
       frameworkVersion="2"
-      unitVersion="4.0.0.0"
+      unitVersion="4.0.0.1"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -340,7 +342,7 @@
       sortOrder="2"
       type="IdCode"
       defaultValue="1"
-      description="Starting ID code. Valid values: 1-125."
+      description="Starting ID code. Valid values: 1-125"
       label="ID Code LED display"
       writeLevel="branch"
       privilege="install"
