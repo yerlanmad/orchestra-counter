@@ -115,6 +115,11 @@ gulp.task('move:lang', function () {
         .pipe(gulp.dest('./dist'))
 })
 
+gulp.task('move:config', function () {
+    return gulp.src(['./config.properties'])
+        .pipe(gulp.dest('./dist'))
+})
+
 gulp.task('util:war', function () {
     return gulp.src(['dist/**', '!dist/lang'])
         .pipe(zip('workstationterminal.war'))
@@ -280,6 +285,7 @@ gulp.task('build:war', gulpsync.sync(
         'move:images',
         'move:icons',
         'move:previous_counter_files',
+        'move:config',
         'util:war',
         'clean:war',
         'move:lang'
@@ -305,6 +311,7 @@ gulp.task('deploy', gulpsync.sync(
         'clean:war',
         'move:lang',
         'deploy:war',
+        'move:config',
         'deploy:lang'
     ]), function () {
         return console.log(`workstationterminal.war file created in dist folder`)
