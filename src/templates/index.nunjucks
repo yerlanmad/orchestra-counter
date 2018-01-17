@@ -83,6 +83,7 @@
         {% include "partials/modals/storeNext/store-next.nunjucks" %}
         {% include "partials/modals/visitInDisplayQueue/visit-in-display-queue.nunjucks" %}
         {% include "partials/modals/nextServices/next-services.nunjucks" %}
+        {% include "partials/modals/logoutWindow/logout-window.nunjucks" %}
     </div>
     
 

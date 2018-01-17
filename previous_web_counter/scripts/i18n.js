@@ -114,8 +114,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         // confirm logout dialog
         i18nSafeAppend("logoutWindowHeader", "info.confirm.logout.header");
-        i18nSafe("confirmLogoutLink", "info.confirm.logout.proceed");
-        i18nSafe("cancelLogoutLink", "info.confirm.logout.cancel");
+        i18nQmBtn("confirmLogoutLink", "info.confirm.logout.proceed");
+        i18nQmBtn("cancelLogoutLink", "info.confirm.logout.cancel");
 
         //ongoing visit button
         i18nSafe("callNextLabel", 'action.next');

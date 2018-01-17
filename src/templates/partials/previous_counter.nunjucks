@@ -1092,7 +1092,7 @@
             </div>#}
 
 			<!-- Logout dialogue -->
-            <div id="logoutWindow" class="modalPage">
+            <!--<div id="logoutWindow" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="branchForm roundedCorner5">
@@ -1116,7 +1116,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>-->
             
             <!-- Walkdirect dialogue -->
             <!--<div id="walks" class="modalPage">

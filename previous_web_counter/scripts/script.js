@@ -2258,8 +2258,9 @@ var servicePoint = new function () {
 					}
 				}
 				if (displayDialog) {
-					util.showModal("logoutWindow");
+					// util.showModal("logoutWindow");
 					$("#confirmLogoutMessage").html(warningMessage);
+					modalNavigationController.push($Qmatic.components.modal.logoutWindow);
 				} else {
 					// check if workstation is open inside
 					// endUserServicePointSession() call
@@ -2279,6 +2280,9 @@ var servicePoint = new function () {
 				servicePoint.cleanAndLogout();
 				isLogout = true;
 			}
+		}
+		if (isLogout){
+			window.location.replace("/logout.jsp");
 		}
 		return isLogout;
 	};
