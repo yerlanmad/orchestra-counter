@@ -24,9 +24,11 @@
     &:hover,
     &:focus {
         text-decoration: none;
+        color: $card-action-item-color;
 
         &:before {
             background: rgba($pale-aquamarine, 0.04);
+            color: $card-action-item-color;
         }
     }
 

@@ -45,6 +45,7 @@
         &:hover,
         &:focus {
             text-decoration: none;
+            color: $secondary-color;
         }
 
         &:visited {
