@@ -37,9 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
-    4.0.0.1    2018-01-17   bug in pivotal #154323479                 lakcal
-
-	  4.0.0.0    2017-12-20   label and tooltip tweaks for reskin       lakcal
+    4.0.0.0    2018-01-17   label and tooltip tweaks for reskin       lakcal
 	
     2.12.0     2016-11-18   USER_SERVICE_POINT_SESSION_END is now     johper, marwah
                             only sent to the affected user
@@ -70,7 +68,7 @@
 
 <unit name="WebServicePoint_D924"
       frameworkVersion="2"
-      unitVersion="4.0.0.1"
+      unitVersion="4.0.0.0"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
