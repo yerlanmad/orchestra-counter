@@ -1089,6 +1089,7 @@ var servicePoint = new function () {
 			&& sessvars.state.visit.recycleAllowed) {
 			sessvars.cfuSelectionSet = true;
 			servicePoint.reinsertCustomer();
+			queues.updateQueues(true);
 		}
 	};
 
