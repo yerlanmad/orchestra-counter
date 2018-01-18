@@ -178,6 +178,8 @@ var transfer = new function() {
                 table = util.buildTableJson({"tableSelector": selector, "url": url,
                     "rowCallback": rowCallback, "columns": columns, "filter": false, "headerCallback": headerCallback,
                     "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues});
+                
+                table.fnSort([0, 'asc']);
                 //transferTicketToQueueTable = util.buildTable("transferTicketQueueToQueueTable", url, rowCallback, columns, false, headerCallback, true);
             }
             //destroy old event handlers
@@ -348,8 +350,9 @@ var transfer = new function() {
                     "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns,
                     "filter": false, "headerCallback": servicePointHeaderCallback, "scrollYHeight": "300px",
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
-                table.fnSort([3, 'asc']); // open counters first
+                
             }
+            table.fnSort([[3, 'asc'], [0, 'asc']]); // open counters first
             //destroy old event handlers
             $('tbody tr td', $(selector)).die('click');
             //make new ones
@@ -512,8 +515,9 @@ var transfer = new function() {
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": headerCallback,
                     "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues, "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
                 //transferTicketToQueueTable = util.buildTable("transferTicketQueueToQueueTable", url, rowCallback, columns, false, headerCallback, true);
-                transferTable.fnSort([0, 'asc']);
+                
             }
+            transferTable.fnSort([0, 'asc']);
 					
             //destroy old event handlers
 			if ( buttonTransferFirstEnabled  == true ) {	
@@ -599,9 +603,8 @@ var transfer = new function() {
                 transferToStaffPoolTable = util.buildTableJson({"tableId": "transferTicketToUserPoolTable", "url": staffPoolUrl,
                 "rowCallback": staffPoolRowCallback, "columns": staffPoolColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": staffPoolHeaderCallback,
                 "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.staff.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
-
-                transferToStaffPoolTable.fnSort([1, 'asc']);
             }
+            transferToStaffPoolTable.fnSort([1, 'asc']);
             //destroy old event handlers
             $('tbody tr td', $("#transferTicketToUserPoolTable")).die('click');
             //make new ones
@@ -669,8 +672,8 @@ var transfer = new function() {
                 transferToServicePointPoolTable = util.buildTableJson({"tableId": "transferTicketToCounterPoolTable",
                 "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": servicePointHeaderCallback,
                 "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
-                transferToServicePointPoolTable.fnSort([3, 'asc']); // open counters first
             }
+            transferToServicePointPoolTable.fnSort([[3, 'asc'], [0, 'asc']]);// open counters first
             //destroy old event handlers
             $('tbody tr td', $("#transferTicketToCounterPoolTable")).die('click');
             //make new ones

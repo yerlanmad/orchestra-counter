@@ -16,11 +16,14 @@ var userPool = new function() {
         } else {
             var columns = [
                 /* Id */                {"bSearchable": false,
+                "sType": "qm-sort",
                     "bVisible": false,
                     "mDataProp": "visitId"},
                 /* Ticket id */         {"sClass": "firstColumn",
+                "sType": "qm-sort",
                     "mDataProp": "ticketId"},
                 /* Waiting time */      {"sClass": "lastColumn",
+                "sType": "qm-sort",
                     "mDataProp": "waitingTime"}
             ];
             var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
@@ -52,6 +55,8 @@ var userPool = new function() {
             userPoolTable = util.buildTableJson({"tableId": "userPool", "url": url, "rowCallback": rowCallback,
                 "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "54px",
                 "emptyTableLabel": "info.user.pool.no.tickets"});
+            var sorting = [[2, 'desc']];
+            userPoolTable.fnSort(sorting);
         }
 
         //kill old event handlers
@@ -64,11 +69,6 @@ var userPool = new function() {
             var aData = userPoolTable.fnGetData(nTr);
             ticketClicked(aData);
             return false;
-        });
-
-        $(document).ready(function() {
-            var sorting = [[2, 'desc']];
-            userPoolTable.fnSort(sorting);
         });
 
         // Sadly clearing and adding data to the queue "data table" resets the position of our search result
