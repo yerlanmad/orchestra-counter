@@ -9,30 +9,15 @@
     .qm-card {
         margin-bottom: rem($global-standard-padding + $global-standard-card-shadow-height);
     }
-    &::-webkit-scrollbar {
-        width: 0px;
-        background: transparent;
-        -ms-overflow-style: -ms-autohiding-scrollbar;
-    }
     .qm-card-scroll-container {
         display: flex;
         flex-direction: column;
         height: 100%;
         width: 100%;
-        &::-webkit-scrollbar {
-            width: 0px;
-            background: transparent;
-            -ms-overflow-style: -ms-autohiding-scrollbar;
-        }
         &__content {
             width: 100%;
             margin: auto;
             padding-top: $height-of-card-stack;
-            &::-webkit-scrollbar {
-                width: 0px;
-                background: transparent;
-                -ms-overflow-style: -ms-autohiding-scrollbar;
-            }
         }
     }
 }

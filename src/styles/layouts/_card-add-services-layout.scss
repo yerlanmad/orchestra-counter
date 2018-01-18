@@ -53,11 +53,6 @@
         &__content-section {
             flex-grow: 1;
             overflow-y: scroll;
-            &::-webkit-scrollbar {
-                width: 0px;
-                background: transparent;
-                -ms-overflow-style: -ms-autohiding-scrollbar;
-            }
             #unServedServices {
                 .list {
                     &--item {
