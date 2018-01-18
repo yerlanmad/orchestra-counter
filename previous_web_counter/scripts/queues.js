@@ -314,15 +314,15 @@ var queues = new function() {
         myQueuesTable.fnClearTable();
     };
     // TODO: Remove
-    var removeTicketClicked = function(aRowData) {
-        if(servicePoint.hasValidSettings()) {
-            var params = servicePoint.createParams();
-            params.queueId = sessvars.clickedQueueId;
-            params.visitId = aRowData.visitId;
-            spService.del("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId);
-            queues.updateQueues(false);
-        }
-    };
+    // var removeTicketClicked = function(aRowData) {
+    //     if(servicePoint.hasValidSettings()) {
+    //         var params = servicePoint.createParams();
+    //         params.queueId = sessvars.clickedQueueId;
+    //         params.visitId = aRowData.visitId;
+    //         spService.del("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId);
+    //         queues.updateQueues(false);
+    //     }
+    // };
 
     this.removeTicket = function (visitId, ticketId) {
         if(servicePoint.hasValidSettings()) {

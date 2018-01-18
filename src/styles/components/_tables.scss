@@ -71,6 +71,17 @@
         }
     }
 
+    &__lock-icon {
+        font-size: rem(24px);
+        color: $dark-transparent42;
+        vertical-align: text-bottom;
+    }
+
+    &__highlight {
+        font-weight: $font-weight-medium;
+        text-decoration: underline;
+    }
+
     // DataTables overrides
     .sorting,
     .sorting_asc,

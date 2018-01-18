@@ -1,0 +1,12 @@
+.qm-generic-layout {
+    display: flex;
+    flex-wrap: wrap;
+
+    &--space-between {
+        justify-content: space-between;
+    }
+
+    &--align-right {
+        justify-content: flex-end;
+    }
+}

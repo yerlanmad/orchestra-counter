@@ -1,0 +1,66 @@
+.qm-customer-search-results {
+    box-shadow: 0 0 8px 0 $dark-transparent12;
+}
+
+// Data tables overrides and old styles
+#customerSearchDiv{ 
+    max-height: 300px;
+    overflow-y: auto; 
+    background: $white; 
+    color: $dark-transparent82;
+    font-weight: $font-weight-light;
+    height: auto;
+    position: fixed !important;
+
+    .dataTables_wrapper {
+        min-height: auto;
+    }
+
+    .dataTables_scrollHead {
+        display: none;
+    }
+}
+#customerSearchTable{
+    width: 100% !important;
+
+    thead {
+        tr {
+            th {
+                white-space: nowrap; 
+                padding: 0;
+                margin: 0;
+                padding-left: rem($global-standard-padding / 2); 
+                padding-right: rem($global-standard-padding / 2);
+            }
+        }
+    }
+
+    tbody {
+        tr {
+            
+            td {
+                color: $dark-transparent82;
+                cursor: pointer; 
+                white-space: nowrap;
+                padding: rem(8px);
+                &:first-child {
+                    font-size: rem(18px);
+                }
+            }
+        }
+    }
+
+    
+
+    .odd,
+    .even {
+        background: transparent;
+    }
+
+    .row_selected {
+        background: $dark-transparent04; 
+    }
+}
+
+.dataTables_wrapper {min-height: 100px;}
+.customerSearchHeader { display: none; }

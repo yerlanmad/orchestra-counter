@@ -9,7 +9,26 @@ var customer = new function() {
 
 	var isDefined = function(object) {
         return object !== null && object !== undefined;
-	};
+    };
+    
+    this.addUserPressed = function (e) {
+        e.preventDefault();
+        window.$Qmatic.components.card.addCustomerCard.showAddForm();
+        cardNavigationController.push(window.$Qmatic.components.card.addCustomerCard);
+    };
+
+    this.editUserPressed = function (e) {
+        e.preventDefault();
+        if(moduleCustomerEnabled) {
+            cardNavigationController.push(window.$Qmatic.components.card.editCustomerCard);
+            this.populateEditAttachedCustomerFields("editAttached");
+        }
+    }
+
+    this.editAttachedCustomer = function (e) {
+        e.preventDefault();
+        this.editCustomer("editAttached", true);
+    }
 
     /*
         The locale identifier we get may contain a country identifier which may not exist among the
@@ -130,12 +149,12 @@ var customer = new function() {
                     }
                     
                     // NEW R5: Make sure links are disabled when search changes
-                    $("#editCustomerLink").removeClass("customLink").addClass("editCust customLinkDisabled");
-                    $("#editCustomerLink").prop('disabled', true);
-                    $("#linkCustomerLink").removeClass("customLink").addClass("linkCust customLinkDisabled");
-                    $("#linkCustomerLink").prop('disabled', true);
-                    $("#deleteCustomerLink").removeClass("customLink").addClass("deleteCust customLinkDisabled");
-                    $("#deleteCustomerLink").prop('disabled', true);
+                    // $("#editCustomerLink").removeClass("customLink").addClass("editCust customLinkDisabled");
+                    // $("#editCustomerLink").prop('disabled', true);
+                    // $("#linkCustomerLink").removeClass("customLink").addClass("linkCust customLinkDisabled");
+                    // $("#linkCustomerLink").prop('disabled', true);
+                    // $("#deleteCustomerLink").removeClass("customLink").addClass("deleteCust customLinkDisabled");
+                    // $("#deleteCustomerLink").prop('disabled', true);
                     sessvars.currentCustomer = null;
                     
                     if (val.length >= 2) { //We want at least 2 characters entered.
@@ -159,6 +178,9 @@ var customer = new function() {
                         // less than 2 chars -> clear the table and hide it
                     } else {
                         $('#customerSearchTable').dataTable().fnClearTable();
+                        window.$Qmatic.components.card.addCustomerCard.disableEditSave();
+                        window.$Qmatic.components.card.addCustomerCard.clearEditForm();
+                        window.$Qmatic.components.card.addCustomerCard.showAddForm();
                         util.hideModal('customerSearchDiv');
                     }
                 }
@@ -166,18 +188,27 @@ var customer = new function() {
 
         // column header definitions for the data table
         // read them from i18n to get the visible names
-        this.COLUMN_NAMES = [
-            "firstName", "lastName", "addressLine1", "addressLine2",
-            "addressLine3", "addressLine4", "addressLine5", "addressPostCode",
-            "accountNumber", "cardNumber", "phoneNumber", // "phoneMobile", "phoneHome", "phoneWork",
-            "email", "dateOfBirth", "gender"];
+        // this.COLUMN_NAMES = [
+        //     "firstName", "lastName", "addressLine1", "addressLine2",
+        //     "addressLine3", "addressLine4", "addressLine5", "addressPostCode",
+        //     "accountNumber", "cardNumber", "phoneNumber", // "phoneMobile", "phoneHome", "phoneWork",
+        //     "email", "dateOfBirth", "gender"];
+        //this.COLUMN_NAMES = ["firstName", "lastName", "phoneNumber", "email"];
+        this.COLUMN_NAMES = ["fullName", "phoneNumber", "email"];
         var columnDefs = [];
         for (var i=0; i < customer.COLUMN_NAMES.length; i++) {
             var i18name = "field." + customer.COLUMN_NAMES[i];
             columnDefs.push({
                 mDataProp: customer.COLUMN_NAMES[i],
-                sTitle: '<span style="customerSearchHeader">' + jQuery.i18n.prop(i18name) + '</span>'
+                sTitle: '<span class="customerSearchHeader">' + jQuery.i18n.prop(i18name) + '</span>'
             });
+        }
+        var rowCallback = function(nRow, aData, iDisplayIndex) {
+            var searchTerm = $("#customerInput").val();
+            var pattern = new RegExp(searchTerm, "ig")
+            $('td:eq(0)', nRow).html(aData.fullName.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
+            $('td:eq(1)', nRow).html(aData.phoneNumber.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
+            $('td:eq(2)', nRow).html(aData.email.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
         }
 
         // initialise datatable for the auto-complete customer search
@@ -187,12 +218,15 @@ var customer = new function() {
             bPaginate : false,
             bInfo : false,
             bFilter : false,
+            sScrollX: "100%",
+            autoWidth: true,
             bSort: false,
             asStripClasses: [],
             oLanguage: {
                 sEmptyTable: jQuery.i18n.prop('customer.not.found')
             },
-            aoColumns : columnDefs
+            aoColumns : columnDefs,
+            fnRowCallback: rowCallback
         });
 
         util.hideModal('customerSearchDiv');
@@ -207,6 +241,7 @@ var customer = new function() {
     		urlextra = '&breakcache=' + Math.random();
     	}
         var prev = $(this).data('enteredVal');
+        
         $('#customerSearchTable').dataTable().fnClearTable();
         if(val !== prev) {
             $.ajax({
@@ -214,11 +249,14 @@ var customer = new function() {
                 dataType: 'json',
                 async: false,
                 success: function(data){
-                	customer.customerDbOnline = true;
+                    customer.customerDbOnline = true;
                     $.map(data, function(item){
                         var transformedCustomer = transformCustomer(item, customer.COLUMN_NAMES);
                         $('#customerSearchTable').dataTable().fnAddData(transformedCustomer);
                     });
+                    
+                    window.$Qmatic.components.card.addCustomerCard.showAddForm();
+                    
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     if(jqXHR.status == 503) {
@@ -243,6 +281,7 @@ var customer = new function() {
                 $("#customerInput").data('selectedRow', index);
             });
             // bind loosing focus on the input field
+            $("html").off('click');
             $("html").click( function(event) {
                 // if we're in search mode, hide the window
                 if (document.getElementById('customerSearchDiv').style.display == "block") {
@@ -263,6 +302,7 @@ var customer = new function() {
     var transformCustomer = function(item, columnNames) {
         // Add the declared fields
         var cust = {
+            "fullName":item.firstName + " " + item.lastName,
             "firstName":item.firstName,
             "lastName":item.lastName,
             "cardNumber":item.cardNumber,
@@ -326,9 +366,107 @@ var customer = new function() {
         if (searchCustomer) {
             sessvars.currentCustomer = searchCustomer;
             $("#customerInput").value = searchCustomer.firstName + " " + searchCustomer.lastName;
+            customer.updateSearchFieldText();
             customer.updateCustomerModule();
+            window.$Qmatic.components.card.addCustomerCard.clearEditForm();
+            this.populateEditCustomerFields("edit");
+            window.$Qmatic.components.card.addCustomerCard.showEditForm();
         }
     };
+
+    this.setEditFields = function (prefix, customer) {
+        for(var customerField in customer) {
+            if(customer.hasOwnProperty(customerField)) {
+                if(customerField == 'properties') {
+                    // Iterate over all properties
+                    var value;
+                    for(var property in customer['properties']) {
+                        if(customer['properties'].hasOwnProperty(property)) {
+                            value = customer['properties'][property];
+                            switch(property) {
+                                case 'firstName':
+                                case 'lastName':
+                                case 'phoneNumber':
+                                case 'email':
+                                    $("#" + prefix + property).val(value);
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                    }
+                } else {
+                    value = customer[customerField];
+                    if(customerField != "id") {
+                        try {
+                            $("#" + prefix + customerField).val(value);
+                        } finally {}
+                    }
+                }
+            }
+        }
+    }
+
+    this.populateEditAttachedCustomerFields = function (prefix) {
+        if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit.customerIds != null) {
+            // clear form to not have old values in there
+            $('#' + prefix + 'CustomerForm input').val("");
+            //window.$Qmatic.components.card.addCustomerCard.clearEditForm();
+            //customer might have been updated elsewhere, fetch from database before display
+            var customerId = sessvars.state.visit.customerIds[sessvars.state.visit.customerIds.length - 1]
+            sessvars.currentCustomer = spService.get("customers/"+customerId);
+            
+            this.setEditFields(prefix, sessvars.currentCustomer)
+        }
+    }
+
+    this.populateEditCustomerFields = function (prefix) {
+        if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
+            // clear form to not have old values in there
+            $('#' + prefix + 'CustomerForm input').val("");
+            //window.$Qmatic.components.card.addCustomerCard.clearEditForm();
+            //customer might have been updated elsewhere, fetch from database before display
+            var params = {customerId : parseInt(sessvars.currentCustomer.id)};
+            sessvars.currentCustomer = spService.get("customers/"+sessvars.currentCustomer.id);
+            
+            this.setEditFields(prefix, sessvars.currentCustomer);
+
+            window.$Qmatic.components.card.addCustomerCard.enableEditSave();
+        }
+    }
+
+    this.editAndLink = function (e) {
+        e.preventDefault();
+        var prefix = "edit";
+        var formName = "editCustomerForm";
+        this.editAndSaveCustomer(prefix, formName);
+    }
+
+    this.editAndSaveCustomer = function (prefix, formName) {
+        var isUpdated = this.determineIfCustomerUpdated(formName);
+        
+        if(isUpdated) {
+             this.editCustomer(prefix, false);
+        }
+        this.linkCustomerPressed();
+    }
+
+    this.determineIfCustomerUpdated = function (formName) {
+        var serializedForm = $('#' + formName).serializeArray();
+        var isUpdated = false;
+
+        for(var i = 0; i < serializedForm.length; i++) {
+            var field = serializedForm[i];
+            if((field.name === 'firstName' || field.name === 'lastName') && sessvars.currentCustomer[field.name] !== field.value) {
+                isUpdated = true;
+                break;
+            } else if ((field.name === 'email' || field.name === 'phoneNumber') && sessvars.currentCustomer.properties[field.name] !== field.value) {
+                isUpdated = true;
+                break;
+            }
+        }
+        return isUpdated;
+    }
 
     this.createCustomerPressed = function() {
         util.showModal("createCustomerWindow");
@@ -369,33 +507,69 @@ var customer = new function() {
         }
     };
 
-    this.saveAndLinkCustomer = function() {
+    this.setSaveButtonState = function (formName) {
+        var requiredInputs = $(formName).find('input["required"]');
+        $.each(requiredInputs, function (input) {
+            // TODO
+        });
+    };
+
+    this.setAmountOfAdditionalCustomers = function () {
+        if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
+            sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 1) {
+            $('#amountOfAdditionalCustomers').text("+" + (sessvars.state.visit.customerIds.length - 1));
+        } else {
+            $('#amountOfAdditionalCustomers').empty();
+        }
+    };
+
+    this.saveAndLinkCustomer = function(e) {
+        e.preventDefault();
         if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
             var parameterizedCustomer = parameterizeCustomer("createCustomerForm");
             if(validateCustomerForm(parameterizedCustomer.$entity)) {
-                var parsed = $.datepicker.parseDate('yy-mm-dd', $.datepicker.formatDate('yy-mm-dd',
-                    $.datepicker.parseDate($("#createdateOfBirth").datepicker("option", "dateFormat"),
-                        parameterizedCustomer.$entity.properties.dateOfBirth)));
-                // convert to UTC format
-                if (typeof parsed !== "undefined" && parsed != null) {
-                    var dateOfBirth = new Date();
-                    dateOfBirth.setUTCDate(parsed.getDate());
-                    dateOfBirth.setUTCFullYear(parsed.getFullYear());
-                    dateOfBirth.setUTCMonth(parsed.getMonth());
-                    dateOfBirth.setUTCHours(0, 0, 0, 0);
-                    parameterizedCustomer.$entity.properties.dateOfBirth = dateOfBirth;
-                }
+                
                 var createdCustomer = createCustomer(parameterizedCustomer);
                 if(typeof createdCustomer !== "undefined") {
                     //validation ok, all fields nice and proper
                     linkCustomer(createdCustomer.id);
                     $("#linkedCustomerField").html(createdCustomer.firstName + " " + createdCustomer.lastName);
-                    cleanCustomerForm("create");
-                    util.hideModal("createCustomerWindow");
+                    this.setAmountOfAdditionalCustomers();
+                    $('#ticketNumber').removeClass('qm-card-header__highlighted');
+                    //cleanCustomerForm("create");
+                    window.$Qmatic.components.card.addCustomerCard.clearAddForm();
                 }
             }
         }
     };
+
+    // this.saveAndLinkCustomer = function() {
+    //     if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
+    //         var parameterizedCustomer = parameterizeCustomer("createCustomerForm");
+    //         if(validateCustomerForm(parameterizedCustomer.$entity)) {
+    //             var parsed = $.datepicker.parseDate('yy-mm-dd', $.datepicker.formatDate('yy-mm-dd',
+    //                 $.datepicker.parseDate($("#createdateOfBirth").datepicker("option", "dateFormat"),
+    //                     parameterizedCustomer.$entity.properties.dateOfBirth)));
+    //             // convert to UTC format
+    //             if (typeof parsed !== "undefined" && parsed != null) {
+    //                 var dateOfBirth = new Date();
+    //                 dateOfBirth.setUTCDate(parsed.getDate());
+    //                 dateOfBirth.setUTCFullYear(parsed.getFullYear());
+    //                 dateOfBirth.setUTCMonth(parsed.getMonth());
+    //                 dateOfBirth.setUTCHours(0, 0, 0, 0);
+    //                 parameterizedCustomer.$entity.properties.dateOfBirth = dateOfBirth;
+    //             }
+    //             var createdCustomer = createCustomer(parameterizedCustomer);
+    //             if(typeof createdCustomer !== "undefined") {
+    //                 //validation ok, all fields nice and proper
+    //                 linkCustomer(createdCustomer.id);
+    //                 $("#linkedCustomerField").html(createdCustomer.firstName + " " + createdCustomer.lastName);
+    //                 cleanCustomerForm("create");
+    //                 util.hideModal("createCustomerWindow");
+    //             }
+    //         }
+    //     }
+    // };
 
     var cleanCustomerForm = function(operation) {
         $("#" + operation + "CustomerForm input").val("");
@@ -407,87 +581,72 @@ var customer = new function() {
         util.hideModal('createCustomerWindow');
     };
 
-    this.editCustomerPressed = function() {
-        if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
-            util.showModal("editCustomerWindow");
-            // clear modal form to not have old values in there
-            $("#editCustomerWindow #editCustomerForm input").val("");
-            //customer might have been updated elsewhere, fetch from database before display
-            var params = {customerId : parseInt(sessvars.currentCustomer.id)};
-            sessvars.currentCustomer = spService.get("customers/"+sessvars.currentCustomer.id);
-            for(var customerField in sessvars.currentCustomer) {
-                if(sessvars.currentCustomer.hasOwnProperty(customerField)) {
-                    if(customerField == 'properties') {
-                        // Iterate over all properties
-                        var value;
-                        for(var property in sessvars.currentCustomer['properties']) {
-                            if(sessvars.currentCustomer['properties'].hasOwnProperty(property)) {
-                                value = sessvars.currentCustomer['properties'][property];
-                                if(property == "gender") {
-                                    var editGenderSelect = $("#edit" + property);
-                                    util.setSelect(editGenderSelect, value);
-                                } else if(property == "dateOfBirth") {
-                                    if(typeof value !== "undefined" && value != null && value.length > 0) {
-                                        var splitDateTime = value.split("T");
-                                        //if birth date has not been modified by the client
-                                        var date;
-                                        if(splitDateTime.length > 1) {
-                                            //yyyy-mm-dd
-                                            date = splitDateTime[0].split("-");
-                                            //hh:mmm:ss
-                                            //poor IE. We need to create date using format: yyyy, mm-1, dd, hh, mm, ss
-                                            $("#edit" + property).val($.datepicker.formatDate(
-                                                $("#editdateOfBirth").datepicker("option", "dateFormat"),
-                                                new Date(date[0], date[1]-1, date[2])));
-                                        } else {
-                                            date = splitDateTime[0].split("-");
-                                            $("#edit" + property).value = $.datepicker.formatDate(
-                                                $("#editdateOfBirth").datepicker("option", "dateFormat"),
-                                                new Date(date[0], date[1]-1, date[2]));
-                                        }
-                                    }
-                                } else if(property != "status" && property != "id" && property != "dateOfBirth" && property != "gender") {
-                                    if (typeof value !== 'undefined' && value != null && value != 'null') {
-                                        $("#edit" + property).val(value);
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        value = sessvars.currentCustomer[customerField];
-                        if(customerField != "id") {
-                            try {
-                                $("#edit" + customerField).val(value);
-                            } finally {}
-                        }
-                    }
-                }
-            }
-        }
-    };
+    // this.editCustomerPressed = function() {
+    //     if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
+    //         util.showModal("editCustomerWindow");
+    //         // clear modal form to not have old values in there
+    //         $("#editCustomerWindow #editCustomerForm input").val("");
+    //         //customer might have been updated elsewhere, fetch from database before display
+    //         var params = {customerId : parseInt(sessvars.currentCustomer.id)};
+    //         sessvars.currentCustomer = spService.get("customers/"+sessvars.currentCustomer.id);
+            
+    //         for(var customerField in sessvars.currentCustomer) {
+    //             if(sessvars.currentCustomer.hasOwnProperty(customerField)) {
+    //                 if(customerField == 'properties') {
+    //                     // Iterate over all properties
+    //                     var value;
+    //                     for(var property in sessvars.currentCustomer['properties']) {
+    //                         if(sessvars.currentCustomer['properties'].hasOwnProperty(property)) {
+    //                             value = sessvars.currentCustomer['properties'][property];
+    //                             if(property == "gender") {
+    //                                 var editGenderSelect = $("#edit" + property);
+    //                                 util.setSelect(editGenderSelect, value);
+    //                             } else if(property == "dateOfBirth") {
+    //                                 if(typeof value !== "undefined" && value != null && value.length > 0) {
+    //                                     var splitDateTime = value.split("T");
+    //                                     //if birth date has not been modified by the client
+    //                                     var date;
+    //                                     if(splitDateTime.length > 1) {
+    //                                         //yyyy-mm-dd
+    //                                         date = splitDateTime[0].split("-");
+    //                                         //hh:mmm:ss
+    //                                         //poor IE. We need to create date using format: yyyy, mm-1, dd, hh, mm, ss
+    //                                         $("#edit" + property).val($.datepicker.formatDate(
+    //                                             $("#editdateOfBirth").datepicker("option", "dateFormat"),
+    //                                             new Date(date[0], date[1]-1, date[2])));
+    //                                     } else {
+    //                                         date = splitDateTime[0].split("-");
+    //                                         $("#edit" + property).value = $.datepicker.formatDate(
+    //                                             $("#editdateOfBirth").datepicker("option", "dateFormat"),
+    //                                             new Date(date[0], date[1]-1, date[2]));
+    //                                     }
+    //                                 }
+    //                             } else if(property != "status" && property != "id" && property != "dateOfBirth" && property != "gender") {
+    //                                 if (typeof value !== 'undefined' && value != null && value != 'null') {
+    //                                     $("#edit" + property).val(value);
+    //                                 }
+    //                             }
+    //                         }
+    //                     }
+    //                 } else {
+    //                     value = sessvars.currentCustomer[customerField];
+    //                     if(customerField != "id") {
+    //                         try {
+    //                             $("#edit" + customerField).val(value);
+    //                         } finally {}
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // };
 
-    this.editCustomer = function() {
-        var customerParameterized = parameterizeCustomer("editCustomerForm");
+    this.editCustomer = function(prefix, shouldPop) {
+        var customerParameterized = parameterizeCustomer(prefix + "CustomerForm");
         if(validateCustomerForm(customerParameterized.$entity)) {
-            //special treatment for dateOfBirth
-            var parsed = $.datepicker.parseDate('yy-mm-dd', $.datepicker.formatDate('yy-mm-dd',
-                $.datepicker.parseDate(
-                    $("#createdateOfBirth").datepicker("option", "dateFormat"),
-                    customerParameterized.$entity.properties.dateOfBirth)));
-            // convert to UTC format
-            if (typeof parsed !== "undefined" && parsed != null ) {
-                var dateOfBirth = new Date();
-                dateOfBirth.setUTCDate(parsed.getDate());
-                dateOfBirth.setUTCFullYear(parsed.getFullYear());
-                dateOfBirth.setUTCMonth(parsed.getMonth());
-                dateOfBirth.setUTCHours(0, 0, 0, 0);
-                customerParameterized.$entity.properties.dateOfBirth = dateOfBirth;
-				
-            }
 			
             customerParameterized.customerId = sessvars.currentCustomer.id;
-			cleanCustomerForm("edit");
-            util.hideModal("editCustomerWindow");
+			
 			var params = servicePoint.createParams();
 			params.json =jsonString(customerParameterized);
 			spService.putParams("customers/"+customerParameterized.customerId, params);
@@ -500,14 +659,62 @@ var customer = new function() {
             if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
                 typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
-                sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
+                sessvars.state.visit.customerIds[sessvars.state.visit.customerIds.length - 1] == customerParameterized.customerId) {
                         $("#linkedCustomerField").html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
+                        this.setAmountOfAdditionalCustomers();
+                        $('#ticketNumber').removeClass('qm-card-header__highlighted');
+            }
+            if(shouldPop === true) {
+                cardNavigationController.pop();
             }
             //clean form
-            cleanCustomerForm("edit");
-            util.hideModal("editCustomerWindow");
+            //window.$Qmatic.components.card.addCustomerCard.clearEditForm();
         }
     };
+
+
+    // this.editCustomer = function() {
+    //     var customerParameterized = parameterizeCustomer("editCustomerForm");
+    //     if(validateCustomerForm(customerParameterized.$entity)) {
+    //         //special treatment for dateOfBirth
+    //         var parsed = $.datepicker.parseDate('yy-mm-dd', $.datepicker.formatDate('yy-mm-dd',
+    //             $.datepicker.parseDate(
+    //                 $("#createdateOfBirth").datepicker("option", "dateFormat"),
+    //                 customerParameterized.$entity.properties.dateOfBirth)));
+    //         // convert to UTC format
+    //         if (typeof parsed !== "undefined" && parsed != null ) {
+    //             var dateOfBirth = new Date();
+    //             dateOfBirth.setUTCDate(parsed.getDate());
+    //             dateOfBirth.setUTCFullYear(parsed.getFullYear());
+    //             dateOfBirth.setUTCMonth(parsed.getMonth());
+    //             dateOfBirth.setUTCHours(0, 0, 0, 0);
+    //             customerParameterized.$entity.properties.dateOfBirth = dateOfBirth;
+				
+    //         }
+			
+    //         customerParameterized.customerId = sessvars.currentCustomer.id;
+	// 		cleanCustomerForm("edit");
+    //         util.hideModal("editCustomerWindow");
+	// 		var params = servicePoint.createParams();
+	// 		params.json =jsonString(customerParameterized);
+	// 		spService.putParams("customers/"+customerParameterized.customerId, params);
+
+    //         //update current customer i.e. the selected customer, NOT the linked customer
+    //         sessvars.currentCustomer = customerParameterized.$entity;
+    //         sessvars.currentCustomer.id = customerParameterized.customerId;
+
+    //         //update linked customer field if the customer is linked to the current transaction
+    //         if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
+    //             typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
+    //             sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
+    //             sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
+    //                     $("#linkedCustomerField").html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
+    //         }
+    //         //clean form
+    //         cleanCustomerForm("edit");
+    //         util.hideModal("editCustomerWindow");
+    //     }
+    // };
 
     this.cancelEditCustomer = function() {
         cleanCustomerForm("edit");
@@ -565,23 +772,32 @@ var customer = new function() {
 
     var createCustomer = function(parameterizedCustomer) {
 		var params = servicePoint.createParams();
-		params.json =jsonString(parameterizedCustomer);
+        params.json = jsonString(parameterizedCustomer);
 		return spService.postParams("customers", params);
     };
 
 	
-	var jsonString = function (val) {
+	// var jsonString = function (val) {
+	// 	var main = val.$entity;
+	// 	var prop = val.$entity.properties;
+	// 	var j = '{';
+	// 	j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '","cardNumber":"' + main.cardNumber + '"'
+	// 	j +=',"properties":{"addressLine1":"' + prop.addressLine1 + '","addressLine2":"' + prop.addressLine2 + '","addressLine3":"' + prop.addressLine3 + '","addressLine4":"' + prop.addressLine4 + '","addressLine5":"' + prop.addressLine5 + '"'
+    //     j +=',"addressPostCode":"' + prop.addressPostCode + '","phoneNumber":"' + prop.phoneNumber + '"'
+    //     //j +=',"phoneMobile":"' + prop.phoneMobile + '","phoneHome":"' + prop.phoneHome + '","phoneWork":"' + prop.phoneWork + '"'
+    //     j +=',"email":"' + prop.email + '","gender":"' + prop.gender + '","dateOfBirth":' + JSON.stringify(prop.dateOfBirth) + ',"accountNumber":"' + prop.accountNumber + '"}}';
+	// 	return j;
+	// }
+    
+    var jsonString = function (val) {
 		var main = val.$entity;
 		var prop = val.$entity.properties;
 		var j = '{';
-		j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '","cardNumber":"' + main.cardNumber + '"'
-		j +=',"properties":{"addressLine1":"' + prop.addressLine1 + '","addressLine2":"' + prop.addressLine2 + '","addressLine3":"' + prop.addressLine3 + '","addressLine4":"' + prop.addressLine4 + '","addressLine5":"' + prop.addressLine5 + '"'
-        j +=',"addressPostCode":"' + prop.addressPostCode + '","phoneNumber":"' + prop.phoneNumber + '"'
-        //j +=',"phoneMobile":"' + prop.phoneMobile + '","phoneHome":"' + prop.phoneHome + '","phoneWork":"' + prop.phoneWork + '"'
-        j +=',"email":"' + prop.email + '","gender":"' + prop.gender + '","dateOfBirth":' + JSON.stringify(prop.dateOfBirth) + ',"accountNumber":"' + prop.accountNumber + '"}}';
+		j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '"'
+		j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '"}}';
 		return j;
 	}
-	
+
     //link customer stuff below
 
     var linkCustomer = function(customerId) {
@@ -601,35 +817,44 @@ var customer = new function() {
                 linkCustomer(sessvars.currentCustomer.id);
                 $("#linkedCustomerField").html(sessvars.currentCustomer.firstName + " " +
                     sessvars.currentCustomer.lastName);
+                this.setAmountOfAdditionalCustomers();
+                $('#ticketNumber').removeClass('qm-card-header__highlighted');
                 sessvars.currentCustomer = null;
                 customer.updateCustomerModule();
             }
         }
     };
 
-    this.updateCustomerModule = function() {
-        $("#createCustomerLink").addClass("newCust customLink");
-        $("#createCustomerLink").prop('disabled', false);
+    this.updateSearchFieldText = function () {
         if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
             $("#customerInput").val(sessvars.currentCustomer.firstName + " " +
-                sessvars.currentCustomer.lastName);
-            $("#editCustomerLink").removeClass("customLinkDisabled").addClass("editCust customLink");
-            $("#editCustomerLink").prop('disabled', false);
-            if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
-                $("#linkCustomerLink").removeClass("customLinkDisabled").addClass("linkCust customLink");
-                $("#linkCustomerLink").prop('disabled', false);
-            }
-            $("#deleteCustomerLink").removeClass("customLinkDisabled").addClass("deleteCust customLink");
-            $("#deleteCustomerLink").prop('disabled', false);
-            return;
+                                    sessvars.currentCustomer.lastName);
         }
-        $("#customerInput").val("");
-        $("#editCustomerLink").removeClass("customLink").addClass("editCust customLinkDisabled");
-        $("#editCustomerLink").prop('disabled', true);
-        $("#linkCustomerLink").removeClass("customLink").addClass("linkCust customLinkDisabled");
-        $("#linkCustomerLink").prop('disabled', true);
-        $("#deleteCustomerLink").removeClass("customLink").addClass("deleteCust customLinkDisabled");
-        $("#deleteCustomerLink").prop('disabled', true);
+    }
+
+    this.updateCustomerModule = function() {
+        // $("#createCustomerLink").addClass("newCust customLink");
+        // $("#createCustomerLink").prop('disabled', false);
+        // if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
+        //     $("#customerInput").val(sessvars.currentCustomer.firstName + " " +
+        //         sessvars.currentCustomer.lastName);
+        //     $("#editCustomerLink").removeClass("customLinkDisabled").addClass("editCust customLink");
+        //     $("#editCustomerLink").prop('disabled', false);
+        //     if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
+        //         $("#linkCustomerLink").removeClass("customLinkDisabled").addClass("linkCust customLink");
+        //         $("#linkCustomerLink").prop('disabled', false);
+        //     }
+        //     $("#deleteCustomerLink").removeClass("customLinkDisabled").addClass("deleteCust customLink");
+        //     $("#deleteCustomerLink").prop('disabled', false);
+        //     return;
+        // }
+        // $("#customerInput").val("");
+        // $("#editCustomerLink").removeClass("customLink").addClass("editCust customLinkDisabled");
+        // $("#editCustomerLink").prop('disabled', true);
+        // $("#linkCustomerLink").removeClass("customLink").addClass("linkCust customLinkDisabled");
+        // $("#linkCustomerLink").prop('disabled', true);
+        // $("#deleteCustomerLink").removeClass("customLink").addClass("deleteCust customLinkDisabled");
+        // $("#deleteCustomerLink").prop('disabled', true);
     };
 
     this.updateCustomer = function() {
@@ -640,10 +865,18 @@ var customer = new function() {
                 sessvars.state.visit.parameterMap.customerName != null &&
                 sessvars.state.visit.parameterMap.customerName != "") {
                 $("#linkedCustomerField").html(sessvars.state.visit.parameterMap.customerName);
+                this.setAmountOfAdditionalCustomers();
+                $('#ticketNumber').removeClass('qm-card-header__highlighted');
+                
             } else if(typeof sessvars.state.visit.customerIds !== "undefined" &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0) {
-                var customer =spService.get("customers/"+sessvars.state.visit.customerIds[0]);
+                var customer =spService.get("customers/"+sessvars.state.visit.customerIds[sessvars.state.visit.customerIds.length - 1]);
                 $("#linkedCustomerField").html(customer.firstName + " " + customer.lastName);
+                this.setAmountOfAdditionalCustomers();
+                $('#ticketNumber').removeClass('qm-card-header__highlighted');
+            } else {
+                $("#ticketNumber").addClass("qm-card-header__highlighted");
+                this.setAmountOfAdditionalCustomers();
             }
         }
     };
@@ -672,30 +905,30 @@ var customer = new function() {
                 validationError += ", " + jQuery.i18n.prop('error.validate.email');
             }
         }
-        try {
-            //parse date against the localized format
-            var dateOfBirth = $.datepicker.parseDate($("#createdateOfBirth").datepicker("option", "dateFormat"), customer.properties.dateOfBirth);
-            //in case the user entered a date of birth manually, check that the date is not in the future
-            if(typeof dateOfBirth !== "undefined" && dateOfBirth != null && dateOfBirth.length > 0) {
-                var now = new Date();
-                if(dateOfBirth.getTime() > now.getTime()) {
-                    error = true;
-                    if(validationError == "") {
-                        validationError = jQuery.i18n.prop('error.validate.dateOfBirth');
-                    }
-                    else {
-                        validationError += ", " + jQuery.i18n.prop('error.validate.dateOfBirth');
-                    }
-                }
-            }
-        } catch(e) {
-            error = true;
-            if(validationError == "") {
-                validationError = jQuery.i18n.prop('error.validate.dateOfBirth'); //+ ": " + e; can't i18n the exceptions without modifying jquery.ui
-            } else {
-                validationError += ", " + jQuery.i18n.prop('error.validate.dateOfBirth'); //+ ": " + e;  can't i18n the exceptions without modifying jquery.ui
-            }
-        }
+        // try {
+        //     //parse date against the localized format
+        //     var dateOfBirth = $.datepicker.parseDate($("#createdateOfBirth").datepicker("option", "dateFormat"), customer.properties.dateOfBirth);
+        //     //in case the user entered a date of birth manually, check that the date is not in the future
+        //     if(typeof dateOfBirth !== "undefined" && dateOfBirth != null && dateOfBirth.length > 0) {
+        //         var now = new Date();
+        //         if(dateOfBirth.getTime() > now.getTime()) {
+        //             error = true;
+        //             if(validationError == "") {
+        //                 validationError = jQuery.i18n.prop('error.validate.dateOfBirth');
+        //             }
+        //             else {
+        //                 validationError += ", " + jQuery.i18n.prop('error.validate.dateOfBirth');
+        //             }
+        //         }
+        //     }
+        // } catch(e) {
+        //     error = true;
+        //     if(validationError == "") {
+        //         validationError = jQuery.i18n.prop('error.validate.dateOfBirth'); //+ ": " + e; can't i18n the exceptions without modifying jquery.ui
+        //     } else {
+        //         validationError += ", " + jQuery.i18n.prop('error.validate.dateOfBirth'); //+ ": " + e;  can't i18n the exceptions without modifying jquery.ui
+        //     }
+        // }
 
         if(error) {
             util.showError(validationError);
@@ -706,11 +939,13 @@ var customer = new function() {
 
     // position the search box (this is also used when updating the queues)
     this.positionCustomerResult = function() {
-        $("#customerSearchDiv").position({
-            my: "right top",
-            at: "right bottom",
-            of: $("#customerInput")
-        });
+        $("#customerSearchDiv")
+            .css("minWidth", $('#customerInput').outerWidth(), "width", $('#customerSearchTable').outerWidth())
+            .position({
+                my: "left top",
+                at: "left bottom",
+                of: $("#customerInput")
+            });
     };
 
     var isEmailValid = function(emailString) {

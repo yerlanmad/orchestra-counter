@@ -1,0 +1,83 @@
+{% extends "partials/card/scroll-card.nunjucks" %}
+
+{% block id %}id="editCustomerCard"{% endblock %}
+{% block cardModifier %}qm-card--more-than-one{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-nav">
+            <div class="qm-card-nav__left">
+                <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__back-btn js-back-btn" onclick="cardNavigationController.pop();this.blur();">
+                    <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                    <span class="sr-only"></span>
+                </button>
+            </div>
+            <div class="qm-card-nav__middle">
+                <h2 id="editCustomerLabel" class="qm-card-nav__title"></h2>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+        <div class="qm-customer">
+            <div class="qm-customer__detail-container">
+                <!-- Customer details -->
+                <form id="editAttachedCustomerForm" action="" class="js-edit-customer-form" novalidate>
+                    <fieldset class="qm-fieldset">
+                        <legend class="qm-legend sr-only">
+                            <span class="qm-legend__text">CUSTOMER DETAILS</span>
+                        </legend>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <div class="qm-generic-layout qm-generic-layout--space-between">
+                                        <label for="editAttachedfirstName" class="qm-form-field__label qm-form-field__label--with-req">First name</label>
+                                        <span class="qm-form-field__required-text">required</span>
+                                    </div>
+                                    <input id="editAttachedfirstName" class="qm-form-field__text-input" type="text" name="firstName" required />
+                                </div>
+                            </div>
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <div class="qm-generic-layout qm-generic-layout--space-between">
+                                        <label for="editAttachedlastName" class="qm-form-field__label qm-form-field__label--with-req">Last name</label>
+                                        <span class="qm-form-field__required-text">required</span>
+                                    </div>
+                                    <input id="editAttachedlastName" class="qm-form-field__text-input" type="text" name="lastName" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-12">
+                                <div class="qm-form-field">
+                                    <label for="editAttachedemail" class="qm-form-field__label">Email address</label>
+                                    <input id="editAttachedemail" class="qm-form-field__text-input" type="email" name="email"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <label for="editAttachedphoneNumber" class="qm-form-field__label">Phone number</label>
+                                    <input id="editAttachedphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-actions qm-form-actions--large-margin-top">
+                            <div class="qm-generic-layout qm-generic-layout--align-right">
+                                <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
+                                    <span class="qm-action-btn__text"></span>
+                                </button>
+                                <button class="qm-btn qm-btn--primary js-update-customer-save" onclick="customer.editAttachedCustomer(event);this.blur();">
+                                    <span class="qm-action-btn__text"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -403,6 +403,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('#transferCounterPoolCard .qm-card-description', 'info.card.transferCounterPoolCard.description');
         i18nPlaceholder($("#transferToQueues_filter input"), "info.placeholder.transfer.search");
         
+        
         i18nSafeSelectorBtnAppend('.js-back-btn > .sr-only', 'application.sr.back');
         i18nSafeSelectorBtnAppend('.js-add-services-btn > .sr-only', 'application.sr.addServices');
         i18nSafeSelectorBtnAppend('.js-cancel-btn > span', 'button.cancel');
@@ -411,7 +412,13 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-transferToUserPool > span', 'action.transfer.to.user');
         i18nSafeSelectorBtnAppend('.js-transferToCounterPool > span', 'action.transfer.to.counter');
 
-
+        // Add customer card
+        i18nPlaceholder($("#customerInput"), "info.placeholder.link.customer");
+        i18nSafe("addCustomerLabel", "info.card.addCustomerCard.addCustomer");
+        i18nSafeSelectorBtnAppend('.js-add-customer-save > span', 'action.save.and.add');
+        i18nSafeSelectorBtnAppend('.js-edit-customer-save > span', 'action.save.and.add');
+        i18nSafeSelectorBtnAppend('.js-update-customer-save > span', 'action.update.info');
+        
         // Notes
         i18nSafeSelectorBtnAppend('.js-notes-save-btn > span', 'button.save.notes');
         i18nSafeSelectorBtnAppend('.js-notes-cancel-btn > span', 'button.cancel');

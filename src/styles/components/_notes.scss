@@ -5,11 +5,6 @@
         display: none;
     }
 
-    &__action-container {
-        display: flex;
-        justify-content: flex-end;
-    }
-
     &__presentation-container {
         margin-top: 198px;
     }
@@ -21,6 +16,7 @@
         margin-bottom: rem($global-standard-margin / 2);
         border: 1px solid $dark-transparent12;
         resize: none;
+        font-weight: $font-weight-light;
     }
 
     &__label {

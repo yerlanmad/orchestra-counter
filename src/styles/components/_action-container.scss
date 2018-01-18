@@ -1,0 +1,7 @@
+.qm-action-container {
+    display: flex;
+     
+    &--align-right {
+        justify-content: flex-end;
+    }
+}

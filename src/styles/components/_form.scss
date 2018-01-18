@@ -1,7 +1,45 @@
+.qm-form {
+    &-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -4px;
+        margin-right: -4px;
+    }
+
+    &-column {
+        &-6 {
+            padding-left: 4px;
+            padding-right: 4px;
+            flex: 0 0 50%;
+            max-width: 50%;
+            width: 100%;
+            position: relative;
+        }
+
+        &-12 {
+            padding-left: 4px;
+            padding-right: 4px;
+            flex: 0 0 100%;
+            max-width: 100%;
+            width: 100%;
+            position: relative;
+        }
+    }
+
+    &-actions {
+        margin-top: rem(60px);
+    }
+}
+
+
 .qm-form-field {
     position: relative;
-    margin-bottom: rem($global-standard-margin);
-    
+    margin-bottom: rem($global-standard-margin * 2);
+
+    @at-root [dir='rtl'] & {
+        text-align: right;
+    }
+
     &__textarea {
         width: 100%;
         max-width: 467px;
@@ -9,6 +47,7 @@
         border-bottom: 1px solid $input-border-color;
         padding-right: 40px;
         resize: none;
+        line-height: 1;
 
         &:focus {
             outline: 0;
@@ -20,6 +59,33 @@
         }
     }
 
+    &__label {
+        font-size: rem(14px);
+        color: $dark-transparent62;
+        margin-bottom: 0;
+
+        &--with-req {
+            flex: 1 1 50%;
+        }
+    }
+
+    &__required-text {
+        flex: 0 0 auto;
+        font-size: rem(12px);
+        align-self: flex-end;
+        color: $pale-aquamarine;
+    }
+
+    &__text-input {
+        width: 100%;
+        font-size: rem(18px);
+        line-height: 1;
+        padding: rem(10px $global-standard-padding / 2);
+        border: 1px solid rgba(0,0,0,0.12);
+        box-shadow: 0 0 4px 0 rgba(0,0,0,0.04);
+        font-weight: $font-weight-light;
+    }
+
     &__icon {
         position: absolute;
         right: 0;
@@ -28,5 +94,69 @@
         width: 22px;
         font-size: rem(22px);
         color: $input-border-color;
+    }
+}
+
+.qm-fieldset {
+
+}
+
+.qm-legend {
+    position: relative;
+    font-size: rem(18px);
+    font-weight: $font-weight-medium;
+    color: $dark-transparent42;
+    text-align: center;
+    
+    &:before {
+        content: "";
+        border-top: 1px solid $dark-transparent12;
+        position: absolute;
+        top: 50%;
+        display: block;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+    }
+
+    &__text {
+        background: $white;
+        padding: rem(0 $global-standard-padding / 2);
+        position: relative;
+    }
+}
+
+.qm-form-actions {
+
+    &--large-margin-top {
+        margin-top: rem(200px);
+    }
+}
+
+.qm-search-input {
+    width: 100%;
+    font-size: rem(18px);
+    line-height: 1;
+    padding: rem(10px 40px 10px $global-standard-padding / 2);
+    border: 1px solid $dark-transparent12;
+    box-shadow: 0 0 4px 0 $dark-transparent04;
+    font-weight: $font-weight-light;
+
+    @at-root [dir='rtl'] & {
+        padding: rem(10px $global-standard-padding / 2 10px 40px);
+    }
+
+    &__icon {
+        position: absolute;
+        font-size: rem(28px);
+        color: $dark-transparent42;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+
+        @at-root [dir='rtl'] & {
+            right: auto;
+            left: 10px;
+        }
     }
 }

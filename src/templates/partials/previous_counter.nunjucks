@@ -328,10 +328,10 @@
             </div> -->
 
 			<!-- Customer Search Popup -->
-			<div class="ui-widget" id="customerSearchDiv">
+			{# <div class="ui-widget" id="customerSearchDiv">
 				<table id="customerSearchTable">
 				</table> 
-			</div>
+			</div> #}
 
 			<!-- Dialogs start here -->
 			

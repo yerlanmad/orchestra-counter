@@ -34,7 +34,10 @@ function showModules() {
 	var $main = $('.qm-main');
 
 	if (moduleCustomerEnabled == true) {
-		$('#customerModule').show();
+		//$('#customerModule').show();
+		$('.js-add-customer').attr("style", "");
+	} else {
+		$('.js-add-customer').hide();
 	}
 
 	if (moduleDeliveredServicesEnabled == true) {

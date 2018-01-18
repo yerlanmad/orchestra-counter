@@ -36,6 +36,8 @@
                             {% include "partials/card/transferCard/views/transfer-counter-pool.nunjucks" %}
                             {% include "partials/card/addServicesCard/add-services-card.nunjucks" %}
                             {% include "partials/card/marksCard/marks-card.nunjucks" %} 
+                            {% include "partials/card/addCustomerCard/add-customer-card.nunjucks" %} 
+                            {% include "partials/card/editCustomerCard/edit-customer-card.nunjucks" %} 
                         </div>
                     </div>
                 </div>
@@ -70,6 +72,11 @@
     </div>
     <div id="renderedPopovers" class="qm-rendered-popovers"></div>
     {% include "partials/previous_counter.nunjucks" %}
+    
+    <div class="ui-widget qm-customer-search-results" id="customerSearchDiv">
+        <table id="customerSearchTable">
+        </table> 
+    </div>
 
 
     <!-- Modal Views -->

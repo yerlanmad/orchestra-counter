@@ -1821,7 +1821,6 @@ var servicePoint = new function () {
 			$("#ticketNumber").removeClass("qm-card-header__highlighted");
 		} else {
 			$("#linkedCustomerField").removeClass("qm-card-header__highlighted");
-			$("#ticketNumber").addClass("qm-card-header__highlighted");
 		}
 
 		if (spPoolUpdateNeeded) {

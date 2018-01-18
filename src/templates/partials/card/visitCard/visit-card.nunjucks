@@ -8,10 +8,11 @@
         <div class="qm-card-header">
             <div class="qm-card-header__top">
                 <h1 class="qm-card-header__headline">
-                    <a href="" id="linkedCustomerField" class="qm-card-header__customer-name"></a>
+                    <a href="#" id="linkedCustomerField" class="qm-card-header__customer-name" onclick="customer.editUserPressed(event);this.blur();"></a>
+                    <span id="amountOfAdditionalCustomers" class="qm-card-header__amount-of-customers"></span>
                     <span id="ticketNumber" class="qm-card-header__ticket"></span>
                 </h1>
-                <a href="#" class="qm-card-header__add-customer js-add-customer">
+                <a href="#" class="qm-card-header__add-customer js-add-customer" onclick="customer.addUserPressed(event);this.blur();">
                     <i class="qm-card-header__add-customer-icon icon-customer-add" aria-hidden="true"></i>
                     <span class="sr-only"></span>
                 </a>
@@ -22,7 +23,7 @@
                         <div class="qm-services__current-service-title-container">
                             <span id="serviceId" class="qm-services__current-service-title"></span>
                         </div>
-                        <a href="#" class="qm-services__add-service js-add-services-btn" id="addMultiServiceLink"   onclick="servicePoint.addMultiServicePressed();this.blur();">
+                        <a href="#" class="qm-services__add-service js-add-services-btn" id="addMultiServiceLink" onclick="servicePoint.addMultiServicePressed();this.blur();">
                             <i class="qm-services__add-service-icon icon-service-add" aria-hidden="true"></i>
                             <span class="sr-only"></span>
                             <span class="qm-services__add-service-text" id="addServicesLbl"></span>   
@@ -102,7 +103,7 @@
                     </div>
                 </div>
                 <textarea id="notesEdit" class="qm-notes__textarea" maxlength="255" rows="5"></textarea>
-                <div class="qm-notes__action-container">
+                <div class="qm-action-container qm-action-container--align-right">
                     <button class="qm-btn qm-btn--secondary qm-btn--small js-notes-cancel-btn">
                         <span class="qm-btn__text"></span>
                     </button>

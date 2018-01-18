@@ -1,0 +1,148 @@
+{% extends "partials/card/scroll-card.nunjucks" %}
+
+{% block id %}id="addCustomerCard"{% endblock %}
+{% block cardModifier %}qm-card--more-than-one{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        <div class="qm-card-nav">
+            <div class="qm-card-nav__left">
+                <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__back-btn js-back-btn" onclick="cardNavigationController.pop();this.blur();">
+                    <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+                    <span class="sr-only"></span>
+                </button>
+            </div>
+            <div class="qm-card-nav__middle">
+                <h2 id="addCustomerLabel" class="qm-card-nav__title"></h2>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+        <div class="qm-customer">
+            <div class="qm-customer__link-container">
+                <fieldset class="qm-fieldset js-customer-search-view">
+                    <legend class="qm-legend">
+                        <span class="qm-legend__text">LINK EXISTING CUSTOMER</span>
+                    </legend>
+                    <div class="qm-form-field">
+                        <label for="customerInput" class="sr-only">Search for customer</label>
+                        <input id="customerInput" type="search" class="qm-search-input" />
+                        <i class="qm-search-input__icon icon-search" aria-hidden="true"></i>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="qm-customer__detail-container">
+                <form id="createCustomerForm" action="" class="js-add-new-customer-form" novalidate>
+                    <fieldset class="qm-fieldset">
+                        <legend class="qm-legend">
+                            <span class="qm-legend__text">OR ADD NEW CUSTOMER</span>
+                        </legend>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <div class="qm-generic-layout qm-generic-layout--space-between">
+                                        <label for="createfirstName" class="qm-form-field__label qm-form-field__label--with-req">First name</label>
+                                        <span class="qm-form-field__required-text">required</span>
+                                    </div>
+                                    <input id="createfirstName" class="qm-form-field__text-input" type="text" name="firstName" required />
+                                </div>
+                            </div>
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <div class="qm-generic-layout qm-generic-layout--space-between">
+                                        <label for="createlastName" class="qm-form-field__label qm-form-field__label--with-req">Last name</label>
+                                        <span class="qm-form-field__required-text">required</span>
+                                    </div>
+                                    <input id="createlastName" class="qm-form-field__text-input" type="text" name="lastName" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-12">
+                                <div class="qm-form-field">
+                                    <label for="createemail" class="qm-form-field__label">Email address</label>
+                                    <input id="createemail" class="qm-form-field__text-input" type="email" name="email" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <label for="createphoneNumber" class="qm-form-field__label">Phone number</label>
+                                    <input id="createphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-actions">
+                            <div class="qm-generic-layout qm-generic-layout--align-right">
+                                <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
+                                    <span class="qm-action-btn__text"></span>
+                                </button>
+                                <button class="qm-btn qm-btn--primary js-add-customer-save" onclick="customer.saveAndLinkCustomer(event);this.blur();">
+                                    <span class="qm-action-btn__text"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <!-- Customer details -->
+                <form id="editCustomerForm" action="" class="qm-hide js-edit-customer-form" novalidate>
+                    <fieldset class="qm-fieldset">
+                        <legend class="qm-legend">
+                            <span class="qm-legend__text">CUSTOMER DETAILS</span>
+                        </legend>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <div class="qm-generic-layout qm-generic-layout--space-between">
+                                        <label for="editfirstName" class="qm-form-field__label qm-form-field__label--with-req">First name</label>
+                                        <span class="qm-form-field__required-text">required</span>
+                                    </div>
+                                    <input id="editfirstName" class="qm-form-field__text-input" type="text" name="firstName" required />
+                                </div>
+                            </div>
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <div class="qm-generic-layout qm-generic-layout--space-between">
+                                        <label for="editlastName" class="qm-form-field__label qm-form-field__label--with-req">Last name</label>
+                                        <span class="qm-form-field__required-text">required</span>
+                                    </div>
+                                    <input id="editlastName" class="qm-form-field__text-input" type="text" name="lastName" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-12">
+                                <div class="qm-form-field">
+                                    <label for="editemail" class="qm-form-field__label">Email address</label>
+                                    <input id="editemail" class="qm-form-field__text-input" type="email" name="email"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-6">
+                                <div class="qm-form-field">
+                                    <label for="editphoneNumber" class="qm-form-field__label">Phone number</label>
+                                    <input id="editphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-actions">
+                            <div class="qm-generic-layout qm-generic-layout--align-right">
+                                <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
+                                    <span class="qm-action-btn__text"></span>
+                                </button>
+                                <button class="qm-btn qm-btn--primary js-edit-customer-save" onclick="customer.editAndLink(event);this.blur();">
+                                    <span class="qm-action-btn__text"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
