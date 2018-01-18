@@ -263,7 +263,7 @@ var customMarks = new function () {
 				//customMarksTable.fnAdjustColumnSizing();
 			});
 		}
-			var sorting = [[0, 'asc']];
+			var sorting = [[0, 'desc']];
 			customMarksTable.fnSort(sorting);
 	};
 

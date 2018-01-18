@@ -2,7 +2,7 @@ var deliveredServices = new function () {
 
     var deliveredServicesTable;
     var selectDeliveredServiceTable;
-    var SORTING = [[0, 'asc']];
+    var SORTING = [[0, 'desc']];
     var dropdownFilter = null;
 
     function initFilter() {
@@ -193,11 +193,11 @@ var deliveredServices = new function () {
                     sessvars.state.visit.currentVisitService.visitDeliveredServices !== null ?
                     sessvars.state.visit.currentVisitService.visitDeliveredServices : null)
             });
+            deliveredServicesTable.fnSort(SORTING);
             $(window).bind('resize', function () {
                 deliveredServicesTable.fnAdjustColumnSizing();
             });
         }
-        deliveredServicesTable.fnSort(SORTING);
     };
 
     this.cancelAddDeliveredServices = function () {

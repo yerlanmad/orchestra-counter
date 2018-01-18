@@ -13,14 +13,21 @@ window.$Qmatic.components.TooltipController.prototype = {
         });
         this._add(key, instance);
     },
-    _add: function(key, instance) {
+    _add: function (key, instance) {
         this.dispose(key);
         this.instances[key] = instance;
     },
     dispose: function (key) {
-        if(this.instances.hasOwnProperty(key)) {
+        if (this.instances.hasOwnProperty(key)) {
             this.instances[key].dispose();
             delete this.instances[key];
+        }
+    },
+    disposeAll: function () {
+        for (var key in this.instances) {
+            if (this.instances.hasOwnProperty(key)) {
+                this.dispose(key)
+            }
         }
     }
 }

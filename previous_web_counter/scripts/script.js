@@ -1438,9 +1438,11 @@ var servicePoint = new function () {
 			// Card Navigation - There are types types of cards (CLOSED, INACTIVE and VISIT)
 			if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
 				cardNavigationController.push($Qmatic.components.card.closeCard);
+				tooltipController.disposeAll();
 			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 				&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 				cardNavigationController.push($Qmatic.components.card.inactiveCard);
+				tooltipController.disposeAll();
 			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 				&& sessvars.state.userState == servicePoint.userState.SERVING) {
 				cardNavigationController.push($Qmatic.components.card.visitCard);
@@ -1779,10 +1781,12 @@ var servicePoint = new function () {
 			trtUpdateNeeded = true;
 		}
 
+		if (!blockCardChange) {
 		if (journeyUpdateNeeded) {
 			updateVerticalMessage();
 		} else {
 			journeyUpdateNeeded = true;
+		}
 		}
 
 		if (delServUpdateNeeded) {
