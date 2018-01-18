@@ -56,9 +56,9 @@ var customMarks = new function () {
 					+ "/markTypes/" + markTypeId + "/marks?call=" + t;
 				var marksResponse = spService.get(url)
 
-				var marks = util.sortArrayCaseInsensitive(marksResponse, "name")
+				util.sortArrayCaseInsensitive(marksResponse, "name");
 
-				util.populateSelect(marks, dropdownFilter);
+				util.populateSelect(marksResponse, dropdownFilter);
 				dropdownFilter.trigger("chosen:updated");
 			}
 		}
@@ -160,6 +160,7 @@ var customMarks = new function () {
 			/* D.serv. name */{
 					"sClass": "firstColumn",
 					"mDataProp": "markName",
+					"sType": "qm-sort",
 					"sDefaultContent": null,
 					"sWidth": "70%"
 				},
@@ -167,17 +168,20 @@ var customMarks = new function () {
 					"bSearchable": false,
 					"bVisible": false,
 					"mDataProp": "id",
+					"sType": "qm-sort",
 					"sDefaultContent": null
 				},
 			/* D.serv. orig id */{
 					"bSearchable": false,
 					"bVisible": false,
 					"mDataProp": "markId",
+					"sType": "qm-sort",
 					"sDefaultContent": null
 				},
 			/* Delivered time */{
 					"sClass": "middleColumn",
 					"mDataProp": "eventTime",
+					"sType": "qm-sort",
 					"sDefaultContent": null,
 					"sWidth": "30%",
 					"createdCell": function (td, cellData, rowData, row, col) {
@@ -259,10 +263,8 @@ var customMarks = new function () {
 				//customMarksTable.fnAdjustColumnSizing();
 			});
 		}
-		$(document).ready(function () {
-			var sorting = [[3, 'desc'], [1, 'desc']];
+			var sorting = [[0, 'asc']];
 			customMarksTable.fnSort(sorting);
-		});
 	};
 
 	this.cancelAddCustomMarks = function () {

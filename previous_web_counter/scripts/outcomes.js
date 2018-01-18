@@ -83,6 +83,7 @@ var outcome = new function() {
             var params = servicePoint.createParams();
             params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
             var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes");
+            util.sortArrayCaseInsensitive(outcomes, "name");
             if(typeof outcomes !== 'undefined' && outcomes != null && outcomes.length > 0) {
                 outcomeSelect.removeAttr('disabled');
                 util.populateSelect(outcomes, outcomeSelect, "code");

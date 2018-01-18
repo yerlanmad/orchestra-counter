@@ -373,6 +373,7 @@ var servicePoint = new function () {
 			var prioSelect = $("#prioListModal");
 			util.clearSelect(branchSelect);
 
+			util.sortArrayCaseInsensitive(branches, "name");
 			util.populateSettingsSelect(branches, branchSelect);
 			if (branches.length > 1) {
 				branchSelect.removeAttr('disabled');
@@ -438,6 +439,7 @@ var servicePoint = new function () {
 		util.clearSelect(workstationSelect);
 		util.clearSelect(prioSelect);
 
+		util.sortArrayCaseInsensitive(softwareWorkstations, "name");
 		util.populateSettingsSelect(softwareWorkstations, workstationSelect);
 
 		if (softwareWorkstations.length > 1) {
@@ -483,6 +485,7 @@ var servicePoint = new function () {
 		}
 		util.clearSelect(prioSelect);
 
+		util.sortArrayCaseInsensitive(profiles, "name");
 		util.populateSettingsSelect(profiles, prioSelect);
 
 		if (profiles.length > 1) {
@@ -1150,27 +1153,32 @@ var servicePoint = new function () {
 				/* Service ext name */{
 						"bSearchable": false,
 						"bVisible": false,
-						"mDataProp": "externalName"
+						"mDataProp": "externalName",
+						"sType": "qm-sort"
 					},
 				/* Service int name */{
 						"sClass": "firstColumn",
-						"mDataProp": "internalName"
+						"mDataProp": "internalName",
+						"sType": "qm-sort"
 					},
 				/* Service id */{
 						"bSearchable": false,
 						"bVisible": false,
-						"mDataProp": "id"
+						"mDataProp": "id",
+						"sType": "qm-sort"
 					},
 				/* Service int desc */{
 						"sClass": "lastColumn",
 						"mDataProp": "internalDescription",
 						"bSearchable": false,
-						"bVisible": false
+						"bVisible": false,
+						"sType": "qm-sort"
 					},
 				/* Service ext desc */{
 						"bSearchable": false,
 						"bVisible": false,
-						"mDataProp": "externalDescription"
+						"mDataProp": "externalDescription",
+						"sType": "qm-sort"
 					}];
 				var t = new Date();
 				var url = "/rest/servicepoint/branches/" + sessvars.branchId

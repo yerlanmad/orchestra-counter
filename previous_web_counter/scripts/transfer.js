@@ -131,11 +131,14 @@ var transfer = new function() {
             } else {
                 var columns = [
                     /* Queue name */        {"sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
                         "mDataProp": "name"},
                     /* Queue id */          {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "id"},
                     /* Actions */      {"sClass": "qm-table__last-column",
+                    "sType": "qm-sort",
                         "mData": null,
                         "sDefaultContent": ""}
                 ];
@@ -235,13 +238,17 @@ var transfer = new function() {
                 var staffPoolColumns = [
                     /* Id */         {"bSearchable": false,
                         "bVisible": false,
+                        "sType": "qm-sort",
                         "mDataProp": "id"},
                     /* User name  */ {"sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
                         "mDataProp": "fullName"},
                     /* Locale */     {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "locale"},
                     /* Direction */  {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "direction"}
                 ];
@@ -299,16 +306,21 @@ var transfer = new function() {
             } else {
                 var servicePointColumns = [
                     /* Name */        {"sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
                         "mDataProp": "name"},
                     /* Id */          {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "id"},
                     /* Unit id */     {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "unitId"},
                     /* State*/{"bVisible": false,
+                    "sType": "qm-sort",
                         "mDataProp": "state"},
                     /* Parameters */ {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "parameters"}
                 ];
@@ -336,7 +348,7 @@ var transfer = new function() {
                     "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns,
                     "filter": false, "headerCallback": servicePointHeaderCallback, "scrollYHeight": "300px",
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
-                table.fnSort([3, 'desc']); // open counters first
+                table.fnSort([3, 'asc']); // open counters first
             }
             //destroy old event handlers
             $('tbody tr td', $(selector)).die('click');
@@ -452,11 +464,14 @@ var transfer = new function() {
             } else {
                 var columns = [
                     /* Queue name */        {"sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
                         "mDataProp": "name"},
                     /* Queue id */          {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "id"},
                     /* Actions */      {"sClass": "qm-table__last-column",
+                    "sType": "qm-sort",
                         "mData": null,
                         "sDefaultContent": ""}
                 ];
@@ -551,14 +566,18 @@ var transfer = new function() {
             } else {
                 var staffPoolColumns = [
                     /* Id */         {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "id"},
                     /* User name  */ {"sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
                         "mDataProp": "fullName"},
                     /* Locale */     {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "locale"},
                     /* Direction */  {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "direction"}
                 ];
@@ -609,16 +628,21 @@ var transfer = new function() {
             } else {
                 var servicePointColumns = [
                     /* Name */        {"sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
                         "mDataProp": "name"},
                     /* Id */          {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "id"},
                     /* Unit id */     {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "unitId"},
                     /* State*/{"bVisible": false,
+                    "sType": "qm-sort",
                         "mDataProp": "state"},
                     /* Parameters */ {"bSearchable": false,
+                    "sType": "qm-sort",
                         "bVisible": false,
                         "mDataProp": "parameters"}
                 ];
@@ -645,7 +669,7 @@ var transfer = new function() {
                 transferToServicePointPoolTable = util.buildTableJson({"tableId": "transferTicketToCounterPoolTable",
                 "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": servicePointHeaderCallback,
                 "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
-                transferToServicePointPoolTable.fnSort([3, 'desc']); // open counters first
+                transferToServicePointPoolTable.fnSort([3, 'asc']); // open counters first
             }
             //destroy old event handlers
             $('tbody tr td', $("#transferTicketToCounterPoolTable")).die('click');

@@ -2,7 +2,7 @@ var deliveredServices = new function () {
 
     var deliveredServicesTable;
     var selectDeliveredServiceTable;
-    var SORTING = [[4, 'desc'], [1, 'desc']];
+    var SORTING = [[0, 'asc']];
     var dropdownFilter = null;
 
     function initFilter() {
@@ -30,9 +30,10 @@ var deliveredServices = new function () {
             var t = new Date();
             var url = "branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/deliverableServices?call=" + t;
             var dsResponse = spService.get(url)
-            var dsServices = util.sortArrayCaseInsensitive(dsResponse, "name")
 
-            util.populateSelect(dsServices, dropdownFilter);
+            util.sortArrayCaseInsensitive(dsResponse, "name")
+            util.populateSelect(dsResponse, dropdownFilter);
+            
             dropdownFilter.trigger("chosen:updated");
         }
     };
@@ -77,37 +78,43 @@ var deliveredServices = new function () {
                     "sClass": "qm-table__first-column",
                     "mDataProp": "deliveredServiceName",
                     "sDefaultContent": null,
-                    "sWidth": "33%"
+                    "sWidth": "33%",
+                    "sType": "qm-sort"
                 },
 /* D.serv. jiql id */  {
                     "bSearchable": false,
                     "bVisible": false,
                     "mDataProp": "id",
-                    "sDefaultContent": null
+                    "sDefaultContent": null,
+                    "sType": "qm-sort"
                 },
 /* D.serv. orig id */  {
                     "bSearchable": false,
                     "bVisible": false,
                     "mDataProp": "deliveredServiceId",
-                    "sDefaultContent": null
+                    "sDefaultContent": null,
+                    "sType": "qm-sort"
                 },
 /* D.serv. outcome */  {
                     "sClass": "qm-table__middle-column",
                     "mDataProp": "visitOutcome",
                     "sDefaultContent": null,
                     "bSortable": false,
-                    "sWidth": "45%"
+                    "sWidth": "45%",
+                    "sType": "qm-sort"
                 },
 /* Delivered time */   {
                     "sClass": "qm-table__last-column",
                     "mDataProp": "eventTime",
                     "sDefaultContent": null,
-                    "sWidth": "22%"
+                    "sWidth": "22%",
+                    "sType": "qm-sort"
                 },
 /* D.serv. out req. */ {
                     "bSearchable": false,
                     "bVisible": false,
-                    "mDataProp": "outcomeExists"
+                    "mDataProp": "outcomeExists",
+                    "sType": "qm-sort"
                 }
             ];
             var headerCallback = function (nHead, aasData, iStart, iEnd, aiDisplay) {
@@ -127,7 +134,9 @@ var deliveredServices = new function () {
                     var params = servicePoint.createParams();
                     params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
                     params.deliveredServiceId = aData["deliveredServiceId"];
+                    
                     var possibleOutcomes = spService.get("branches/" + params.branchId + "/services/" + params.serviceId + "/deliveredServices/" + params.deliveredServiceId + "/outcomes");
+                    util.sortArrayCaseInsensitive(possibleOutcomes, "name");
 
                     $.each(possibleOutcomes, function (i, outcome) {
                         html.append($("<option></option>")

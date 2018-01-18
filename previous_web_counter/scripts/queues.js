@@ -3,7 +3,7 @@ var queues = new function() {
     var myQueuesTable;
     var queuesTable;
     var ticketsTable;
-    var SORTING = [[3, 'desc'], [2, 'desc'], [0, 'asc']];
+    var SORTING = [[0, 'asc']];
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.
@@ -33,6 +33,7 @@ var queues = new function() {
                 var columns = [
                     /* Queue name */        {"sClass": "qm-table__first-column",
                         "mDataProp": "name",
+                        "sType": "qm-sort",
                         "sDefaultContent" : null},
                     /* Queue id */          {"bSearchable": false,
                         "bVisible": false,
@@ -40,9 +41,11 @@ var queues = new function() {
                         "sDefaultContent" : null},
                     /* Queue waiting num */ {"sClass": "qm-table__middle-column qm-table__middle-column--right-align",
                         "mDataProp": "customersWaiting",
+                        "sType": "qm-sort",
                         "sDefaultContent" : null},
                     /* Queue waiting time */{"sClass": "qm-table__last-column",
                         "mDataProp": "waitingTime",
+                        "sType": "qm-sort",
                         "sDefaultContent" : null}
                 ];
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
@@ -158,6 +161,7 @@ var queues = new function() {
                 params.branchId = sessvars.branchId;
                 params.queueId = sessvars.clickedQueueId;
                 var tickets = spService.get("branches/" + params.branchId + "/queues/" + params.queueId + "/visits/full");
+                util.sortArrayCaseInsensitive(tickets, "ticketId");
                 if(tickets.length > 0) {
                     ticketsTable.fnAddData(tickets);
                     ticketsTable.fnAdjustColumnSizing();
@@ -167,17 +171,21 @@ var queues = new function() {
                 var columns = [
                     /* Id */                {"bSearchable": false,
                         "bVisible": false,
+                        "sType": "qm-sort",
                         "mDataProp": "id"},
 
                     /* Ticket id */         {"sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
                         "mDataProp": "ticketId"},
                     /* Customer name */
                         {"sClass": "qm-table__middle-column",
+                        "sType": "qm-sort",
                         "mData": null,
                         "sDefaultContent": ""},
                     /* Actions */      {"sClass": "qm-table__middle-column",
                         "mDataProp": "currentVisitService.serviceExternalName"},
                     /* Waiting time */      {"sClass": "qm-table__last-column",
+                    "sType": "qm-sort",
                         "mDataProp": "waitingTime"}
 
                 ];
@@ -252,6 +260,7 @@ var queues = new function() {
                 ticketsTable = util.buildTableJson({"tableId": "tickets", "url": url, "rowCallback": rowCallback,
                     "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "100%",
                     "emptyTableLabel": "info.queue.tickets.empty", "initFn": queueDetailInitFn});
+                ticketsTable.fnSort([[1, 'asc']]);
 
             }
 

@@ -589,9 +589,28 @@ var util = new function () {
     }
 
     this.sortArrayCaseInsensitive = function (array, property, sortOrder) {
-        return array.sort(function (a, b) {
-            return a[property].toLowerCase().localeCompare(b[property].toLowerCase());
+        // Default Sort is Asc
+        array.sort(function (a, b) {
+            var multiplier = 0;
+            var ax = [], bx = [];
+
+            var a = multiplier ? (parseFloat(a[property]) * multiplier).toString() : a[property].toString();
+            var b = multiplier ? (parseFloat(b[property]) * multiplier).toString() : b[property].toString();
+
+            a.replace(/(\d+)|(\D+)/g, function (_, $1, $2) { ax.push([$1 || Infinity, $2 || ""]) });
+            b.replace(/(\d+)|(\D+)/g, function (_, $1, $2) { bx.push([$1 || Infinity, $2 || ""]) });
+
+            while (ax.length && bx.length) {
+                var an = ax.shift();
+                var bn = bx.shift();
+                var nn = (an[0] - bn[0]) || an[1].localeCompare(bn[1]);
+                if (nn) return nn;
+            }
+
+            return ax.length - bx.length;
         });
+        if (sortOrder == "desc")
+            array.reverse();
     }
 
     this.getLimitedArrayWithRemainingCount = function (array, maxCount) {
