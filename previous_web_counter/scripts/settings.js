@@ -150,6 +150,44 @@ function showModules() {
 		$('#recallBtn').hide();
 		$('#recallOption').hide();
 	}
+
+	if (buttonRecallEnabled && buttonRecycleEnabled) {
+	
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
+		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.or"))).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append( 
+		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+
+	} else if (buttonRecallEnabled) {
+
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
+		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.or"))).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+
+	} else if (buttonRecycleEnabled) {
+
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append( 
+		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+
+	} else {
+
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
+		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+		$("#customerOptionsText").html("Would you like to <strong>call the next</strong> customer");
+	}
   
   	if (multiMarks == false) {
 		$('#marksQuantityDiv').hide();

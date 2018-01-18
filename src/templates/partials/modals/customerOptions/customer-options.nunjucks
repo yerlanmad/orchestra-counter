@@ -7,21 +7,9 @@
         <div class="qm-card">
             <div class="qm-card__header-section"></div>
             <div class="qm-card__content-section">
-                <p id="recallReinsertCallnext" class="dialogueMessage">
-                    <span id="notConfirmedOptions"></span>
-                    <strong>
-                    <span>recall</span></strong>
-                    <span id="notConfirmedRecallAppendCustomer"></span>
-                    <br/>
-                    <span id="notConfirmedRecallAppendOr"></span>
-                    <strong id="reinsertLink"><span>recycle</span></strong>
-                    <span id="notConfirmedReinsertAppendIntoQueue"></span>
-                    <br/>
-                    <span id="notConfirmedReinsertAppendOr"></span>
-                    <strong id="callNextLink">
-                    <span id="callNextOption"></span>
-                    </strong>
-                    <span id="notConfirmedCallNextAppendCustomer"></span>
+                <p class="dialogueMessage">
+                    <span id="customerOptionsText">
+                    </span>
                 </p>
             </div>
             <div class="qm-card__footer-section qm-card__footer-section--space-between">
