@@ -296,7 +296,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("cancelCreateCustomerLabel", "customer.cancel");
 
         //edit customer window
-        i18nSafeAppend("editCustomerHeader", "customer.edit");
+        i18nSafeAppend("editCustomerHeader", "info.header.edit.profile");
         i18nSafe("editFirstNameLabel", "field.firstName");
         i18nSafe("editLastNameLabel", "field.lastName");
         i18nSafe("editAddressLine1Label", "field.addressLine1");
