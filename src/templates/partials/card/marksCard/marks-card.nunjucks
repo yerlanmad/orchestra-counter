@@ -39,7 +39,7 @@
                                                 <span id="noOfMarksLabel"></span>
                                             </label>
                                             
-                                            <input id="noMarkCount" class="count-input" type="number" min="0" max="10"/>
+                                            <input id="noMarkCount" class="count-input" type="number" min="1" max="10"/>
                                         </div>
 
                                         <div class="main__bottom-inner-container__btn">

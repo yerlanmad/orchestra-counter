@@ -3,7 +3,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
 
     this.selectedId = null
     this.selectedText = ""
-    this.noOfMarksToBeAdded = 0;
+    this.noOfMarksToBeAdded = 1;
 
     // Elements
     var $markCountInputField = null
@@ -55,9 +55,9 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
         });
 
         $markCountInputField.change(function() {
-            if ($(this).val() <= 0) {
+            if ($(this).val() <= 1) {
                 $(this).addClass("invalid")
-                 parentContext.noOfMarksToBeAdded = 0
+                 parentContext.noOfMarksToBeAdded = 1;
             } else {
                 $(this).removeClass("invalid")
                 parentContext.noOfMarksToBeAdded = $(this).val()
@@ -74,10 +74,10 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
     this.resetSelected = function () {
         this.selectedText = ""
         this.selectedId = null
-        this.noOfMarksToBeAdded = 0
+        this.noOfMarksToBeAdded = 1;
         customMarks.showAddedMarksTable();
         $markCountInputField.removeClass("invalid")
-        $markCountInputField.val(0)
+        $markCountInputField.val(1)
         $mainOverlayContainer.hide();
     }
     
