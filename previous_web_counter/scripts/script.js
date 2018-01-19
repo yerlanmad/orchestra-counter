@@ -735,6 +735,15 @@ var servicePoint = new function () {
 
 	this.addMultiServicePressed = function () {
 
+		// var unservedVisitServices = sessvars.state.visit.unservedVisitServices.slice(0);
+		// var servedVisitServices = sessvars.state.visit.servedVisitServices.slice(0);
+
+		// util.sortArrayCaseInsensitive(unservedVisitServices, "id", "desc");
+		// util.sortArrayCaseInsensitive(servedVisitServices, "id", "desc");
+
+		// var len = unservedVisitServices.length;
+		// var len1 = servedVisitServices.length;
+
 		var len = sessvars.state.visit.unservedVisitServices.length;
 		var len1 = sessvars.state.visit.servedVisitServices.length;
 
