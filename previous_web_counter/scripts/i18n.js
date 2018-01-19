@@ -419,6 +419,20 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-edit-customer-save > span', 'action.save.and.add');
         i18nSafeSelectorBtnAppend('.js-update-customer-save > span', 'action.update.info');
         
+        // Customer form legends
+        i18nSafeSelectorAppend('.js-legend-link-existing-customer', 'info.legend.link.existing.customer');
+        i18nSafeSelectorAppend('.js-legend-add-customer', 'info.legend.add.new.customer');
+        i18nSafeSelectorAppend('.js-legend-customer-details', 'info.legend.customer.details');
+
+        // Customer form inputs
+        i18nSafeSelectorAppend('.js-label-search-customer', 'application.sr.search.customer');
+        i18nSafeSelectorAppend('.js-label-firstName', 'field.firstName');
+        i18nSafeSelectorAppend('.js-label-lastName', 'field.lastName');
+        i18nSafeSelectorAppend('.js-label-email', 'field.email');
+        i18nSafeSelectorAppend('.js-label-phone', 'field.phoneNumber');
+        i18nSafeSelectorAppend('.js-label-required', 'field.required');
+
+
         // Notes
         i18nSafeSelectorBtnAppend('.js-notes-save-btn > span', 'button.save.notes');
         i18nSafeSelectorBtnAppend('.js-notes-cancel-btn > span', 'button.cancel');

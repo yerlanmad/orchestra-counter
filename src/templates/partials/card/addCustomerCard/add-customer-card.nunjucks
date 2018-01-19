@@ -25,10 +25,10 @@
             <div class="qm-customer__link-container">
                 <fieldset class="qm-fieldset js-customer-search-view">
                     <legend class="qm-legend">
-                        <span class="qm-legend__text">LINK EXISTING CUSTOMER</span>
+                        <span class="qm-legend__text js-legend-link-existing-customer"></span>
                     </legend>
                     <div class="qm-form-field">
-                        <label for="customerInput" class="sr-only">Search for customer</label>
+                        <label for="customerInput" class="sr-only js-label-search-customer"></label>
                         <input id="customerInput" type="search" class="qm-search-input" />
                         <i class="qm-search-input__icon icon-search" aria-hidden="true"></i>
                     </div>
@@ -38,14 +38,14 @@
                 <form id="createCustomerForm" action="" class="js-add-new-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend">
-                            <span class="qm-legend__text">OR ADD NEW CUSTOMER</span>
+                            <span class="qm-legend__text js-legend-add-customer"></span>
                         </legend>
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
                                     <div class="qm-generic-layout qm-generic-layout--space-between">
-                                        <label for="createfirstName" class="qm-form-field__label qm-form-field__label--with-req">First name</label>
-                                        <span class="qm-form-field__required-text">required</span>
+                                        <label for="createfirstName" class="qm-form-field__label qm-form-field__label--with-req js-label-firstName"></label>
+                                        <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <input id="createfirstName" class="qm-form-field__text-input" type="text" name="firstName" required />
                                 </div>
@@ -53,8 +53,8 @@
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
                                     <div class="qm-generic-layout qm-generic-layout--space-between">
-                                        <label for="createlastName" class="qm-form-field__label qm-form-field__label--with-req">Last name</label>
-                                        <span class="qm-form-field__required-text">required</span>
+                                        <label for="createlastName" class="qm-form-field__label qm-form-field__label--with-req js-label-lastName"></label>
+                                        <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <input id="createlastName" class="qm-form-field__text-input" type="text" name="lastName" required />
                                 </div>
@@ -63,7 +63,7 @@
                         <div class="qm-form-row">
                             <div class="qm-form-column-12">
                                 <div class="qm-form-field">
-                                    <label for="createemail" class="qm-form-field__label">Email address</label>
+                                    <label for="createemail" class="qm-form-field__label js-label-email"></label>
                                     <input id="createemail" class="qm-form-field__text-input" type="email" name="email" />
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
-                                    <label for="createphoneNumber" class="qm-form-field__label">Phone number</label>
+                                    <label for="createphoneNumber" class="qm-form-field__label js-label-phone"></label>
                                     <input id="createphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
                                 </div>
                             </div>
@@ -92,14 +92,14 @@
                 <form id="editCustomerForm" action="" class="qm-hide js-edit-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend">
-                            <span class="qm-legend__text">CUSTOMER DETAILS</span>
+                            <span class="qm-legend__text js-legend-customer-details"></span>
                         </legend>
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
                                     <div class="qm-generic-layout qm-generic-layout--space-between">
-                                        <label for="editfirstName" class="qm-form-field__label qm-form-field__label--with-req">First name</label>
-                                        <span class="qm-form-field__required-text">required</span>
+                                        <label for="editfirstName" class="qm-form-field__label qm-form-field__label--with-req js-label-firstName"></label>
+                                        <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <input id="editfirstName" class="qm-form-field__text-input" type="text" name="firstName" required />
                                 </div>
@@ -107,8 +107,8 @@
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
                                     <div class="qm-generic-layout qm-generic-layout--space-between">
-                                        <label for="editlastName" class="qm-form-field__label qm-form-field__label--with-req">Last name</label>
-                                        <span class="qm-form-field__required-text">required</span>
+                                        <label for="editlastName" class="qm-form-field__label qm-form-field__label--with-req js-label-lastName"></label>
+                                        <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <input id="editlastName" class="qm-form-field__text-input" type="text" name="lastName" required />
                                 </div>
@@ -117,7 +117,7 @@
                         <div class="qm-form-row">
                             <div class="qm-form-column-12">
                                 <div class="qm-form-field">
-                                    <label for="editemail" class="qm-form-field__label">Email address</label>
+                                    <label for="editemail" class="qm-form-field__label js-label-email"></label>
                                     <input id="editemail" class="qm-form-field__text-input" type="email" name="email"/>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
-                                    <label for="editphoneNumber" class="qm-form-field__label">Phone number</label>
+                                    <label for="editphoneNumber" class="qm-form-field__label js-label-phone"></label>
                                     <input id="editphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
                                 </div>
                             </div>
