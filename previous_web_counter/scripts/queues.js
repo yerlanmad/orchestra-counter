@@ -109,6 +109,10 @@ var queues = new function() {
             customer.positionCustomerResult();
         }
         if(keepCalling) {
+            if(sessvars.queueTimer !== undefined) {
+                clearTimeout(sessvars.queueTimer);
+                sessvars.queueTimer = undefined;
+            }
             sessvars.queueTimer = setTimeout(function() {
                 queues.updateQueues(true);
             }, queueRefeshTime*1000);

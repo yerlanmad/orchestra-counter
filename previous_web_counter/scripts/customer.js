@@ -507,12 +507,26 @@ var customer = new function() {
         }
     };
 
-    this.setSaveButtonState = function (formName) {
-        var requiredInputs = $(formName).find('input["required"]');
-        $.each(requiredInputs, function (input) {
-            // TODO
+    this.setSaveButtonState = function (requiredInputs) {
+        
+        $.each(requiredInputs, function (requiredInput) {
+            if(requiredInput.val() === "") {
+                saveBtn.prop('disabled', true);
+                break;
+            } else {
+                saveBtn.prop('disabled', false);
+            }
         });
     };
+
+    this.setSaveButtonStateListeners = function (formName) {
+        var requiredInputs = $(formName).find('input["required"]');
+        var saveBtn        = $(formName).find('[save-btn]');
+
+        requiredInputs.on('keyup', function () {
+            this.setSaveButtonState(requiredInputs);
+        });
+    }
 
     this.setAmountOfAdditionalCustomers = function () {
         if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
