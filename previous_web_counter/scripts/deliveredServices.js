@@ -2,7 +2,7 @@ var deliveredServices = new function () {
 
     var deliveredServicesTable;
     var selectDeliveredServiceTable;
-    var SORTING = [[0, 'desc']];
+    var SORTING = [[1, 'desc']];
     var dropdownFilter = null;
 
     function initFilter() {
@@ -78,6 +78,7 @@ var deliveredServices = new function () {
                     "sClass": "qm-table__first-column",
                     "mDataProp": "deliveredServiceName",
                     "sDefaultContent": null,
+                    "bSortable": false,
                     "sWidth": "33%",
                     "sType": "qm-sort"
                 },
@@ -86,6 +87,7 @@ var deliveredServices = new function () {
                     "bVisible": false,
                     "mDataProp": "id",
                     "sDefaultContent": null,
+                    "bSortable": false,
                     "sType": "qm-sort"
                 },
 /* D.serv. orig id */  {
@@ -93,6 +95,7 @@ var deliveredServices = new function () {
                     "bVisible": false,
                     "mDataProp": "deliveredServiceId",
                     "sDefaultContent": null,
+                    "bSortable": false,
                     "sType": "qm-sort"
                 },
 /* D.serv. outcome */  {
@@ -107,12 +110,14 @@ var deliveredServices = new function () {
                     "sClass": "qm-table__last-column",
                     "mDataProp": "eventTime",
                     "sDefaultContent": null,
+                    "bSortable": false,
                     "sWidth": "22%",
                     "sType": "qm-sort"
                 },
 /* D.serv. out req. */ {
                     "bSearchable": false,
                     "bVisible": false,
+                    "bSortable": false,
                     "mDataProp": "outcomeExists",
                     "sType": "qm-sort"
                 }

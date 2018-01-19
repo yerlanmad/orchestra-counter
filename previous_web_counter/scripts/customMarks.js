@@ -162,6 +162,7 @@ var customMarks = new function () {
 					"mDataProp": "markName",
 					"sType": "qm-sort",
 					"sDefaultContent": null,
+					"bSortable": false,
 					"sWidth": "70%"
 				},
 			/* D.serv. visit mark id */{
@@ -169,6 +170,7 @@ var customMarks = new function () {
 					"bVisible": false,
 					"mDataProp": "id",
 					"sType": "qm-sort",
+					"bSortable": false,
 					"sDefaultContent": null
 				},
 			/* D.serv. orig id */{
@@ -176,6 +178,7 @@ var customMarks = new function () {
 					"bVisible": false,
 					"mDataProp": "markId",
 					"sType": "qm-sort",
+					"bSortable": false,
 					"sDefaultContent": null
 				},
 			/* Delivered time */{
@@ -184,6 +187,7 @@ var customMarks = new function () {
 					"sType": "qm-sort",
 					"sDefaultContent": null,
 					"sWidth": "30%",
+					"bSortable": false,
 					"createdCell": function (td, cellData, rowData, row, col) {
 
 						$(td).append(
@@ -203,6 +207,7 @@ var customMarks = new function () {
 					"bSearchable": false,
 					"mDataProp": "id",
 					"bVisible": false,
+					"bSortable": false,
 					"sDefaultContent": ""
 				}];
 			var headerCallback = function (nHead, aasData, iStart, iEnd,

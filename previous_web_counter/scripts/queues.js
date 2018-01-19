@@ -3,7 +3,7 @@ var queues = new function() {
     var myQueuesTable;
     var queuesTable;
     var ticketsTable;
-    var SORTING = [[0, 'asc']];
+    var SORTING = [[3, 'desc'], [2, 'desc'], [0, 'asc']];
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.

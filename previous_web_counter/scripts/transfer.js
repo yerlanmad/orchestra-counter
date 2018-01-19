@@ -352,7 +352,7 @@ var transfer = new function() {
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
                 
             }
-            table.fnSort([[3, 'asc'], [0, 'asc']]); // open counters first
+            table.fnSort([[3, 'desc'], [0, 'asc']]); // open counters first
             //destroy old event handlers
             $('tbody tr td', $(selector)).die('click');
             //make new ones
@@ -673,7 +673,7 @@ var transfer = new function() {
                 "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": servicePointHeaderCallback,
                 "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
             }
-            transferToServicePointPoolTable.fnSort([[3, 'asc'], [0, 'asc']]);// open counters first
+            transferToServicePointPoolTable.fnSort([[3, 'desc'], [0, 'asc']]);// open counters first
             //destroy old event handlers
             $('tbody tr td', $("#transferTicketToCounterPoolTable")).die('click');
             //make new ones
