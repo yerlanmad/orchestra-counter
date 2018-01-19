@@ -135,11 +135,11 @@ gulp.task('watch:start', function () {
 })
 
 gulp.task('cache:killer', function() {
-  gulp.src('./dist/index.html')
+  return gulp.src('dist/index.html')
     .pipe(cachebust({
         type: 'timestamp'
     }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('connect', devServer.server({
@@ -295,8 +295,8 @@ gulp.task('build:war', gulpsync.sync(
         'move:images',
         'move:icons',
         'move:previous_counter_files',
-        'move:config',
         'cache:killer',
+        'move:config',
         'util:war',
         'clean:war',
         'move:lang'
@@ -318,10 +318,10 @@ gulp.task('deploy', gulpsync.sync(
         'move:images',
         'move:icons',
         'move:previous_counter_files',
+        'cache:killer',
         'util:war',
         'clean:war',
         'move:lang',
-        'cache:killer',
         'deploy:war',
         'move:config',
         'deploy:lang'
