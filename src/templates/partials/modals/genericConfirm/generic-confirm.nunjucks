@@ -11,8 +11,8 @@
             </div>
             <div class="qm-card__footer-section">
                 <div class="qm-btns-container">
-                {{button.render(id="deleteVisitYes", type="qm-btn--primary")}}
-                {{button.render(id="deleteVisitNo", type="qm-btn--secondary")}}
+                {{button.render(id="genericConfirmYes", type="qm-btn--primary")}}
+                {{button.render(id="genericConfirmNo", type="qm-btn--secondary")}}
                 </div>
             </div>
         </div>

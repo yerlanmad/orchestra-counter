@@ -326,10 +326,6 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("confirmDeleteCustomerBtn", "customer.delete");
         i18nSafe("cancelDeleteCustomerBtn", "button.cancel");
 
-        // Delete Visit Confirmation
-        i18nQmBtn("deleteVisitYes", "btn.deteleVisit.confirm.yes");
-        i18nQmBtn("deleteVisitNo", "btn.deteleVisit.confirm.no");
-
         //hijack counter window is i18nized in script.js
         i18nSafe("confirmCounterHijackingHeader",'info.confirm.counter.hijacking.header');
         i18nQmBtn("hijackYesBtnModal", 'info.confirm.counter.hijacking.yes');

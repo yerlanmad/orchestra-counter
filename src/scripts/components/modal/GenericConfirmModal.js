@@ -8,6 +8,8 @@ window.$Qmatic.components.modal.GenericConfirmModal = function (selector, config
             throw new Error("Please check your configuration. You need a valid message and yesCallback");
             
             this.hide();
+            this.bindYesText(config.yesText);
+            this.bindNoText(config.noText);
             this.bindNoCallback(config.noCallback || function () {
                 modalNavigationController.pop()
             });
@@ -20,12 +22,20 @@ window.$Qmatic.components.modal.GenericConfirmModal = function (selector, config
         $(this.getSelector()).find("#genericConfirmPrompt").empty().text(text);
     }
 
+    this.bindYesText = function (yesText) {
+        $(this.getSelector()).find("#genericConfirmYes").empty().text(yesText || jQuery.i18n.prop('general.btn.yes'));
+    }
+
+    this.bindNoText = function (noText) {
+        $(this.getSelector()).find("#genericConfirmNo").empty().text(noText || jQuery.i18n.prop('general.btn.no'));
+    }
+
     this.bindYesCallback = function (func) {
-        $(this.getSelector()).find("#deleteVisitYes").on('click', func);
+        $(this.getSelector()).find("#genericConfirmYes").on('click', func);
     }
 
     this.bindNoCallback = function (func) {
-        $(this.getSelector()).find("#deleteVisitNo").on('click', func);
+        $(this.getSelector()).find("#genericConfirmNo").on('click', func);
     }
 
     this.isValidConfig = function (config) {
@@ -38,8 +48,8 @@ window.$Qmatic.components.modal.GenericConfirmModal = function (selector, config
 
     this.hide = function () {
         window.$Qmatic.components.modal.GenericConfirmModal.prototype.hide.call(this);
-        $(this.getSelector()).find("#deleteVisitYes").unbind();
-        $(this.getSelector()).find("#deleteVisitNo").unbind();
+        $(this.getSelector()).find("#genericConfirmYes").unbind();
+        $(this.getSelector()).find("#genericConfirmNo").unbind();
         
     }
 
