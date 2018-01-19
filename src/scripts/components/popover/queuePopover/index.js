@@ -153,8 +153,17 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     },
     _delete: function () {
         this.disposeInstance();
-        queues.removeTicket(this.visitId, this.ticketId);
-        queueViewController.navigateToOverview();
+        var visitId = this.visitId;
+        var ticketId = this.ticketId;
+        var deleteConfirmation = new $Qmatic.components.modal.GenericConfirmModal("#generic-confirm-modal", {
+            message: jQuery.i18n.prop('btn.deteleVisit.confirm.message'),
+            yesCallback: function () {
+                queues.removeTicket(visitId, ticketId);
+                modalNavigationController.pop();
+                queueViewController.navigateToOverview();
+            }
+        });
+        modalNavigationController.push(deleteConfirmation);
     },
     disposeInstance: function () {
         this.navigationStack    = [];

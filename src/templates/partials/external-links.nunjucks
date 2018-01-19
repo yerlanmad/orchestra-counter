@@ -101,6 +101,7 @@
 
         <script type="text/javascript" src="scripts/components/modal/index.js"></script>
         <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/GenericConfirmModal.js"></script>
         <script type="text/javascript" src="scripts/components/modal/ProfileSettingsModal.js"></script>
         <script type="text/javascript" src="scripts/components/modal/NextServicesModal.js"></script>
         <script type="text/javascript" src="scripts/components/modal/HijackModal.js"></script>

@@ -91,6 +91,7 @@
         {% include "partials/modals/visitInDisplayQueue/visit-in-display-queue.nunjucks" %}
         {% include "partials/modals/nextServices/next-services.nunjucks" %}
         {% include "partials/modals/logoutWindow/logout-window.nunjucks" %}
+        {% include "partials/modals/genericConfirm/generic-confirm.nunjucks" %}
     </div>
     
 
