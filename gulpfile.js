@@ -10,7 +10,8 @@ const devServer = connect();
 var proxy = require('http-proxy-middleware');
 const zip = require('gulp-zip');
 var sftp = require('gulp-sftp');
-
+var cachebust = require('gulp-cache-bust');
+ 
 var isWindows = process.platform === 'win32';
 var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
 
@@ -133,6 +134,13 @@ gulp.task('watch:start', function () {
     gulp.watch('./previous_web_counter/scripts/**/*.js', ['move:previous_counter_js'])
 })
 
+gulp.task('cache:killer', function() {
+  gulp.src('./dist/index.html')
+    .pipe(cachebust({
+        type: 'timestamp'
+    }))
+    .pipe(gulp.dest('./dist'));
+});
 
 gulp.task('connect', devServer.server({
     root: ['./dist'],
@@ -248,7 +256,8 @@ gulp.task('build', gulpsync.sync(
         'move:assets',
         'move:images',
         'move:icons',
-        'move:previous_counter_files'
+        'move:previous_counter_files',
+        'cache:killer'
     ]), function () {
         return console.log(`Build Created in folder ./dist`)
     })
@@ -266,6 +275,7 @@ gulp.task('build:dev', gulpsync.sync(
         'move:images',
         'move:icons',
         'move:previous_counter_files',
+        'cache:killer',
         'watch:start',
         'connect'
     ]), function () {
@@ -286,6 +296,7 @@ gulp.task('build:war', gulpsync.sync(
         'move:icons',
         'move:previous_counter_files',
         'move:config',
+        'cache:killer',
         'util:war',
         'clean:war',
         'move:lang'
@@ -310,6 +321,7 @@ gulp.task('deploy', gulpsync.sync(
         'util:war',
         'clean:war',
         'move:lang',
+        'cache:killer',
         'deploy:war',
         'move:config',
         'deploy:lang'
