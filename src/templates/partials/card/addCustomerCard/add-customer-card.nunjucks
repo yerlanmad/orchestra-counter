@@ -47,7 +47,13 @@
                                         <label for="createfirstName" class="qm-form-field__label qm-form-field__label--with-req js-label-firstName"></label>
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
-                                    <input id="createfirstName" class="qm-form-field__text-input" type="text" name="firstName" required />
+                                    <div class="qm-form-field__input-container">
+                                        <input id="createfirstName" class="qm-form-field__text-input" type="text" name="firstName" maxlength="50" required />
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="qm-form-column-6">
@@ -56,7 +62,13 @@
                                         <label for="createlastName" class="qm-form-field__label qm-form-field__label--with-req js-label-lastName"></label>
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
-                                    <input id="createlastName" class="qm-form-field__text-input" type="text" name="lastName" required />
+                                    <div class="qm-form-field__input-container">
+                                        <input id="createlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required />
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -64,7 +76,13 @@
                             <div class="qm-form-column-12">
                                 <div class="qm-form-field">
                                     <label for="createemail" class="qm-form-field__label js-label-email"></label>
-                                    <input id="createemail" class="qm-form-field__text-input" type="email" name="email" />
+                                    <div class="qm-form-field__input-container">
+                                        <input id="createemail" class="qm-form-field__text-input" type="email" name="email" />
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +90,13 @@
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
                                     <label for="createphoneNumber" class="qm-form-field__label js-label-phone"></label>
-                                    <input id="createphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
+                                    <div class="qm-form-field__input-container">
+                                        <input id="createphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +125,13 @@
                                         <label for="editfirstName" class="qm-form-field__label qm-form-field__label--with-req js-label-firstName"></label>
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
-                                    <input id="editfirstName" class="qm-form-field__text-input" type="text" name="firstName" required />
+                                    <div class="qm-form-field__input-container">
+                                        <input id="editfirstName" class="qm-form-field__text-input" type="text" name="firstName" maxlength="50" required />
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             <div class="qm-form-column-6">
@@ -110,7 +140,13 @@
                                         <label for="editlastName" class="qm-form-field__label qm-form-field__label--with-req js-label-lastName"></label>
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
-                                    <input id="editlastName" class="qm-form-field__text-input" type="text" name="lastName" required />
+                                    <div class="qm-form-field__input-container">
+                                        <input id="editlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required />
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -118,7 +154,13 @@
                             <div class="qm-form-column-12">
                                 <div class="qm-form-field">
                                     <label for="editemail" class="qm-form-field__label js-label-email"></label>
-                                    <input id="editemail" class="qm-form-field__text-input" type="email" name="email"/>
+                                    <div class="qm-form-field__input-container">
+                                        <input id="editemail" class="qm-form-field__text-input" type="email" name="email"/>
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -126,7 +168,13 @@
                             <div class="qm-form-column-6">
                                 <div class="qm-form-field">
                                     <label for="editphoneNumber" class="qm-form-field__label js-label-phone"></label>
-                                    <input id="editphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
+                                    <div class="qm-form-field__input-container">
+                                        <input id="editphoneNumber" class="qm-form-field__text-input" type="text" name="phoneNumber" />
+                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                                            <span class="sr-only"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

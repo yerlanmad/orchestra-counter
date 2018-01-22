@@ -92,6 +92,8 @@ var customer = new function() {
         this.setFormButtonsState("#editCustomerForm", true);
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
+        this.initClearInputField();
+
         /*
          * Functionality below for autocomplete customer-search.
          * uses a simple input text field and jQuery datatable
@@ -269,6 +271,19 @@ var customer = new function() {
             $emailField.removeClass('qm-field-error');
         }
     };
+
+    this.clearInput = function (e) {
+        e.preventDefault();
+        var $input = $(this).siblings('input');
+        $input.val("");
+        $input.trigger('keyup');
+    }
+
+    this.initClearInputField = function () {
+        $clearBtns = $('.js-clear-field');
+        $clearBtns.on('click', this.clearInput);
+         
+    }
 
     this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField) {  
         $.each($requiredFields, function (i, requiredField) {

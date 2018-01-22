@@ -367,7 +367,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.qm-header__home-btn > span', 'button.home');
         i18nSafeSelectorAppend('.qm-header__help-btn > span', 'application.sr.help');
         i18nSafeSelectorAppend('.qm-header__logout-btn > span', 'button.logout');
-        
+
         // Pool
         i18nSafeSelectorAppend('.qm-pool__toggle-btn > span', 'application.sr.toggle');
         
@@ -418,7 +418,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-add-customer-save > span', 'action.save.and.add');
         i18nSafeSelectorBtnAppend('.js-edit-customer-save > span', 'action.save.and.add');
         i18nSafeSelectorBtnAppend('.js-update-customer-save > span', 'action.update.info');
-        
+        i18nSafeSelectorAppend('.js-clear-field > .sr-only', 'application.sr.clear.field');
+
         // Customer form legends
         i18nSafeSelectorAppend('.js-legend-link-existing-customer', 'info.legend.link.existing.customer');
         i18nSafeSelectorAppend('.js-legend-add-customer', 'info.legend.add.new.customer');

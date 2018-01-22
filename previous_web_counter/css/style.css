@@ -553,10 +553,10 @@ input.customerModuleButton{font-weight:bold !important; height:30px !important; 
 	width:100%;
 }
 
-.customButton{
+/* .customButton{
 	overflow:hidden;
 	white-space:nowrap;
-}
+} */
 .customButton a{
 	color:#000;
 }
