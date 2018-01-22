@@ -87,10 +87,6 @@
             @at-root [dir='rtl'] & {
                 padding: rem(10px $global-standard-padding / 2 10px 32px);
             }
-
-            &:placeholder-shown + .qm-form-field__clear-btn {
-                display: none;
-            }
         }
     }
 
