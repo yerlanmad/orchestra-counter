@@ -59,7 +59,7 @@ var init = new function () {
         initDataTablesConfiguration()
 
         initSessvars();
-        customer.init();
+        customer.init != undefined && typeof customer.init == "function" && customer.init();
         queueViewController.init();
         notesController.init();
         servicePoint.init();

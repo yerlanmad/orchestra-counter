@@ -512,7 +512,8 @@ var customer = new function() {
         $.each(requiredInputs, function (requiredInput) {
             if(requiredInput.val() === "") {
                 saveBtn.prop('disabled', true);
-                break;
+                // break; TODO - Remove this, should return false from forEach to exit.
+                return;
             } else {
                 saveBtn.prop('disabled', false);
             }
