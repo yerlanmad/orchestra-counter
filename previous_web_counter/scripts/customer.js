@@ -14,6 +14,7 @@ var customer = new function() {
     this.addUserPressed = function (e) {
         e.preventDefault();
         window.$Qmatic.components.card.addCustomerCard.showAddForm();
+        this.setFormButtonsState('#createCustomerForm', false);
         cardNavigationController.push(window.$Qmatic.components.card.addCustomerCard);
     };
 
@@ -86,6 +87,10 @@ var customer = new function() {
         $("#createdateOfBirth").datepicker("option", "appendText", $("#createdateOfBirth").datepicker("option", "dateFormat"));
         $("#editdateOfBirth").datepicker("option", $.datepicker.regional[datepickerRegionalString]);
         $("#editdateOfBirth").datepicker("option", "appendText", $("#editdateOfBirth").datepicker("option", "dateFormat"));
+
+        this.setFormButtonsState("#createCustomerForm", true);
+        this.setFormButtonsState("#editCustomerForm", true);
+        this.setFormButtonsState("#editAttachedCustomerForm", true);
 
         /*
          * Functionality below for autocomplete customer-search.
@@ -232,6 +237,65 @@ var customer = new function() {
         util.hideModal('customerSearchDiv');
 
     };
+
+    this.setFormButtonsState = function (formSelector, setListeners) {
+        var $form = $(formSelector);
+        var $requiredFields = $form.find('[required]');
+        var $saveBtn = $form.find('[save-btn]');
+        var $emailField = $form.find('[name="email"]');
+        $form.find('.qm-field-error').removeClass('qm-field-error');
+
+        this.setSaveButtonState($requiredFields, $saveBtn, $emailField);
+        if(setListeners) {
+            this.setRequiredFieldsListener($requiredFields, $saveBtn, $emailField);
+        }
+    }
+
+    this.setSaveButtonState = function ($requiredFields, $saveBtn, $emailField) {  
+        $.each($requiredFields, function (i, requiredField) {
+            var $reqField = $(requiredField);
+            if($reqField.val() === "") {
+                $saveBtn.prop('disabled', true);
+                return false;
+            } else {
+                $saveBtn.prop('disabled', false);
+                $reqField.removeClass('qm-field-error');
+            }
+        });
+
+        if($emailField.val() !== "" && !isEmailValid($emailField.val())) {
+            $saveBtn.prop('disabled', true);
+        } else {
+            $emailField.removeClass('qm-field-error');
+        }
+    };
+
+    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField) {  
+        $.each($requiredFields, function (i, requiredField) {
+            var $reqField = $(requiredField);
+            if($reqField.val() === "") {
+                $reqField.addClass('qm-field-error');
+                $saveBtn.prop('disabled', true);
+                return false;
+            } else {
+                $reqField.removeClass('qm-field-error');
+                $saveBtn.prop('disabled', false);
+            }
+        });
+
+        if($emailField.val() !== "" && !isEmailValid($emailField.val())) {
+            $emailField.addClass('qm-field-error');
+            $saveBtn.prop('disabled', true);
+        } else {
+            $emailField.removeClass('qm-field-error');
+        }
+    };
+
+    this.setRequiredFieldsListener = function ($requiredFields, $saveBtn, $emailField) {
+        var self = this;
+        $requiredFields.on('keyup', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
+        $emailField.on('keyup', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
+    }
 
     // the actual search function
     this.filterList = function(val) {
@@ -417,6 +481,7 @@ var customer = new function() {
             sessvars.currentCustomer = spService.get("customers/"+customerId);
             
             this.setEditFields(prefix, sessvars.currentCustomer)
+            this.setFormButtonsState('#' + prefix + 'CustomerForm', false);
         }
     }
 
@@ -430,8 +495,8 @@ var customer = new function() {
             sessvars.currentCustomer = spService.get("customers/"+sessvars.currentCustomer.id);
             
             this.setEditFields(prefix, sessvars.currentCustomer);
-
-            window.$Qmatic.components.card.addCustomerCard.enableEditSave();
+            this.setFormButtonsState('#' + prefix + 'CustomerForm', false);
+            //window.$Qmatic.components.card.addCustomerCard.enableEditSave();
         }
     }
 
@@ -506,28 +571,6 @@ var customer = new function() {
             }
         }
     };
-
-    this.setSaveButtonState = function (requiredInputs) {
-        
-        $.each(requiredInputs, function (requiredInput) {
-            if(requiredInput.val() === "") {
-                saveBtn.prop('disabled', true);
-                // break; TODO - Remove this, should return false from forEach to exit.
-                return;
-            } else {
-                saveBtn.prop('disabled', false);
-            }
-        });
-    };
-
-    this.setSaveButtonStateListeners = function (formName) {
-        var requiredInputs = $(formName).find('input["required"]');
-        var saveBtn        = $(formName).find('[save-btn]');
-
-        requiredInputs.on('keyup', function () {
-            this.setSaveButtonState(requiredInputs);
-        });
-    }
 
     this.setAmountOfAdditionalCustomers = function () {
         if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&

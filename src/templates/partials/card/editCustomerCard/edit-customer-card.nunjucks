@@ -70,7 +70,7 @@
                                 <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button class="qm-btn qm-btn--primary js-update-customer-save" onclick="customer.editAttachedCustomer(event);this.blur();">
+                                <button class="qm-btn qm-btn--primary js-update-customer-save" save-btn onclick="customer.editAttachedCustomer(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>

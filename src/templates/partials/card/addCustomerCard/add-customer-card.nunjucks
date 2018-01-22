@@ -81,7 +81,7 @@
                                 <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button class="qm-btn qm-btn--primary js-add-customer-save" onclick="customer.saveAndLinkCustomer(event);this.blur();">
+                                <button class="qm-btn qm-btn--primary js-add-customer-save" save-btn onclick="customer.saveAndLinkCustomer(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>
@@ -135,7 +135,7 @@
                                 <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button class="qm-btn qm-btn--primary js-edit-customer-save" onclick="customer.editAndLink(event);this.blur();">
+                                <button class="qm-btn qm-btn--primary js-edit-customer-save" save-btn onclick="customer.editAndLink(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>

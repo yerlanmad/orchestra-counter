@@ -27,10 +27,18 @@
     }
 
     &-actions {
-        margin-top: rem(60px);
+        margin-top: rem(32px);
+
+        &--large-margin-top {
+            margin-top: rem(60px);
+        }
     }
 }
 
+.qm-field-error {
+    border-color: $primary-color !important;
+    outline-color: $primary-color !important;
+}
 
 .qm-form-field {
     position: relative;
@@ -123,13 +131,6 @@
         background: $white;
         padding: rem(0 $global-standard-padding / 2);
         position: relative;
-    }
-}
-
-.qm-form-actions {
-
-    &--large-margin-top {
-        margin-top: rem(200px);
     }
 }
 
