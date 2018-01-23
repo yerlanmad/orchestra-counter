@@ -408,12 +408,15 @@ var servicePoint = new function () {
 
 		if (branchId != -1) {
 			showWorkstations(branchId, selectWorkstationModal, selectPrioModal);
+			showProfiles(branchId, undefined, selectPrioModal);
 			$Qmatic.components.dropdown.branchSelection.clearError()
 		} else {
 			$Qmatic.components.dropdown.counterSelection.onRemoveSingleItem()
 			$Qmatic.components.dropdown.profileSelection.onRemoveSingleItem()
 			selectWorkstationModal.attr('disabled', true);
 			selectPrioModal.attr('disabled', true);
+			$Qmatic.components.dropdown.counterSelection.clearError()
+			$Qmatic.components.dropdown.profileSelection.clearError()
 		}
 
 		selectWorkstationModal.trigger("chosen:updated");
@@ -448,6 +451,7 @@ var servicePoint = new function () {
 			workstationSelect.attr('disabled', '');
 			$Qmatic.components.dropdown.counterSelection.onSingleItem()
 			servicePoint.selectWorkstation(softwareWorkstations[0].id);
+			$Qmatic.components.dropdown.counterSelection.clearError();
 		}
 
 		workstationSelect.trigger("chosen:updated");
@@ -459,10 +463,10 @@ var servicePoint = new function () {
 		var branchSelect = $("#branchListModal");
 		var branchId = branchSelect.val();
 		var prioSelect = $("#prioListModal");
-		util.clearSelect(prioSelect);
+		// util.clearSelect(prioSelect);
 		prioSelect.trigger("chosen:updated");
 		if (unitId != "-1") {
-			showProfiles(branchId, unitId, prioSelect);
+			// showProfiles(branchId, unitId, prioSelect);
 			$Qmatic.components.dropdown.counterSelection.clearError()
 		}
 	};
@@ -493,6 +497,7 @@ var servicePoint = new function () {
 		} else {
 			prioSelect.attr('disabled', '');
 			$Qmatic.components.dropdown.profileSelection.onSingleItem()
+			$Qmatic.components.dropdown.profileSelection.clearError();
 		}
 
 		prioSelect.trigger("chosen:updated");
@@ -2641,13 +2646,16 @@ var servicePoint = new function () {
 			// util.showError(jQuery.i18n.prop("error.no.branch"));
 			$Qmatic.components.dropdown.branchSelection.onError(jQuery.i18n.prop("error.no.branch"))
 			return false;
-		} else if (workstationSel.val() == -1) {
-			// util.showError(jQuery.i18n.prop("error.no.workstation"));
-			$Qmatic.components.dropdown.counterSelection.onError(jQuery.i18n.prop("error.no.workstation"))
-			return false;
-		} else if (profileSel.val() == -1) {
-			// util.showError(jQuery.i18n.prop("error.no.profile"));
-			$Qmatic.components.dropdown.profileSelection.onError(jQuery.i18n.prop("error.no.profile"))
+		} else { 
+			if (workstationSel.val() == -1) {
+				// util.showError(jQuery.i18n.prop("error.no.workstation"));
+				$Qmatic.components.dropdown.counterSelection.onError(jQuery.i18n.prop("error.no.workstation"))
+			} 
+			if (profileSel.val() == -1) {
+				// util.showError(jQuery.i18n.prop("error.no.profile"));
+				$Qmatic.components.dropdown.profileSelection.onError(jQuery.i18n.prop("error.no.profile"))
+			}
+			if (workstationSel.val() == -1 || profileSel.val() == -1)
 			return false;
 		}
 		return true;
