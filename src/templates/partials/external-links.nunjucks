@@ -125,6 +125,7 @@
 
         <script type="text/javascript" src="scripts/components/card/index.js"></script>
         <script type="text/javascript" src="scripts/components/card/CardBaseComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/WalkInCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/VisitCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/TransferCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/CustomerCardComponent.js"></script>

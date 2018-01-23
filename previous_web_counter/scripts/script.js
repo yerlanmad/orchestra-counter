@@ -2905,4 +2905,8 @@ var servicePoint = new function () {
 	this.getWorkstationOffline = function () {
 		return workstationOffline;
 	};
+
+	this.getWalkdirectDT = function () {
+		return walkTable;
+	}
 };
