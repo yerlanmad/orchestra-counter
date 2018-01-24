@@ -1,13 +1,15 @@
 .qm-card-fill {
         height: 100%;
-        height: calc(100% - #{rem($height-of-card-stack)});
         width: 100%;
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
         .qm-card {
                 height: inherit;
                 display: flex;
+                height: $global-car-min-height;
                 flex-direction: column;
                 justify-content: center;
-                margin-top: rem($height-of-card-stack);
 
                 &--justify-top {
                     justify-content: flex-start !important;

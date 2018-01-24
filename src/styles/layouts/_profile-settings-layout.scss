@@ -1,5 +1,8 @@
 #profile-settings-modal {
     @include default-card-modal-layout();
+    .qm-card {
+        min-height: auto;
+    }
     .qm-card__content-section {
         .error-message{
             margin: 20px 0;

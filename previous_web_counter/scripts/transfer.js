@@ -513,7 +513,7 @@ var transfer = new function() {
                 
                 transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url,
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": headerCallback,
-                    "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues, "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
+                    "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues, "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
                 //transferTicketToQueueTable = util.buildTable("transferTicketQueueToQueueTable", url, rowCallback, columns, false, headerCallback, true);
                 
             }
@@ -602,7 +602,7 @@ var transfer = new function() {
                 };
                 transferToStaffPoolTable = util.buildTableJson({"tableId": "transferTicketToUserPoolTable", "url": staffPoolUrl,
                 "rowCallback": staffPoolRowCallback, "columns": staffPoolColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": staffPoolHeaderCallback,
-                "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.staff.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
+                "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.staff.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
             }
             transferToStaffPoolTable.fnSort([1, 'asc']);
             //destroy old event handlers
@@ -671,7 +671,7 @@ var transfer = new function() {
                 };
                 transferToServicePointPoolTable = util.buildTableJson({"tableId": "transferTicketToCounterPoolTable",
                 "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": servicePointHeaderCallback,
-                "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
+                "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
             }
             transferToServicePointPoolTable.fnSort([[3, 'desc'], [0, 'asc']]);// open counters first
             //destroy old event handlers

@@ -1,4 +1,4 @@
-{% extends "partials/card/scroll-card.nunjucks" %}
+{% extends "partials/card/fill-parent-card.nunjucks" %}
 
 {% block id %}id="transferOptionsCard"{% endblock %}
 {% block cardModifier %}qm-card--transfer qm-card--more-than-one{% endblock %}
@@ -21,7 +21,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="qm-card__content-section">
+    <div class="qm-card__content-section qm-card__content-section-flex-grow">
         <div class="qm-card__content-narrow">
             <button class="qm-btn qm-btn--secondary qm-btn--full qm-btn--with-icon js-transferToQueue" onclick="transfer.navigateToQueueView();this.blur();">
                 <i class="qm-btn__icon icon-queue" aria-hidden="true"></i>

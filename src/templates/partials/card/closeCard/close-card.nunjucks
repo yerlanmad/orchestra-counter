@@ -1,4 +1,4 @@
-{% extends "partials/card/scroll-card.nunjucks" %}
+{% extends "partials/card/fill-parent-card.nunjucks" %}
 
 {% block id %}id="closedCard"{% endblock %}
 {% block cardModifier %}qm-transparent-card{% endblock %}

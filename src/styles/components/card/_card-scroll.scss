@@ -6,9 +6,6 @@
     right: 0;
     height: 100%;
     width: 100%;
-    .qm-card {
-        margin-bottom: rem($global-standard-padding + $global-standard-card-shadow-height);
-    }
     .qm-card-scroll-container {
         display: flex;
         flex-direction: column;
@@ -17,7 +14,6 @@
         &__content {
             width: 100%;
             margin: auto;
-            padding-top: $height-of-card-stack;
         }
     }
 }

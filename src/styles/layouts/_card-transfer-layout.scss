@@ -17,7 +17,7 @@
     &__content-narrow {
         max-width: rem(365px);
         width: 100%;
-        margin: 0 auto 200px;
+        margin: 0 auto;
     }
     &__content-section {
         .dataTables_filter {
@@ -40,3 +40,9 @@
         }
     }
 }
+
+ #transferOptionsCard {
+     .qm-card {
+         justify-content: flex-start;
+     }
+ }

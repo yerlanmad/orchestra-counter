@@ -55,7 +55,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="qm-card__content-section">
+    <div class="qm-card__content-section qm-card__content-section-flex-grow">
         <!-- Waiting time and transaction time -->
         <div class="qm-timer">
             <div class="qm-timer__item">

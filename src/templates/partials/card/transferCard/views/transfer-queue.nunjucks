@@ -1,4 +1,4 @@
-{% extends "partials/card/scroll-card.nunjucks" %}
+{% extends "partials/card/fill-parent-card.nunjucks" %}
 
 {% block id %}id="transferQueueCard"{% endblock %}
 {% block cardModifier %}qm-card--transfer qm-card--more-than-one{% endblock %}
@@ -17,16 +17,16 @@
             </div>
         </div>
         <span class="qm-card-description"></span>
-    </header>
-{% endblock %}
-
-{% block content %}
-    <div class="qm-card__content-section">
         <div id="transferToQueues_filter" class="search-filter qm-table-filter">
             <label>
                 <input class="js-table-filter-input" type="search" placeholder="" aria-controls="transferToQueues">
             </label>
         </div>
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
         <table id="transferToQueues" class="qm-table qm-table--small qm-table--no-header js-table-queues">
             <thead class="qm-table__header">
                 <tr>

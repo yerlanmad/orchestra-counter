@@ -1,0 +1,4 @@
+#transferUserPoolCard{
+    @include set-default-width-for-card-layout ();
+    @include set-default-list-card-layout ();
+}

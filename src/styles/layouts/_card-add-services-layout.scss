@@ -52,7 +52,7 @@
         }
         &__content-section {
             flex-grow: 1;
-            overflow-y: scroll;
+            overflow-y: auto;
             #unServedServices {
                 .list {
                     &--item {
