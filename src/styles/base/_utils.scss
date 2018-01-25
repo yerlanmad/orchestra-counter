@@ -20,3 +20,8 @@
     color: $validation-error;
     font-size: rem(16px);
 }
+
+.qm-flex {
+    display: flex;
+    flex-wrap: wrap;
+}

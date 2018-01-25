@@ -1,5 +1,7 @@
 .qm-notes {
     display: flex;
+    width: 100%;
+    align-self: flex-end;
     align-items: flex-end;
     flex-wrap: wrap;
     margin-bottom: rem(24px);
