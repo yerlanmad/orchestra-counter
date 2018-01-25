@@ -1,5 +1,8 @@
 #logout-window-modal {
     @include default-card-modal-layout();
+    .qm-card {
+        min-height: auto;
+    }
     .qm-card__content-section {
         text-align: center;
     }

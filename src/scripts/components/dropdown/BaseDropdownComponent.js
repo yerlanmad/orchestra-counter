@@ -10,9 +10,17 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
 
     // @Override
     this.onInit = function (selector, choosenConfig) {
-        window.$Qmatic.components.dropdown.BaseDropdownComponent.prototype.onInit.call(this, selector);
-        this.activate(choosenConfig)
-        this.clearError()
+        if (selector) {
+            window.$Qmatic.components.dropdown.BaseDropdownComponent.prototype.onInit.call(this, selector);
+            this.activate(choosenConfig)
+            this.setChosenSingleFocusable();
+            this.clearError()
+        }
+    }
+
+    this.setChosenSingleFocusable = function () {
+        this.get$Elem().parent().find('.chosen-search-input').attr("tabIndex", "0");
+        this.get$Elem().parent().find('.chosen-search-input').addClass("qm-tab");
     }
 
     this.onError = function (msg) {
@@ -29,17 +37,17 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
 
     this.activate = function (config) {
 
-        this.chosenConfig = config ? $.extend( this.chosenConfig , config ) : this.chosenConfig        
+        this.chosenConfig = config ? $.extend(this.chosenConfig, config) : this.chosenConfig
         $(this.getSelector()).chosen(this.chosenConfig)
 
-        if (this.chosenConfig.single_disable && $(this.getSelector()).children().length == 1){
+        if (this.chosenConfig.single_disable && $(this.getSelector()).children().length == 1) {
             $(this.getSelector()).prop('disabled', true).trigger("chosen:updated");
         } else {
             $(this.getSelector()).prop('disabled', false).trigger("chosen:updated");
         }
     }
 
-    this.update = function(config){
+    this.update = function (config) {
         $.extend(this.chosenConfig, config)
     }
 

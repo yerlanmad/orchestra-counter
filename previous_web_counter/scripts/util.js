@@ -665,5 +665,4 @@ var util = new function () {
 
         return arrayOfMappedMarksAndCount;
     };
-
 };

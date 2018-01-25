@@ -1,5 +1,8 @@
 #next-services-modal {
     @include default-card-modal-layout();
+    .qm-card {
+        min-height: auto;
+    }
     .qm-card__content-section {
         padding-top: rem(10px);
         padding-bottom: rem(20px);

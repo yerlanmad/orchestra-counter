@@ -1,5 +1,8 @@
 #confirm-customer-modal {
     @include default-card-modal-layout();
+    .qm-card {
+        min-height: auto;
+    }
     .qm-card__header-section {
         display: none;
     }

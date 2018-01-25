@@ -1,18 +1,20 @@
 .qm-card-fill {
+    height: 100%;
+    width: 100%;
+    .qm-card-fill__inner-container{
+        display: flex;
+        flex-direction: column;
         height: 100%;
         width: 100%;
+    }
+    .qm-card {
+        height: inherit;
         display: flex;
-    flex-direction: column;
-    justify-content: center;
-        .qm-card {
-                height: inherit;
-                display: flex;
-                height: $global-car-min-height;
-                flex-direction: column;
-                justify-content: center;
-
-                &--justify-top {
-                    justify-content: flex-start !important;
-                }
+        height: $global-car-min-height;
+        flex-direction: column;
+        justify-content: center;
+        &--justify-top {
+            justify-content: flex-start !important;
         }
+    }
 }
