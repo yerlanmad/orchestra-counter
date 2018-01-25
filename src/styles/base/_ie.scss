@@ -1,6 +1,9 @@
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {  
     /* IE10+ specific styles go here */  
-    .qm-notes {
-        height: rem(200px); // IE needs height to make the align items work.
+
+    .qm-card-scroll {
+        .qm-card {
+            min-height: auto;
+        }
     }
  }

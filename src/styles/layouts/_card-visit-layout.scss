@@ -1,16 +1,16 @@
-#visitCard {
-    .qm-card {
-        display: block !important;
-        height: 100% !important;
-        position: relative;
-        // Additional padding to support the actions buttoms positioned absolutely due to unavoidable flex box redraw issues in IE 11
-        padding-bottom: rem(100px);
-        &__footer-section {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: rem(40px 32px 32px);
-        }
-    }
-}
+// #visitCard {
+//     .qm-card {
+//         display: block !important;
+//         height: 100% !important;
+//         position: relative;
+//         // Additional padding to support the actions buttoms positioned absolutely due to unavoidable flex box redraw issues in IE 11
+//         padding-bottom: rem(100px);
+//         &__footer-section {
+//             position: absolute;
+//             bottom: 0;
+//             left: 0;
+//             right: 0;
+//             padding: rem(40px 32px 32px);
+//         }
+//     }
+// }
