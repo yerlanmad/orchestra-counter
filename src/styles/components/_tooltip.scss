@@ -63,6 +63,7 @@
 
         &--context-marketing {
             border-radius: $standard-border-radius;
+            z-index: 80;
             
             .tooltip__arrow,
             .tooltip-arrow,

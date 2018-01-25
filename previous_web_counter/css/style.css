@@ -72,15 +72,7 @@ td.servicedone {
 text-decoration:line-through;
 }
 
-#message, #error {
-    position:fixed;
-    z-index: 9999;
-    visibility: hidden;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    margin: 0 15px 0 15px;
-    width: 98%;
-}
+
 
 #settingsTable{padding:5px; margin-top:5px; border:0 none;}
 #settingsTable td{height:25px;}

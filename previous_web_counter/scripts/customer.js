@@ -62,38 +62,15 @@ var customer = new function() {
 
     this.init = function() {
 
-        $("#createdateOfBirth").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            minDate: '-110Y',
-            maxDate: '-1D',
-            dateFormat: 'yy-mm-dd',
-            yearRange: "-125:+0",
-            showMonthAfterYear: true
-        });
-
-        $("#editdateOfBirth").datepicker({
-            changeMonth: true,
-            changeYear: true,
-            minDate: '-110Y',
-            maxDate: '-1D',
-            dateFormat: 'yy-mm-dd',
-            yearRange: "-125:+0",
-            showMonthAfterYear: true
-        });
-
-        var datepickerRegionalString = determineDatePickerRegion(sessvars.currentUser.locale);
-        $("#createdateOfBirth").datepicker("option", $.datepicker.regional[datepickerRegionalString]);
-        $("#createdateOfBirth").datepicker("option", "appendText", $("#createdateOfBirth").datepicker("option", "dateFormat"));
-        $("#editdateOfBirth").datepicker("option", $.datepicker.regional[datepickerRegionalString]);
-        $("#editdateOfBirth").datepicker("option", "appendText", $("#editdateOfBirth").datepicker("option", "dateFormat"));
-
         this.setFormButtonsState("#createCustomerForm", true);
         this.setFormButtonsState("#editCustomerForm", true);
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
         this.initClearInputField();
-
+        $('input[type="tel"]').keypress(function(e) {
+            var phonePattern = /[0-9\-\+\s\(\)\.]/;
+            if (!phonePattern.test(String.fromCharCode(e.which))) { return false; };
+        });
         /*
          * Functionality below for autocomplete customer-search.
          * uses a simple input text field and jQuery datatable
@@ -155,13 +132,6 @@ var customer = new function() {
                         clearTimeout(timer);
                     }
                     
-                    // NEW R5: Make sure links are disabled when search changes
-                    // $("#editCustomerLink").removeClass("customLink").addClass("editCust customLinkDisabled");
-                    // $("#editCustomerLink").prop('disabled', true);
-                    // $("#linkCustomerLink").removeClass("customLink").addClass("linkCust customLinkDisabled");
-                    // $("#linkCustomerLink").prop('disabled', true);
-                    // $("#deleteCustomerLink").removeClass("customLink").addClass("deleteCust customLinkDisabled");
-                    // $("#deleteCustomerLink").prop('disabled', true);
                     sessvars.currentCustomer = null;
                     
                     if (val.length >= 2) { //We want at least 2 characters entered.
@@ -195,12 +165,6 @@ var customer = new function() {
 
         // column header definitions for the data table
         // read them from i18n to get the visible names
-        // this.COLUMN_NAMES = [
-        //     "firstName", "lastName", "addressLine1", "addressLine2",
-        //     "addressLine3", "addressLine4", "addressLine5", "addressPostCode",
-        //     "accountNumber", "cardNumber", "phoneNumber", // "phoneMobile", "phoneHome", "phoneWork",
-        //     "email", "dateOfBirth", "gender"];
-        //this.COLUMN_NAMES = ["firstName", "lastName", "phoneNumber", "email"];
         this.COLUMN_NAMES = ["fullName", "phoneNumber", "email"];
         var columnDefs = [];
         for (var i=0; i < customer.COLUMN_NAMES.length; i++) {
@@ -253,17 +217,22 @@ var customer = new function() {
         }
     }
 
-    this.setSaveButtonState = function ($requiredFields, $saveBtn, $emailField) {  
+    this.setSaveButtonState = function ($requiredFields, $saveBtn, $emailField) {
+        var isValid = true;  
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
             if($reqField.val() === "") {
-                $saveBtn.prop('disabled', true);
-                return false;
+                isValid = false;
             } else {
-                $saveBtn.prop('disabled', false);
                 $reqField.removeClass('qm-field-error');
             }
         });
+
+        if(!isValid) {
+            $saveBtn.prop('disabled', true);
+        } else {
+            $saveBtn.prop('disabled', false);
+        }
 
         if($emailField.val() !== "" && !isEmailValid($emailField.val())) {
             $saveBtn.prop('disabled', true);
@@ -281,22 +250,26 @@ var customer = new function() {
 
     this.initClearInputField = function () {
         $clearBtns = $('.js-clear-field');
-        $clearBtns.on('click', this.clearInput);
-         
+        $clearBtns.on('click', this.clearInput); 
     }
 
-    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField) {  
+    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField) {
+        var isValid = true;  
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
             if($reqField.val() === "") {
+                isValid = false;
                 $reqField.addClass('qm-field-error');
-                $saveBtn.prop('disabled', true);
-                return false;
             } else {
                 $reqField.removeClass('qm-field-error');
-                $saveBtn.prop('disabled', false);
             }
         });
+
+        if(!isValid) {
+            $saveBtn.prop('disabled', true);
+        } else {
+            $saveBtn.prop('disabled', false);
+        }
 
         if($emailField.val() !== "" && !isEmailValid($emailField.val())) {
             $emailField.addClass('qm-field-error');
@@ -490,7 +463,6 @@ var customer = new function() {
         if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit.customerIds != null) {
             // clear form to not have old values in there
             $('#' + prefix + 'CustomerForm input').val("");
-            //window.$Qmatic.components.card.addCustomerCard.clearEditForm();
             //customer might have been updated elsewhere, fetch from database before display
             var customerId = sessvars.state.visit.customerIds[sessvars.state.visit.customerIds.length - 1]
             sessvars.currentCustomer = spService.get("customers/"+customerId);
@@ -504,7 +476,6 @@ var customer = new function() {
         if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
             // clear form to not have old values in there
             $('#' + prefix + 'CustomerForm input').val("");
-            //window.$Qmatic.components.card.addCustomerCard.clearEditForm();
             //customer might have been updated elsewhere, fetch from database before display
             var params = {customerId : parseInt(sessvars.currentCustomer.id)};
             sessvars.currentCustomer = spService.get("customers/"+sessvars.currentCustomer.id);
@@ -557,36 +528,6 @@ var customer = new function() {
         }
     };
 
-    this.saveCustomer = function() {
-        var parameterizedCustomer = parameterizeCustomer("createCustomerForm");
-        if(validateCustomerForm(parameterizedCustomer.$entity)) {
-            //special treatment for dateOfBirth
-            var parsed = $.datepicker.parseDate('yy-mm-dd',
-                $.datepicker.formatDate('yy-mm-dd',
-                    $.datepicker.parseDate($("#createdateOfBirth").datepicker("option", "dateFormat"),
-                        parameterizedCustomer.$entity.properties.dateOfBirth)
-                )
-            );
-            // convert to UTC format
-            if (typeof parsed !== "undefined" && parsed != null) {
-                var dateOfBirth = new Date();
-                dateOfBirth.setUTCDate(parsed.getDate());
-                dateOfBirth.setUTCFullYear(parsed.getFullYear());
-                dateOfBirth.setUTCMonth(parsed.getMonth());
-                dateOfBirth.setUTCHours(0, 0, 0, 0);
-                parameterizedCustomer.$entity.properties.dateOfBirth = dateOfBirth;
-            }
-            sessvars.currentCustomer = createCustomer(parameterizedCustomer);
-            //update edit, link and delete button and close dialogue in case the customer was created
-            if(typeof sessvars.currentCustomer !== "undefined") {
-                customer.updateCustomerModule();
-                //clean form before closing
-                cleanCustomerForm("create");
-                util.hideModal("createCustomerWindow");
-            }
-        }
-    };
-
     this.setAmountOfAdditionalCustomers = function () {
         if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
             sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 1) {
@@ -616,104 +557,6 @@ var customer = new function() {
         }
     };
 
-    // this.saveAndLinkCustomer = function() {
-    //     if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
-    //         var parameterizedCustomer = parameterizeCustomer("createCustomerForm");
-    //         if(validateCustomerForm(parameterizedCustomer.$entity)) {
-    //             var parsed = $.datepicker.parseDate('yy-mm-dd', $.datepicker.formatDate('yy-mm-dd',
-    //                 $.datepicker.parseDate($("#createdateOfBirth").datepicker("option", "dateFormat"),
-    //                     parameterizedCustomer.$entity.properties.dateOfBirth)));
-    //             // convert to UTC format
-    //             if (typeof parsed !== "undefined" && parsed != null) {
-    //                 var dateOfBirth = new Date();
-    //                 dateOfBirth.setUTCDate(parsed.getDate());
-    //                 dateOfBirth.setUTCFullYear(parsed.getFullYear());
-    //                 dateOfBirth.setUTCMonth(parsed.getMonth());
-    //                 dateOfBirth.setUTCHours(0, 0, 0, 0);
-    //                 parameterizedCustomer.$entity.properties.dateOfBirth = dateOfBirth;
-    //             }
-    //             var createdCustomer = createCustomer(parameterizedCustomer);
-    //             if(typeof createdCustomer !== "undefined") {
-    //                 //validation ok, all fields nice and proper
-    //                 linkCustomer(createdCustomer.id);
-    //                 $("#linkedCustomerField").html(createdCustomer.firstName + " " + createdCustomer.lastName);
-    //                 cleanCustomerForm("create");
-    //                 util.hideModal("createCustomerWindow");
-    //             }
-    //         }
-    //     }
-    // };
-
-    var cleanCustomerForm = function(operation) {
-        $("#" + operation + "CustomerForm input").val("");
-        $("#" + operation + "CustomerForm #creategender").val("-1");
-    };
-
-    this.cancelSaveCustomer = function() {
-        cleanCustomerForm("create");
-        util.hideModal('createCustomerWindow');
-    };
-
-    // this.editCustomerPressed = function() {
-    //     if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
-    //         util.showModal("editCustomerWindow");
-    //         // clear modal form to not have old values in there
-    //         $("#editCustomerWindow #editCustomerForm input").val("");
-    //         //customer might have been updated elsewhere, fetch from database before display
-    //         var params = {customerId : parseInt(sessvars.currentCustomer.id)};
-    //         sessvars.currentCustomer = spService.get("customers/"+sessvars.currentCustomer.id);
-            
-    //         for(var customerField in sessvars.currentCustomer) {
-    //             if(sessvars.currentCustomer.hasOwnProperty(customerField)) {
-    //                 if(customerField == 'properties') {
-    //                     // Iterate over all properties
-    //                     var value;
-    //                     for(var property in sessvars.currentCustomer['properties']) {
-    //                         if(sessvars.currentCustomer['properties'].hasOwnProperty(property)) {
-    //                             value = sessvars.currentCustomer['properties'][property];
-    //                             if(property == "gender") {
-    //                                 var editGenderSelect = $("#edit" + property);
-    //                                 util.setSelect(editGenderSelect, value);
-    //                             } else if(property == "dateOfBirth") {
-    //                                 if(typeof value !== "undefined" && value != null && value.length > 0) {
-    //                                     var splitDateTime = value.split("T");
-    //                                     //if birth date has not been modified by the client
-    //                                     var date;
-    //                                     if(splitDateTime.length > 1) {
-    //                                         //yyyy-mm-dd
-    //                                         date = splitDateTime[0].split("-");
-    //                                         //hh:mmm:ss
-    //                                         //poor IE. We need to create date using format: yyyy, mm-1, dd, hh, mm, ss
-    //                                         $("#edit" + property).val($.datepicker.formatDate(
-    //                                             $("#editdateOfBirth").datepicker("option", "dateFormat"),
-    //                                             new Date(date[0], date[1]-1, date[2])));
-    //                                     } else {
-    //                                         date = splitDateTime[0].split("-");
-    //                                         $("#edit" + property).value = $.datepicker.formatDate(
-    //                                             $("#editdateOfBirth").datepicker("option", "dateFormat"),
-    //                                             new Date(date[0], date[1]-1, date[2]));
-    //                                     }
-    //                                 }
-    //                             } else if(property != "status" && property != "id" && property != "dateOfBirth" && property != "gender") {
-    //                                 if (typeof value !== 'undefined' && value != null && value != 'null') {
-    //                                     $("#edit" + property).val(value);
-    //                                 }
-    //                             }
-    //                         }
-    //                     }
-    //                 } else {
-    //                     value = sessvars.currentCustomer[customerField];
-    //                     if(customerField != "id") {
-    //                         try {
-    //                             $("#edit" + customerField).val(value);
-    //                         } finally {}
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // };
-
     this.editCustomer = function(prefix, shouldPop) {
         var customerParameterized = parameterizeCustomer(prefix + "CustomerForm");
         if(validateCustomerForm(customerParameterized.$entity)) {
@@ -741,82 +584,6 @@ var customer = new function() {
                 cardNavigationController.pop();
             }
             //clean form
-            //window.$Qmatic.components.card.addCustomerCard.clearEditForm();
-        }
-    };
-
-
-    // this.editCustomer = function() {
-    //     var customerParameterized = parameterizeCustomer("editCustomerForm");
-    //     if(validateCustomerForm(customerParameterized.$entity)) {
-    //         //special treatment for dateOfBirth
-    //         var parsed = $.datepicker.parseDate('yy-mm-dd', $.datepicker.formatDate('yy-mm-dd',
-    //             $.datepicker.parseDate(
-    //                 $("#createdateOfBirth").datepicker("option", "dateFormat"),
-    //                 customerParameterized.$entity.properties.dateOfBirth)));
-    //         // convert to UTC format
-    //         if (typeof parsed !== "undefined" && parsed != null ) {
-    //             var dateOfBirth = new Date();
-    //             dateOfBirth.setUTCDate(parsed.getDate());
-    //             dateOfBirth.setUTCFullYear(parsed.getFullYear());
-    //             dateOfBirth.setUTCMonth(parsed.getMonth());
-    //             dateOfBirth.setUTCHours(0, 0, 0, 0);
-    //             customerParameterized.$entity.properties.dateOfBirth = dateOfBirth;
-				
-    //         }
-			
-    //         customerParameterized.customerId = sessvars.currentCustomer.id;
-	// 		cleanCustomerForm("edit");
-    //         util.hideModal("editCustomerWindow");
-	// 		var params = servicePoint.createParams();
-	// 		params.json =jsonString(customerParameterized);
-	// 		spService.putParams("customers/"+customerParameterized.customerId, params);
-
-    //         //update current customer i.e. the selected customer, NOT the linked customer
-    //         sessvars.currentCustomer = customerParameterized.$entity;
-    //         sessvars.currentCustomer.id = customerParameterized.customerId;
-
-    //         //update linked customer field if the customer is linked to the current transaction
-    //         if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
-    //             typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
-    //             sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
-    //             sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
-    //                     $("#linkedCustomerField").html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
-    //         }
-    //         //clean form
-    //         cleanCustomerForm("edit");
-    //         util.hideModal("editCustomerWindow");
-    //     }
-    // };
-
-    this.cancelEditCustomer = function() {
-        cleanCustomerForm("edit");
-        util.hideModal('editCustomerWindow');
-    };
-
-    this.deleteCustomerPressed = function() {
-        if(servicePoint.hasValidSettings(false)) {
-            if(sessvars.state.userState == servicePoint.userState.SERVING && typeof sessvars.state.visit !== "undefined" &&
-                sessvars.state.visit != null && sessvars.state.visit.customerIds != null &&
-                sessvars.state.visit.customerIds.length > 0 &&
-                sessvars.state.visit.customerIds[0] == sessvars.currentCustomer.id) {
-                    util.showError(jQuery.i18n.prop('error.cannot.delete.linked.customer'));
-                    return;
-            }
-        }
-        if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
-            util.showModal("deleteCustomerConfirmWindow");
-        }
-    };
-
-    this.deleteCustomer = function() {
-        if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
-            var params = {};
-            params.customerId = sessvars.currentCustomer.id;
-            spService.del("customers/" + params.customerId);
-            sessvars.currentCustomer = null;
-            customer.updateCustomerModule();
-            util.hideModal("deleteCustomerConfirmWindow");
         }
     };
 
@@ -848,19 +615,6 @@ var customer = new function() {
         params.json = jsonString(parameterizedCustomer);
 		return spService.postParams("customers", params);
     };
-
-	
-	// var jsonString = function (val) {
-	// 	var main = val.$entity;
-	// 	var prop = val.$entity.properties;
-	// 	var j = '{';
-	// 	j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '","cardNumber":"' + main.cardNumber + '"'
-	// 	j +=',"properties":{"addressLine1":"' + prop.addressLine1 + '","addressLine2":"' + prop.addressLine2 + '","addressLine3":"' + prop.addressLine3 + '","addressLine4":"' + prop.addressLine4 + '","addressLine5":"' + prop.addressLine5 + '"'
-    //     j +=',"addressPostCode":"' + prop.addressPostCode + '","phoneNumber":"' + prop.phoneNumber + '"'
-    //     //j +=',"phoneMobile":"' + prop.phoneMobile + '","phoneHome":"' + prop.phoneHome + '","phoneWork":"' + prop.phoneWork + '"'
-    //     j +=',"email":"' + prop.email + '","gender":"' + prop.gender + '","dateOfBirth":' + JSON.stringify(prop.dateOfBirth) + ',"accountNumber":"' + prop.accountNumber + '"}}';
-	// 	return j;
-	// }
     
     var jsonString = function (val) {
 		var main = val.$entity;
@@ -978,30 +732,6 @@ var customer = new function() {
                 validationError += ", " + jQuery.i18n.prop('error.validate.email');
             }
         }
-        // try {
-        //     //parse date against the localized format
-        //     var dateOfBirth = $.datepicker.parseDate($("#createdateOfBirth").datepicker("option", "dateFormat"), customer.properties.dateOfBirth);
-        //     //in case the user entered a date of birth manually, check that the date is not in the future
-        //     if(typeof dateOfBirth !== "undefined" && dateOfBirth != null && dateOfBirth.length > 0) {
-        //         var now = new Date();
-        //         if(dateOfBirth.getTime() > now.getTime()) {
-        //             error = true;
-        //             if(validationError == "") {
-        //                 validationError = jQuery.i18n.prop('error.validate.dateOfBirth');
-        //             }
-        //             else {
-        //                 validationError += ", " + jQuery.i18n.prop('error.validate.dateOfBirth');
-        //             }
-        //         }
-        //     }
-        // } catch(e) {
-        //     error = true;
-        //     if(validationError == "") {
-        //         validationError = jQuery.i18n.prop('error.validate.dateOfBirth'); //+ ": " + e; can't i18n the exceptions without modifying jquery.ui
-        //     } else {
-        //         validationError += ", " + jQuery.i18n.prop('error.validate.dateOfBirth'); //+ ": " + e;  can't i18n the exceptions without modifying jquery.ui
-        //     }
-        // }
 
         if(error) {
             util.showError(validationError);

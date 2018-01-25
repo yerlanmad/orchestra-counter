@@ -138,7 +138,7 @@
 
             th {
                 font-size: rem(16px);
-                padding: rem($global-standard-padding / 2 0);
+                padding: rem($global-standard-padding / 2 $global-standard-padding / 2);
             }
         }
 
@@ -194,4 +194,19 @@
 
 .qm-table-filter {
     margin-bottom: rem($global-standard-margin);
+}
+
+#myQueuesPanel,
+#allQueuesPanel {
+    tr {
+        .qm-table__first-column {
+            width: 60% !important; 
+        }
+        .qm-table__middle-column {
+            width: 15% !important;
+        }
+        .qm-table__last-column {
+            width: 25% !important;
+        }
+    }
 }

@@ -71,7 +71,9 @@
         {% include "partials/popovers/popover-root-templates.nunjucks" %}
     </div>
     <div id="renderedPopovers" class="qm-rendered-popovers"></div>
-    {% include "partials/previous_counter.nunjucks" %}
+    {# {% include "partials/previous_counter.nunjucks" %} #}
+    <div id="message"></div>
+    <div id="error"></div>
     
     <div class="ui-widget qm-customer-search-results" id="customerSearchDiv">
         <table id="customerSearchTable">

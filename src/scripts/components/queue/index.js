@@ -29,6 +29,7 @@ window.$Qmatic.components.QueueNavController.prototype = {
     },
     navigateToOverview: function () {
         this._clearTimer();
+        queues.runClearQueuePopovers();
         this.queueDetailView.style.display = "none";
         this.queueOverviewView.style.display = "block";
     },

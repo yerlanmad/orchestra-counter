@@ -60,9 +60,12 @@
     &.popover-show--transfer-selection-view {
         .qm-popover-transfer-selection {
             display: block;
-
-            .qm-btn__text{
-                white-space: normal;
+            .qm-btn {
+                padding: rem($global-standard-padding / 2 $global-standard-padding);
+            
+                &__text{
+                    white-space: normal;
+                }
             }
         }
     }

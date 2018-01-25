@@ -27,8 +27,9 @@
 
     &__label {
         flex: 0 0 110px;
-        padding-top: rem($global-standard-padding / 2);
+        padding-top: rem($global-standard-padding / 2 - 1);
         color: $dark-transparent82;
+        font-size: rem(18px);
         overflow: hidden;
         text-align: right;
         white-space: nowrap;

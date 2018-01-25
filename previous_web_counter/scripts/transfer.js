@@ -148,9 +148,6 @@ var transfer = new function() {
                     $(nHead).closest('thead, THEAD').find('.transferQueueName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.queue.name'));
                     });
-                    $(nHead).closest('thead, THEAD').find('.transferQueueActions').each( function (i, item) {
-                        $(item).html(jQuery.i18n.prop('info.transfer.queue.actions'));
-                    });
                 };
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
                     if($('td:eq(0)', nRow).find('span').length == 0) {
@@ -180,7 +177,6 @@ var transfer = new function() {
                     "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues});
                 
                 table.fnSort([0, 'asc']);
-                //transferTicketToQueueTable = util.buildTable("transferTicketQueueToQueueTable", url, rowCallback, columns, false, headerCallback, true);
             }
             //destroy old event handlers
 			if ( buttonTransferFirstEnabled  == true ) {	
@@ -258,7 +254,6 @@ var transfer = new function() {
                 var staffPoolHeaderCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     
                     $(nHead).closest('thead, THEAD').find('.transferStaffPoolName').each( function (i, item) {
-                        //$(item).parent().css('borderBottom', "1px solid #c0c0c0");
                         $(item).html(jQuery.i18n.prop('info.transfer.staff.pool.username'));
                     });
                 };
@@ -383,7 +378,6 @@ var transfer = new function() {
             queueViewController.navigateToOverview();
             util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
             
-            //util.hideModal("transferQueueToQueueDialogue");
         }
     };
 
@@ -403,7 +397,6 @@ var transfer = new function() {
             queues.updateQueues();
             queueViewController.navigateToOverview();
             util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.fullName]), false);
-            //util.hideModal("transferQueueToQueueDialogue");
         }
     };
 
@@ -423,7 +416,6 @@ var transfer = new function() {
             queues.updateQueues();
             queueViewController.navigateToOverview();
             util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
-            //util.hideModal("transferQueueToQueueDialogue");
         }
     };
 
@@ -514,7 +506,6 @@ var transfer = new function() {
                 transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url,
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": headerCallback,
                     "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues, "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
-                //transferTicketToQueueTable = util.buildTable("transferTicketQueueToQueueTable", url, rowCallback, columns, false, headerCallback, true);
                 
             }
             transferTable.fnSort([0, 'asc']);
@@ -589,7 +580,6 @@ var transfer = new function() {
                 var staffPoolHeaderCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     
                     $(nHead).closest('thead, THEAD').find('.transferStaffPoolName').each( function (i, item) {
-                        //$(item).parent().css('borderBottom', "1px solid #c0c0c0");
                         $(item).html(jQuery.i18n.prop('info.transfer.staff.pool.username'));
                     });
                 };

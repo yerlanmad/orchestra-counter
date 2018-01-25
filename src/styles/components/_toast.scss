@@ -1,3 +1,14 @@
+// Toast containers
+#message, #error {
+    position: fixed;
+    z-index: 140;
+    visibility: hidden;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin: rem(0 16px 0 16px);
+    width: 100%;
+}
+
 // Block
 .qm-toast {
     padding: rem($global-standard-padding 24px $global-standard-padding);
@@ -60,3 +71,4 @@
     }
 }
   
+

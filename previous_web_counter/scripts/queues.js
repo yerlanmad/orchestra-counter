@@ -4,6 +4,7 @@ var queues = new function() {
     var queuesTable;
     var ticketsTable;
     var SORTING = [[3, 'desc'], [2, 'desc'], [0, 'asc']];
+    var queuePopovers = [];
 
     /*
      * keepCalling should be set to true to have this function call itself every 30 secs.
@@ -70,8 +71,12 @@ var queues = new function() {
                     } else {
                         $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
                     }
+                    if(aData.customersWaiting === 0) {
+                        $('td:eq(2)', nRow).html("--");
+                    } else {
+                        $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
+                    }
                     
-                    $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
                     return nRow;
                 }; 
 
@@ -89,8 +94,11 @@ var queues = new function() {
                     } else {
                         $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
                     }
-                    
-                    $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
+                    if(aData.customersWaiting === 0) {
+                        $('td:eq(2)', nRow).html("--");
+                    } else {
+                        $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
+                    }
                     return nRow;
                 }; 
 
@@ -106,7 +114,7 @@ var queues = new function() {
             }
 
             // Sadly clearing and adding data to the queue "data table" resets the position of our search result
-            customer.positionCustomerResult();
+            //customer.positionCustomerResult();
         }
         if(keepCalling) {
             if(sessvars.queueTimer !== undefined) {
@@ -156,8 +164,9 @@ var queues = new function() {
             !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
             sessvars.clickedQueueId = queueTableContainingRow.fnGetData(rowClicked).id; //ql queue id
             //util.showModal("ticketsDialogue");
+            
             queueViewController.navigateToDetail();
-
+            
             if(typeof ticketsTable !== 'undefined') {
                 //empty the tickets table and populate with new data from server if table is not created
                 ticketsTable.fnClearTable();
@@ -168,7 +177,7 @@ var queues = new function() {
                 util.sortArrayCaseInsensitive(tickets, "ticketId");
                 if(tickets.length > 0) {
                     ticketsTable.fnAddData(tickets);
-                    ticketsTable.fnAdjustColumnSizing();
+                    //ticketsTable.fnAdjustColumnSizing();
                 }
                 queueDetailInitFn(tickets);
             } else {
@@ -195,8 +204,8 @@ var queues = new function() {
                 ];
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     //nHead.style.borderBottom = "1px solid #c0c0c0";
-                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.tickets');
-                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.transfer.queue.name');
+                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.ticket');
+                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.service.name');
                     nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
                 };
@@ -205,6 +214,9 @@ var queues = new function() {
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
                     
                     if($('td:eq(0)', nRow).find('a').length == 0) {
+                        if(iDisplayIndex === 0) {
+                            clearQueuePopovers();
+                        }
                         //format ticket number
                         var ticketNumSpan = $("<a href='#' class='qm-table__ticket-code'>" + aData.ticketId + "</a>")
                         $('td:eq(0)', nRow).html(ticketNumSpan);
@@ -248,7 +260,9 @@ var queues = new function() {
 
                         var popover = new window.$Qmatic.components.popover.QueuePopoverComponent(options);
                         popover.init();
-
+                        
+                        queuePopovers.push(popover);
+                        
                         var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
                     }
 
@@ -313,20 +327,23 @@ var queues = new function() {
         }
     };
 
+    var clearQueuePopovers = function () {
+        if(queuePopovers && queuePopovers.length > 0) {
+            for(var i = 0; i < queuePopovers.length; i++) {
+                queuePopovers[i].disposeInstance();
+            }
+        }
+        queuePopovers = [];
+    };
+
+    this.runClearQueuePopovers = function () {
+        clearQueuePopovers();
+    };
+
     this.emptyQueues = function() {
         queuesTable.fnClearTable();
         myQueuesTable.fnClearTable();
     };
-    // TODO: Remove
-    // var removeTicketClicked = function(aRowData) {
-    //     if(servicePoint.hasValidSettings()) {
-    //         var params = servicePoint.createParams();
-    //         params.queueId = sessvars.clickedQueueId;
-    //         params.visitId = aRowData.visitId;
-    //         spService.del("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId);
-    //         queues.updateQueues(false);
-    //     }
-    // };
 
     this.removeTicket = function (visitId, ticketId) {
         if(servicePoint.hasValidSettings()) {
