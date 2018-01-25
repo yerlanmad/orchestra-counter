@@ -41,6 +41,16 @@ var util = new function () {
         select.find('option[value != "-1"]').remove();
     };
 
+    this.twinkleTicketNumber = function () {
+        var $ticketNumber = $('#ticketNumber'),
+            lengthOfAnimation = 3000;
+
+        $ticketNumber.addClass('qm-twinkle-animation');
+        setTimeout(function() {
+            $ticketNumber.removeClass('qm-twinkle-animation');
+        }, lengthOfAnimation); 
+    };
+
     /**
      *
      * @param select the jquery select object

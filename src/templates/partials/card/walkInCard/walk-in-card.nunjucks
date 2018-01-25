@@ -22,17 +22,17 @@
 {% block content %}
     <div class="qm-card__content-section">
          <table id="walkDirectServices">
-                            <thead>
-                                <tr>
-                                    <th id="walkServiceExternalName"></th>
-                                    <th id="walkServiceInternalName"></th>
-                                    <th id="walkServiceId"></th>
-                                    <th id="walkServiceIntDescription"></th>
-                                    <th id="walkServiceExtDescription"></th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
+            <thead>
+                <tr>
+                    <th id="walkServiceExternalName"></th>
+                    <th id="walkServiceInternalName"></th>
+                    <th id="walkServiceId"></th>
+                    <th id="walkServiceIntDescription"></th>
+                    <th id="walkServiceExtDescription"></th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
     </div>    
 {% endblock %}
 

@@ -717,7 +717,7 @@ var servicePoint = new function () {
 				.putCallback("branches/" + params.branchId
 				+ "/servicePoints/" + params.servicePointId
 				+ "/visit/recall"));
-			console.log('sessvars.state recall: ', sessvars.state);
+
 			sessvars.statusUpdated = new Date();
 			delServUpdateNeeded = false;
 			outcomeUpdateNeeded = false;
@@ -727,6 +727,10 @@ var servicePoint = new function () {
 			journeyUpdateNeeded = false;
 			trtUpdateNeeded = false;
 			servicePoint.updateWorkstationStatus();
+			if(sessvars.state && sessvars.state.visitState 
+				&& sessvars.state.visitState !== "VISIT_IN_DISPLAY_QUEUE") {
+				util.twinkleTicketNumber();
+			}
 		}
 	};
 
@@ -2399,6 +2403,7 @@ var servicePoint = new function () {
 					window.clearTimeout(displayQueueTimeoutId);
 					//util.hideModal("displayQueueSpinnerWindow");
 					modalNavigationController.popModal($Qmatic.components.modal.visitInDisplayQueue)
+					util.twinkleTicketNumber();
 					sessvars.state = servicePoint.getState(spService
 						.get("user/status"));
 					sessvars.statusUpdated = new Date();

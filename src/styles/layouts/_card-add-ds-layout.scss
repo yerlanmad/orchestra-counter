@@ -4,28 +4,8 @@
         &__header-section {
             margin-bottom: 0;
             .qm-card-header {
-                &__headline {
-                    color: $dark-transparent82;
-                    font-size: rem(28px);
-                    font-weight: 300;
-                    line-height: rem(32px);
-                    margin-bottom: rem(15px);
-                    &__back-icon {
-                        cursor: pointer;
-                        i {
-                            &:before {
-                                font-size: rem(22px);
-                                vertical-align: middle;
-                            }
-                        }
-                        margin-right: rem(10px);
-                        margin-left: 0;
-                        @at-root [dir='rtl'] & {
-                            margin-right: 0;
-                            margin-left: rem(10px);
-                        }
-                        color: $dark-transparent82;
-                    }
+                .qm-card-nav {
+                    margin-bottom: rem($global-standard-margin);
                 }
                 &__sub-heading {
                     color: $dark-transparent82;

@@ -26,7 +26,10 @@
             text-align: right;
         }
 
-        &:focus,
+        &:focus {
+            //outline: 0;
+        }
+
         &:active {
             outline: 0;
         }

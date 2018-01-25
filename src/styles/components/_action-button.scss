@@ -10,12 +10,13 @@
   
     &:hover,
     &:focus {
-        outline: 0;
+        //outline: 0;
         font-weight: $font-weight-medium;
         text-decoration: none;
     }
 
     &:active {
+        outline: 0;
         color: $primary-action-button-active-color;
     }
 
