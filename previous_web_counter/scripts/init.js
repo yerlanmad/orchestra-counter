@@ -63,6 +63,7 @@ var init = new function () {
         queueViewController.init();
         notesController.init();
         servicePoint.init();
+        initKeyboardEvents();
         if (moduleChatEnabled == true) {
             chat.init();
         }
@@ -124,5 +125,28 @@ var init = new function () {
             // something is not valid, everything is invalid. Scenario: New configuration has been published
             servicePoint.resetSettings();
         }
+    }
+
+    var initKeyboardEvents = function () {
+        var $callNextBtn = $('#callNextBtn'),
+            $walkInBtn   = $('#walkDirectBtn'),
+            $endBtn      = $('#endVisitBtn');
+
+        Mousetrap.unbind('alt+n');
+        Mousetrap.unbind('alt+w');
+        Mousetrap.unbind('alt+e');
+
+        Mousetrap.bind('alt+n', function(e) {
+            $callNextBtn.trigger('onclick');
+            return false;
+        });
+        Mousetrap.bind('alt+w', function(e) {
+            $walkInBtn.trigger('onclick');
+            return false;
+        });
+        Mousetrap.bind('alt+e', function(e) {
+            $endBtn.trigger('onclick');
+            return false;
+        });
     }
 };

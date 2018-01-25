@@ -717,6 +717,7 @@ var servicePoint = new function () {
 				.putCallback("branches/" + params.branchId
 				+ "/servicePoints/" + params.servicePointId
 				+ "/visit/recall"));
+			console.log('sessvars.state recall: ', sessvars.state);
 			sessvars.statusUpdated = new Date();
 			delServUpdateNeeded = false;
 			outcomeUpdateNeeded = false;
