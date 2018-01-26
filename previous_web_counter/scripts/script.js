@@ -290,7 +290,6 @@ var servicePoint = new function () {
 			// the user wants to change the branch, workstation or work profile
 			showBranches();
 
-			//util.showModal("settingsWindow");
 			modalNavigationController.push($Qmatic.components.modal.profileSettings)
 			var branchSel = $("#branchListModal");
 			var workstationSel = $("#workstationListModal");
@@ -364,7 +363,6 @@ var servicePoint = new function () {
 
 		if (branches.length == 0) {
 			// no branches returned
-			//util.showError(jQuery.i18n.prop('error.no.branches.assigned'));
 			$Qmatic.components.dropdown.branchSelection.onError(jQuery.i18n.prop('error.no.branches.assigned'))
 		} else {
 			var branchSelect = $("#branchListModal");
@@ -434,7 +432,6 @@ var servicePoint = new function () {
 
 		if (softwareWorkstations.length == 0) {
 			// no workstations returned
-			// util.showError(jQuery.i18n.prop('error.no.available.counters'));
 			$Qmatic.components.dropdown.counterSelection.onError(jQuery.i18n.prop('error.no.available.counters'))
 			return;
 		}
@@ -483,7 +480,6 @@ var servicePoint = new function () {
 
 		if (profiles.length == 0) {
 			// no profiles returned
-			// util.showError(jQuery.i18n.prop("error.no.available.profiles"));
 			$Qmatic.components.dropdown.profileSelection.onError(jQuery.i18n.prop('error.no.available.profiles'))
 			return;
 		}
@@ -556,7 +552,6 @@ var servicePoint = new function () {
 					setProfile(servicePoint.createParams());
 					updateUI();
 				} else {
-					//util.showModal('settingsWindow');
 					modalNavigationController.pop()
 				}
 			}
@@ -577,9 +572,6 @@ var servicePoint = new function () {
 				&& usersOnWantedServicePoint[0].id != currentUser.id) {
 				// the user wants to login to an occupied counter; display
 				// warning message.
-				//modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
-				// util.hideModal("settingsWindow");
-				//util.showModal("confirmCounterHijackingWindow");
 				$Qmatic.components.modal.hijack.updateLoggedInUser(usersOnWantedServicePoint[0].userName)
 				modalNavigationController.push($Qmatic.components.modal.hijack)
 				isHijacking = true;
@@ -589,7 +581,6 @@ var servicePoint = new function () {
 	};
 
 	this.closeHijackModal = function () {
-		// or modalNavigationController.pop()
 		modalNavigationController.popModal($Qmatic.components.modal.hijack)
 	}
 
@@ -620,7 +611,6 @@ var servicePoint = new function () {
 			// well
 			if (startUserSession(settings)) {
 				modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
-				// util.hideModal("settingsWindow");
 				isApplied = true;
 			}
 		}
@@ -653,42 +643,6 @@ var servicePoint = new function () {
 			}
 			util.showModal("changeProfileConfirmWindow");
 		}
-	};
-
-	// set new profile
-	this.changeSettings = function () {
-		// Create params and set new values in sessvars
-		var profileSel = $("#prioList");
-		if (util.validateProfile(profileSel)) {
-			sessvars.workProfileId = parseInt(profileSel.val());
-			sessvars.profileName = $("option:selected", profileSel).text();
-			var params = servicePoint.createParams();
-			setProfile(params);
-			if (typeof sessvars.state.servicePointState === 'undefined'
-				|| sessvars.state.servicePointState == null
-				|| sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
-				confirm(true, params);
-			}
-			servicePoint.updateWorkstationStatus(false);
-			sessvars.currentCustomer = null;
-			customer.updateCustomerModule();
-			updateWorkstationSettings();
-			util.hideModal("changeProfileConfirmWindow");
-			util.showMessage(jQuery.i18n.prop('info.changed.settings.success')
-				+ ': ' + sessvars.branchName + ', '
-				+ sessvars.servicePointName + ', ' + sessvars.profileName);
-
-			/* update projected visits */
-			if (typeof projectedVisits !== undefined) {
-				projectedVisits.updateProjectedVisits(true);
-			}
-
-		}
-	};
-
-	this.cancelChangeSettings = function () {
-		updateWorkstationSettings();
-		util.hideModal("changeProfileConfirmWindow");
 	};
 
 	this.noShow = function () {
@@ -745,15 +699,6 @@ var servicePoint = new function () {
 
 	this.addMultiServicePressed = function () {
 
-		// var unservedVisitServices = sessvars.state.visit.unservedVisitServices.slice(0);
-		// var servedVisitServices = sessvars.state.visit.servedVisitServices.slice(0);
-
-		// util.sortArrayCaseInsensitive(unservedVisitServices, "id", "desc");
-		// util.sortArrayCaseInsensitive(servedVisitServices, "id", "desc");
-
-		// var len = unservedVisitServices.length;
-		// var len1 = servedVisitServices.length;
-
 		var len = sessvars.state.visit.unservedVisitServices.length;
 		var len1 = sessvars.state.visit.servedVisitServices.length;
 
@@ -806,7 +751,6 @@ var servicePoint = new function () {
 			}
 		}
 
-		// util.showModal('addEditServicesDialogue');
 		$("#availableServicesFilter").trigger("chosen:updated");
 		cardNavigationController.push($Qmatic.components.card.addServicesCard)
 	};
@@ -948,23 +892,6 @@ var servicePoint = new function () {
 	this.checkServicesLeft = function (command) {
 		this.command = command;
 		if (this.servicesLeft == true && moduleMultiServicesEnabled == true) {
-			// var len = sessvars.state.visit.unservedVisitServices.length;
-			// $("#nextServices").find("tr:gt(0)").remove();
-			// for (i = 0; i < len; i++) {
-			// 	var s = '';
-			// 	if (i % 2 == 1) {
-			// 		s += '<tr class="even">';
-			// 	} else {
-			// 		s += '<tr class="odd">';
-			// 	}
-
-			// 	s += '<td align="center">'
-			// 		+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
-			// 		+ '</td>';
-			// 	s += '</tr>';
-			// 	$('#nextServices').append(s);
-			// }
-			// util.showModal("nextServicesDialogue");
 			$Qmatic.components.modal.nextServices.updateList(sessvars.state.visit.unservedVisitServices);
 			modalNavigationController.push($Qmatic.components.modal.nextServices);
 		} else {
@@ -1074,15 +1001,12 @@ var servicePoint = new function () {
 	};
 
 	this.customerNotConfirmed = function () {
-		// util.hideModal("confirmCustomer");
 		if (servicePoint.hasValidSettings()) {
-			// util.showModal("customerOptionsDialogue");
 			modalNavigationController.push($Qmatic.components.modal.customerOptions)
 		}
 	};
 
 	this.closeConfirmWindow = function () {
-		// util.hideModal("confirmCustomer");
 		modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer)
 		if (servicePoint.hasValidSettings()) {
 			servicePoint.noShow();
@@ -1090,7 +1014,6 @@ var servicePoint = new function () {
 	};
 
 	this.cancelCustomerOptionsDialogue = function () {
-		// util.hideModal("customerOptionsDialogue");
 		modalNavigationController.popAllModals()
 		if (servicePoint.hasValidSettings()) {
 			servicePoint.noShow();
@@ -1102,7 +1025,6 @@ var servicePoint = new function () {
 	 */
 	this.reinsertClicked = function () {
 		if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
-			// util.hideModal("customerOptionsDialogue");
 			modalNavigationController.popAllModals()
 		}
 		if (servicePoint.hasValidSettings()
@@ -1306,21 +1228,18 @@ var servicePoint = new function () {
 					}
 				} else {
 					cardNavigationController.popModal($Qmatic.components.card.walkInCard)
-					// util.hideModal("walks");
 					return;
 				}
 			}
 			if (sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
 				util.showError(jQuery.i18n.prop("error.not.loggedin"));
 				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
-				// util.hideModal("walks");
 				clearOngoingVisit();
 				$("#closeBtn").toggleClass("customButtonSmallDisabled");
 				$("#closeBtn").prop('disabled', true);
 				return;
 			}
 			if (!sessvars.state.servicePointState == servicePoint.servicePointState.OPEN) {
-				// util.hideModal("walks");
 				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
 				sessvars.state = servicePoint.getState(spService
 					.putCallback("branches/" + walkParams.branchId
@@ -1340,7 +1259,6 @@ var servicePoint = new function () {
 				}
 			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 				|| sessvars.state.userState == servicePoint.userState.SERVING) {
-				// util.hideModal("walks");
 				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
 				if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
 					sessvars.currentCustomer = null;
@@ -1376,7 +1294,6 @@ var servicePoint = new function () {
 	};
 
 	this.saveNotes = function () {
-		//util.hideModal("notesDialogue"); TODO: remove me
 		var newNotes = document.getElementById("notesEdit").value;
 		var params = {};
 		params.branchId = sessvars.branchId;
@@ -1528,85 +1445,60 @@ var servicePoint = new function () {
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -
 			// callTime
-			// $("#callNextBtn").toggleClass("customButtonDisabled", true);
-			// $("#callNextBtn").toggleClass("customButton", false);
 			var $callNextBtn = $("#callNextBtn");
 			$callNextBtn.prop('disabled', true);
 			tooltipController.init('callnext', $callNextBtn.closest('.button-tooltip'), {
 				text: jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service')
 			});
-			// $("#walkDirectBtn").toggleClass("customButtonDisabled", true);
-			// $("#walkDirectBtn").toggleClass("customButton", false);
+
 			var $walkDirectBtn = $("#walkDirectBtn");
 			$walkDirectBtn.prop('disabled', true);
 			tooltipController.init('walkin', $walkDirectBtn.closest('.button-tooltip'), {
 				text: jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service')
 			});
-			// $("#endVisitBtn").toggleClass("customButtonDisabled", true);
-			// $("#endVisitBtn").toggleClass("customButton", false);
+
 			var $endVisitBtn = $("#endVisitBtn");
 			$endVisitBtn.prop('disabled', true);
 			tooltipController.init('endvisit', $endVisitBtn.closest('.button-tooltip'), {
 				text: jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service')
 			});
-			// $("#closeBtn").toggleClass("customButtonDisabled", true);
-			// $("#closeBtn").toggleClass("customButton", false);
+
 			var $closeBtn = $("#closeBtn");
 			$closeBtn.prop('disabled', true);
 			tooltipController.init('closecounter', $closeBtn.closest('.button-tooltip'), {
 				text: jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service')
 			});
-			// $("#transferBtn").toggleClass("customButtonSmall", true);
-			// $("#transferBtn").toggleClass("customButtonSmallDisabled", false);
 			var $transferBtn = $("#transferBtn");
 			$transferBtn.prop('disabled', false);
 
-			// $("#parkBtn").toggleClass("customButtonSmall", true);
-			// $("#parkBtn").toggleClass("customButtonSmallDisabled", false);
 			var $parkBtn = $("#parkBtn");
 			$parkBtn.prop('disabled', false);
 
-			// $("#notesBtn").toggleClass("customButtonSmall", true);
-			// $("#notesBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#notesBtn").prop('disabled', false);
 
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
-				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
-				// $("#noShowBtn").toggleClass("customButtonSmall", true);
 				$("#noShowBtn").prop('disabled', false);
 			} else {
-				// $("#noShowBtn").toggleClass("customButtonSmall", false);
-				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
 				$("#noShowBtn").prop('disabled', true);
 			}
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
-				// $("#recallBtn").toggleClass("customButtonSmallDisabled", false);
-				// $("#recallBtn").toggleClass("customButtonSmall", true);
 				$("#recallBtn").prop('disabled', false);
 			} else {
-				// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
-				// $("#recallBtn").toggleClass("customButtonSmall", false);
 				$("#recallBtn").prop('disabled', true);
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
-				// $("#reinsertBtn").toggleClass("customButtonSmall", true);
-				// $("#reinsertBtn").toggleClass("customButtonSmallDisabled",
-				// 		false);
 				$("#reinsertBtn").prop('disabled', false);
 			} else {
-				// $("#reinsertBtn").toggleClass("customButtonSmall", false);
-				// $("#reinsertBtn")
-				// 		.toggleClass("customButtonSmallDisabled", true);
 				$("#reinsertBtn").prop('disabled', true);
 			}
-			$("#prioList").prop('disabled', true);
+
 			$("#homeLink").toggleClass("linkDisabled", true);
 			$("#homeImage").toggleClass("imgDisabled", true);
 			$("#settingsLink").toggleClass("linkDisabled", true);
@@ -1655,7 +1547,6 @@ var servicePoint = new function () {
 			} else if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				// display spinner with text stating that the visit is about to
 				// be called
-				// util.showModal("displayQueueSpinnerWindow");
 				modalNavigationController.push($Qmatic.components.modal.visitInDisplayQueue)
 				if (displayQueueTimeout > 0) {
 					displayQueueTimeoutId = window
@@ -1715,41 +1606,25 @@ var servicePoint = new function () {
 			$("#parkBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#parkBtn").prop('disabled', false);
 
-			// $("#notesBtn").toggleClass("customButtonSmall", true);
-			// $("#notesBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#notesMessage").prop('disabled', false);
 
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
-				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", false);
-				// $("#noShowBtn").toggleClass("customButtonSmall", true);
 				$("#noShowBtn").prop('disabled', false);
 			} else {
-				// $("#noShowBtn").toggleClass("customButtonSmall", false);
-				// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
 				$("#noShowBtn").prop('disabled', true);
 			}
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
-				// $("#recallBtn").toggleClass("customButtonSmallDisabled", false);
-				// $("#recallBtn").toggleClass("customButtonSmall", true);
 				$("#recallBtn").prop('disabled', false);
 				tooltipController.dispose('recall');
 			} else {
-				// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
-				// $("#recallBtn").toggleClass("customButtonSmall", false);
 				$("#recallBtn").prop('disabled', true);
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
-				// $("#reinsertBtn").toggleClass("customButtonSmall", true);
-				// $("#reinsertBtn").toggleClass("customButtonSmallDisabled",
-				// 		false);
 				$("#reinsertBtn").prop('disabled', false);
 			} else {
-				// $("#reinsertBtn").toggleClass("customButtonSmall", false);
-				// $("#reinsertBtn")
-				// 		.toggleClass("customButtonSmallDisabled", true);
 				$("#reinsertBtn").prop('disabled', true);
 			}
 
@@ -1842,14 +1717,12 @@ var servicePoint = new function () {
 		}
 
 		if (spPoolUpdateNeeded) {
-			//servicePointPool.updateServicePointPool(); // Todo: remove me
 			servicePointPool.renderCounterPool();
 		} else {
 			spPoolUpdateNeeded = true;
 		}
 
 		if (userPoolUpdateNeeded) {
-			//userPool.updateUserPool(); // TODO: remove me
 			userPool.renderUserPool();
 		} else {
 			userPoolUpdateNeeded = true;
@@ -1922,7 +1795,7 @@ var servicePoint = new function () {
 		var isDisabled = sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.SERVING
 			&& servicePoint.isOutcomeOrDeliveredServiceNeeded();
-		$("#prioList").prop('disabled', isDisabled);
+
 		$("#homeLink").toggleClass("linkDisabled", isDisabled);
 		$("#homeImage").toggleClass("imgDisabled", isDisabled);
 		$("#settingsLink")
@@ -2008,31 +1881,17 @@ var servicePoint = new function () {
 			$("#closeBtn").prop("disabled", true);
 		}
 
-		// $("#transferBtn").toggleClass("customButtonSmallDisabled", true);
-		// $("#transferBtn").toggleClass("customButtonSmall", false);
 		$("#transferBtn").prop("disabled", true);
 
-		// $("#parkBtn").toggleClass("customButtonSmallDisabled", true);
-		// $("#parkBtn").toggleClass("customButtonSmall", false);
 		$("#parkBtn").prop("disabled", true);
 
-		// $("#noShowBtn").toggleClass("customButtonSmallDisabled", true);
-		// $("#noShowBtn").toggleClass("customButtonSmall", false);
 		$("#noShowBtn").prop("disabled", true);
 
-		// $("#notesBtn").toggleClass("customButtonSmallDisabled", true);
-		// $("#notesBtn").toggleClass("customButtonSmall", false);
 		$("#notesBtn").prop("disabled", true);
 
-		// $("#recallBtn").toggleClass("customButtonSmallDisabled", true);
-		// $("#recallBtn").toggleClass("customButtonSmall", false);
 		$("#recallBtn").prop("disabled", true);
 
-		// $("#reinsertBtn").toggleClass("customButtonSmallDisabled", true);
-		// $("#reinsertBtn").toggleClass("customButtonSmall", false);
 		$("#reinsertBtn").prop("disabled", true);
-
-		$("#prioList").prop("disabled", false);
 
 		$("#addOutcomeLink").toggleClass("customButtonSmall", false);
 		$("#addOutcomeLink").toggleClass("customButtonSmallDisabled", true);
@@ -2205,20 +2064,15 @@ var servicePoint = new function () {
 		var branch = $("#branch");
 		var workstation = $("#workstation");
 		var profile = $("#profile");
-		var prioSel = $("#prioList");
 
-		showProfiles(sessvars.branchId, sessvars.servicePointId, prioSel);
+		servicePoint.servicesList = spService.get("branches/" + parseInt(sessvars.branchId)
+			+ "/services");
 
 		branch.text(sessvars.branchName);
 		workstation.text(sessvars.servicePointName);
 		profile.text(sessvars.state.workProfileName);
 		// Used to repaint in IE when values are appended
 		profile.focus().blur();
-
-		prioSel.prop('selectedIndex', $(
-			"#prioList option[value=" + sessvars.workProfileId + "]")
-			.index());
-		prioSel.prop("disabled", false);
 	};
 
 	var doEndUserSession = function () {
@@ -2491,21 +2345,18 @@ var servicePoint = new function () {
 		if (typeof sessvars.branchId === "undefined"
 			|| sessvars.branchId == null) {
 			if (showMessages) {
-				// util.showError(translate.msg("error.no.branch"));
 				$Qmatic.components.dropdown.branchSelection.onError(translate.msg("error.no.branch"))
 			}
 			return false;
 		} else if (typeof sessvars.servicePointId === "undefined"
 			|| sessvars.servicePointId == null) {
 			if (showMessages) {
-				// util.showError(translate.msg("error.no.workstation"));
 				$Qmatic.components.dropdown.counterSelection.onError(translate.msg("error.no.workstation"))
 			}
 			return false;
 		} else if (typeof sessvars.workProfileId === "undefined"
 			|| sessvars.workProfileId == null) {
 			if (showMessages) {
-				// util.showError(translate.msg("error.no.profile"));
 				$Qmatic.components.dropdown.profileSelection.onError(translate.msg("error.no.profile"))
 			}
 			return false;
@@ -2648,16 +2499,13 @@ var servicePoint = new function () {
 		profileSel) {
 
 		if (branchSel.val() == -1) {
-			// util.showError(jQuery.i18n.prop("error.no.branch"));
 			$Qmatic.components.dropdown.branchSelection.onError(jQuery.i18n.prop("error.no.branch"))
 			return false;
 		} else { 
 			if (workstationSel.val() == -1) {
-				// util.showError(jQuery.i18n.prop("error.no.workstation"));
 				$Qmatic.components.dropdown.counterSelection.onError(jQuery.i18n.prop("error.no.workstation"))
 			} 
 			if (profileSel.val() == -1) {
-				// util.showError(jQuery.i18n.prop("error.no.profile"));
 				$Qmatic.components.dropdown.profileSelection.onError(jQuery.i18n.prop("error.no.profile"))
 			}
 			if (workstationSel.val() == -1 || profileSel.val() == -1)

@@ -1044,7 +1044,7 @@
             </div>
 
 			<!-- Change Profile dialogue -->
-            <div id="changeProfileConfirmWindow" class="modalPage">
+            <!--<div id="changeProfileConfirmWindow" class="modalPage">
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="branchForm roundedCorner5">
@@ -1065,7 +1065,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
 			<!-- Confirm Hijack Service Point dialogue -->
             {#<div id="confirmCounterHijackingWindow" class="modalPage">
