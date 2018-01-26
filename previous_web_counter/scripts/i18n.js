@@ -433,6 +433,13 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.js-label-phone', 'field.phoneNumber');
         i18nSafeSelectorAppend('.js-label-required', 'field.required');
 
+        // Chosen Select drop down placeholder text...
+        $Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') })
+        $Qmatic.components.dropdown.branchSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseBranch') })
+        $Qmatic.components.dropdown.counterSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseCounter') })
+        $Qmatic.components.dropdown.profileSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseProfile') })
+        $Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') })
+
 
         // Notes
         i18nSafeSelectorBtnAppend('.js-notes-save-btn > span', 'button.save.notes');

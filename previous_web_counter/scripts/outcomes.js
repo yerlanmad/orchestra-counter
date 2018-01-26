@@ -73,7 +73,6 @@ var outcome = new function() {
 
     this.updateOutcomes = function() {
         var outcomeSelect = $("#selectOutcome");
-		$Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') })
         outcomeSelect.parent().removeClass("optionSelected");
         outcomeSelect.parent().hide();
         util.clearSelect(outcomeSelect);

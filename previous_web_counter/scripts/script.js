@@ -791,7 +791,6 @@ var servicePoint = new function () {
 		var select = document.getElementById("availableServicesFilter");
 
 		util.clearSelect($("#availableServicesFilter"));
-		$Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') })
 
 		for (i = 0; i < servicePoint.servicesList.length; i++) {
 
