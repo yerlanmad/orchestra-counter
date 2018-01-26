@@ -59,6 +59,14 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
         $(this.getSelector()).next().removeClass("single-item")
     }
 
+    this.selectOption = function () {
+        $(this.getSelector()).parent().addClass("optionSelected");
+    }
+
+    this.unSelectOption = function () {
+        $(this.getSelector()).parent().removeClass("optionSelected");
+    }
+
     this.onInit.apply(this, arguments);
 }
 
