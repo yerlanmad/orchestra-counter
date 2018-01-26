@@ -40,6 +40,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     init: function () {
         this._attachOverlayEvent();
         this._attachTargetEventListeners();
+        this.boundariesElement = document.querySelector('.qm-main');
     },
     _attachTargetEventListeners: function () {
         this.target.addEventListener('click', this._toggleAndAttachPopoverTemplateEvents.bind(this));
@@ -50,7 +51,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         } else {
             this.instance = new Tooltip(this.target, {
                 container: document.getElementById('renderedPopovers'),
-                boundariesElement: 'viewport',
+                boundariesElement: this.boundariesElement,
                 trigger: 'manual',
                 title: ' ',
                 placement: this.isRTL ? 'bottom-end' : 'bottom-start',
@@ -102,13 +103,13 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
             deleteBtn.addEventListener('click', this._delete.bind(this));
         }
         if(!this.showCallBtn) {
-            callBtn.remove();
+            callBtn.parentNode.removeChild(callBtn);
         }
         if(!this.showTransferBtn) {
-            transferBtn.remove();
+            transferBtn.parentNode.removeChild(transferBtn);
         }
         if(!this.showDeleteBtn) {
-            deleteBtn.remove();
+            deleteBtn.parentNode.removeChild(deleteBtn);
         }
         
         // Transfer view
@@ -126,12 +127,15 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         transferToCounterPoolBtn.addEventListener('click', this._navigateTo.bind(this, this.views.COUNTER_POOL, this._initCounterPoolTable.bind(this, popoverCounterPoolTable)));
 
         if (transferToUserPoolEnabled == false) {
-            transferToUserPoolBtn.remove();
+            transferToUserPoolBtn.parentNode.removeChild(transferToUserPoolBtn);
         }
     
         if (transferToServicePointPoolEnabled == false) {
-            transferToCounterPoolBtn.remove();
+            transferToCounterPoolBtn.parentNode.removeChild(transferToCounterPoolBtn);
         }
+
+    },
+    _remove: function (element) {
 
     },
     _initQueuesTable: function (selector) {

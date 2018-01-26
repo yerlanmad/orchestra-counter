@@ -1437,9 +1437,9 @@ var servicePoint = new function () {
 					}
 				}
 			}
-
-			// spPoolUpdateNeeded = true;
-			// userPoolUpdateNeeded = true;
+			// DS or outcome needed - Update pools
+			spPoolUpdateNeeded = true;
+			userPoolUpdateNeeded = true;
 
 			$("#waitingTimeCounter").html(
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime

@@ -10,9 +10,10 @@
     .qm-card {
         height: inherit;
         display: flex;
-        height: $global-car-min-height;
+        height: $global-card-min-height;
         flex-direction: column;
         justify-content: center;
+        min-height: 400px;
         &--justify-top {
             justify-content: flex-start !important;
         }

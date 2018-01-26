@@ -6,7 +6,7 @@ $global-card-layout-height: calc(100% - #{$global-action-bar-height});
 $global-main-height: calc(100vh - #{$global-header-height} - #{$global-footer-height});
 $height-of-card-stack: 35px;
 $global-standard-card-shadow-height: 50px;
-$global-car-min-height: calc(100vh - 300px);
+$global-card-min-height: calc(100vh - 300px);
 
 // Standard padding and margin
 $global-standard-padding: 16px;

@@ -118,7 +118,8 @@ var customer = new function() {
                 // these events are handled in "keydown" event handler
                 if (event.keyCode === $.ui.keyCode.ENTER ||
                     event.keyCode === $.ui.keyCode.UP ||
-                    event.keyCode === $.ui.keyCode.DOWN) {
+                    event.keyCode === $.ui.keyCode.DOWN ||
+                    event.keyCode === $.ui.keyCode.TAB) {
 
                     // cancel search
                 } else if (event.keyCode === $.ui.keyCode.ESCAPE) {
@@ -520,12 +521,12 @@ var customer = new function() {
     }
 
     this.createCustomerPressed = function() {
-        util.showModal("createCustomerWindow");
-        if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
-            $("#saveAndLinkCustomerLink").removeClass("customLinkDisabled").addClass("customLink");
-        } else {
-            $("#saveAndLinkCustomerLink").removeClass("customLink").addClass("customLinkDisabled");
-        }
+        // util.showModal("createCustomerWindow");
+        // if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
+        //     $("#saveAndLinkCustomerLink").removeClass("customLinkDisabled").addClass("customLink");
+        // } else {
+        //     $("#saveAndLinkCustomerLink").removeClass("customLink").addClass("customLinkDisabled");
+        // }
     };
 
     this.setAmountOfAdditionalCustomers = function () {
@@ -546,7 +547,7 @@ var customer = new function() {
                 var createdCustomer = createCustomer(parameterizedCustomer);
                 if(typeof createdCustomer !== "undefined") {
                     //validation ok, all fields nice and proper
-                    linkCustomer(createdCustomer.id);
+                    linkCustomer(createdCustomer);
                     $("#linkedCustomerField").html(createdCustomer.firstName + " " + createdCustomer.lastName);
                     this.setAmountOfAdditionalCustomers();
                     $('#ticketNumber').removeClass('qm-card-header__highlighted');
@@ -564,12 +565,14 @@ var customer = new function() {
             customerParameterized.customerId = sessvars.currentCustomer.id;
 			
 			var params = servicePoint.createParams();
-			params.json =jsonString(customerParameterized);
-			spService.putParams("customers/"+customerParameterized.customerId, params);
-
+            params.json =jsonString(customerParameterized);
+            spService.putParams("customers/"+customerParameterized.customerId, params);
+            
             //update current customer i.e. the selected customer, NOT the linked customer
             sessvars.currentCustomer = customerParameterized.$entity;
             sessvars.currentCustomer.id = customerParameterized.customerId;
+
+            
 
             //update linked customer field if the customer is linked to the current transaction
             if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
@@ -581,6 +584,12 @@ var customer = new function() {
                         $('#ticketNumber').removeClass('qm-card-header__highlighted');
             }
             if(shouldPop === true) {
+                var updateParams = servicePoint.createParams();
+                updateParams.customerId = sessvars.currentCustomer.id;
+                updateParams.visitId = sessvars.state.visit.id;
+                updateParams.json = '{"customers":"' + customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName + '"}';
+                spService.putParams("branches/" + params.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+
                 cardNavigationController.pop();
             }
             //clean form
@@ -613,6 +622,7 @@ var customer = new function() {
     var createCustomer = function(parameterizedCustomer) {
 		var params = servicePoint.createParams();
         params.json = jsonString(parameterizedCustomer);
+        
 		return spService.postParams("customers", params);
     };
     
@@ -620,18 +630,20 @@ var customer = new function() {
 		var main = val.$entity;
 		var prop = val.$entity.properties;
 		var j = '{';
-		j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '"'
+        j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '"'
 		j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '"}}';
 		return j;
-	}
+    }
 
     //link customer stuff below
 
-    var linkCustomer = function(customerId) {
+    var linkCustomer = function(customer) {
         var params = servicePoint.createParams();
-        params.customerId = customerId;
+        params.customerId = customer.id;
         params.visitId = sessvars.state.visit.id;
+        params.json = '{"customers":"' + customer.firstName + " " + customer.lastName + '"}';
         sessvars.state = servicePoint.getState(spService.putCallback("branches/" + params.branchId + "/visits/" + params.visitId + "/customers/" + params.customerId));
+        spService.putParams("branches/" + params.branchId + "/visits/" + params.visitId + "/parameters", params);
         sessvars.statusUpdated = new Date();
         servicePoint.updateWorkstationStatus(false);
     };
@@ -641,7 +653,7 @@ var customer = new function() {
             if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null &&
                 typeof sessvars.currentCustomer.id !== "undefined" && sessvars.currentCustomer.id != null &&
                 typeof sessvars.currentCustomer.id === 'number') {
-                linkCustomer(sessvars.currentCustomer.id);
+                linkCustomer(sessvars.currentCustomer);
                 $("#linkedCustomerField").html(sessvars.currentCustomer.firstName + " " +
                     sessvars.currentCustomer.lastName);
                 this.setAmountOfAdditionalCustomers();
@@ -697,7 +709,7 @@ var customer = new function() {
                 
             } else if(typeof sessvars.state.visit.customerIds !== "undefined" &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0) {
-                var customer =spService.get("customers/"+sessvars.state.visit.customerIds[sessvars.state.visit.customerIds.length - 1]);
+                var customer =spService.get("customers/"+sessvars.state.visit.customerIds[0]);
                 $("#linkedCustomerField").html(customer.firstName + " " + customer.lastName);
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
