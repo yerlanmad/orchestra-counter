@@ -50,15 +50,19 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
         window.removeEventListener('keydown', this.tabTriggerFunc);
     }
 
-    this.getNextTabbaleElement = function () {
-        var focusableElements = this.get$Elem().find(".qm-tab, .qm-action-btn").filter(function (i, item) {
-            if ($(item).hasClass("chosen-search-input")) {
-                if ($($(item).parent().parent().parent().parent().children()[0]).is(':disabled')) {
-                    return false
-                }
+    this.tabFilterFunc = function (i, item) {
+        if ($(item).hasClass("chosen-search-input")) {
+            if ($($(item).parent().parent().parent().parent().children()[0]).is(':disabled')) {
+                return false;
             }
-            return true;
-        }.bind(this));
+        } else if ($(item).is(':hidden')) {
+            return false;
+        }
+        return true;
+    }
+
+    this.getNextTabbaleElement = function () {
+        var focusableElements = this.get$Elem().find(".qm-tab, .qm-action-btn").filter(this.tabFilterFunc.bind(this));
         var focusableItemCount = focusableElements.length;
 
         if (document.activeElement) {
@@ -74,14 +78,7 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
     }
 
     this.getPrevTabbaleElement = function () {
-        var focusableElements = this.get$Elem().find(".qm-tab, .qm-action-btn").filter(function (i, item) {
-            if ($(item).hasClass("chosen-search-input")) {
-                if ($($(item).parent().parent().parent().parent().children()[0]).is(':disabled')) {
-                    return false
-                }
-            }
-            return true;
-        }.bind(this));
+        var focusableElements = this.get$Elem().find(".qm-tab, .qm-action-btn").filter(this.tabFilterFunc.bind(this));
         var focusableItemCount = focusableElements.length;
 
         if (document.activeElement) {
