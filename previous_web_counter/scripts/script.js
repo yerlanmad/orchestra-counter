@@ -1489,8 +1489,10 @@ var servicePoint = new function () {
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
 				$("#recallBtn").prop('disabled', false);
+				$("#waitingTimeContainer").show();
 			} else {
 				$("#recallBtn").prop('disabled', true);
+				$("#waitingTimeContainer").hide();
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
@@ -1618,8 +1620,10 @@ var servicePoint = new function () {
 			if (sessvars.state.visit.recallAllowed) {
 				$("#recallBtn").prop('disabled', false);
 				tooltipController.dispose('recall');
+				$("#waitingTimeContainer").show();
 			} else {
 				$("#recallBtn").prop('disabled', true);
+				$("#waitingTimeContainer").hide();
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
