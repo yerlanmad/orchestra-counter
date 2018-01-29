@@ -49,8 +49,12 @@ function showModules() {
 
 	if (moduleMultiServicesEnabled == true) {
 		$('#addMultiServiceLink').show();
+		$('#nextVisitServices').show();
+		$('#previousVisitServices').show();
 	} else {
 		$('#addMultiServiceLink').hide();
+		$('#nextVisitServices').hide();
+		$('#previousVisitServices').hide();
 	}
 	
 	
