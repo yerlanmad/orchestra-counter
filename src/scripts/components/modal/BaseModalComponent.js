@@ -35,7 +35,6 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
                 if ($(elem).hasClass("chosen-search-input")) {
                     $($(elem).parent().parent().parent().parent().children()[0]).trigger("chosen:open");
                 } else {
-                    console.log($(elem).find("span").val());
                     $(elem).focus();
                 }
 

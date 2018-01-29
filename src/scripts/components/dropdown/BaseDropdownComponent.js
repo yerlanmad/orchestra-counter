@@ -14,11 +14,32 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
             window.$Qmatic.components.dropdown.BaseDropdownComponent.prototype.onInit.call(this, selector);
             this.activate(choosenConfig)
             this.setChosenSingleFocusable();
-            this.clearError()
+            this.clearError();
+            this.setupFocusListener();
         }
     }
 
+    this.setupFocusListener = function () {
+        this.tearDownFocusListener();
+        this.onFocus = (function (e) {
+            if (e.keyCode == 13) {
+                if (document.activeElement == e.target) {
+                    this.get$Elem().trigger("chosen:open");
+                }
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }).bind(this);
+
+        this.get$Elem().parent().on("keyup", this.onFocus)
+    }
+
+    this.tearDownFocusListener = function () {
+        this.get$Elem().parent().on('keyup', this.onFocus);
+    }
+
     this.setChosenSingleFocusable = function () {
+        this.get$Elem().parent().attr("tabIndex", "0");
         this.get$Elem().parent().find('.chosen-search-input').attr("tabIndex", "0");
         this.get$Elem().parent().find('.chosen-search-input').addClass("qm-tab");
     }

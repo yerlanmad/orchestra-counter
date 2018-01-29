@@ -1,0 +1,21 @@
+// Heights
+$global-header-height: 56px;
+$global-footer-height: 40px;
+$global-action-bar-height: 84px;
+$global-card-layout-height: calc(100% - #{$global-action-bar-height});
+$global-main-height: calc(100vh - #{$global-header-height} - #{$global-footer-height});
+$height-of-card-stack: 35px;
+$global-standard-card-shadow-height: 50px;
+<<<<<<< HEAD
+$global-card-min-height: calc(100vh - 300px);
+=======
+$global-car-min-height: calc(100vh - 270px);
+>>>>>>> 154431202 : Popup logging out and visits in my pool does not consider customized properties (and other popups)
+
+// Standard padding and margin
+$global-standard-padding: 16px;
+$global-standard-margin: 16px;
+
+// Font size
+$button-font-size: 18px;
+$h1-font-size: 28px;
