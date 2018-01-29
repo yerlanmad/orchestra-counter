@@ -8,16 +8,18 @@
     }
 
     &__tab {
-        display: flex;
+        display: inline-flex;
         align-items: middle;
-        flex: 1 auto;
+        flex: 0 1 auto;
         background: transparent;
         border: 0;
         color: $tab-text-color;
-        padding: rem($global-standard-padding / 2 $global-standard-padding);
+        padding: rem($global-standard-padding / 2 0);
         padding-left: 0;
         font-size: rem(21px);
         line-height: rem(24px);
+        margin-bottom: rem(-4px);
+        border-bottom: 4px solid $button-disabled-border-color;
         cursor: pointer;
         text-align: left;
 
@@ -35,12 +37,14 @@
         }
 
         &[aria-selected='false'] {
+            font-weight: $font-weight-light;
             color: $tab-disabled-color;
+            border-bottom: 4px solid transparent;
         }
 
         & + & {
-            padding-left: rem($global-standard-padding);
-            margin-left: rem($global-standard-margin);
+            //padding-left: rem($global-standard-padding);
+            margin-left: rem(10%);
 
             @at-root [dir='rtl'] & {
                 margin-left: 0;

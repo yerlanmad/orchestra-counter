@@ -17,10 +17,14 @@
                     <legend class="qm-legend">
                         <span class="qm-legend__text js-legend-link-existing-customer"></span>
                     </legend>
-                    <div class="qm-form-field">
+                    <div class="qm-form-field qm-form-field--search">
                         <label for="customerInput" class="sr-only js-label-search-customer"></label>
                         <input id="customerInput" type="search" class="qm-search-input" />
-                        <i class="qm-search-input__icon icon-search" aria-hidden="true"></i>
+                        <i class="qm-search-input__icon icon-search js-search-input__icon" aria-hidden="true"></i>
+                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                            <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+                            <span class="sr-only"></span>
+                        </button>
                     </div>
                 </fieldset>
             </div>
@@ -39,7 +43,7 @@
                                     </div>
                                     <div class="qm-form-field__input-container">
                                         <input id="createfirstName" class="qm-form-field__text-input" type="text" name="firstName" maxlength="50" required />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -54,7 +58,7 @@
                                     </div>
                                     <div class="qm-form-field__input-container">
                                         <input id="createlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -68,7 +72,7 @@
                                     <label for="createemail" class="qm-form-field__label js-label-email"></label>
                                     <div class="qm-form-field__input-container">
                                         <input id="createemail" class="qm-form-field__text-input" type="email" name="email" />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -82,7 +86,7 @@
                                     <label for="createphoneNumber" class="qm-form-field__label js-label-phone"></label>
                                     <div class="qm-form-field__input-container">
                                         <input id="createphoneNumber" class="qm-form-field__text-input" type="tel" name="phoneNumber" />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -92,10 +96,10 @@
                         </div>
                         <div class="qm-form-actions">
                             <div class="qm-generic-layout qm-generic-layout--align-right">
-                                <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
+                                <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button class="qm-btn qm-btn--primary js-add-customer-save" save-btn onclick="customer.saveAndLinkCustomer(event);this.blur();">
+                                <button type="submit" class="qm-btn qm-btn--primary js-add-customer-save" save-btn onclick="customer.saveAndLinkCustomer(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>
@@ -117,7 +121,7 @@
                                     </div>
                                     <div class="qm-form-field__input-container">
                                         <input id="editfirstName" class="qm-form-field__text-input" type="text" name="firstName" maxlength="50" required />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -132,7 +136,7 @@
                                     </div>
                                     <div class="qm-form-field__input-container">
                                         <input id="editlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -146,7 +150,7 @@
                                     <label for="editemail" class="qm-form-field__label js-label-email"></label>
                                     <div class="qm-form-field__input-container">
                                         <input id="editemail" class="qm-form-field__text-input" type="email" name="email"/>
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -160,7 +164,7 @@
                                     <label for="editphoneNumber" class="qm-form-field__label js-label-phone"></label>
                                     <div class="qm-form-field__input-container">
                                         <input id="editphoneNumber" class="qm-form-field__text-input" type="tel" name="phoneNumber" />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -170,10 +174,10 @@
                         </div>
                         <div class="qm-form-actions">
                             <div class="qm-generic-layout qm-generic-layout--align-right">
-                                <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
+                                <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button class="qm-btn qm-btn--primary js-edit-customer-save" save-btn onclick="customer.editAndLink(event);this.blur();">
+                                <button type="submit" class="qm-btn qm-btn--primary js-edit-customer-save" save-btn onclick="customer.editAndLink(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>

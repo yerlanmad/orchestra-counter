@@ -242,6 +242,9 @@ function showModules() {
 		if ( params.multiMarks != undefined) {
 			multiMarks = params.multiMarks								// feature to add a quantity for marks
 		}
+		if ( true ) {
+			transferToQueueEnabled = true;								// Transfer to Queue
+		}
 		if ( params.trUserPool != undefined) {
 			transferToUserPoolEnabled = params.trUserPool;				// Transfer to User Pool
 		}

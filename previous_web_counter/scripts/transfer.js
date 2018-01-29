@@ -8,6 +8,27 @@ var transfer = new function() {
     var transferQueueToServicePointPoolTable;
 
     this.transferPressed = function () {
+        if(transferToQueueEnabled 
+            && transferToUserPoolEnabled === false
+            && transferToServicePointPoolEnabled === false) {
+                transfer.navigateToQueueView();
+        } else if(transferToUserPoolEnabled 
+            && transferToQueueEnabled === false
+            && transferToServicePointPoolEnabled === false) {
+                transfer.navigateToUserPoolView();
+        } else if(transferToServicePointPoolEnabled 
+            && transferToUserPoolEnabled === false
+            && transferToQueueEnabled === false) {
+                transfer.navigateToCounterPoolView();
+        } else {
+            cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
+        }
+        
+        if(transferToQueueEnabled) {
+            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').attr('style', '');
+        } else {
+            $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').css('display', 'none');
+        }
         if(transferToUserPoolEnabled) {
             $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToUserPool').attr('style', '');
         } else {
@@ -18,7 +39,7 @@ var transfer = new function() {
         } else {
             $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').css('display', 'none');
         }
-        cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
+        
     }
 
     var transferCurrentVisitToQueueClicked = function(sortType, rowData) {

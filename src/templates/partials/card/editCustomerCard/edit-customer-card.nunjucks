@@ -28,7 +28,7 @@
                                     </div>
                                     <div class="qm-form-field__input-container">
                                         <input id="editAttachedfirstName" class="qm-form-field__text-input" type="text" name="firstName" maxlength="50" required />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="qm-form-field__input-container">
                                         <input id="editAttachedlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -57,7 +57,7 @@
                                     <label for="editAttachedemail" class="qm-form-field__label js-label-email"></label>
                                     <div class="qm-form-field__input-container">
                                         <input id="editAttachedemail" class="qm-form-field__text-input" type="email" name="email"/>
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -71,7 +71,7 @@
                                     <label for="editAttachedphoneNumber" class="qm-form-field__label js-label-phone"></label>
                                     <div class="qm-form-field__input-container">
                                         <input id="editAttachedphoneNumber" class="qm-form-field__text-input" type="tel" name="phoneNumber" />
-                                        <button class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+                                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
@@ -81,10 +81,10 @@
                         </div>
                         <div class="qm-form-actions qm-form-actions--large-margin-top">
                             <div class="qm-generic-layout qm-generic-layout--align-right">
-                                <button class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
+                                <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button class="qm-btn qm-btn--primary js-update-customer-save" save-btn onclick="customer.editAttachedCustomer(event);this.blur();">
+                                <button type="submit" class="qm-btn qm-btn--primary js-update-customer-save" save-btn onclick="customer.editAttachedCustomer(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>

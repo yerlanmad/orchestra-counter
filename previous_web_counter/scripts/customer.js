@@ -106,7 +106,6 @@ var customer = new function() {
                     customer.setSelectedCustomer(row);
                     util.hideModal('customerSearchDiv');
                 }
-
             });
 
         $("#customerInput")
@@ -131,6 +130,13 @@ var customer = new function() {
                     var timer = $(this).data('timer');
                     if(timer) {
                         clearTimeout(timer);
+                    }
+                    if(val.length > 0) {
+                        $('.js-search-input__icon').hide();
+                        $('.qm-form-field--search .js-clear-field').show();
+                    } else {
+                        $('.js-search-input__icon').show();
+                        $('.qm-form-field--search .js-clear-field').hide();
                     }
                     
                     sessvars.currentCustomer = null;
@@ -205,8 +211,22 @@ var customer = new function() {
 
     };
 
+    this.handleShowResetButton = function ($inputs) {
+        $inputs.on('keyup', function (e) {
+            var $self = $(this),
+                val = $self.val();
+
+            if(val.length > 0) {
+                $self.next('.js-clear-field').show();
+            } else {
+                $self.next('.js-clear-field').hide();
+            }
+        })
+    }
+
     this.setFormButtonsState = function (formSelector, setListeners) {
         var $form = $(formSelector);
+        var $inputs = $form.find('input');
         var $requiredFields = $form.find('[required]');
         var $saveBtn = $form.find('[save-btn]');
         var $emailField = $form.find('[name="email"]');
@@ -215,6 +235,7 @@ var customer = new function() {
         this.setSaveButtonState($requiredFields, $saveBtn, $emailField);
         if(setListeners) {
             this.setRequiredFieldsListener($requiredFields, $saveBtn, $emailField);
+            this.handleShowResetButton($inputs);
         }
     }
 
@@ -265,7 +286,6 @@ var customer = new function() {
                 $reqField.removeClass('qm-field-error');
             }
         });
-
         if(!isValid) {
             $saveBtn.prop('disabled', true);
         } else {

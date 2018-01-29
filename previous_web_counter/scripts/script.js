@@ -2297,12 +2297,12 @@ var servicePoint = new function () {
 				break;
 			case servicePoint.publicEvents.VISIT_TRANSFER_TO_SERVICE_POINT_POOL:
 				sessvars.cfuSelectionSet = true;
-				servicePointPool.updateServicePointPool(); // Todo: remove me
+				//servicePointPool.updateServicePointPool(); // Todo: remove me
 				servicePointPool.renderCounterPool();
 				break;
 			case servicePoint.publicEvents.VISIT_TRANSFER_TO_USER_POOL:
 				sessvars.cfuSelectionSet = true;
-				userPool.updateUserPool(); // Todo: remove me
+				//userPool.updateUserPool(); // Todo: remove me
 				userPool.renderUserPool();
 				break;
 			case servicePoint.publicEvents.USER_SERVICE_POINT_WORK_PROFILE_SET:

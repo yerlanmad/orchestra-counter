@@ -162,7 +162,7 @@
             }
     
             .qm-table__last-column {
-                padding: rem($global-standard-padding / 2);
+                padding: rem($global-standard-padding / 2 24px $global-standard-padding / 2 $global-standard-padding / 2);
             }
         }
     }

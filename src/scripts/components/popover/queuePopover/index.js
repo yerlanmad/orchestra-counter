@@ -73,12 +73,21 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         this.popoverOverlay.addEventListener('click', this.disposeInstance.bind(this));
     },
     _attachTemplateEvents: function () {
-        
+        // Action view
         var closeBtns   = this.instance._tooltipNode.querySelectorAll('.js-popover-close'),
             callBtn     = this.instance._tooltipNode.querySelector('.js-popover-call'),
             backBtns    = this.instance._tooltipNode.querySelectorAll('.js-popover-back'),
             deleteBtn   = this.instance._tooltipNode.querySelector('.js-popover-delete'),
             transferBtn = this.instance._tooltipNode.querySelector('.js-popover-transfer');
+
+
+        // Transfer view
+        var transferToQueueBtn          = this.instance._tooltipNode.querySelector('.js-popover-transferToQueue'),
+            transferToUserPoolBtn       = this.instance._tooltipNode.querySelector('.js-popover-transferToUserPool'),
+            transferToCounterPoolBtn    = this.instance._tooltipNode.querySelector('.js-popover-transferToCounterPool'),
+            popoverQueueTable           = this.instance._tooltipNode.querySelector('.js-popover-table-queues'),
+            popoverUserPoolTable        = this.instance._tooltipNode.querySelector('.js-popover-table-user-pool'),
+            popoverCounterPoolTable     = this.instance._tooltipNode.querySelector('.js-popover-table-counter-pool');
 
         for(var i = 0; i < closeBtns.length; i ++) {
             closeBtns[i].addEventListener('click', this.disposeInstance.bind(this));
@@ -95,7 +104,22 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         if(this.disableTransfer) {
             transferBtn.disabled = true;
         } else {
-            transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.TRANSFER_SELECTION));
+            if(transferToQueueEnabled 
+                && transferToUserPoolEnabled === false
+                && transferToServicePointPoolEnabled === false) {
+                    transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.QUEUE, this._initQueuesTable.bind(this, popoverQueueTable)));
+            }
+            else if(transferToUserPoolEnabled 
+                && transferToQueueEnabled === false
+                && transferToServicePointPoolEnabled === false) {
+                    transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.USER_POOL, this._initUserPoolTable.bind(this, popoverUserPoolTable)));
+            } else if(transferToServicePointPoolEnabled 
+                && transferToUserPoolEnabled === false
+                && transferToQueueEnabled === false) {
+                    transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.COUNTER_POOL, this._initCounterPoolTable.bind(this, popoverCounterPoolTable)));
+            } else {
+                transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.TRANSFER_SELECTION));
+            }
         }
         if(this.disableDelete) {
             deleteBtn.disabled = true;
@@ -112,25 +136,22 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
             deleteBtn.parentNode.removeChild(deleteBtn);
         }
         
-        // Transfer view
 
-        var transferToQueueBtn          = this.instance._tooltipNode.querySelector('.js-popover-transferToQueue'),
-            transferToUserPoolBtn       = this.instance._tooltipNode.querySelector('.js-popover-transferToUserPool'),
-            transferToCounterPoolBtn    = this.instance._tooltipNode.querySelector('.js-popover-transferToCounterPool'),
-            popoverQueueTable           = this.instance._tooltipNode.querySelector('.js-popover-table-queues'),
-            popoverUserPoolTable        = this.instance._tooltipNode.querySelector('.js-popover-table-user-pool'),
-            popoverCounterPoolTable     = this.instance._tooltipNode.querySelector('.js-popover-table-counter-pool');
             
 
         transferToQueueBtn.addEventListener('click', this._navigateTo.bind(this, this.views.QUEUE, this._initQueuesTable.bind(this, popoverQueueTable)));
         transferToUserPoolBtn.addEventListener('click', this._navigateTo.bind(this, this.views.USER_POOL, this._initUserPoolTable.bind(this, popoverUserPoolTable)));
         transferToCounterPoolBtn.addEventListener('click', this._navigateTo.bind(this, this.views.COUNTER_POOL, this._initCounterPoolTable.bind(this, popoverCounterPoolTable)));
 
-        if (transferToUserPoolEnabled == false) {
+        if(transferToQueueEnabled === false) {
+            transferToQueueBtn.parentNode.removeChild(transferToQueueBtn);
+        }
+
+        if (transferToUserPoolEnabled === false) {
             transferToUserPoolBtn.parentNode.removeChild(transferToUserPoolBtn);
         }
     
-        if (transferToServicePointPoolEnabled == false) {
+        if (transferToServicePointPoolEnabled === false) {
             transferToCounterPoolBtn.parentNode.removeChild(transferToCounterPoolBtn);
         }
 

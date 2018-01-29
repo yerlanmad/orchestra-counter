@@ -1,6 +1,5 @@
-// Dropdown Component
+// Customer card Component
 window.$Qmatic.components.card.CustomerCardComponent = function (selector) {
-    this.activeView = null;
 
     // @Override
     this.onInit = function (selector) {
@@ -13,6 +12,8 @@ window.$Qmatic.components.card.CustomerCardComponent = function (selector) {
     this.clearSearchInput = function () {
         this.get$Elem().find('.js-customer-search-view input').val("");
         this.get$Elem().find('.js-customer-search-view input').trigger('click');
+        this.get$Elem().find('.js-search-input__icon').show();
+        this.get$Elem().find('.qm-form-field--search .js-clear-field').hide();
     }
 
     this.clearAddForm = function () {
