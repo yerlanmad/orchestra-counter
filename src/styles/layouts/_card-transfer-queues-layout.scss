@@ -1,4 +1,6 @@
 #transferQueueCard {
-    @include set-default-width-for-card-layout ();
-    @include set-default-list-card-layout ();
+    .qm-card__content-section {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 }

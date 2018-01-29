@@ -10,8 +10,7 @@
     }
     .qm-btns-container {
         display: flex;
-        flex-direction: row-reverse;
-        align-items: flex-end;
+        justify-content: flex-end;
         .qm-btn--primary {
             font-size: inherit;
             margin-left: rem(10px);

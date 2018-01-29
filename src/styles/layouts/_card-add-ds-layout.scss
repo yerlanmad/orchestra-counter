@@ -1,5 +1,4 @@
 #dsCard {
-    @include set-default-width-for-card-layout ();
     .qm-card {
         &__header-section {
             margin-bottom: 0;

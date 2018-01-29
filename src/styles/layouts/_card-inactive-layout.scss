@@ -1,7 +1,4 @@
 #inactiveCard {
-    @include set-default-height-for-card-layout ();
-    @include set-default-width-for-card-layout ();
-
     display: flex;
     flex-direction: column;
     justify-content: center;

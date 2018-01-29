@@ -26,7 +26,9 @@
 
     &__current-service-title {
         font-size: rem(24px);
-        white-space: nowrap;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;  
     }
 
     &__add-service {

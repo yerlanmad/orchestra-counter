@@ -1,17 +1,23 @@
-
 // #transferOptionsCard.qm-card-fill {
 //     .qm-card--transfer {
 //         justify-content: initial;
-
 //         .qm-card__content-section {
 //             flex: 1 1 100%;
 //         }
-
 //         .qm-card__footer-section {
 //             justify-self: flex-end;
 //         }
 //     }
 // }
+#transferOptionsCard {
+    .qm-btn__text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+}
 
 .qm-card {
     &__content-narrow {
@@ -41,8 +47,8 @@
     }
 }
 
- #transferOptionsCard {
-     .qm-card {
-         justify-content: flex-start;
-     }
- }
+#transferOptionsCard {
+    .qm-card {
+        justify-content: flex-start;
+    }
+}

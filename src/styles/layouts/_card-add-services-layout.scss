@@ -1,5 +1,4 @@
 #addServicesCard {
-    @include set-default-width-for-card-layout ();
     .qm-card {
         display: flex;
         flex-direction: column;

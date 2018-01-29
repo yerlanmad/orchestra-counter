@@ -3,8 +3,8 @@
     border: 1px solid transparent;
     padding: rem($global-standard-padding / 2 $global-standard-padding * 2);
     border-radius: rem($standard-border-radius);
-    white-space: nowrap;
     justify-content: center;
+    height: 100%;
     cursor: pointer;
     font-size: rem($button-font-size);
     font-weight: $font-weight-light;

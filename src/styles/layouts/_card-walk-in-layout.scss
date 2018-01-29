@@ -1,5 +1,4 @@
 #walkInCard {
-    @include set-default-width-for-card-layout ();
     .qm-card {
         &__header-section {
             margin-bottom: 5px;
@@ -41,6 +40,7 @@
                     td {
                         padding: rem(10px) !important;
                         text-align: left !important;
+                        cursor: pointer;
                         background: $white;
                         border: none !important;
                         width: 100%;
@@ -66,6 +66,9 @@
         }
         &__footer-section {
             min-height: rem(50px);
+        }
+        &-action-layout{
+            margin-top: 0;
         }
     }
 }

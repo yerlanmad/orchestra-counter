@@ -322,16 +322,11 @@ $rem-px-only: false !default;
             margin-top: rem(30px);
         }
     }
-
 }
 
-@mixin set-default-height-for-card-layout {
-    // max-height: rem(calc(100vh - 400px));
-    // height: rem(calc(100vh - 400px));
-}
-
-@mixin set-default-width-for-card-layout {
-    // max-width: 500px;
-    // width: 100%;
-    // margin: 0 auto;
+@mixin add-line-clamp-with-ellipsis($lines: 1) {
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
 }

@@ -37,16 +37,11 @@
                 <div id="nextVisitServices" class="qm-services__upcoming-services-container">
                     <span class="qm-services__label" id="nextServiceLbl"></span>
                     <div class="qm-services__services-listing">
-                        <span class="qm-services__service-item">General support</span>
-                        <span class="qm-services__service-item">Network & routers</span>
-                        <span class="qm-services__service-item">Service 3</span>
-                        <span class="qm-services__service-item">Service 6</span>
                     </div>
                 </div>
                 <div id="previousVisitServices" class="qm-services__previous-services-container">
                     <span class="qm-services__label" id="previousServiceLbl"></span>
                     <div class="qm-services__services-listing">
-                        <span class="qm-services__service-item">Computers</span>
                     </div>
                 </div>
             </div>
@@ -62,14 +57,14 @@
                 <i class="qm-timer__icon icon-clock-solid" aria-hidden="true"></i>
                 <div class="qm-timer__text">
                     <span class="qm-timer__label"><span id="visitWaitingTime"></span><span>:</span></span>
-                    <span id="waitingTimeCounter" class="qm-timer__time">15m 20s</span>
+                    <span id="waitingTimeCounter" class="qm-timer__time"></span>
                 </div>
             </div>
             <div class="qm-timer__item">
                 <i class="qm-timer__icon icon-hourglass" aria-hidden="true"></i>
                 <div class="qm-timer__text">
                     <span class="qm-timer__label"><span id="visitTransactionTime"></span><span>:</span></span>
-                    <span id="countTransactionTime" class="qm-timer__time">20s</span>
+                    <span id="countTransactionTime" class="qm-timer__time"></span>
                 </div>
             </div>
         </div>
@@ -96,7 +91,7 @@
         <div class="qm-notes js-notes">
             <div class="qm-notes__edit-container">
                 <div class="qm-notes-layout">
-                    <label class="qm-notes__label" for="notes">Add notes</label>
+                    <label class="qm-notes__label" for="notes"></label>
                     <div class="qm-notes__nr-of-character-container">
                         <span class="qm-notes__characters js-notes-written-characters">0</span>
                         <span class="qm-notes__characters js-notes-max-characters"></span>
@@ -126,7 +121,7 @@
 
 {% block footer %}
     <div class="qm-card__footer-section qm-card__footer-section--space-between">
-        <div class="qm-card-action-layout">
+        <div class="qm-card-action-layout qm-card-action-layout-left">
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="recallBtn" onclick="servicePoint.recall();this.blur();">
                     <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
@@ -152,7 +147,7 @@
                 </button>
             </div>
         </div>
-        <div class="qm-card-action-layout">
+        <div class="qm-card-action-layout qm-card-action-layout-right">
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="noShowBtn" onclick="servicePoint.noShow();this.blur();" >
                     <i class="qm-action-btn__icon icon-no-show" aria-hidden="true"></i>

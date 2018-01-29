@@ -58,8 +58,8 @@
             </div>
             <div class="qm-card__footer-section">
                 <div class="qm-btns-container">
-                {{button.render(id="confirmSettingsBtnModal", type="qm-btn--primary", handler="servicePoint.confirmSettings();")}}
                 {{button.render(id="cancelSettingsBtnModal", type="qm-btn--secondary", handler="servicePoint.cancelConfirmSettings();")}}
+                {{button.render(id="confirmSettingsBtnModal", type="qm-btn--primary", handler="servicePoint.confirmSettings();")}}
                 </div>
             </div>
         </div>

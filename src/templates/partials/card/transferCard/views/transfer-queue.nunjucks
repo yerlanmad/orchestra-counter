@@ -1,7 +1,7 @@
 {% extends "partials/card/fill-parent-card.nunjucks" %}
 
 {% block id %}id="transferQueueCard"{% endblock %}
-{% block cardModifier %}qm-card--transfer qm-card--more-than-one{% endblock %}
+{% block cardModifier %}qm-card qm-card--more-than-one qm-card--justify-top{% endblock %}
 
 {% block header %}
     <header class="qm-card__header-section">

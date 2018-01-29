@@ -5,32 +5,32 @@
     height: $global-action-bar-height;
     background: $white;
     padding: rem(0 $global-standard-padding);
-    box-shadow: -10px -12px 60px -6px rgba(0,0,0,0.75);
+    box-shadow: -10px -12px 60px -6px rgba(0, 0, 0, 0.75);
+    
+    .qm-action-btn__text{
+        @include add-line-clamp-with-ellipsis();
+    }
 
     &__left {
         display: flex;
         flex: 1;
         justify-content: space-around;
     }
-
     &__middle {
         display: flex;
         flex: 1;
         justify-content: center;
     }
-
     &__right {
         display: flex;
         flex: 1;
         justify-content: space-around;
     }
-
     &__super {
         transform: translateY(rem(-22px));
-
-        [class^="icon-"], [class*=" icon-"] {
+        [class^="icon-"],
+        [class*=" icon-"] {
             padding: rem(4px);
-            
             &:before {
                 background: $white;
                 border-radius: 50%;

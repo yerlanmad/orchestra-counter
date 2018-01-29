@@ -2,6 +2,10 @@
     display: flex;
     flex-wrap: wrap;
 
+    .qm-btn{
+        margin-top: rem(5px);
+    }
+
     &--space-between {
         justify-content: space-between;
     }
