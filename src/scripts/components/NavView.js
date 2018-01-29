@@ -4,3 +4,4 @@ window.$Qmatic.components.NavView = function () {
 }
 
 window.$Qmatic.components.NavView.prototype = new window.$Qmatic.components.BaseComponent();
+window.$Qmatic.components.NavView.prototype.constructor = window.$Qmatic.components.NavView

@@ -1,4 +1,3 @@
-// Dropdown Component
 window.$Qmatic.components.card.VisitCardComponent = function (selector) {
 
     // @Override
@@ -11,7 +10,7 @@ window.$Qmatic.components.card.VisitCardComponent = function (selector) {
 
     // @Override
     this.cleanUp = function () {
-        window.$Qmatic.components.card.CardBaseComponent.prototype.cleanUp.call(this, selector);
+        window.$Qmatic.components.card.VisitCardComponent.prototype.cleanUp.call(this, selector);
         window.$Qmatic.utils.log.info("Cleaning up compnent " + this.getSelector())
         contextMarketingController.close("contextmarketing");
     }

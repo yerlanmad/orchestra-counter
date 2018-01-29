@@ -35,6 +35,7 @@ var deliveredServices = new function () {
             util.populateSelect(dsResponse, dropdownFilter);
             
             dropdownFilter.trigger("chosen:updated");
+            this.updateDeliveredServices();
         }
     };
 
@@ -153,6 +154,7 @@ var deliveredServices = new function () {
                         html.val(aData[outcomeDataIndex].outcomeCode);
                     } else {
                         html.val("-1");
+                        html.parent("div").addClass("invalid");
                     }
 
                     html.change(function () {
@@ -170,7 +172,7 @@ var deliveredServices = new function () {
                     });
 
                     $('td:eq(1)', nRow).html(html);
-                    html.wrap("<div class='cross-browser-select'></div>")
+                    html.wrap("<div class='cross-browser-select "+ (html.val() == -1 ? "invalid" : "") +"'></div>")
                     html.before($("<div class='native-like-select select-carrot-icon'>" + html.find(":selected").text() + "</div>")
                     );
                 }
