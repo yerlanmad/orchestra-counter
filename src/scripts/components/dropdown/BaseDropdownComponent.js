@@ -16,8 +16,55 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
             this.setChosenSingleFocusable();
             this.clearError();
             this.setupFocusListener();
+            this.setupChangeListener();
+            this.setupUpdateListener();
         }
     }
+
+    // =======================
+    // On Update Funcitonality......
+    // =======================
+
+    this.setupUpdateListener = function () {
+        this.onUpdate = (function (evt, params) {
+            if(this.get$Elem().find("option").is(":selected") && this.get$Elem().find(":selected").val() && this.get$Elem().find(":selected").val() != -1){
+                this.selectOption();
+            } else {
+                this.unSelectOption();
+            }
+        }).bind(this);
+
+        this.get$Elem().on("chosen:updated", this.onUpdate);
+    }
+
+    this.teardownSetupUpdateListener = function () {
+        this.get$Elem().on('chosen:updated', this.onUpdate);
+    }
+
+    // =======================
+    // On Change Funcitonality......
+    // =======================
+
+    this.setupChangeListener = function () {
+        this.teardownSetupChangeListener();
+        this.onChange = (function (evt, params) {
+            if (params.selected == -1){
+                this.unSelectOption();
+            } else {
+                this.selectOption();
+            }
+        }).bind(this);
+
+        this.get$Elem().on("change", this.onChange);
+    }
+
+    this.teardownSetupChangeListener = function () {
+        this.get$Elem().on('change', this.onChange);
+    }
+
+    // =======================
+    // On Focus Funcitonality......
+    // =======================
 
     this.setupFocusListener = function () {
         this.tearDownFocusListener();

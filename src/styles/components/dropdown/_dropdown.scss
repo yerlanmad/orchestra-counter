@@ -14,7 +14,15 @@
         &.optionSelected {
             .chosen-single {
                 span {
-                    // color: $dark-transparent82 !important;  // Todo - Add Color to change text when dropdown selected!!
+                    color: $dark-transparent82 !important;
+                    font-weight: 500 !important;
+                }
+                div {
+                    b {
+                        &:before {
+                            color: $dark-transparent82 !important;
+                        }
+                    }
                 }
             }
         }
