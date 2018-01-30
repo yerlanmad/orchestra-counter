@@ -49,12 +49,12 @@ function showModules() {
 
 	if (moduleMultiServicesEnabled == true) {
 		$('#addMultiServiceLink').show();
-		$('#nextVisitServices').show();
-		$('#previousVisitServices').show();
+		$('#nextVisitServices').css("display", "flex");
+		$('#previousVisitServices').css("display", "flex");
 	} else {
 		$('#addMultiServiceLink').hide();
-		$('#nextVisitServices').hide();
-		$('#previousVisitServices').hide();
+		$('#nextVisitServices').css("display", "none");
+		$('#previousVisitServices').css("display", "none");
 	}
 	
 	

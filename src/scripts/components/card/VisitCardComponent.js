@@ -2,7 +2,7 @@ window.$Qmatic.components.card.VisitCardComponent = function (selector) {
 
     // @Override
     this.onInit = function (selector) {
-        if(selector) {
+        if (selector) {
             window.$Qmatic.components.card.CardBaseComponent.prototype.onInit.call(this, selector);
             this.hide()
         }

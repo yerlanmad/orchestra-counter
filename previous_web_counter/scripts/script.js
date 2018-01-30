@@ -1732,9 +1732,11 @@ var servicePoint = new function () {
 			userPoolUpdateNeeded = true;
 		}
 		resetLogoffCounter();
-		updateNextAndPreviousServices();
 		updateSelectedDs("#visitAddDsLbl");
 		updateSelectedMarks("#visitAddMarksLbl");
+		if (moduleMultiServicesEnabled) {
+			updateNextAndPreviousServices();
+		}
 	};
 
 	var updateSelectedMarks = function (idSelector) {
