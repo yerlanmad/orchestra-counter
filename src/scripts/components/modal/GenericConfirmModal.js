@@ -6,7 +6,7 @@ window.$Qmatic.components.modal.GenericConfirmModal = function (selector, config
             window.$Qmatic.components.modal.GenericConfirmModal.prototype.onInit.call(this, selector);
             if (!this.isValidConfig(config))
             throw new Error("Please check your configuration. You need a valid message and yesCallback");
-            
+            this.reset();
             this.hide();
             this.bindYesText(config.yesText);
             this.bindNoText(config.noText);
@@ -16,6 +16,11 @@ window.$Qmatic.components.modal.GenericConfirmModal = function (selector, config
             this.bindYesCallback(config.yesCallback);
             this.bindMessage(config.message);
         }
+    }
+
+    this.reset = function () {
+        $(this.getSelector()).find("#genericConfirmYes").unbind('click');
+        $(this.getSelector()).find("#genericConfirmNo").unbind('click');
     }
 
     this.bindMessage = function (text) {

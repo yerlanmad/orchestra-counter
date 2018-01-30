@@ -181,7 +181,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         var visitId = this.visitId;
         var ticketId = this.ticketId;
         var deleteConfirmation = new $Qmatic.components.modal.GenericConfirmModal("#generic-confirm-modal", {
-            message: jQuery.i18n.prop('btn.deteleVisit.confirm.message'),
+            message: jQuery.i18n.prop('info.deteleVisit.confirm.message'),
             yesCallback: function () {
                 queues.removeTicket(visitId, ticketId);
                 modalNavigationController.pop();

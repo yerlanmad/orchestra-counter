@@ -74,6 +74,7 @@ var servicePoint = new function () {
 	var displayQueueTimeout = -1;
 	var displayQueueTimeoutId;
 	var logoffTimer = null;
+	var isAppLoaded = false;
 
 	var cfuForceSelection = false;
 
@@ -173,15 +174,13 @@ var servicePoint = new function () {
 	this.SW_SERVICE_POINT = "SW_SERVICE_POINT";
 
 	this.init = function () {
-		$("#userName").html(sessvars.currentUser.userName);
-		servicePoint.showSettingsWindow();
-		
-		/*if (!isLoggedInToWorkstation()) {
+		if (!isLoggedInToWorkstation()) {
 			$("#userName").html(sessvars.currentUser.userName);
 			servicePoint.showSettingsWindow();
 		} else {
-			updateUI();
-		}*/
+			// updateUI();
+			servicePoint.showSettingsWindow();
+		}
 	};
 
 	var isLoggedInToWorkstation = function () {
@@ -201,9 +200,11 @@ var servicePoint = new function () {
 			});
 		});
 		if (servicePoint.hasValidSettings(true)) {
+
 			sessvars.state = servicePoint
 				.getState(spService.get("user/status"));
 			sessvars.statusUpdated = new Date();
+
 			if (typeof sessvars.state.servicePointState === 'undefined'
 				|| sessvars.state.servicePointState == null) {
 				var params = servicePoint.createParams();
@@ -262,6 +263,7 @@ var servicePoint = new function () {
 			if (moduleChatEnabled == true) {
 				// chat.restoreTabs();
 			}
+			isAppLoaded = true;
 
 		} else {
 			clearTimeout(sessvars.queueTimer);
@@ -512,16 +514,6 @@ var servicePoint = new function () {
 		}
 	}
 
-	this.promptDualSession = function () {
-		var dualSessionConfirmation = new $Qmatic.components.modal.GenericConfirmModal("#generic-confirm-modal", {
-            message: jQuery.i18n.prop('btn.deteleVisit.confirm.message'),
-            yesCallback: function () {
-                servicePoint.confirmSettings();
-            }
-        });
-        modalNavigationController.push(dualSessionConfirmation);
-	}
-
 	this.confirmSettings = function (warnUser) {
 		var isHijacking = false;
 		var branchSel = $("#branchListModal");
@@ -559,17 +551,41 @@ var servicePoint = new function () {
 					&& sessvars.servicePointUnitId != wantedWorkstation.unitId) {
 					unsubscribeAndDisableQueues();
 				}
-				if (isApplied(settings)) {
-					servicePoint.storeSettingsInSession(settings);
-					setProfile(servicePoint.createParams());
-					updateUI();
+
+				if (sessvars.state.userState != servicePoint.userState.NO_STARTED_USER_SESSION && !isAppLoaded) {
+					this.promptDualSession(settings);
 				} else {
-					modalNavigationController.pop()
+					this.proceedLogin(settings);
 				}
 			}
 		}
 		return isHijacking;
-	};
+	}.bind(this);
+
+	this.proceedLogin = function (settings) {
+		if (isApplied(settings)) {
+			servicePoint.storeSettingsInSession(settings);
+			setProfile(servicePoint.createParams());
+			updateUI();
+		} else {
+			modalNavigationController.pop()
+		}
+	}
+
+	this.promptDualSession = function (settings) {
+		var dualSessionConfirmation = new $Qmatic.components.modal.GenericConfirmModal("#generic-confirm-modal", {
+			message: jQuery.i18n.prop('info.session.ongoing.message'),
+			yesCallback: function () {
+				modalNavigationController.popAllModals();
+				servicePoint.proceedLogin(settings);
+			},
+			noCallback: function () {
+				modalNavigationController.popAllModals();
+				servicePoint.showSettingsWindow();
+			}
+		});
+		modalNavigationController.push(dualSessionConfirmation);
+	}
 
 	var isHijack = function (wantedWorkstation, params) {
 		var isHijacking = false;
@@ -685,7 +701,7 @@ var servicePoint = new function () {
 			journeyUpdateNeeded = false;
 			trtUpdateNeeded = false;
 			servicePoint.updateWorkstationStatus();
-			if(sessvars.state && sessvars.state.visitState 
+			if (sessvars.state && sessvars.state.visitState
 				&& sessvars.state.visitState !== "VISIT_IN_DISPLAY_QUEUE") {
 				util.twinkleTicketNumber();
 			}
@@ -1683,11 +1699,11 @@ var servicePoint = new function () {
 		}
 
 		if (!blockCardChange) {
-		if (journeyUpdateNeeded) {
-			updateVerticalMessage();
-		} else {
-			journeyUpdateNeeded = true;
-		}
+			if (journeyUpdateNeeded) {
+				updateVerticalMessage();
+			} else {
+				journeyUpdateNeeded = true;
+			}
 		}
 
 		if (delServUpdateNeeded) {
@@ -2175,7 +2191,7 @@ var servicePoint = new function () {
 				isLogout = true;
 			}
 		}
-		if (isLogout){
+		if (isLogout) {
 			window.location.replace("/logout.jsp");
 		}
 		return isLogout;
@@ -2511,15 +2527,15 @@ var servicePoint = new function () {
 		if (branchSel.val() == -1) {
 			$Qmatic.components.dropdown.branchSelection.onError(jQuery.i18n.prop("error.no.branch"))
 			return false;
-		} else { 
+		} else {
 			if (workstationSel.val() == -1) {
 				$Qmatic.components.dropdown.counterSelection.onError(jQuery.i18n.prop("error.no.workstation"))
-			} 
+			}
 			if (profileSel.val() == -1) {
 				$Qmatic.components.dropdown.profileSelection.onError(jQuery.i18n.prop("error.no.profile"))
 			}
 			if (workstationSel.val() == -1 || profileSel.val() == -1)
-			return false;
+				return false;
 		}
 		return true;
 	};
