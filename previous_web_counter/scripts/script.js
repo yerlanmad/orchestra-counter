@@ -173,13 +173,15 @@ var servicePoint = new function () {
 	this.SW_SERVICE_POINT = "SW_SERVICE_POINT";
 
 	this.init = function () {
-		if (!isLoggedInToWorkstation()) {
+		$("#userName").html(sessvars.currentUser.userName);
+		servicePoint.showSettingsWindow();
+		
+		/*if (!isLoggedInToWorkstation()) {
 			$("#userName").html(sessvars.currentUser.userName);
 			servicePoint.showSettingsWindow();
 		} else {
-			// $Qmatic.redux.store.dispatch($Qmatic.redux.actions.branch.selectedBranch({id: 1, name: "Sri"}));
 			updateUI();
-		}
+		}*/
 	};
 
 	var isLoggedInToWorkstation = function () {
@@ -510,6 +512,16 @@ var servicePoint = new function () {
 		}
 	}
 
+	this.promptDualSession = function () {
+		var dualSessionConfirmation = new $Qmatic.components.modal.GenericConfirmModal("#generic-confirm-modal", {
+            message: jQuery.i18n.prop('btn.deteleVisit.confirm.message'),
+            yesCallback: function () {
+                servicePoint.confirmSettings();
+            }
+        });
+        modalNavigationController.push(dualSessionConfirmation);
+	}
+
 	this.confirmSettings = function (warnUser) {
 		var isHijacking = false;
 		var branchSel = $("#branchListModal");
@@ -618,14 +630,6 @@ var servicePoint = new function () {
 	};
 
 	this.cancelConfirmSettings = function () {
-		var branchSel = $("#branchListModal");
-		util.clearSelect(branchSel);
-		var workstationSel = $("#workstationListModal");
-		util.clearSelect(workstationSel);
-		var prioSel = $("#prioListModal");
-		util.clearSelect(prioSel);
-		util.hideModal('settingsWindow');
-
 		if (servicePoint.hasValidSettings()) {
 			modalNavigationController.popModal($Qmatic.components.modal.profileSettings)
 		} else {
