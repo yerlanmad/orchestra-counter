@@ -1483,16 +1483,16 @@ var servicePoint = new function () {
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
 				$("#noShowBtn").prop('disabled', false);
+				$("#waitingTimeContainer").show();
 			} else {
 				$("#noShowBtn").prop('disabled', true);
+				$("#waitingTimeContainer").hide();
 			}
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
 				$("#recallBtn").prop('disabled', false);
-				$("#waitingTimeContainer").show();
 			} else {
 				$("#recallBtn").prop('disabled', true);
-				$("#waitingTimeContainer").hide();
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
@@ -1613,17 +1613,17 @@ var servicePoint = new function () {
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
 				$("#noShowBtn").prop('disabled', false);
+				$("#waitingTimeContainer").show();
 			} else {
 				$("#noShowBtn").prop('disabled', true);
+				$("#waitingTimeContainer").hide();
 			}
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
 				$("#recallBtn").prop('disabled', false);
 				tooltipController.dispose('recall');
-				$("#waitingTimeContainer").show();
 			} else {
 				$("#recallBtn").prop('disabled', true);
-				$("#waitingTimeContainer").hide();
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
