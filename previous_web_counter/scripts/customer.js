@@ -604,12 +604,14 @@ var customer = new function() {
                         $('#ticketNumber').removeClass('qm-card-header__highlighted');
             }
             if(shouldPop === true) {
-                var updateParams = servicePoint.createParams();
-                updateParams.customerId = sessvars.currentCustomer.id;
-                updateParams.visitId = sessvars.state.visit.id;
-                updateParams.json = '{"customers":"' + customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName + '"}';
-                spService.putParams("branches/" + params.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
-
+                if(sessvars.state.visit.customerIds.length === 1) {
+                    var updateParams = servicePoint.createParams();
+                    updateParams.customerId = sessvars.currentCustomer.id;
+                    updateParams.visitId = sessvars.state.visit.id;
+                    updateParams.json = '{"customers":"' + customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName + '"}';
+                    spService.putParams("branches/" + params.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);        
+                }
+                
                 cardNavigationController.pop();
             }
             //clean form
@@ -663,7 +665,9 @@ var customer = new function() {
         params.visitId = sessvars.state.visit.id;
         params.json = '{"customers":"' + customer.firstName + " " + customer.lastName + '"}';
         sessvars.state = servicePoint.getState(spService.putCallback("branches/" + params.branchId + "/visits/" + params.visitId + "/customers/" + params.customerId));
-        spService.putParams("branches/" + params.branchId + "/visits/" + params.visitId + "/parameters", params);
+        if(sessvars.state && sessvars.state.visit && sessvars.state.visit.customerIds && sessvars.state.visit.customerIds.length === 1) {
+            spService.putParams("branches/" + params.branchId + "/visits/" + params.visitId + "/parameters", params);
+        }
         sessvars.statusUpdated = new Date();
         servicePoint.updateWorkstationStatus(false);
     };

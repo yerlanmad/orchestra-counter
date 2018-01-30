@@ -2190,7 +2190,11 @@ var servicePoint = new function () {
 				servicePoint.cleanAndLogout();
 				isLogout = true;
 			}
+		} else if (!workstationOffline
+			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+				util.showError(jQuery.i18n.prop('error.logout.ds.or.outcome.needed'));
 		}
+
 		if (isLogout) {
 			window.location.replace("/logout.jsp");
 		}

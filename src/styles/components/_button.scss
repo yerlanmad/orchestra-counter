@@ -4,7 +4,7 @@
     padding: rem($global-standard-padding / 2 $global-standard-padding * 2);
     border-radius: rem($standard-border-radius);
     justify-content: center;
-    height: 100%;
+    height: auto;
     cursor: pointer;
     font-size: rem($button-font-size);
     font-weight: $font-weight-light;

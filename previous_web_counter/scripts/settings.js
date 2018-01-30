@@ -10,10 +10,12 @@ moduleQueuesEnabled = true;							// Queues overview
 moduleCustomMarksEnabled = false ;					// Custom Marks
 customMarkTypeName = 'custom'	;					// name of the custom mark set in the admin
 multiMarks = false ;								// feature to add a quantity for marks
+transferToQueueEnabled = true;						// Transfer to Queue
 transferToUserPoolEnabled = true;					// Transfer to User Pool
 transferToServicePointPoolEnabled = true;			// Transfer to ServicePoint Pool
 buttonTransferEnabled = true;						// Transfer button
 buttonRecycleEnabled = true;						// Recycle button
+allQueuesBtnEnabled = false;						// All queues tab button
 buttonParkEnabled = false;							// Park Button
 buttonNotesEnabled = false;							// Edit/Add Notes Button
 buttonNoShowsEnabled = true;						// No Shows Button
@@ -102,6 +104,13 @@ function showModules() {
 		$main.addClass('qm-main--no-queues');
 		$('#queuesModule').hide();
 	}
+
+	if(allQueuesBtnEnabled == true) {
+		$('#allQueuesTab').attr("style", "");
+	} else {
+		$('#allQueuesTab').hide();
+	}
+
 	if (transferToUserPoolEnabled == false) {
 		$('#transferTicketToStaffPoolDiv').hide();
 		$('#transferQueueToStaffPoolDiv').hide();
@@ -233,6 +242,9 @@ function showModules() {
 		if ( params.mdQueues != undefined) {
 			moduleQueuesEnabled = params.mdQueues;						// Queues overview
 		}
+		if ( params.btnAllQueues != undefined) {
+			allQueuesBtnEnabled = params.btnAllQueues;						// Show all queues
+		}
 		if ( params.mdMarks != undefined) {
 			moduleCustomMarksEnabled = params.mdMarks ;					// Custom Marks
 		}
@@ -242,8 +254,8 @@ function showModules() {
 		if ( params.multiMarks != undefined) {
 			multiMarks = params.multiMarks								// feature to add a quantity for marks
 		}
-		if ( true ) {
-			transferToQueueEnabled = true;								// Transfer to Queue
+		if ( params.trQueue != undefined ) {
+			transferToQueueEnabled = params.trQueue;								// Transfer to Queue
 		}
 		if ( params.trUserPool != undefined) {
 			transferToUserPoolEnabled = params.trUserPool;				// Transfer to User Pool
