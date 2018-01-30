@@ -12,7 +12,7 @@
             overflow-y: auto;
             .nextServicesList-row {
                 font-size: rem(18px);
-                height: 40px;
+                height: rem(40px);
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -21,11 +21,12 @@
     }
     .qm-btns-container {
         display: flex;
-        flex-direction: row-reverse;
-        align-items: center;
+        text-align: center;
+        justify-content: center;
         .qm-btn--primary {
             font-size: inherit;
             margin: auto;
+            margin: rem(0 10px);
         }
     }
 }

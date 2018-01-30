@@ -8,13 +8,15 @@
     }
     .qm-card__content-section {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: rem(40px);
     }
     .qm-btns-container {
-         text-align: center;
+        display: flex;
+        text-align: center;
+        justify-content: center;
         .qm-btn--primary {
             font-size: inherit;
-            margin: 0 10px;
+            margin: rem(0 10px);
         }
         .qm-btn--secondary {
             font-size: inherit;

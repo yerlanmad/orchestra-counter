@@ -2,6 +2,7 @@
     &__header {
         width: 100%;
         color: $dark-transparent62;
+        font-weight: normal;
         font-family: $font-family;
         font-size: rem(14px);
         line-height: rem(25px);
@@ -14,15 +15,8 @@
         &.optionSelected {
             .chosen-single {
                 span {
-                    color: $dark-transparent82 !important;
-                    font-weight: 500 !important;
-                }
-                div {
-                    b {
-                        &:before {
-                            color: $dark-transparent82 !important;
-                        }
-                    }
+                    color: $dark-transparent80 !important;
+                    font-weight: normal !important;
                 }
             }
         }
@@ -114,7 +108,7 @@
                         width: 100%;
                         height: 100%;
                         &:before {
-                            color: $dark-transparent42;
+                            color: $dark-transparent62;
                             background: transparent;
                             content: "\e902";
                             font-family: 'icomoon';

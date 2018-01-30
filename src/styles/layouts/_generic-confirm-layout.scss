@@ -7,13 +7,16 @@
         text-align: center;
     }
     .qm-btns-container {
+        display: flex;
         text-align: center;
+        justify-content: center;
         .qm-btn--primary {
             font-size: inherit;
-            margin: 0 10px;
+            margin: rem(0 10px);
         }
         .qm-btn--secondary {
             font-size: inherit;
+            margin: rem(0 10px);
         }
     }
 }
