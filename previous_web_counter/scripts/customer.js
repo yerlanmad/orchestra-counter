@@ -793,8 +793,8 @@ var customer = new function() {
             return true;
         }
 
-        var p = new RegExp(".+@.+\\.[a-z]+");
-        return p.test(emailString);
+        // var p = new RegExp(".+@.+\\.[a-z]+");
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(emailString);
     };
 };
 

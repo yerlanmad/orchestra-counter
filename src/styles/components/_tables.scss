@@ -6,7 +6,7 @@
             font-size: rem(12px);
             font-weight: $font-weight-medium;
             color: $dark-transparent62;
-            padding: rem(0 10px);
+            padding: rem(0 $global-standard-padding);
         }
     }
 
@@ -200,13 +200,19 @@
 #allQueuesPanel {
     tr {
         .qm-table__first-column {
-            width: 60% !important; 
+            width: 55% !important; 
         }
         .qm-table__middle-column {
             width: 15% !important;
         }
         .qm-table__last-column {
-            width: 25% !important;
+            width: 30% !important;
+            padding-right: rem(30px);
+
+            @at-root [dir='rtl'] & {
+                padding-right: rem($global-standard-padding);
+                padding-left: rem(30px);
+            }
         }
     }
 }
