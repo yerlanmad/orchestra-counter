@@ -138,24 +138,24 @@ var userPool = new function() {
 
             servicePoint.updateWorkstationStatus();
             sessvars.currentCustomer = null;
-            customer.updateCustomerModule();
+            //customer.updateCustomerModule();
         }
     }
 
-    var ticketClicked = function(aRowData) {
-        if(servicePoint.hasValidSettings()) {
-            var params = servicePoint.createParams();
-            params.userId = sessvars.currentUser.id;
-            params.visitId = aRowData.visitId;
-			spPoolUpdateNeeded = false;
-             sessvars.state = servicePoint.getState(spService.put("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/users/"+params.userId+"/pool/"+params.visitId));
-            sessvars.statusUpdated = new Date();
+    // var ticketClicked = function(aRowData) {
+    //     if(servicePoint.hasValidSettings()) {
+    //         var params = servicePoint.createParams();
+    //         params.userId = sessvars.currentUser.id;
+    //         params.visitId = aRowData.visitId;
+	// 		spPoolUpdateNeeded = false;
+    //          sessvars.state = servicePoint.getState(spService.put("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/users/"+params.userId+"/pool/"+params.visitId));
+    //         sessvars.statusUpdated = new Date();
 
-            servicePoint.updateWorkstationStatus();
-            sessvars.currentCustomer = null;
-            customer.updateCustomerModule();
-        }
-    };
+    //         servicePoint.updateWorkstationStatus();
+    //         sessvars.currentCustomer = null;
+    //         customer.updateCustomerModule();
+    //     }
+    // };
 	
 	this.parkPressed = function() {
 		if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
@@ -169,7 +169,7 @@ var userPool = new function() {
 	        servicePoint.updateWorkstationStatus();
 		   
 		    sessvars.currentCustomer = null;
-	        customer.updateCustomerModule();
+	        //customer.updateCustomerModule();
 		}
     };
 
@@ -186,7 +186,7 @@ var userPool = new function() {
     };
 
     this.emptyPool = function() {
-        userPoolTable.fnClearTable(); // TODO: Remove me
+        //userPoolTable.fnClearTable(); // TODO: Remove me
 
         var userPool            = $('#userPoolModule'),
             userPoolList        = userPool.find('.qm-pool__list');

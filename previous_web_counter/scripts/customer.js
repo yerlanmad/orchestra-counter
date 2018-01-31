@@ -440,7 +440,7 @@ var customer = new function() {
             sessvars.currentCustomer = searchCustomer;
             $("#customerInput").value = searchCustomer.firstName + " " + searchCustomer.lastName;
             customer.updateSearchFieldText();
-            customer.updateCustomerModule();
+            //customer.updateCustomerModule();
             window.$Qmatic.components.card.addCustomerCard.clearEditForm();
             this.populateEditCustomerFields("edit");
             window.$Qmatic.components.card.addCustomerCard.showEditForm();
@@ -683,7 +683,7 @@ var customer = new function() {
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
                 sessvars.currentCustomer = null;
-                customer.updateCustomerModule();
+                //customer.updateCustomerModule();
             }
         }
     };
@@ -695,30 +695,30 @@ var customer = new function() {
         }
     }
 
-    this.updateCustomerModule = function() {
-        // $("#createCustomerLink").addClass("newCust customLink");
-        // $("#createCustomerLink").prop('disabled', false);
-        // if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
-        //     $("#customerInput").val(sessvars.currentCustomer.firstName + " " +
-        //         sessvars.currentCustomer.lastName);
-        //     $("#editCustomerLink").removeClass("customLinkDisabled").addClass("editCust customLink");
-        //     $("#editCustomerLink").prop('disabled', false);
-        //     if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
-        //         $("#linkCustomerLink").removeClass("customLinkDisabled").addClass("linkCust customLink");
-        //         $("#linkCustomerLink").prop('disabled', false);
-        //     }
-        //     $("#deleteCustomerLink").removeClass("customLinkDisabled").addClass("deleteCust customLink");
-        //     $("#deleteCustomerLink").prop('disabled', false);
-        //     return;
-        // }
-        // $("#customerInput").val("");
-        // $("#editCustomerLink").removeClass("customLink").addClass("editCust customLinkDisabled");
-        // $("#editCustomerLink").prop('disabled', true);
-        // $("#linkCustomerLink").removeClass("customLink").addClass("linkCust customLinkDisabled");
-        // $("#linkCustomerLink").prop('disabled', true);
-        // $("#deleteCustomerLink").removeClass("customLink").addClass("deleteCust customLinkDisabled");
-        // $("#deleteCustomerLink").prop('disabled', true);
-    };
+    // this.updateCustomerModule = function() {
+    //     $("#createCustomerLink").addClass("newCust customLink");
+    //     $("#createCustomerLink").prop('disabled', false);
+    //     if(typeof sessvars.currentCustomer !== "undefined" && sessvars.currentCustomer != null) {
+    //         $("#customerInput").val(sessvars.currentCustomer.firstName + " " +
+    //             sessvars.currentCustomer.lastName);
+    //         $("#editCustomerLink").removeClass("customLinkDisabled").addClass("editCust customLink");
+    //         $("#editCustomerLink").prop('disabled', false);
+    //         if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
+    //             $("#linkCustomerLink").removeClass("customLinkDisabled").addClass("linkCust customLink");
+    //             $("#linkCustomerLink").prop('disabled', false);
+    //         }
+    //         $("#deleteCustomerLink").removeClass("customLinkDisabled").addClass("deleteCust customLink");
+    //         $("#deleteCustomerLink").prop('disabled', false);
+    //         return;
+    //     }
+    //     $("#customerInput").val("");
+    //     $("#editCustomerLink").removeClass("customLink").addClass("editCust customLinkDisabled");
+    //     $("#editCustomerLink").prop('disabled', true);
+    //     $("#linkCustomerLink").removeClass("customLink").addClass("linkCust customLinkDisabled");
+    //     $("#linkCustomerLink").prop('disabled', true);
+    //     $("#deleteCustomerLink").removeClass("customLink").addClass("deleteCust customLinkDisabled");
+    //     $("#deleteCustomerLink").prop('disabled', true);
+    // };
 
     this.updateCustomer = function() {
         if(sessvars.state.userState == servicePoint.userState.SERVING && typeof sessvars.state.visit !== "undefined" &&

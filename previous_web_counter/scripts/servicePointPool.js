@@ -132,22 +132,22 @@ var servicePointPool = new function() {
             sessvars.statusUpdated = new Date();
             servicePoint.updateWorkstationStatus();
             sessvars.currentCustomer = null;
-            customer.updateCustomerModule();
+            //customer.updateCustomerModule();
         }
     }
 
-    var ticketClicked = function(aRowData) {
-        if(servicePoint.hasValidSettings()) {
-            var params = servicePoint.createParams();
-            params.visitId = aRowData.visitId;
-			userPoolUpdateNeeded = false;
-            sessvars.state = servicePoint.getState(spService.put("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/pool/"+params.visitId));
-            sessvars.statusUpdated = new Date();
-            servicePoint.updateWorkstationStatus();
-            sessvars.currentCustomer = null;
-            customer.updateCustomerModule();
-        }
-    };
+    // var ticketClicked = function(aRowData) {
+    //     if(servicePoint.hasValidSettings()) {
+    //         var params = servicePoint.createParams();
+    //         params.visitId = aRowData.visitId;
+	// 		userPoolUpdateNeeded = false;
+    //         sessvars.state = servicePoint.getState(spService.put("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/pool/"+params.visitId));
+    //         sessvars.statusUpdated = new Date();
+    //         servicePoint.updateWorkstationStatus();
+    //         sessvars.currentCustomer = null;
+    //         customer.updateCustomerModule();
+    //     }
+    // };
 
     this.isEmpty = function() {
         var isEmpty = true;
@@ -160,7 +160,7 @@ var servicePointPool = new function() {
     };
 
     this.emptyPool = function() {
-        servicePointPoolTable.fnClearTable();
+        //servicePointPoolTable.fnClearTable();
 
         // Get DOM elements
         var counterPool         = $('#servicePointPoolModule'),

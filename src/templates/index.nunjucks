@@ -10,7 +10,7 @@
 </head>
 
 <!-- Imported partials -->
-{% import "partials/button.nunjucks" as button  %}
+{% import "partials/button.nunjucks" as button %}
 {% import "partials/card/card-nav.nunjucks" as cardNav  %}
 
 <body>

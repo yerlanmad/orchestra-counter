@@ -64,7 +64,7 @@ var transfer = new function() {
             }
             sessvars.currentCustomer = null;
             sessvars.cfuSelectionSet = true;
-            customer.updateCustomerModule();
+            //customer.updateCustomerModule();
         } else {
             util.showError(jQuery.i18n.prop("error.no.ongoing.transaction"));
         }
@@ -93,7 +93,7 @@ var transfer = new function() {
                 return;
             }
             sessvars.currentCustomer = null;
-            customer.updateCustomerModule();
+            //customer.updateCustomerModule();
         } else {
             util.showError(jQuery.i18n.prop("error.no.ongoing.transaction"));
         }
@@ -121,7 +121,7 @@ var transfer = new function() {
                 return;
             }
             sessvars.currentCustomer = null;
-            customer.updateCustomerModule();
+            //customer.updateCustomerModule();
         } else {
             util.showError(jQuery.i18n.prop("error.no.ongoing.transaction"));
         }

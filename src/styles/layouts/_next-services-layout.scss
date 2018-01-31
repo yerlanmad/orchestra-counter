@@ -2,31 +2,30 @@
     @include default-card-modal-layout();
     .qm-card {
         min-height: auto;
-    }
-    .qm-card__content-section {
-        padding-top: rem(10px);
-        padding-bottom: rem(20px);
-        flex-grow: 1;
-        #nextServicesList {
-            max-height: calc(100vh - 300px);
-            overflow-y: auto;
-            .nextServicesList-row {
-                font-size: rem(18px);
-                height: rem(40px);
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            } 
+
+        &__header-section {
+            text-align: center;
+        }
+
+        &__content-section {
+            padding: rem($global-standard-padding 0 $global-standard-padding * 2);
+            flex-grow: 1;
         }
     }
-    .qm-btns-container {
+}
+
+.qm-services-list {
+    max-height: rem(235px);
+    overflow-y: auto;
+
+    &__row {
+        font-size: rem(18px);
+        padding: rem($global-standard-padding / 2 0);
         display: flex;
-        text-align: center;
-        justify-content: center;
-        .qm-btn--primary {
-            font-size: inherit;
-            margin: auto;
-            margin: rem(0 10px);
+        font-weight: $font-weight-light;
+
+        &--bold {
+            font-weight: $font-weight-regular;
         }
     }
 }

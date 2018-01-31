@@ -8,40 +8,14 @@
             <div class="qm-card__header-section" id="nextServicesListHeader"></div>
             <div class="qm-card__content-section">
                 
-                <div id="nextServicesList">
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
-                    <div class="nextServicesList-row">
-                        Next Service Item
-                    </div>
+                <div id="nextServicesList" class="qm-services-list">
+
                 </div>
 
             </div>
             <div class="qm-card__footer-section">
-                <div class="qm-btns-container">
-                {{button.render(id="confirmServicesBtn", type="qm-btn--primary", handler="servicePoint.confirmServices();")}}
+                <div class="qm-generic-layout qm-generic-layout--align-right">
+                    {{button.render(id="confirmServicesBtn", type="qm-btn--primary", handler="servicePoint.confirmServices();")}}
                 </div>
             </div>
         </div>

@@ -678,7 +678,7 @@ var servicePoint = new function () {
 			sessvars.cfuSelectionSet = true;
 			servicePoint.updateWorkstationStatus(false);
 			sessvars.currentCustomer = null;
-			customer.updateCustomerModule();
+			//customer.updateCustomerModule();
 		}
 	};
 
@@ -1000,7 +1000,7 @@ var servicePoint = new function () {
 					queueViewController.navigateToOverview();
 					servicePoint.updateWorkstationStatus();
 					sessvars.currentCustomer = null;
-					customer.updateCustomerModule();
+					//customer.updateCustomerModule();
 				}
 			}
 		}
@@ -1071,7 +1071,7 @@ var servicePoint = new function () {
 
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
-			customer.updateCustomerModule();
+			//customer.updateCustomerModule();
 		}
 	};
 
@@ -1190,7 +1190,7 @@ var servicePoint = new function () {
 
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
-			customer.updateCustomerModule();
+			//customer.updateCustomerModule();
 		}
 	};
 
@@ -1214,7 +1214,7 @@ var servicePoint = new function () {
 			queueViewController.navigateToOverview();
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
-			customer.updateCustomerModule();
+			//customer.updateCustomerModule();
 		}
 	};
 
@@ -1730,7 +1730,7 @@ var servicePoint = new function () {
 
 		}
 		customer.updateCustomer();
-		customer.updateCustomerModule();
+		//customer.updateCustomerModule();
 
 		// Set Highlight class to customer name if present else set to ticket number
 		if (sessvars.state.visit && sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != "") {

@@ -10,9 +10,9 @@ window.$Qmatic.components.modal.NextServicesModal = function (selector) {
 
     this.updateList = function (nextServices) {
         $(this.getSelector() + " #nextServicesList").empty()
-        nextServices.forEach(function(element) {
+        nextServices.forEach(function(element, i) {
             $(this.getSelector() + " #nextServicesList").append(
-                "<div class='nextServicesList-row'>" + 
+                "<div class='qm-services-list__row" + (i === 0 ? " qm-services-list__row--bold" : "") + "'>" + 
                 element.serviceInternalName + 
                 "</div>"
 
