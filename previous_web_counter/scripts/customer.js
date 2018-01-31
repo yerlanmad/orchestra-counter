@@ -512,6 +512,7 @@ var customer = new function() {
         var prefix = "edit";
         var formName = "editCustomerForm";
         this.editAndSaveCustomer(prefix, formName);
+        cardNavigationController.pop();
     }
 
     this.editAndSaveCustomer = function (prefix, formName) {
@@ -573,6 +574,7 @@ var customer = new function() {
                     $('#ticketNumber').removeClass('qm-card-header__highlighted');
                     //cleanCustomerForm("create");
                     window.$Qmatic.components.card.addCustomerCard.clearAddForm();
+                    cardNavigationController.pop();
                 }
             }
         }
@@ -591,8 +593,6 @@ var customer = new function() {
             //update current customer i.e. the selected customer, NOT the linked customer
             sessvars.currentCustomer = customerParameterized.$entity;
             sessvars.currentCustomer.id = customerParameterized.customerId;
-
-            
 
             //update linked customer field if the customer is linked to the current transaction
             if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
@@ -669,7 +669,7 @@ var customer = new function() {
             spService.putParams("branches/" + params.branchId + "/visits/" + params.visitId + "/parameters", params);
         }
         sessvars.statusUpdated = new Date();
-        servicePoint.updateWorkstationStatus(false);
+        servicePoint.updateWorkstationStatus(false, true);
     };
 
     this.linkCustomerPressed = function() {
