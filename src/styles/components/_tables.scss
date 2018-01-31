@@ -216,3 +216,16 @@
         }
     }
 }
+
+#queueDetailView {
+    tr {
+        .qm-table__last-column {
+            padding-right: rem(30px);
+
+            @at-root [dir='rtl'] & {
+                padding-right: rem($global-standard-padding);
+                padding-left: rem(30px);
+            }
+        }
+    }
+}
