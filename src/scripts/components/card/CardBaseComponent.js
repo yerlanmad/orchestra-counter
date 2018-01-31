@@ -1,4 +1,4 @@
-// Dropdown Component
+// Card base Component
 window.$Qmatic.components.card.CardBaseComponent = function (selector) {
 
     // @Override

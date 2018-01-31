@@ -130,6 +130,7 @@
         <script type="text/javascript" src="scripts/components/card/VisitCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/TransferCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/CustomerCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/CustomerListCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/visitCard/visitCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/closeCard/closeCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/inactiveCard/inactiveCard.js"></script>
@@ -138,6 +139,7 @@
         <script type="text/javascript" src="scripts/components/card/addServicesCard/addServicesCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/addCustomerCard/addCustomerCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/editCustomerCard/editCustomerCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/customerListCard/customerListCard.js"></script>
 
         <script type="text/javascript" src="scripts/components/card/transferCards/transferOptionsCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferQueueCard.js"></script>

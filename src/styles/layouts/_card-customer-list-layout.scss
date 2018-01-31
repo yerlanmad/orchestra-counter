@@ -1,0 +1,7 @@
+#customerListCard {
+    .qm-card {
+        &__content-section {
+            height: calc(100% - 58px - 16px);
+        }
+    }
+}

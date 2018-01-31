@@ -8,8 +8,8 @@
         <div class="qm-card-header">
             <div class="qm-card-header__top">
                 <h1 class="qm-card-header__headline">
-                    <a href="#" id="linkedCustomerField" class="qm-card-header__customer-name" onclick="customer.editUserPressed(event);this.blur();"></a>
-                    <span id="amountOfAdditionalCustomers" class="qm-card-header__amount-of-customers"></span>
+                    <a href="#" id="linkedCustomerField" class="qm-card-header__customer-name" onclick="customer.editUserPressed(event, 0);this.blur();"></a>
+                    <a href="#" id="amountOfAdditionalCustomers" class="qm-card-header__amount-of-customers" onclick="customer.navigateToCustomerOverview(event);this.blur();"></a>
                     <span id="ticketNumber" class="qm-card-header__ticket"></span>
                 </h1>
                 <a href="#" class="qm-card-header__add-customer js-add-customer" onclick="customer.addUserPressed(event);this.blur();">

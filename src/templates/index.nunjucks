@@ -38,7 +38,8 @@
                             {% include "partials/card/addServicesCard/add-services-card.nunjucks" %}
                             {% include "partials/card/marksCard/marks-card.nunjucks" %} 
                             {% include "partials/card/addCustomerCard/add-customer-card.nunjucks" %} 
-                            {% include "partials/card/editCustomerCard/edit-customer-card.nunjucks" %} 
+                            {% include "partials/card/editCustomerCard/edit-customer-card.nunjucks" %}
+                            {% include "partials/card/customerListCard/customer-list-card.nunjucks" %}  
                         </div>
                     </div>
                 </div>

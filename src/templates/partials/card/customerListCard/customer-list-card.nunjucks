@@ -1,0 +1,20 @@
+{% extends "partials/card/fill-parent-card.nunjucks" %}
+
+{% block id %}id="customerListCard"{% endblock %}
+{% block cardModifier %}qm-card qm-card--more-than-one qm-card--justify-top{% endblock %}
+
+{% block header %}
+    <header class="qm-card__header-section">
+        {{cardNav.render('customerListLabel')}}
+    </header>
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+        <div class="qm-customer-overview">
+            <ul class="qm-customer-list js-customer-list">
+                
+            </ul>
+        </div>
+    </div>
+{% endblock %}

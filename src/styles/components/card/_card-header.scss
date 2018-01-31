@@ -59,6 +59,18 @@
         font-size: rem(21px);
         margin-top: rem(3px);
         font-weight: $font-weight-medium;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:visited {
+            color: $h1-color;
+        }
+
+        &:hover,
+        &:focus {
+            color: $dark-transparent82;
+            text-decoration: underline;
+        }
     }
 
     &__ticket {

@@ -18,17 +18,75 @@ var customer = new function() {
         cardNavigationController.push(window.$Qmatic.components.card.addCustomerCard);
     };
 
-    this.editUserPressed = function (e) {
+    this.editUserPressed = function (e, index) {
         e.preventDefault();
         if(moduleCustomerEnabled) {
             cardNavigationController.push(window.$Qmatic.components.card.editCustomerCard);
-            this.populateEditAttachedCustomerFields("editAttached");
+            this.populateEditAttachedCustomerFields("editAttached", index);
         }
     }
 
     this.editAttachedCustomer = function (e) {
         e.preventDefault();
         this.editCustomer("editAttached", true);
+    }
+
+    this.navigateToCustomerOverview = function (e) {
+        e.preventDefault();
+        cardNavigationController.push(window.$Qmatic.components.card.customerListCard);
+        this.populateAdditionalCustomersList();
+    }
+
+    this.populateAdditionalCustomersList = function () {
+        var customerIds = sessvars.state.visit.customerIds.slice(0);
+        customerIds.shift();
+        $('.js-customer-list').empty();
+        var listItems = [];
+        _.each(customerIds, function (customerId, i) {
+            var customer = spService.get("customers/"+customerId);
+            listItems.push(createCustomerListItem(customer.id, customer.firstName, customer.lastName, customer.properties.email, customer.properties.phoneNumber, i+1));
+        });
+        $('.js-customer-list').append(listItems);
+    };
+
+    var createCustomerListItem = function (id, firstName, lastName, email, phoneNumber, index) {
+        var entry = document.createElement('LI');
+        entry.classList.add('qm-customer-list__item');
+        if(firstName && lastName) {
+            var nameNode = document.createElement("P");
+            nameNode.classList.add('qm-customer-list__name');
+            var nameText = document.createTextNode(firstName + " " + lastName);
+            nameNode.appendChild(nameText);
+            entry.appendChild(nameNode);
+        }
+        if(email) {
+            var emailNode = document.createElement("P");
+            emailNode.classList.add('qm-customer-list__information');
+            var emailText = document.createTextNode(email);
+            emailNode.appendChild(emailText);
+            entry.appendChild(emailNode);
+        }
+        if(phoneNumber) {
+            var phoneNode = document.createElement("P");
+            phoneNode.classList.add('qm-customer-list__information');
+            var phoneText = document.createTextNode(phoneNumber);
+            phoneNode.appendChild(phoneText);
+            entry.appendChild(phoneNode);
+        }
+        var editBtnNode = document.createElement("BUTTON");
+        editBtnNode.onclick = function (e) {
+            customer.editUserPressed(e, index);
+        };
+        editBtnNode.className += 'qm-action-btn qm-action-btn--only-icon qm-customer-list__edit-btn js-customer-edit-btn';
+        var editIconNode = document.createElement("I");
+        editIconNode.className += 'qm-action-btn__icon icon-edit';
+        editIconNode.setAttribute('aria-hidden', true);
+        editBtnNode.appendChild(editIconNode);
+        var srSpan = document.createElement("SPAN");
+        srSpan.classList.add('sr-only');
+        editBtnNode.appendChild(srSpan);
+        entry.appendChild(editBtnNode);
+        return entry;
     }
 
     /*
@@ -302,8 +360,8 @@ var customer = new function() {
 
     this.setRequiredFieldsListener = function ($requiredFields, $saveBtn, $emailField) {
         var self = this;
-        $requiredFields.on('keyup', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
-        $emailField.on('keyup', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
+        $requiredFields.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
+        $emailField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
     }
 
     // the actual search function
@@ -480,12 +538,12 @@ var customer = new function() {
         }
     }
 
-    this.populateEditAttachedCustomerFields = function (prefix) {
+    this.populateEditAttachedCustomerFields = function (prefix, index) {
         if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit.customerIds != null) {
             // clear form to not have old values in there
             $('#' + prefix + 'CustomerForm input').val("");
             //customer might have been updated elsewhere, fetch from database before display
-            var customerId = sessvars.state.visit.customerIds[sessvars.state.visit.customerIds.length - 1]
+            var customerId = sessvars.state.visit.customerIds[index]
             sessvars.currentCustomer = spService.get("customers/"+customerId);
             
             this.setEditFields(prefix, sessvars.currentCustomer)
@@ -569,7 +627,8 @@ var customer = new function() {
                 if(typeof createdCustomer !== "undefined") {
                     //validation ok, all fields nice and proper
                     linkCustomer(createdCustomer);
-                    $("#linkedCustomerField").html(createdCustomer.firstName + " " + createdCustomer.lastName);
+                    
+                    //$("#linkedCustomerField").html(createdCustomer.firstName + " " + createdCustomer.lastName);
                     this.setAmountOfAdditionalCustomers();
                     $('#ticketNumber').removeClass('qm-card-header__highlighted');
                     //cleanCustomerForm("create");
@@ -598,7 +657,7 @@ var customer = new function() {
             if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
                 typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
-                sessvars.state.visit.customerIds[sessvars.state.visit.customerIds.length - 1] == customerParameterized.customerId) {
+                sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
                         $("#linkedCustomerField").html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
                         this.setAmountOfAdditionalCustomers();
                         $('#ticketNumber').removeClass('qm-card-header__highlighted');
@@ -614,7 +673,6 @@ var customer = new function() {
                 
                 cardNavigationController.pop();
             }
-            //clean form
         }
     };
 
@@ -631,10 +689,10 @@ var customer = new function() {
                 customerParameterized[customerArray[i].name] = customerArray[i].value;
             } else {
                 // First, a little special "hack" for the gender select.
-                if(customerArray[i].name == "gender" && customerArray[i].value == -1) {
-                    customerParameterized.properties[customerArray[i].name] = "";
-                    continue;
-                }
+                // if(customerArray[i].name == "gender" && customerArray[i].value == -1) {
+                //     customerParameterized.properties[customerArray[i].name] = "";
+                //     continue;
+                // }
                 customerParameterized.properties[customerArray[i].name] = customerArray[i].value;
             }
 		}
@@ -665,7 +723,7 @@ var customer = new function() {
         params.visitId = sessvars.state.visit.id;
         params.json = '{"customers":"' + customer.firstName + " " + customer.lastName + '"}';
         sessvars.state = servicePoint.getState(spService.putCallback("branches/" + params.branchId + "/visits/" + params.visitId + "/customers/" + params.customerId));
-        if(sessvars.state && sessvars.state.visit && sessvars.state.visit.customerIds && sessvars.state.visit.customerIds.length === 1) {
+        if(isFirstCustomerLinked()) {
             spService.putParams("branches/" + params.branchId + "/visits/" + params.visitId + "/parameters", params);
         }
         sessvars.statusUpdated = new Date();
@@ -678,14 +736,26 @@ var customer = new function() {
                 typeof sessvars.currentCustomer.id !== "undefined" && sessvars.currentCustomer.id != null &&
                 typeof sessvars.currentCustomer.id === 'number') {
                 linkCustomer(sessvars.currentCustomer);
-                $("#linkedCustomerField").html(sessvars.currentCustomer.firstName + " " +
+                if(isFirstCustomerLinked()) {
+                    $("#linkedCustomerField").html(sessvars.currentCustomer.firstName + " " +
                     sessvars.currentCustomer.lastName);
+                }
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
                 sessvars.currentCustomer = null;
                 //customer.updateCustomerModule();
             }
         }
+    };
+
+    var isFirstCustomerLinked = function () {
+        if(sessvars.state 
+            && sessvars.state.visit 
+            && sessvars.state.visit.customerIds 
+            && sessvars.state.visit.customerIds.length === 1) {
+                return true;
+        }
+        return false;
     };
 
     this.updateSearchFieldText = function () {

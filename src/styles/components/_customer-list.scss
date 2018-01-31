@@ -1,0 +1,64 @@
+
+.qm-customer-overview {
+    margin-top: rem($global-standard-margin);
+    height: 100%;
+    overflow: auto;
+}
+
+.qm-customer-list {
+    list-style-type: none;
+    padding: 0;
+
+    &__item {
+        position: relative;
+        padding: rem(0 48px 0 0);
+
+        @at-root [dir='rtl'] & {
+            padding: rem(0 0 0 48px);
+        }
+
+        & + & {
+            margin-top: rem($global-standard-margin * 2);
+        }
+    }
+
+    &__name {
+        font-size: rem(18px);
+        color: $dark-transparent82;
+        font-weight: $font-weight-light;
+        margin: rem(0 0 $global-standard-margin / 2);
+    }
+
+    &__information {
+        color: $dark-transparent82;
+        font-weight: $font-weight-light;
+        padding-left: rem($global-standard-padding / 2);
+        margin: 0;
+
+        @at-root [dir='rtl'] & {
+            padding-left: 0;
+            padding-right: rem($global-standard-padding / 2);
+        }
+        
+        & + & {
+            margin: rem($global-standard-margin / 4 0 0);
+        }
+    }
+
+    &__edit-btn {
+        position: absolute;
+        right: rem($global-standard-padding);
+        top: 0;
+        color: $dark-transparent12;
+
+        &:hover,
+        &:focus {
+            color: $dark-transparent82;
+        }
+
+        @at-root [dir='rtl'] & {
+            right: auto;
+            left: rem($global-standard-padding);
+        }
+    }
+}

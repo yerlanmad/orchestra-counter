@@ -1,4 +1,4 @@
-// Dropdown Component
+// Transfer Card Component
 window.$Qmatic.components.card.TransferCardComponent = function (selector) {
 
     // @Override

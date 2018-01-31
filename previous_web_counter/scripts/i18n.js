@@ -206,7 +206,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeAppend("addDeliveredServices", 'info.ds.addDs');
         i18nSafeAppend("selectADeliveredService", 'info.ds.selectDs');
         
-		
+        // Customer details card
+        i18nSafeAppend("customerListLabel", 'info.customer.details.label');
+        
 		 // multi services 
 		 i18nSafeAppend("addMultiServicesHeader", 'info.multi.services');
         i18nSafe("multiServicesModuleLabel", 'info.multi.services');
