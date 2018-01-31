@@ -1875,6 +1875,7 @@ var servicePoint = new function () {
 			$('#countTransactionTime').countdown('destroy');
 		}
 		$("#linkedCustomerField").empty();
+		$("#amountOfAdditionalCustomers").empty();
 		$("#outcome").empty();
 		$("#verticalMessage").empty();
 		$("#notesEdit").val('');
