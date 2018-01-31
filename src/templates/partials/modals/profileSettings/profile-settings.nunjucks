@@ -8,7 +8,7 @@
             <div class="qm-card__header-section" id="workstationSettingsHeader"></div>
             <div class="qm-card__content-section">
                 
-                <div class="error-message">This is an error message!!</div>
+                <div class="error-message"></div>
                 <div class="qm-drop-down">
                     <div id="selectBranchModal" class="qm-drop-down__header text-ellipsis">
                         
@@ -20,7 +20,7 @@
                             </select>
                         </div>
                     <div class="qm-drop-down__error invisible-on-load" id="branchListModalErrorMsg">
-                            Branch Info Message
+                            
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                             </select>
                         </div>
                     <div class="qm-drop-down__error invisible-on-load" id="workstationListModalErrorMsg">
-                        Counter Info Message
+                        
                     </div>
                 </div>
 
@@ -52,12 +52,12 @@
                             </select>
                         </div>
                     <div class="qm-drop-down__error invisible-on-load" id="prioListModalErrorMsg">
-                        Profile Info Message
+                        
                     </div>
                 </div>
             </div>
             <div class="qm-card__footer-section">
-                <div class="qm-btns-container">
+                <div class="qm-generic-layout qm-generic-layout--align-right">
                 {{button.render(id="cancelSettingsBtnModal", type="qm-btn--secondary", handler="servicePoint.cancelConfirmSettings();")}}
                 {{button.render(id="confirmSettingsBtnModal", type="qm-btn--primary", handler="servicePoint.confirmSettings();")}}
                 </div>

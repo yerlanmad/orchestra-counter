@@ -2,25 +2,11 @@
     @include default-card-modal-layout();
     .qm-card {
         min-height: auto;
-    }
-    .qm-card__content-section {
-        .error-message{
-            margin: 20px 0;
-        }
-    }
-    .qm-btns-container {
-        display: flex;
-        justify-content: flex-end;
-        .qm-btn--primary {
-            font-size: inherit;
-            margin-left: rem(10px);
-            @at-root [dir='rtl'] & {
-                margin-left: rem(0px);
-                margin-right: rem(10px);
+
+        &__content-section {
+            .error-message{
+                margin: 20px 0;
             }
-        }
-        .qm-btn--secondary {
-            font-size: inherit;
         }
     }
 }

@@ -1255,7 +1255,7 @@ var servicePoint = new function () {
 				util.showError(jQuery.i18n.prop("error.not.loggedin"));
 				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
 				clearOngoingVisit();
-				$("#closeBtn").toggleClass("customButtonSmallDisabled");
+				//$("#closeBtn").toggleClass("customButtonSmallDisabled");
 				$("#closeBtn").prop('disabled', true);
 				return;
 			}
@@ -1525,18 +1525,19 @@ var servicePoint = new function () {
 			$("#homeImage").toggleClass("imgDisabled", true);
 			$("#settingsLink").toggleClass("linkDisabled", true);
 			$("#logoutLink").toggleClass("linkDisabled", true);
-
-			if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
-				$("#addOutcomeLink").toggleClass("customButtonSmall", true);
-				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-					false);
-				$("#addOutcomeLink").prop('disabled', false);
-			} else {
-				$("#addOutcomeLink").toggleClass("customButtonSmall", false);
-				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-					true);
-				$("#addOutcomeLink").prop('disabled', true);
-			}
+			
+			// Add outcome link doesn't exist anymore
+			// if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", true);
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
+			// 		false);
+			// 	$("#addOutcomeLink").prop('disabled', false);
+			// } else {
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", false);
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
+			// 		true);
+			// 	$("#addOutcomeLink").prop('disabled', true);
+			// }
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
 					true);
@@ -1652,17 +1653,17 @@ var servicePoint = new function () {
 				$("#reinsertBtn").prop('disabled', true);
 			}
 
-			if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
-				$("#addOutcomeLink").toggleClass("customButtonSmall", true);
-				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-					false);
-				$("#addOutcomeLink").prop('disabled', false);
-			} else {
-				$("#addOutcomeLink").toggleClass("customButtonSmall", false);
-				$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-					true);
-				$("#addOutcomeLink").prop('disabled', true);
-			}
+			// if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", true);
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
+			// 		false);
+			// 	$("#addOutcomeLink").prop('disabled', false);
+			// } else {
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", false);
+			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
+			// 		true);
+			// 	$("#addOutcomeLink").prop('disabled', true);
+			// }
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
 				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
 					true);
@@ -1919,9 +1920,9 @@ var servicePoint = new function () {
 
 		$("#reinsertBtn").prop("disabled", true);
 
-		$("#addOutcomeLink").toggleClass("customButtonSmall", false);
-		$("#addOutcomeLink").toggleClass("customButtonSmallDisabled", true);
-		$("#addOutcomeLink").prop('disabled', true);
+		// $("#addOutcomeLink").toggleClass("customButtonSmall", false);
+		// $("#addOutcomeLink").toggleClass("customButtonSmallDisabled", true);
+		// $("#addOutcomeLink").prop('disabled', true);
 		$("#addDeliveredServiceLink").toggleClass("customButtonSmall", false);
 		$("#addDeliveredServiceLink").toggleClass("customButtonSmallDisabled",
 			true);
