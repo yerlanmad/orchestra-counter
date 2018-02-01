@@ -34,7 +34,7 @@ var customer = new function() {
     this.navigateToCustomerOverview = function (e) {
         e.preventDefault();
         cardNavigationController.push(window.$Qmatic.components.card.customerListCard);
-        this.populateAdditionalCustomersList();
+        //this.populateAdditionalCustomersList();
     }
 
     this.populateAdditionalCustomersList = function () {
@@ -663,7 +663,7 @@ var customer = new function() {
                         $('#ticketNumber').removeClass('qm-card-header__highlighted');
             }
             if(shouldPop === true) {
-                if(sessvars.state.visit.customerIds.length === 1) {
+                if(sessvars.state.visit.customerIds[0] === sessvars.currentCustomer.id) {
                     var updateParams = servicePoint.createParams();
                     updateParams.customerId = sessvars.currentCustomer.id;
                     updateParams.visitId = sessvars.state.visit.id;
@@ -794,10 +794,10 @@ var customer = new function() {
         if(sessvars.state.userState == servicePoint.userState.SERVING && typeof sessvars.state.visit !== "undefined" &&
             sessvars.state.visit != null) {
             if(sessvars.state.visit.parameterMap != null &&
-                typeof sessvars.state.visit.parameterMap.customerName != 'undefined' &&
-                sessvars.state.visit.parameterMap.customerName != null &&
-                sessvars.state.visit.parameterMap.customerName != "") {
-                $("#linkedCustomerField").html(sessvars.state.visit.parameterMap.customerName);
+                typeof sessvars.state.visit.parameterMap.customers != 'undefined' &&
+                sessvars.state.visit.parameterMap.customers != null &&
+                sessvars.state.visit.parameterMap.customers != "") {
+                $("#linkedCustomerField").html(sessvars.state.visit.parameterMap.customers);
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
                 

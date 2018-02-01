@@ -9,6 +9,11 @@ window.$Qmatic.components.card.CustomerListCardComponent = function (selector) {
         }
     }
 
+    this.show = function () {
+        window.$Qmatic.components.card.CustomerListCardComponent.prototype.show.call(this, selector);
+        customer.populateAdditionalCustomersList();
+    }
+
     // @Override
     this.cleanUp = function () {
         window.$Qmatic.components.card.CardBaseComponent.prototype.cleanUp.call(this, selector);

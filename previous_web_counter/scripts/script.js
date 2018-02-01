@@ -1506,29 +1506,29 @@ var servicePoint = new function () {
 			// 	$("#addOutcomeLink").prop('disabled', true);
 			// }
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
-				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-					true);
-				$("#addDeliveredServiceLink").toggleClass(
-					"customButtonSmallDisabled", false);
+				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
+				// 	true);
+				// $("#addDeliveredServiceLink").toggleClass(
+				// 	"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
 				$("#deliveredServicesModule").show()
 			} else {
-				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-					false);
-				$("#addDeliveredServiceLink").toggleClass(
-					"customButtonSmallDisabled", true);
+				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
+				// 	false);
+				// $("#addDeliveredServiceLink").toggleClass(
+				// 	"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
 				$("#deliveredServicesModule").hide()
 			}
 
-			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
-			$("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
-				false);
+			// $("#addMultiServiceLink").toggleClass("customButtonSmall", true);
+			// $("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
+			// 	false);
 			$("#addMultiServiceLink").prop('disabled', false);
 
-			$("#addCustomMarkLink").toggleClass("customButtonSmall", true);
-			$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
-				false);
+			// $("#addCustomMarkLink").toggleClass("customButtonSmall", true);
+			// $("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
+			// 	false);
 			$("#addCustomMarkLink").prop('disabled', false);
 		} else {
 			if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
@@ -1572,28 +1572,28 @@ var servicePoint = new function () {
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -
 			// callTime
-			$("#callNextBtn").toggleClass("customButton", true);
-			$("#callNextBtn").toggleClass("customButtonDisabled", false);
+			// $("#callNextBtn").toggleClass("customButton", true);
+			// $("#callNextBtn").toggleClass("customButtonDisabled", false);
 			$("#callNextBtn").prop('disabled', false);
 			tooltipController.dispose('callnext');
-			$("#walkDirectBtn").toggleClass("customButton", true);
-			$("#walkDirectBtn").toggleClass("customButtonDisabled", false);
+			// $("#walkDirectBtn").toggleClass("customButton", true);
+			// $("#walkDirectBtn").toggleClass("customButtonDisabled", false);
 			$("#walkDirectBtn").prop('disabled', false);
 			tooltipController.dispose('walkin');
-			$("#endVisitBtn").toggleClass("customButton", true);
-			$("#endVisitBtn").toggleClass("customButtonDisabled", false);
+			// $("#endVisitBtn").toggleClass("customButton", true);
+			// $("#endVisitBtn").toggleClass("customButtonDisabled", false);
 			$("#endVisitBtn").prop('disabled', false);
 			tooltipController.dispose('endvisit');
-			$("#closeBtn").toggleClass("customButton", true);
-			$("#closeBtn").toggleClass("customButtonDisabled", false);
+			// $("#closeBtn").toggleClass("customButton", true);
+			// $("#closeBtn").toggleClass("customButtonDisabled", false);
 			$("#closeBtn").prop('disabled', false);
 			tooltipController.dispose('closecounter');
-			$("#transferBtn").toggleClass("customButtonSmall", true);
-			$("#transferBtn").toggleClass("customButtonSmallDisabled", false);
+			// $("#transferBtn").toggleClass("customButtonSmall", true);
+			// $("#transferBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#transferBtn").prop('disabled', false);
 			tooltipController.dispose('transfer');
-			$("#parkBtn").toggleClass("customButtonSmall", true);
-			$("#parkBtn").toggleClass("customButtonSmallDisabled", false);
+			// $("#parkBtn").toggleClass("customButtonSmall", true);
+			// $("#parkBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#parkBtn").prop('disabled', false);
 
 			$("#notesMessage").prop('disabled', false);
@@ -1632,29 +1632,29 @@ var servicePoint = new function () {
 			// 	$("#addOutcomeLink").prop('disabled', true);
 			// }
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
-				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-					true);
-				$("#addDeliveredServiceLink").toggleClass(
-					"customButtonSmallDisabled", false);
+				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
+				// 	true);
+				// $("#addDeliveredServiceLink").toggleClass(
+				// 	"customButtonSmallDisabled", false);
 				$("#addDeliveredServiceLink").prop('disabled', false);
 				$("#deliveredServicesModule").show()
 			} else {
-				$("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-					false);
-				$("#addDeliveredServiceLink").toggleClass(
-					"customButtonSmallDisabled", true);
+				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
+				// 	false);
+				// $("#addDeliveredServiceLink").toggleClass(
+				// 	"customButtonSmallDisabled", true);
 				$("#addDeliveredServiceLink").prop('disabled', true);
 				$("#deliveredServicesModule").hide()
 			}
 
-			$("#addMultiServiceLink").toggleClass("customButtonSmall", true);
-			$("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
-				false);
+			// $("#addMultiServiceLink").toggleClass("customButtonSmall", true);
+			// $("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
+			// 	false);
 			$("#addMultiServiceLink").prop('disabled', false);
 
-			$("#addCustomMarkLink").toggleClass("customButtonSmall", true);
-			$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
-				false);
+			// $("#addCustomMarkLink").toggleClass("customButtonSmall", true);
+			// $("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
+			// 	false);
 			$("#addCustomMarkLink").prop('disabled', false);
 		}
 		updateTop();
