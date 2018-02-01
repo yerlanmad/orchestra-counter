@@ -11,7 +11,7 @@
     <div class="qm-action-bar__middle">
         <div class="qm-action-bar__super">
             <div class="button-tooltip">
-                <button class="qm-action-btn qm-action-btn--huge" name="callNextButton" id="callNextBtn" onclick="servicePoint.checkServicesLeft('callNext')">
+                <button class="qm-action-btn qm-action-btn--huge" name="callNextButton" id="callNextBtn" onclick="servicePoint.checkServicesLeft('callNext');this.blur();">
                     <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
                 </button>
@@ -20,7 +20,7 @@
     </div>
     <div class="qm-action-bar__right">
         <div class="button-tooltip">
-            <button class="qm-action-btn qm-action-btn--large" id="closeBtn" name="closeWorkstationButton" onclick="servicePoint.checkServicesLeft('handleClose')">
+            <button class="qm-action-btn qm-action-btn--large" id="closeBtn" name="closeWorkstationButton" onclick="servicePoint.checkServicesLeft('handleClose');this.blur();">
                 <i class="qm-action-btn__icon icon-close-square" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title=""></span>
             </button>
