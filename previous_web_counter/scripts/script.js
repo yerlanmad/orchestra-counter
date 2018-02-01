@@ -179,8 +179,7 @@ var servicePoint = new function () {
 			$("#userName").html(sessvars.currentUser.userName);
 			servicePoint.showSettingsWindow();
 		} else {
-			// updateUI();
-			servicePoint.showSettingsWindow();
+			updateUI();
 		}
 	};
 
@@ -553,41 +552,18 @@ var servicePoint = new function () {
 					unsubscribeAndDisableQueues();
 				}
 
-				if (sessvars.state.userState != servicePoint.userState.NO_STARTED_USER_SESSION && !isAppLoaded) {
-					this.promptDualSession(settings);
+				prevBranchId = sessvars.branchId;
+				if (isApplied(settings)) {
+					servicePoint.storeSettingsInSession(settings);
+					setProfile(servicePoint.createParams());
+					updateUI();
 				} else {
-					this.proceedLogin(settings);
+					modalNavigationController.pop()
 				}
 			}
 		}
 		return isHijacking;
-	}.bind(this);
-
-	this.proceedLogin = function (settings) {
-		prevBranchId = sessvars.branchId;
-		if (isApplied(settings)) {
-			servicePoint.storeSettingsInSession(settings);
-			setProfile(servicePoint.createParams());
-			updateUI();
-		} else {
-			modalNavigationController.pop()
-		}
-	}
-
-	this.promptDualSession = function (settings) {
-		var dualSessionConfirmation = new $Qmatic.components.modal.GenericConfirmModal("#generic-confirm-modal", {
-			message: jQuery.i18n.prop('info.session.ongoing.message'),
-			yesCallback: function () {
-				modalNavigationController.popAllModals();
-				servicePoint.proceedLogin(settings);
-			},
-			noCallback: function () {
-				modalNavigationController.popAllModals();
-				servicePoint.showSettingsWindow();
-			}
-		});
-		modalNavigationController.push(dualSessionConfirmation);
-	}
+	};
 
 	var isHijack = function (wantedWorkstation, params) {
 		var isHijacking = false;
@@ -1175,7 +1151,7 @@ var servicePoint = new function () {
 				var sorting = [[1, 'asc']];
 				walkTable.fnSort(sorting);
 			}
-			
+
 		}
 	};
 
@@ -1530,7 +1506,7 @@ var servicePoint = new function () {
 			$("#homeImage").toggleClass("imgDisabled", true);
 			$("#settingsLink").toggleClass("linkDisabled", true);
 			$("#logoutLink").toggleClass("linkDisabled", true);
-			
+
 			// Add outcome link doesn't exist anymore
 			// if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
 			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", true);
