@@ -632,17 +632,6 @@ var servicePoint = new function () {
 		}
 	};
 
-	this.changeProfile = function (value) {
-		if (value != -1 && value != sessvars.workProfileId) {
-			if (servicePoint.hasValidSettings()) {
-				if (servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
-					return;
-				}
-			}
-			util.showModal("changeProfileConfirmWindow");
-		}
-	};
-
 	this.noShow = function () {
 		if (servicePoint.hasValidSettings()
 			&& sessvars.state.userState == servicePoint.userState.SERVING
@@ -2098,9 +2087,9 @@ var servicePoint = new function () {
 	};
 
 	this.handleHome = function () {
-		if (workstationOffline
-			|| (servicePoint.hasValidSettings() && servicePoint
-				.isOutcomeOrDeliveredServiceNeeded())) {
+		if (workstationOffline || (servicePoint.hasValidSettings() && servicePoint.isOutcomeOrDeliveredServiceNeeded())) {
+			util.showMessage(jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service'));
 			return false;
 		}
 		workstationOffline = true;
