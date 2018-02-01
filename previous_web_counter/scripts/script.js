@@ -74,7 +74,6 @@ var servicePoint = new function () {
 	var displayQueueTimeout = -1;
 	var displayQueueTimeoutId;
 	var logoffTimer = null;
-	var isAppLoaded = false;
 	var prevBranchId = null;
 
 	var cfuForceSelection = false;
@@ -181,6 +180,8 @@ var servicePoint = new function () {
 		} else {
 			updateUI();
 		}
+		this.teardownAutoCloseListener();
+		this.setupAutoCloseListener();
 	};
 
 	var isLoggedInToWorkstation = function () {
@@ -263,8 +264,6 @@ var servicePoint = new function () {
 			if (moduleChatEnabled == true) {
 				// chat.restoreTabs();
 			}
-			isAppLoaded = true;
-
 		} else {
 			clearTimeout(sessvars.queueTimer);
 			sessvars.queueTimerOn = false;
@@ -1074,9 +1073,7 @@ var servicePoint = new function () {
 																		 */) {
 
 			// util.showModal("walks");
-			cardNavigationController.push($Qmatic.components.card.walkInCard)
-			console.log("prevBranchId: " + prevBranchId);
-			console.log("sessvars.branchId: " + sessvars.branchId);
+			cardNavigationController.push($Qmatic.components.card.walkInCard);
 			var t = new Date();
 			var url = "/rest/servicepoint/branches/" + sessvars.branchId
 				+ "/services?call=" + t;
@@ -1804,6 +1801,19 @@ var servicePoint = new function () {
 		$("#logoutLink").toggleClass("linkDisabled", isDisabled);
 	};
 
+	this.setupAutoCloseListener = function () {
+		$(window).on("focusin click", function () {
+			if (sessvars != undefined) {
+				sessvars.statusUpdated = new Date();
+				resetLogoffCounter();
+			}
+		});
+	}
+
+	this.teardownAutoCloseListener = function () {
+		$(window).off("focusin click");
+	}
+
 	// Resets the logout counter
 	var resetLogoffCounter = function () {
 		if (logoffTimer != null) {
@@ -1826,6 +1836,7 @@ var servicePoint = new function () {
 			timeSinceLastUpdate = timeSinceLastUpdate / 1000;
 		}
 		var timeUntilLogoff = (autoClose - timeSinceLastUpdate) * 1000;
+		// $Qmatic.utils.log.info("Station will outclose in " + (timeUntilLogoff/1000) + " seconds!");
 		logoffTimer = window.setTimeout(function () {
 			servicePoint.handleLogoutQES(true, true);
 			window.location.href = "/logout.jsp";
@@ -2089,7 +2100,7 @@ var servicePoint = new function () {
 	this.handleHome = function () {
 		if (workstationOffline || (servicePoint.hasValidSettings() && servicePoint.isOutcomeOrDeliveredServiceNeeded())) {
 			util.showMessage(jQuery.i18n
-					.prop('error.no.outcome.or.delivered.service'));
+				.prop('error.no.outcome.or.delivered.service'));
 			return false;
 		}
 		workstationOffline = true;
