@@ -75,6 +75,7 @@ var servicePoint = new function () {
 	var displayQueueTimeoutId;
 	var logoffTimer = null;
 	var isAppLoaded = false;
+	var prevBranchId = null;
 
 	var cfuForceSelection = false;
 
@@ -563,6 +564,7 @@ var servicePoint = new function () {
 	}.bind(this);
 
 	this.proceedLogin = function (settings) {
+		prevBranchId = sessvars.branchId;
 		if (isApplied(settings)) {
 			servicePoint.storeSettingsInSession(settings);
 			setProfile(servicePoint.createParams());
@@ -1108,7 +1110,12 @@ var servicePoint = new function () {
 
 			// util.showModal("walks");
 			cardNavigationController.push($Qmatic.components.card.walkInCard)
-			if (typeof walkTable === "undefined") {
+			console.log("prevBranchId: " + prevBranchId);
+			console.log("sessvars.branchId: " + sessvars.branchId);
+			var t = new Date();
+			var url = "/rest/servicepoint/branches/" + sessvars.branchId
+				+ "/services?call=" + t;
+			if ((walkTable == undefined && prevBranchId == sessvars.branchId) || prevBranchId != sessvars.branchId) {
 				var columns = [
 				/* Service ext name */{
 						"bSearchable": false,
@@ -1140,9 +1147,6 @@ var servicePoint = new function () {
 						"mDataProp": "externalDescription",
 						"sType": "qm-sort"
 					}];
-				var t = new Date();
-				var url = "/rest/servicepoint/branches/" + sessvars.branchId
-					+ "/services?call=" + t;
 				var headerCallback = function (nHead, aasData, iStart, iEnd,
 					aiDisplay) {
 					// nHead.style.borderBottom = "1px solid #c0c0c0";
@@ -1168,9 +1172,10 @@ var servicePoint = new function () {
 					"infoFiltered": "info.filtered.fromEntries",
 					"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search")
 				});
+				var sorting = [[1, 'asc']];
+				walkTable.fnSort(sorting);
 			}
-			var sorting = [[1, 'asc']];
-			walkTable.fnSort(sorting);
+			
 		}
 	};
 
@@ -2194,7 +2199,7 @@ var servicePoint = new function () {
 			}
 		} else if (!workstationOffline
 			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
-				util.showError(jQuery.i18n.prop('error.logout.ds.or.outcome.needed'));
+			util.showError(jQuery.i18n.prop('error.logout.ds.or.outcome.needed'));
 		}
 
 		if (isLogout) {
