@@ -2099,7 +2099,7 @@ var servicePoint = new function () {
 
 	this.handleHome = function () {
 		if (workstationOffline || (servicePoint.hasValidSettings() && servicePoint.isOutcomeOrDeliveredServiceNeeded())) {
-			util.showMessage(jQuery.i18n
+			util.showError(jQuery.i18n
 				.prop('error.no.outcome.or.delivered.service'));
 			return false;
 		}
