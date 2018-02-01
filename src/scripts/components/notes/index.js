@@ -58,6 +58,7 @@ window.$Qmatic.components.NotesController.prototype = {
         this.notesPresentationalView.style.display = "none";
         this.notesInputView.style.display = "block";
         this._setButtonState();
+        this.notesInput.focus();
     },
     reload: function (text) {
         this.navigateToPresentational();

@@ -65,9 +65,12 @@
 
     &__last-column {
         text-align: right;
-        
+        padding-right: rem(30px);
+
         @at-root [dir='rtl'] & {
             text-align: left;
+            padding-right: rem($global-standard-padding);
+            padding-left: rem(30px);
         }
     }
 
@@ -163,6 +166,10 @@
     
             .qm-table__last-column {
                 padding: rem($global-standard-padding / 2 24px $global-standard-padding / 2 $global-standard-padding / 2);
+
+                @at-root [dir='rtl'] & {
+                    padding: rem($global-standard-padding / 2 $global-standard-padding / 2 $global-standard-padding / 2 24px);
+                }
             }
         }
     }

@@ -118,4 +118,8 @@
     font-size: rem(20px);
     font-weight: $font-weight-light;
     margin: rem($global-standard-padding / 2 0 $global-standard-margin * 2 0);
+
+    @at-root [dir="rtl"] & {
+        text-align: right;
+    }
 }

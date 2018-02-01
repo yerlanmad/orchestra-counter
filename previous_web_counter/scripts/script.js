@@ -753,6 +753,7 @@ var servicePoint = new function () {
 		sessvars.statusUpdated = new Date();
 		servicePoint.updateWorkstationStatus();
 		servicePoint.addMultiServicePressed();
+		util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', [sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName]));
 	};
 
 	this.removeService = function (serviceId, index) {
