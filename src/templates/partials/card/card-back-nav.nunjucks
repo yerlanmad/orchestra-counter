@@ -1,0 +1,6 @@
+{% import "./../button.nunjucks" as button  %}   
+    {% macro render()%}
+    <div class="qm-card__back-nav">
+        {{button.render(type="qm-btn--primary qm-card--back-btn", handler="cardNavigationController.pop();this.blur()")}}
+    </div>
+    {% endmacro %}

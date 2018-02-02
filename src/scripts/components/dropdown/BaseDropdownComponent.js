@@ -5,7 +5,8 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     this.chosenConfig = {
         disable_search_threshold: 0,
         single_disable: true,
-        search_contains: true
+        search_contains: true,
+        expand_dropdown_height: null
     }
 
     // @Override
@@ -18,7 +19,43 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
             this.setupFocusListener();
             this.setupChangeListener();
             this.setupUpdateListener();
+            if (this.chosenConfig.expand_dropdown_height) {
+                this.setupOpenListener();
+                this.setupWindowResizeListener();
+            }
         }
+    }
+
+    // =======================
+    // On Window Resize Funcitonality......
+    // =======================
+
+    this.setupWindowResizeListener = function () {
+        this.onResize = (function (evt) {
+            this.get$Elem().trigger("chosen:close");
+        }).bind(this);
+
+        $(window).on("resize", this.onResize);
+    }
+
+    this.teardownResizeListener = function () {
+        $(window).on('resize', this.onResize);
+    }
+
+    // =======================
+    // On Open Funcitonality......
+    // =======================
+
+    this.setupOpenListener = function () {
+        this.onOpen = (function () {
+            this.chosenConfig.expand_dropdown_height(this.get$Elem());
+        }).bind(this);
+
+        this.get$Elem().on("chosen:showing_dropdown", this.onOpen);
+    }
+
+    this.teardownOpenListener = function () {
+        this.get$Elem().on('chosen:showing_dropdown', this.onOpen);
     }
 
     // =======================
@@ -27,7 +64,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
 
     this.setupUpdateListener = function () {
         this.onUpdate = (function (evt, params) {
-            if(this.get$Elem().find("option").is(":selected") && this.get$Elem().find(":selected").val() && this.get$Elem().find(":selected").val() != -1){
+            if (this.get$Elem().find("option").is(":selected") && this.get$Elem().find(":selected").val() && this.get$Elem().find(":selected").val() != -1) {
                 this.selectOption();
             } else {
                 this.unSelectOption();
@@ -48,7 +85,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     this.setupChangeListener = function () {
         this.teardownSetupChangeListener();
         this.onChange = (function (evt, params) {
-            if (params.selected == -1){
+            if (params.selected == -1) {
                 this.unSelectOption();
             } else {
                 this.selectOption();

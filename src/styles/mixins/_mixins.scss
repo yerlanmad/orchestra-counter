@@ -18,6 +18,12 @@
     &__content-section {
         margin-bottom: rem($global-standard-margin);
     }
+    &__back-nav {
+        text-align: right;
+        @at-root [dir='rtl'] & {
+            text-align: left;
+        }
+    }
     &__content-section-flex-grow {
         flex-grow: 1;
         flex-shrink: 2;

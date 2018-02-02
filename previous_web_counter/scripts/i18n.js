@@ -143,6 +143,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nPlaceholder($("#walkDirectServices_filter input"), "info.placeholder.walkdirect.search");
         
         //card details
+        // Card back
+        i18nSafeSelectorBtnAppend(".qm-card--back-btn", 'application.sr.back');
+
         // Closed Card
         i18nSafe("closedCardTitle", 'info.card.closedCard.title');
         i18nSafe("closedCardSubTitle", 'info.card.closedCard.subTitle');
@@ -167,7 +170,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         
         // Add Services Card
         i18nSafe("visitCardAddServicesLbl", 'info.card.addServicesCard.addServices');
-        i18nSafe("unServedServicesLabel", 'info.card.addServicesCard.unServedServices');
+        i18nSafe("unServedServicesLabel", 'info.unserved.name');
          
 
         // Inactive Card

@@ -2,6 +2,11 @@
     .qm-card {
         display: flex;
         flex-direction: column;
+        &-nav{
+            &__left{
+                display: none;
+            }
+        }
         &__header-section {
             margin-bottom: 0;
             .qm-card-header {
@@ -21,9 +26,11 @@
             }
             .custom-list-header {
                 vertical-align: middle;
-                color: $dark-transparent82;
-                font-size: rem(16px);
-                padding: rem(10px 5px);
+                color: $dark-transparent62;
+                border-bottom: 1px solid $dark-transparent12;
+                font-weight: 500;
+                font-size: rem(12px);
+                padding: rem(8px 5px);
                 @at-root [dir='rtl'] & {
                     text-align: right;
                 }
@@ -36,7 +43,7 @@
                 .list {
                     &--item {
                         display: flex;
-                        padding: rem(5px);
+                        padding: rem(10px 5px);
                         &:hover {
                             background: $dark-transparent04;
                         }
@@ -50,7 +57,13 @@
                         }
                         &-empty {
                             flex-grow: 1;
-                            text-align: center;
+                            text-align: left;
+                            font-weight: 300;
+                            color: $dark-transparent82;
+                            @at-root [dir='rtl'] & {
+                                text-align: right;
+                            }
+
                         }
                         &-icon {
                             i:before {

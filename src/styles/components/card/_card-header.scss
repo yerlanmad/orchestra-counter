@@ -1,11 +1,9 @@
 .qm-card-header {
-
     &__top {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-
     &__headline {
         flex: 1 1 auto;
         display: flex;
@@ -13,12 +11,10 @@
         font-size: rem($h1-font-size);
         margin-bottom: 0;
     }
-
     &__highlighted {
         color: $h1-color !important;
         font-weight: $font-weight-medium !important;
     }
-
     &__customer-name {
         flex: 0 1 auto;
         overflow: hidden;
@@ -27,31 +23,25 @@
         text-decoration: none;
         padding-right: rem(4px);
         color: $h1-color;
-
         @at-root [dir='rtl'] & {
             padding-right: 0;
             padding-left: rem(4px);
-
             &:empty {
                 padding-left: 0;
             }
         }
-
         &:empty {
             padding-right: 0;
         }
-
         &:visited {
             color: $h1-color;
         }
-
         &:hover,
         &:focus {
             color: $dark-transparent82;
             text-decoration: underline;
         }
     }
-
     &__amount-of-customers {
         flex: 0 0 auto;
         color: $primary-color;
@@ -61,18 +51,15 @@
         font-weight: $font-weight-medium;
         text-decoration: none;
         cursor: pointer;
-
         &:visited {
             color: $h1-color;
         }
-
         &:hover,
         &:focus {
             color: $dark-transparent82;
             text-decoration: underline;
         }
     }
-
     &__ticket {
         flex: 1 0 auto;
         padding-left: rem(4px);
@@ -80,34 +67,28 @@
         color: $dark-transparent82;
         white-space: nowrap;
         overflow: hidden;
-
         @at-root [dir='rtl'] & {
             text-align: right;
             padding-left: 0;
             padding-right: rem(4px);
         }
     }
-
     &__add-customer {
         flex: 0 0 28px;
         color: $secondary-color;
         margin-left: rem(4px);
-
         &:hover {
             text-decoration: none;
             color: lighten($secondary-color, 5%);
         }
-
         @at-root [dir='rtl'] & {
             margin-left: 0;
             margin-right: rem(4px);
         }
     }
-
     &__add-customer-icon {
         font-size: rem(28px);
     }
-    
     &__sub-heading {
         font-size: rem(28px);
     }
@@ -118,8 +99,7 @@
     font-size: rem(20px);
     font-weight: $font-weight-light;
     margin: rem($global-standard-padding / 2 0 $global-standard-margin * 2 0);
-
-    @at-root [dir="rtl"] & {
+    @at-root [dir='rtl'] & {
         text-align: right;
     }
 }

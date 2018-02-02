@@ -1,2 +1,6 @@
 #transferCounterPoolCard{
+    .qm-card__content-section {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
 }

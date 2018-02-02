@@ -46,6 +46,7 @@
             .chosen-drop {
                 border: 0;
                 border-top: 1px solid $dark-transparent12;
+                box-shadow: 4px 0 15px -3px $dark-transparent08, -4px 0 8px -3px $dark-transparent08, 0 4px 5px 3px $dark-transparent08;
             }
             &.single-item {
                 .chosen-single div {
@@ -191,7 +192,7 @@
                         line-height: rem(20px);
                     }
                     &.highlighted {
-                        background: $dark-transparent04;
+                        background: $dark-transparent08;
                         color: $dark-transparent82;
                     }
                     &.no-results {

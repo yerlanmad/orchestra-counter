@@ -63,4 +63,5 @@
                         </tbody>
                     </table>
     </div>    
+    {{cardBackNav.render()}}
 {% endblock %}

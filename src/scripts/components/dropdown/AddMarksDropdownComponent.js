@@ -41,8 +41,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
         });
 
         $(this.getSelector()).prev("div.main").find(".cross-icon button").on("click", function() {
-            console.log("clicked on cross")
-            parentContext.resetSelected()
+            parentContext.resetSelected();
         });
 
         $marksAddBtn.click(function() {

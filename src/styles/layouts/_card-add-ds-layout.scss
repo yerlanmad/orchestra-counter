@@ -1,5 +1,10 @@
 #dsCard {
     .qm-card {
+        &-nav{
+            &__left{
+                display: none;
+            }
+        }
         &__header-section {
             margin-bottom: 0;
             .qm-card-header {
@@ -51,6 +56,9 @@
                             font-size: rem(12px);
                             line-height: rem(30px);
                             border-bottom: 0;
+                            &:hover{
+                                cursor: auto !important;
+                            }
                             &.sorting {
                                 background: $white;
                                 position: relative;

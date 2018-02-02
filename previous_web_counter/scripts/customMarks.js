@@ -14,7 +14,14 @@ var customMarks = new function () {
 			dropdownFilter = new window.$Qmatic.components.dropdown.AddMarksDropdownComponent('#marksFilter', {
 				single_disable: false,
 				allow_single_deselect: false,
-				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark')
+				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark'),
+				expand_dropdown_height: function (elem) {
+					var heightOfContentSection = elem.parent().parent().parent().parent().parent().parent().find(".qm-card__content-section").height() -
+						(elem.parent().parent().parent().parent().parent().parent().find(".chosen-search").height() +
+						elem.parent().parent().parent().parent().parent().parent().find(".custom-list-header").height() + 25);
+
+					elem.parent().find(".chosen-results").css("max-height", heightOfContentSection);
+				}
 			}).get$Elem();
 	}
 
@@ -194,9 +201,9 @@ var customMarks = new function () {
 							"<span class=\"removeMarkBtn\" " + "title=\""
 							+ jQuery.i18n.prop("action.remove.mark.click")
 							+ "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
-                             + '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
-                             + '<span class="sr-only">delete button</span>'
-                             + '</button>' + "</span>");
+							+ '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
+							+ '<span class="sr-only">delete button</span>'
+							+ '</button>' + "</span>");
 
 						$(td).find(".removeMarkBtn").click(function () {
 							customMarkRemove(row);
@@ -268,8 +275,8 @@ var customMarks = new function () {
 				//customMarksTable.fnAdjustColumnSizing();
 			});
 		}
-			var sorting = [[1, 'desc']];
-			customMarksTable.fnSort(sorting);
+		var sorting = [[1, 'desc']];
+		customMarksTable.fnSort(sorting);
 	};
 
 	this.cancelAddCustomMarks = function () {
@@ -285,7 +292,7 @@ var customMarks = new function () {
 	};
 
 	this.getDataTable = function () {
-        return customMarksTable;
-    }
+		return customMarksTable;
+	}
 
 };

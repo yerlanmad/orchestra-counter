@@ -12,6 +12,7 @@
 <!-- Imported partials -->
 {% import "partials/button.nunjucks" as button %}
 {% import "partials/card/card-nav.nunjucks" as cardNav  %}
+{% import "partials/card/card-back-nav.nunjucks" as cardBackNav  %}
 
 <body>
     <div class="qm-app">
