@@ -223,7 +223,6 @@ var servicePoint = new function () {
 			// queues will not be updated here since it is a refresh,
 			servicePoint.updateWorkstationStatus(true);
 			updateWorkstationSettings();
-
 			// INIT command to qevents
 			var initCmd = {
 				"M": "C",
@@ -2078,11 +2077,7 @@ var servicePoint = new function () {
 		servicePoint.servicesList = spService.get("branches/" + parseInt(sessvars.branchId)
 			+ "/services");
 
-		branch.text(sessvars.branchName);
-		workstation.text(sessvars.servicePointName);
-		profile.text(sessvars.state.workProfileName);
-		// Used to repaint in IE when values are appended
-		profile.focus().blur();
+		window.$Qmatic.components.header.setInformation(sessvars.branchName, sessvars.servicePointName, sessvars.state.workProfileName);
 	};
 
 	var doEndUserSession = function () {

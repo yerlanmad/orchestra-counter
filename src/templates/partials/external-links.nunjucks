@@ -119,9 +119,10 @@
         <script type="text/javascript" src="scripts/components/queue/index.js"></script>
         <script type="text/javascript" src="scripts/components/notes/index.js"></script>
         
-
-
+        <script type="text/javascript" src="scripts/components/header/headerComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/header/applicationHeader/header.js"></script>
         
+
         <script type="text/javascript" src="scripts/components/tooltip/index.js"></script>
 
         <script type="text/javascript" src="scripts/components/card/index.js"></script>
