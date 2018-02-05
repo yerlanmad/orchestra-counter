@@ -18,6 +18,19 @@
         &--narrow {
             padding: rem(30px 45px 50px);
         }
+
+        .qm-table-filter {
+            margin-top: rem($global-standard-margin);
+            margin-bottom: 0;
+        }
+
+        .dataTables_filter {
+            display: none;
+        }
+
+        .dataTables_info {
+            display: none;
+        }
     }
 
     &__close {
@@ -112,6 +125,7 @@
         left: 0;
         z-index: 100;
     }
+    
 }
 
 .qm-rendered-popovers {

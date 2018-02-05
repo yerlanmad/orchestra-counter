@@ -5,7 +5,7 @@
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
         <div class="qm-card">
-            <div class="qm-card__header-section" id="confirmCounterHijackingHeader"></div>
+            <div class="qm-card__header-section js-confirm-counter-highjack-label"></div>
             <div class="qm-card__content-section">
                 <span id="hijackMessagePartOne"></span><span id="hijackUser"></span><span id="hijackMessagePartTwo"></span>
             </div>

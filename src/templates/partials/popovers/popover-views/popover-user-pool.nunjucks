@@ -19,6 +19,11 @@
         </div>
     
         <div class="qm-popover__content">
+            <div class="search-filter qm-table-filter">
+                <label>
+                    <input class="js-table-filter-input js-popover-filter-user-pool" type="search" placeholder="">
+                </label>
+            </div>
             <table class="qm-table qm-table--small js-popover-table-user-pool">
                 <thead class="qm-table__header">
                     <tr>

@@ -138,7 +138,7 @@ var util = new function () {
                 "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel) : "",
                 "sInfo": "",
                 "sInfoEmpty": "",
-                "sZeroRecords": "",
+                "sZeroRecords": typeof config.emptySearchLabel !== 'undefined' ? translate.msg(config.emptySearchLabel) : "",
                 // "sSearch": jQuery.i18n.prop('info.search')
                 "sSearch": "",
                 "sSearchPlaceholder": config.placeholder ? config.placeholder : ""

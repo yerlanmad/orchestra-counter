@@ -25,12 +25,12 @@
          <table id="deliveredServices" class="display">
             <thead>
                 <tr class="table-header__border">
-                    <th id="deliveredServiceId"></th>
-                    <th id="deliveredServiceEventTime"></th>
-                    <th id="deliveredServiceOrigId"></th>
-                    <th id="deliveredServiceName"></th>
-                    <th id="deliveredServiceVisitOutcome"></th>
-                    <th id="deliveredServiceVisitOutcomeNeeded"></th>
+                    <th class="deliveredServiceId"></th>
+                    <th class="deliveredServiceEventTime"></th>
+                    <th class="deliveredServiceOrigId"></th>
+                    <th class="deliveredServiceName"></th>
+                    <th class="deliveredServiceVisitOutcome"></th>
+                    <th class="deliveredServiceVisitOutcomeNeeded"></th>
                 </tr>
             </thead>
             <tbody>

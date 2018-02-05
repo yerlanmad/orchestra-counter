@@ -161,14 +161,40 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     },
     _initQueuesTable: function (selector) {
         this.queueTable = transfer.buildTransferToQueueTable(this, selector, this.queueTable, this.ticketId, this.visitId);
+        var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-queue');
+
+        this._setupAriaAttributes(this.queueTable, searchInput);
+        this._setupSearchListener(this.queueTable, searchInput);
         queueViewController.resetTimer();
+    },
+    _setupAriaAttributes: function (table, searchInput) {
+        searchInput.setAttribute('aria-controls', table.attr('id'));
+    },
+    _setupSearchListener: function (table, searchInput) {
+        searchInput.removeEventListener('keyup', this._filterTable);
+        searchInput.addEventListener('keyup', this._filterTable.bind(this, table));
+    },
+    _filterTable: function (table, e) {
+        var val = e.target.value;
+        this._filter(table, val);
+    },
+    _filter: function (table, val) {
+        table.fnFilter(val);
     },
     _initUserPoolTable: function (selector) {
         this.userPoolTable = transfer.buildTransferToUserPoolTable(this, selector, this.userPoolTable, this.ticketId, this.visitId);
+        var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool');
+
+        this._setupAriaAttributes(this.userPoolTable, searchInput);
+        this._setupSearchListener(this.userPoolTable, searchInput);
         queueViewController.resetTimer();
     },
     _initCounterPoolTable: function (selector) {
         this.counterPoolTable = transfer.buildTransferToCounterPoolTable(this, selector, this.counterPoolTable, this.ticketId, this.visitId);
+        var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-counter-pool');
+
+        this._setupAriaAttributes(this.counterPoolTable, searchInput);
+        this._setupSearchListener(this.counterPoolTable, searchInput);
         queueViewController.resetTimer();
     },
     _call: function () {

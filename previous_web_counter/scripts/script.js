@@ -1074,6 +1074,7 @@ var servicePoint = new function () {
 
 			// util.showModal("walks");
 			cardNavigationController.push($Qmatic.components.card.walkInCard);
+			queueViewController.navigateToOverview();
 			var t = new Date();
 			var url = "/rest/servicepoint/branches/" + sessvars.branchId
 				+ "/services?call=" + t;
@@ -1714,7 +1715,9 @@ var servicePoint = new function () {
 
 		// Set Highlight class to customer name if present else set to ticket number
 		if (sessvars.state.visit && sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != "") {
-			$("#linkedCustomerField").addClass("qm-card-header__highlighted");
+			$linkedCustomerField = $("#linkedCustomerField");
+			$linkedCustomerField.addClass("qm-card-header__highlighted");
+			$linkedCustomerField.css("display", "");
 			$("#ticketNumber").removeClass("qm-card-header__highlighted");
 		} else {
 			$("#linkedCustomerField").removeClass("qm-card-header__highlighted");
@@ -1867,8 +1870,12 @@ var servicePoint = new function () {
 			$("#countTransactionTime").empty();
 			$('#countTransactionTime').countdown('destroy');
 		}
-		$("#linkedCustomerField").empty();
-		$("#amountOfAdditionalCustomers").empty();
+		var $linkedCustomerField = $("#linkedCustomerField");
+		$linkedCustomerField.empty();
+		$linkedCustomerField.hide();
+		$amountOfAdditionalCustomers = $("#amountOfAdditionalCustomers");
+		$amountOfAdditionalCustomers.empty();
+		$amountOfAdditionalCustomers.hide();
 		$("#outcome").empty();
 		$("#verticalMessage").empty();
 		$("#notesEdit").val('');

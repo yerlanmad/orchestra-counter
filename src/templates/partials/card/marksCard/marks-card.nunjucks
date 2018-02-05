@@ -50,18 +50,18 @@
 {% block content %}
     <div class="qm-card__content-section">
          <table id="customMarks" class="display">
-                        <thead>
-                           <tr class="table-header__border">
-                                <th id="customMarkId"></th>
-                                <th id="customMarkEventTime"></th>
-                                <th id="customMarkOrigId"></th>
-                                <th id="customMarkName"></th>
-								<th id="removeCustomMark"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+            <thead>
+                <tr class="table-header__border">
+                    <th class="customMarkId"></th>
+                    <th class="customMarkEventTime"></th>
+                    <th class="customMarkOrigId"></th>
+                    <th class="customMarkName"></th>
+                    <th class="removeCustomMark"></th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </div>    
     {{cardBackNav.render()}}
 {% endblock %}

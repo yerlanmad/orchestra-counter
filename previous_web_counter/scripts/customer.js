@@ -609,11 +609,15 @@ var customer = new function() {
     };
 
     this.setAmountOfAdditionalCustomers = function () {
+        var $amountOfAdditionalCustomers = $('#amountOfAdditionalCustomers');
+
         if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
             sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 1) {
-            $('#amountOfAdditionalCustomers').text("+" + (sessvars.state.visit.customerIds.length - 1));
+                $amountOfAdditionalCustomers.text("+" + (sessvars.state.visit.customerIds.length - 1));
+                $amountOfAdditionalCustomers.css("display", "");
         } else {
-            $('#amountOfAdditionalCustomers').empty();
+            $amountOfAdditionalCustomers.empty();
+            $amountOfAdditionalCustomers.hide();
         }
     };
 
@@ -654,13 +658,18 @@ var customer = new function() {
             sessvars.currentCustomer.id = customerParameterized.customerId;
 
             //update linked customer field if the customer is linked to the current transaction
+            var $linkedCustomerField = $("#linkedCustomerField");
             if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
                 typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
                 sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
-                        $("#linkedCustomerField").html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
+                        
+                        $linkedCustomerField.html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
+                        $linkedCustomerField.css("display", "");
                         this.setAmountOfAdditionalCustomers();
                         $('#ticketNumber').removeClass('qm-card-header__highlighted');
+            } else {
+                $linkedCustomerField.hide();
             }
             if(shouldPop === true) {
                 if(sessvars.state.visit.customerIds[0] === sessvars.currentCustomer.id) {
@@ -737,8 +746,9 @@ var customer = new function() {
                 typeof sessvars.currentCustomer.id === 'number') {
                 linkCustomer(sessvars.currentCustomer);
                 if(isFirstCustomerLinked()) {
-                    $("#linkedCustomerField").html(sessvars.currentCustomer.firstName + " " +
-                    sessvars.currentCustomer.lastName);
+                    $linkedCustomerField = $("#linkedCustomerField");
+                    $linkedCustomerField.html(sessvars.currentCustomer.firstName + " " + sessvars.currentCustomer.lastName); 
+                    $linkedCustomerField.css("display", "");
                 }
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
@@ -797,14 +807,18 @@ var customer = new function() {
                 typeof sessvars.state.visit.parameterMap.customers != 'undefined' &&
                 sessvars.state.visit.parameterMap.customers != null &&
                 sessvars.state.visit.parameterMap.customers != "") {
-                $("#linkedCustomerField").html(sessvars.state.visit.parameterMap.customers);
+                var $linkedCustomerField = $("#linkedCustomerField");
+                $linkedCustomerField.html(sessvars.state.visit.parameterMap.customers);
+                $linkedCustomerField.css("display", "");
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
                 
             } else if(typeof sessvars.state.visit.customerIds !== "undefined" &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0) {
                 var customer =spService.get("customers/"+sessvars.state.visit.customerIds[0]);
-                $("#linkedCustomerField").html(customer.firstName + " " + customer.lastName);
+                var $linkedCustomerField = $("#linkedCustomerField");
+                $linkedCustomerField.html(customer.firstName + " " + customer.lastName);
+                $linkedCustomerField.css("display", "");
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
             } else {

@@ -332,7 +332,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("cancelDeleteCustomerBtn", "button.cancel");
 
         //hijack counter window is i18nized in script.js
-        i18nSafe("confirmCounterHijackingHeader",'info.confirm.counter.hijacking.header');
+        i18nSafeSelectorAppend('.js-confirm-counter-highjack-label', 'info.confirm.counter.hijacking.header');
+        //i18nSafe("confirmCounterHijackingHeader",'info.confirm.counter.hijacking.header');
         i18nQmBtn("hijackYesBtnModal", 'info.confirm.counter.hijacking.yes');
         i18nQmBtn("hijackNoBtnModal", 'info.confirm.counter.hijacking.no');
         i18nSafe("hijackMessagePartOne",'info.confirm.counter.hijacking.message.part.one');

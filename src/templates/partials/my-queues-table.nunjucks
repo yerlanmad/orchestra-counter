@@ -2,10 +2,10 @@
 <table id="myQueuesTable" class="qm-table">
     <thead class="qm-table__header">
         <tr>
-            <th id="myQueueName"></th>
-            <th id="myQueueId"></th>
-            <th id="myQueueWaitingTime"></th>
-            <th id="myQueueCustomersWaiting"></th>
+            <th class="myQueueName"></th>
+            <th class="myQueueId"></th>
+            <th class="myQueueWaitingTime"></th>
+            <th class="myQueueCustomersWaiting"></th>
         </tr>
     </thead>
     <tbody class="qm-table__body">

@@ -193,9 +193,9 @@ var transfer = new function() {
                     return nRow;
                 };
                 
-                table = util.buildTableJson({"tableSelector": selector, "url": url,
-                    "rowCallback": rowCallback, "columns": columns, "filter": false, "headerCallback": headerCallback,
-                    "scrollYHeight": "300px", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues});
+                table = util.buildTableJson({"tableSelector": selector, "url": url, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search"),
+                    "rowCallback": rowCallback, "columns": columns, "filter": true, "headerCallback": headerCallback, "emptySearchLabel": "info.transfer.queue.empty",
+                    "scrollYHeight": "300px", "emptyTableLabel": "info.transfer.queue.empty", "filterData": filterQueues});
                 
                 table.fnSort([0, 'asc']);
             }
@@ -285,9 +285,9 @@ var transfer = new function() {
                     }
                     return nRow;
                 };
-                table = util.buildTableJson({"tableSelector": selector,
-                    "url": staffPoolUrl, "rowCallback": staffPoolRowCallback, "columns": staffPoolColumns,
-                    "filter": false, "headerCallback": staffPoolHeaderCallback, "scrollYHeight": "300px",
+                table = util.buildTableJson({"tableSelector": selector, "emptySearchLabel": "info.transfer.staff.pool.empty",
+                    "url": staffPoolUrl, "rowCallback": staffPoolRowCallback, "columns": staffPoolColumns, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search"),
+                    "filter": true, "headerCallback": staffPoolHeaderCallback, "scrollYHeight": "300px",
                     "emptyTableLabel":"info.transfer.staff.pool.empty"});
 
                 table.fnSort([1, 'asc']);
@@ -362,9 +362,9 @@ var transfer = new function() {
                     }
                     return nRow;
                 };
-                table = util.buildTableJson({"tableSelector": selector,
+                table = util.buildTableJson({"tableSelector": selector, "emptySearchLabel": "info.transfer.servicepoint.pool.empty",
                     "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns,
-                    "filter": false, "headerCallback": servicePointHeaderCallback, "scrollYHeight": "300px",
+                    "filter": true, "headerCallback": servicePointHeaderCallback, "scrollYHeight": "300px","customFilter": true, "infoFiltered": "info.filtered.fromEntries", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search"),
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
                 
             }
@@ -524,7 +524,7 @@ var transfer = new function() {
                     return nRow;
                 };
                 
-                transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url,
+                transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url, "emptySearchLabel": "info.transfer.queue.empty",
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": headerCallback,
                     "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues, "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
                 
@@ -611,7 +611,7 @@ var transfer = new function() {
                     }
                     return nRow;
                 };
-                transferToStaffPoolTable = util.buildTableJson({"tableId": "transferTicketToUserPoolTable", "url": staffPoolUrl,
+                transferToStaffPoolTable = util.buildTableJson({"tableId": "transferTicketToUserPoolTable", "url": staffPoolUrl, "emptySearchLabel": "info.transfer.staff.pool.empty",
                 "rowCallback": staffPoolRowCallback, "columns": staffPoolColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": staffPoolHeaderCallback,
                 "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.staff.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
             }
@@ -680,7 +680,7 @@ var transfer = new function() {
                     }
                     return nRow;
                 };
-                transferToServicePointPoolTable = util.buildTableJson({"tableId": "transferTicketToCounterPoolTable",
+                transferToServicePointPoolTable = util.buildTableJson({"tableId": "transferTicketToCounterPoolTable", "emptySearchLabel": "info.transfer.servicepoint.pool.empty",
                 "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": servicePointHeaderCallback,
                 "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
             }
