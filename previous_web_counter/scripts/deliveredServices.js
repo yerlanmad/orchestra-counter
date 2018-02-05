@@ -56,7 +56,6 @@ var deliveredServices = new function () {
             var params = deliveredServicesParams;
             sessvars.state = servicePoint.getState(spService.post("branches/" + params.branchId + "/visits/" + params.visitId + "/services/" + params.visitServiceId + "/deliveredServices/" + params.deliveredServiceId));
             sessvars.statusUpdated = new Date();
-            // util.hideModal("addDeliveredServices");
             if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                 sessvars.state.userState == servicePoint.userState.SERVING) {
             }
@@ -125,7 +124,6 @@ var deliveredServices = new function () {
             ];
             var headerCallback = function (nHead, aasData, iStart, iEnd, aiDisplay) {
                 if (nHead.getElementsByTagName('th')[0].innerHTML.length == 0) {
-                    //nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.delivered.service.outcome');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.delivered.service.time');
@@ -201,18 +199,10 @@ var deliveredServices = new function () {
                     sessvars.state.visit.currentVisitService.visitDeliveredServices : null)
             });
             deliveredServicesTable.fnSort(SORTING);
-            $(window).bind('resize', function () {
-                deliveredServicesTable.fnAdjustColumnSizing();
-            });
+            // $(window).bind('resize', function () {
+            //     deliveredServicesTable.fnAdjustColumnSizing();
+            // });
         }
-    };
-
-    this.cancelAddDeliveredServices = function () {
-        util.hideModal("addDeliveredServices");
-    };
-
-    this.hideAddDeliveredServices = function () {
-        util.hideModal("addDeliveredServices");
     };
 
     this.clearTable = function () {

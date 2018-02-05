@@ -50,7 +50,6 @@ var queues = new function() {
                         "sDefaultContent" : null}
                 ];
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    //nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.name');
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.waiting');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
@@ -163,7 +162,6 @@ var queues = new function() {
         if(servicePoint.hasValidSettings() && sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
             !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
             sessvars.clickedQueueId = queueTableContainingRow.fnGetData(rowClicked).id; //ql queue id
-            //util.showModal("ticketsDialogue");
             
             queueViewController.navigateToDetail();
             
@@ -177,7 +175,6 @@ var queues = new function() {
                 util.sortArrayCaseInsensitive(tickets, "ticketId");
                 if(tickets.length > 0) {
                     ticketsTable.fnAddData(tickets);
-                    //ticketsTable.fnAdjustColumnSizing();
                 }
                 queueDetailInitFn(tickets);
             } else {
@@ -203,7 +200,6 @@ var queues = new function() {
 
                 ];
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    //nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.ticket');
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.service.name');
@@ -234,19 +230,16 @@ var queues = new function() {
                         
                         // Popover options and initialization
                         if ( buttonTransferFromQueueEnabled  == true ) {						
-                            //$('td:eq(1)', nRow).append("<span><a href=\"#\" class=\"transferTicket\" title=\"" + jQuery.i18n.prop("action.title.transfer") + "\"></a></span>");
                             options.showTransferBtn = true;
                         } else {
                             options.showTransferBtn = false;
                         }
 						if ( buttonRemoveFromQueueEnabled == true ) {
-                            //$('td:eq(1)', nRow).append("<span><a href=\"#\" class=\"removeTicket\" title=\"" + jQuery.i18n.prop("action.title.remove") + "\"></a></span>");
                             options.showDeleteBtn = true;
 						} else {
                             options.showDeleteBtn = false;
                         }
 						if ( buttonCallFromQueueEnabled == true ) {						
-                            //$('td:eq(1)', nRow).append("<span><a href=\"#\" class=\"callTicket\" title=\"" +  jQuery.i18n.prop("action.title.call.ticket")  + "\"></a></span>");
                             options.showCallBtn = true;
 						} else {
                             options.showCallBtn = false;
@@ -283,45 +276,45 @@ var queues = new function() {
             }
 
             //kill old event handlers
-			if ( buttonTransferFromQueueEnabled  == true ) {
-				$('tbody td span a.transferTicket', $('#tickets')).die('click');
-			}
-			if ( buttonRemoveFromQueueEnabled  == true ) {
-				$('tbody td span a.removeTicket', $('#tickets')).die('click');
-			}
-			if ( buttonCallFromQueueEnabled  == true ) {
-				$('tbody td span a.callTicket', $('#tickets')).die('click');
-			}
+			// if ( buttonTransferFromQueueEnabled  == true ) {
+			// 	$('tbody td span a.transferTicket', $('#tickets')).die('click');
+			// }
+			// if ( buttonRemoveFromQueueEnabled  == true ) {
+			// 	$('tbody td span a.removeTicket', $('#tickets')).die('click');
+			// }
+			// if ( buttonCallFromQueueEnabled  == true ) {
+			// 	$('tbody td span a.callTicket', $('#tickets')).die('click');
+			// }
 	
-			if ( buttonTransferFromQueueEnabled  == true ) {	
-				$('tbody td span a.transferTicket', $('#tickets')).live('click', function() {
-					var nTr = $(this).closest("tr").get(0);
-					var aData = ticketsTable.fnGetData(nTr);
-					//transfer.transferTicketToQueueClicked(aData);
-					//util.hideModal('ticketsDialogue');
-					return false;
-				});
-			}			
+			// if ( buttonTransferFromQueueEnabled  == true ) {	
+			// 	$('tbody td span a.transferTicket', $('#tickets')).live('click', function() {
+			// 		var nTr = $(this).closest("tr").get(0);
+			// 		var aData = ticketsTable.fnGetData(nTr);
+			// 		//transfer.transferTicketToQueueClicked(aData);
+			// 		//util.hideModal('ticketsDialogue');
+			// 		return false;
+			// 	});
+			// }			
 
-			if ( buttonRemoveFromQueueEnabled == true ) {
-				$('tbody td span a.removeTicket', $('#tickets')).live('click', function() {
-					var nTr = $(this).closest("tr").get(0);
-					var aData = ticketsTable.fnGetData(nTr);
-					removeTicketClicked(aData);
-					//util.hideModal('ticketsDialogue');
-					return false;
-				});
-			}
+			// if ( buttonRemoveFromQueueEnabled == true ) {
+			// 	$('tbody td span a.removeTicket', $('#tickets')).live('click', function() {
+			// 		var nTr = $(this).closest("tr").get(0);
+			// 		var aData = ticketsTable.fnGetData(nTr);
+			// 		removeTicketClicked(aData);
+			// 		//util.hideModal('ticketsDialogue');
+			// 		return false;
+			// 	});
+			// }
 
-			if ( buttonCallFromQueueEnabled  == true ) {			
-				$('tbody td span a.callTicket', $('#tickets')).live('click', function() {
-					var nTr = $(this).closest("tr").get(0);
-					var aData = ticketsTable.fnGetData(nTr);
-					callTicketClicked(aData);
-					//util.hideModal('ticketsDialogue');
-					return false;
-				});
-			}
+			// if ( buttonCallFromQueueEnabled  == true ) {			
+			// 	$('tbody td span a.callTicket', $('#tickets')).live('click', function() {
+			// 		var nTr = $(this).closest("tr").get(0);
+			// 		var aData = ticketsTable.fnGetData(nTr);
+			// 		callTicketClicked(aData);
+			// 		//util.hideModal('ticketsDialogue');
+			// 		return false;
+			// 	});
+			// }
             $("#ticketListHeader").empty();
             $("#ticketListHeader").html(queueTableContainingRow.fnGetData(rowClicked).name);
         }

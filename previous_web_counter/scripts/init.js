@@ -44,18 +44,7 @@ var init = new function () {
         } catch (e) {
             //nothing found; rtl prop not set
         }
-
-        //make stuff draggable
-        // $(".branchForm, .logoutForm, .customerForm, .confirmCounterHijackingForm, .confirmCustomer, .transferForm").draggable({
-        //     containment: "window",
-        //     handle: "h2",
-        //     cancel: "a"
-        // });
-        // chrome hack to allow for proper dragging, QP-892
-        // $('.branchForm, .logoutForm, .customerForm, .confirmCounterHijackingForm, .confirmCustomer, .transferForm').each(function(i){
-        // 	var x = ($(window).width() - $(this).width()) / 2;
-        // 	$(this).css({position:"absolute",top:100,left:x});
-        // });
+        
         initDataTablesConfiguration()
 
         initSessvars();

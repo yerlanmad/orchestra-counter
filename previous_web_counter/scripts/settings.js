@@ -36,7 +36,6 @@ function showModules() {
 	var $main = $('.qm-main');
 
 	if (moduleCustomerEnabled == true) {
-		//$('#customerModule').show();
 		$('.js-add-customer').attr("style", "");
 	} else {
 		$('.js-add-customer').hide();
@@ -44,15 +43,14 @@ function showModules() {
 
 	if (moduleDeliveredServicesEnabled == true) {
 		$('#deliveredServicesModule').show();
-		// $('#addDeliveredServiceLink').css("visibility","visible");
 	} else {
 		$('#deliveredServicesModule').hide();
 	}
 
 	if (moduleMultiServicesEnabled == true) {
 		$('#addMultiServiceLink').show();
-		$('#nextVisitServices').css("display", "flex");
-		$('#previousVisitServices').css("display", "flex");
+		$('#nextVisitServices').css("display", "");
+		$('#previousVisitServices').css("display", "");
 	} else {
 		$('#addMultiServiceLink').hide();
 		$('#nextVisitServices').css("display", "none");
@@ -61,10 +59,8 @@ function showModules() {
 	
 	
 	if (moduleCustomMarksEnabled == true) {
-		// $('#customMarksModule').css("visibility","visible");
 		$('#addCustomMarkLink').show();
 	} else {
-		// $('#customMarksModule').hide();
 		$('#addCustomMarkLink').hide();
 	}
 	
@@ -144,10 +140,8 @@ function showModules() {
 		$('#parkBtn').hide();
 	}
 	if (buttonNotesEnabled == true) {
-		//$('#notesBtn').show(); // TODO: Remove me
-		$('.js-notes').show();
+		$('.js-notes').css("display", "");
 	} else {
-		//$('#notesBtn').hide(); // TODO: Remove me
 		$('.js-notes').hide();
 	}
 	
@@ -205,9 +199,6 @@ function showModules() {
 		$("#customerOptionsText").html("Would you like to <strong>call the next</strong> customer");
 	}
   
-  	if (multiMarks == false) {
-		$('#marksQuantityDiv').hide();
-	}
 	if (moduleChatEnabled == true){
 		$('#chatModule').show();
 	} else {

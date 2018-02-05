@@ -6,10 +6,8 @@ var outcome = new function() {
     this.addOutcomePressed = function() {
         if(servicePoint.hasValidSettings() && (sessvars.state.userState == servicePoint.userState.SERVING &&
             (sessvars.state.visit.currentVisitService.outcomeExists == true))) {
-            // util.showModal("addOutcomes");
             if(typeof selectOutcomeTable != 'undefined') {
                 selectOutcomeTable.fnClearTable();
-                //var enquiryMarks = WorkstationService.getMarksOfType({'markType': 'enquiry'});
                 var params = servicePoint.createParams();
                 params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
 				var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes");				
@@ -31,7 +29,6 @@ var outcome = new function() {
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
                     /* Set onclick action */
                     nRow.onclick = outcomeClicked;
-                    //            nRow.style.cursor = "pointer";
                     return nRow;
                 };
                 selectOutcomeTable = util.buildTable("selectOutcomeTable", url, rowCallback, columns, true, headerCallback, true);
@@ -62,7 +59,6 @@ var outcome = new function() {
             outcomeForServiceParams.outcomeCode = selectOutcomeTable.fnGetData(this).code;
             sessvars.state = servicePoint.getState(spService.putCallback("branches/" + sessvars.branchId + "/visits/" + sessvars.state.visit.id + "/services/" + sessvars.state.visit.currentVisitService.id + "/outcome/" + selectOutcomeTable.fnGetData(this).code));
             sessvars.statusUpdated = new Date();
-            outcome.hideAddOutcomes();
             if(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN && sessvars.state.userState == servicePoint.userState.SERVING) {
                 sessvars.visit = sessvars.state.visit;
             }
@@ -159,18 +155,8 @@ var outcome = new function() {
                     [sessvars.state.visit.currentVisitService.visitOutcome] : null)
             });
         }
-        $(document).ready(function() {
-            var sorting = [[2, 'desc']];
-            outcomeTable.fnSort(sorting);
-        });
-    };
-
-    this.cancelAddOutcomes = function() {
-        util.hideModal("addOutcomes");
-    };
-
-    this.hideAddOutcomes = function() {
-        util.hideModal("addOutcomes");
+        var sorting = [[2, 'desc']];
+        outcomeTable.fnSort(sorting);
     };
 
     this.clearTable = function() {

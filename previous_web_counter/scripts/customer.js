@@ -34,9 +34,8 @@ var customer = new function() {
     this.navigateToCustomerOverview = function (e) {
         e.preventDefault();
         cardNavigationController.push(window.$Qmatic.components.card.customerListCard);
-        //this.populateAdditionalCustomersList();
     }
-
+    // Real
     this.populateAdditionalCustomersList = function () {
         var customerIds = sessvars.state.visit.customerIds.slice(0);
         customerIds.shift();
@@ -48,7 +47,7 @@ var customer = new function() {
         });
         $('.js-customer-list').append(listItems);
     };
-
+    
     var createCustomerListItem = function (id, firstName, lastName, email, phoneNumber, index) {
         var entry = document.createElement('LI');
         entry.classList.add('qm-customer-list__item');

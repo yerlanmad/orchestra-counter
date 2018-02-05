@@ -41,7 +41,6 @@ var customMarks = new function () {
 
 		if (servicePoint.hasValidSettings()
 			&& sessvars.state.userState == servicePoint.userState.SERVING) {
-			//util.showModal("addCustomMarks");
 			cardNavigationController.push($Qmatic.components.card.marksCard)
 			if (typeof selectCustomMarkTable != 'undefined') {
 
@@ -95,8 +94,6 @@ var customMarks = new function () {
 					+ customMarksParams.servicePointId + "/visits/"
 					+ customMarksParams.visitId + "/marks/"
 					+ customMarksParams.markId));
-				// util.hideModal("addCustomMarks");
-				// cardNavigationController.pop();
 				customMarks.getUserStateWorkaround();
 			}
 		}
@@ -115,8 +112,6 @@ var customMarks = new function () {
 				+ customMarksParams.servicePointId + "/visits/"
 				+ customMarksParams.visitId + "/marks/"
 				+ customMarksParams.markId));
-			// util.hideModal("addCustomMarks");
-			// cardNavigationController.pop();
 			customMarks.getUserStateWorkaround();
 		}
 
@@ -141,8 +136,6 @@ var customMarks = new function () {
 
 	this.getUserStateWorkaround = function () {
 		sessvars.state = servicePoint.getState(spService.get("user/status"));
-		//delServUpdateNeeded = false;
-		//outcomeUpdateNeeded = false;
 		spPoolUpdateNeeded = false;
 		userPoolUpdateNeeded = false;
 		queuesUpdateNeeded = false;
@@ -224,23 +217,9 @@ var customMarks = new function () {
 						.prop('info.custom.mark.name');
 					nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n
 						.prop('info.custom.mark.time');
-					// nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n
-					// .prop('info.custom.mark.remove');
 				}
 			};
 			var rowCallback = function (nRow, aData, iDisplayIndex) {
-				// var visitMarkId = $('td:eq(1)', nRow).text();
-				// $('td:eq(1)', nRow).html(
-				// 		"<span class=\"removeMark\" " + "title=\""
-				// 				+ jQuery.i18n.prop("action.remove.mark.click")
-				// 				+ "\"> </span>");
-
-				// $('td:eq(1) > span.removeMark', nRow).click(function() {
-				// 	customMarkRemove(nRow);
-				// });
-
-				// $(nRow).find("td").append("HI")
-
 				return nRow;
 			};
 
@@ -271,9 +250,6 @@ var customMarks = new function () {
 						&& sessvars.state.visit.visitMarks !== null ? sessvars.state.visit.visitMarks
 						: null)
 				});
-			$(window).bind('resize', function () {
-				//customMarksTable.fnAdjustColumnSizing();
-			});
 		}
 		var sorting = [[1, 'desc']];
 		customMarksTable.fnSort(sorting);
