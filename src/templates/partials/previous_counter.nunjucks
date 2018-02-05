@@ -35,15 +35,15 @@
                                     </div>
                                 </td>
                                 <td class="orch-userinfo" style="width: 20%;">
-                                    <span id="userName"></span><br />
+                                    {#<span id="userName"></span><br />#}
                                     <a href="#" id="settingsLink" onclick="servicePoint.showSettingsWindow();this.blur();"></a><br/>
 									<a id="logoutLink" href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);"></a>
                                 </td>
                                 <td class="orch-actions" style="width: 5%;">
                                     <div>
-                                        <a id="homeLink" href="/" class="orch-icons" onclick="return servicePoint.handleHome();">
+                                        {#<a id="homeLink" href="/" class="orch-icons" onclick="return servicePoint.handleHome();">
                                             <img id="homeImage" src="/images/icons/home.png" alt=""/>
-                                        </a>
+                                        </a>#}
                                         <a href="/help" class="orch-icons" target="_blank">
                                             <img src="/images/icons/help.png" alt=""/>
                                         </a>
@@ -72,7 +72,7 @@
 			</table> #}
 
 			<!-- Ongoing Visit module -->			
-			<div id="ongoingVisitModuleWrapper">
+			{#<div id="ongoingVisitModuleWrapper">
 				<div id="ongoingVisitModule" class="roundedCorner5">
 					<div id="ongoingVisitInfo">
                         <table>
@@ -106,10 +106,7 @@
                                     <td>
                                         <ul class="direction-flexible-text">
                                             <li>
-                                                <!--<select id="selectOutcome" class="roundedCorner3"
-                                                        onchange="javascript:outcome.selectOutcome($(this).val());">
-                                                    <option id="chooseOutcome" value="-1" disabled></option>
-                                                </select>-->
+                                               
                                             </li>
                                         </ul>
                                     </td>
@@ -121,7 +118,7 @@
                                 </tr>
 								 <tr  id="notesRow">
                                     <td class="descriptionCol, roundedCorner5" colspan="2">
-                                        {# <span id="notesMessage">&nbsp;</span> #}
+                                         <span id="notesMessage">&nbsp;</span> 
                                     </td>
                                 </tr>
                             </tbody>
@@ -142,7 +139,7 @@
                         </table>
 					</div>
 				</div>
-			</div>
+			</div>#}
 
 			<!-- Chat module -->
 			 <div id="chatModule" class="module">
@@ -789,7 +786,7 @@
                 <div class="modalOpacityDiv"></div>
                 <div class="modalContainer">
                     <div class="customerForm roundedCorner5">
-                        <h2 id="editCustomerHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('editCustomerWindow');"></a></h2>
+                        {#<h2 id="editCustomerHeader"><a href="#" class="closeButton" onclick="javascript:util.hideModal('editCustomerWindow');"></a></h2>#}
                         <form id="editCustomerForm">
                             <table id="editCustomerTable" cellspacing="0">
                                 <thead>

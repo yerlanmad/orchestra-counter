@@ -12,7 +12,7 @@
                     <a href="#" id="amountOfAdditionalCustomers" class="qm-card-header__amount-of-customers" onclick="customer.navigateToCustomerOverview(event);this.blur();"></a>
                     <span id="ticketNumber" class="qm-card-header__ticket"></span>
                 </h1>
-                <a href="#" class="qm-card-header__add-customer js-add-customer" onclick="customer.addUserPressed(event);this.blur();">
+                <a href="#" id="addCustomerIcon" class="qm-card-header__add-customer js-add-customer" onclick="customer.addUserPressed(event);this.blur();">
                     <i class="qm-card-header__add-customer-icon icon-customer-add" aria-hidden="true"></i>
                     <span class="sr-only"></span>
                 </a>

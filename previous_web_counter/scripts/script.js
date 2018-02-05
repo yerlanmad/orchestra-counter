@@ -194,13 +194,25 @@ var servicePoint = new function () {
 
 	// F5 pressed
 	var updateUI = function () {
-		// TODO: Investigate if this is needed, if not remove
+		// TODO: Remove
 		// re-enable app shortcuts
 		// $('.orch-userinfo a').each(function () {
 		// 	$(this).attr({
 		// 		"disabled": false
 		// 	});
 		// });
+
+		// Enable Links
+		$("#editCustomerHeader").css('pointer-events', 'auto');
+		$("#userName").css('pointer-events', 'auto');
+		$("#homeLink").css('pointer-events', 'auto');
+
+		$("#addMultiServiceLink").css('pointer-events', 'auto');
+		$("#addCustomMarkLink").css('pointer-events', 'auto');
+		$("#deliveredServicesModule").css('pointer-events', 'auto');
+		$("#selectOutcome").css('pointer-events', 'auto');
+		$("#addCustomerIcon").css('pointer-events', 'auto');
+
 		if (servicePoint.hasValidSettings(true)) {
 
 			sessvars.state = servicePoint
@@ -513,7 +525,7 @@ var servicePoint = new function () {
 		var workstationSel = $("#workstationListModal");
 		var profileSel = $("#prioListModal");
 		if (sessvars.singleSettingsOnly) {
-			modalNavigationController.popAllModals()
+			modalNavigationController.popAllModals();
 		}
 
 		if (hasValidDropboxSettings(branchSel, workstationSel, profileSel)) {
@@ -1477,7 +1489,7 @@ var servicePoint = new function () {
 				$("#deliveredServicesModule").hide()
 			}
 
-			$("#addMultiServiceLink").prop('disabled', false);			
+			$("#addMultiServiceLink").prop('disabled', false);
 			$("#addCustomMarkLink").prop('disabled', false);
 		} else {
 			if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
@@ -2404,7 +2416,7 @@ var servicePoint = new function () {
 	this.cometDWSPollStatusHandler = function (status, message) {
 		if (status) {
 			try {
-				setWorkstationOnline();
+				this.setWorkstationOnline();
 			} catch (e) {
 			}
 			// Reconnection was made
@@ -2427,6 +2439,11 @@ var servicePoint = new function () {
 			queues.emptyQueues();
 			servicePointPool.emptyPool();
 			userPool.emptyPool();
+
+			// Remove all tooltips and modals
+			tooltipController.disposeAll();
+			modalNavigationController.popAllModals()
+
 			// TODO: disable the buttons listed in the code below
 			// disable call buttons
 			// $('#callButtons a').each(function () {
@@ -2438,6 +2455,21 @@ var servicePoint = new function () {
 			// 		"disabled": true
 			// 	});
 			// });
+
+			// Disable btns
+			$("#callNextBtn").prop('disabled', true);
+			$("#walkDirectBtn").prop('disabled', true);
+			$("#closeBtn").prop('disabled', true);
+			$("#endVisitBtn").prop('disabled', true);
+
+			// Disalble links on cards
+			$("#addMultiServiceLink").css('pointer-events', 'none');
+			$("#addCustomMarkLink").css('pointer-events', 'none');
+			$("#deliveredServicesModule").css('pointer-events', 'none');
+			$("#selectOutcome").css('pointer-events', 'none');
+			$("#addCustomerIcon").css('pointer-events', 'none');
+
+			// TODO: Remove
 			// // disable visit buttons
 			// $('#ongoingVisitButtons a').each(function () {
 			// 	$(this).addClass("customLinkDisabled").click(function (e) {
@@ -2448,6 +2480,16 @@ var servicePoint = new function () {
 			// 		"disabled": true
 			// 	});
 			// });
+
+			// Disable btns in card
+			$("#transferBtn").prop('disabled', true);
+			$("#parkBtn").prop('disabled', true);
+			$("#noShowBtn").prop('disabled', true);
+			$("#recallBtn").prop('disabled', true);
+			$("#reinsertBtn").prop('disabled', true);
+			$("#notesBtn").prop('disabled', true);
+
+			// TODO: Remove
 			// disable home/settings/logout links
 			// $('.orch-userinfo a').each(function () {
 			// 	$(this).prop("disabled", true);
@@ -2458,6 +2500,12 @@ var servicePoint = new function () {
 			// 	$(this).toggleClass("imgDisabled", true);
 			// });
 
+			// Disable Links. This logic is reset in updateUi
+			$("#editCustomerHeader").css('pointer-events', 'none');
+			$("#userName").css('pointer-events', 'none');
+			$("#homeLink").css('pointer-events', 'none');
+
+			// TODO: Remove
 			// document.getElementById("createCustomerLink").className = "newCust customLinkDisabled";
 			// document.getElementById("createCustomerLink").disabled = true;
 			// document.getElementById("editCustomerLink").className = "editCust customLinkDisabled";
@@ -2471,7 +2519,7 @@ var servicePoint = new function () {
 		}
 	};
 
-	var setWorkstationOnline = function () {
+	this.setWorkstationOnline = function () {
 		if (workstationOffline) {
 			util.hideError();
 			workstationOffline = false;
