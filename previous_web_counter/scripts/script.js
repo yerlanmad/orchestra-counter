@@ -1470,11 +1470,17 @@ var servicePoint = new function () {
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
 				$("#noShowBtn").prop('disabled', false);
-				$("#waitingTimeContainer").show();
 			} else {
 				$("#noShowBtn").prop('disabled', true);
+			}
+
+			// If waiting time is greater than zero only show
+			if(sessvars.state.visit && parseInt(sessvars.state.visit.waitingTime) > 0) {
+				$("#waitingTimeContainer").css("display", "");
+			} else {
 				$("#waitingTimeContainer").hide();
 			}
+
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
 				$("#recallBtn").prop('disabled', false);
@@ -1601,11 +1607,17 @@ var servicePoint = new function () {
 			// is no-show allowed
 			if (sessvars.state.visit.noshowAllowed) {
 				$("#noShowBtn").prop('disabled', false);
-				$("#waitingTimeContainer").show();
 			} else {
 				$("#noShowBtn").prop('disabled', true);
+			}
+
+			// If waiting time is greater than zero only show
+			if(sessvars.state.visit && parseInt(sessvars.state.visit.waitingTime) > 0) {
+				$("#waitingTimeContainer").css("display", "");
+			} else {
 				$("#waitingTimeContainer").hide();
 			}
+
 			// is recall allowed
 			if (sessvars.state.visit.recallAllowed) {
 				$("#recallBtn").prop('disabled', false);
