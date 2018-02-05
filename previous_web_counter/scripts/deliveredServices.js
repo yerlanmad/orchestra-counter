@@ -39,15 +39,15 @@ var deliveredServices = new function () {
         }
     };
 
-    this.selectDeliveredService = function (dsId) {
+    this.selectDeliveredService = function (dsId, dsName) {
         if (dsId != -1) {
             resetFilterSeleciton();
-            deliveredServiceClicked(dsId);
+            deliveredServiceClicked(dsId, dsName);
             this.updateDeliveredServices();
         }
     }
 
-    var deliveredServiceClicked = function (dsId) {
+    var deliveredServiceClicked = function (dsId, dsName) {
         if (servicePoint.hasValidSettings()) {
             var deliveredServicesParams = servicePoint.createParams();
             deliveredServicesParams.visitId = sessvars.state.visit.id;
@@ -59,6 +59,11 @@ var deliveredServices = new function () {
             if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                 sessvars.state.userState == servicePoint.userState.SERVING) {
             }
+
+            util.showMessage(jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service') + " " + dsName + " " + "was added!");
+
+
             servicePoint.updateWorkstationStatus(false, true);
         }
     };

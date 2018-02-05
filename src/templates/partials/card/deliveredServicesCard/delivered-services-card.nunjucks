@@ -10,7 +10,7 @@
             <div class="qm-card-header__sub-heading"> 
                 <div class="qm-drop-down">
                     <div class="qm-drop-down__component">
-                        <select id="deliveredServicesFilter" onchange="javascript:deliveredServices.selectDeliveredService($(this).val());">
+                        <select id="deliveredServicesFilter" onchange="javascript:deliveredServices.selectDeliveredService($(this).val(), $(this).text());">
                             <option id="selectADeliveredService" value="-1"></option>
                         </select>
                     </div>
