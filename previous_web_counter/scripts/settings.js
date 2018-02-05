@@ -42,7 +42,7 @@ function showModules() {
 	}
 
 	if (moduleDeliveredServicesEnabled == true) {
-		$('#deliveredServicesModule').show();
+		$('#deliveredServicesModule').css("display", "");
 	} else {
 		$('#deliveredServicesModule').hide();
 	}

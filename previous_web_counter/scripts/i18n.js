@@ -227,8 +227,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("parkLabel", 'button.park');		
 		
 		i18nSafeAppend("addEditServicesHeader", 'edit.multi.services');
-        $("#closeServicesBtn").val(jQuery.i18n.prop('button.close.services'));
-        $("#closeResortServicesBtn").val(jQuery.i18n.prop('button.close.resort.services'));
+        //$("#closeResortServicesBtn").val(jQuery.i18n.prop('button.close.resort.services'));
 
 		
 		// custom marks

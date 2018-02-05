@@ -194,12 +194,13 @@ var servicePoint = new function () {
 
 	// F5 pressed
 	var updateUI = function () {
+		// TODO: Investigate if this is needed, if not remove
 		// re-enable app shortcuts
-		$('.orch-userinfo a').each(function () {
-			$(this).attr({
-				"disabled": false
-			});
-		});
+		// $('.orch-userinfo a').each(function () {
+		// 	$(this).attr({
+		// 		"disabled": false
+		// 	});
+		// });
 		if (servicePoint.hasValidSettings(true)) {
 
 			sessvars.state = servicePoint
@@ -309,16 +310,12 @@ var servicePoint = new function () {
 				// Not logged in and multiple selection available for one or
 				// many of branch, workstation and work profile
 				sessvars.singleSettingsOnly = false;
-				// util.showModal("settingsWindow");
 				modalNavigationController.push($Qmatic.components.modal.profileSettings)
 				settingsShown = true;
-
-
 			} else {
 				// only one of branch, workstation and work profile available
 				sessvars.singleSettingsOnly = true;
 				servicePoint.confirmSettings();
-				// used to disable the settings link
 			}
 		} else {
 			if (servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
@@ -462,10 +459,8 @@ var servicePoint = new function () {
 		var branchSelect = $("#branchListModal");
 		var branchId = branchSelect.val();
 		var prioSelect = $("#prioListModal");
-		// util.clearSelect(prioSelect);
 		prioSelect.trigger("chosen:updated");
 		if (unitId != "-1") {
-			// showProfiles(branchId, unitId, prioSelect);
 			$Qmatic.components.dropdown.counterSelection.clearError()
 		}
 	};
@@ -643,7 +638,6 @@ var servicePoint = new function () {
 			sessvars.cfuSelectionSet = true;
 			servicePoint.updateWorkstationStatus(false);
 			sessvars.currentCustomer = null;
-			//customer.updateCustomerModule();
 		}
 	};
 
@@ -783,95 +777,96 @@ var servicePoint = new function () {
 		}
 	};
 
-	this.closeResortServices = function () {
-		servicePoint.getQueuesAndService();
-	};
+	// TODO: Probably remove this.
+	// this.closeResortServices = function () {
+	// 	servicePoint.getQueuesAndService();
+	// };
 
-	this.getQueuesAndService = function () {
-		// currently not used, todo.
-		sortParams = servicePoint.createParams();
-		sortParams.branchId = sessvars.branchId;
-		var queues = spService.get("branches/" + sortParams.branchId
-			+ "/queues");
-		sortParams.name = "queueAndServices";
-		var returnInfo = spService.get("branches/" + sortParams.branchId
-			+ "/variables/" + sortParams.name);
-		var t = returnInfo.split('|');
-		var len = sessvars.state.visit.unservedVisitServices.length;
-		var listId = '';
-		var listTime = '';
+	// this.getQueuesAndService = function () {
+	// 	// currently not used, todo.
+	// 	sortParams = servicePoint.createParams();
+	// 	sortParams.branchId = sessvars.branchId;
+	// 	var queues = spService.get("branches/" + sortParams.branchId
+	// 		+ "/queues");
+	// 	sortParams.name = "queueAndServices";
+	// 	var returnInfo = spService.get("branches/" + sortParams.branchId
+	// 		+ "/variables/" + sortParams.name);
+	// 	var t = returnInfo.split('|');
+	// 	var len = sessvars.state.visit.unservedVisitServices.length;
+	// 	var listId = '';
+	// 	var listTime = '';
 
-		for (i = 0; i < len; i++) {
-			var s = sessvars.state.visit.unservedVisitServices[i].serviceId;
-			var q;
-			var r;
+	// 	for (i = 0; i < len; i++) {
+	// 		var s = sessvars.state.visit.unservedVisitServices[i].serviceId;
+	// 		var q;
+	// 		var r;
 
-			// find the queue belonging to this service according to the value
-			// in branch variable queueAndServices
-			for (j = 0; j < t.length; j++) {
-				var x = t[j].split(" ");
-				for (k = 1; k < x.length; k++) {
-					if (x[k] == s) {
-						q = x[0]; // queue belonging to this service
-					}
-				}
-			}
+	// 		// find the queue belonging to this service according to the value
+	// 		// in branch variable queueAndServices
+	// 		for (j = 0; j < t.length; j++) {
+	// 			var x = t[j].split(" ");
+	// 			for (k = 1; k < x.length; k++) {
+	// 				if (x[k] == s) {
+	// 					q = x[0]; // queue belonging to this service
+	// 				}
+	// 			}
+	// 		}
 
-			// find the waiting time for that queue
-			for (l = 0; l < queues.length; l++) {
+	// 		// find the waiting time for that queue
+	// 		for (l = 0; l < queues.length; l++) {
 
-				if (queues[l].id == q) {
-					r = queues[l].waitingTime;
-					// t=queues[l].customersWaiting //could do the same based on
-					// waiting customers
-				}
-			}
-			if (listId == '') {
-				listId = sessvars.state.visit.unservedVisitServices[i].id;
-				listTime = r;
-			} else {
-				listId += ","
-					+ sessvars.state.visit.unservedVisitServices[i].id;
-				listTime += "," + r;
-			}
-		}
+	// 			if (queues[l].id == q) {
+	// 				r = queues[l].waitingTime;
+	// 				// t=queues[l].customersWaiting //could do the same based on
+	// 				// waiting customers
+	// 			}
+	// 		}
+	// 		if (listId == '') {
+	// 			listId = sessvars.state.visit.unservedVisitServices[i].id;
+	// 			listTime = r;
+	// 		} else {
+	// 			listId += ","
+	// 				+ sessvars.state.visit.unservedVisitServices[i].id;
+	// 			listTime += "," + r;
+	// 		}
+	// 	}
 
-		// lets resort the list according to above found values
-		// example 284,286,287,288,289 - 12132,0,12119,12135,0
+	// 	// lets resort the list according to above found values
+	// 	// example 284,286,287,288,289 - 12132,0,12119,12135,0
 
-		listId = listId.split(",");
-		listTime = listTime.split(",");
-		var sortedId = "";
-		var sortesValue = "";
+	// 	listId = listId.split(",");
+	// 	listTime = listTime.split(",");
+	// 	var sortedId = "";
+	// 	var sortesValue = "";
 
-		for (i = 0; i < listId.length; i++) {
-			if (sortedId == "") {
-				sortedId = listId[0];
-				sortestValue = listTime[0];
-			} else {
-				if (sortestValue > parseInt(listTime[i])) {
-					sortedId = listId[i] + "," + sortedId;
-					sortestValue = listTime[i];
-				} else {
-					sortedId = sortedId + "," + listId[i];
-				}
-			}
-		}
-	};
+	// 	for (i = 0; i < listId.length; i++) {
+	// 		if (sortedId == "") {
+	// 			sortedId = listId[0];
+	// 			sortestValue = listTime[0];
+	// 		} else {
+	// 			if (sortestValue > parseInt(listTime[i])) {
+	// 				sortedId = listId[i] + "," + sortedId;
+	// 				sortestValue = listTime[i];
+	// 			} else {
+	// 				sortedId = sortedId + "," + listId[i];
+	// 			}
+	// 		}
+	// 	}
+	// };
 
-	this.sortServices = function (value) {
-		sessvars.state = value;
-		sessvars.statusUpdated = new Date();
-		servicePoint.updateWorkstationStatus();
-		servicePoint.addMultiServicePressed();
-		// util.hideModal("addEditServicesDialogue");
-		cardNavigationController.popModal($Qmatic.components.card.addServicesCard)
-	};
+	// TODO: Remove this
+	// this.sortServices = function (value) {
+	// 	sessvars.state = value;
+	// 	sessvars.statusUpdated = new Date();
+	// 	servicePoint.updateWorkstationStatus();
+	// 	servicePoint.addMultiServicePressed();
+	// 	cardNavigationController.popModal($Qmatic.components.card.addServicesCard)
+	// };
 
-	this.closeServices = function () {
-		// util.hideModal("addEditServicesDialogue");
-		cardNavigationController.popModal($Qmatic.components.card.addServicesCard)
-	};
+	// TODO: Remove this
+	// this.closeServices = function () {
+	// 	cardNavigationController.popModal($Qmatic.components.card.addServicesCard)
+	// };
 
 	// commands like next needs to be checked for multi service to show popup.
 
@@ -901,17 +896,9 @@ var servicePoint = new function () {
 		}
 	};
 
-	// pop-up with info where customer to go next.
-	this.resortServices = function () {
-		// util.hideModal("nextServicesDialogue");
-		modalNavigationController.popModal($Qmatic.components.modal.nextServices);
-	};
-
 	this.confirmServices = function () {
 		this.executeCommand();
-		// util.hideModal("nextServicesDialogue");
 		modalNavigationController.popModal($Qmatic.components.modal.nextServices);
-
 	};
 
 	this.callNext = function () {
@@ -966,14 +953,12 @@ var servicePoint = new function () {
 					queueViewController.navigateToOverview();
 					servicePoint.updateWorkstationStatus();
 					sessvars.currentCustomer = null;
-					//customer.updateCustomerModule();
 				}
 			}
 		}
 	};
 
 	this.customerConfirmed = function () {
-		// util.hideModal("confirmCustomer");
 		modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer)
 		if (servicePoint.hasValidSettings()) {
 			var params = servicePoint.createParams();
@@ -1037,16 +1022,16 @@ var servicePoint = new function () {
 
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
-			//customer.updateCustomerModule();
 		}
 	};
 
-	this.cancelReinsertCustomer = function () {
-		util.hideModal("reinsertCustomerWindow");
-		if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
-			util.showModal("customerOptionsDialogue");
-		}
-	};
+	// TODO: Remove this
+	// this.cancelReinsertCustomer = function () {
+	// 	util.hideModal("reinsertCustomerWindow");
+	// 	if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
+	// 		util.showModal("customerOptionsDialogue");
+	// 	}
+	// };
 
 	this.cancelWaitingForVisit = function () {
 		if (servicePoint.hasValidSettings()
@@ -1059,7 +1044,6 @@ var servicePoint = new function () {
 			sessvars.statusUpdated = new Date();
 			servicePoint.updateWorkstationStatus();
 		}
-		//util.hideModal("waitingForCustomerDialogue");
 		modalNavigationController.popModal($Qmatic.components.modal.storeNext)
 	};
 
@@ -1072,7 +1056,6 @@ var servicePoint = new function () {
 																		 * !hasMark())
 																		 */) {
 
-			// util.showModal("walks");
 			cardNavigationController.push($Qmatic.components.card.walkInCard);
 			queueViewController.navigateToOverview();
 			var t = new Date();
@@ -1110,14 +1093,6 @@ var servicePoint = new function () {
 						"mDataProp": "externalDescription",
 						"sType": "qm-sort"
 					}];
-				var headerCallback = function (nHead, aasData, iStart, iEnd,
-					aiDisplay) {
-					// nHead.style.borderBottom = "1px solid #c0c0c0";
-					// nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n
-					// 	.prop('info.service.name');
-					// nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n
-					// 	.prop('info.service.description');
-				};
 				var rowCallback = function (nRow, aData, iDisplayIndex) {
 					/* Set onclick action */
 					nRow.onclick = walkServiceClicked;
@@ -1130,7 +1105,6 @@ var servicePoint = new function () {
 					"columns": columns,
 					"filter": true,
 					"customFilter": true,
-					"headerCallback": headerCallback,
 					"scrollYHeight": "auto",
 					"infoFiltered": "info.filtered.fromEntries",
 					"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search")
@@ -1158,7 +1132,6 @@ var servicePoint = new function () {
 
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
-			//customer.updateCustomerModule();
 		}
 	};
 
@@ -1182,7 +1155,6 @@ var servicePoint = new function () {
 			queueViewController.navigateToOverview();
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
-			//customer.updateCustomerModule();
 		}
 	};
 
@@ -1223,7 +1195,6 @@ var servicePoint = new function () {
 				util.showError(jQuery.i18n.prop("error.not.loggedin"));
 				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
 				clearOngoingVisit();
-				//$("#closeBtn").toggleClass("customButtonSmallDisabled");
 				$("#closeBtn").prop('disabled', true);
 				return;
 			}
@@ -1263,7 +1234,6 @@ var servicePoint = new function () {
 	};
 
 	this.hideWalks = function () {
-		// util.hideModal("walks");
 		cardNavigationController.pop()
 	};
 
@@ -1377,7 +1347,6 @@ var servicePoint = new function () {
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 			modalNavigationController.push($Qmatic.components.modal.storeNext)
-			//util.showModal("waitingForCustomerDialogue");
 			$("#ticketNumber").html(
 				jQuery.i18n.prop('info.waiting.for.customer'));
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
@@ -1417,8 +1386,6 @@ var servicePoint = new function () {
 			}
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
-					// $("#notesEdit").val(
-					// 		sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? sessvars.state.visit.parameterMap.custom1 : jQuery.i18n.prop('button.add.note');
 						document.getElementById("notesEdit").value = sessvars.state.visit.parameterMap.custom1;
@@ -1495,51 +1462,25 @@ var servicePoint = new function () {
 				$("#reinsertBtn").prop('disabled', true);
 			}
 
-			$("#homeLink").toggleClass("linkDisabled", true);
-			$("#homeImage").toggleClass("imgDisabled", true);
-			$("#settingsLink").toggleClass("linkDisabled", true);
-			$("#logoutLink").toggleClass("linkDisabled", true);
+			// TODO: Remove this. Investigate if we need to disable something,
+			// Old styles is just to make it look disabled
+			// User interaction probably handled elsewhere
 
-			// Add outcome link doesn't exist anymore
-			// if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", true);
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-			// 		false);
-			// 	$("#addOutcomeLink").prop('disabled', false);
-			// } else {
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", false);
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-			// 		true);
-			// 	$("#addOutcomeLink").prop('disabled', true);
-			// }
+			// $("#homeLink").toggleClass("linkDisabled", true);
+			// $("#homeImage").toggleClass("imgDisabled", true);
+			// $("#settingsLink").toggleClass("linkDisabled", true);
+			// $("#logoutLink").toggleClass("linkDisabled", true);
+
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
-				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-				// 	true);
-				// $("#addDeliveredServiceLink").toggleClass(
-				// 	"customButtonSmallDisabled", false);
-				$("#addDeliveredServiceLink").prop('disabled', false);
-				$("#deliveredServicesModule").show()
+				$("#deliveredServicesModule").css("display", "");
 			} else {
-				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-				// 	false);
-				// $("#addDeliveredServiceLink").toggleClass(
-				// 	"customButtonSmallDisabled", true);
-				$("#addDeliveredServiceLink").prop('disabled', true);
 				$("#deliveredServicesModule").hide()
 			}
 
-			// $("#addMultiServiceLink").toggleClass("customButtonSmall", true);
-			// $("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
-			// 	false);
-			$("#addMultiServiceLink").prop('disabled', false);
-
-			// $("#addCustomMarkLink").toggleClass("customButtonSmall", true);
-			// $("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
-			// 	false);
+			$("#addMultiServiceLink").prop('disabled', false);			
 			$("#addCustomMarkLink").prop('disabled', false);
 		} else {
 			if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
-				//util.showModal("confirmCustomer");
 				modalNavigationController.push($Qmatic.components.modal.confirmCustomer)
 			} else if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				// display spinner with text stating that the visit is about to
@@ -1566,8 +1507,6 @@ var servicePoint = new function () {
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
-					// $("#notesEdit").val(
-					// 		sessvars.state.visit.parameterMap.custom1);
 					if (buttonNotesEnabled == true) {
 						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? sessvars.state.visit.parameterMap.custom1 : jQuery.i18n.prop('button.add.note');
 						document.getElementById("notesEdit").value = sessvars.state.visit.parameterMap.custom1;
@@ -1579,28 +1518,16 @@ var servicePoint = new function () {
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime
 			// -
 			// callTime
-			// $("#callNextBtn").toggleClass("customButton", true);
-			// $("#callNextBtn").toggleClass("customButtonDisabled", false);
 			$("#callNextBtn").prop('disabled', false);
 			tooltipController.dispose('callnext');
-			// $("#walkDirectBtn").toggleClass("customButton", true);
-			// $("#walkDirectBtn").toggleClass("customButtonDisabled", false);
 			$("#walkDirectBtn").prop('disabled', false);
 			tooltipController.dispose('walkin');
-			// $("#endVisitBtn").toggleClass("customButton", true);
-			// $("#endVisitBtn").toggleClass("customButtonDisabled", false);
 			$("#endVisitBtn").prop('disabled', false);
 			tooltipController.dispose('endvisit');
-			// $("#closeBtn").toggleClass("customButton", true);
-			// $("#closeBtn").toggleClass("customButtonDisabled", false);
 			$("#closeBtn").prop('disabled', false);
 			tooltipController.dispose('closecounter');
-			// $("#transferBtn").toggleClass("customButtonSmall", true);
-			// $("#transferBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#transferBtn").prop('disabled', false);
 			tooltipController.dispose('transfer');
-			// $("#parkBtn").toggleClass("customButtonSmall", true);
-			// $("#parkBtn").toggleClass("customButtonSmallDisabled", false);
 			$("#parkBtn").prop('disabled', false);
 
 			$("#notesMessage").prop('disabled', false);
@@ -1632,46 +1559,14 @@ var servicePoint = new function () {
 			} else {
 				$("#reinsertBtn").prop('disabled', true);
 			}
-
-			// if ((sessvars.state.visit.currentVisitService.outcomeExists == true)) {
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", true);
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-			// 		false);
-			// 	$("#addOutcomeLink").prop('disabled', false);
-			// } else {
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmall", false);
-			// 	$("#addOutcomeLink").toggleClass("customButtonSmallDisabled",
-			// 		true);
-			// 	$("#addOutcomeLink").prop('disabled', true);
-			// }
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
-				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-				// 	true);
-				// $("#addDeliveredServiceLink").toggleClass(
-				// 	"customButtonSmallDisabled", false);
-				$("#addDeliveredServiceLink").prop('disabled', false);
-				$("#deliveredServicesModule").show()
+				$("#deliveredServicesModule").css("display", "");
 			} else {
-				// $("#addDeliveredServiceLink").toggleClass("customButtonSmall",
-				// 	false);
-				// $("#addDeliveredServiceLink").toggleClass(
-				// 	"customButtonSmallDisabled", true);
-				$("#addDeliveredServiceLink").prop('disabled', true);
 				$("#deliveredServicesModule").hide()
 			}
-
-			// $("#addMultiServiceLink").toggleClass("customButtonSmall", true);
-			// $("#addMultiServiceLink").toggleClass("customButtonSmallDisabled",
-			// 	false);
 			$("#addMultiServiceLink").prop('disabled', false);
-
-			// $("#addCustomMarkLink").toggleClass("customButtonSmall", true);
-			// $("#addCustomMarkLink").toggleClass("customButtonSmallDisabled",
-			// 	false);
 			$("#addCustomMarkLink").prop('disabled', false);
 		}
-		updateTop();
-		updateService();
 
 		if (trtUpdateNeeded) {
 			updateTransactionTime();
@@ -1711,7 +1606,6 @@ var servicePoint = new function () {
 
 		}
 		customer.updateCustomer();
-		//customer.updateCustomerModule();
 
 		// Set Highlight class to customer name if present else set to ticket number
 		if (sessvars.state.visit && sessvars.state.visit.parameterMap.customerName && sessvars.state.visit.parameterMap.customerName != "") {
@@ -1800,21 +1694,22 @@ var servicePoint = new function () {
 		}
 	}
 
-	var updateTop = function () {
-		var isDisabled = sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-			&& sessvars.state.userState == servicePoint.userState.SERVING
-			&& servicePoint.isOutcomeOrDeliveredServiceNeeded();
+	// TODO: Remove this if state of the top bar shouldn't change
+	// var updateTop = function () {
+	// 	var isDisabled = sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+	// 		&& sessvars.state.userState == servicePoint.userState.SERVING
+	// 		&& servicePoint.isOutcomeOrDeliveredServiceNeeded();
 
-		$("#homeLink").toggleClass("linkDisabled", isDisabled);
-		$("#homeImage").toggleClass("imgDisabled", isDisabled);
-		$("#settingsLink")
-			.toggleClass(
-			"linkDisabled",
-			isDisabled
-			|| (typeof sessvars.singleSettingsOnly !== 'undefined'
-				&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true));
-		$("#logoutLink").toggleClass("linkDisabled", isDisabled);
-	};
+	// 	$("#homeLink").toggleClass("linkDisabled", isDisabled);
+	// 	$("#homeImage").toggleClass("imgDisabled", isDisabled);
+	// 	$("#settingsLink")
+	// 		.toggleClass(
+	// 		"linkDisabled",
+	// 		isDisabled
+	// 		|| (typeof sessvars.singleSettingsOnly !== 'undefined'
+	// 			&& sessvars.singleSettingsOnly != null && sessvars.singleSettingsOnly == true));
+	// 	$("#logoutLink").toggleClass("linkDisabled", isDisabled);
+	// };
 
 	this.setupAutoCloseListener = function () {
 		$(window).on("focusin click", function () {
@@ -1851,7 +1746,6 @@ var servicePoint = new function () {
 			timeSinceLastUpdate = timeSinceLastUpdate / 1000;
 		}
 		var timeUntilLogoff = (autoClose - timeSinceLastUpdate) * 1000;
-		// $Qmatic.utils.log.info("Station will outclose in " + (timeUntilLogoff/1000) + " seconds!");
 		logoffTimer = window.setTimeout(function () {
 			servicePoint.handleLogoutQES(true, true);
 			window.location.href = "/logout.jsp";
@@ -1863,7 +1757,6 @@ var servicePoint = new function () {
 	var clearOngoingVisit = function () {
 		$("#ticketNumber").empty();
 		$("#serviceId").empty();
-		$("#multiServices").find("tr:gt(0)").remove();
 		servicePoint.servicesLeft = false;
 		$("#waitingTimeCounter").empty();
 		if (trtUpdateNeeded) {
@@ -1876,36 +1769,19 @@ var servicePoint = new function () {
 		$amountOfAdditionalCustomers = $("#amountOfAdditionalCustomers");
 		$amountOfAdditionalCustomers.empty();
 		$amountOfAdditionalCustomers.hide();
-		$("#outcome").empty();
 		$("#verticalMessage").empty();
 		$("#notesEdit").val('');
 		notesController.navigateToPresentational();
 		document.getElementById("notesMessage").innerHTML = jQuery.i18n.prop('button.add.note');
-		util.hideModal("displayQueueSpinnerWindow");
-		$("#callNextBtn").toggleClass("customButton", true);
-		$("#callNextBtn").toggleClass("customButtonDisabled", false);
 		$("#callNextBtn").prop("disabled", false);
-
-		$("#walkDirectBtn").toggleClass("customButton", true);
-		$("#walkDirectBtn").toggleClass("customButtonDisabled", false);
 		$("#walkDirectBtn").prop("disabled", false);
-
-		$("#endVisitBtn").toggleClass("customButtonDisabled", true);
-		$("#endVisitBtn").toggleClass("customButton", false);
 		$("#endVisitBtn").prop("disabled", true);
 
-		$("#addMultiServiceLink")
-			.toggleClass("customButtonSmallDisabled", true);
-		$("#addMultiServiceLink").toggleClass("customButtonSmall", false);
 		$("#addMultiServiceLink").prop('disabled', true);
 
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN) {
-			$("#closeBtn").toggleClass("customButton", true);
-			$("#closeBtn").toggleClass("customButtonDisabled", false);
 			$("#closeBtn").prop("disabled", false);
 		} else {
-			$("#closeBtn").toggleClass("customButton", false);
-			$("#closeBtn").toggleClass("customButtonDisabled", true);
 			$("#closeBtn").prop("disabled", true);
 		}
 
@@ -1921,17 +1797,7 @@ var servicePoint = new function () {
 
 		$("#reinsertBtn").prop("disabled", true);
 
-		// $("#addOutcomeLink").toggleClass("customButtonSmall", false);
-		// $("#addOutcomeLink").toggleClass("customButtonSmallDisabled", true);
-		// $("#addOutcomeLink").prop('disabled', true);
-		$("#addDeliveredServiceLink").toggleClass("customButtonSmall", false);
-		$("#addDeliveredServiceLink").toggleClass("customButtonSmallDisabled",
-			true);
-		$("#addDeliveredServiceLink").prop('disabled', true);
-		$("#deliveredServicesModule").hide()
-
-		$("#addCustomMarkLink").toggleClass("customButtonSmall", false);
-		$("#addCustomMarkLink").toggleClass("customButtonSmallDisabled", true);
+		$("#deliveredServicesModule").hide();
 		$("#addCustomMarkLink").prop('disabled', true);
 
 		if (outcomeUpdateNeeded) {
@@ -1940,66 +1806,6 @@ var servicePoint = new function () {
 
 		deliveredServices.clearTable();
 		customMarks.clearTable();
-		$("#linkCustomerLink").toggleClass("linkCust customLinkDisabled", true);
-		$("#linkCustomerLink").prop("disabled", true);
-	};
-
-	var updateService = function () {
-		if (sessvars.state.userState == servicePoint.userState.SERVING) {
-			var service = sessvars.state.visit.currentVisitService.serviceInternalName;
-			$("#serviceId").html(service);
-			if (moduleMultiServicesEnabled == true) {
-				var len1 = sessvars.state.visit.unservedVisitServices.length;
-				var len2 = sessvars.state.visit.servedVisitServices.length;
-				var len = len1;
-				if (len1 > 0) {
-					servicePoint.servicesLeft = true;
-				}
-				if (len1 < len2) {
-					len = len2;
-				}
-
-				$("#multiServices").find("tr:gt(0)").remove();
-				// var sortedId = 0;
-				// var sortedName='';
-				for (i = 0; i < len; i++) {
-					var s = '';
-					if (i % 2 == 1) {
-						s += '<tr class="even">';
-					} else {
-						s += '<tr class="odd">';
-					}
-					if (i < len1) {
-						// returned list is not sorted correctly lets fix this
-						/*
-						 * var r = 0; for(j=0; j < len1; j++) { var t =
-						 * parseInt(sessvars.state.visit.unservedVisitServices[j].id);
-						 * if (r == 0) { r = t+1000; } if (t > sortedId && t <
-						 * r) { r = t; sortedName =
-						 * sessvars.state.visit.unservedVisitServices[j].serviceInternalName; } }
-						 * sortedId = r; s += '<td align="center">'+
-						 * sortedName + '</td>';
-						 */
-						s += '<td align="center">'
-							+ sessvars.state.visit.unservedVisitServices[i].serviceInternalName
-							+ '</td>';
-					} else {
-						s += '<td ></td>';
-					}
-
-					if (i < len2) {
-						s += '<td class="servicedone" align="center">'
-							+ sessvars.state.visit.servedVisitServices[i].serviceInternalName
-							+ '</td>';
-					} else {
-						s += '<td ></td>';
-					}
-
-					s += '</tr>';
-					$('#multiServices').append(s);
-				}
-			}
-		}
 	};
 
 	var updateTransactionTime = function () {
@@ -2166,7 +1972,6 @@ var servicePoint = new function () {
 					}
 				}
 				if (displayDialog) {
-					// util.showModal("logoutWindow");
 					$("#confirmLogoutMessage").html(warningMessage);
 					modalNavigationController.push($Qmatic.components.modal.logoutWindow);
 				} else {
@@ -2271,7 +2076,6 @@ var servicePoint = new function () {
 					// if (window.console) console.log("Case is store next, event
 					// is: " + processedEvent.E.evnt);
 					modalNavigationController.popModal($Qmatic.components.modal.storeNext)
-					// util.hideModal("waitingForCustomerDialogue");
 					sessvars.state = servicePoint.getState(spService
 						.get("user/status"));
 					sessvars.statusUpdated = new Date();
@@ -2282,7 +2086,6 @@ var servicePoint = new function () {
 					util
 						.log('About to handle a visit call event when in state VISIT_IN_DISPLAY_QUEUE');
 					window.clearTimeout(displayQueueTimeoutId);
-					//util.hideModal("displayQueueSpinnerWindow");
 					modalNavigationController.popModal($Qmatic.components.modal.visitInDisplayQueue)
 					util.twinkleTicketNumber();
 					sessvars.state = servicePoint.getState(spService
@@ -2321,12 +2124,10 @@ var servicePoint = new function () {
 				break;
 			case servicePoint.publicEvents.VISIT_TRANSFER_TO_SERVICE_POINT_POOL:
 				sessvars.cfuSelectionSet = true;
-				//servicePointPool.updateServicePointPool(); // Todo: remove me
 				servicePointPool.renderCounterPool();
 				break;
 			case servicePoint.publicEvents.VISIT_TRANSFER_TO_USER_POOL:
 				sessvars.cfuSelectionSet = true;
-				//userPool.updateUserPool(); // Todo: remove me
 				userPool.renderUserPool();
 				break;
 			case servicePoint.publicEvents.USER_SERVICE_POINT_WORK_PROFILE_SET:
@@ -2609,11 +2410,11 @@ var servicePoint = new function () {
 			// Reconnection was made
 
 		} else {
-			setWorkstationOffline();
+			this.setWorkstationOffline();
 		}
 	};
 
-	var setWorkstationOffline = function () {
+	this.setWorkstationOffline = function () {
 		if (!workstationOffline) {
 			var err = jQuery.i18n.prop('error.communication_error');
 			util.showPermanentError(err);
@@ -2626,46 +2427,47 @@ var servicePoint = new function () {
 			queues.emptyQueues();
 			servicePointPool.emptyPool();
 			userPool.emptyPool();
+			// TODO: disable the buttons listed in the code below
 			// disable call buttons
-			$('#callButtons a').each(function () {
-				$(this).addClass("customLinkDisabled").click(function (e) {
-					e.preventDefault();
-				});
-				$(this).attr({
-					"class": "customButtonDisabled",
-					"disabled": true
-				});
-			});
-			// disable visit buttons
-			$('#ongoingVisitButtons a').each(function () {
-				$(this).addClass("customLinkDisabled").click(function (e) {
-					e.preventDefault();
-				});
-				$(this).attr({
-					"class": "customButtonSmallDisabled",
-					"disabled": true
-				});
-			});
+			// $('#callButtons a').each(function () {
+			// 	$(this).addClass("customLinkDisabled").click(function (e) {
+			// 		e.preventDefault();
+			// 	});
+			// 	$(this).attr({
+			// 		"class": "customButtonDisabled",
+			// 		"disabled": true
+			// 	});
+			// });
+			// // disable visit buttons
+			// $('#ongoingVisitButtons a').each(function () {
+			// 	$(this).addClass("customLinkDisabled").click(function (e) {
+			// 		e.preventDefault();
+			// 	});
+			// 	$(this).attr({
+			// 		"class": "customButtonSmallDisabled",
+			// 		"disabled": true
+			// 	});
+			// });
 			// disable home/settings/logout links
-			$('.orch-userinfo a').each(function () {
-				$(this).prop("disabled", true);
-				$(this).toggleClass("linkDisabled", true);
-			});
-			$('.orch-actions a').each(function () {
-				$(this).prop("disabled", true);
-				$(this).toggleClass("imgDisabled", true);
-			});
+			// $('.orch-userinfo a').each(function () {
+			// 	$(this).prop("disabled", true);
+			// 	$(this).toggleClass("linkDisabled", true);
+			// });
+			// $('.orch-actions a').each(function () {
+			// 	$(this).prop("disabled", true);
+			// 	$(this).toggleClass("imgDisabled", true);
+			// });
 
-			document.getElementById("createCustomerLink").className = "newCust customLinkDisabled";
-			document.getElementById("createCustomerLink").disabled = true;
-			document.getElementById("editCustomerLink").className = "editCust customLinkDisabled";
-			document.getElementById("editCustomerLink").disabled = true;
-			document.getElementById("linkCustomerLink").className = "linkCust customLinkDisabled";
-			document.getElementById("linkCustomerLink").disabled = true;
-			document.getElementById("deleteCustomerLink").className = "deleteCust customLinkDisabled";
-			document.getElementById("deleteCustomerLink").disabled = true;
-			// disable settings / dropdown in menu
-			$('#prioList').prop("disabled", true);
+			// document.getElementById("createCustomerLink").className = "newCust customLinkDisabled";
+			// document.getElementById("createCustomerLink").disabled = true;
+			// document.getElementById("editCustomerLink").className = "editCust customLinkDisabled";
+			// document.getElementById("editCustomerLink").disabled = true;
+			// document.getElementById("linkCustomerLink").className = "linkCust customLinkDisabled";
+			// document.getElementById("linkCustomerLink").disabled = true;
+			// document.getElementById("deleteCustomerLink").className = "deleteCust customLinkDisabled";
+			// document.getElementById("deleteCustomerLink").disabled = true;
+			// // disable settings / dropdown in menu
+			// $('#prioList').prop("disabled", true);
 		}
 	};
 

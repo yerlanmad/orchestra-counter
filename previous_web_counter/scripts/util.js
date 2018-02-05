@@ -58,12 +58,6 @@ var util = new function () {
      */
     this.setSelect = function (select, value) {
         select.prop('selectedIndex', $("#" + select.prop('id') + " option[value=" + value + "]").index());
-        //        for(i = 0; i < select.length; i++) {
-        //            if(select.options[i].value == value) {
-        //                select.selectedIndex = select.options[i].index;
-        //                break;
-        //            }
-        //        }
         select.trigger("chosen:updated");
     };
 
@@ -88,7 +82,6 @@ var util = new function () {
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sZeroRecords": "",
-                // "sSearch": jQuery.i18n.prop('info.search')
                 "sSearch": "",
                 "sSearchPlaceholder": config.placeholder ? config.placeholder : ""
             },
@@ -129,7 +122,6 @@ var util = new function () {
             }
         }
         var table;
-        //        table = $('#' + config.tableId).dataTable( {
         var tableConfig = {
             "bDestroy": true,
             "sScrollX": "100%",
@@ -139,7 +131,6 @@ var util = new function () {
                 "sInfo": "",
                 "sInfoEmpty": "",
                 "sZeroRecords": typeof config.emptySearchLabel !== 'undefined' ? translate.msg(config.emptySearchLabel) : "",
-                // "sSearch": jQuery.i18n.prop('info.search')
                 "sSearch": "",
                 "sSearchPlaceholder": config.placeholder ? config.placeholder : ""
             },
@@ -163,7 +154,6 @@ var util = new function () {
                     fnCallback({ "iTotalRecords": json.length, "iTotalDisplayRecords": json.length, "aaData": json });
                 });
             }
-            //       });
         };
         if (typeof config.infoFiltered !== 'undefined') {
             tableConfig.oLanguage.sInfoFiltered = translate.msg(config.infoFiltered, ["_MAX_"]);
@@ -427,10 +417,8 @@ var util = new function () {
 
         if (typeof paramArray === 'undefined' || !paramArray) {
             toast.find('.qm-toast__message').text(translate.msg(errorMessage));
-            //var errorDiv = $('<div/>').text(translate.msg(errorMessage));
         } else {
             toast.find('.qm-toast__message').text(translate.msg(errorMessage, paramArray));
-            //var errorDiv = $('<div/>').text(translate.msg(errorMessage, paramArray));
         }
 
         var $messageContainer = $('#error');
