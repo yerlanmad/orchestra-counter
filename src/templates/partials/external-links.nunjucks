@@ -46,7 +46,7 @@
         <!-- Per R5, we don't use DWR for server push of events anymore -->
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.2/chosen.jquery.js"></script>
+        <script type="text/javascript" src="scripts/vendor/chosen-1.8.2.js"></script>
 
         <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
         <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
