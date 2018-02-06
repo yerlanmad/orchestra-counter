@@ -1,114 +1,149 @@
 .qm-services {
     margin-bottom: rem($global-standard-margin);
-
     &__current-service-container {
         display: flex;
         justify-content: space-between;
         margin-bottom: rem(2px);
         align-items: center;
-
         @at-root [dir='rtl'] & {
             text-align: right;
         }
     }
-
     &__current-services {
         display: flex;
         flex: 0 1 auto;
         overflow: hidden;
     }
-    
     &__current-service-title-container {
         flex: 0 1 auto;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
     &__current-service-title {
         font-size: rem(24px);
         display: -webkit-box;
         -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;  
+        -webkit-box-orient: vertical;
     }
-
     &__add-service {
         flex: 0 0 auto;
         color: $secondary-color;
         align-items: center;
         text-decoration: none;
         font-size: rem(22px);
-        display: flex;
-        //width: 200px;
-
+        display: flex; //width: 200px;
+        align-items: initial;
         &-text {
             font-size: rem(14px);
         }
-
         &:hover,
         &:focus {
             text-decoration: none;
             color: $secondary-color;
         }
-
         &:visited {
             color: $secondary-color;
         }
     }
-
     &__add-service-icon {
         display: inline-block;
-        margin-left: rem(4px);
-
         @at-root [dir='rtl'] & {
-            margin-left: 0;
-            margin-right: rem(4px);
+            text-align: right;
         }
     }
-
-    &__upcoming-services-container {
+    &__add-service-text {
         display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    &__upcoming-services-container {
+        display: block;
         color: $services-color;
         span {
             min-width: rem(40px);
         }
     }
-
     &__previous-services-container {
-        display: flex;
+        display: block;
         color: $services-color;
         span {
             min-width: rem(70px);
         }
     }
-
     &__label {
-        font-weight: $font-weight-light;
-        margin-right: rem($global-standard-margin / 2);
-
+        font-weight: $font-weight-medium;
+        margin-right: rem($global-standard-margin / 4);
+        font-size: rem(14px);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        color: $dark-transparent62;
         @at-root [dir='rtl'] & {
             margin-right: 0;
-            margin-left: rem($global-standard-margin / 2);
+            margin-left: rem($global-standard-margin / 4);
         }
     }
-
     &__services-listing {
         display: flex;
         flex-wrap: wrap;
         margin-left: rem(-$global-standard-padding / 2);
         margin-right: rem(-$global-standard-padding / 2);
     }
-
+    &__service-item-count {
+        padding: rem(0 5px);
+    }
     &__service-item {
         white-space: nowrap;
         padding: rem(0 $global-standard-padding / 2);
-
-        & + & {
+        font-size: rem(16px);
+        font-weight: $font-weight-light;
+        &+& {
             // margin-left: rem($global-standard-margin / 2);
-
             // @at-root [dir='rtl'] & {
             //     margin-left: 0;
             //     margin-right: rem($global-standard-margin / 2);
             // }
         }
+    }
+    &__expand-container {
+        text-align: right;
+        font-weight: 300;
+        font-size: rem(14px);
+        padding: rem(15px 0 0 0);
+        @at-root [dir='rtl'] & {
+            text-align: left;
+        }
+    }
+    &__expand-container-link {
+        text-decoration: none;
+        color: $pale-aquamarine;
+        display: flex;
+        align-items: center;
+        &:hover {
+            text-decoration: none;
+            font-weight: normal;
+            color: $pale-aquamarine;
+        }
+    }
+    &__service-list-item {
+        font-size: rem(16px);
+        font-weight: 300;
+        padding: rem(2px 0);
+        color: $services-color;
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
+    }
+    &__expand-container-link-icon {
+        color: $dark-transparent62;
+        &-larger {
+            color: $dark-transparent62;
+            font-size: rem(16px);
+            position: relative;
+            top: rem(2px);
+        }
+    }
+    &__expand-container {
+        border-bottom: 2px solid $dark-transparent12;
     }
 }

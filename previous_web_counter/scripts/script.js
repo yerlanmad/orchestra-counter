@@ -1383,23 +1383,23 @@ var servicePoint = new function () {
 				}
 			} else if (sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED) {
 				if (!blockMesssagePopup) {
-				util
-					.showMessage(jQuery.i18n
-						.prop('error.no.delivered.service'));
+					util
+						.showMessage(jQuery.i18n
+							.prop('error.no.delivered.service'));
 				}
 			} else if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_FOR_DELIVERED_SERVICE_NEEDED) {
 				if (!blockMesssagePopup) {
-				util.showMessage(jQuery.i18n
-					.prop('error.no.outcome.for.delivered.service'));
+					util.showMessage(jQuery.i18n
+						.prop('error.no.outcome.for.delivered.service'));
 				}
 			} else if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_OR_DELIVERED_SERVICE_NEEDED) {
 				if (!blockMesssagePopup) {
-				util.showMessage(jQuery.i18n
-					.prop('error.no.outcome.or.delivered.service'));
+					util.showMessage(jQuery.i18n
+						.prop('error.no.outcome.or.delivered.service'));
 				}
 			} else if (cfuForceSelection || !sessvars.cfuSelectionSet) {
 				if (!blockMesssagePopup) {
-				util.showMessage(jQuery.i18n.prop('error.no.cfu.selection'));
+					util.showMessage(jQuery.i18n.prop('error.no.cfu.selection'));
 				}
 			}
 			if (sessvars.state.visit) {
@@ -1464,7 +1464,7 @@ var servicePoint = new function () {
 			}
 
 			// If waiting time is greater than zero only show
-			if(sessvars.state.visit && parseInt(sessvars.state.visit.waitingTime) > 0) {
+			if (sessvars.state.visit && parseInt(sessvars.state.visit.waitingTime) > 0) {
 				$("#waitingTimeContainer").css("display", "");
 			} else {
 				$("#waitingTimeContainer").hide();
@@ -1561,7 +1561,7 @@ var servicePoint = new function () {
 			}
 
 			// If waiting time is greater than zero only show
-			if(sessvars.state.visit && parseInt(sessvars.state.visit.waitingTime) > 0) {
+			if (sessvars.state.visit && parseInt(sessvars.state.visit.waitingTime) > 0) {
 				$("#waitingTimeContainer").css("display", "");
 			} else {
 				$("#waitingTimeContainer").hide();
@@ -1691,26 +1691,54 @@ var servicePoint = new function () {
 		if (sessvars.state.visit) {
 			var nextServices = sessvars.state.visit.unservedVisitServices;
 			var previousServices = sessvars.state.visit.servedVisitServices;
-
+			
+			if (nextServices.length > 1 || previousServices.length > 1) {
+				$("#multiServicesExpandContainer").show();
+			} else {
+				$("#multiServicesExpandContainer").hide();
+			}
 
 			if (nextServices.length > 0) {
-				$("#nextVisitServices").show()
-				$("#nextVisitServices .qm-services__services-listing").html("")
-				nextServices.forEach(function (service) {
-					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>')
-				});
+				$("#nextVisitServices").show();
+
+				$("#nextVisitServices .qm-services__services-listing").html("");
+				$(".qm-services__upcoming-services-list").html("");
+
+				if (nextServices.length > 1) {
+					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + nextServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + nextServices.length + '</span>' + '</span>');
+					$("#nextVisitServicesList").show();
+					nextServices.forEach(function (service) {
+						$(".qm-services__upcoming-services-list").append('<div class="qm-services__service-list-item">' + service.serviceInternalName + '</div>');
+					});
+				} else {
+					$("#nextVisitServicesList").hide();
+					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>');
+				}
+
 			} else {
-				$("#nextVisitServices").hide()
+				$("#nextVisitServices").hide();
+				$("#nextVisitServicesList").hide();
 			}
 
 			if (previousServices.length > 0) {
 				$("#previousVisitServices").show()
-				$("#previousVisitServices .qm-services__services-listing").html("")
-				previousServices.forEach(function (service) {
-					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>')
-				});
+				
+				$("#previousVisitServices .qm-services__services-listing").html("");
+				$(".qm-services__previous-services-list").html("");
+
+				if (previousServices.length > 1) {
+					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + previousServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + nextServices.length + '</span>' + '</span>');
+					$("#previousVisitServicesList").show();
+					previousServices.forEach(function (service) {
+						$(".qm-services__previous-services-list").append('<div class="qm-services__service-list-item">' + service.serviceInternalName + '</div>');
+					});
+				} else {
+					$("#previousVisitServicesList").hide();
+					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>');
+				}
 			} else {
-				$("#previousVisitServices").hide()
+				$("#previousVisitServices").hide();
+				$("#previousVisitServicesList").hide()
 			}
 		}
 	}
