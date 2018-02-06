@@ -194,14 +194,6 @@ var servicePoint = new function () {
 
 	// F5 pressed
 	var updateUI = function () {
-		// TODO: Remove
-		// re-enable app shortcuts
-		// $('.orch-userinfo a').each(function () {
-		// 	$(this).attr({
-		// 		"disabled": false
-		// 	});
-		// });
-
 		// Enable Links
 		$("#editCustomerHeader").css('pointer-events', 'auto');
 		$("#userName").css('pointer-events', 'auto');
@@ -2479,19 +2471,7 @@ var servicePoint = new function () {
 
 			// Remove all tooltips and modals
 			tooltipController.disposeAll();
-			modalNavigationController.popAllModals()
-
-			// TODO: disable the buttons listed in the code below
-			// disable call buttons
-			// $('#callButtons a').each(function () {
-			// 	$(this).addClass("customLinkDisabled").click(function (e) {
-			// 		e.preventDefault();
-			// 	});
-			// 	$(this).attr({
-			// 		"class": "customButtonDisabled",
-			// 		"disabled": true
-			// 	});
-			// });
+			modalNavigationController.popAllModals();
 
 			// Disable btns
 			$("#callNextBtn").prop('disabled', true);
@@ -2506,18 +2486,6 @@ var servicePoint = new function () {
 			$("#selectOutcome").css('pointer-events', 'none');
 			$("#addCustomerIcon").css('pointer-events', 'none');
 
-			// TODO: Remove
-			// // disable visit buttons
-			// $('#ongoingVisitButtons a').each(function () {
-			// 	$(this).addClass("customLinkDisabled").click(function (e) {
-			// 		e.preventDefault();
-			// 	});
-			// 	$(this).attr({
-			// 		"class": "customButtonSmallDisabled",
-			// 		"disabled": true
-			// 	});
-			// });
-
 			// Disable btns in card
 			$("#transferBtn").prop('disabled', true);
 			$("#parkBtn").prop('disabled', true);
@@ -2526,33 +2494,10 @@ var servicePoint = new function () {
 			$("#reinsertBtn").prop('disabled', true);
 			$("#notesBtn").prop('disabled', true);
 
-			// TODO: Remove
-			// disable home/settings/logout links
-			// $('.orch-userinfo a').each(function () {
-			// 	$(this).prop("disabled", true);
-			// 	$(this).toggleClass("linkDisabled", true);
-			// });
-			// $('.orch-actions a').each(function () {
-			// 	$(this).prop("disabled", true);
-			// 	$(this).toggleClass("imgDisabled", true);
-			// });
-
 			// Disable Links. This logic is reset in updateUi
 			$("#editCustomerHeader").css('pointer-events', 'none');
 			$("#userName").css('pointer-events', 'none');
 			$("#homeLink").css('pointer-events', 'none');
-
-			// TODO: Remove
-			// document.getElementById("createCustomerLink").className = "newCust customLinkDisabled";
-			// document.getElementById("createCustomerLink").disabled = true;
-			// document.getElementById("editCustomerLink").className = "editCust customLinkDisabled";
-			// document.getElementById("editCustomerLink").disabled = true;
-			// document.getElementById("linkCustomerLink").className = "linkCust customLinkDisabled";
-			// document.getElementById("linkCustomerLink").disabled = true;
-			// document.getElementById("deleteCustomerLink").className = "deleteCust customLinkDisabled";
-			// document.getElementById("deleteCustomerLink").disabled = true;
-			// // disable settings / dropdown in menu
-			// $('#prioList').prop("disabled", true);
 		}
 	};
 
