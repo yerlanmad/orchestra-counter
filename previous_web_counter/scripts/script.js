@@ -1679,32 +1679,63 @@ var servicePoint = new function () {
 		}
 	}
 
+	this.showCollapsedServices = function () {
+		var nextServices = sessvars.state.visit.unservedVisitServices;
+		var previousServices = sessvars.state.visit.servedVisitServices;
+
+		if (nextServices.length > 1) {
+			$("#nextVisitServicesList").show();
+		} else {
+			$("#nextVisitServicesList").hide();
+		}
+
+		if (previousServices.length > 1) {
+			$("#previousVisitServicesList").show();
+		} else {
+			$("#previousVisitServicesList").hide();
+		}
+
+		$("#showServicesLink").hide();
+		$("#hideServicesLink").css("display", "");
+		$("#nextVisitServices").find(".qm-services__service-item").hide();
+		$("#previousVisitServices").find(".qm-services__service-item").hide();
+	}
+
+	this.hideCollapsedServices = function () {
+		$("#nextVisitServicesList").hide();
+		$("#previousVisitServicesList").hide();
+
+		$("#showServicesLink").css("display", "");
+		$("#hideServicesLink").hide();
+		$("#nextVisitServices").find(".qm-services__service-item").css("display", "");
+		$("#previousVisitServices").find(".qm-services__service-item").css("display", "");
+	}
+
 	var updateNextAndPreviousServices = function () {
 		if (sessvars.state.visit) {
 			var nextServices = sessvars.state.visit.unservedVisitServices;
 			var previousServices = sessvars.state.visit.servedVisitServices;
-			
-			if (nextServices.length > 1 || previousServices.length > 1) {
-				$("#multiServicesExpandContainer").show();
-			} else {
-				$("#multiServicesExpandContainer").hide();
-			}
+
+			$("#nextVisitServicesList").hide();
+			$("#previousVisitServicesList").hide();
+			$("#showServicesLink").css("display", "");
+			$("#hideServicesLink").hide();
 
 			if (nextServices.length > 0) {
-				$("#nextVisitServices").show();
+				$("#nextVisitServices").css("display", "");
 
 				$("#nextVisitServices .qm-services__services-listing").html("");
 				$(".qm-services__upcoming-services-list").html("");
 
 				if (nextServices.length > 1) {
-					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + nextServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + nextServices.length + '</span>' + '</span>');
-					$("#nextVisitServicesList").show();
+					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + nextServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + (parseInt(nextServices.length) - 1) + '</span>' + '</span>');
+					// $("#nextVisitServicesList").show();
 					nextServices.forEach(function (service) {
 						$(".qm-services__upcoming-services-list").append('<div class="qm-services__service-list-item">' + service.serviceInternalName + '</div>');
 					});
 				} else {
 					$("#nextVisitServicesList").hide();
-					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>');
+					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + nextServices[0].serviceInternalName + '</span>');
 				}
 
 			} else {
@@ -1713,24 +1744,24 @@ var servicePoint = new function () {
 			}
 
 			if (previousServices.length > 0) {
-				$("#previousVisitServices").show()
-				
+				$("#previousVisitServices").css("display", "");
+
 				$("#previousVisitServices .qm-services__services-listing").html("");
 				$(".qm-services__previous-services-list").html("");
 
 				if (previousServices.length > 1) {
-					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + previousServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + nextServices.length + '</span>' + '</span>');
-					$("#previousVisitServicesList").show();
+					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + previousServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + (parseInt(nextServices.length) - 1) + '</span>' + '</span>');
+					// $("#previousVisitServicesList").show();
 					previousServices.forEach(function (service) {
 						$(".qm-services__previous-services-list").append('<div class="qm-services__service-list-item">' + service.serviceInternalName + '</div>');
 					});
 				} else {
 					$("#previousVisitServicesList").hide();
-					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + service.serviceInternalName + '</span>');
+					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + previousServices[0].serviceInternalName + '</span>');
 				}
 			} else {
 				$("#previousVisitServices").hide();
-				$("#previousVisitServicesList").hide()
+				$("#previousVisitServicesList").hide();
 			}
 		}
 	}
