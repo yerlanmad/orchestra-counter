@@ -7,7 +7,9 @@ var customMarks = new function () {
 	var selectCustomMarkTable;
 	var customMarksParams;
 	var multiMarkCounter;
+	var multiMarkCounterIntial;
 	var dropdownFilter = null;
+	var markName = "";
 
 	function initFilter() {
 		if (!dropdownFilter)
@@ -78,15 +80,17 @@ var customMarks = new function () {
 		customMarksTable.hide();
 	}
 
-	this.customMarkClicked = function (id, numberOfMarks) {
+	this.customMarkClicked = function (id, numberOfMarks, name) {
 		if (servicePoint.hasValidSettings()) {
 			customMarksParams = servicePoint.createParams();
 			customMarksParams.visitId = sessvars.state.visit.id;
 			customMarksParams.servicePointId = sessvars.state.servicePointId;
 			customMarksParams.markId = id;
 			multiMarkCounter = parseInt(numberOfMarks);
+			multiMarkCounterIntial = multiMarkCounter
+			markName = name;
 			if (multiMarks == true && multiMarkCounter > 1) {
-				customMarks.addMultiMarks();
+				customMarks.addMultiMarks(null, markName);
 			} else {
 				sessvars.state = servicePoint.getState(spService
 					.post("branches/" + customMarksParams.branchId
@@ -94,7 +98,9 @@ var customMarks = new function () {
 					+ customMarksParams.servicePointId + "/visits/"
 					+ customMarksParams.visitId + "/marks/"
 					+ customMarksParams.markId));
-				customMarks.getUserStateWorkaround();
+				customMarks.getUserStateWorkaround(true);
+				util.showMessage(jQuery.i18n
+					.prop('success.added.mark') + " " + markName);
 			}
 		}
 	};
@@ -112,7 +118,9 @@ var customMarks = new function () {
 				+ customMarksParams.servicePointId + "/visits/"
 				+ customMarksParams.visitId + "/marks/"
 				+ customMarksParams.markId));
-			customMarks.getUserStateWorkaround();
+			customMarks.getUserStateWorkaround(true);
+			util.showMessage(jQuery.i18n
+					.prop('success.added.mark') + " " + markName + " X " + multiMarkCounterIntial);
 		}
 
 		delServUpdateNeeded = true;
@@ -134,7 +142,7 @@ var customMarks = new function () {
 		}
 	};
 
-	this.getUserStateWorkaround = function () {
+	this.getUserStateWorkaround = function (blockMessages) {
 		sessvars.state = servicePoint.getState(spService.get("user/status"));
 		spPoolUpdateNeeded = false;
 		userPoolUpdateNeeded = false;
@@ -142,7 +150,7 @@ var customMarks = new function () {
 		journeyUpdateNeeded = false;
 		trtUpdateNeeded = false;
 		sessvars.statusUpdated = new Date();
-		servicePoint.updateWorkstationStatus(false, true);
+		servicePoint.updateWorkstationStatus(false, true, blockMessages);
 	};
 
 	this.updateCustomMarks = function () {

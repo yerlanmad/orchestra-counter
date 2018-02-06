@@ -36,7 +36,7 @@ var outcome = new function() {
         }
     };
 
-    this.selectOutcome = function(val) {
+    this.selectOutcome = function(val, outcomeName) {
         if(val != -1 && servicePoint.hasValidSettings()) {
             var outcomeForServiceParams = servicePoint.createParams();
             outcomeForServiceParams.visitId = sessvars.state.visit.id;
@@ -47,6 +47,8 @@ var outcome = new function() {
             if(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN && sessvars.state.userState == servicePoint.userState.SERVING) {
                 sessvars.visit = sessvars.state.visit;
             }
+            util.showMessage(jQuery.i18n
+					.prop('success.added.outcome') + " " + outcomeName);
             servicePoint.updateWorkstationStatus();
         }
     };

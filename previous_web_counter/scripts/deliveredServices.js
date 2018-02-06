@@ -61,10 +61,10 @@ var deliveredServices = new function () {
             }
 
             util.showMessage(jQuery.i18n
-					.prop('error.no.outcome.or.delivered.service') + " " + dsName + " " + "was added!");
+					.prop('success.added.delivered.service') + " " + dsName);
 
 
-            servicePoint.updateWorkstationStatus(false, true);
+            servicePoint.updateWorkstationStatus(false, true, true);
         }
     };
 

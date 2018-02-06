@@ -35,7 +35,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
             if (multiMarks) {
                 parentContext.setSelectedText(parentContext.selectedText)
             } else {
-                customMarks.customMarkClicked(parentContext.selectedId, 1);
+                customMarks.customMarkClicked(parentContext.selectedId, 1, parentContext.selectedText);
             }
             $(this).val('').trigger('chosen:updated');
         });
@@ -46,7 +46,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
 
         $marksAddBtn.click(function() {
             if (parentContext.noOfMarksToBeAdded > 0 && parentContext.noOfMarksToBeAdded <= parseInt($markCountInputField.attr('max'))) {
-                customMarks.customMarkClicked(parentContext.selectedId, parentContext.noOfMarksToBeAdded);
+                customMarks.customMarkClicked(parentContext.selectedId, parentContext.noOfMarksToBeAdded, parentContext.selectedText);
                 parentContext.resetSelected();
             } else {
                 $markCountInputField.addClass("invalid")
