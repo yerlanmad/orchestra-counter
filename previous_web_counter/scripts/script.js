@@ -1100,6 +1100,7 @@ var servicePoint = new function () {
 				var rowCallback = function (nRow, aData, iDisplayIndex) {
 					/* Set onclick action */
 					nRow.onclick = walkServiceClicked;
+					$(nRow).find("td").html($("<a href='#'></a>").text($(nRow).find("td").text()));
 					return nRow;
 				};
 				walkTable = util.buildTableJson({

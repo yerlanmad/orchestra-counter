@@ -1,12 +1,10 @@
 .dataTables_scrollBody {
     .qm-table__header {
         height: 0;
-
         th {
             &:before,
             &:after {
                 content: none;
-
                 @at-root [dir='rtl'] & {
                     content: none;
                 }
@@ -15,29 +13,23 @@
     }
 }
 
-
 #queuesModule,
 #queueDetailView {
     height: 100%;
-
     .dataTables_scrollBody {
         height: calc(100% - 18px) !important;
     }
-
     #queues_wrapper,
     #myQueuesTable_wrapper,
     #tickets_wrapper {
         height: 100%;
     }
-
     .dataTables_scroll {
         height: 100%;
     }
-
     .dataTables_scrollHeadInner {
         width: 100% !important;
     }
-
     .dataTables_wrapper {
         min-height: auto;
     }
@@ -49,7 +41,7 @@
     }
     input {
         width: 100%;
-	}
+    }
 }
 
 .dataTables_scrollHeadInner {
@@ -69,7 +61,6 @@
         height: calc(100% - 30px) !important;
     }
 }
-
 
 .ui-widget {
     font-family: inherit;
