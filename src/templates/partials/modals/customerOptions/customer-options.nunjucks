@@ -13,31 +13,31 @@
                 </p>
             </div>
             <div class="qm-card__footer-section qm-card__footer-section--space-between">
-        <div class="qm-card-action-layout">
-            <button class="qm-action-btn" id="customerOptionBack" onclick="modalNavigationController.pop()">
-                <i class="qm-action-btn__icon icon-previous" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Go back"></span>
-            </button>
-            <button class="qm-action-btn" id="cancelOptions" onclick="servicePoint.cancelCustomerOptionsDialogue();this.blur();">
-                <i class="qm-action-btn__icon icon-close-circle" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Cancel"></span>
-            </button>
-        </div>
-        <div class="qm-card-action-layout">
-            <button class="qm-action-btn" id="recallOption" onclick="modalNavigationController.popAllModals();servicePoint.recall();this.blur();" >
-                <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Recall"></span>
-            </button>
-            <button class="qm-action-btn" id="reinsertOption" onclick="servicePoint.reinsertClicked();this.blur();" >
-                <i class="qm-action-btn__icon icon-recycle" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Recycle"></span>
-            </button>
-            <button class="qm-action-btn" id="customerOptionsCallNext" onclick="modalNavigationController.popAllModals();servicePoint.noShow();servicePoint.callNext();this.blur();">
-                <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
-                <span class="qm-action-btn__text" title="Call next"></span>
-            </button>
-        </div>
-    </div>
+                <div class="qm-card-action-layout">
+                    <button class="qm-action-btn" id="customerOptionBack" onclick="modalNavigationController.pop()">
+                        <i class="qm-action-btn__icon icon-previous" aria-hidden="true"></i>
+                        <span class="qm-action-btn__text" title="Go back"></span>
+                    </button>
+                    <button class="qm-action-btn" id="cancelOptions" onclick="servicePoint.cancelCustomerOptionsDialogue();this.blur();">
+                        <i class="qm-action-btn__icon icon-close-circle" aria-hidden="true"></i>
+                        <span class="qm-action-btn__text" title="Cancel"></span>
+                    </button>
+                </div>
+                <div class="qm-card-action-layout">
+                    <button class="qm-action-btn" id="recallOption" onclick="modalNavigationController.popAllModals();servicePoint.recall();this.blur();" >
+                        <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
+                        <span class="qm-action-btn__text" title="Recall"></span>
+                    </button>
+                    <button class="qm-action-btn" id="reinsertOption" onclick="servicePoint.reinsertClicked();this.blur();" >
+                        <i class="qm-action-btn__icon icon-recycle-tilted" aria-hidden="true"></i>
+                        <span class="qm-action-btn__text" title="Recycle"></span>
+                    </button>
+                    <button class="qm-action-btn" id="customerOptionsCallNext" onclick="modalNavigationController.popAllModals();servicePoint.noShow();servicePoint.callNext();this.blur();">
+                        <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
+                        <span class="qm-action-btn__text" title="Call next"></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
