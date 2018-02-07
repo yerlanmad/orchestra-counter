@@ -113,7 +113,7 @@ var queues = new function() {
             }
 
             // Sadly clearing and adding data to the queue "data table" resets the position of our search result
-            //customer.positionCustomerResult();
+            customer.positionCustomerResult();
         }
         if(keepCalling) {
             if(sessvars.queueTimer !== undefined) {

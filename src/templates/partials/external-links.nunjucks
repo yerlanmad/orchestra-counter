@@ -1,7 +1,8 @@
         {# Commented out the current stylesheets to know what to reset #}
         {# <link rel="stylesheet" type="text/css" href="/css/reset.css">
         <link rel="stylesheet" type="text/css" href="/css/css3.css"> #}
-        <link rel="stylesheet" type="text/css" href="css/jquery/jquery.ui.all.css"/>
+        {# <link rel="stylesheet" type="text/css" href="css/jquery/jquery.ui.all.css"/> #}
+        <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css"/>
         <link rel="stylesheet" type="text/css" href="css/dataTable.css"/>
         {# <link rel="stylesheet" type="text/css" href="/css/orchestra.css"/> #}
         {# <link rel="stylesheet" type="text/css" href="css/style.css"/> #}
@@ -24,16 +25,17 @@
         <script type="text/javascript" src="scripts/redux/store/index.js"></script>
         <script type="text/javascript" src="scripts/redux/monitor.js"></script>-->
         
-
-        <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="scripts/vendor/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/jquery-ui.min.js"></script>
+        {# <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.core.js"></script>
         <script type="text/javascript" src="scripts/jquery/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="scripts/jquery/i18n/jquery-ui-i18n.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.mouse.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.position.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.autocomplete.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.datepicker.js"></script> 
+        <script type="text/javascript" src="scripts/jquery/i18n/jquery-ui-i18n.js"></script> #}
         <script type="text/javascript" src="scripts/vendor/lodash.min.js"></script>
         <script type="text/javascript" src="scripts/vendor/mousetrap.min.js"></script>
 
@@ -50,7 +52,10 @@
 
         <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
         <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
-        <script type="text/javascript" src="/events/qevents_cometd.js"></script>
+        {# <script type="text/javascript" src="/events/qevents_cometd.js"></script> #}
+        <!-- TODO: Upgrade links - Remove this when added to Orchestra -->
+        <script type="text/javascript" src="scripts/upgrades/qevents_cometd_v2.js"></script>
+        <!-- End upgrade links -->
         <script type="text/javascript" src="scripts/init.js"></script>
         <script type="text/javascript" src="scripts/util.js?2016022608"></script>
         <script type="text/javascript" src="scripts/customer.js?20160630"></script>

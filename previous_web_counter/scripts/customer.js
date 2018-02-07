@@ -133,7 +133,7 @@ var customer = new function() {
          * uses a simple input text field and jQuery datatable
          */
         $("#customerInput")
-            .bind("keydown", function(event) {
+            .on("keydown", function(event) {
                 // only process these events if we're in "search" mode
                 if (document.getElementById('customerSearchDiv').style.display != "block") {
                     return;
@@ -166,7 +166,7 @@ var customer = new function() {
             });
 
         $("#customerInput")
-            .bind("keyup", function(event) {
+            .on("keyup", function(event) {
                 var val = $(this).val();
                 if (val) {
                     val = $.trim(val);

@@ -198,17 +198,8 @@ var transfer = new function() {
             }
             //destroy old event handlers
 			if ( buttonTransferFirstEnabled  == true ) {	
-				$('tbody td button.transferTicketFirst', $(selector)).die('click');
-			}
-			if ( buttonTransferLastEnabled  == true ) {	
-				$('tbody td button.transferTicketLast', $(selector)).die('click');
-			}
-			if ( buttonTransferSortEnabled  == true ) {	
-				$('tbody td button.transferTicketSort', $(selector)).die('click');
-			}
-            //make new ones
-			if ( buttonTransferFirstEnabled  == true ) {	
-				$('tbody td button.transferTicketFirst', $(selector)).live('click',function(){
+                $(selector).off('click', 'tbody td button.transferTicketFirst');
+                $(selector).on('click', 'tbody td button.transferTicketFirst', function(){
 					var nTr = $(this).closest("tr").get(0);
 					var aData = table.fnGetData(nTr);
                     transferTicketToQueue("FIRST", aData, visitId);
@@ -216,7 +207,8 @@ var transfer = new function() {
 				});
 			}
 			if ( buttonTransferLastEnabled  == true ) {	
-				$('tbody td button.transferTicketLast', $(selector)).live('click',function(){
+                $(selector).off('click', 'tbody td button.transferTicketLast');
+                $(selector).on('click', 'tbody td button.transferTicketLast', function(){
 					var nTr = $(this).closest("tr").get(0);
 					var aData = table.fnGetData(nTr);
                     transferTicketToQueue("LAST", aData, visitId);
@@ -224,13 +216,14 @@ var transfer = new function() {
 				});
 			}
 			if ( buttonTransferSortEnabled  == true ) {	
-				$('tbody td button.transferTicketSort', $(selector)).live('click',function(){
+                $(selector).off('click', 'tbody td button.transferTicketSort');
+                $(selector).on('click', 'tbody td button.transferTicketSort', function(){
 					var nTr = $(this).closest("tr").get(0);
 					var aData = table.fnGetData(nTr);
                     transferTicketToQueue("SORTED", aData, visitId);
                     popoverComponent.disposeInstance();
 				});
-            }
+			}
 
             return table;
         }
@@ -290,9 +283,9 @@ var transfer = new function() {
                 table.fnSort([1, 'asc']);
             }
             //destroy old event handlers
-            $('tbody tr td', $(selector)).die('click');
+            $(selector).off('click', 'tbody tr td');
             //make new ones
-            $('tbody tr td', $(selector)).live('click',function(){
+            $(selector).on('click', 'tbody tr td', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
                 transferVisitInQueueToStaffPoolClicked("FIRST", aData, visitId);
@@ -367,9 +360,9 @@ var transfer = new function() {
             }
             table.fnSort([[3, 'desc'], [0, 'asc']]); // open counters first
             //destroy old event handlers
-            $('tbody tr td', $(selector)).die('click');
+            $(selector).off('click', 'tbody tr td');
             //make new ones
-            $('tbody tr td', $(selector)).live('click',function(){
+            $(selector).on('click', 'tbody tr td', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
                 transferVisitInQueueToServicePointPoolClicked("FIRST", aData, visitId);
@@ -527,39 +520,33 @@ var transfer = new function() {
                 
             }
             transferTable.fnSort([0, 'asc']);
-					
+            
+            var $jTable = $('#transferToQueues');
             //destroy old event handlers
 			if ( buttonTransferFirstEnabled  == true ) {	
-				$('tbody td button.transferTicketFirst', $('#transferToQueues')).die('click');
-			}
-			if ( buttonTransferLastEnabled  == true ) {	
-				$('tbody td button.transferTicketLast', $('#transferToQueues')).die('click');
-			}
-			if ( buttonTransferSortEnabled  == true ) {	
-				$('tbody td button.transferTicketSort', $('#transferToQueues')).die('click');
-			}
-            //make new ones
-			if ( buttonTransferFirstEnabled  == true ) {	
-				$('tbody td button.transferTicketFirst', $('#transferToQueues')).live('click',function(){
+                $jTable.off('click', 'tbody td button.transferTicketFirst');
+                $jTable.on('click', 'tbody td button.transferTicketFirst', function(){
 					var nTr = $(this).closest("tr").get(0);
                     var aData = transferTable.fnGetData(nTr);
                     transferCurrentVisitToQueueClicked("FIRST", aData);
 				});
 			}
 			if ( buttonTransferLastEnabled  == true ) {	
-				$('tbody td button.transferTicketLast', $('#transferToQueues')).live('click',function(){
+                $jTable.off('click', 'tbody td button.transferTicketLast');
+                $jTable.on('click', 'tbody td button.transferTicketLast', function(){
                     var nTr = $(this).closest("tr").get(0);
                     var aData = transferTable.fnGetData(nTr);
                     transferCurrentVisitToQueueClicked("LAST", aData);
 				});
 			}
 			if ( buttonTransferSortEnabled  == true ) {	
-				$('tbody td button.transferTicketSort', $('#transferToQueues')).live('click',function(){
+                $jTable.off('click', 'tbody td button.transferTicketSort');
+                $jTable.on('click', 'tbody td button.transferTicketSort', function(){
                     var nTr = $(this).closest("tr").get(0);
                     var aData = transferTable.fnGetData(nTr);
                     transferCurrentVisitToQueueClicked("SORTED", aData);
 				});
-            }
+			}
         }
     };
 
@@ -614,9 +601,10 @@ var transfer = new function() {
             }
             transferToStaffPoolTable.fnSort([1, 'asc']);
             //destroy old event handlers
-            $('tbody tr td', $("#transferTicketToUserPoolTable")).die('click');
+            var $jTable = $("#transferTicketToUserPoolTable");
+            $jTable.off('click', 'tbody tr td');
             //make new ones
-            $('tbody tr td', $("#transferTicketToUserPoolTable")).live('click',function(){
+            $jTable.on('click', 'tbody tr td', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = transferToStaffPoolTable.fnGetData(nTr);
                 transferCurrentVisitToUserPoolClicked("FIRST", aData);
@@ -682,10 +670,12 @@ var transfer = new function() {
                 "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
             }
             transferToServicePointPoolTable.fnSort([[3, 'desc'], [0, 'asc']]);// open counters first
+            
+            var $jTable = $("#transferTicketToCounterPoolTable");
             //destroy old event handlers
-            $('tbody tr td', $("#transferTicketToCounterPoolTable")).die('click');
+            $jTable.off('click', 'tbody tr td');
             //make new ones
-            $('tbody tr td', $("#transferTicketToCounterPoolTable")).live('click',function(){
+            $jTable.on('click', 'tbody tr td', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = transferToServicePointPoolTable.fnGetData(nTr);
                 transferCurrentVisitToCounterPoolClicked("FIRST", aData);
