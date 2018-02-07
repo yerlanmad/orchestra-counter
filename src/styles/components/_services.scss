@@ -24,15 +24,18 @@
         display: -webkit-box;
         -webkit-line-clamp: 3;
         -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     &__add-service {
         flex: 0 0 auto;
         color: $secondary-color;
+        font-weight: $font-weight-light;
         align-items: center;
         text-decoration: none;
         font-size: rem(22px);
         display: flex; //width: 200px;
         align-items: initial;
+        padding-bottom: rem(6px);
         &-text {
             font-size: rem(14px);
         }
@@ -64,7 +67,7 @@
         }
     }
     &__previous-services-container {
-        display: block;
+        display: flex;
         color: $services-color;
         span {
             min-width: rem(70px);
@@ -74,12 +77,10 @@
         font-weight: $font-weight-medium;
         margin-right: rem($global-standard-margin / 4);
         font-size: rem(14px);
-        // display: flex;
-        // flex-direction: column;
-        // justify-content: flex-end;
-        padding-top: 2px;
+        padding-top: rem(2px);
         color: $dark-transparent62;
         @at-root [dir='rtl'] & {
+            text-align: right;
             margin-right: 0;
             margin-left: rem($global-standard-margin / 4);
         }
@@ -95,6 +96,7 @@
         font-weight: normal;
     }
     &__service-item {
+        display: flex;
         white-space: nowrap;
         padding: rem(0 $global-standard-padding / 2);
         font-size: rem(16px);
@@ -115,7 +117,7 @@
         justify-content: flex-end;
         font-weight: 300;
         font-size: rem(14px);
-        padding: rem(10px 0 0 0);
+        padding: rem(6px 0 0 0);
         border-bottom: 2px solid $dark-transparent12;
         @at-root [dir='rtl'] & {
             text-align: left;
@@ -143,5 +145,8 @@
             position: relative;
             top: rem(2px);
         }
+    }
+    &__upcoming-services-list{
+        padding-bottom: rem(16px);
     }
 }

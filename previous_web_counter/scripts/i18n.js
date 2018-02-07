@@ -223,6 +223,11 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("resortServicesBtn",'button.resort.services');
 		i18nSafe("selectedName",'info.selected.name');
 		i18nSafe("availableName",'info.available.name');
+        
+        i18nSafe("showServicesLinkText",'info.multi.services.show');
+        i18nSafe("hideServicesLinkText",'info.multi.services.hide');
+
+        
 
         i18nSafe("parkLabel", 'button.park');		
 		

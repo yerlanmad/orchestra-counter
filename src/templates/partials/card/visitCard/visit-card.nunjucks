@@ -49,11 +49,11 @@
                     <div id="previousVisitServicesList" class="qm-services__previous-services-list">
                     </div>
                     <a href="#" class="qm-services__expand-container-link" id="showServicesLink"  onclick="servicePoint.showCollapsedServices();this.blur();">
-                                <span class="qm-services__expand-container-link-text" id="showServicesLinkText">Show Services</span>
+                                <span class="qm-services__expand-container-link-text" id="showServicesLinkText"></span>
                                 <i class="qm-services__expand-container-link-icon icon-caret-right" aria-hidden="true"></i>
                             </a>
                     <a href="#" class="qm-services__expand-container-link" id="hideServicesLink"  onclick="servicePoint.hideCollapsedServices();this.blur();">
-                                <span class="qm-services__expand-container-link-text" id="hideServicesLinkText">Hide Services</span>
+                                <span class="qm-services__expand-container-link-text" id="hideServicesLinkText"></span>
                                 <i class="qm-services__expand-container-link-icon-larger icon-caret-up" aria-hidden="true"></i>
                             </a>
                 </div>

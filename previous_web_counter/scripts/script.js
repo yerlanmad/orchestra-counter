@@ -1647,6 +1647,10 @@ var servicePoint = new function () {
 		if (moduleMultiServicesEnabled) {
 			updateNextAndPreviousServices();
 		}
+
+		if (sessvars.state.visit) {
+			$("#serviceId").html(sessvars.state.visit.currentVisitService.serviceInternalName);
+		}
 	};
 
 	var updateSelectedMarks = function (idSelector) {
@@ -1683,14 +1687,14 @@ var servicePoint = new function () {
 		var nextServices = sessvars.state.visit.unservedVisitServices;
 		var previousServices = sessvars.state.visit.servedVisitServices;
 
-		if (nextServices.length > 1) {
-			$("#nextVisitServicesList").show();
+		if (nextServices.length > 0) {
+			$("#nextVisitServicesList").css("display", "");
 		} else {
 			$("#nextVisitServicesList").hide();
 		}
 
-		if (previousServices.length > 1) {
-			$("#previousVisitServicesList").show();
+		if (previousServices.length > 0) {
+			$("#previousVisitServicesList").css("display", "");
 		} else {
 			$("#previousVisitServicesList").hide();
 		}
@@ -1718,25 +1722,31 @@ var servicePoint = new function () {
 
 			$("#nextVisitServicesList").hide();
 			$("#previousVisitServicesList").hide();
-			$("#showServicesLink").css("display", "");
+
+			if (nextServices.length > 1 || previousServices.length > 1) {
+				$("#showServicesLink").css("display", "");
+			} else {
+				$("#showServicesLink").hide();
+			}
+
 			$("#hideServicesLink").hide();
 
 			if (nextServices.length > 0) {
 				$("#nextVisitServices").css("display", "");
 
 				$("#nextVisitServices .qm-services__services-listing").html("");
-				$(".qm-services__upcoming-services-list").html("");
+				$("#nextVisitServicesList").html("");
 
 				if (nextServices.length > 1) {
-					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + nextServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + (parseInt(nextServices.length) - 1) + '</span>' + '</span>');
-					// $("#nextVisitServicesList").show();
-					nextServices.forEach(function (service) {
-						$(".qm-services__upcoming-services-list").append('<div class="qm-services__service-list-item">' + service.serviceInternalName + '</div>');
-					});
+					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item"><span>' + nextServices[0].serviceInternalName + '</span><span class="qm-services__service-item-count">+' + (parseInt(nextServices.length) - 1) + '</span>' + '</span>');
 				} else {
 					$("#nextVisitServicesList").hide();
-					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + nextServices[0].serviceInternalName + '</span>');
+					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item"><span>' + nextServices[0].serviceInternalName + '</span></span>');
 				}
+
+				nextServices.forEach(function (service) {
+					$("#nextVisitServicesList").append('<div class="qm-services__service-list-item"><span>' + service.serviceInternalName + '</span></div>');
+				});
 
 			} else {
 				$("#nextVisitServices").hide();
@@ -1744,21 +1754,21 @@ var servicePoint = new function () {
 			}
 
 			if (previousServices.length > 0) {
+				previousServices.reverse();
 				$("#previousVisitServices").css("display", "");
 
 				$("#previousVisitServices .qm-services__services-listing").html("");
-				$(".qm-services__previous-services-list").html("");
+				$("#previousVisitServicesList").html("");
 
 				if (previousServices.length > 1) {
-					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + previousServices[0].serviceInternalName + '<span class="qm-services__service-item-count">+' + (parseInt(nextServices.length) - 1) + '</span>' + '</span>');
-					// $("#previousVisitServicesList").show();
-					previousServices.forEach(function (service) {
-						$(".qm-services__previous-services-list").append('<div class="qm-services__service-list-item">' + service.serviceInternalName + '</div>');
-					});
+					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item"><span>' + previousServices[0].serviceInternalName + '</span><span class="qm-services__service-item-count">+' + (parseInt(previousServices.length) - 1) + '</span>' + '</span>');
 				} else {
 					$("#previousVisitServicesList").hide();
-					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item">' + previousServices[0].serviceInternalName + '</span>');
+					$("#previousVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item"><span>' + previousServices[0].serviceInternalName + '</span></span>');
 				}
+				previousServices.forEach(function (service) {
+					$("#previousVisitServicesList").append('<div class="qm-services__service-list-item"><span>' + service.serviceInternalName + '</span></div>');
+				});
 			} else {
 				$("#previousVisitServices").hide();
 				$("#previousVisitServicesList").hide();
