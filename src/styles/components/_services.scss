@@ -34,7 +34,7 @@
         text-decoration: none;
         font-size: rem(22px);
         display: flex; //width: 200px;
-        align-items: initial;
+        align-items: center;
         padding-bottom: rem(6px);
         &-text {
             font-size: rem(14px);
@@ -50,8 +50,13 @@
     }
     &__add-service-icon {
         display: inline-block;
+        font-size: rem(16px);
+        line-height: rem(21px);
+        margin-right: rem(4px);
         @at-root [dir='rtl'] & {
             text-align: right;
+            margin-right: 0;
+            margin-left: rem(4px);
         }
     }
     &__add-service-text {
@@ -94,6 +99,10 @@
     &__service-item-count {
         padding: rem(0 5px);
         font-weight: normal;
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
     }
     &__service-item {
         display: flex;
@@ -142,8 +151,6 @@
         &-larger {
             color: $dark-transparent62;
             font-size: rem(16px);
-            position: relative;
-            top: rem(2px);
         }
     }
     &__upcoming-services-list{
