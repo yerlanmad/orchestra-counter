@@ -367,23 +367,4 @@ var queues = new function() {
 			}
         }
     };
-
-	var callTicketClicked = function(aRowData) {
-        if(servicePoint.hasValidSettings()) {
-            var params = servicePoint.createParams();
-            params.queueId = sessvars.clickedQueueId;
-            params.visitId = aRowData.visitId;
-			userPoolUpdateNeeded = false;
-			spPoolUpdateNeeded = false;
-			sessvars.state = servicePoint.getState(spService.post("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId));
-			queues.updateQueues(false);
-			if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-				util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
-			} else {
-				sessvars.statusUpdated = new Date();
-				servicePoint.updateWorkstationStatus();
-				sessvars.currentCustomer = null;
-			}
-        }
-    };
 };

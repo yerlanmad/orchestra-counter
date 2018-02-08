@@ -135,9 +135,6 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         if(!this.showDeleteBtn) {
             deleteBtn.parentNode.removeChild(deleteBtn);
         }
-        
-
-            
 
         transferToQueueBtn.addEventListener('click', this._navigateTo.bind(this, this.views.QUEUE, this._initQueuesTable.bind(this, popoverQueueTable)));
         transferToUserPoolBtn.addEventListener('click', this._navigateTo.bind(this, this.views.USER_POOL, this._initUserPoolTable.bind(this, popoverUserPoolTable)));
