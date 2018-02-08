@@ -258,8 +258,26 @@ var servicePoint = new function () {
 			var myQueues = spService.get('branches/' + sessvars.branchId
 				+ '/workProfiles/'
 				+ sessvars.workProfileId + '/queues') || [];
+			
 
 			window.myQueueIds = _.map(myQueues, 'id');
+
+			if(allQueuesBtnEnabled === true) {
+				var allQueues = spService.get("branches/" + sessvars.branchId + "/queues");
+
+				var queuesAreTheSame = _.reduce(allQueues, function(r, e) {
+					var q = _.find(myQueues, function(el) { return e.id == el.id })
+					if(q && r) {
+						return true;
+					} else {
+						return false;
+					}
+				}, true);
+
+				if(queuesAreTheSame === true) {
+					$('#allQueuesTab').hide();
+				}
+			}
 
 			queues.updateQueues(true);
 			if (typeof projectedVisits != "undefined") {
