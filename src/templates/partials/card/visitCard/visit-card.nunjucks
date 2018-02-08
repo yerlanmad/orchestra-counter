@@ -23,9 +23,9 @@
                         <div class="qm-services__current-service-title-container">
                             <span id="serviceId" class="qm-services__current-service-title"></span>
                             <a href="#" class="qm-services__add-service js-add-services-btn" id="addMultiServiceLink" onclick="servicePoint.addMultiServicePressed();this.blur();">
-                        <i class="qm-services__add-service-icon icon-add-circle-solid" aria-hidden="true"></i>
-                        <span class="qm-services__add-service-text" id="addServicesLbl"></span>   
-                    </a>
+                                <i class="qm-services__add-service-icon icon-add-circle-solid" aria-hidden="true"></i>
+                                <span class="qm-services__add-service-text" id="addServicesLbl"></span>   
+                            </a>
                         </div>
                     </div>
                     <a href="#" class="qm-context-marketing" id="verticalMessageRow">
