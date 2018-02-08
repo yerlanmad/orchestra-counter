@@ -49,7 +49,7 @@ var outcome = new function() {
             }
             util.showMessage(jQuery.i18n
 					.prop('success.added.outcome') + " " + outcomeName);
-            servicePoint.updateWorkstationStatus();
+            servicePoint.updateWorkstationStatus(false, true);
         }
     };
 
