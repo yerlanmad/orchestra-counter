@@ -36,6 +36,7 @@
         display: flex; //width: 200px;
         align-items: center;
         padding-bottom: rem(6px);
+        padding-top: rem(4px);
         &-text {
             font-size: rem(14px);
         }
@@ -118,6 +119,9 @@
             // }
         }
     }
+    &__component{
+        border-bottom: 2px solid $dark-transparent12;
+    }
     &__expand-container-link {
         text-decoration: none;
         color: $pale-aquamarine;
@@ -127,7 +131,6 @@
         font-weight: 300;
         font-size: rem(14px);
         padding: rem(6px 0 0 0);
-        border-bottom: 2px solid $dark-transparent12;
         @at-root [dir='rtl'] & {
             text-align: left;
         }
