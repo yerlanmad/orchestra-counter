@@ -271,7 +271,7 @@ var customer = new function() {
     this.handleShowResetButton = function ($inputs) {
         $inputs.on('keyup', function (e) {
             var $self = $(this),
-                val = $self.val();
+                val = $self.val().trim();
 
             if(val.length > 0) {
                 $self.next('.js-clear-field').show();
@@ -288,7 +288,7 @@ var customer = new function() {
         var $saveBtn = $form.find('[save-btn]');
         var $emailField = $form.find('[name="email"]');
         $form.find('.qm-field-error').removeClass('qm-field-error');
-
+        
         this.setSaveButtonState($requiredFields, $saveBtn, $emailField);
         if(setListeners) {
             this.setRequiredFieldsListener($requiredFields, $saveBtn, $emailField);
@@ -297,10 +297,10 @@ var customer = new function() {
     }
 
     this.setSaveButtonState = function ($requiredFields, $saveBtn, $emailField) {
-        var isValid = true;  
+        var isValid = true; 
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
-            if($reqField.val() === "") {
+            if($reqField.val().trim() === "") {
                 isValid = false;
             } else {
                 $reqField.removeClass('qm-field-error');
@@ -336,7 +336,7 @@ var customer = new function() {
         var isValid = true;  
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
-            if($reqField.val() === "") {
+            if($reqField.val().trim() === "") {
                 isValid = false;
                 $reqField.addClass('qm-field-error');
             } else {
