@@ -443,12 +443,7 @@ var customer = new function() {
         var props = item.properties;
         for (var key in props) {
             if(props.hasOwnProperty(key)) {
-                if(key == "dateOfBirth") {
-                    cust[key] = $.datepicker.formatDate($("#editdateOfBirth").datepicker("option", "dateFormat"),
-                        $.datepicker.parseDate('yy-mm-dd', props[key]))
-                } else {
-                    cust[key] = props[key];
-                }
+                cust[key] = props[key];
             }
         }
 
