@@ -19,8 +19,7 @@ var customMarks = new function () {
 				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark'),
 				expand_dropdown_height: function (elem) {
 					var heightOfContentSection = elem.parent().parent().parent().parent().parent().parent().find(".qm-card__content-section").height() -
-						(elem.parent().parent().parent().parent().parent().parent().find(".chosen-search").height() +
-						elem.parent().parent().parent().parent().parent().parent().find(".custom-list-header").height() + 25);
+						(elem.parent().parent().parent().parent().parent().parent().find(".chosen-search").height() + 25);
 
 					elem.parent().find(".chosen-results").css("max-height", heightOfContentSection);
 				}
