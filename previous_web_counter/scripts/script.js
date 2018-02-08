@@ -1647,6 +1647,9 @@ var servicePoint = new function () {
 		updateSelectedMarks("#visitAddMarksLbl");
 		if (moduleMultiServicesEnabled) {
 			updateNextAndPreviousServices();
+		} else {
+			$("#showServicesLink").hide();
+			$("#hideServicesLink").hide();
 		}
 
 		if (sessvars.state.visit) {
