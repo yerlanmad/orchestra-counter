@@ -127,7 +127,7 @@ var customMarks = new function () {
 		outcomeUpdateNeeded = true;
 	};
 
-	var customMarkRemove = function (rowClicked) {
+	var customMarkRemove = function (rowClicked, markName) {
 		if (servicePoint.hasValidSettings()) {
 			var removeParams = servicePoint.createParams();
 			removeParams.visitId = sessvars.state.visit.id;
@@ -138,7 +138,9 @@ var customMarks = new function () {
 				+ removeParams.servicePointId + "/visits/"
 				+ removeParams.visitId + "/marks/"
 				+ removeParams.visitMarkId));
-			customMarks.getUserStateWorkaround();
+			customMarks.getUserStateWorkaround(true);
+			util.showMessage(jQuery.i18n
+					.prop('success.removed.mark') + " " + markName);
 		}
 	};
 
@@ -207,7 +209,7 @@ var customMarks = new function () {
 							+ '</button>' + "</span>");
 
 						$(td).find(".removeMarkBtn").click(function () {
-							customMarkRemove(row);
+							customMarkRemove(row, rowData.markName);
 						});
 					}
 				}, {
