@@ -323,7 +323,7 @@ var servicePoint = new function () {
 			}
 		} else {
 			if (servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
-				util.showMessage(jQuery.i18n
+				util.showError(jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service'));
 			} else {
 				var branchSel = $("#branchListModal");
@@ -748,7 +748,7 @@ var servicePoint = new function () {
 			+ "/visits/" + addParams.visitId + "/services/"
 			+ addParams.serviceId);
 		sessvars.statusUpdated = new Date();
-		servicePoint.updateWorkstationStatus();
+		servicePoint.updateWorkstationStatus(false, false, true);
 		servicePoint.addMultiServicePressed();
 		util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', [sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName]));
 	};
@@ -767,7 +767,7 @@ var servicePoint = new function () {
 		if (returnInfo != undefined) {
 			sessvars.state = returnInfo;
 			sessvars.statusUpdated = new Date();
-			servicePoint.updateWorkstationStatus();
+			servicePoint.updateWorkstationStatus(false, false, true);
 			servicePoint.addMultiServicePressed();
 			if (serviceName) {
 				if (sessvars.currentUser.direction == "rtl") {
@@ -1372,27 +1372,27 @@ var servicePoint = new function () {
 			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED) {
 				if (!blockMesssagePopup) {
-					util.showMessage(jQuery.i18n.prop('error.no.outcome'));
+					util.showError(jQuery.i18n.prop('error.no.outcome'));
 				}
 			} else if (sessvars.state.visitState == servicePoint.visitState.DELIVERED_SERVICE_NEEDED) {
 				if (!blockMesssagePopup) {
 					util
-						.showMessage(jQuery.i18n
+						.showError(jQuery.i18n
 							.prop('error.no.delivered.service'));
 				}
 			} else if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_FOR_DELIVERED_SERVICE_NEEDED) {
 				if (!blockMesssagePopup) {
-					util.showMessage(jQuery.i18n
+					util.showError(jQuery.i18n
 						.prop('error.no.outcome.for.delivered.service'));
 				}
 			} else if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_OR_DELIVERED_SERVICE_NEEDED) {
 				if (!blockMesssagePopup) {
-					util.showMessage(jQuery.i18n
+					util.showError(jQuery.i18n
 						.prop('error.no.outcome.or.delivered.service'));
 				}
 			} else if (cfuForceSelection || !sessvars.cfuSelectionSet) {
 				if (!blockMesssagePopup) {
-					util.showMessage(jQuery.i18n.prop('error.no.cfu.selection'));
+					util.showError(jQuery.i18n.prop('error.no.cfu.selection'));
 				}
 			}
 			if (sessvars.state.visit) {
