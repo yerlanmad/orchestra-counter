@@ -1,5 +1,5 @@
 
-// UserPool
+// CounterPool
 window.$Qmatic.components.popover.CounterPoolPopoverComponent = function(options) {
     window.$Qmatic.components.popover.PoolPopoverComponent.call(this, options);
 }

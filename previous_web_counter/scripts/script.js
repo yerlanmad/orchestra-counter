@@ -1020,8 +1020,8 @@ var servicePoint = new function () {
 				+ "/visit/recycle"));
 			sessvars.statusUpdated = new Date();
 
-			spPoolUpdateNeeded = false;
-			userPoolUpdateNeeded = false;
+			spPoolUpdateNeeded = true;
+			userPoolUpdateNeeded = true;
 			queuesUpdateNeeded = false;
 
 			servicePoint.updateWorkstationStatus();
