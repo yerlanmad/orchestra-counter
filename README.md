@@ -13,7 +13,7 @@ These instructions will help you get started running this project on your local 
 
 ## What is include in this project
 
-1. Wep App
+1. Web App
 2. Utts
 3. Language properties file
 
