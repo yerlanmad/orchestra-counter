@@ -135,13 +135,6 @@
                         @at-root [dir='rtl'] & {
                             text-align: right !important;
                         }
-                        &:nth-child(2) {
-                            padding-right: 0 !important;
-                            @at-root [dir='rtl'] & {
-                                padding-right: auto !important;
-                                padding-left: 0 !important;
-                            }
-                        }
                         .removeMarkBtn {
                             display: block;
                             height: 100%;
