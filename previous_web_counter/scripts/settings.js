@@ -162,7 +162,7 @@ function showModules() {
 	}
 
 	if (buttonRecallEnabled && buttonRecycleEnabled) {
-	
+		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
@@ -174,7 +174,7 @@ function showModules() {
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 
 	} else if (buttonRecallEnabled) {
-
+		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
@@ -183,7 +183,7 @@ function showModules() {
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 
 	} else if (buttonRecycleEnabled) {
-
+		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append( 
@@ -192,11 +192,10 @@ function showModules() {
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 
 	} else {
-
+		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
-		$("#customerOptionsText").html("Would you like to <strong>call the next</strong> customer");
 	}
   
 	if (moduleChatEnabled == true){
