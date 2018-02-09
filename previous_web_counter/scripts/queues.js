@@ -217,45 +217,51 @@ var queues = new function() {
                         var ticketNumSpan = $("<a href='#' class='qm-table__ticket-code'>" + aData.ticketId + "</a>")
                         $('td:eq(0)', nRow).html(ticketNumSpan);
                         
-                        // Templates
-                        var popoverTemplate = document.querySelector('.qm-popover--queue').outerHTML.trim();
                         
-                        // Popover options
-                        var options = {
-                            template: popoverTemplate,
-                            popTarget: ticketNumSpan.get(0),
-                            ticketId: aData.ticketId,
-                            visitId: aData.id
-                        };
-                        
-                        // Popover options and initialization
-                        if ( buttonTransferFromQueueEnabled  == true ) {						
-                            options.showTransferBtn = true;
+
+                        if(!buttonCallFromQueueEnabled && !buttonTransferFromQueueEnabled && !buttonRemoveFromQueueEnabled) {
+                            ticketNumSpan.addClass('qm-table__ticket-code--disabled');
                         } else {
-                            options.showTransferBtn = false;
-                        }
-						if ( buttonRemoveFromQueueEnabled == true ) {
-                            options.showDeleteBtn = true;
-						} else {
-                            options.showDeleteBtn = false;
-                        }
-						if ( buttonCallFromQueueEnabled == true ) {						
-                            options.showCallBtn = true;
-						} else {
-                            options.showCallBtn = false;
-                        }
-                        
-                        if(servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
-                            options.disableCall = true;
-                            options.disableTransfer = true;
-                            options.disableDelete = true;
+                            // Templates
+                            var popoverTemplate = document.querySelector('.qm-popover--queue').outerHTML.trim();
+                            
+                            // Popover options
+                            var options = {
+                                template: popoverTemplate,
+                                popTarget: ticketNumSpan.get(0),
+                                ticketId: aData.ticketId,
+                                visitId: aData.id
+                            };
+                            
+                            // Popover options and initialization
+                            if ( buttonTransferFromQueueEnabled  == true ) {						
+                                options.showTransferBtn = true;
+                            } else {
+                                options.showTransferBtn = false;
+                            }
+                            if ( buttonRemoveFromQueueEnabled == true ) {
+                                options.showDeleteBtn = true;
+                            } else {
+                                options.showDeleteBtn = false;
+                            }
+                            if ( buttonCallFromQueueEnabled == true ) {						
+                                options.showCallBtn = true;
+                            } else {
+                                options.showCallBtn = false;
+                            }
+                            
+                            if(servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+                                options.disableCall = true;
+                                options.disableTransfer = true;
+                                options.disableDelete = true;
+                            }
+
+                            var popover = new window.$Qmatic.components.popover.QueuePopoverComponent(options);
+                            popover.init();
+                            
+                            queuePopovers.push(popover);
                         }
 
-                        var popover = new window.$Qmatic.components.popover.QueuePopoverComponent(options);
-                        popover.init();
-                        
-                        queuePopovers.push(popover);
-                        
                         var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
                     }
 

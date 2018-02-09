@@ -35,10 +35,19 @@
         &:focus {
             color: $secondary-color;
         }
+
+        &--disabled {
+            color: $dark-transparent82;
+            pointer-events: none;
+        }
     }
 
     &__ticket-code {
         font-weight: $font-weight-bold;
+
+        &--disabled {
+            font-weight: $font-weight-medium;
+        }
     }
 
     &__first-column {
