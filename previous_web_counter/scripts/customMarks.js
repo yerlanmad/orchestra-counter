@@ -91,15 +91,21 @@ var customMarks = new function () {
 			if (multiMarks == true && multiMarkCounter > 1) {
 				customMarks.addMultiMarks(null, markName);
 			} else {
-				sessvars.state = servicePoint.getState(spService
+				var postResponse = spService
 					.post("branches/" + customMarksParams.branchId
 					+ "/servicePoints/"
 					+ customMarksParams.servicePointId + "/visits/"
 					+ customMarksParams.visitId + "/marks/"
-					+ customMarksParams.markId));
+					+ customMarksParams.markId);
+				sessvars.state = servicePoint.getState(postResponse);
+				
+				if (postResponse) {
 				customMarks.getUserStateWorkaround(true);
 				util.showMessage(jQuery.i18n
 					.prop('success.added.mark') + " " + markName);
+				} else {
+				customMarks.getUserStateWorkaround();
+				}
 			}
 		}
 	};
@@ -132,14 +138,19 @@ var customMarks = new function () {
 			removeParams.visitId = sessvars.state.visit.id;
 			removeParams.servicePointId = sessvars.state.servicePointId;
 			removeParams.visitMarkId = customMarksTable.fnGetData(rowClicked).id;
-			sessvars.state = servicePoint.getState(spService.del("branches/"
+			var delResponse = spService.del("branches/"
 				+ removeParams.branchId + "/servicePoints/"
 				+ removeParams.servicePointId + "/visits/"
 				+ removeParams.visitId + "/marks/"
-				+ removeParams.visitMarkId));
+				+ removeParams.visitMarkId);
+			sessvars.state = servicePoint.getState(delResponse);
+			if (delResponse) {
 			customMarks.getUserStateWorkaround(true);
 			util.showMessage(jQuery.i18n
 					.prop('success.removed.mark') + " " + markName);
+			} else {
+				customMarks.getUserStateWorkaround();
+			}
 		}
 	};
 

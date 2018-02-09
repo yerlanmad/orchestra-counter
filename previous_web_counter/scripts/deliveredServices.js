@@ -54,17 +54,21 @@ var deliveredServices = new function () {
             deliveredServicesParams.visitServiceId = sessvars.state.visit.currentVisitService.id;
             deliveredServicesParams.deliveredServiceId = dsId;
             var params = deliveredServicesParams;
-            sessvars.state = servicePoint.getState(spService.post("branches/" + params.branchId + "/visits/" + params.visitId + "/services/" + params.visitServiceId + "/deliveredServices/" + params.deliveredServiceId));
+            var postResponse = spService.post("branches/" + params.branchId + "/visits/" + params.visitId + "/services/" + params.visitServiceId + "/deliveredServices/" + params.deliveredServiceId);
+            sessvars.state = servicePoint.getState(postResponse);
             sessvars.statusUpdated = new Date();
             if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
                 sessvars.state.userState == servicePoint.userState.SERVING) {
             }
 
+            if (postResponse) {
             util.showMessage(jQuery.i18n
 					.prop('success.added.delivered.service') + " " + dsName);
-
-
-            servicePoint.updateWorkstationStatus(false, true, true);
+                    servicePoint.updateWorkstationStatus(false, true, true);
+            } else {
+                    servicePoint.updateWorkstationStatus();
+            }
+            
         }
     };
 

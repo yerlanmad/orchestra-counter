@@ -768,7 +768,9 @@ var servicePoint = new function () {
 		sessvars.statusUpdated = new Date();
 		servicePoint.updateWorkstationStatus(false, false, true);
 		servicePoint.addMultiServicePressed();
-		util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', [sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName]));
+		if (sessvars.state) {
+			util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', [sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName]));
+		}
 	};
 
 	this.removeService = function (serviceId, index) {
@@ -1972,7 +1974,8 @@ var servicePoint = new function () {
 			if (typeof verticalMessage !== 'undefined'
 				&& verticalMessage != null
 				&& typeof verticalMessage.workstationMessage !== 'undefined'
-				&& verticalMessage.workstationMessage != null) {
+				&& verticalMessage.workstationMessage != null
+				&& verticalMessage.workstationMessage != "") {
 				var $contextMarketing = $('#verticalMessageRow');
 				$contextMarketing.show();
 				var contextTemplate = document.querySelector('.qm-popover--context-marketing').outerHTML.trim();
