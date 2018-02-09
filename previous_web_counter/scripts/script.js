@@ -1975,7 +1975,7 @@ var servicePoint = new function () {
 				&& verticalMessage != null
 				&& typeof verticalMessage.workstationMessage !== 'undefined'
 				&& verticalMessage.workstationMessage != null
-				&& verticalMessage.workstationMessage != "") {
+				&& $.trim(verticalMessage.workstationMessage) != "") {
 				var $contextMarketing = $('#verticalMessageRow');
 				$contextMarketing.show();
 				var contextTemplate = document.querySelector('.qm-popover--context-marketing').outerHTML.trim();
