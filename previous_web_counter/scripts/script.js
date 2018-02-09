@@ -1262,22 +1262,8 @@ var servicePoint = new function () {
 		cardNavigationController.pop()
 	};
 
-	this.notesPressed = function () {
-		if (isNotesButtonEnabled()) {
-			util.showModal("notesDialogue");
-		}
-	};
-
-	var isNotesButtonEnabled = function () {
-		return $('#notesBtn[class*=Disabled]').length == 0;
-	};
-
-	this.hideNotes = function () {
-		util.hideModal("notesDialogue");
-	};
-
 	this.saveNotes = function () {
-		var newNotes = document.getElementById("notesEdit").value;
+		var newNotes = encodeURIComponent(document.getElementById("notesEdit").value);
 		var params = {};
 		params.branchId = sessvars.branchId;
 		params.visitId = sessvars.state.visit.id;
@@ -1289,7 +1275,7 @@ var servicePoint = new function () {
 			+ params.visitId + "/parameters", params);
 
 		if (newNotes !== null && newNotes.parameterMap !== null && newNotes.parameterMap.custom1 !== "") {
-			document.getElementById("notesMessage").innerHTML = newNotes.parameterMap.custom1;
+			document.getElementById("notesMessage").innerHTML = decodeURIComponent(newNotes.parameterMap.custom1);
 		} else {
 			document.getElementById("notesMessage").innerHTML = jQuery.i18n.prop('button.add.note');
 		}
@@ -1421,8 +1407,8 @@ var servicePoint = new function () {
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
 					if (buttonNotesEnabled == true) {
-						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? sessvars.state.visit.parameterMap.custom1 : jQuery.i18n.prop('button.add.note');
-						document.getElementById("notesEdit").value = sessvars.state.visit.parameterMap.custom1;
+						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? decodeURIComponent(sessvars.state.visit.parameterMap.custom1) : jQuery.i18n.prop('button.add.note');
+						document.getElementById("notesEdit").value = decodeURIComponent(sessvars.state.visit.parameterMap.custom1);
 					}
 				}
 			}
@@ -1542,8 +1528,8 @@ var servicePoint = new function () {
 			if (sessvars.state.visit.parameterMap != undefined) {
 				if (sessvars.state.visit.parameterMap.custom1 != undefined) {
 					if (buttonNotesEnabled == true) {
-						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? sessvars.state.visit.parameterMap.custom1 : jQuery.i18n.prop('button.add.note');
-						document.getElementById("notesEdit").value = sessvars.state.visit.parameterMap.custom1;
+						document.getElementById("notesMessage").innerHTML = sessvars.state.visit.parameterMap.custom1 ? decodeURIComponent(sessvars.state.visit.parameterMap.custom1) : jQuery.i18n.prop('button.add.note');
+						document.getElementById("notesEdit").value = decodeURIComponent(sessvars.state.visit.parameterMap.custom1);
 					}
 				}
 			}
