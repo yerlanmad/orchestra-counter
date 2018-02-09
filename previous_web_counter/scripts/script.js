@@ -2159,7 +2159,7 @@ var servicePoint = new function () {
 	 */
 	var receiveEvent = function (event) {
 		var processedEvent;
-
+		
 		try {
 			processedEvent = JSON.parse(event);
 		} catch (err) {
@@ -2224,6 +2224,13 @@ var servicePoint = new function () {
 				sessvars.cfuSelectionSet = true;
 				// we can't call the logout service by ourselves, as it might be us
 				// that have logged in somewhere else
+				window.location.replace("/logout.jsp");
+				break;
+			case servicePoint.publicEvents.RESET:
+				// This event will follow servicePoint.publicEvents.USER_SERVICE_POINT_SESSION_END.
+				// #154585463 - Better handling of Publish/Nightly reset
+				sessvars.$.clearMem();
+				sessvars.cfuSelectionSet = true;
 				window.location.replace("/logout.jsp");
 				break;
 			case servicePoint.publicEvents.VISIT_TRANSFER_TO_SERVICE_POINT_POOL:
