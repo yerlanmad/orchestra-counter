@@ -6,8 +6,8 @@ This project is the standard Orchestra Counter Application found in Orchestra 7
 
 These instructions will help you get started running this project on your local machine for,
 1. Development
-    1. Local Development
-    2. Remote Development
+    1. Orchestra Installed on your local machine
+    2. Orchestra Installed on a remote machine
 2. Creating the Production Build
 3. Create the war package for distribution
 
@@ -33,9 +33,9 @@ Make sure you have installed
 npm install
 ```
 
-### Local Development
+### Orchestra Installed on your local machine
 
-In the case you have Orchestra installed on your local machine.
+In the case you are developing with an Orchestra installed on your local machine.
 
 To start development run the following command
 
@@ -43,11 +43,11 @@ To start development run the following command
 npm start
 ```
 
-Visit localhost:1337 to see the application. (If you have LiveReload installed. You should see a chrome browser open and launch the application. Please make sure live reload is enabled on the browser.)
+If the application doesn't open in your chrome browser automatically, you can visit **localhost:1337** to see the application. (If you want to see any of the changes you make in the code auto update the application in the browser, make sure live reload is enabled on the browser.)
 
-### Remote Development
+### Orchestra Installed on a remote machine
 
-In the case you have Orchestra installed on a remote machine.
+In the case you are developing with an Orchestra installed on a remote machine.
 
 Create a config.gulp.json file in the root of the project and make sure to add the remote ip,port and host details in the structure shown below.
 
@@ -67,7 +67,7 @@ To start development run the following command
 npm start
 ```
 
-Visit localhost:1337 to see the application. (If you have LiveReload installed. You should see a chrome browser open and launch the application. Please make sure live reload is enabled on the browser.)
+If the application doesn't open in your chrome browser automatically, you can visit **localhost:1337** to see the application. (If you want to see any of the changes you make in the code auto update the application in the browser, make sure live reload is enabled on the browser.)
 
 ## Creating the Production Build
 
