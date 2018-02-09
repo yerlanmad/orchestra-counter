@@ -60,6 +60,7 @@ var tooltipController = new $Qmatic.components.TooltipController();
 var queueViewController = new $Qmatic.components.QueueNavController();
 var notesController = new $Qmatic.components.NotesController();
 var contextMarketingController = new $Qmatic.components.popover.ContextMarketingPopoverController();
+var popoverController = new $Qmatic.components.popover.PopoverController();
 
 var servicePoint = new function () {
 
