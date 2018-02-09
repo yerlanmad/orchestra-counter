@@ -22,7 +22,6 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype.constructor
 window.$Qmatic.components.popover.PoolPopoverComponent.prototype 
     = $.extend(window.$Qmatic.components.popover.BasePopoverComponent.prototype, {
     init: function () {
-        this._attachOverlayEvent();
         this._attachTargetEventListeners();
     },
     _attachTargetEventListeners: function () {
@@ -41,7 +40,8 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
                 template: this.template,
                 offset: '0, 10'
             });
-    
+            
+            popoverController.pushPopover(this);
 
             var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true; 
             
@@ -54,7 +54,10 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
         }
     },
     _attachOverlayEvent: function () {
-        this.popoverOverlay.addEventListener('click', this.disposeInstance.bind(this));
+        this.popoverOverlay.addEventListener('click', this.disposeInstance.bind(this), {once: true});
+    },
+    _removeOverlayEvent: function () {
+        this.popoverOverlay.removeEventListener('click', this.disposeInstance);
     },
     _attachTemplateEvents: function () {
         var closeBtns   = this.instance._tooltipNode.querySelectorAll('.js-popover-close'),

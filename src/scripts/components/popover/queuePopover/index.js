@@ -38,7 +38,6 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype.constructor
 window.$Qmatic.components.popover.QueuePopoverComponent.prototype 
     = $.extend(window.$Qmatic.components.popover.QueuePopoverComponent.prototype, {
     init: function () {
-        this._attachOverlayEvent();
         this._attachTargetEventListeners();
         this.boundariesElement = document.querySelector('.qm-main');
     },
@@ -59,6 +58,8 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
                 offset: '0, 10'
             });
 
+            popoverController.pushPopover(this);
+
             var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true; 
             
             this._toggleInstance();
@@ -70,7 +71,10 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         }
     },
     _attachOverlayEvent: function () {
-        this.popoverOverlay.addEventListener('click', this.disposeInstance.bind(this));
+        this.popoverOverlay.addEventListener('click', this.disposeInstance.bind(this), {once: true});
+    },
+    _removeOverlayEvent: function () {
+        this.popoverOverlay.removeEventListener('click', this.disposeInstance);
     },
     _attachTemplateEvents: function () {
         // Action view

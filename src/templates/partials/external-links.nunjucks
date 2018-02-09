@@ -80,6 +80,7 @@
         <script type="text/javascript" src="scripts/components/index.js"></script>
         <script type="text/javascript" src="scripts/components/BaseComponent.js"></script>
 
+        <script type="text/javascript" src="scripts/components/popover/PopoverController.js"></script>
         <script type="text/javascript" src="scripts/components/popover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/poolPopover/index.js"></script>
         <script type="text/javascript" src="scripts/components/popover/userPoolPopover/index.js"></script>

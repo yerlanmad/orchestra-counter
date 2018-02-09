@@ -1,5 +1,5 @@
 // Popover Component
-window.$Qmatic.components.popover = {}
+window.$Qmatic.components.popover = window.$Qmatic.components.popover || {}
 
 // Base Popover Class
 window.$Qmatic.components.popover.BasePopoverComponent = function (options) {
