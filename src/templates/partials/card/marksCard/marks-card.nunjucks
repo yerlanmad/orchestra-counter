@@ -44,6 +44,12 @@
                 </div>
             </div>
         </div>
+        <div class="custom-list-header">
+            <div class="custom-list-header-col" id="markNameColumn">
+            </div>
+            <div class="custom-list-header-col" id="markTimeColumn">
+            </div>
+        </div>
     </header>
 {% endblock %}
 

@@ -18,8 +18,8 @@ var customMarks = new function () {
 				allow_single_deselect: false,
 				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark'),
 				expand_dropdown_height: function (elem) {
-					var heightOfContentSection = elem.parent().parent().parent().parent().parent().parent().find(".qm-card__content-section").height() -
-						(elem.parent().parent().parent().parent().parent().parent().find(".chosen-search").height() + 25);
+					var heightOfContentSection = elem.parent().parent().parent().parent().parent().parent().find(".qm-card__content-section").height()
+						 - 25;
 
 					elem.parent().find(".chosen-results").css("max-height", heightOfContentSection);
 				}
@@ -183,7 +183,7 @@ var customMarks = new function () {
 					"sType": "qm-sort",
 					"sDefaultContent": null,
 					"bSortable": false,
-					"sWidth": "70%"
+					"sWidth": "auto"
 				},
 			/* D.serv. visit mark id */{
 					"bSearchable": false,
@@ -206,7 +206,7 @@ var customMarks = new function () {
 					"mDataProp": "eventTime",
 					"sType": "qm-sort",
 					"sDefaultContent": null,
-					"sWidth": "30%",
+					"sWidth": "auto",
 					"bSortable": false,
 					"createdCell": function (td, cellData, rowData, row, col) {
 
@@ -230,18 +230,6 @@ var customMarks = new function () {
 					"bSortable": false,
 					"sDefaultContent": ""
 				}];
-			var headerCallback = function (nHead, aasData, iStart, iEnd,
-				aiDisplay) {
-				if (nHead.getElementsByTagName('th')[0].innerHTML.length == 0) {
-					nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n
-						.prop('info.custom.mark.name');
-					nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n
-						.prop('info.custom.mark.time');
-				}
-			};
-			var rowCallback = function (nRow, aData, iDisplayIndex) {
-				return nRow;
-			};
 
 			customMarksTable = $('#customMarks')
 				.dataTable(
@@ -256,8 +244,8 @@ var customMarks = new function () {
 						"sZeroRecords": ""
 					},
 					"bFilter": false,
-					"fnRowCallback": rowCallback,
-					"fnHeaderCallback": headerCallback,
+					"fnRowCallback": null,
+					"fnHeaderCallback": null,
 					"bLengthChange": false,
 					"bProcessing": true,
 					"bPaginate": false,

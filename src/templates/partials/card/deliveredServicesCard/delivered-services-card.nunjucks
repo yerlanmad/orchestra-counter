@@ -17,6 +17,14 @@
                 </div>
             </div>
         </div>
+         <div class="custom-list-header">
+            <div class="custom-list-header-col" id="dsNameColoumn">
+            </div>
+            <div class="custom-list-header-col" id="outcomeNameColoumn">
+            </div>
+            <div class="custom-list-header-col" id="dsTimeColoumn">
+            </div>
+        </div>
     </header>
 {% endblock %}
 

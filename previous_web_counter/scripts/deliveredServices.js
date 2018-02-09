@@ -33,7 +33,7 @@ var deliveredServices = new function () {
 
             util.sortArrayCaseInsensitive(dsResponse, "name")
             util.populateSelect(dsResponse, dropdownFilter);
-            
+
             dropdownFilter.trigger("chosen:updated");
             this.updateDeliveredServices();
         }
@@ -62,13 +62,33 @@ var deliveredServices = new function () {
             }
 
             if (postResponse) {
-            util.showMessage(jQuery.i18n
-					.prop('success.added.delivered.service') + " " + dsName);
-                    servicePoint.updateWorkstationStatus(false, true, true);
+                util.showMessage(jQuery.i18n
+                    .prop('success.added.delivered.service') + " " + dsName);
+                servicePoint.updateWorkstationStatus(false, true, true);
             } else {
-                    servicePoint.updateWorkstationStatus();
+                servicePoint.updateWorkstationStatus();
             }
-            
+
+        }
+    };
+
+    var removeDeliveredService = function (rowClicked, dsName) {
+        if (servicePoint.hasValidSettings()) {
+            var removeParams = servicePoint.createParams();
+            removeParams.visitId = sessvars.state.visit.id;
+            removeParams.visitDeliveredServiceId = deliveredServicesTable.fnGetData(rowClicked).id;
+            var delResponse = spService.del("branches/"
+                + removeParams.branchId + "/visits/"
+                + removeParams.visitId + "/deliveredServices/"
+                + removeParams.visitDeliveredServiceId);
+            sessvars.state = servicePoint.getState(delResponse);
+            if (delResponse) {
+                customMarks.getUserStateWorkaround(true);
+                util.showMessage(jQuery.i18n
+                    .prop('success.removed.ds') + " " + dsName);
+            } else {
+                customMarks.getUserStateWorkaround();
+            }
         }
     };
 
@@ -88,7 +108,7 @@ var deliveredServices = new function () {
                     "mDataProp": "deliveredServiceName",
                     "sDefaultContent": null,
                     "bSortable": false,
-                    "sWidth": "33%",
+                    "sWidth": "auto",
                     "sType": "qm-sort"
                 },
 /* D.serv. jiql id */  {
@@ -112,7 +132,7 @@ var deliveredServices = new function () {
                     "mDataProp": "visitOutcome",
                     "sDefaultContent": null,
                     "bSortable": false,
-                    "sWidth": "45%",
+                    "sWidth": "auto",
                     "sType": "qm-sort"
                 },
 /* Delivered time */   {
@@ -120,8 +140,23 @@ var deliveredServices = new function () {
                     "mDataProp": "eventTime",
                     "sDefaultContent": null,
                     "bSortable": false,
-                    "sWidth": "22%",
-                    "sType": "qm-sort"
+                    "sWidth": "auto",
+                    "sType": "qm-sort",
+                    "createdCell": function (td, cellData, rowData, row, col) {
+
+                        $(td).append(
+                            "<span class=\"removeMarkBtn\" " + "title=\""
+                            + jQuery.i18n.prop("action.remove.mark.click")
+                            + "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
+                            + '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
+                            + '<span class="sr-only">delete button</span>'
+                            + '</button>' + "</span>");
+
+                        $(td).find(".removeMarkBtn").click(function () {
+                            
+                            removeDeliveredService(row, rowData.deliveredServiceName);
+                        });
+                    }
                 },
 /* D.serv. out req. */ {
                     "bSearchable": false,
@@ -132,11 +167,11 @@ var deliveredServices = new function () {
                 }
             ];
             var headerCallback = function (nHead, aasData, iStart, iEnd, aiDisplay) {
-                if (nHead.getElementsByTagName('th')[0].innerHTML.length == 0) {
-                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
-                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.delivered.service.outcome');
-                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.delivered.service.time');
-                }
+                // if (nHead.getElementsByTagName('th')[0].innerHTML.length == 0) {
+                //     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
+                //     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.delivered.service.outcome');
+                //     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.delivered.service.time');
+                // }
             };
             var rowCallback = function (nRow, aData, iDisplayIndex) {
                 var outcomeDataIndex = "visitOutcome";
@@ -147,7 +182,7 @@ var deliveredServices = new function () {
                     var params = servicePoint.createParams();
                     params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
                     params.deliveredServiceId = aData["deliveredServiceId"];
-                    
+
                     var possibleOutcomes = spService.get("branches/" + params.branchId + "/services/" + params.serviceId + "/deliveredServices/" + params.deliveredServiceId + "/outcomes");
                     util.sortArrayCaseInsensitive(possibleOutcomes, "name");
 
@@ -179,7 +214,7 @@ var deliveredServices = new function () {
                     });
 
                     $('td:eq(1)', nRow).html(html);
-                    html.wrap("<div class='cross-browser-select "+ (html.val() == -1 ? "invalid" : "") +"'></div>")
+                    html.wrap("<div class='cross-browser-select " + (html.val() == -1 ? "invalid" : "") + "'></div>")
                     html.before($("<div class='native-like-select select-carrot-icon'>" + html.find(":selected").text() + "</div>")
                     );
                 }

@@ -167,6 +167,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         
         // Add Marks Card
         i18nQmBtn("addMarksToVisitBtn", 'button.add.markToVisit');
+        i18nSafe("markNameColumn", 'info.custom.mark.name');
+        i18nSafe("markTimeColumn", 'info.custom.mark.time');
+
         
         // Add Services Card
         i18nSafe("visitCardAddServicesLbl", 'info.card.addServicesCard.addServices');
@@ -208,6 +211,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeAppend("addDeliveredServicesHeader", 'info.delivered.services');
         i18nSafeAppend("addDeliveredServices", 'info.ds.addDs');
         i18nSafeAppend("selectADeliveredService", 'info.ds.selectDs');
+        i18nSafe("dsNameColoumn","info.delivered.service.name");
+        i18nSafe("outcomeNameColoumn","info.delivered.service.outcome");
+        i18nSafe("dsTimeColoumn","info.delivered.service.time");
         
         // Customer details card
         i18nSafeAppend("customerListLabel", 'info.customer.details.label');

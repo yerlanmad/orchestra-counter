@@ -23,6 +23,21 @@
                     }
                 }
             }
+            .custom-list-header {
+                vertical-align: middle;
+                color: $dark-transparent62;
+                border-bottom: 1px solid $dark-transparent12;
+                font-weight: 500;
+                font-size: rem(12px);
+                display: flex;
+                @at-root [dir='rtl'] & {
+                    text-align: right;
+                }
+                &-col {
+                    flex: 1;
+                    padding: rem(10px);
+                }
+            }
         }
         &__content-section {
             * {
@@ -32,6 +47,9 @@
             }
             flex-grow: 1;
             overflow: auto;
+            .dataTables_scrollHead{
+                display: none;
+            }
             .dataTables_scrollHeadInner {
                 width: 100% !important;
             }
