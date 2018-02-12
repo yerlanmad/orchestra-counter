@@ -30,7 +30,7 @@ buttonTransferLastEnabled  = true; 				// Transfer to last in Queue Button
 buttonTransferSortEnabled  = true;					// Transfer Sorted in Queue Button
 moduleChatEnabled = false;							// Chat Module
 
-queueRefeshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
+queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
 
 function showModules() {

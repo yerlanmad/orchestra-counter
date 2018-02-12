@@ -40,6 +40,10 @@ var queues = new function() {
                         "bVisible": false,
                         "mDataProp": "id",
                         "sDefaultContent" : null},
+                    /* Queue serviceLevel */          {"bSearchable": false,
+                        "bVisible": false,
+                        "mDataProp": "serviceLevel",
+                        "sDefaultContent" : null},
                     /* Queue waiting num */ {"sClass": "qm-table__middle-column qm-table__middle-column--right-align",
                         "mDataProp": "customersWaiting",
                         "sType": "qm-sort",
@@ -65,16 +69,19 @@ var queues = new function() {
         
                         $('td:eq(0) > a.qm-table__queue-name', nRow).click(function(e) {
                             e.preventDefault();
-                            queueClicked(queuesTable, nRow);
+                            queueClicked(queuesTable, nRow, aData);
                         });
                     } else {
                         $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
                     }
+
+                    
                     if(aData.customersWaiting === 0) {
                         $('td:eq(2)', nRow).html("--");
                     } else {
                         $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
                     }
+                    setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
                     
                     return nRow;
                 }; 
@@ -88,16 +95,21 @@ var queues = new function() {
         
                         $('td:eq(0) > a.qm-table__queue-name', nRow).click(function(e) {
                             e.preventDefault();
-                            queueClicked(myQueuesTable, nRow);
+                            queueClicked(myQueuesTable, nRow, aData);
                         });
                     } else {
                         $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
                     }
+
+                    
+
                     if(aData.customersWaiting === 0) {
                         $('td:eq(2)', nRow).html("--");
                     } else {
                         $('td:eq(2)', nRow).html(util.formatIntoMM(parseInt(aData.waitingTime)));
                     }
+
+                    setSLAIcon(aData.serviceLevel, aData.waitingTime, nRow);
                     return nRow;
                 }; 
 
@@ -115,6 +127,7 @@ var queues = new function() {
             // Sadly clearing and adding data to the queue "data table" resets the position of our search result
             customer.positionCustomerResult();
         }
+        
         if(keepCalling) {
             if(sessvars.queueTimer !== undefined) {
                 clearTimeout(sessvars.queueTimer);
@@ -122,9 +135,27 @@ var queues = new function() {
             }
             sessvars.queueTimer = setTimeout(function() {
                 queues.updateQueues(true);
-            }, queueRefeshTime*1000);
+            }, queueRefreshTime*1000);
         }
     };
+
+    var setSLAIcon = function(serviceLevel, waitingTime, nRow) {
+        if(serviceLevel && serviceLevel !== 0) { 
+            var waitingTimeInMinutes = 0
+            if(waitingTime && waitingTime !== 0) {
+                waitingTimeInMinutes = waitingTime / 60;
+            
+                if(waitingTimeInMinutes < serviceLevel * 0.75) {
+                    $(nRow).addClass('qm-sla qm-sla--normal');
+                } else if(waitingTimeInMinutes >= serviceLevel * 0.75
+                    && waitingTimeInMinutes <= serviceLevel * 0.99) {
+                    $(nRow).addClass('qm-sla qm-sla--warning');
+                } else {
+                    $(nRow).addClass('qm-sla qm-sla--danger');
+                }
+            }
+        }
+    }
 
     var allQueuesInitFn = function (queues) {
         var waitingCustomers = getNumberOfWaitingCustomers(queues);
@@ -158,7 +189,7 @@ var queues = new function() {
         });
     };
 
-    var queueClicked = function(queueTableContainingRow, rowClicked) {
+    var queueClicked = function(queueTableContainingRow, rowClicked, rowAData) {
         if(servicePoint.hasValidSettings() && sessvars.state.servicePointState == servicePoint.servicePointState.OPEN &&
             !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
             sessvars.clickedQueueId = queueTableContainingRow.fnGetData(rowClicked).id; //ql queue id
@@ -172,6 +203,7 @@ var queues = new function() {
                 params.branchId = sessvars.branchId;
                 params.queueId = sessvars.clickedQueueId;
                 var tickets = spService.get("branches/" + params.branchId + "/queues/" + params.queueId + "/visits/full");
+                
                 util.sortArrayCaseInsensitive(tickets, "ticketId");
                 if(tickets.length > 0) {
                     ticketsTable.fnAddData(tickets);
@@ -217,7 +249,7 @@ var queues = new function() {
                         var ticketNumSpan = $("<a href='#' class='qm-table__ticket-code'>" + aData.ticketId + "</a>")
                         $('td:eq(0)', nRow).html(ticketNumSpan);
                         
-                        
+                        setSLAIcon(rowAData.serviceLevel, aData.waitingTime, nRow);
 
                         if(!buttonCallFromQueueEnabled && !buttonTransferFromQueueEnabled && !buttonRemoveFromQueueEnabled) {
                             ticketNumSpan.addClass('qm-table__ticket-code--disabled');
