@@ -32,6 +32,7 @@ Make sure you have installed
 ```
 npm install
 ```
+3. Copy the properties file found in the lang folder into C:\qmatic\orchestra\system\conf\lang folder of your orchestra system.
 
 ### Orchestra Installed on your local machine
 
