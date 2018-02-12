@@ -111,6 +111,7 @@
         padding: rem(0 $global-standard-padding / 2);
         font-size: rem(16px);
         font-weight: $font-weight-light;
+        white-space: normal;
         &+& {
             // margin-left: rem($global-standard-margin / 2);
             // @at-root [dir='rtl'] & {
