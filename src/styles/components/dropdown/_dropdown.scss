@@ -158,22 +158,18 @@
                         padding: 0 10px 0 30px;
                     }
                 }
-                &:after {
+                &::after {
                     background: transparent;
                     content: "\e92f";
                     font-family: 'icomoon';
                     font-size: rem(24px);
-                    position: absolute;
-                    right: rem(15px);
-                    top: rem(15px);
-                    height: rem(36px);
-                    line-height: rem(36px);
+                    
+                    position: relative;
+                    right: rem(34px);
+                    top: rem(3px);
                     color: $dark-transparent42;
-                    text-align: right;
                     @at-root [dir='rtl'] & {
-                        right: 0;
-                        left: rem(15px);
-                        text-align: left;
+                        right: rem(-34px);
                     }
                 }
             }
