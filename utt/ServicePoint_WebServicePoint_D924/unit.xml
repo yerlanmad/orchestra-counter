@@ -37,6 +37,9 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.1    2018-02-12   Added parameter for default walkin        lakcal
+                            service 
+
     7.0.0.0    2018-01-17   label and tooltip tweaks for reskin       lakcal
 	
     2.12.0     2016-11-18   USER_SERVICE_POINT_SESSION_END is now     johper, marwah
@@ -68,7 +71,7 @@
 
 <unit name="WebServicePoint_D924"
       frameworkVersion="2"
-      unitVersion="7.0.0.0"
+      unitVersion="7.0.0.1"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -283,6 +286,14 @@
           sortOrder="5027"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
+        <parameter name="wdService"
+          description="Default service used for walk in"
+          sortOrder="5027"
+          label="Default walk in service"
+          type="Service"
+          writeLevel="profile"
+          privilege="branchAdmin"
+          multiSelection="false"/>
         <parameter name="btnQueueRemove"
           type="Boolean"
           defaultValue="true"

@@ -21,6 +21,7 @@ buttonNotesEnabled = false;							// Edit/Add Notes Button
 buttonNoShowsEnabled = true;						// No Shows Button
 buttonRecallEnabled = false;						// Recall Button
 buttonWalkDirectEnabled = true;						// Walk Direct Button
+buttonWalkDirectService = '';						// Default Walk Direct
 buttonRemoveFromQueueEnabled = true;				// Remove from Queue Button 
 buttonTransferFromQueueEnabled = true;				// Transfer from Queue Button 
 buttonCallFromQueueEnabled = false;					// Call from Queue Button 
@@ -274,7 +275,9 @@ function showModules() {
 		if ( params.btnWalkDirect != undefined) {
 			buttonWalkDirectEnabled = params.btnWalkDirect;				// Walk Direct Button
 		}
-			
+		if ( params.wdService != undefined) {
+			buttonWalkDirectService = params.wdService;				// Walk Direct Default Service
+		}
 		if ( params.btnQueueRemove != undefined) {
 			buttonRemoveFromQueueEnabled = params.btnQueueRemove ;		// Remove from Queue Button 
 		}

@@ -259,23 +259,23 @@ var servicePoint = new function () {
 			var myQueues = spService.get('branches/' + sessvars.branchId
 				+ '/workProfiles/'
 				+ sessvars.workProfileId + '/queues') || [];
-			
+
 
 			window.myQueueIds = _.map(myQueues, 'id');
 
-			if(allQueuesBtnEnabled === true) {
+			if (allQueuesBtnEnabled === true) {
 				var allQueues = spService.get("branches/" + sessvars.branchId + "/queues");
 
-				var queuesAreTheSame = _.reduce(allQueues, function(r, e) {
-					var q = _.find(myQueues, function(el) { return e.id == el.id })
-					if(q && r) {
+				var queuesAreTheSame = _.reduce(allQueues, function (r, e) {
+					var q = _.find(myQueues, function (el) { return e.id == el.id })
+					if (q && r) {
 						return true;
 					} else {
 						return false;
 					}
 				}, true);
 
-				if(queuesAreTheSame === true) {
+				if (queuesAreTheSame === true) {
 					$('#allQueuesTab').hide();
 				}
 			}
@@ -1073,72 +1073,78 @@ var servicePoint = new function () {
 	};
 
 	this.walkDirectPressed = function () {
-		if (servicePoint.hasValidSettings()
-			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
+		if (!cardNavigationController.isTopComponent($Qmatic.components.card.walkInCard)) {
+			if (servicePoint.hasValidSettings()
+				&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded())/*
 																		 * !(sessvars.state.userState ==
 																		 * servicePoint.userState.SERVING &&
 																		 * sessvars.forceMark &&
 																		 * !hasMark())
 																		 */) {
 
-			cardNavigationController.push($Qmatic.components.card.walkInCard);
-			queueViewController.navigateToOverview();
-			var t = new Date();
-			var url = "/rest/servicepoint/branches/" + sessvars.branchId
-				+ "/services?call=" + t;
-			if ((walkTable == undefined && prevBranchId == sessvars.branchId) || prevBranchId != sessvars.branchId) {
-				var columns = [
+				// If no default walkdirect service is set in utt
+				if (buttonWalkDirectService == "") {
+					cardNavigationController.push($Qmatic.components.card.walkInCard);
+					queueViewController.navigateToOverview();
+					var t = new Date();
+					var url = "/rest/servicepoint/branches/" + sessvars.branchId
+						+ "/services?call=" + t;
+					if ((walkTable == undefined && prevBranchId == sessvars.branchId) || prevBranchId != sessvars.branchId) {
+						var columns = [
 				/* Service ext name */{
-						"bSearchable": false,
-						"bVisible": false,
-						"mDataProp": "externalName",
-						"sType": "qm-sort"
-					},
+								"bSearchable": false,
+								"bVisible": false,
+								"mDataProp": "externalName",
+								"sType": "qm-sort"
+							},
 				/* Service int name */{
-						"sClass": "firstColumn",
-						"mDataProp": "internalName",
-						"sType": "qm-sort"
-					},
+								"sClass": "firstColumn",
+								"mDataProp": "internalName",
+								"sType": "qm-sort"
+							},
 				/* Service id */{
-						"bSearchable": false,
-						"bVisible": false,
-						"mDataProp": "id",
-						"sType": "qm-sort"
-					},
+								"bSearchable": false,
+								"bVisible": false,
+								"mDataProp": "id",
+								"sType": "qm-sort"
+							},
 				/* Service int desc */{
-						"sClass": "lastColumn",
-						"mDataProp": "internalDescription",
-						"bSearchable": false,
-						"bVisible": false,
-						"sType": "qm-sort"
-					},
+								"sClass": "lastColumn",
+								"mDataProp": "internalDescription",
+								"bSearchable": false,
+								"bVisible": false,
+								"sType": "qm-sort"
+							},
 				/* Service ext desc */{
-						"bSearchable": false,
-						"bVisible": false,
-						"mDataProp": "externalDescription",
-						"sType": "qm-sort"
-					}];
-				var rowCallback = function (nRow, aData, iDisplayIndex) {
-					/* Set onclick action */
-					nRow.onclick = walkServiceClicked;
-					$(nRow).find("td").html($("<a href='#'></a>").text($(nRow).find("td").text()));
-					return nRow;
-				};
-				walkTable = util.buildTableJson({
-					"tableId": "walkDirectServices",
-					"url": url,
-					"rowCallback": rowCallback,
-					"columns": columns,
-					"filter": true,
-					"customFilter": true,
-					"scrollYHeight": "auto",
-					"infoFiltered": "info.filtered.fromEntries",
-					"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search")
-				});
-				var sorting = [[1, 'asc']];
-				walkTable.fnSort(sorting);
+								"bSearchable": false,
+								"bVisible": false,
+								"mDataProp": "externalDescription",
+								"sType": "qm-sort"
+							}];
+						var rowCallback = function (nRow, aData, iDisplayIndex) {
+							/* Set onclick action */
+							nRow.onclick = walkServiceClicked;
+							$(nRow).find("td").html($("<a href='#'></a>").text($(nRow).find("td").text()));
+							return nRow;
+						};
+						walkTable = util.buildTableJson({
+							"tableId": "walkDirectServices",
+							"url": url,
+							"rowCallback": rowCallback,
+							"columns": columns,
+							"filter": true,
+							"customFilter": true,
+							"scrollYHeight": "auto",
+							"infoFiltered": "info.filtered.fromEntries",
+							"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search")
+						});
+						var sorting = [[1, 'asc']];
+						walkTable.fnSort(sorting);
+					}
+				} else {
+					walkServiceClicked(undefined, buttonWalkDirectService);
+				}
 			}
-
 		}
 	};
 
@@ -1184,12 +1190,13 @@ var servicePoint = new function () {
 		}
 	};
 
-	var walkServiceClicked = function () {
+	// @param serviceId - call walkdirect on a give id, if not provided get from list selection
+	var walkServiceClicked = function (event, serviceId) {
 		if (servicePoint.hasValidSettings()) {
 			var walkParams = servicePoint.createParams();
 
 			var serviceIdArray = [];
-			serviceIdArray[0] = walkTable.fnGetData(this).id;
+			serviceIdArray[0] = serviceId ? serviceId : walkTable.fnGetData(this).id;
 			walkParams.json = '{"services":[' + serviceIdArray + ']}'; // service
 			// id
 			spPoolUpdateNeeded = false;
@@ -2149,7 +2156,7 @@ var servicePoint = new function () {
 	 */
 	var receiveEvent = function (event) {
 		var processedEvent;
-		
+
 		try {
 			processedEvent = JSON.parse(event);
 		} catch (err) {
