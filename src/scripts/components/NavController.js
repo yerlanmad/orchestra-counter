@@ -83,6 +83,10 @@ window.$Qmatic.components.NavController = function (navSelector) {
         return window.$Qmatic.utils.containsObject(component, this.navigationStack);
     }
 
+    this.isTopComponent = function (component) {
+        return this.navigationStack[this.navigationStack.length - 1] === component;
+    }
+
     this.onInit.apply(this, arguments);
 };
 
