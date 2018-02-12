@@ -53,7 +53,7 @@ var projectedVisits = new function() {
         if(keepCalling) {
             sessvars.projectedVisitsTimer = setTimeout(function() {
                 projectedVisits.updateProjectedVisits(true);
-            }, queueRefeshTime*1000);
+            }, queueRefreshTime*1000);
         }
     };
 

@@ -4,6 +4,7 @@
         <tr>
             <th class="queueName"></th>
             <th class="queueId"></th>
+            <th class="queueSLA"></th>
             <th class="queueWaitingTime"></th>
             <th class="queueCustomersWaiting"></th>
         </tr>

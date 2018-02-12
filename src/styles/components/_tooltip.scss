@@ -2,6 +2,19 @@
     
 }
 
+.button-tooltip {
+    & + & {
+        .qm-action-btn {
+            margin-left: rem(12px);
+            
+            @at-root [dir='rtl'] & {
+                margin-left: 0;
+                margin-right: rem(12px);
+            }
+        }
+    }
+}
+
 .tooltip,
 .popper {
 

@@ -1,0 +1,53 @@
+.qm-sla {
+    .qm-table__last-column {
+
+        @at-root #tickets & {
+            &:before {
+                font-size: rem(32px);
+                line-height: rem(22px);
+            }
+        }
+
+        &:before {
+            content: "\e913";
+            @extend .icon-styles;
+            display: inline-block;
+            font-size: rem(32px);
+            line-height: rem(24px);
+            vertical-align: top;
+            margin-right: rem(2px);
+        }
+
+        @at-root [dir='rtl'] & {
+            &:before {
+                margin-right: 0;
+                margin-left: rem(2px);
+            }
+        }
+    }
+
+    &--normal {
+        .qm-table__last-column {
+            &:before {
+                content: none; // Remove this if this is supposed to be shown
+                color: $light-transparent75;
+            }
+        }
+    }
+
+    &--warning {
+        .qm-table__last-column {
+            &:before {
+                color: $sla-warning-color;
+            }
+        }
+    }
+
+    &--danger {
+        .qm-table__last-column {
+            &:before {
+                color: $sla-danger-color;
+            }
+        }
+    }
+}
