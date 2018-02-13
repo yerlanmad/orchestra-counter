@@ -76,6 +76,7 @@ var servicePoint = new function () {
 	var displayQueueTimeoutId;
 	var logoffTimer = null;
 	var prevBranchId = null;
+	var minTimeBetweenCallsTimer = null;
 
 	var cfuForceSelection = false;
 
@@ -665,28 +666,33 @@ var servicePoint = new function () {
 	};
 
 	this.recall = function () {
-		if (servicePoint.hasValidSettings()
-			&& sessvars.state.userState == servicePoint.userState.SERVING
-			&& sessvars.state.visit.recallAllowed) {
-			var params = servicePoint.createParams();
-			sessvars.state = servicePoint.getState(spService
-				.putCallback("branches/" + params.branchId
-				+ "/servicePoints/" + params.servicePointId
-				+ "/visit/recall"));
+		if (!!!minTimeBetweenCallsTimer) {
+			if (servicePoint.hasValidSettings()
+				&& sessvars.state.userState == servicePoint.userState.SERVING
+				&& sessvars.state.visit.recallAllowed) {
+				var params = servicePoint.createParams();
+				sessvars.state = servicePoint.getState(spService
+					.putCallback("branches/" + params.branchId
+					+ "/servicePoints/" + params.servicePointId
+					+ "/visit/recall"));
 
-			sessvars.statusUpdated = new Date();
-			delServUpdateNeeded = false;
-			outcomeUpdateNeeded = false;
-			spPoolUpdateNeeded = false;
-			userPoolUpdateNeeded = false;
-			queuesUpdateNeeded = false;
-			journeyUpdateNeeded = false;
-			trtUpdateNeeded = false;
-			servicePoint.updateWorkstationStatus();
-			if (sessvars.state && sessvars.state.visitState
-				&& sessvars.state.visitState !== "VISIT_IN_DISPLAY_QUEUE") {
-				util.twinkleTicketNumber();
+				sessvars.statusUpdated = new Date();
+				delServUpdateNeeded = false;
+				outcomeUpdateNeeded = false;
+				spPoolUpdateNeeded = false;
+				userPoolUpdateNeeded = false;
+				queuesUpdateNeeded = false;
+				journeyUpdateNeeded = false;
+				trtUpdateNeeded = false;
+				servicePoint.updateWorkstationStatus();
+				this.setTimerToBlockCalls();
+				if (sessvars.state && sessvars.state.visitState
+					&& sessvars.state.visitState !== "VISIT_IN_DISPLAY_QUEUE") {
+					util.twinkleTicketNumber();
+				}
 			}
+		} else {
+			util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
 		}
 	};
 
@@ -926,60 +932,76 @@ var servicePoint = new function () {
 		modalNavigationController.popModal($Qmatic.components.modal.nextServices);
 	};
 
+	this.setTimerToBlockCalls = function () {
+		// If utt has a reading to set mintime between calls, then set timer before which cannot call again.
+		if (minTimeBetweenCalls != "" && parseInt(minTimeBetweenCalls) > 0) {
+			minTimeBetweenCallsTimer = setTimeout(function () {
+				minTimeBetweenCallsTimer = null;
+			}, parseInt(minTimeBetweenCalls) * 1000);
+		}
+	}
+
 	this.callNext = function () {
-		var params = servicePoint.createParams();
-		if (servicePoint.hasValidSettings()
-			&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED)) {
-			var callNextResponse = spService.post("branches/"
-				+ params.branchId + "/servicePoints/"
-				+ params.servicePointId + "/visits/next");
-			if (callNextResponse) {
-				sessvars.state = servicePoint.getState(callNextResponse);
-				sessvars.statusUpdated = new Date();
 
-				if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-					util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
-				} else {
-					// TODO: Calling should always start a user service point
-					// session if none is started, implement in connectors
-					if (sessvars.state.userState == servicePoint.userState.NO_STARTED_SERVICE_POINT_SESSION) {
-						// the service point will be closed after application login
-						// since it's a single session service point
-						sessvars.state = servicePoint.getState(spService
-							.putCallback("branches/" + params.branchId
-							+ "/servicePoints/" + params.servicePointId
-							+ "/users/" + params.userName));
-						sessvars.statusUpdated = new Date();
+		if (!!!minTimeBetweenCallsTimer) {
+			var params = servicePoint.createParams();
+			if (servicePoint.hasValidSettings()
+				&& !(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED)) {
+				var callNextResponse = spService.post("branches/"
+					+ params.branchId + "/servicePoints/"
+					+ params.servicePointId + "/visits/next");
+				if (callNextResponse) {
+					sessvars.state = servicePoint.getState(callNextResponse);
+					sessvars.statusUpdated = new Date();
+
+					if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
+						util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
+					} else {
+						// TODO: Calling should always start a user service point
+						// session if none is started, implement in connectors
+						if (sessvars.state.userState == servicePoint.userState.NO_STARTED_SERVICE_POINT_SESSION) {
+							// the service point will be closed after application login
+							// since it's a single session service point
+							sessvars.state = servicePoint.getState(spService
+								.putCallback("branches/" + params.branchId
+								+ "/servicePoints/" + params.servicePointId
+								+ "/users/" + params.userName));
+							sessvars.statusUpdated = new Date();
+							servicePoint.updateWorkstationStatus();
+							sessvars.state = servicePoint.getState(spService
+								.post("branches/" + params.branchId
+								+ "/servicePoints/" + params.servicePointId
+								+ "/visits/next"));
+							sessvars.statusUpdated = new Date();
+						} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+							&& sessvars.state.visit == null) {
+							// no tickets left in the queue(s) for the selected prio
+							util.showError(jQuery.i18n
+								.prop("info.no.waiting.customers"));
+
+							// NEW 20131203. Send APPLICATION event
+							var noCustWaitingEvent = {
+								"M": "E",
+								"E": {
+									"evnt": "NO_CUSTOMERS_WAITING",
+									"type": "APPLICATION",
+									"prm": {}
+								}
+							};
+							noCustWaitingEvent.E.prm.uid = sessvars.servicePointUnitId
+								+ ":" + this.SW_SERVICE_POINT;
+							qevents.publish('/events/APPLICATION', noCustWaitingEvent);
+						}
+
+						this.setTimerToBlockCalls();
+						queueViewController.navigateToOverview();
 						servicePoint.updateWorkstationStatus();
-						sessvars.state = servicePoint.getState(spService
-							.post("branches/" + params.branchId
-							+ "/servicePoints/" + params.servicePointId
-							+ "/visits/next"));
-						sessvars.statusUpdated = new Date();
-					} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-						&& sessvars.state.visit == null) {
-						// no tickets left in the queue(s) for the selected prio
-						util.showError(jQuery.i18n
-							.prop("info.no.waiting.customers"));
-
-						// NEW 20131203. Send APPLICATION event
-						var noCustWaitingEvent = {
-							"M": "E",
-							"E": {
-								"evnt": "NO_CUSTOMERS_WAITING",
-								"type": "APPLICATION",
-								"prm": {}
-							}
-						};
-						noCustWaitingEvent.E.prm.uid = sessvars.servicePointUnitId
-							+ ":" + this.SW_SERVICE_POINT;
-						qevents.publish('/events/APPLICATION', noCustWaitingEvent);
+						sessvars.currentCustomer = null;
 					}
-					queueViewController.navigateToOverview();
-					servicePoint.updateWorkstationStatus();
-					sessvars.currentCustomer = null;
 				}
 			}
+		} else {
+			util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
 		}
 	};
 
@@ -1192,77 +1214,84 @@ var servicePoint = new function () {
 
 	// @param serviceId - call walkdirect on a give id, if not provided get from list selection
 	var walkServiceClicked = function (event, serviceId) {
-		if (servicePoint.hasValidSettings()) {
-			var walkParams = servicePoint.createParams();
+		if (!!!minTimeBetweenCallsTimer) {
+			if (servicePoint.hasValidSettings()) {
+				var walkParams = servicePoint.createParams();
 
-			var serviceIdArray = [];
-			serviceIdArray[0] = serviceId ? serviceId : walkTable.fnGetData(this).id;
-			walkParams.json = '{"services":[' + serviceIdArray + ']}'; // service
-			// id
-			spPoolUpdateNeeded = false;
-			userPoolUpdateNeeded = false;
-			queuesUpdateNeeded = false;
-			sessvars.state = servicePoint.getState(spService
-				.postParams("branches/" + walkParams.branchId
-				+ "/servicePoints/" + walkParams.servicePointId
-				+ "/visits", walkParams));
-			if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
-				sessvars.statusUpdated = new Date();
-			}
-			if (sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
-				if (startUserSession(servicePoint.createParams())) {
-					sessvars.state = servicePoint.getState(spService
-						.postParams("branches/" + walkParams.branchId
-						+ "/servicePoints/"
-						+ walkParams.servicePointId + "/visits",
-						walkParams));
-					if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
-						sessvars.statusUpdated = new Date();
-					}
-				} else {
-					cardNavigationController.popModal($Qmatic.components.card.walkInCard)
-					return;
-				}
-			}
-			if (sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
-				util.showError(jQuery.i18n.prop("error.not.loggedin"));
-				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
-				clearOngoingVisit();
-				$("#closeBtn").prop('disabled', true);
-				return;
-			}
-			if (!sessvars.state.servicePointState == servicePoint.servicePointState.OPEN) {
-				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
-				sessvars.state = servicePoint.getState(spService
-					.putCallback("branches/" + walkParams.branchId
-					+ "/servicePoints/" + walkParams.servicePointId
-					+ "/users/" + walkParams.userName));
+				var serviceIdArray = [];
+				serviceIdArray[0] = serviceId ? serviceId : walkTable.fnGetData(this).id;
+				walkParams.json = '{"services":[' + serviceIdArray + ']}'; // service
+				// id
 				spPoolUpdateNeeded = false;
 				userPoolUpdateNeeded = false;
 				queuesUpdateNeeded = false;
-				sessvars.state = servicePoint.getState(spService.postParams(
-					"branches/" + walkParams.branchId + "/servicePoints/"
-					+ walkParams.servicePointId + "/visits",
-					walkParams));
-				if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-					sessvars.statusUpdated = new Date();
-					sessvars.currentCustomer = null;
-					servicePoint.updateWorkstationStatus();
-				}
-			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				|| sessvars.state.userState == servicePoint.userState.SERVING) {
-				cardNavigationController.popModal($Qmatic.components.card.walkInCard)
+				sessvars.state = servicePoint.getState(spService
+					.postParams("branches/" + walkParams.branchId
+					+ "/servicePoints/" + walkParams.servicePointId
+					+ "/visits", walkParams));
+
+				this.setTimerToBlockCalls();
+
 				if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
-					sessvars.currentCustomer = null;
+					sessvars.statusUpdated = new Date();
+				}
+				if (sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
+					if (startUserSession(servicePoint.createParams())) {
+						sessvars.state = servicePoint.getState(spService
+							.postParams("branches/" + walkParams.branchId
+							+ "/servicePoints/"
+							+ walkParams.servicePointId + "/visits",
+							walkParams));
+						if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
+							sessvars.statusUpdated = new Date();
+						}
+					} else {
+						cardNavigationController.popModal($Qmatic.components.card.walkInCard)
+						return;
+					}
+				}
+				if (sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
+					util.showError(jQuery.i18n.prop("error.not.loggedin"));
+					cardNavigationController.popModal($Qmatic.components.card.walkInCard)
+					clearOngoingVisit();
+					$("#closeBtn").prop('disabled', true);
+					return;
+				}
+				if (!sessvars.state.servicePointState == servicePoint.servicePointState.OPEN) {
+					cardNavigationController.popModal($Qmatic.components.card.walkInCard)
+					sessvars.state = servicePoint.getState(spService
+						.putCallback("branches/" + walkParams.branchId
+						+ "/servicePoints/" + walkParams.servicePointId
+						+ "/users/" + walkParams.userName));
 					spPoolUpdateNeeded = false;
 					userPoolUpdateNeeded = false;
 					queuesUpdateNeeded = false;
-					servicePoint.updateWorkstationStatus();
+					sessvars.state = servicePoint.getState(spService.postParams(
+						"branches/" + walkParams.branchId + "/servicePoints/"
+						+ walkParams.servicePointId + "/visits",
+						walkParams));
+					if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
+						sessvars.statusUpdated = new Date();
+						sessvars.currentCustomer = null;
+						servicePoint.updateWorkstationStatus();
+					}
+				} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+					|| sessvars.state.userState == servicePoint.userState.SERVING) {
+					cardNavigationController.popModal($Qmatic.components.card.walkInCard)
+					if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
+						sessvars.currentCustomer = null;
+						spPoolUpdateNeeded = false;
+						userPoolUpdateNeeded = false;
+						queuesUpdateNeeded = false;
+						servicePoint.updateWorkstationStatus();
+					}
+				}
+				if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
+					util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
 				}
 			}
-			if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-				util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
-			}
+		} else {
+			util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
 		}
 	};
 

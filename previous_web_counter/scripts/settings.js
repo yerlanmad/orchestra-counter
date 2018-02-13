@@ -29,6 +29,7 @@ buttonTransferFirstEnabled  = true;				// Transfer to first in Queue Button
 buttonTransferLastEnabled  = true; 				// Transfer to last in Queue Button
 buttonTransferSortEnabled  = true;					// Transfer Sorted in Queue Button
 moduleChatEnabled = false;							// Chat Module
+minTimeBetweenCalls = '';
 
 queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
@@ -298,6 +299,9 @@ function showModules() {
 		}
 		if (params.mdChat != undefined){
 			moduleChatEnabled = params.mdChat;
+		}
+		if (params.minTimeBetweenCalls != undefined){
+			minTimeBetweenCalls = params.minTimeBetweenCalls;
 		}
 		
 		showModules();
