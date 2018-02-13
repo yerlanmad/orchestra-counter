@@ -101,8 +101,6 @@ var queues = new function() {
                         $('td:eq(0)', nRow).addClass("qm-table__queue-name--disabled");
                     }
 
-                    
-
                     if(aData.customersWaiting === 0) {
                         $('td:eq(2)', nRow).html("--");
                     } else {
@@ -123,6 +121,9 @@ var queues = new function() {
                 myQueuesTable.fnSort(SORTING);
                 myQueuesTable.fnAdjustColumnSizing();
             }
+
+            tableScrollController.initTableScroll("queues");
+            tableScrollController.initTableScroll("myQueuesTable");
 
             // Sadly clearing and adding data to the queue "data table" resets the position of our search result
             customer.positionCustomerResult();
@@ -311,6 +312,7 @@ var queues = new function() {
                     "emptyTableLabel": "info.queue.tickets.empty", "initFn": queueDetailInitFn});
                 ticketsTable.fnSort([[1, 'asc']]);
 
+                tableScrollController.initTableScroll("tickets");
             }
 
             //kill old event handlers
