@@ -29,7 +29,7 @@ var deliveredServices = new function () {
             cardNavigationController.push($Qmatic.components.card.deliveredServicesCard)
             var t = new Date();
             var url = "branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/deliverableServices?call=" + t;
-            var dsResponse = spService.get(url)
+            var dsResponse = spService.get(url, true);
 
             util.sortArrayCaseInsensitive(dsResponse, "name")
             util.populateSelect(dsResponse, dropdownFilter);
@@ -186,7 +186,7 @@ var deliveredServices = new function () {
                     params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
                     params.deliveredServiceId = aData["deliveredServiceId"];
 
-                    var possibleOutcomes = spService.get("branches/" + params.branchId + "/services/" + params.serviceId + "/deliveredServices/" + params.deliveredServiceId + "/outcomes");
+                    var possibleOutcomes = spService.get("branches/" + params.branchId + "/services/" + params.serviceId + "/deliveredServices/" + params.deliveredServiceId + "/outcomes", true);
                     util.sortArrayCaseInsensitive(possibleOutcomes, "name");
 
                     $.each(possibleOutcomes, function (i, outcome) {

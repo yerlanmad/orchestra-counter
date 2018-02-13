@@ -1,5 +1,5 @@
 
-var spService = (function($) {
+var spService = (function ($) {
 	var restConnector = '/rest/servicepoint/';
 	var getResult;
 	var putResult;
@@ -12,10 +12,10 @@ var spService = (function($) {
 			url: restConnector + resource,
 			dataType: 'json',
 			async: false,
-			success: function(val) {
+			success: function (val) {
 				_handleSuccess(val, 'GET');
 			},
-			error: function(xhr, type) {
+			error: function (xhr, type) {
 				_handleError(xhr, 'GET');
 			}
 		});
@@ -27,25 +27,25 @@ var spService = (function($) {
 			url: restConnector + resource,
 			dataType: 'json',
 			async: false,
-			success: function(val) {
+			success: function (val) {
 				_handleSuccess(val, 'DEL');
 			},
-			error: function(xhr, type) {
+			error: function (xhr, type) {
 				_handleError(xhr, 'DEL');
 			}
 		});
 	}
-	
+
 	function _post(resource) {
 		$.ajax({
 			type: 'POST',
 			url: restConnector + resource,
 			dataType: 'json',
 			async: false,
-			success: function(val) {
+			success: function (val) {
 				_handleSuccess(val, 'POST');
 			},
-			error: function(xhr, type) {
+			error: function (xhr, type) {
 				_handleError(xhr, 'POST');
 			}
 		});
@@ -54,19 +54,19 @@ var spService = (function($) {
 	function _put(resource) {
 		$.ajax({
 			type: 'PUT',
-			url: restConnector+resource,
+			url: restConnector + resource,
 			dataType: 'json',
 			async: false,
-			success: function(val) {
+			success: function (val) {
 				_handleSuccess(val, 'PUT');
 			},
-			error: function(xhr, type) {
+			error: function (xhr, type) {
 				_handleError(xhr, 'PUT')
 			}
 		});
 	}
-	
-	function _postParams(resource,params) {
+
+	function _postParams(resource, params) {
 		$.ajax({
 			type: 'POST',
 			url: restConnector + resource,
@@ -74,15 +74,15 @@ var spService = (function($) {
 			contentType: 'application/json',
 			dataType: 'json',
 			async: false,
-			success: function(val) {
+			success: function (val) {
 				_handleSuccess(val, 'POST');
 			},
-			error: function(xhr, type) {
+			error: function (xhr, type) {
 				_handleError(xhr, 'POST');
 			}
 		});
 	}
-	
+
 	function _putParams(resource, params) {
 		$.ajax({
 			type: 'PUT',
@@ -91,10 +91,10 @@ var spService = (function($) {
 			dataType: 'json',
 			contentType: 'application/json',
 			async: false,
-			success: function(val) {
+			success: function (val) {
 				_handleSuccess(val, 'PUT');
 			},
-			error: function(xhr, type) {
+			error: function (xhr, type) {
 				_handleError(xhr, 'PUT');
 			}
 		});
@@ -153,17 +153,17 @@ var spService = (function($) {
 	function _logError(xhr) {
 		var errorCode = xhr.getResponseHeader('ERROR_CODE');
 		var err;
-		if(typeof errorCode === 'undefined' || errorCode == null || errorCode == "") {
+		if (typeof errorCode === 'undefined' || errorCode == null || errorCode == "") {
 			// strip out html text
 			var text = _stripHtml(xhr.getResponseHeader("ERROR_MESSAGE"));
 			// limit the no of characters to 200
 			if (text.length > 200) {
-				text = text.substring(0,200);
+				text = text.substring(0, 200);
 			}
 			err = translate.msg('error.server_error', [text]);
 		} else {
 			err = translate.msg('error.server_error_' + errorCode);
-			if(err == 'error.server.error_' + errorCode) {
+			if (err == 'error.server.error_' + errorCode) {
 				err = translate.msg('error.server_error', [errorCode]);
 			}
 		}
@@ -181,53 +181,62 @@ var spService = (function($) {
 		// remove any nested html comments
 		return text.replace(/<!--*[^<>]*-->/ig, "");
 	}
-	
+
 	return {
-		get : function(resource) {
-			_get(resource);
+		get: function (resource, isCachedResource) {
+			if (!isCachedResource) {
+				_get(resource);
+			} else {
+				if (!spServiceCache.isCached(resource)) {
+					_get(resource);
+					spServiceCache.putData(resource, getResult);
+				} else {
+					getResult = spServiceCache.getData(resource);
+				}
+			}
 			return getResult;
 		},
 
-		del : function(resource) {
+		del: function (resource) {
 			_del(resource);
 			return delResult;
 		},
-		
-		post : function(resource) {
+
+		post: function (resource) {
 			_post(resource);
 			return postResult;
 		},
-		
-		put : function(resource) {
+
+		put: function (resource) {
 			_put(resource);
 			return putResult;
 		},
 
-		getParse : function(resource, newFunction) {
-			var call=eval(newFunction);
+		getParse: function (resource, newFunction) {
+			var call = eval(newFunction);
 			_get(resource);
 			call(getResult);
 			return getResult;
 		},
 
-		postParse : function(resource, newFunction) {
-			var call=eval(newFunction);
-        	_post(resource);
+		postParse: function (resource, newFunction) {
+			var call = eval(newFunction);
+			_post(resource);
 			call(postResult);
 			return postResult;
 		},
-		
-		postParams : function(resource,params) {
-			_postParams(resource,params);
+
+		postParams: function (resource, params) {
+			_postParams(resource, params);
 			return postResult;
 		},
-		
-		putParams : function(resource,params) {
-			_putParams(resource,params);
+
+		putParams: function (resource, params) {
+			_putParams(resource, params);
 			return putResult;
-		},	
-		
-		putCallback : function(resource) {
+		},
+
+		putCallback: function (resource) {
 			_putCallback(resource);
 			return putResult;
 		}

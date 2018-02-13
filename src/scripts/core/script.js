@@ -75,6 +75,9 @@ var servicePoint = new function () {
 	var autoClose = 0;
 	var logoffTimer = null;
 	var prevBranchId = null;
+	var prevCounterId = null;
+	var prevProfileId = null;
+	var applicationInitialized = false;
 	var minTimeBetweenCallsTimer = null;
 
 	var cfuForceSelection = false;
@@ -298,6 +301,8 @@ var servicePoint = new function () {
 			$("#userName").html(sessvars.currentUser.userName);
 			servicePoint.showSettingsWindow();
 		}
+
+		applicationInitialized = true;
 	};
 
 	// display modal popup with settings
@@ -378,9 +383,11 @@ var servicePoint = new function () {
 			var params = {};
 			params.branchId = parseInt(branches[i].id);
 			params.deviceType = "SW_SERVICE_POINT";
-			var softwareWorkstations = spService.get("branches/"
+			var resource = "branches/"
 				+ params.branchId + "/servicePoints/deviceTypes/"
-				+ params.deviceType);
+				+ params.deviceType;
+			softwareWorkstations = spService.get(resource);
+			spServiceCache.putData(resource, softwareWorkstations);
 			if (softwareWorkstations.length > 0) {
 				branches_tmp.push(branches[i]);
 			}
@@ -432,6 +439,7 @@ var servicePoint = new function () {
 
 		if (branchId != -1) {
 			showWorkstations(branchId, selectWorkstationModal, selectPrioModal);
+			// if(!isSingleBranch)
 			showProfiles(branchId, undefined, selectPrioModal);
 			$Qmatic.components.dropdown.branchSelection.clearError()
 		} else {
@@ -454,7 +462,7 @@ var servicePoint = new function () {
 		params.branchId = parseInt(branchId);
 		params.deviceType = "SW_SERVICE_POINT";
 		var softwareWorkstations = spService.get("branches/" + params.branchId
-			+ "/servicePoints/deviceTypes/" + params.deviceType);
+			+ "/servicePoints/deviceTypes/" + params.deviceType, true);
 
 		if (softwareWorkstations.length == 0) {
 			// no workstations returned
@@ -499,8 +507,10 @@ var servicePoint = new function () {
 		params.branchId = parseInt(branchId);
 		var profiles = spService.get("branches/" + params.branchId
 			+ "/workProfiles");
-		servicePoint.servicesList = spService.get("branches/" + params.branchId
-			+ "/services");
+		var resource = "branches/" + params.branchId
+			+ "/services";
+		servicePoint.servicesList = spService.get(resource);
+		// spServiceCache.putData(resource, servicePoint.servicesList);
 
 		if (profiles.length == 0) {
 			// no profiles returned
@@ -548,10 +558,9 @@ var servicePoint = new function () {
 			if (typeof warnUser === "undefined") {
 				warnUser = true;
 			}
-			if (prevBranchId == settings.branchId && prevCounterId == settings.servicePointId && prevProfileId == settings.workProfileId) {
+			if (prevBranchId == settings.branchId && prevCounterId == settings.servicePointId && prevProfileId == settings.workProfileId && applicationInitialized) {
 				modalNavigationController.pop();
 				isHijacking = false;
-				updateUI();
 			} else {
 				isHijacking = confirm(warnUser, settings);
 			}
@@ -578,7 +587,10 @@ var servicePoint = new function () {
 					unsubscribeAndDisableQueues();
 				}
 
-				prevBranchId = sessvars.branchId;
+				prevBranchId = settings.branchId;
+				prevCounterId = settings.servicePointId;
+				prevProfileId = settings.workProfileId;
+
 				if (isApplied(settings)) {
 					servicePoint.storeSettingsInSession(settings);
 					setProfile(servicePoint.createParams());
@@ -644,6 +656,7 @@ var servicePoint = new function () {
 			if (startUserSession(settings)) {
 				modalNavigationController.popModal($Qmatic.components.modal.profileSettings);
 				isApplied = true;
+				spServiceCache.clearCache();
 			}
 		}
 		return isApplied;
@@ -1117,9 +1130,10 @@ var servicePoint = new function () {
 				if (buttonWalkDirectService == "") {
 					cardNavigationController.push($Qmatic.components.card.walkInCard);
 					queueViewController.navigateToOverview();
-					var t = new Date();
-					var url = "/rest/servicepoint/branches/" + sessvars.branchId
-						+ "/services?call=" + t;
+					// var t = new Date();
+					// var url = "/rest/servicepoint/branches/" + sessvars.branchId
+					// 	+ "/services?call=" + t;
+					var serivesList = servicePoint.servicesList;
 					if ((walkTable == undefined && prevBranchId == sessvars.branchId) || prevBranchId != sessvars.branchId) {
 						var columns = [
 				/* Service ext name */{
@@ -1158,16 +1172,17 @@ var servicePoint = new function () {
 							$(nRow).find("td").html($("<a href='#'></a>").text($(nRow).find("td").text()));
 							return nRow;
 						};
-						walkTable = util.buildTableJson({
+						walkTable = util.buildTableJsonNoUrl({
 							"tableId": "walkDirectServices",
-							"url": url,
+							// "url": url,
 							"rowCallback": rowCallback,
 							"columns": columns,
 							"filter": true,
 							"customFilter": true,
 							"scrollYHeight": "auto",
 							"infoFiltered": "info.filtered.fromEntries",
-							"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search")
+							"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search"),
+							"data": serivesList
 						});
 						var sorting = [[1, 'asc']];
 						walkTable.fnSort(sorting);
@@ -2033,7 +2048,7 @@ var servicePoint = new function () {
 		var profile = $("#profile");
 
 		servicePoint.servicesList = spService.get("branches/" + parseInt(sessvars.branchId)
-			+ "/services");
+			+ "/services", true);
 
 		window.$Qmatic.components.header.setInformation(sessvars.branchName, sessvars.servicePointName, sessvars.state.workProfileName);
 	};
@@ -2407,7 +2422,7 @@ var servicePoint = new function () {
 		} else {
 			sessvars.branchName = sessvarsInfo.branchName;
 		}
-
+		
 		sessvars.servicePointId = sessvarsInfo.servicePointId;
 		var params = {};
 		params.branchId = sessvars.branchId;
