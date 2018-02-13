@@ -1,55 +1,85 @@
+<<<<<<< HEAD
+        <!-- build:css css/bundle.css -->
+=======
+        {# Commented out the current stylesheets to know what to reset #}
+        {# <link rel="stylesheet" type="text/css" href="/css/reset.css">
+        <link rel="stylesheet" type="text/css" href="/css/css3.css"> #}
+        <link rel="stylesheet" type="text/css" href="css/jquery/jquery.ui.all.css"/>
+        <link rel="stylesheet" type="text/css" href="css/dataTable.css"/>
+        {# <link rel="stylesheet" type="text/css" href="/css/orchestra.css"/> #}
+        {# <link rel="stylesheet" type="text/css" href="css/style.css"/> #}
+
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" type="text/css" href="css/ie7.css"/>
+        <![endif]-->
         <!-- json2.js include for IE7 which does not have native JSON support, see http://www.json.org/js.html for source code and further info -->
         <!--[if lt IE 8]>
         <script type="text/javascript" src="scripts/json2.js"></script>
         <![endif]-->
 
+        <!--<script type="text/javascript" src="scripts/redux/index.js"></script>
+        <script type="text/javascript" src="scripts/vendor/redux-3.7.2.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/object-path.js"></script>
+        <script type="text/javascript" src="scripts/vendor/redux-watch.js"></script>
+
+        <script type="text/javascript" src="scripts/redux/actions/index.js"></script>
+        <script type="text/javascript" src="scripts/redux/reducers/index.js"></script>
+        <script type="text/javascript" src="scripts/redux/store/index.js"></script>
+        <script type="text/javascript" src="scripts/redux/monitor.js"></script>-->
+        
+
+        <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="scripts/jquery/i18n/jquery-ui-i18n.js"></script>
+        <script type="text/javascript" src="scripts/vendor/lodash.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/mousetrap.min.js"></script>
+
+        <script type="text/javascript" src="scripts/vendor/popper.1.13.0.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/tooltip.1.1.7.js"></script>
         <!--[if lt IE 10]>
 		<script type="text/javascript" src="scripts/rest-ie.js"></script>
-		<![endif]-->         
-
-        <!-- build:js scripts/bundle.js -->
+		<![endif]-->
         <!-- New CometD based server-push -->
         <!-- Per R5, we don't use DWR for server push of events anymore -->
 
-        <script type="text/javascript" src="scripts/vendor/jquery-3.3.1.js"></script>
-        <script type="text/javascript" src="scripts/vendor/jquery-ui.js"></script>
 
-        <script type="text/javascript" src="scripts/vendor/lodash.min.js"></script>
-        <script type="text/javascript" src="scripts/vendor/mousetrap.js"></script>
-
-        <script type="text/javascript" src="scripts/vendor/popper.1.13.0.js"></script>
-        <script type="text/javascript" src="scripts/vendor/tooltip.1.1.7.js"></script>
         <script type="text/javascript" src="scripts/vendor/chosen-1.8.2.js"></script>
-        
-        <script type="text/javascript" src="scripts/cometd/cometd.js"></script>
-        <script type="text/javascript" src="scripts/cometd/jquery.cometd.js"></script>
-        <script type="text/javascript" src="scripts/cometd/qevents_cometd_v2.js"></script>
 
-        <script type="text/javascript" src="scripts/core/init.js"></script>
-        <script type="text/javascript" src="scripts/core/util.js"></script>
-        <script type="text/javascript" src="scripts/core/customer.js"></script>
-        <script type="text/javascript" src="scripts/core/deliveredServices.js"></script>
-        <script type="text/javascript" src="scripts/core/customMarks.js"></script>
-        <script type="text/javascript" src="scripts/core/outcomes.js"></script>
-        <script type="text/javascript" src="scripts/core/servicePointPool.js"></script>
-        <script type="text/javascript" src="scripts/core/userPool.js"></script>
-        <script type="text/javascript" src="scripts/core/transfer.js"></script>
-        <script type="text/javascript" src="scripts/core/queues.js"></script>
-        <!--<script type="text/javascript" src="scripts/core/projectedVisits.js"></script> -->
-        <script type="text/javascript" src="scripts/core/chat.js"></script>
-        <script type="text/javascript" src="scripts/core/jquery/jquery.i18n.properties.js"></script>
-        <script type="text/javascript" src="scripts/core/i18n-util.js"></script>
-        <script type="text/javascript" src="scripts/core/jquery/jquery.countdown.js"></script>
-        <script type="text/javascript" src="scripts/core/jquery/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="scripts/core/i18n.js"></script>
-        <script type="text/javascript" src="scripts/core/sessvars.js"></script>
-        <script type="text/javascript" src="scripts/core/ieCache.js"></script>
-        <script type="text/javascript" src="scripts/core/ieService.js"></script>
-        <script type="text/javascript" src="scripts/core/settings.js"></script>
+        <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
+        <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
+        <script type="text/javascript" src="/events/qevents_cometd.js"></script>
+        <script type="text/javascript" src="scripts/init.js"></script>
+        <script type="text/javascript" src="scripts/util.js?2016022608"></script>
+        <script type="text/javascript" src="scripts/customer.js?20160630"></script>
+        <script type="text/javascript" src="scripts/deliveredServices.js"></script>
+        <script type="text/javascript" src="scripts/customMarks.js"></script>
+		<script type="text/javascript" src="scripts/outcomes.js"></script>
+        <script type="text/javascript" src="scripts/servicePointPool.js?20160630"></script>
+        <script type="text/javascript" src="scripts/userPool.js?20160630"></script>
+        <script type="text/javascript" src="scripts/transfer.js?2016022608"></script>
+        <script type="text/javascript" src="scripts/queues.js?20160630"></script>
+        <!--<script type="text/javascript" src="scripts/projectedVisits.js"></script> -->
+		<script type="text/javascript" src="scripts/chat.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.i18n.properties.js"></script>
+        <script type="text/javascript" src="scripts/i18n-util.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.countdown.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="scripts/i18n.js"></script>
+        <script type="text/javascript" src="scripts/sessvars.js"></script>
+		<script type="text/javascript" src="scripts/ieCache.js"></script>
+        <script type="text/javascript" src="scripts/ieService.js"></script>
+		<script type="text/javascript" src="scripts/settings.js"></script>
 
         {# Component Links #}
         <script type="text/javascript" src="scripts/main.js"></script>
         <script type="text/javascript" src="scripts/utils/index.js"></script>
+        <script type="text/javascript" src="scripts/vendor/index.js"></script>
 
         <script type="text/javascript" src="scripts/components/index.js"></script>
         <script type="text/javascript" src="scripts/components/BaseComponent.js"></script>
@@ -71,8 +101,6 @@
         <script type="text/javascript" src="scripts/components/dropdown/deliveredServicesSelection/deliveredServicesSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/singleOutcomeSelection/singleOutcomeSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/addServiceSelection/addServiceSelection.js"></script>
-
-        <script type="text/javascript" src="scripts/components/tableScroll/index.js"></script>
 
         <script type="text/javascript" src="scripts/components/NavView.js"></script>
         <script type="text/javascript" src="scripts/components/NavController.js"></script>
@@ -124,7 +152,6 @@
         <script type="text/javascript" src="scripts/components/card/transferCards/transferUserPoolCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferCounterPoolCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/marksCard/marksCard.js"></script>
-
-        <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
-        <script type="text/javascript" src="scripts/core/script.js"></script>
+>>>>>>> 153698902 : Investigate how to Reduce number of rest calls (Performance optimization) : inital investigations
+        <link rel="stylesheet" href="css/main.css" />
         <!-- endbuild -->

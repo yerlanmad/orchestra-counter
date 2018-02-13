@@ -10,7 +10,7 @@ var outcome = new function() {
                 selectOutcomeTable.fnClearTable();
                 var params = servicePoint.createParams();
                 params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
-				var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes");				
+				var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes", true);				
                 selectOutcomeTable.fnAddData(outcomes);
             } else {
                 var columns = [
@@ -79,7 +79,7 @@ var outcome = new function() {
             sessvars.state.visit != null) {
             var params = servicePoint.createParams();
             params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
-            var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes");
+            var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes", true);
             util.sortArrayCaseInsensitive(outcomes, "name");
             if(typeof outcomes !== 'undefined' && outcomes != null && outcomes.length > 0) {
                 outcomeSelect.removeAttr('disabled');

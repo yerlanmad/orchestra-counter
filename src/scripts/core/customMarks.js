@@ -51,7 +51,7 @@ var customMarks = new function () {
 				var params = servicePoint.createParams();
 				params.branchId = sessvars.state.branchId;
 				var markTypesArray = spService.get("branches/"
-					+ params.branchId + "/markTypes");
+					+ params.branchId + "/markTypes", true);
 				for (i = 0; i < markTypesArray.length; i++) {
 					if (markTypesArray[i].name == customMarkTypeName) {
 						markTypeId = markTypesArray[i].id;
@@ -62,7 +62,7 @@ var customMarks = new function () {
 				var t = new Date();
 				var url = "branches/" + sessvars.branchId
 					+ "/markTypes/" + markTypeId + "/marks?call=" + t;
-				var marksResponse = spService.get(url)
+				var marksResponse = spService.get(url, true)
 
 				util.sortArrayCaseInsensitive(marksResponse, "name");
 
