@@ -1,0 +1,25 @@
+.qm-scroll-top-btn {
+    display: none;
+    position: absolute;
+    bottom: rem($global-standard-margin);
+    right: rem(24px);
+    font-size: rem(38px);
+    height: 50px;
+    width: 50px;
+    color: $tertiary-color;
+    background: $white;
+    border-radius: 50%;
+    border: 1px solid $dark-transparent12;
+    box-shadow: 0 0 8px 0 $dark-transparent12;
+    opacity: 0.4;
+
+    &:hover,
+    &:focus {
+        opacity: 1;
+    }
+
+    @at-root [dir='rtl'] & {
+        right: auto;
+        left: rem(24px);
+    }
+}
