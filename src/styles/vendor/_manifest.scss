@@ -1,4 +1,5 @@
+@import '_jquery-ui';
 @import '_variables';
-@import 'node_modules/bootstrap/scss/bootstrap-reboot.scss';
-@import 'node_modules/bootstrap/scss/bootstrap-grid.scss';
-@import '_chosen.scss';
+@import 'node_modules/bootstrap/scss/bootstrap-reboot';
+@import 'node_modules/bootstrap/scss/bootstrap-grid';
+@import '_chosen';

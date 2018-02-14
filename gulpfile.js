@@ -137,15 +137,13 @@ gulp.task('move:js', function () {
         .pipe(gulp.dest('./dist/scripts')).pipe(devServer.reload())
 })
 
-gulp.task('move:previous_counter_files', function () {
-    return gulp.src(['./previous_web_counter/**/*', '!./previous_web_counter/index.html'])
+gulp.task('move:inf', function () {
+    return gulp.src([
+        'src/INF/**/*',
+        'src/ping.html'
+        ])
         .pipe(gulp.dest('./dist'))
 })
-
-gulp.task('move:previous_counter_js', function () {
-    return gulp.src(['./previous_web_counter/scripts/**/*.js', '!./previous_web_counter/scripts/jquery/*.js'])
-        .pipe(gulp.dest('./dist/scripts'))
-});
 
 gulp.task('move:lang', function () {
     return gulp.src(['./src/lang/*'])
@@ -167,7 +165,6 @@ gulp.task('watch:start', function () {
     gulp.watch(['./src/styles/**/*.scss'], ['compile:scss'])
     gulp.watch(['src/scripts/**/*.js'], ['move:js'])
     gulp.watch('./src/templates/**/*.nunjucks', ['compile:nunjucks'])
-    gulp.watch('./previous_web_counter/scripts/**/*.js', ['move:previous_counter_js'])
 })
 
 gulp.task('cache:killer', function () {
@@ -281,9 +278,9 @@ gulp.task('deploy:lang', function () {
 });
 
 /**
- * Create development build in dist
+ * Create customization build, for customization.
  */
-gulp.task('build', gulpsync.sync(
+gulp.task('build:custom', gulpsync.sync(
     [
         'clean:build',
         'compile:nunjucks',
@@ -292,11 +289,12 @@ gulp.task('build', gulpsync.sync(
         'move:assets',
         'move:images',
         'move:icons',
-        'move:previous_counter_files',
-        'cache:killer'
+        'cache:killer',
+        'move:inf'
     ]), function () {
         return console.log(`Build Created in folder ./dist`)
     })
+
 
 /**
  * Create development build in dist and start watching files for changes
@@ -310,7 +308,6 @@ gulp.task('build:dev', gulpsync.sync(
         'move:assets',
         'move:images',
         'move:icons',
-        'move:previous_counter_files',
         'cache:killer',
         'watch:start',
         'connect'
@@ -321,7 +318,7 @@ gulp.task('build:dev', gulpsync.sync(
 /**
  * Create developement war
  */
-gulp.task('build:war', gulpsync.sync(
+gulp.task('build:dev:war', gulpsync.sync(
     [
         'clean:build',
         'compile:nunjucks',
@@ -330,25 +327,23 @@ gulp.task('build:war', gulpsync.sync(
         'move:assets',
         'move:images',
         'move:icons',
-        'move:previous_counter_files',
         'cache:killer',
         'move:config',
         'util:war',
         'clean:war',
         'move:lang'
     ]), function () {
-        return console.log(`workstationterminal.war file created in dist folder`)
+        return console.log(`workstationterminal.war(Development Build) file created in dist folder`)
     })
 
 
 /**
 * Create Production war
 */
-gulp.task('production:war', gulpsync.sync(
+gulp.task('build:prod:war', gulpsync.sync(
     [
         'clean:build',
         'compile:scss',
-        'move:previous_counter_files',
         'move:js',
         'compile:nunjucks',
         'index:concat:uglify',
@@ -358,36 +353,38 @@ gulp.task('production:war', gulpsync.sync(
         'move:images',
         'move:icons',
         'cache:killer',
+        'move:inf',
         'move:config',
         'util:war',
         'clean:war',
         'move:lang'
-        // 'watch:start',
-        // 'connect'
     ]), function () {
-        return console.log(`workstationterminal.war file created in dist folder`)
+        return console.log(`workstationterminal.war(Productiion Build) file created in dist folder`)
     })
 
 /**
  *  Deploy war and lang file to a remote Orchestra System
  *  Note - For this to work you need to have openssh installed on the remote server.
  */
-gulp.task('deploy', gulpsync.sync(
+gulp.task('deploy:remote', gulpsync.sync(
     [
         'clean:build',
-        'compile:nunjucks',
         'compile:scss',
         'move:js',
+        'compile:nunjucks',
+        'index:concat:uglify',
+        'index:minify',
+        'clean:dist',
         'move:assets',
         'move:images',
         'move:icons',
-        'move:previous_counter_files',
         'cache:killer',
+        'move:inf',
+        'move:config',
         'util:war',
         'clean:war',
         'move:lang',
         'deploy:war',
-        'move:config',
         'deploy:lang'
     ]), function () {
         return console.log(`workstationterminal.war file created in dist folder`)
