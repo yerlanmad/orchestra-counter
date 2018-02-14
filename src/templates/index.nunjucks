@@ -100,7 +100,7 @@
     </div>
     
 
-
+     {% include "partials/external-scripts.nunjucks" %}
 
     <script type="text/javascript">
             $(document).ready(function() {

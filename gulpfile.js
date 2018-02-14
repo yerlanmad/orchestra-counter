@@ -11,7 +11,15 @@ var proxy = require('http-proxy-middleware');
 const zip = require('gulp-zip');
 var sftp = require('gulp-sftp');
 var cachebust = require('gulp-cache-bust');
- 
+
+var useref = require('gulp-useref');
+var gulpif = require('gulp-if');
+var uglify = require('gulp-uglify');
+var minifyCss = require('gulp-clean-css');
+var lineEndCorrector = require('gulp-line-ending-corrector');
+var htmlmin = require('gulp-htmlmin');
+
+
 var isWindows = process.platform === 'win32';
 var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
 
@@ -69,6 +77,34 @@ gulp.task('compile:nunjucks', function () {
             path: ['./src/templates/']
         }))
         .pipe(gulp.dest('./dist')).pipe(devServer.reload())
+});
+
+gulp.task('index:concat:uglify', function () {
+    return gulp.src(['./dist/index.html'])
+        .pipe(lineEndCorrector({ verbose: true, eolc: 'LF', encoding: 'utf8' }))
+        .pipe(useref())
+        .pipe(gulpif('*.js', uglify()))
+        .pipe(gulpif('*.css', minifyCss()))
+        .pipe(gulp.dest('./dist'))
+});
+
+gulp.task('index:minify', function () {
+    return gulp.src(['./dist/index.html'])
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest('./dist'))
+});
+
+gulp.task('clean:dist', function () {
+    return del([
+        './dist/css/**/*',
+        '!./dist/css/bundle.css',
+        './dist/scripts/**/*',
+        '!./dist/scripts/bundle.js',
+        '!./dist/scripts/json2.js',
+        '!./dist/scripts/rest-ie.js',
+        '!./dist/scripts/upgrades',
+        '!./dist/scripts/upgrades/**/*'
+    ])
 });
 
 gulp.task('compile:scss', function () {
@@ -134,12 +170,12 @@ gulp.task('watch:start', function () {
     gulp.watch('./previous_web_counter/scripts/**/*.js', ['move:previous_counter_js'])
 })
 
-gulp.task('cache:killer', function() {
-  return gulp.src('dist/index.html')
-    .pipe(cachebust({
-        type: 'timestamp'
-    }))
-    .pipe(gulp.dest('dist'));
+gulp.task('cache:killer', function () {
+    return gulp.src('dist/index.html')
+        .pipe(cachebust({
+            type: 'timestamp'
+        }))
+        .pipe(gulp.dest('dist'));
 });
 
 gulp.task('connect', devServer.server({
@@ -283,7 +319,7 @@ gulp.task('build:dev', gulpsync.sync(
     })
 
 /**
- * Create war file for release
+ * Create developement war
  */
 gulp.task('build:war', gulpsync.sync(
     [
@@ -300,6 +336,34 @@ gulp.task('build:war', gulpsync.sync(
         'util:war',
         'clean:war',
         'move:lang'
+    ]), function () {
+        return console.log(`workstationterminal.war file created in dist folder`)
+    })
+
+
+/**
+* Create Production war
+*/
+gulp.task('production:war', gulpsync.sync(
+    [
+        'clean:build',
+        'compile:scss',
+        'move:previous_counter_files',
+        'move:js',
+        'compile:nunjucks',
+        'index:concat:uglify',
+        'index:minify',
+        'clean:dist',
+        'move:assets',
+        'move:images',
+        'move:icons',
+        'cache:killer',
+        'move:config',
+        'util:war',
+        'clean:war',
+        'move:lang'
+        // 'watch:start',
+        // 'connect'
     ]), function () {
         return console.log(`workstationterminal.war file created in dist folder`)
     })
