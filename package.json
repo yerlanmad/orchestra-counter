@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "gulp build:dev",
-    "build": "gulp build",
-    "war": "gulp build:war",
-    "deploy": "gulp deploy"
+    "build-custom": "gulp build:custom",
+    "build-war-dev": "gulp build:dev:war",
+    "build-war-prod": "gulp build:prod:war",
+    "deploy-remote": "gulp deploy:remote"
   },
   "devDependencies": {
     "del": "^3.0.0",

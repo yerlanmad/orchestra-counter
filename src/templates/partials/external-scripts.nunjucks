@@ -36,26 +36,26 @@
         <!-- TODO: Upgrade links - Remove this when added to Orchestra -->
         
         <!-- End upgrade links -->
-        <script type="text/javascript" src="scripts/init.js"></script>
-        <script type="text/javascript" src="scripts/util.js"></script>
-        <script type="text/javascript" src="scripts/customer.js"></script>
-        <script type="text/javascript" src="scripts/deliveredServices.js"></script>
-        <script type="text/javascript" src="scripts/customMarks.js"></script>
-        <script type="text/javascript" src="scripts/outcomes.js"></script>
-        <script type="text/javascript" src="scripts/servicePointPool.js"></script>
-        <script type="text/javascript" src="scripts/userPool.js"></script>
-        <script type="text/javascript" src="scripts/transfer.js"></script>
-        <script type="text/javascript" src="scripts/queues.js"></script>
-        <!--<script type="text/javascript" src="scripts/projectedVisits.js"></script> -->
-        <script type="text/javascript" src="scripts/chat.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.i18n.properties.js"></script>
-        <script type="text/javascript" src="scripts/i18n-util.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.countdown.js"></script>
-        <script type="text/javascript" src="scripts/jquery/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="scripts/i18n.js"></script>
-        <script type="text/javascript" src="scripts/sessvars.js"></script>
-        <script type="text/javascript" src="scripts/ieService.js"></script>
-        <script type="text/javascript" src="scripts/settings.js"></script>
+        <script type="text/javascript" src="scripts/core/init.js"></script>
+        <script type="text/javascript" src="scripts/core/util.js"></script>
+        <script type="text/javascript" src="scripts/core/customer.js"></script>
+        <script type="text/javascript" src="scripts/core/deliveredServices.js"></script>
+        <script type="text/javascript" src="scripts/core/customMarks.js"></script>
+        <script type="text/javascript" src="scripts/core/outcomes.js"></script>
+        <script type="text/javascript" src="scripts/core/servicePointPool.js"></script>
+        <script type="text/javascript" src="scripts/core/userPool.js"></script>
+        <script type="text/javascript" src="scripts/core/transfer.js"></script>
+        <script type="text/javascript" src="scripts/core/queues.js"></script>
+        <!--<script type="text/javascript" src="scripts/core/projectedVisits.js"></script> -->
+        <script type="text/javascript" src="scripts/core/chat.js"></script>
+        <script type="text/javascript" src="scripts/core/jquery/jquery.i18n.properties.js"></script>
+        <script type="text/javascript" src="scripts/core/i18n-util.js"></script>
+        <script type="text/javascript" src="scripts/core/jquery/jquery.countdown.js"></script>
+        <script type="text/javascript" src="scripts/core/jquery/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="scripts/core/i18n.js"></script>
+        <script type="text/javascript" src="scripts/core/sessvars.js"></script>
+        <script type="text/javascript" src="scripts/core/ieService.js"></script>
+        <script type="text/javascript" src="scripts/core/settings.js"></script>
 
         {# Component Links #}
         <script type="text/javascript" src="scripts/main.js"></script>
@@ -136,7 +136,7 @@
         <script type="text/javascript" src="scripts/components/card/marksCard/marksCard.js"></script>
 
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
-        <script type="text/javascript" src="scripts/script.js"></script>
+        <script type="text/javascript" src="scripts/core/script.js"></script>
         <!-- endbuild -->
 
 
