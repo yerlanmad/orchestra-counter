@@ -19,9 +19,13 @@ var minifyCss = require('gulp-clean-css');
 var lineEndCorrector = require('gulp-line-ending-corrector');
 var htmlmin = require('gulp-htmlmin');
 
+var fs = require('fs');
+var path = require('path');
+var folders = require('gulp-folders');
 
 var isWindows = process.platform === 'win32';
 var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
+var uttsPath = "./utt"
 
 // Remote Deployment Defaults
 var remoteDeploymentDefaultPath = "C:\\qmatic\\orchestra\\system\\custdeploy"
@@ -277,6 +281,24 @@ gulp.task('deploy:lang', function () {
         }));
 });
 
+// Task to create utts files from their source files
+gulp.task('build:utts', folders(uttsPath, function(folder){
+    return gulp.src(path.join(uttsPath, folder, '**/*'))
+        .pipe(zip(folder+'.utt'))
+        .pipe(gulp.dest(path.join(uttsPath, folder)));
+}));
+
+gulp.task('clean:utts', function(){
+    return del([
+        path.join(uttsPath) + "/**/*.utt"
+    ])
+});
+
+gulp.task('move:utts', function(){
+    return gulp.src(uttsPath + "/**/*.utt")
+        .pipe(gulp.dest('./dist/utts'))
+});
+
 /**
  * Create customization build, for customization.
  */
@@ -290,7 +312,11 @@ gulp.task('build:custom', gulpsync.sync(
         'move:images',
         'move:icons',
         'cache:killer',
-        'move:inf'
+        'move:inf',
+        'build:utts',
+        'clean:utts',
+        'build:utts',
+        'move:utts'
     ]), function () {
         return console.log(`Build Created in folder ./dist`)
     })
@@ -331,7 +357,10 @@ gulp.task('build:dev:war', gulpsync.sync(
         'move:config',
         'util:war',
         'clean:war',
-        'move:lang'
+        'move:lang',
+        'clean:utts',
+        'build:utts',
+        'move:utts'
     ]), function () {
         return console.log(`workstationterminal.war(Development Build) file created in dist folder`)
     })
@@ -357,9 +386,23 @@ gulp.task('build:prod:war', gulpsync.sync(
         'move:config',
         'util:war',
         'clean:war',
-        'move:lang'
+        'move:lang',
+        'clean:utts',
+        'build:utts',
+        'move:utts'
     ]), function () {
         return console.log(`workstationterminal.war(Productiion Build) file created in dist folder`)
+    })
+
+/**
+* Clean and rebuilt Utts
+*/
+gulp.task('clean:build:utts', gulpsync.sync(
+    [
+        'clean:utts',
+        'build:utts'
+    ]), function () {
+        return console.log(`Utt files created from source`)
     })
 
 /**
@@ -387,5 +430,5 @@ gulp.task('deploy:remote', gulpsync.sync(
         'deploy:war',
         'deploy:lang'
     ]), function () {
-        return console.log(`workstationterminal.war file created in dist folder`)
-    })
+        return console.log(`workstationterminal.war deployed!`)
+    });
