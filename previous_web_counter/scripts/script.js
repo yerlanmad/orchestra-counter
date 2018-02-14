@@ -686,7 +686,7 @@ var servicePoint = new function () {
 				journeyUpdateNeeded = false;
 				trtUpdateNeeded = false;
 				servicePoint.updateWorkstationStatus();
-				this.setTimerToBlockCalls();
+				setTimerToBlockCalls();
 				if (sessvars.state && sessvars.state.visitState
 					&& sessvars.state.visitState !== "VISIT_IN_DISPLAY_QUEUE") {
 					util.twinkleTicketNumber();
@@ -933,7 +933,7 @@ var servicePoint = new function () {
 		modalNavigationController.popModal($Qmatic.components.modal.nextServices);
 	};
 
-	this.setTimerToBlockCalls = function () {
+	var setTimerToBlockCalls = function () {
 		// If utt has a reading to set mintime between calls, then set timer before which cannot call again.
 		if (minTimeBetweenCalls != "" && parseInt(minTimeBetweenCalls) > 0) {
 			minTimeBetweenCallsTimer = setTimeout(function () {
@@ -994,7 +994,7 @@ var servicePoint = new function () {
 							qevents.publish('/events/APPLICATION', noCustWaitingEvent);
 						}
 
-						this.setTimerToBlockCalls();
+						setTimerToBlockCalls();
 						queueViewController.navigateToOverview();
 						servicePoint.updateWorkstationStatus();
 						sessvars.currentCustomer = null;
@@ -1231,7 +1231,7 @@ var servicePoint = new function () {
 					+ "/servicePoints/" + walkParams.servicePointId
 					+ "/visits", walkParams));
 
-				this.setTimerToBlockCalls();
+				setTimerToBlockCalls();
 
 				if (sessvars.state.visitState != "CALL_NEXT_TO_QUICK") {
 					sessvars.statusUpdated = new Date();

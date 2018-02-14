@@ -278,6 +278,9 @@ function showModules() {
 		}
 		if ( params.wdService != undefined) {
 			buttonWalkDirectService = params.wdService;				// Walk Direct Default Service
+		} else {
+			// Reset flag in the case this property doen't exist in the utt..
+			buttonWalkDirectService = "";	
 		}
 		if ( params.btnQueueRemove != undefined) {
 			buttonRemoveFromQueueEnabled = params.btnQueueRemove ;		// Remove from Queue Button 
