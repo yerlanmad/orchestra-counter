@@ -5,7 +5,7 @@ This project is the standard Orchestra Counter Application found in Orchestra 7
 ## Getting Started
 
 These instructions will help you get started running this project on your local machine for,
-1. Starting Development
+1. Development
     1. Orchestra Installed on your local machine
     2. Orchestra Installed on a remote machine
 2. Creating the Development Build
@@ -90,7 +90,7 @@ npm run build-war-prod
 ```
 
 You will find the files in the dist folder.
-**This build is more optimized for production**
+**Note: This build is more optimized for production than the development build.**
 
 ## Creating the Utt files
 
@@ -100,7 +100,7 @@ If you have updated the utt source files(.xml, etc), use the following command t
 npm run build-utts
 ```
 
-You will new utt files in their respective folders, inside the utt folder.
+You will find the new utt files in their respective folders, inside the utt folder.
 
 ## License
 
