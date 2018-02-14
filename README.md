@@ -5,11 +5,12 @@ This project is the standard Orchestra Counter Application found in Orchestra 7
 ## Getting Started
 
 These instructions will help you get started running this project on your local machine for,
-1. Development
+1. Starting Development
     1. Orchestra Installed on your local machine
     2. Orchestra Installed on a remote machine
-2. Creating the Production Build
-3. Create the war package for distribution
+2. Creating the Development Build
+3. Creating the Production Build
+4. Creating the Utt files
 
 ## What is include in this project
 
@@ -70,18 +71,36 @@ npm start
 
 If the application doesn't open in your chrome browser automatically, you can visit **localhost:1337** to see the application. (If you want to see any of the changes you make in the code auto update the application in the browser, make sure live reload is enabled on the browser.)
 
+## Creating the Development Build
+
+To create a development build(war file/ properties file and utts), run the following command
+
+```
+npm run build-war-dev
+```
+
+You will find the files in the dist folder.
+
 ## Creating the Production Build
 
-Comming soon...
-
-## Creating the war package for distribution
-
-To create the war package run the following command
+To create a production build(war file/ properties file and utts), run the following command
 
 ```
-npm run war
+npm run build-war-prod
 ```
-You will find the war package and the default properties file in the dist folder.
+
+You will find the files in the dist folder.
+**This build is more optimized for production**
+
+## Creating the Utt files
+
+If you have updated the utt source files(.xml, etc), use the following command to build all the utts.
+
+```
+npm run build-utts
+```
+
+You will new utt files in their respective folders, inside the utt folder.
 
 ## License
 
