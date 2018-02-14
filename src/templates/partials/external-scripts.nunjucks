@@ -1,0 +1,145 @@
+        {# <script type="text/javascript" src="scripts/jquery/jquery-1.7.2.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.mouse.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.position.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.autocomplete.js"></script> #}
+        {# <script type="text/javascript" src="scripts/jquery/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.ui.datepicker.js"></script> 
+        <script type="text/javascript" src="scripts/jquery/i18n/jquery-ui-i18n.js"></script> #}        
+        
+        <!-- json2.js include for IE7 which does not have native JSON support, see http://www.json.org/js.html for source code and further info -->
+        <!--[if lt IE 8]>
+        <script type="text/javascript" src="scripts/json2.js"></script>
+        <![endif]-->
+
+        <!--[if lt IE 10]>
+		<script type="text/javascript" src="scripts/rest-ie.js"></script>
+		<![endif]-->         
+
+        <!-- build:js scripts/bundle.js -->
+        <!-- New CometD based server-push -->
+        <!-- Per R5, we don't use DWR for server push of events anymore -->
+
+        <script type="text/javascript" src="scripts/vendor/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="scripts/vendor/jquery-ui.min.js"></script>
+
+        <script type="text/javascript" src="scripts/vendor/lodash.min.js"></script>
+        <script type="text/javascript" src="scripts/vendor/mousetrap.js"></script>
+
+        <script type="text/javascript" src="scripts/vendor/popper.1.13.0.js"></script>
+        <script type="text/javascript" src="scripts/vendor/tooltip.1.1.7.js"></script>
+        <script type="text/javascript" src="scripts/vendor/chosen-1.8.2.js"></script>
+        
+
+        {# <script type="text/javascript" src="/events/qevents_cometd.js"></script> #}
+        <!-- TODO: Upgrade links - Remove this when added to Orchestra -->
+        
+        <!-- End upgrade links -->
+        <script type="text/javascript" src="scripts/init.js"></script>
+        <script type="text/javascript" src="scripts/util.js"></script>
+        <script type="text/javascript" src="scripts/customer.js"></script>
+        <script type="text/javascript" src="scripts/deliveredServices.js"></script>
+        <script type="text/javascript" src="scripts/customMarks.js"></script>
+        <script type="text/javascript" src="scripts/outcomes.js"></script>
+        <script type="text/javascript" src="scripts/servicePointPool.js"></script>
+        <script type="text/javascript" src="scripts/userPool.js"></script>
+        <script type="text/javascript" src="scripts/transfer.js"></script>
+        <script type="text/javascript" src="scripts/queues.js"></script>
+        <!--<script type="text/javascript" src="scripts/projectedVisits.js"></script> -->
+        <script type="text/javascript" src="scripts/chat.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.i18n.properties.js"></script>
+        <script type="text/javascript" src="scripts/i18n-util.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.countdown.js"></script>
+        <script type="text/javascript" src="scripts/jquery/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="scripts/i18n.js"></script>
+        <script type="text/javascript" src="scripts/sessvars.js"></script>
+        <script type="text/javascript" src="scripts/ieService.js"></script>
+        <script type="text/javascript" src="scripts/settings.js"></script>
+
+        {# Component Links #}
+        <script type="text/javascript" src="scripts/main.js"></script>
+        <script type="text/javascript" src="scripts/utils/index.js"></script>
+
+        <script type="text/javascript" src="scripts/components/index.js"></script>
+        <script type="text/javascript" src="scripts/components/BaseComponent.js"></script>
+
+        <script type="text/javascript" src="scripts/components/popover/PopoverController.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/poolPopover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/userPoolPopover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/counterPoolPopover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/queuePopover/index.js"></script>
+        <script type="text/javascript" src="scripts/components/popover/contextMarketingPopover/index.js"></script>
+
+        <script type="text/javascript" src="scripts/components/dropdown/index.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/BaseDropdownComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/AddMarksDropdownComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/branchSelection/branchSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/deliveredServicesSelection/deliveredServicesSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/singleOutcomeSelection/singleOutcomeSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/addServiceSelection/addServiceSelection.js"></script>
+
+        <script type="text/javascript" src="scripts/components/tableScroll/index.js"></script>
+
+        <script type="text/javascript" src="scripts/components/NavView.js"></script>
+        <script type="text/javascript" src="scripts/components/NavController.js"></script>
+
+        <script type="text/javascript" src="scripts/components/modal/index.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/BaseModalComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/GenericConfirmModal.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/ProfileSettingsModal.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/NextServicesModal.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/HijackModal.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/profileSettings/profileSettings.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/noCustomersWaiting/noCustomersWaiting.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/hijack/hijack.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/confirmCustomer/confirmCustomer.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/customerOptions/customerOptions.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/storeNext/storeNext.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/visitInDisplayQueue/visitInDisplayQueue.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/nextServices/nextServices.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/logoutWindow/logoutWindow.js"></script>
+        
+        <script type="text/javascript" src="scripts/components/queue/index.js"></script>
+        <script type="text/javascript" src="scripts/components/notes/index.js"></script>
+        
+        <script type="text/javascript" src="scripts/components/header/HeaderComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/header/applicationHeader/header.js"></script>
+        
+
+        <script type="text/javascript" src="scripts/components/tooltip/index.js"></script>
+
+        <script type="text/javascript" src="scripts/components/card/index.js"></script>
+        <script type="text/javascript" src="scripts/components/card/CardBaseComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/WalkInCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/VisitCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/TransferCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/CustomerCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/CustomerListCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/visitCard/visitCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/closeCard/closeCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/inactiveCard/inactiveCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/walkInCard/walkInCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/deliveredServicesCard/deliveredServicesCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/addServicesCard/addServicesCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/addCustomerCard/addCustomerCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/editCustomerCard/editCustomerCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/customerListCard/customerListCard.js"></script>
+
+        <script type="text/javascript" src="scripts/components/card/transferCards/transferOptionsCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/transferCards/transferQueueCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/transferCards/transferUserPoolCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/transferCards/transferCounterPoolCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/marksCard/marksCard.js"></script>
+
+        <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
+        <script type="text/javascript" src="scripts/script.js"></script>
+        <!-- endbuild -->
+
+
+       <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
+       <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
+       <script type="text/javascript" src="scripts/upgrades/qevents_cometd_v2.js"></script>

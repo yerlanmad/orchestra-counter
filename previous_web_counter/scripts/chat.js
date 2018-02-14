@@ -352,4 +352,4 @@ var chat = new function() {
 				break;
 		}
 	};
-}
+};
