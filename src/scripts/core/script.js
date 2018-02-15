@@ -73,13 +73,13 @@ var servicePoint = new function () {
 	var storeNext = false;
 	var confirmNeeded = false;
 	var autoClose = 0;
-	var displayQueueTimeout = -1;
-	var displayQueueTimeoutId;
 	var logoffTimer = null;
 	var prevBranchId = null;
 	var minTimeBetweenCallsTimer = null;
 
 	var cfuForceSelection = false;
+	var visitInDisplayQInterval = 5 // 5 seconds
+	var visitInDisplayQMaxWait = 50 // 50 x visitInDisplayQInterval interval
 
 	// Service point states
 	this.servicePointState = {
@@ -1543,23 +1543,17 @@ var servicePoint = new function () {
 			} else if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				// display spinner with text stating that the visit is about to
 				// be called
-				modalNavigationController.push($Qmatic.components.modal.visitInDisplayQueue)
-				if (displayQueueTimeout > 0) {
-					displayQueueTimeoutId = window
-						.setTimeout(
-						function () {
-							if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
-								util
-									.log('Timed out waiting for visit to be displayed, about to check user status.');
-								sessvars.state = servicePoint
-									.getState(spService
-										.get("user/status"));
-								sessvars.statusUpdated = new Date();
-								servicePoint
-									.updateWorkstationStatus(false);
-							}
-						}, displayQueueTimeout * 1000);
-				}
+				modalNavigationController.push($Qmatic.components.modal.visitInDisplayQueue);
+				var visitInDisplayQTimer = util.setIntervalCount(function () {
+					sessvars.state = servicePoint
+						.getState(spService
+							.get("user/status"));
+					if (sessvars.state.visitState != servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
+						clearInterval(visitInDisplayQTimer);
+						servicePoint
+							.updateWorkstationStatus(false);
+					}
+				}, visitInDisplayQInterval * 1000, visitInDisplayQMaxWait);
 			}
 
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
@@ -2216,7 +2210,6 @@ var servicePoint = new function () {
 				if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 					util
 						.log('About to handle a visit call event when in state VISIT_IN_DISPLAY_QUEUE');
-					window.clearTimeout(displayQueueTimeoutId);
 					modalNavigationController.popModal($Qmatic.components.modal.visitInDisplayQueue)
 					util.twinkleTicketNumber();
 					sessvars.state = servicePoint.getState(spService
@@ -2393,13 +2386,6 @@ var servicePoint = new function () {
 				autoClose = parseInt(parameters.autoClose);
 			} else {
 				autoClose = 0;
-			}
-			if (typeof parameters.displayQueueTimeout !== 'undefined'
-				&& parameters.displayQueueTimeout != null
-				&& !isNaN(parseInt(parameters.displayQueueTimeout))) {
-				displayQueueTimeout = parseInt(parameters.displayQueueTimeout);
-			} else {
-				displayQueueTimeout = -1;
 			}
 		}
 	};

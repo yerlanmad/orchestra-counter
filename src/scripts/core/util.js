@@ -46,9 +46,9 @@ var util = new function () {
             lengthOfAnimation = 3000;
 
         $ticketNumber.addClass('qm-twinkle-animation');
-        setTimeout(function() {
+        setTimeout(function () {
             $ticketNumber.removeClass('qm-twinkle-animation');
-        }, lengthOfAnimation); 
+        }, lengthOfAnimation);
     };
 
     /**
@@ -662,5 +662,17 @@ var util = new function () {
         }
 
         return arrayOfMappedMarksAndCount;
+    };
+
+    this.setIntervalCount = function (callback, delay, repetitions) {
+        var x = 0;
+        return intervalID = window.setInterval(function () {
+
+            callback();
+
+            if (++x === repetitions) {
+                window.clearInterval(intervalID);
+            }
+        }, delay);
     };
 };
