@@ -12,6 +12,7 @@
     }
 
     &__content {
+
         & + & {
             margin-left: rem($global-standard-margin / 2);
 
@@ -25,7 +26,9 @@
             color: $secondary-color;
             font-weight: bold;
 
-            &:visited {
+            &:visited,
+            &:hover,
+            &:focus {
                 color: $secondary-color;
             }
         }

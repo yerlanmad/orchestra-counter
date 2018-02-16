@@ -25,9 +25,15 @@ window.$Qmatic.components.QueueNavController.prototype = {
     },
     _attachEventListeners: function () {
         this.queueTableContent.addEventListener('click', this._handleClickInsideDetailView.bind(this));
-        this.queueDetailBackBtn.addEventListener('click', this.navigateToOverview.bind(this));
+        this.queueDetailBackBtn.addEventListener('click', this.navigateToOverviewWithRefresh.bind(this));
     },
     navigateToOverview: function () {
+        this._clearTimer();
+        queues.runClearQueuePopovers();
+        this.queueDetailView.style.display = "none";
+        this.queueOverviewView.style.display = "block";
+    },
+    navigateToOverviewWithRefresh: function () {
         this._clearTimer();
         queues.updateQueues(true);
         queues.runClearQueuePopovers();
