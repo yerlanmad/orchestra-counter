@@ -251,7 +251,14 @@
 
 #queueDetailView {
     tr {
+        .qm-table__first-column {
+            width: 20%;
+        }
+        .qm-table__middle-column {
+            width: 27.5%;
+        }
         .qm-table__last-column {
+            width: 25%;
             padding-right: rem(30px);
 
             @at-root [dir='rtl'] & {

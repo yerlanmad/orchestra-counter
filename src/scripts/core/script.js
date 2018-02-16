@@ -1453,6 +1453,7 @@ var servicePoint = new function () {
 			// DS or outcome needed - Update pools
 			spPoolUpdateNeeded = true;
 			userPoolUpdateNeeded = true;
+			queuesUpdateNeeded = true;
 
 			$("#waitingTimeCounter").html(
 				util.formatIntoHHMMSS(sessvars.state.visit.waitingTime)); // createTime

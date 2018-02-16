@@ -37,7 +37,7 @@ window.$Qmatic.components.NotesController.prototype = {
         this.saveBtn.addEventListener('click', this._save.bind(this));
     },
     _setButtonState: function () {
-        if(this._getNumberOfCharacters() === 0) {
+        if(this._getNumberOfTrimmedCharacters() === 0) {
             this.saveBtn.disabled = true;
         } else {
             this.saveBtn.disabled = false;
@@ -49,6 +49,9 @@ window.$Qmatic.components.NotesController.prototype = {
     },
     _getNumberOfCharacters: function () {
         return this.notesInput.value.length;
+    },
+    _getNumberOfTrimmedCharacters: function () {
+        return this.notesInput.value.trim().length;
     },
     navigateToPresentational: function () {
         this.notesInputView.style.display = "none";
