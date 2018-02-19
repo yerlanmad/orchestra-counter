@@ -587,6 +587,7 @@ var util = new function () {
     }
 
     this.sortArrayCaseInsensitive = function (array, property, sortOrder) {
+        if (!!!array) return;
         // Default Sort is Asc
         array.sort(function (a, b) {
             var multiplier = 0;
