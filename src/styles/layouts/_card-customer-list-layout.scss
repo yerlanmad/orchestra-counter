@@ -1,7 +1,17 @@
 #customerListCard {
     .qm-card {
+        &-nav__middle {
+            padding: 0;
+        }
+        &__header-section {
+            flex: 0 0 auto;
+        }
         &__content-section {
-            height: calc(100% - 58px - 16px);
+            flex: 1 1 auto;
+            overflow: auto;
+        }
+        &__footer-section {
+            flex: 0 0 auto;
         }
     }
 }

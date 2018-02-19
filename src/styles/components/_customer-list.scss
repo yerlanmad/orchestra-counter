@@ -1,8 +1,6 @@
 
 .qm-customer-overview {
     margin-top: rem($global-standard-margin);
-    height: 100%;
-    overflow: auto;
 }
 
 .qm-customer-list {
@@ -25,7 +23,7 @@
     &__name {
         font-size: rem(18px);
         color: $dark-transparent82;
-        font-weight: $font-weight-light;
+        font-weight: $font-weight-regular;
         margin: rem(0 0 $global-standard-margin / 2);
     }
 

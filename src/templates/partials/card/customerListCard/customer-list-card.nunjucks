@@ -5,7 +5,11 @@
 
 {% block header %}
     <header class="qm-card__header-section">
-        {{cardNav.render('customerListLabel')}}
+        <div class="qm-card-nav">
+            <div class="qm-card-nav__middle">
+                <h2 id="customerListLabel" class="qm-card-nav__title"></h2>
+            </div>
+        </div>
     </header>
 {% endblock %}
 
@@ -15,6 +19,16 @@
             <ul class="qm-customer-list js-customer-list">
                 
             </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <div class="qm-card__footer-section">
+        <div class="qm-generic-layout qm-generic-layout--align-right">
+            <button class="qm-btn qm-btn--primary js-card-back" onclick="cardNavigationController.pop();this.blur();">
+                <span class="qm-btn__text"></span>
+            </button>
         </div>
     </div>
 {% endblock %}
