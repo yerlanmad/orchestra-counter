@@ -157,7 +157,6 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("visitWaitingTime", 'info.waiting.time');
         i18nSafe("visitTransactionTime", 'info.transaction.time');
         i18nSafe("visitCardAddMarksLbl", 'info.card.marksCard.addMarks');
-        i18nSafe("visitSelectMarksLbl", 'info.card.marksCard.selectMark');
         i18nQmBtn("recallBtn", 'action.recall');
         i18nQmBtn("reinsertBtn", 'action.reinsert');
         i18nQmBtn("transferBtn", 'action.transfer');
@@ -210,7 +209,6 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         //add delivered services table
         i18nSafeAppend("addDeliveredServicesHeader", 'info.delivered.services');
         i18nSafeAppend("addDeliveredServices", 'info.ds.addDs');
-        i18nSafeAppend("selectADeliveredService", 'info.ds.selectDs');
         i18nSafe("dsNameColoumn","info.delivered.service.name");
         i18nSafe("outcomeNameColoumn","info.delivered.service.outcome");
         i18nSafe("dsTimeColoumn","info.delivered.service.time");
@@ -450,11 +448,12 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.js-label-required', 'field.required');
 
         // Chosen Select drop down placeholder text...
-        $Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') })
-        $Qmatic.components.dropdown.branchSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseBranch') })
-        $Qmatic.components.dropdown.counterSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseCounter') })
-        $Qmatic.components.dropdown.profileSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseProfile') })
-        $Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') })
+        $Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') });
+        $Qmatic.components.dropdown.branchSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseBranch') });
+        $Qmatic.components.dropdown.counterSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseCounter') });
+        $Qmatic.components.dropdown.profileSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseProfile') });
+        $Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') });
+        $Qmatic.components.dropdown.deliveredServicesSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.ds.selectDs') });
 
 
         // Notes

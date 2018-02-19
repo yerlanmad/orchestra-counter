@@ -22,7 +22,8 @@ var customMarks = new function () {
 						 - 25;
 
 					elem.parent().find(".chosen-results").css("max-height", heightOfContentSection);
-				}
+				},
+				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark')
 			}).get$Elem();
 	}
 

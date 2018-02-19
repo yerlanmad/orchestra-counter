@@ -104,12 +104,13 @@ var deliveredServices = new function () {
         } else {
             var columns = [
 /* D.serv. name */     {
-                    "sClass": "qm-table__first-column",
+                    // "sClass": "qm-table__first-column",
                     "mDataProp": "deliveredServiceName",
                     "sDefaultContent": null,
                     "bSortable": false,
                     "sWidth": "auto",
-                    "sType": "qm-sort"
+                    "sType": "qm-sort",
+                    "bVisible": true
                 },
 /* D.serv. jiql id */  {
                     "bSearchable": false,
@@ -128,25 +129,26 @@ var deliveredServices = new function () {
                     "sType": "qm-sort"
                 },
 /* D.serv. outcome */  {
-                    "sClass": "qm-table__middle-column",
+                    // "sClass": "qm-table__middle-column",
                     "mDataProp": "visitOutcome",
                     "sDefaultContent": null,
                     "bSortable": false,
                     "sWidth": "auto",
-                    "sType": "qm-sort"
+                    "sType": "qm-sort",
+                    "bVisible": true
                 },
 /* Delivered time */   {
-                    "sClass": "qm-table__last-column",
+                    // "sClass": "qm-table__last-column",
                     "mDataProp": "eventTime",
                     "sDefaultContent": null,
                     "bSortable": false,
-                    "sWidth": "auto",
+                    "sWidth": "105px",
                     "sType": "qm-sort",
                     "createdCell": function (td, cellData, rowData, row, col) {
 
                         $(td).append(
                             "<span class=\"removeMarkBtn\" " + "title=\""
-                            + jQuery.i18n.prop("action.remove.mark.click")
+                            + jQuery.i18n.prop("action.remove.ds.click")
                             + "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
                             + '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
                             + '<span class="sr-only">delete button</span>'
@@ -156,7 +158,8 @@ var deliveredServices = new function () {
                             
                             removeDeliveredService(row, rowData.deliveredServiceName);
                         });
-                    }
+                    },
+                    "bVisible": true
                 },
 /* D.serv. out req. */ {
                     "bSearchable": false,
@@ -168,9 +171,9 @@ var deliveredServices = new function () {
             ];
             var headerCallback = function (nHead, aasData, iStart, iEnd, aiDisplay) {
                 // if (nHead.getElementsByTagName('th')[0].innerHTML.length == 0) {
-                //     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
-                //     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.delivered.service.outcome');
-                //     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.delivered.service.time');
+                    nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.delivered.service.name');
+                    nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.delivered.service.outcome');
+                    nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.delivered.service.time');
                 // }
             };
             var rowCallback = function (nRow, aData, iDisplayIndex) {
@@ -196,7 +199,7 @@ var deliveredServices = new function () {
                         html.val(aData[outcomeDataIndex].outcomeCode);
                     } else {
                         html.val("-1");
-                        html.parent("div").addClass("invalid");
+                        // $(html).parent().addClass("invalid");
                     }
 
                     html.change(function () {
@@ -214,7 +217,7 @@ var deliveredServices = new function () {
                     });
 
                     $('td:eq(1)', nRow).html(html);
-                    html.wrap("<div class='cross-browser-select " + (html.val() == -1 ? "invalid" : "") + "'></div>")
+                    html.wrap("<div class='cross-browser-select " + ((!html.val() || html.val() == -1)  ? "invalid" : "") + "'></div>")
                     html.before($("<div class='native-like-select select-carrot-icon'>" + html.find(":selected").text() + "</div>")
                     );
                 }
@@ -243,9 +246,9 @@ var deliveredServices = new function () {
                     sessvars.state.visit.currentVisitService.visitDeliveredServices : null)
             });
             deliveredServicesTable.fnSort(SORTING);
-            // $(window).bind('resize', function () {
-            //     deliveredServicesTable.fnAdjustColumnSizing();
-            // });
+            $(window).bind('resize', function () {
+                deliveredServicesTable.fnAdjustColumnSizing();
+            });
         }
     };
 
