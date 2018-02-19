@@ -142,7 +142,7 @@ var deliveredServices = new function () {
                     "mDataProp": "eventTime",
                     "sDefaultContent": null,
                     "bSortable": false,
-                    "sWidth": "105px",
+                    "sWidth": "95px",
                     "sType": "qm-sort",
                     "createdCell": function (td, cellData, rowData, row, col) {
 
