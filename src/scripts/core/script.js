@@ -693,7 +693,7 @@ var servicePoint = new function () {
 				}
 			}
 		} else {
-			util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
+			util.showError(jQuery.i18n.prop("info.call.recall.to.quick"));
 		}
 	};
 
@@ -1288,11 +1288,11 @@ var servicePoint = new function () {
 					}
 				}
 				if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
-					util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
+					util.showError(jQuery.i18n.prop("info.call.walkdirect.to.quick"));
 				}
 			}
 		} else {
-			util.showError(jQuery.i18n.prop("info.call.next.to.quick"));
+			util.showError(jQuery.i18n.prop("info.call.walkdirect.to.quick"));
 		}
 	};
 
