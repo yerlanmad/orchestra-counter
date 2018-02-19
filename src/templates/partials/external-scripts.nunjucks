@@ -31,11 +31,10 @@
         <script type="text/javascript" src="scripts/vendor/tooltip.1.1.7.js"></script>
         <script type="text/javascript" src="scripts/vendor/chosen-1.8.2.js"></script>
         
+        <script type="text/javascript" src="scripts/cometd/cometd.js"></script>
+        <script type="text/javascript" src="scripts/cometd/jquery.cometd.js"></script>
+        <script type="text/javascript" src="scripts/cometd/qevents_cometd_v2.js"></script>
 
-        {# <script type="text/javascript" src="/events/qevents_cometd.js"></script> #}
-        <!-- TODO: Upgrade links - Remove this when added to Orchestra -->
-        
-        <!-- End upgrade links -->
         <script type="text/javascript" src="scripts/core/init.js"></script>
         <script type="text/javascript" src="scripts/core/util.js"></script>
         <script type="text/javascript" src="scripts/core/customer.js"></script>
@@ -138,8 +137,3 @@
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
         <script type="text/javascript" src="scripts/core/script.js"></script>
         <!-- endbuild -->
-
-
-       <script type="text/javascript" src="/events/scripts/org/cometd.js"></script>
-       <script type="text/javascript" src="/events/scripts/jquery/jquery.cometd.js"></script>
-       <script type="text/javascript" src="scripts/upgrades/qevents_cometd_v2.js"></script>

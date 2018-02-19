@@ -194,54 +194,6 @@ gulp.task('connect', devServer.server({
                 changeOrigin: false,
                 ws: true
             }),
-            proxy('/css/orchestra.css', {
-                target: targetOrchestraUrl,
-                route: '/css/orchestra.css',
-                changeOrigin: true,
-                ws: true
-            }),
-            proxy('/css/reset.css', {
-                target: targetOrchestraUrl,
-                route: '/css/reset.css',
-                changeOrigin: true,
-                ws: true
-            }),
-            proxy('/css/css3.css', {
-                target: targetOrchestraUrl,
-                route: '/css/css3.css',
-                changeOrigin: true,
-                ws: true
-            }),
-            proxy('/events/scripts/org/cometd.js', {
-                target: targetOrchestraUrl,
-                route: '/events/scripts/org/cometd.js',
-                changeOrigin: true,
-                ws: true
-            }),
-            proxy('/events/scripts/jquery/jquery.cometd.js', {
-                target: targetOrchestraUrl,
-                route: '/events/scripts/jquery/jquery.cometd.js',
-                changeOrigin: true,
-                ws: true
-            }),
-            proxy('/events/qevents_cometd.js', {
-                target: targetOrchestraUrl,
-                route: '/events/qevents_cometd.js',
-                changeOrigin: true,
-                ws: true
-            }),
-            proxy('/images/icons/home.png', {
-                target: targetOrchestraUrl,
-                route: '/images/icons/help.png',
-                changeOrigin: true,
-                ws: true
-            }),
-            proxy('/images/icons/help.png', {
-                target: targetOrchestraUrl,
-                route: '/images/icons/help.png',
-                changeOrigin: true,
-                ws: true
-            }),
             proxy('/cometd', {
                 target: targetOrchestraUrl,
                 route: '/cometd',
