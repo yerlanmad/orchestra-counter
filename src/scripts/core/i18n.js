@@ -144,8 +144,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         
         //card details
         // Card back
-        i18nSafeSelectorBtnAppend(".qm-card--back-btn", 'application.sr.back');
-
+        i18nSafeSelectorBtnAppend(".qm-card--back-btn span", 'application.sr.back');
+        i18nSafeSelectorBtnAppend(".js-card-back span", 'application.sr.back');
+        
         // Closed Card
         i18nSafe("closedCardTitle", 'info.card.closedCard.title');
         i18nSafe("closedCardSubTitle", 'info.card.closedCard.subTitle');
