@@ -2,3 +2,4 @@ node_modules/
 dist/
 config.gulp.json
 npm-debug.log
+*.utt
