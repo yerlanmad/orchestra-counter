@@ -251,7 +251,7 @@ gulp.task('deploy:war', function () {
 });
 
 gulp.task('deploy:lang', function () {
-    return gulp.src('./dist/workstationTerminalMessages.properties')
+    return gulp.src('./dist/properties/workstationTerminalMessages.properties')
         .pipe(sftp({
             remotePath: remoteDeploymentDefaultLangPath,
             remotePlatform: remoteDeploymentPlatform,
