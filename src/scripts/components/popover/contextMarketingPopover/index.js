@@ -27,7 +27,7 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
             trigger: 'manual',
             boundariesElement: 'viewport',
             title: ' ',
-            placement: config.placement ? config.placement : 'top',
+            placement: this.isRTL ? 'left-start' : 'right-start',
             template: config.template,
             offset: '0, 10'
         });

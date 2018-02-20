@@ -25,6 +25,10 @@
         color: $dark-transparent82;
         font-weight: $font-weight-regular;
         margin: rem(0 0 $global-standard-margin / 2);
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
     }
 
     &__information {
@@ -36,6 +40,7 @@
         @at-root [dir='rtl'] & {
             padding-left: 0;
             padding-right: rem($global-standard-padding / 2);
+            text-align: right;
         }
         
         & + & {

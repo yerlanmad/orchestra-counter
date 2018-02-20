@@ -36,6 +36,10 @@
             margin-bottom: 0;
             color: $white;
             font-weight: $font-weight-light;
+
+            @at-root [dir='rtl'] & {
+                text-align: right;
+            }
         }
 
         &__close-btn {

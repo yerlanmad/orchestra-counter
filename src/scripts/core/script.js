@@ -2002,8 +2002,7 @@ var servicePoint = new function () {
 					$contextMarketing,
 					{
 						template: contextTemplate,
-						text: verticalMessage.workstationMessage,
-						placement: "right-start"
+						text: verticalMessage.workstationMessage
 					});
 			} else {
 				$('#verticalMessageRow').hide();

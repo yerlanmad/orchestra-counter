@@ -82,6 +82,8 @@ var customer = new function() {
         editIconNode.setAttribute('aria-hidden', true);
         editBtnNode.appendChild(editIconNode);
         var srSpan = document.createElement("SPAN");
+        var srText = document.createTextNode(jQuery.i18n.prop('customer.edit') + " " + firstName + " " + lastName);
+        srSpan.appendChild(srText);
         srSpan.classList.add('sr-only');
         editBtnNode.appendChild(srSpan);
         entry.appendChild(editBtnNode);
