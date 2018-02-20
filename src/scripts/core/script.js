@@ -177,12 +177,14 @@ var servicePoint = new function () {
 	this.SW_SERVICE_POINT = "SW_SERVICE_POINT";
 
 	this.init = function () {
-		if (!isLoggedInToWorkstation()) {
-			$("#userName").html(sessvars.currentUser.userName);
-			servicePoint.showSettingsWindow();
-		} else {
-			updateUI();
-		}
+		servicePoint.showSettingsWindow();
+		// Commented out because of this task #153136142
+		// if (!isLoggedInToWorkstation()) {
+		// 	$("#userName").html(sessvars.currentUser.userName);
+		// 	servicePoint.showSettingsWindow();
+		// } else {
+		// 	updateUI();
+		// }
 		this.teardownAutoCloseListener();
 		this.setupAutoCloseListener();
 	};
