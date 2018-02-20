@@ -1,4 +1,4 @@
-<h1>Release notes Orchestra Web Counter 1.0.0</h1>
+<h1>Release notes Orchestra Web Counter 4.0.0</h1>
 
 ----------
 
@@ -8,36 +8,12 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
-<!--Add new update section after each release
-
-<h2>Update UPDATE_VERSION_NUMBER</h2>
-
-**Date:**
- 
-**Build number:**
-
-<h3>Stories</h3>
-
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Story header** Story text |
-
-<h3>Bug fixes</h3>
-
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Bug header** Bug text |
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3> 
--->
 
 <h2>Original release</h2>
 
-**Date:** 
+**Date: 10/01/2018** 
  
-**Build number:** 
+**Build number: 001** 
 
 <h3>Stories</h3>
 
@@ -61,6 +37,28 @@ This document describes the new features, bug corrections, known issues and reco
 ---
 <h3>Upgrade Instructions</h3>
 
+
+<h2>Update 4.0.0.005</h2>
+
+**Date: 20/02/2018**
+ 
+**Build number: 005**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **Story header** Story text |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **Bug header** Bug text |
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3> 
 ----------
 
 <h3>Copyright notice</h3>
