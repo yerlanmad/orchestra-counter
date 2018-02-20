@@ -109,16 +109,6 @@ function showModules() {
 		$('#allQueuesTab').hide();
 	}
 
-	if (transferToUserPoolEnabled == false) {
-		$('#transferTicketToStaffPoolDiv').hide();
-		$('#transferQueueToStaffPoolDiv').hide();
-	}
-
-	if (transferToServicePointPoolEnabled == false) {
-		$('#transferTicketToServicePointPoolDiv').hide();
-		$('#transferQueueToServicePointPoolDiv').hide();
-	}
-
 	if (buttonTransferEnabled == true) {
 		$('#transferBtn').show();
 	} else {
