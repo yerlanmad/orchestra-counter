@@ -6,9 +6,7 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController = function (
         options = {};
     }
     this.instances = {};
-    this.isRTL     = document.getElementsByTagName("html")[0].getAttribute("dir") 
-                        && document.getElementsByTagName("html")[0].getAttribute("dir")
-                                                .indexOf('rtl') > -1 ? true : false;
+    
 }
 
 //  Base Context marketing Class Methods
@@ -22,6 +20,11 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
         if(!_.isEmpty(config.placement) && config.placement === "right" && this.isRTL) {
             config.placement = "left";
         }
+        
+        this.isRTL     = document.getElementsByTagName("html")[0].getAttribute("dir") 
+                        && document.getElementsByTagName("html")[0].getAttribute("dir")
+                                                .indexOf('rtl') > -1 ? true : false;
+
         var instance = new Tooltip(refElement, {
             container: document.body,
             trigger: 'manual',
