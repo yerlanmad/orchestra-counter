@@ -240,7 +240,7 @@ gulp.task('connect', devServer.server({
 
 
 gulp.task('deploy:war', function () {
-    return gulp.src('./dist/workstationterminal.war')
+    return gulp.src('./dist/webapp/workstationterminal.war')
         .pipe(sftp({
             remotePath: remoteDeploymentDefaultPath,
             remotePlatform: remoteDeploymentPlatform,
@@ -416,17 +416,7 @@ gulp.task('clean:build:utts', gulpsync.sync(
  */
 gulp.task('deploy:remote', gulpsync.sync(
     [
-        'clean:build',
-        'compile:scss',
-        'move:js',
-        'compile:nunjucks',
-        'index:concat:uglify',
-        'index:minify',
-        'clean:dist',
-        'move:assets',
-        'move:images',
-        'move:icons',
-        'cache:killer',
+        'build:dev',
         'move:inf',
         'move:config',
         'util:war',

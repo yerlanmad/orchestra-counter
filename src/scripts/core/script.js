@@ -561,7 +561,7 @@ var servicePoint = new function () {
 
 		if (typeof wantedWorkstation !== 'undefined'
 			&& null != wantedWorkstation) {
-			if (warnUser) {
+			if (wantedWorkstation.parameters.singleSession && warnUser) {
 				isHijacking = isHijack(wantedWorkstation, settings);
 			}
 			if (!isHijacking) {
@@ -2406,9 +2406,9 @@ var servicePoint = new function () {
 		var params = {};
 		params.branchId = sessvars.branchId;
 		params.servicePointId = sessvars.servicePointId;
+
 		var userServicePoint = spService.get("branches/" + params.branchId
 			+ "/servicePoints/" + params.servicePointId);
-
 		setUnitTypeModules(userServicePoint);
 
 		sessvars.servicePointUnitId = typeof userServicePoint !== 'undefined'
