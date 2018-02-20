@@ -9,7 +9,8 @@
     "build-war-dev": "gulp build:dev:war",
     "build-war-prod": "gulp build:prod:war",
     "build-utts": "gulp clean:build:utts",
-    "deploy-remote": "gulp deploy:remote"
+    "deploy-remote": "gulp deploy:remote",
+    "build-artifactory": "gulp build:artifactory"
   },
   "devDependencies": {
     "del": "^3.0.0",
@@ -24,6 +25,7 @@
     "gulp-line-ending-corrector": "^1.0.2",
     "gulp-livereload": "^3.8.1",
     "gulp-nunjucks-render": "^2.2.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sftp": "^0.1.5",
     "gulp-sync": "^0.1.4",

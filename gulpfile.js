@@ -18,6 +18,7 @@ var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-clean-css');
 var lineEndCorrector = require('gulp-line-ending-corrector');
 var htmlmin = require('gulp-htmlmin');
+var rename = require('gulp-rename');
 
 var fs = require('fs');
 var path = require('path');
@@ -71,7 +72,7 @@ gulp.task('clean:build', function () {
 
 gulp.task('clean:war', function () {
     return del([
-        './dist/**/*', '!./dist/workstationterminal.war'
+        './dist/*', '!./dist/webapp'
     ])
 })
 
@@ -134,35 +135,62 @@ gulp.task('move:images', function () {
 gulp.task('move:icons', function () {
     return gulp.src('./src/icons/**')
         .pipe(gulp.dest('./dist/css/icons'))
-})
+});
 
 gulp.task('move:js', function () {
     return gulp.src(['src/scripts/**/*.js'])
         .pipe(gulp.dest('./dist/scripts')).pipe(devServer.reload())
-})
+});
 
 gulp.task('move:inf', function () {
     return gulp.src([
         'src/INF/**/*',
         'src/ping.html'
-        ])
+    ])
         .pipe(gulp.dest('./dist'))
-})
+});
 
 gulp.task('move:lang', function () {
     return gulp.src(['./src/lang/*'])
-        .pipe(gulp.dest('./dist'))
-})
+        .pipe(gulp.dest('./dist/properties'))
+});
 
 gulp.task('move:config', function () {
     return gulp.src(['./config.properties'])
         .pipe(gulp.dest('./dist'))
-})
+});
+
+gulp.task('move:release-notes', function () {
+    return gulp.src(['release-notes/**'])
+        .pipe(gulp.dest('dist/release-notes/'))
+});
+
+gulp.task('build:artifactory:zip', function () {
+    try {
+        var appData = JSON.parse(fs.readFileSync('./app.json'));
+        if (appData) {
+            var version = appData.version;
+            return gulp.src(['dist/**/*'])
+                .pipe(zip( 'counter-' + version + '.zip'))
+                .pipe(gulp.dest('dist/'));
+        }
+    } catch (ex) {
+        console.log("There was an exception when trying to read the package.json! - " + ex);
+        return false;
+    }
+});
+
+gulp.task('build:artifactory:clean', function () {
+    return del([
+        './dist/**/*',
+        '!./dist/*.zip'
+    ])
+});
 
 gulp.task('util:war', function () {
     return gulp.src(['dist/**', '!dist/lang'])
         .pipe(zip('workstationterminal.war'))
-        .pipe(gulp.dest('dist/'))
+        .pipe(gulp.dest('dist/webapp/'))
 });
 
 gulp.task('watch:start', function () {
@@ -234,21 +262,22 @@ gulp.task('deploy:lang', function () {
 });
 
 // Task to create utts files from their source files
-gulp.task('build:utts', folders(uttsPath, function(folder){
+gulp.task('build:utts', folders(uttsPath, function (folder) {
     return gulp.src(path.join(uttsPath, folder, '**/*'))
-        .pipe(zip(folder+'.utt'))
+        .pipe(zip(folder + '.utt'))
         .pipe(gulp.dest(path.join(uttsPath, folder)));
 }));
 
-gulp.task('clean:utts', function(){
+gulp.task('clean:utts', function () {
     return del([
         path.join(uttsPath) + "/**/*.utt"
     ])
 });
 
-gulp.task('move:utts', function(){
+gulp.task('move:utts', function () {
     return gulp.src(uttsPath + "/**/*.utt")
-        .pipe(gulp.dest('./dist/utts'))
+        .pipe(rename({ dirname: '' }))
+        .pipe(gulp.dest('./dist/utt'))
 });
 
 /**
@@ -265,10 +294,7 @@ gulp.task('build:custom', gulpsync.sync(
         'move:icons',
         'cache:killer',
         'move:inf',
-        'build:utts',
-        'clean:utts',
-        'build:utts',
-        'move:utts'
+        'clean:build:utts'
     ]), function () {
         return console.log(`Build Created in folder ./dist`)
     })
@@ -310,9 +336,7 @@ gulp.task('build:dev:war', gulpsync.sync(
         'util:war',
         'clean:war',
         'move:lang',
-        'clean:utts',
-        'build:utts',
-        'move:utts'
+        'clean:build:utts'
     ]), function () {
         return console.log(`workstationterminal.war(Development Build) file created in dist folder`)
     })
@@ -339,9 +363,36 @@ gulp.task('build:prod:war', gulpsync.sync(
         'util:war',
         'clean:war',
         'move:lang',
-        'clean:utts',
-        'build:utts',
-        'move:utts'
+        'clean:build:utts'
+    ]), function () {
+        return console.log(`workstationterminal.war(Productiion Build) file created in dist folder`)
+    })
+
+/**
+* Artifactory build
+*/
+gulp.task('build:artifactory', gulpsync.sync(
+    [
+        'clean:build',
+        'compile:scss',
+        'move:js',
+        'compile:nunjucks',
+        'index:concat:uglify',
+        'index:minify',
+        'clean:dist',
+        'move:assets',
+        'move:images',
+        'move:icons',
+        'cache:killer',
+        'move:inf',
+        'move:config',
+        'util:war',
+        'clean:war',
+        'move:lang',
+        'clean:build:utts',
+        'move:release-notes',
+        'build:artifactory:zip',
+        'build:artifactory:clean'
     ]), function () {
         return console.log(`workstationterminal.war(Productiion Build) file created in dist folder`)
     })
@@ -352,7 +403,9 @@ gulp.task('build:prod:war', gulpsync.sync(
 gulp.task('clean:build:utts', gulpsync.sync(
     [
         'clean:utts',
-        'build:utts'
+        'build:utts',
+        'move:utts',
+        'clean:utts'
     ]), function () {
         return console.log(`Utt files created from source`)
     })

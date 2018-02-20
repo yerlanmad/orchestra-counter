@@ -3,3 +3,4 @@ dist/
 config.gulp.json
 npm-debug.log
 *.utt
+.DS_Store
