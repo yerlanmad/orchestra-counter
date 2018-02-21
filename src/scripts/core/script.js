@@ -548,7 +548,13 @@ var servicePoint = new function () {
 			if (typeof warnUser === "undefined") {
 				warnUser = true;
 			}
-			isHijacking = confirm(warnUser, settings);
+			if (prevBranchId == settings.branchId && prevCounterId == settings.servicePointId && prevProfileId == settings.workProfileId) {
+				modalNavigationController.pop();
+				isHijacking = false;
+				updateUI();
+			} else {
+				isHijacking = confirm(warnUser, settings);
+			}
 		}
 		return isHijacking;
 	};
