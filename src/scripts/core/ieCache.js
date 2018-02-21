@@ -9,7 +9,8 @@ var spServiceCache = (function ($) {
     
     return {
         isCached: function (resource) {
-            return sanitizeResource(resource) in cache;
+            // return sanitizeResource(resource) in cache; Caching is disabled at the moment
+            return false;
         },
 
         getData: function (resource) {
