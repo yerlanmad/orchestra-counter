@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.2    2018-02-21   Handle Reset Event                        lakcal
+
     7.0.0.1    2018-02-12   Added parameter for default walkin        lakcal
                             service 
                             
@@ -70,7 +72,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay"
       frameworkVersion="2"
-      unitVersion="7.0.0.1"
+      unitVersion="7.0.0.2"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -563,6 +565,16 @@
         } catch (Throwable e) {
           // could not send event to Spotlight
           // most likely this unit does not have any Spotlight device connected
+        }
+
+
+         try {
+          device = unit.getDevice("Web service point")
+          DeviceEvent resetEvent = new DeviceEvent(device.getId(),"RESET")
+          resetEvent.setParameters(event.getParameters())
+          device.sendEvent(resetEvent)
+        } catch(e) {
+          unit.log("DEBUG", "Unable to send reset event to ConnectCounter__PositionalDisplay for unit " + unit.getUnitId())
         }
       
         ]]>
