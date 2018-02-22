@@ -307,8 +307,9 @@ var queues = new function() {
                     if(aData.parameterMap && aData.parameterMap['customers'] !== undefined) {
                         $('td:eq(1)', nRow).html(aData.parameterMap['customers']);
                     }
-
-                    $('td:eq(3)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
+                    if(aData.appointmentTime) {
+                        $('td:eq(3)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
+                    }
 
                     $('td:eq(4)', nRow).html(formattedTime);
                     return nRow;
@@ -323,50 +324,20 @@ var queues = new function() {
                 tableScrollController.initTableScroll("tickets");
             }
 
-            //kill old event handlers
-			// if ( buttonTransferFromQueueEnabled  == true ) {
-			// 	$('tbody td span a.transferTicket', $('#tickets')).die('click');
-			// }
-			// if ( buttonRemoveFromQueueEnabled  == true ) {
-			// 	$('tbody td span a.removeTicket', $('#tickets')).die('click');
-			// }
-			// if ( buttonCallFromQueueEnabled  == true ) {
-			// 	$('tbody td span a.callTicket', $('#tickets')).die('click');
-			// }
-	
-			// if ( buttonTransferFromQueueEnabled  == true ) {	
-			// 	$('tbody td span a.transferTicket', $('#tickets')).live('click', function() {
-			// 		var nTr = $(this).closest("tr").get(0);
-			// 		var aData = ticketsTable.fnGetData(nTr);
-			// 		//transfer.transferTicketToQueueClicked(aData);
-			// 		//util.hideModal('ticketsDialogue');
-			// 		return false;
-			// 	});
-			// }			
+            var $ticketListHeader = $("#ticketListHeader");
+            $ticketListHeader.empty();
+            $ticketListHeader.html(queueTableContainingRow.fnGetData(rowClicked).name);
 
-			// if ( buttonRemoveFromQueueEnabled == true ) {
-			// 	$('tbody td span a.removeTicket', $('#tickets')).live('click', function() {
-			// 		var nTr = $(this).closest("tr").get(0);
-			// 		var aData = ticketsTable.fnGetData(nTr);
-			// 		removeTicketClicked(aData);
-			// 		//util.hideModal('ticketsDialogue');
-			// 		return false;
-			// 	});
-			// }
-
-			// if ( buttonCallFromQueueEnabled  == true ) {			
-			// 	$('tbody td span a.callTicket', $('#tickets')).live('click', function() {
-			// 		var nTr = $(this).closest("tr").get(0);
-			// 		var aData = ticketsTable.fnGetData(nTr);
-			// 		callTicketClicked(aData);
-			// 		//util.hideModal('ticketsDialogue');
-			// 		return false;
-			// 	});
-			// }
-            $("#ticketListHeader").empty();
-            $("#ticketListHeader").html(queueTableContainingRow.fnGetData(rowClicked).name);
+            adjustHeightOfTableScrollWrapper('#queueDetailView');
         }
     };
+
+    var adjustHeightOfTableScrollWrapper = function (id) {
+        var $wrapper = $(id),
+            $scrollBody = $wrapper.find('.dataTables_scrollBody');
+            scrollHeaderHeight = $wrapper.find('.dataTables_scrollHead').height();
+        $scrollBody.css('height', 'calc(100% - ' + scrollHeaderHeight + 'px');
+    }
 
     var clearQueuePopovers = function () {
         if(queuePopovers && queuePopovers.length > 0) {
