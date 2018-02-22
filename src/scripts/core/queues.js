@@ -227,6 +227,9 @@ var queues = new function() {
                         "sDefaultContent": ""},
                     /* Actions */      {"sClass": "qm-table__middle-column",
                         "mDataProp": "currentVisitService.serviceExternalName"},
+                        /* Appointment time */      {"sClass": "qm-table__last-column",
+                    "sType": "qm-sort",
+                        "mDataProp": "appointmentTime"},
                     /* Waiting time */      {"sClass": "qm-table__last-column",
                     "sType": "qm-sort",
                         "mDataProp": "waitingTime"}
@@ -236,7 +239,8 @@ var queues = new function() {
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.ticket');
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.service.name');
-                    nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+                    nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
+                    nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
                 };
                 var t = new Date();
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues/" + sessvars.clickedQueueId + "/visits/full?call=" + t;
@@ -302,7 +306,10 @@ var queues = new function() {
                         $('td:eq(1)', nRow).html(aData.parameterMap['customers']);
                     }
 
-                    $('td:eq(3)', nRow).html(formattedTime);
+                    console.log(nRow);
+                    $('td:eq(3)', nRow).html("dwadwwa");
+
+                    $('td:eq(4)', nRow).html(formattedTime);
                     return nRow;
                 };
 

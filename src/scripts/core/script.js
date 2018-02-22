@@ -77,6 +77,7 @@ var servicePoint = new function () {
 	var prevBranchId = null;
 	var prevCounterId = null;
 	var prevProfileId = null;
+	var appInitialized = false;
 	var applicationInitialized = false;
 	var minTimeBetweenCallsTimer = null;
 
@@ -180,14 +181,12 @@ var servicePoint = new function () {
 	this.SW_SERVICE_POINT = "SW_SERVICE_POINT";
 
 	this.init = function () {
-		servicePoint.showSettingsWindow();
-		// Commented out because of this task #153136142
-		// if (!isLoggedInToWorkstation()) {
-		// 	$("#userName").html(sessvars.currentUser.userName);
-		// 	servicePoint.showSettingsWindow();
-		// } else {
-		// 	updateUI();
-		// }
+		if (!isLoggedInToWorkstation()) {
+			$("#userName").html(sessvars.currentUser.userName);
+			servicePoint.showSettingsWindow();
+		} else {
+			updateUI();
+		}
 		this.teardownAutoCloseListener();
 		this.setupAutoCloseListener();
 	};
@@ -202,6 +201,8 @@ var servicePoint = new function () {
 
 	// F5 pressed
 	var updateUI = function () {
+		appInitialized = true;
+
 		// Enable Links
 		$("#editCustomerHeader").css('pointer-events', 'auto');
 		$("#userName").css('pointer-events', 'auto');
@@ -351,8 +352,10 @@ var servicePoint = new function () {
 			}
 		} else {
 			if (servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+				if (appInitialized) {
 				util.showError(jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service'));
+				}
 			} else {
 				var branchSel = $("#branchListModal");
 				var workstationSel = $("#workstationListModal");
@@ -558,12 +561,7 @@ var servicePoint = new function () {
 			if (typeof warnUser === "undefined") {
 				warnUser = true;
 			}
-			if (prevBranchId == settings.branchId && prevCounterId == settings.servicePointId && prevProfileId == settings.workProfileId && applicationInitialized) {
-				modalNavigationController.pop();
-				isHijacking = false;
-			} else {
-				isHijacking = confirm(warnUser, settings);
-			}
+			isHijacking = confirm(warnUser, settings);
 		}
 		return isHijacking;
 	};
