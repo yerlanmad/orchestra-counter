@@ -204,7 +204,7 @@ var queues = new function() {
                 params.branchId = sessvars.branchId;
                 params.queueId = sessvars.clickedQueueId;
                 var tickets = spService.get("branches/" + params.branchId + "/queues/" + params.queueId + "/visits/full");
-                
+         
                 util.sortArrayCaseInsensitive(tickets, "ticketId");
                 if(tickets.length > 0) {
                     ticketsTable.fnAddData(tickets);
@@ -227,11 +227,13 @@ var queues = new function() {
                         "sDefaultContent": ""},
                     /* Actions */      {"sClass": "qm-table__middle-column",
                         "mDataProp": "currentVisitService.serviceExternalName"},
-                        /* Appointment time */      {"sClass": "qm-table__last-column",
+                        /* Appointment time */      {"sClass": "qm-table__middle-column",
+                        // "bVisible": false,
                     "sType": "qm-sort",
                         "mDataProp": "appointmentTime"},
                     /* Waiting time */      {"sClass": "qm-table__last-column",
                     "sType": "qm-sort",
+                    // "sWidth": "",
                         "mDataProp": "waitingTime"}
 
                 ];
@@ -306,8 +308,7 @@ var queues = new function() {
                         $('td:eq(1)', nRow).html(aData.parameterMap['customers']);
                     }
 
-                    console.log(nRow);
-                    $('td:eq(3)', nRow).html("dwadwwa");
+                    $('td:eq(3)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
 
                     $('td:eq(4)', nRow).html(formattedTime);
                     return nRow;

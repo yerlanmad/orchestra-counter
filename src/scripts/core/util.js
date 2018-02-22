@@ -222,6 +222,13 @@ var util = new function () {
             button.className = button.id;
     };
 
+    this.formatHHMMSSIntoHHMMA = function (time) {
+        var H = +time.substr(0, 2);
+        var h = H % 12 || 12;
+        var ampm = (H < 12 || H === 24) ? " AM" : " PM";
+        return h + time.substr(2, 3) + ampm;
+    }
+
     this.formatIntoHHMMSS = function (secsIn) {
         if (secsIn == -1) {
             return "";
