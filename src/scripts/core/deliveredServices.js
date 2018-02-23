@@ -203,16 +203,22 @@ var deliveredServices = new function () {
                     }
 
                     html.change(function () {
-                        if ($(this).val() != -1) {
+                        var $self = $(this);
+                        if ($self.val() != -1) {
                             var params = servicePoint.createParams();
                             params.visitId = sessvars.state.visit.id;
-                            var nTr = $(this).closest("tr").get(0);
+                            var nTr = $self.closest("tr").get(0);
                             var aData = deliveredServicesTable.fnGetData(nTr);
+                            
+                            var outcomeName = $self.find(":selected").text()
                             params.visitDeliveredServiceId = parseInt(aData["id"]);
-                            params.outcomeCode = $(this).val();
+                            params.outcomeCode = $self.val();
+                            
                             sessvars.state = servicePoint.getState(spService.putCallback("branches/" + params.branchId + "/visits/" + params.visitId + "/deliveredServices/" + params.visitDeliveredServiceId + "/outcome/" + params.outcomeCode));
+                            util.showMessage(translate.msg('info.ds.outcome.added', [outcomeName, aData.deliveredServiceName]), false);
+                            
                             servicePoint.updateWorkstationStatus(false, true);
-                            $(this).prev('div').text($(this).find(":selected").text());
+                            $self.prev('div').text(outcomeName);
                         }
                     });
 
