@@ -9,18 +9,17 @@
             <div class="qm-card__content-section">
                 <p class="dialogueMessage">
                     <span id="wrapUpText">
-                        wrapUp!!
                     </span>
                 </p>
             </div>
             <div class="qm-card__footer-section qm-card__footer-section--space-between">
                 <div class="qm-card-action-layout">
-                    <button class="qm-action-btn" id="wrapUpEndVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();">
+                </div>
+                <div class="qm-card-action-layout">
+                <button class="qm-action-btn" id="wrapUpEndVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();">
                         <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
                         <span class="qm-action-btn__text" title=""></span>
                     </button>
-                </div>
-                <div class="qm-card-action-layout">
                 </div>
             </div>
         </div>
