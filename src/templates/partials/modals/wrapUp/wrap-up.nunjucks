@@ -1,0 +1,28 @@
+<!-- Imported partials -->
+{% import "./../../button.nunjucks" as button  %}
+
+<div class="qm-modal qm-hide" id="wrap-up-modal">
+    <div class="qm-modal__overlay"></div>
+    <div class="qm-modal__layout">
+        <div class="qm-card">
+            <div class="qm-card__header-section"></div>
+            <div class="qm-card__content-section">
+                <p class="dialogueMessage">
+                    <span id="wrapUpText">
+                        wrapUp!!
+                    </span>
+                </p>
+            </div>
+            <div class="qm-card__footer-section qm-card__footer-section--space-between">
+                <div class="qm-card-action-layout">
+                    <button class="qm-action-btn" id="wrapUpEndVisitBtn" onclick="servicePoint.checkServicesLeft('endVisitPressed');this.blur();">
+                        <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
+                        <span class="qm-action-btn__text" title=""></span>
+                    </button>
+                </div>
+                <div class="qm-card-action-layout">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

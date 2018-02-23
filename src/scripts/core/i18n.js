@@ -164,6 +164,11 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("parkBtn", 'button.park');
         i18nQmBtn("noShowBtn", 'action.noshow');
         i18nQmBtn("endVisitBtn", 'action.finish.visit');
+        i18nQmBtn("wrapUpBtn", 'action.wrapup.visit');
+
+        // Wrap up
+        i18nQmBtn("wrapUpEndVisitBtn", 'action.finish.visit');
+        i18nQmBtn("wrapUpText", 'info.wrapup.visit');
         
         // Add Marks Card
         i18nQmBtn("addMarksToVisitBtn", 'button.add.markToVisit');

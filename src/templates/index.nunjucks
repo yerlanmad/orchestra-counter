@@ -97,6 +97,7 @@
         {% include "partials/modals/nextServices/next-services.nunjucks" %}
         {% include "partials/modals/logoutWindow/logout-window.nunjucks" %}
         {% include "partials/modals/genericConfirm/generic-confirm.nunjucks" %}
+        {% include "partials/modals/wrapUp/wrap-up.nunjucks" %}
     </div>
     
 

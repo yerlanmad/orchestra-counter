@@ -20,6 +20,7 @@ buttonParkEnabled = false;							// Park Button
 buttonNotesEnabled = false;							// Edit/Add Notes Button
 buttonNoShowsEnabled = true;						// No Shows Button
 buttonRecallEnabled = false;						// Recall Button
+buttonWrapUpEnabled = false;						// Wrap up Button
 buttonWalkDirectEnabled = true;						// Walk Direct Button
 buttonWalkDirectService = '';						// Default Walk Direct
 buttonRemoveFromQueueEnabled = true;				// Remove from Queue Button 
@@ -136,6 +137,12 @@ function showModules() {
 		$('.js-notes').css("display", "");
 	} else {
 		$('.js-notes').hide();
+	}
+
+	if (buttonWrapUpEnabled == true) {
+		$("#wrapUpBtn").show();
+	} else {
+		$("#wrapUpBtn").hide();
 	}
 	
 	if (buttonRecycleEnabled == true) {
@@ -302,6 +309,12 @@ function showModules() {
 			singleSession = params.singleSession;
 		} else {
 			singleSession = false;
+		}
+
+		if ( params.btnWrapUp != undefined) {
+			buttonWrapUpEnabled = params.btnWrapUp;
+		} else {
+			buttonWrapUpEnabled = false;
 		}
 		
 		showModules();

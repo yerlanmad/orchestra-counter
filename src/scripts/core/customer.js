@@ -797,7 +797,7 @@ var customer = new function() {
     // };
 
     this.updateCustomer = function() {
-        if(sessvars.state.userState == servicePoint.userState.SERVING && typeof sessvars.state.visit !== "undefined" &&
+        if((sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP) && typeof sessvars.state.visit !== "undefined" &&
             sessvars.state.visit != null) {
             if(sessvars.state.visit.parameterMap != null &&
                 typeof sessvars.state.visit.parameterMap.customers != 'undefined' &&

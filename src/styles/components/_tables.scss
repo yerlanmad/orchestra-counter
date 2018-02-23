@@ -258,19 +258,13 @@
 #queueDetailView {
     tr {
         .qm-table__first-column {
-            width: 15% !important;
-            padding-left: rem($global-standard-padding);
-
-            @at-root [dir='rtl'] & {
-                padding-left: rem($global-standard-padding / 2);
-                padding-right: rem($global-standard-padding);
-            }
+             width: 20%;
         }
         .qm-table__middle-column {
-            width: 21% !important;
+            width: 27.5%;
         }
         .qm-table__last-column {
-            width: 22% !important;
+            width: 25%;
             padding-right: rem(30px);
 
             @at-root [dir='rtl'] & {

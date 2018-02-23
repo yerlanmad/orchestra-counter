@@ -1,0 +1,18 @@
+#wrap-up-modal {
+    @include default-card-modal-layout();
+    .qm-card {
+        min-height: auto;
+    }
+    .qm-card__header-section {
+        display: none;
+    }
+    .qm-card__content-section {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .qm-action-btn {
+        &__text {
+            max-width: 75px;
+        }
+    }
+}

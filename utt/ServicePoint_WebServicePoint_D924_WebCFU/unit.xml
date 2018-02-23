@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.3    2018-02-23   Added wrap up param                       lakcal
+
     7.0.0.2    2018-02-21   Handle Reset Event                        lakcal
 
     7.0.0.1    2018-02-12   Added parameter for default walkin        lakcal
@@ -71,7 +73,7 @@
 
 <unit name="WebServicePoint_D924_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.0.2"
+      unitVersion="7.0.0.3"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -279,6 +281,14 @@
           description="Send a customer to your User Pool"
           sortOrder="5024"
           writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnWrapUp"
+          type="Boolean"
+          defaultValue="false"
+          label="Wrap-up"
+          description="Button to enable the possibility to set a wrap-up time, which is a time spent after the Customer leaves and before the Visit is finished."
+          sortOrder="5025"
+          writeLevel="profile"
           privilege="install:adminAdmin"/>
         <parameter name="btnNoShows"
           type="Boolean"

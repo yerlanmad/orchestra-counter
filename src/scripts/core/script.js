@@ -1025,8 +1025,21 @@ var servicePoint = new function () {
 		}
 	};
 
+	this.showWrapUpModal = function () {
+		modalNavigationController.push($Qmatic.components.modal.wrapUp);
+	};
+
+	this.wrapUpVisit = function () {
+		var params = servicePoint.createParams();
+			params.visitId = sessvars.state.visit.id;
+		sessvars.state = servicePoint.getState(spService
+				.putCallback("branches/" + params.branchId + "/visits/"
+				+ params.visitId + "/wrapup"));
+		this.showWrapUpModal();
+	};
+
 	this.customerConfirmed = function () {
-		modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer)
+		modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer);
 		if (servicePoint.hasValidSettings()) {
 			var params = servicePoint.createParams();
 			params.visitId = sessvars.state.visit.id;
@@ -1194,7 +1207,7 @@ var servicePoint = new function () {
 
 	this.endVisitPressed = function () {
 		if (servicePoint.hasValidSettings()
-			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP)
 			&& !servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			var params = servicePoint.createParams();
 			params.visitId = sessvars.state.visit.id;
@@ -1206,6 +1219,7 @@ var servicePoint = new function () {
 			userPoolUpdateNeeded = false;
 			queuesUpdateNeeded = false;
 
+			modalNavigationController.popAllModals();
 			servicePoint.updateWorkstationStatus();
 			sessvars.currentCustomer = null;
 		}
@@ -1407,10 +1421,15 @@ var servicePoint = new function () {
 				cardNavigationController.push($Qmatic.components.card.inactiveCard);
 				tooltipController.disposeAll();
 			} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-				&& sessvars.state.userState == servicePoint.userState.SERVING) {
+				&& (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP)) {
 				cardNavigationController.push($Qmatic.components.card.visitCard);
 			}
 		}
+
+		if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+			&& sessvars.state.userState == servicePoint.userState.WRAPUP) {
+				this.showWrapUpModal();
+		} 
 
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.closed'));
@@ -1433,7 +1452,7 @@ var servicePoint = new function () {
 				.html(jQuery.i18n.prop('info.no.customer.called'));
 
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
-			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP)
 			&& servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
 			if (sessvars.state.visitState == servicePoint.visitState.OUTCOME_NEEDED) {
 				if (!blockMesssagePopup) {
@@ -1497,6 +1516,13 @@ var servicePoint = new function () {
 			var $endVisitBtn = $("#endVisitBtn");
 			$endVisitBtn.prop('disabled', true);
 			tooltipController.init('endvisit', $endVisitBtn.closest('.button-tooltip'), {
+				text: jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service')
+			});
+
+			var $wrapUpBtn = $("#wrapUpBtn");
+			$wrapUpBtn.prop('disabled', true);
+			tooltipController.init('wrapup', $wrapUpBtn.closest('.button-tooltip'), {
 				text: jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service')
 			});
@@ -1598,6 +1624,8 @@ var servicePoint = new function () {
 			tooltipController.dispose('walkin');
 			$("#endVisitBtn").prop('disabled', false);
 			tooltipController.dispose('endvisit');
+			$("#wrapUpBtn").prop('disabled', false);
+			tooltipController.dispose('wrapup');
 			$("#closeBtn").prop('disabled', false);
 			tooltipController.dispose('closecounter');
 			$("#transferBtn").prop('disabled', false);
@@ -1922,6 +1950,7 @@ var servicePoint = new function () {
 		$("#callNextBtn").prop("disabled", false);
 		$("#walkDirectBtn").prop("disabled", false);
 		$("#endVisitBtn").prop("disabled", true);
+		$("#wrapUpBtn").prop("disabled", true);
 
 		$("#addMultiServiceLink").prop('disabled', true);
 
@@ -1956,7 +1985,7 @@ var servicePoint = new function () {
 
 	var updateTransactionTime = function () {
 		var timeRelativeToCallNext = -1;
-		if (sessvars.state.userState == servicePoint.userState.SERVING) {
+		if (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP) {
 			if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				$("#countTransactionTime").empty().text(
 					translate.msg("info.visit.not.called.yet"));
@@ -2000,7 +2029,7 @@ var servicePoint = new function () {
 
 	var updateVerticalMessage = function () {
 		if (servicePoint.hasValidSettings()
-			&& sessvars.state.userState == servicePoint.userState.SERVING
+			&& (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP)
 			&& typeof sessvars.state.visit.currentVisitService.serviceId !== 'undefined'
 			&& sessvars.state.visit.currentVisitService.serviceId != null) {
 			var params = {
@@ -2582,6 +2611,7 @@ var servicePoint = new function () {
 			$("#walkDirectBtn").prop('disabled', true);
 			$("#closeBtn").prop('disabled', true);
 			$("#endVisitBtn").prop('disabled', true);
+			$("#wrapUpBtn").prop('disabled', true);
 
 			// Disalble links on cards
 			$("#addMultiServiceLink").css('pointer-events', 'none');

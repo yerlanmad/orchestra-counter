@@ -92,6 +92,7 @@
         <script type="text/javascript" src="scripts/components/modal/visitInDisplayQueue/visitInDisplayQueue.js"></script>
         <script type="text/javascript" src="scripts/components/modal/nextServices/nextServices.js"></script>
         <script type="text/javascript" src="scripts/components/modal/logoutWindow/logoutWindow.js"></script>
+        <script type="text/javascript" src="scripts/components/modal/wrapUp/wrapUp.js"></script>
         
         <script type="text/javascript" src="scripts/components/queue/index.js"></script>
         <script type="text/javascript" src="scripts/components/notes/index.js"></script>
