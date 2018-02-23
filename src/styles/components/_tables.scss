@@ -256,15 +256,30 @@
 }
 
 #queueDetailView {
+    table{
+        border-collapse: collapse;
+        table-layout: fixed;
+        word-wrap:break-word;
+        box-sizing: border-box;
+    }
     tr {
         .qm-table__first-column {
-             width: 20%;
+            width: 100px !important;
+            padding-left: rem($global-standard-padding);
+
+            @at-root [dir='rtl'] & {
+                padding-left: rem($global-standard-padding / 2);
+                padding-right: rem($global-standard-padding);
+            }
         }
         .qm-table__middle-column {
-            width: 27.5%;
+            width: auto !important;
+        }
+        .qm-table__app-column {
+            width: 90px !important;
         }
         .qm-table__last-column {
-            width: 25%;
+            width: 145px !important;
             padding-right: rem(30px);
 
             @at-root [dir='rtl'] & {

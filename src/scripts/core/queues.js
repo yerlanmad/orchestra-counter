@@ -219,21 +219,26 @@ var queues = new function() {
 
                     /* Ticket id */         {"sClass": "qm-table__first-column",
                     "sType": "qm-sort",
+                    "sWidth": "",
                         "mDataProp": "ticketId"},
                     /* Customer name */
                         {"sClass": "qm-table__middle-column",
                         "sType": "qm-sort",
                         "mData": null,
+                        "sWidth": "",
                         "sDefaultContent": ""},
                     /* Actions */      {"sClass": "qm-table__middle-column",
-                        "mDataProp": "currentVisitService.serviceExternalName"},
-                        /* Appointment time */      {"sClass": "qm-table__middle-column",
+                        "mDataProp": "currentVisitService.serviceExternalName",
+                        "sWidth": ""
+                    },
+                        /* Appointment time */      {"sClass": "qm-table__app-column",
                         // "bVisible": false,
                     "sType": "qm-sort",
+                    "sWidth": "",
                         "mDataProp": "appointmentTime"},
                     /* Waiting time */      {"sClass": "qm-table__last-column",
                     "sType": "qm-sort",
-                    // "sWidth": "",
+                    "sWidth": "",
                         "mDataProp": "waitingTime"}
 
                 ];
