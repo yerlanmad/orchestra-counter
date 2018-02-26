@@ -38,11 +38,11 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Upgrade Instructions</h3>
 
 
-<h2>Update 4.0.0.005</h2>
+<h2>Update 4.0.0.007</h2>
 
-**Date: 20/02/2018**
+**Date: 26/02/2018**
  
-**Build number: 005**
+**Build number: 007**
 
 <h3>Stories</h3>
 
