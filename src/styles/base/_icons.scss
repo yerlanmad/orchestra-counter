@@ -1,11 +1,11 @@
   @font-face {
     font-family: 'icomoon';
-    src:  url('../assets/icons/icomoon.eot?cmgn1o');
-    src:  url('../assets/icons/icomoon.eot?cmgn1o#iefix') format('embedded-opentype'),
-      url('../assets/icons/icomoon.woff2?cmgn1o') format('woff2'),
-      url('../assets/icons/icomoon.ttf?cmgn1o') format('truetype'),
-      url('../assets/icons/icomoon.woff?cmgn1o') format('woff'),
-      url('../assets/icons/icomoon.svg?cmgn1o#icomoon') format('svg');
+    src:  url('../assets/icons/icomoon.eot?md4cap');
+    src:  url('../assets/icons/icomoon.eot?md4cap#iefix') format('embedded-opentype'),
+      url('../assets/icons/icomoon.woff2?md4cap') format('woff2'),
+      url('../assets/icons/icomoon.ttf?md4cap') format('truetype'),
+      url('../assets/icons/icomoon.woff?md4cap') format('woff'),
+      url('../assets/icons/icomoon.svg?md4cap#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
   }
@@ -258,6 +258,9 @@
   }
   .icon-walk-in-rtl:before {
     content: "\e948";
+  }
+  .icon-wrap-up:before {
+    content: "\e95b";
   }
   .icon-recycle-tilted:before {
     content: "\e952";
