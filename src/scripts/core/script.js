@@ -1141,9 +1141,9 @@ var servicePoint = new function () {
 				if (buttonWalkDirectService == "") {
 					cardNavigationController.push($Qmatic.components.card.walkInCard);
 					queueViewController.navigateToOverview();
-					// var t = new Date();
-					// var url = "/rest/servicepoint/branches/" + sessvars.branchId
-					// 	+ "/services?call=" + t;
+					var t = new Date();
+					var url = "/rest/servicepoint/branches/" + sessvars.branchId
+						+ "/services?call=" + t;
 					var serivesList = servicePoint.servicesList;
 					if ((walkTable == undefined && prevBranchId == sessvars.branchId) || prevBranchId != sessvars.branchId) {
 						var columns = [
@@ -1183,9 +1183,9 @@ var servicePoint = new function () {
 							$(nRow).find("td").html($("<a href='#'></a>").text($(nRow).find("td").text()));
 							return nRow;
 						};
-						walkTable = util.buildTableJsonNoUrl({
+						walkTable = util.buildTableJson({
 							"tableId": "walkDirectServices",
-							// "url": url,
+							"url": url,
 							"rowCallback": rowCallback,
 							"columns": columns,
 							"filter": true,
