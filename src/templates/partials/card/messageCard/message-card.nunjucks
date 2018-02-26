@@ -1,0 +1,15 @@
+{% extends "partials/card/fill-parent-card.nunjucks" %}
+
+{% block id %}id="messageCard"{% endblock %}
+{% block cardModifier %}qm-card--more-than-one{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+    <div class="qm-card__content-section">
+        <p class="qm-card__text" id="inactiveCardSubTitle">
+            <span id="cardCustomMessage"></span>
+        </p>
+    </div>
+{% endblock %}

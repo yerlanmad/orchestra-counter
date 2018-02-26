@@ -1,0 +1,25 @@
+#messageCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    &.qm-card {
+        padding-top: rem(90px);
+        padding-bottom: rem(90px);
+    }
+
+    .qm-card__headline {
+        font-size: rem(32px);
+        color: $midnight-blue;
+        line-height: rem(48px);
+        text-align: center;
+        font-weight: 300;
+    }
+    .qm-card__content-section {
+        font-size: rem(32px);
+        color: $midnight-blue;
+        line-height: rem(48px);
+        text-align: center;
+        font-weight: 300;
+    }
+}

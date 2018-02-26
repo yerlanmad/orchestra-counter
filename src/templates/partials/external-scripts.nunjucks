@@ -125,6 +125,8 @@
         <script type="text/javascript" src="scripts/components/card/transferCards/transferUserPoolCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferCounterPoolCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/marksCard/marksCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/MessageCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/messageCard/messageCard.js"></script>
 
         <script type="text/javascript" src="scripts/components/tabs-component.js"></script>
         <script type="text/javascript" src="scripts/core/script.js"></script>

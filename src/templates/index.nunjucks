@@ -41,6 +41,7 @@
                             {% include "partials/card/addCustomerCard/add-customer-card.nunjucks" %} 
                             {% include "partials/card/editCustomerCard/edit-customer-card.nunjucks" %}
                             {% include "partials/card/customerListCard/customer-list-card.nunjucks" %}  
+                            {% include "partials/card/messageCard/message-card.nunjucks" %} 
                         </div>
                     </div>
                 </div>

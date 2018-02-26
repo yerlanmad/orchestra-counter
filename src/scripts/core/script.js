@@ -1436,8 +1436,9 @@ var servicePoint = new function () {
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 			modalNavigationController.push($Qmatic.components.modal.storeNext)
-			$("#ticketNumber").html(
-				jQuery.i18n.prop('info.waiting.for.customer'));
+			// $("#ticketNumber").html(
+				// jQuery.i18n.prop('info.waiting.for.customer'));
+			showStoreNextCard();
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.inactive'));
@@ -1758,6 +1759,12 @@ var servicePoint = new function () {
 		} else {
 			$(idSelector).text(jQuery.i18n.prop('info.card.visitCard.addAMark'));
 		}
+	}
+
+	var showStoreNextCard = function () {
+		var messageCard = $Qmatic.components.card.messageCard;
+			messageCard.onMessage(jQuery.i18n.prop('info.waiting.for.customer'));
+			cardNavigationController.push(messageCard);
 	}
 
 	var updateSelectedDs = function (idSelector) {
@@ -2250,7 +2257,7 @@ var servicePoint = new function () {
 				if (sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
 					// if (window.console) console.log("Case is store next, event
 					// is: " + processedEvent.E.evnt);
-					modalNavigationController.popModal($Qmatic.components.modal.storeNext)
+					modalNavigationController.popModal($Qmatic.components.modal.storeNext);
 					sessvars.state = servicePoint.getState(spService
 						.get("user/status"));
 					sessvars.statusUpdated = new Date();
