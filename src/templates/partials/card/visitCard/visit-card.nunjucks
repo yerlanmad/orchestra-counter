@@ -169,7 +169,7 @@
             </div>
             <div class="button-tooltip">
                 <button class="qm-action-btn" id="wrapUpBtn" onclick="servicePoint.wrapUpVisit();this.blur();">
-                    <i class="qm-action-btn__icon icon-done-solid" aria-hidden="true"></i>
+                    <i class="qm-action-btn__icon icon-wrap-up" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
                 </button>
             </div>
