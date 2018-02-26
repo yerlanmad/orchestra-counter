@@ -126,7 +126,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("noShowLabel", 'action.noshow');
         i18nSafe("recallLabel", 'action.recall');
         i18nSafe("reinsertLabel", 'action.reinsert');
-		i18nSafe("notesLabel", 'action.notes');
+		i18nSafe("notesLabel", 'button.add.note');
         //modal window headers
         i18nSafeAppend("workstationSettingsHeader", 'info.select.your.settings');
         i18nSafeAppend("changeSettingsHeader", 'info.confirm.change.profile.header');
