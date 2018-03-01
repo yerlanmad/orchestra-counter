@@ -5,8 +5,8 @@ const sass = require('gulp-sass')
 const autoprefixer = require('gulp-autoprefixer')
 const del = require('del')
 const nunjucksRender = require('gulp-nunjucks-render')
-const connect = require('gulp-connect-multi')
-const devServer = connect();
+const connect = require('gulp-connect')
+const devServer = connect;
 var proxy = require('http-proxy-middleware');
 const zip = require('gulp-zip');
 var sftp = require('gulp-sftp');
@@ -207,36 +207,35 @@ gulp.task('cache:killer', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('connect', devServer.server({
-    root: ['./dist'],
-    port: 1337,
-    livereload: true,
-    open: {
-        browser: chromeBrowser // if not working OS X browser: 'Google Chrome'
-    },
-    middleware: function (connect, opt) {
-        return [
-            proxy('/rest', {
-                target: targetOrchestraUrl,
-                route: '/rest',
-                changeOrigin: false,
-                ws: true
-            }),
-            proxy('/cometd', {
-                target: targetOrchestraUrl,
-                route: '/cometd',
-                changeOrigin: false,
-                ws: true
-            }),
-            proxy('/workstationterminal/bundle', {
-                target: targetOrchestraUrl,
-                route: '/workstationterminal/bundle',
-                changeOrigin: true,
-                ws: true
-            })
-        ]
-    }
-}));
+gulp.task('connect', function() {
+    devServer.server({
+        root: ['./dist'],
+        port: 1337,
+        livereload: true,
+        middleware: function (connect, opt) {
+            return [
+                proxy('/rest', {
+                    target: targetOrchestraUrl,
+                    route: '/rest',
+                    changeOrigin: false,
+                    ws: true
+                }),
+                proxy('/cometd', {
+                    target: targetOrchestraUrl,
+                    route: '/cometd',
+                    changeOrigin: false,
+                    ws: true
+                }),
+                proxy('/workstationterminal/bundle', {
+                    target: targetOrchestraUrl,
+                    route: '/workstationterminal/bundle',
+                    changeOrigin: true,
+                    ws: true
+                })
+            ]
+        }
+    })
+});
 
 
 gulp.task('deploy:war', function () {
