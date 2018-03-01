@@ -1016,6 +1016,7 @@ var servicePoint = new function () {
 						setTimerToBlockCalls();
 						queueViewController.navigateToOverview();
 						servicePoint.updateWorkstationStatus();
+						util.twinkleTicketNumber();
 						sessvars.currentCustomer = null;
 					}
 				}
@@ -1320,6 +1321,7 @@ var servicePoint = new function () {
 						userPoolUpdateNeeded = false;
 						queuesUpdateNeeded = false;
 						servicePoint.updateWorkstationStatus();
+						util.twinkleTicketNumber();
 					}
 				}
 				if (sessvars.state.visitState == "CALL_NEXT_TO_QUICK") {
