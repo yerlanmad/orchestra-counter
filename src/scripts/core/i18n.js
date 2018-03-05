@@ -5,6 +5,19 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe(elemId + " .sr-only", propName)
     };
 
+    var i18nTitle = function(elemId, propName, mappingArray) {
+        var translatedText = jQuery.i18n.prop(propName);
+        
+        if (!translatedText)
+        return;
+        
+        mappingArray.forEach(function (value, index) {
+            translatedText = translatedText.replace("{"+ index +"}", mappingArray[index]);
+        });
+        
+        $("#" + elemId).attr("title", translatedText);
+    };
+
     var i18nPlaceholder = function(elem, propName) {
         elem.prop("placeholder", jQuery.i18n.prop(propName))
     };
@@ -174,6 +187,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("addMarksToVisitBtn", 'button.add.markToVisit');
         i18nSafe("markNameColumn", 'info.custom.mark.name');
         i18nSafe("markTimeColumn", 'info.custom.mark.time');
+        i18nTitle("noMarkCount", "info.custom.mark.add.validation", [0, 10]);
 
         
         // Add Services Card
