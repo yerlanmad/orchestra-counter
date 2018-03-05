@@ -57,9 +57,11 @@
         <script type="text/javascript" src="scripts/components/dropdown/index.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/BaseDropdownComponent.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/AddMarksDropdownComponent.js"></script>
+         <script type="text/javascript" src="scripts/components/dropdown/AddMarksDropdownComponent.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/branchSelection/branchSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/multiMarkSelection/multiMarkSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/deliveredServicesSelection/deliveredServicesSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/singleOutcomeSelection/singleOutcomeSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/addServiceSelection/addServiceSelection.js"></script>
@@ -102,6 +104,7 @@
         <script type="text/javascript" src="scripts/components/card/TransferCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/CustomerCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/CustomerListCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/MarksCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/visitCard/visitCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/closeCard/closeCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/inactiveCard/inactiveCard.js"></script>

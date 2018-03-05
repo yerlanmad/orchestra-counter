@@ -460,6 +460,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         $Qmatic.components.dropdown.profileSelection.update({ placeholder_text_single: jQuery.i18n.prop('field.chooseProfile') });
         $Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') });
         $Qmatic.components.dropdown.deliveredServicesSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.ds.selectDs') });
+        $Qmatic.components.dropdown.multiMarkSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark') });
 
 
         // Notes

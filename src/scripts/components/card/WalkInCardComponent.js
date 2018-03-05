@@ -10,7 +10,7 @@ window.$Qmatic.components.card.WalkInCardComponent = function (selector) {
     }
 
     this.show = function () {
-        window.$Qmatic.components.card.WalkInCardComponent.prototype.show.call(this, selector);
+        window.$Qmatic.components.card.WalkInCardComponent.prototype.show.call(this);
         this.clearSearchInput();
     }
 

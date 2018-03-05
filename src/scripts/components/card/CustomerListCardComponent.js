@@ -10,13 +10,13 @@ window.$Qmatic.components.card.CustomerListCardComponent = function (selector) {
     }
 
     this.show = function () {
-        window.$Qmatic.components.card.CustomerListCardComponent.prototype.show.call(this, selector);
+        window.$Qmatic.components.card.CustomerListCardComponent.prototype.show.call(this);
         customer.populateAdditionalCustomersList();
     }
 
     // @Override
     this.cleanUp = function () {
-        window.$Qmatic.components.card.CardBaseComponent.prototype.cleanUp.call(this, selector);
+        window.$Qmatic.components.card.CardBaseComponent.prototype.cleanUp.call(this);
     }
 
     this.onInit.apply(this, arguments);

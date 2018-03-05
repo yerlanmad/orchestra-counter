@@ -13,18 +13,7 @@ var customMarks = new function () {
 
 	function initFilter() {
 		if (!dropdownFilter)
-			dropdownFilter = new window.$Qmatic.components.dropdown.AddMarksDropdownComponent('#marksFilter', {
-				single_disable: false,
-				allow_single_deselect: false,
-				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark'),
-				expand_dropdown_height: function (elem) {
-					var heightOfContentSection = elem.parent().parent().parent().parent().parent().parent().find(".qm-card__content-section").height()
-						 - 25;
-
-					elem.parent().find(".chosen-results").css("max-height", heightOfContentSection);
-				},
-				placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark')
-			}).get$Elem();
+			dropdownFilter = $Qmatic.components.dropdown.multiMarkSelection.get$Elem();
 	}
 
 	function clearFilter() {
@@ -73,11 +62,11 @@ var customMarks = new function () {
 	};
 
 	this.showAddedMarksTable = function () {
-		customMarksTable.show();
+		customMarksTable && customMarksTable.show();
 	}
 
 	this.hideAddedMarksTable = function () {
-		customMarksTable.hide();
+		customMarksTable && customMarksTable.hide();
 	}
 
 	this.customMarkClicked = function (id, numberOfMarks, name) {

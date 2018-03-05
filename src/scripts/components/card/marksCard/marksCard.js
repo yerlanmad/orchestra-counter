@@ -1,4 +1,4 @@
 $(function() {
-    window.$Qmatic.components.card.marksCard = new window.$Qmatic.components.card.CardBaseComponent('#marksCard')
+    window.$Qmatic.components.card.marksCard = new window.$Qmatic.components.card.MarksCardComponent('#marksCard')
 })
 
