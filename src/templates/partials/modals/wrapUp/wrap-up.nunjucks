@@ -11,6 +11,15 @@
                     <span id="wrapUpText">
                     </span>
                 </p>
+                <p class="wrapUpTimerBox">
+                    <span class="wrapUpTimerBox__text">
+                        <span id="wrapUpTimerText" class="wrapUpTimerBox__text-content"></span>
+                        <span class="wrapUpTimerBox__text-colon">:</span>
+                    </span>
+                    <span id="wrapUpTimerTime" class="wrapUpTimerBox__time">
+                    00:00:00
+                    </span>
+                </p>
             </div>
             <div class="qm-card__footer-section qm-card__footer-section--space-between">
                 <div class="qm-card-action-layout">

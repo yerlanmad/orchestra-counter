@@ -1036,7 +1036,15 @@ var servicePoint = new function () {
 		sessvars.state = servicePoint.getState(spService
 				.putCallback("branches/" + params.branchId + "/visits/"
 				+ params.visitId + "/wrapup"));
+
+
 		this.showWrapUpModal();
+
+		var params = servicePoint.createParams();
+		params.json='{"wrapUpTime":"'+ Math.floor(Date.now() / 1000) + '"}';
+		params.visitId = sessvars.state.visit.id;
+		spService.putParams("branches/" + params.branchId + "/visits/"
+				+ params.visitId + "/parameters/", params)
 	};
 
 	this.customerConfirmed = function () {

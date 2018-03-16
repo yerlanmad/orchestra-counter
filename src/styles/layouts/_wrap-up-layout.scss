@@ -8,11 +8,45 @@
     }
     .qm-card__content-section {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 0;
+
+        .dialogueMessage {
+            margin-bottom: rem(30px);
+        }
+
+        .wrapUpTimerBox {
+            margin-bottom: rem(0px);
+        }
     }
     .qm-action-btn {
         &__text {
             max-width: 75px;
         }
+    }
+    .wrapUpTimerBox {
+        font-size: rem(16px);
+        color: $dark-transparent62;
+
+        &__text{
+            font-weight: 500;
+
+            &-content {
+
+            }
+            &-colon {
+                &::after{
+                    content: "";
+                    display: inline-block;
+                    width: 10px;
+                }
+            }
+        }
+
+        &__time {
+            font-weight: normal;
+        }
+    }
+    .wrapUpTimerText {
+
     }
 }
