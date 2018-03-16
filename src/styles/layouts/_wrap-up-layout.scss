@@ -26,6 +26,7 @@
     .wrapUpTimerBox {
         font-size: rem(16px);
         color: $dark-transparent62;
+        display: inline-flex;
 
         &__text{
             font-weight: 500;
