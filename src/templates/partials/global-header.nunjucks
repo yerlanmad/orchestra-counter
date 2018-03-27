@@ -2,10 +2,13 @@
     <div class="qm-header__left">
         <a id="homeLink" href="/" onclick="return servicePoint.handleHome();" class="qm-action-btn qm-action-btn--only-icon qm-header__home-btn">
             <i class="qm-action-btn__icon icon-home" aria-hidden="true"></i>
-            <span class="sr-only">Home</span>
+            <span class="sr-only"></span>
         </a>
         <div class="qm-header__brand-logo-container">
-            <img class="qm-header__brand-logo" src="./images/brand_logo_header.png" alt="" role="presentation"/>
+            <a href="/" class="qm-header__home-btn" onclick="return servicePoint.handleHome();">
+                <img class="qm-header__brand-logo" src="./images/brand_logo_header.png" alt="" role="presentation"/>
+                <span class="sr-only"></span>
+            </a>
         </div>
         <span id="appName" class="qm-header__application-name"></span>
     </div>
@@ -26,12 +29,12 @@
     <div class="qm-header__right">
         <a href="/help" target="_blank" class="qm-action-btn qm-action-btn--only-icon qm-header__help-btn">
             <i class="qm-action-btn__icon icon-help" aria-hidden="true"></i>
-            <span class="sr-only">Help</span>
+            <span class="sr-only"></span>
         </a>
         <a href="#" id="userName" class="qm-header__user-name" onclick="servicePoint.showSettingsWindow();this.blur();"></a>
         <a href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);" class="qm-action-btn qm-action-btn--only-icon qm-header__logout-btn">
             <i class="qm-action-btn__icon icon-exit" aria-hidden="true"></i>
-            <span class="sr-only">Logout</span>
+            <span class="sr-only"></span>
         </a>
     </div>
 </header>
