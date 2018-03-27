@@ -1680,6 +1680,7 @@ var servicePoint = new function () {
 			$("#addMultiServiceLink").prop('disabled', false);
 			$("#addCustomMarkLink").prop('disabled', false);
 		}
+		updateService();
 
 		if (trtUpdateNeeded) {
 			updateTransactionTime();
@@ -1753,6 +1754,16 @@ var servicePoint = new function () {
 
 		if (sessvars.state.visit) {
 			$("#serviceId").html(sessvars.state.visit.currentVisitService.serviceInternalName);
+		}
+	};
+
+	var updateService = function () {
+		if (sessvars.state.userState == servicePoint.userState.SERVING) {
+			if (moduleMultiServicesEnabled == true) {
+				if (sessvars.state.visit.unservedVisitServices.length > 0) {
+					servicePoint.servicesLeft = true;
+				}
+			}
 		}
 	};
 
