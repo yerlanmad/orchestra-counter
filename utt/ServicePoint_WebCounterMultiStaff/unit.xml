@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.4    2018-03-28   MultiSession doesn't support store next   lakcal
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
 
     7.0.0.2    2018-02-21   Handle Reset Event                        lakcal
@@ -67,7 +68,7 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.0.3"
+      unitVersion="7.0.0.4"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"
@@ -96,14 +97,6 @@
           writeLevel="global"
           privilege="install:adminAdmin"
           size="4" />
-        <parameter name="storeNext"
-          sortOrder="3"
-          type="Boolean"
-          defaultValue="false"
-          label="Store next"
-          description="Defines if store next is enabled or not"
-          writeLevel="profile"
-          privilege="install:adminAdmin"/>
         <parameter name="confirmNeeded"
           sortOrder="4"
           type="Boolean"
