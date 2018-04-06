@@ -585,9 +585,9 @@ var servicePoint = new function () {
 					unsubscribeAndDisableQueues();
 				}
 
-				prevBranchId = settings.branchId;
-				prevCounterId = settings.servicePointId;
-				prevProfileId = settings.workProfileId;
+				prevBranchId = sessvars.branchId;
+				prevCounterId = sessvars.servicePointId;
+				prevProfileId = sessvars.workProfileId;
 
 				if (isApplied(settings)) {
 					servicePoint.storeSettingsInSession(settings);
