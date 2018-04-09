@@ -1668,9 +1668,9 @@ var servicePoint = new function () {
 			}
 			// is recycle allowed
 			if (sessvars.state.visit.recycleAllowed) {
-				$("#reinsertBtn").prop('disabled', false);
+				$("#reinsertBtn, #reinsertOption").prop('disabled', false);
 			} else {
-				$("#reinsertBtn").prop('disabled', true);
+				$("#reinsertBtn, #reinsertOption").prop('disabled', true);
 			}
 			if (sessvars.state.visit.currentVisitService.deliveredServiceExists == true) {
 				$("#deliveredServicesModule").css("display", "");
