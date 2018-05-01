@@ -200,12 +200,13 @@ var queues = new function() {
             if(typeof ticketsTable !== 'undefined') {
                 //empty the tickets table and populate with new data from server if table is not created
                 ticketsTable.fnClearTable();
+                ticketsTable.fnSort([]);
                 var params = {};
                 params.branchId = sessvars.branchId;
                 params.queueId = sessvars.clickedQueueId;
                 var tickets = spService.get("branches/" + params.branchId + "/queues/" + params.queueId + "/visits/full");
          
-                util.sortArrayCaseInsensitive(tickets, "ticketId");
+                // util.sortArrayCaseInsensitive(tickets, "ticketId");
                 if(tickets.length > 0) {
                     ticketsTable.fnAddData(tickets);
                 }
@@ -324,7 +325,7 @@ var queues = new function() {
                 ticketsTable = util.buildTableJson({"tableId": "tickets", "url": url, "rowCallback": rowCallback,
                     "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "100%",
                     "emptyTableLabel": "info.queue.tickets.empty", "initFn": queueDetailInitFn});
-                ticketsTable.fnSort([[1, 'asc']]);
+                // ticketsTable.fnSort([[1, 'asc']]);
 
                 tableScrollController.initTableScroll("tickets");
             }
