@@ -38,11 +38,11 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Upgrade Instructions</h3>
 
 
-<h2>Update 4.0.0.007</h2>
+<h2>Update 4.0.0.013</h2>
 
 **Date: 26/02/2018**
  
-**Build number: 007**
+**Build number: 013**
 
 <h3>Stories</h3>
 
@@ -54,7 +54,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 | **Id** | **Release notes** |
 | --- | --- |
-| **xxx** | **Bug header** Bug text |
+| **157141258** | **Transferring visits does not update the order in the queue GUI** |
 
 <h3>Known issues</h3>
 
