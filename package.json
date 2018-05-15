@@ -10,7 +10,8 @@
     "build-war-prod": "gulp build:prod:war",
     "build-utts": "gulp clean:build:utts",
     "deploy-remote": "gulp deploy:remote",
-    "build-artifactory": "gulp build:artifactory"
+    "build-artifactory": "gulp build:artifactory",
+    "deploy-artifactory": "gulp build:artifactory:deploy"
   },
   "devDependencies": {
     "del": "^3.0.0",
@@ -32,7 +33,8 @@
     "gulp-uglify": "^3.0.0",
     "gulp-useref": "^3.1.4",
     "gulp-zip": "^4.1.0",
-    "http-proxy-middleware": "^0.17.4"
+    "http-proxy-middleware": "^0.17.4",
+    "node-cmd": "^3.0.0"
   },
   "author": "Qmatic",
   "license": "ISC",

@@ -1,0 +1,19 @@
+{
+  "proxy": {
+    "host": "",
+    "port": "8080",
+    "protocol": "http"
+  },
+  "remote_deploy": {
+    "host": "",
+    "username": "",
+    "password": ""
+  },
+  "artifactory": {
+    "host": "artifactory.qmatic.net",
+    "protocol": "http",
+    "username": "",
+    "password": "",
+    "path": "/artifactory/list/mobile/counter"
+  }
+}
