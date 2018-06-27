@@ -43,6 +43,12 @@ require('events').EventEmitter.prototype._maxListeners = 100;
 
 try {
   var config = require('./config.gulp.json');
+  
+  // Needed for dev server
+  var targetOrchestraIp = config.proxy.host ? config.proxy.host : "localhost";
+  var targetOrchestraPort = config.proxy.port ? config.proxy.port : "8080";
+  var targetOrchestraProtocol = config.proxy.protocol ? config.proxy.protocol : "http";
+  var targetOrchestraUrl = targetOrchestraProtocol + '://' + targetOrchestraIp + ':' + targetOrchestraPort;
 
   // Must be provided via config.gulp.json file
   var remoteDeployHost = config.remote_deploy.host
