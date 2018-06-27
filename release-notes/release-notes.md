@@ -61,6 +61,31 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Upgrade instructions</h3> 
 ----------
 
+
+<h2>Update 4.0.0.014</h2>
+
+**Date: 27/06/2018**
+ 
+**Build number: 014**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **Story header** Story text |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **158627159** | **Search customer with phone number with + does not return any response** |
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3> 
+----------
+
+
 <h3>Copyright notice</h3>
 
 The information in this document is subject to change without prior notice and does not represent a commitment on the part of Q-MATIC AB. All efforts have been made to ensure the accuracy of this manual, but Q-MATIC AB cannot assume any responsibility for any errors and their consequences. 

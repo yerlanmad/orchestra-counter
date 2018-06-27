@@ -242,6 +242,9 @@ var customer = new function() {
         }
         var rowCallback = function(nRow, aData, iDisplayIndex) {
             var searchTerm = $("#customerInput").val();
+            if(searchTerm.indexOf('+') > -1) {
+                searchTerm = searchTerm.replace('+', '\\+');
+            }
             var pattern = new RegExp(searchTerm, "ig")
             $('td:eq(0)', nRow).html(aData.fullName.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
             $('td:eq(1)', nRow).html(aData.phoneNumber.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
@@ -376,6 +379,11 @@ var customer = new function() {
         
         $('#customerSearchTable').dataTable().fnClearTable();
         if(val !== prev) {
+
+            if(val.indexOf("+") > -1) {
+                val = encodeURIComponent(val);
+            }
+
             $.ajax({
                 url: "/rest/servicepoint/customers/search?text=" + val + urlextra,
                 dataType: 'json',
