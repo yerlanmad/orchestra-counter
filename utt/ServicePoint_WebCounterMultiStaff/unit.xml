@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+	  7.0.0.5    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.4    2018-03-28   MultiSession doesn't support store next   lakcal
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
 
@@ -68,7 +69,7 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.0.4"
+      unitVersion="7.0.0.5"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"

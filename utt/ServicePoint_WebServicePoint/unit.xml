@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+	  7.0.0.4    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
 
     7.0.0.2    2018-02-21   Handle Reset Event                        lakcal
@@ -67,7 +68,7 @@
 
 <unit name="WebServicePoint"
       frameworkVersion="2"
-      unitVersion="7.0.0.3"
+      unitVersion="7.0.0.4"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
