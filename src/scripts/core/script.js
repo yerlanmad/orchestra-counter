@@ -563,6 +563,7 @@ var servicePoint = new function () {
 			}
 			isHijacking = confirm(warnUser, settings);
 		}
+		util.updateServicesExpectedTransactionTimes();
 		return isHijacking;
 	};
 
@@ -1963,6 +1964,7 @@ var servicePoint = new function () {
 		$("#waitingTimeCounter").empty();
 		if (trtUpdateNeeded) {
 			$("#countTransactionTime").empty();
+			util.clearServiceExpectedTransactionTime();
 			$('#countTransactionTime').countdown('destroy');
 		}
 		var $linkedCustomerField = $("#linkedCustomerField");
@@ -2017,6 +2019,7 @@ var servicePoint = new function () {
 			if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				$("#countTransactionTime").empty().text(
 					translate.msg("info.visit.not.called.yet"));
+				util.clearServiceExpectedTransactionTime();
 			} else {
 				// Use the fields in the UserState to find out how long since
 				// the ticket was called
@@ -2048,6 +2051,7 @@ var servicePoint = new function () {
 				compact: true,
 				format: 'HMS'
 			});
+			util.setServiceExpectedTransactionTime();
 		}
 	};
 

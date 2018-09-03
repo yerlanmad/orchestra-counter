@@ -78,6 +78,7 @@
                 <div class="qm-timer__text">
                     <span class="qm-timer__label"><span id="visitTransactionTime"></span><span>:</span></span>
                     <span id="countTransactionTime" class="qm-timer__time"></span>
+                    <span id="expectedTransactionTime" class="qm-timer__time qm-timer__time--expected-time"></span>
                 </div>
             </div>
         </div>

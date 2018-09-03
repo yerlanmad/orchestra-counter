@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.5    2018-09-03   Added expected transaction time param     joelan
     7.0.0.4    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
 
@@ -69,7 +70,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.0.4"
+      unitVersion="7.0.0.5"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -363,6 +364,14 @@
           writeLevel="profile"
           label="Allow Counter Pool transfer"
           description="Defines if it is possible to transfer to counter pools on this service point"
+          privilege="install:adminAdmin"/>
+        <parameter name="expectedTransactionTimeEnabled"
+          sortOrder="5036"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Show expected transaction time"
+          description="Show expected transaction time for current service"
           privilege="install:adminAdmin"/>
                 
     

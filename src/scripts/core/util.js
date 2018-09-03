@@ -22,6 +22,36 @@ var util = new function () {
         }
     };
 
+    this.updateServicesExpectedTransactionTimes = function () {
+        if(sessvars.branchId !== null) {
+            var t = new Date();
+            var url = "/branches/" + sessvars.branchId
+                + "/services?call=" + t;
+            var services = spService.get(url);
+            var expectedTransactionTimes = {};
+            for(var i = 0; i < services.length; i++) {
+                expectedTransactionTimes[services[i].id] = services[i].targetTransactionTime;
+            }
+            window.servicesExpectedTransactionTimes = expectedTransactionTimes;
+        }
+    };
+
+    this.setServiceExpectedTransactionTime = function () {
+        var serviceId = sessvars.state.visit.currentVisitService.serviceId;
+        var $expectedTransactionTime = $("#expectedTransactionTime");
+        if (serviceId) {
+            $expectedTransactionTime.empty().text('(' + this.secondsToMs(window.servicesExpectedTransactionTimes[serviceId]) + ')');
+            $expectedTransactionTime.attr('title', translate.msg('info.card.visitCard.expected.transaction.time'));
+        }
+    };
+
+    this.clearServiceExpectedTransactionTime = function () {
+        var $expectedTransactionTime = $("#expectedTransactionTime");
+        $expectedTransactionTime.empty();
+        $expectedTransactionTime.attr('title', null);
+
+    };
+
     this.enableOnChange = function (select) {
         //Enable selection box firing of the onchange event...
         if (select.addEventListener) {
@@ -533,6 +563,18 @@ var util = new function () {
         var t = new Date(1970, 0, 1);
         t.setSeconds(secs);
         return t.toTimeString().substr(0, 5);
+    };
+
+    this.secondsToMs = function (secs) {
+        var m = Math.floor(secs / 60);
+        var s = secs % 60;
+        if (m < 10) {
+            m = '0' + m;
+        }
+        if (s < 10) {
+            s = '0' + s;
+        }
+        return m + ':' + s;
     };
 
     this.log = function (object) {

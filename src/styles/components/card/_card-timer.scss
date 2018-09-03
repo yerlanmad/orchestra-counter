@@ -43,5 +43,9 @@
             margin-left: 0;
             margin-right: rem(4px);
         }
+
+        &--expected-time {
+            font-style: italic;
+        }
     }
 }

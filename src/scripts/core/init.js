@@ -46,11 +46,11 @@ var init = new function () {
         }
         
         initDataTablesConfiguration()
-
         initSessvars();
         customer.init != undefined && typeof customer.init == "function" && customer.init();
         queueViewController.init();
         notesController.init();
+        util.updateServicesExpectedTransactionTimes();
         servicePoint.init();
         initKeyboardEvents();
         if (moduleChatEnabled == true) {

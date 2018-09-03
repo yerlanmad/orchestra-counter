@@ -32,6 +32,7 @@ buttonTransferSortEnabled  = true;					// Transfer Sorted in Queue Button
 moduleChatEnabled = false;							// Chat Module
 minTimeBetweenCalls = '';
 singleSession = false;
+expectedTransactionTimeEnabled = false;
 
 queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
@@ -159,6 +160,12 @@ function showModules() {
 	} else {
 		$('#recallBtn').hide();
 		$('#recallOption').hide();
+	}
+
+	if (expectedTransactionTimeEnabled == true) {
+		$('#expectedTransactionTime').show();
+	} else {
+		$('#expectedTransactionTime').hide();
 	}
 
 	if (buttonRecallEnabled && buttonRecycleEnabled) {
@@ -315,6 +322,12 @@ function showModules() {
 			buttonWrapUpEnabled = params.btnWrapUp;
 		} else {
 			buttonWrapUpEnabled = false;
+		}
+
+		if ( params.expectedTransactionTimeEnabled != undefined) {
+			expectedTransactionTimeEnabled = params.expectedTransactionTimeEnabled;
+		} else {
+			expectedTransactionTimeEnabled = false;
 		}
 		
 		showModules();

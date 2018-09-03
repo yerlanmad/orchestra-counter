@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.6    2018-09-03   Added expected transaction time param     joelan
 	  7.0.0.5    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.4    2018-03-28   MultiSession doesn't support store next   lakcal
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
@@ -69,7 +70,7 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.0.5"
+      unitVersion="7.0.0.6"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"
@@ -355,6 +356,14 @@
           writeLevel="profile"
           label="Allow Counter Pool transfer"
           description="Defines if it is possible to transfer to counter pools on this service point"
+          privilege="install:adminAdmin"/>
+        <parameter name="expectedTransactionTimeEnabled"
+          sortOrder="5035"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Show expected transaction time"
+          description="Show expected transaction time for current service"
           privilege="install:adminAdmin"/>
       
 
