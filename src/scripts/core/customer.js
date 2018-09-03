@@ -127,7 +127,7 @@ var customer = new function() {
 
         this.initClearInputField();
         $('input[type="tel"]').keypress(function(e) {
-            var phonePattern = /[0-9\-\+\s\(\)\.]/;
+            var phonePattern = /^[0-9\+\s]+$/;
             if (!phonePattern.test(String.fromCharCode(e.which))) { return false; };
         });
         /*
