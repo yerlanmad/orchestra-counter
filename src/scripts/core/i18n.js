@@ -37,6 +37,22 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         } catch(e) {}
     };
 
+    var i18nSafeWithTitle = function(elementName, propName, padding) {
+        try {
+            var value = propName;
+            if (! (elementName == null || typeof elementName == 'undefined' ||
+                propName == null || typeof propName == 'undefined') &&
+                (jQuery.i18n.prop(propName))) {
+                value = jQuery.i18n.prop(propName);
+            }
+            var element = $("#" + elementName);
+            if (element != null && typeof element != 'undefined') {
+                element.html(value + (typeof padding !== 'undefined' ? padding : ''));
+                element.attr('title', value);
+            }
+        } catch(e) {}
+    };
+
     // prepends the i18n text to the start of the inner html string
     var i18nSafePrepend = function(elementName, propName, padding) {
         try {
@@ -273,10 +289,10 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("addDeliveredServiceLabel", 'button.add.delivered.service');
 
         // Service point pool
-        i18nSafe("servicePointPoolModuleLabel", 'info.servicepoint.pool');
+        i18nSafeWithTitle("servicePointPoolModuleLabel", 'info.servicepoint.pool');
 
         // User pool
-        i18nSafe("userPoolModuleLabel", 'info.user.pool');
+        i18nSafeWithTitle("userPoolModuleLabel", 'info.user.pool');
 
         //confirm customer
         i18nSafeAppend("waitingForCustomer", "info.waiting.for.customer.header");
