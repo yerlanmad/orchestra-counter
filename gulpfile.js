@@ -311,6 +311,42 @@ gulp.task('move:utts', function() {
 });
 
 /**
+ * Write to manifest file
+ */
+gulp.task('write:manifest', function () {
+  try {
+    var versionInfo = getVersionInfo();
+    if (versionInfo) {
+      var fileContent = 'Build-Date: ' + new Date().toISOString().substring(0, 10) + '\r\n';
+      fileContent += 'Built-By: gulp' + '\r\n';
+      fileContent += 'Product-Name: Orchestra Web Counter' + '\r\n';
+      fileContent += 'Build-Version: ' + versionInfo.version + '\r\n';
+      fs.writeFileSync('src/INF/META-INF/MANIFEST.MF', fileContent);
+      return true;
+    }
+  } catch (ex) {
+    console.log(
+      'There was an exception when trying to read the package.json! - ' + ex
+    );
+    return false;
+  }
+});
+
+function getVersionInfo() {
+  var appData = JSON.parse(fs.readFileSync('./app.json'));
+  if (appData) {
+    return {
+      //versionPrefix: appData.version,
+      //version: appData.version + '.' + appData.build,
+      //build: appData.build
+      version: appData.version
+    };
+  }
+  return null;
+}
+
+
+/**
  * Create customization build, for customization.
  */
 gulp.task(
@@ -443,6 +479,7 @@ gulp.task(
   'build:artifactory',
   gulpsync.sync([
     'clean:build',
+    'write:manifest',
     'compile:scss',
     'move:js',
     'compile:nunjucks',
