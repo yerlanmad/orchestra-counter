@@ -135,7 +135,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("selectOutcomeLabel", 'info.outcomes');
         i18nSafe("noOfMarksLabel", 'info.custom.mark.quantity', " (");
         i18nSafeAppend("noOfMarksLabel", 'info.custom.mark.maxLbl', "10)");
-        
+        i18nSafe("bookedAppointmentTimeLabel", "info.card.visitCard.appointmentTime");
+
         //header links
         i18nSafe("settingsLink", 'menu.tab.settings');
         i18nSafe("logoutLink", 'button.logout');

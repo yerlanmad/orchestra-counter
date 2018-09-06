@@ -1756,7 +1756,21 @@ var servicePoint = new function () {
 		if (sessvars.state.visit) {
 			$("#serviceId").html(sessvars.state.visit.currentVisitService.serviceInternalName);
 		}
+
+		updateAppointmentTime();
 	};
+
+	var updateAppointmentTime = function() {
+		if (sessvars.state.visit && sessvars.state.visit.appointmentTime !== null) {
+			// Update and show appointmentTime in visit card
+			$('.js-appointment-time').css('display', '');
+			var date = new Date(sessvars.state.visit.appointmentTime);
+			$('#bookedAppointmentTime').text(date.getHours() + ':' + date.getMinutes());
+		} else {
+			// Hide appointmentTime
+			$('.js-appointment-time').hide();
+		}
+	}
 
 	var updateService = function () {
 		if (sessvars.state.userState == servicePoint.userState.SERVING) {

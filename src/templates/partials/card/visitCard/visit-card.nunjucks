@@ -81,6 +81,13 @@
                     <span id="expectedTransactionTime" class="qm-timer__time qm-timer__time--expected-time"></span>
                 </div>
             </div>
+            <div class="qm-timer__item js-appointment-time">
+                <i class="qm-timer__icon icon-calendar" aria-hidden="true"></i>
+                <div class="qm-timer__text">
+                    <span class="qm-timer__label"><span id="bookedAppointmentTimeLabel"></span><span>:</span></span>
+                    <span id="bookedAppointmentTime" class="qm-timer__time"></span>
+                </div>
+            </div>
         </div>
 
         <!-- Navigation to screens -->

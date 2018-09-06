@@ -1,11 +1,11 @@
   @font-face {
     font-family: 'icomoon';
-    src:  url('../assets/icons/icomoon.eot?md4cap');
-    src:  url('../assets/icons/icomoon.eot?md4cap#iefix') format('embedded-opentype'),
-      url('../assets/icons/icomoon.woff2?md4cap') format('woff2'),
-      url('../assets/icons/icomoon.ttf?md4cap') format('truetype'),
-      url('../assets/icons/icomoon.woff?md4cap') format('woff'),
-      url('../assets/icons/icomoon.svg?md4cap#icomoon') format('svg');
+    src:  url('../assets/icons/icomoon.eot?ktia5d');
+    src:  url('../assets/icons/icomoon.eot?ktia5d#iefix') format('embedded-opentype'),
+      url('../assets/icons/icomoon.woff2?ktia5d') format('woff2'),
+      url('../assets/icons/icomoon.ttf?ktia5d') format('truetype'),
+      url('../assets/icons/icomoon.woff?ktia5d') format('woff'),
+      url('../assets/icons/icomoon.svg?ktia5d#icomoon') format('svg');
     font-weight: normal;
     font-style: normal;
   }
@@ -96,6 +96,42 @@
   }
   .icon-subtract-smaller:before {
     content: "\e912";
+  }
+  .icon-radiobutton-checked:before {
+    content: "\e966";
+  }
+  .icon-radiobutton-unchecked:before {
+    content: "\e967";
+  }
+  .icon-calendar:before {
+    content: "\e962";
+  }
+  .icon-view:before {
+    content: "\e963";
+  }
+  .icon-checkbox-checked:before {
+    content: "\e95e";
+  }
+  .icon-checkbox-checked-rtl:before {
+    content: "\e960";
+  }
+  .icon-checkbox-unchecked:before {
+    content: "\e961";
+  }
+  .icon-radiobutton:before {
+    content: "\e95f";
+  }
+  .icon-delete-secondary:before {
+    content: "\e964";
+  }
+  .icon-print:before {
+    content: "\e965";
+  }
+  .icon-mail:before {
+    content: "\e95c";
+  }
+  .icon-phone:before {
+    content: "\e95d";
   }
   .icon-add-circle-solid:before {
     content: "\e951";
