@@ -94,6 +94,32 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-12">
+                                <p class="qm-form-field__headline js-label-dob"></p>
+                                <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--month">
+                                        <div class="qm-drop-down__component">
+                                            <label for="createdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
+                                            <select id="createdateOfBirthMonth" class="qm-date-select" dob dobmonth name="dobMonth">
+                                                <option value="-1"></option>
+                                            </select>
+                                        </div>
+                                        <div class="qm-drop-down__error invisible-on-load" id="createdateOfBirthMonthErrorMsg">
+                                                
+                                        </div>
+                                    </div>
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--day">
+                                        <label for="createdateOfBirthDay" class="qm-form-field__label js-label-day"></label>
+                                        <input id="createdateOfBirthDay" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
+                                    </div>
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--year">
+                                        <label for="createdateOfBirthYear" class="qm-form-field__label js-label-year"></label>
+                                        <input id="createdateOfBirthYear" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="qm-form-actions">
                             <div class="qm-generic-layout qm-generic-layout--align-right">
                                 <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
@@ -168,6 +194,32 @@
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="qm-form-row">
+                            <div class="qm-form-column-12">
+                                <p class="qm-form-field__headline js-label-dob"></p>
+                                <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--month">
+                                        <div class="qm-drop-down__component">
+                                            <label for="editdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
+                                            <select id="editdateOfBirthMonth" class="qm-date-select" dob dobmonth name="dobMonth">
+                                                <option value="-1"></option>
+                                            </select>
+                                        </div>
+                                        <div class="qm-drop-down__error invisible-on-load" id="editdateOfBirthMonthErrorMsg">
+                                                
+                                        </div>
+                                    </div>
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--day">
+                                        <label for="editdateOfBirthDay" class="qm-form-field__label js-label-day"></label>
+                                        <input id="editdateOfBirthDay" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
+                                    </div>
+                                    <div class="qm-form-field__input-container qm-form-field__input-container--year">
+                                        <label for="editdateOfBirthYear" class="qm-form-field__label js-label-year"></label>
+                                        <input id="editdateOfBirthYear" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
                                     </div>
                                 </div>
                             </div>

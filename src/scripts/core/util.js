@@ -344,6 +344,31 @@ var util = new function () {
         });
     };
 
+    this.populateDateSelect = function ($selects) {
+        var months = [
+            {id: "01", name: translate.msg('info.month.january')},
+            {id: "02", name: translate.msg('info.month.february')},
+            {id: "03", name: translate.msg('info.month.march')},
+            {id: "04", name: translate.msg('info.month.april')},
+            {id: "05", name: translate.msg('info.month.may')},
+            {id: "06", name: translate.msg('info.month.june')},
+            {id: "07", name: translate.msg('info.month.july')},
+            {id: "08", name: translate.msg('info.month.august')},
+            {id: "09", name: translate.msg('info.month.september')},
+            {id: "10", name: translate.msg('info.month.october')},
+            {id: "11", name: translate.msg('info.month.november')},
+            {id: "12", name: translate.msg('info.month.december')},
+        ];
+
+        $selects.each(function(index, select) {
+            var $select = $(select);
+            util.populateSelect(months, $select);
+            $select.trigger('chosen:updated');
+        });
+    }
+
+
+
     this.showMessage = function (text, isError) {
         // Build toast
         var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');

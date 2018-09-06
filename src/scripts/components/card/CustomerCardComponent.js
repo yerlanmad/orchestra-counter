@@ -18,10 +18,14 @@ window.$Qmatic.components.card.CustomerCardComponent = function (selector) {
 
     this.clearAddForm = function () {
         this.get$Elem().find('.js-add-new-customer-form input').val("");
+        this.get$Elem().find('.qm-date-select').val('-1');
+        this.get$Elem().find('.qm-date-select').trigger('chosen:updated');
     }
 
     this.clearEditForm = function () {
         this.get$Elem().find('.js-edit-customer-form input').val("");
+        this.get$Elem().find('.qm-date-select').val('-1');
+        this.get$Elem().find('.qm-date-select').trigger('chosen:updated');
     }
 
     this.showEditForm = function () {

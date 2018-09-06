@@ -52,6 +52,12 @@ var init = new function () {
         notesController.init();
         util.updateServicesExpectedTransactionTimes();
         servicePoint.init();
+
+        // Dates
+        var $dateSelects = $('.qm-date-select');
+        util.populateDateSelect($dateSelects);
+        // Dates end
+
         initKeyboardEvents();
         if (moduleChatEnabled == true) {
             chat.init();

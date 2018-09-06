@@ -470,6 +470,17 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-edit-customer-save > span', 'action.save.and.add');
         i18nSafeSelectorBtnAppend('.js-update-customer-save > span', 'action.update.info');
         i18nSafeSelectorAppend('.js-clear-field > .sr-only', 'application.sr.clear.field');
+        i18nSafeSelectorAppend('.js-label-dob', 'info.label.dob');
+        i18nSafeSelectorAppend('.qm-form-field--dob option:first-child', 'info.card.addCustomerCard.selectMonth');
+        i18nSafeSelectorAppend('.js-label-month', 'info.label.month');
+        i18nSafeSelectorAppend('.js-label-day', 'info.label.day');
+        i18nSafeSelectorAppend('.js-label-year', 'info.label.year');
+        i18nPlaceholder($('#createdateOfBirthDay'), 'info.placeholder.day');
+        i18nPlaceholder($('#createdateOfBirthYear'), 'info.placeholder.year');
+        i18nPlaceholder($('#editAttacheddateOfBirthDay'), 'info.placeholder.day');
+        i18nPlaceholder($('#editAttacheddateOfBirthYear'), 'info.placeholder.year');
+        i18nPlaceholder($('#editdateOfBirthDay'), 'info.placeholder.day');
+        i18nPlaceholder($('#editdateOfBirthYear'), 'info.placeholder.year');
 
         // Customer form legends
         i18nSafeSelectorAppend('.js-legend-link-existing-customer', 'info.legend.link.existing.customer');
@@ -492,6 +503,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         $Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') });
         $Qmatic.components.dropdown.deliveredServicesSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.ds.selectDs') });
         $Qmatic.components.dropdown.multiMarkSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark') });
+        $Qmatic.components.dropdown.createDobSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addCustomerCard.selectMonth') });
+        $Qmatic.components.dropdown.editDobSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addCustomerCard.selectMonth') });
+        $Qmatic.components.dropdown.editAttachedDobSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addCustomerCard.selectMonth') });
 
 
         // Notes

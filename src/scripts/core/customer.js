@@ -39,16 +39,17 @@ var customer = new function() {
     this.populateAdditionalCustomersList = function () {
         var customerIds = sessvars.state.visit.customerIds.slice(0);
         customerIds.shift();
-        $('.js-customer-list').empty();
+        var $customerList = $('.js-customer-list');
+        $customerList.empty();
         var listItems = [];
         _.each(customerIds, function (customerId, i) {
             var customer = spService.get("customers/"+customerId);
-            listItems.push(createCustomerListItem(customer.id, customer.firstName, customer.lastName, customer.properties.email, customer.properties.phoneNumber, i+1));
+            listItems.push(createCustomerListItem(customer.id, customer.firstName, customer.lastName, customer.properties.email, customer.properties.phoneNumber, customer.properties["dateOfBirth"], i+1));
         });
-        $('.js-customer-list').append(listItems);
+        $customerList.append(listItems);
     };
     
-    var createCustomerListItem = function (id, firstName, lastName, email, phoneNumber, index) {
+    var createCustomerListItem = function (id, firstName, lastName, email, phoneNumber, dateOfBirth, index) {
         var entry = document.createElement('LI');
         entry.classList.add('qm-customer-list__item');
         if(firstName && lastName) {
@@ -71,6 +72,13 @@ var customer = new function() {
             var phoneText = document.createTextNode(phoneNumber);
             phoneNode.appendChild(phoneText);
             entry.appendChild(phoneNode);
+        }
+        if(dateOfBirth) {
+            var dobNode = document.createElement("P");
+            dobNode.classList.add('qm-customer-list__information');
+            var dateOfBirthText = document.createTextNode(dateOfBirth);
+            dobNode.appendChild(dateOfBirthText);
+            entry.appendChild(dobNode);
         }
         var editBtnNode = document.createElement("BUTTON");
         editBtnNode.onclick = function (e) {
@@ -231,7 +239,7 @@ var customer = new function() {
 
         // column header definitions for the data table
         // read them from i18n to get the visible names
-        this.COLUMN_NAMES = ["fullName", "phoneNumber", "email"];
+        this.COLUMN_NAMES = ["fullName", "phoneNumber", "email", "dateOfBirth"];
         var columnDefs = [];
         for (var i=0; i < customer.COLUMN_NAMES.length; i++) {
             var i18name = "field." + customer.COLUMN_NAMES[i];
@@ -292,16 +300,20 @@ var customer = new function() {
         var $requiredFields = $form.find('[required]');
         var $saveBtn = $form.find('[save-btn]');
         var $emailField = $form.find('[name="email"]');
+        var $dobMonth = $form.find('[dobmonth]');
+        var $dobDay = $form.find('[dobday]');
+        var $dobYear = $form.find('[dobyear]');
+        var dob = [$dobMonth, $dobDay, $dobYear];
+
         $form.find('.qm-field-error').removeClass('qm-field-error');
-        
-        this.setSaveButtonState($requiredFields, $saveBtn, $emailField);
+        this.setSaveButtonState($requiredFields, $saveBtn, $emailField, dob);
         if(setListeners) {
-            this.setRequiredFieldsListener($requiredFields, $saveBtn, $emailField);
+            this.setRequiredFieldsListener($requiredFields, $saveBtn, $emailField, dob);
             this.handleShowResetButton($inputs);
         }
     }
 
-    this.setSaveButtonState = function ($requiredFields, $saveBtn, $emailField) {
+    this.setSaveButtonState = function ($requiredFields, $saveBtn, $emailField, dob) {
         var isValid = true; 
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
@@ -323,6 +335,10 @@ var customer = new function() {
         } else {
             $emailField.removeClass('qm-field-error');
         }
+
+        if(customer.validateDateOfBirth(dob) !== true) {
+            $saveBtn.prop('disabled', true);
+        }
     };
 
     this.clearInput = function (e) {
@@ -337,7 +353,7 @@ var customer = new function() {
         $clearBtns.on('click', this.clearInput); 
     }
 
-    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField) {
+    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField, dob) {
         var isValid = true;  
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
@@ -360,12 +376,119 @@ var customer = new function() {
         } else {
             $emailField.removeClass('qm-field-error');
         }
+
+        if(customer.validateDateOfBirth(dob) !== true) {
+            $saveBtn.prop('disabled', true);
+        }
     };
 
-    this.setRequiredFieldsListener = function ($requiredFields, $saveBtn, $emailField) {
+    this.validateDateOfBirth = function (dob) {
+        var mm = dob[0].val();
+        var dd = dob[1].val().trim();
+        var yyyy = dob[2].val().trim();
+        var hasStartedDob = false;
+        var isValid = false;
+        if (mm !== "-1" || dd !== '' || yyyy !== '') {
+            hasStartedDob = true;
+        } else {
+            hasDobStarted = false;
+        }
+
+        if(hasStartedDob) {
+            isValid = this.isValidDateOfBirth(dob);
+        } else {
+            isValid = true;
+        }
+
+        return isValid;
+    };
+
+    this.isValidDateOfBirth = function (dob) {
+        var mm = dob[0].val();
+        var dd = dob[1].val().trim();
+        var yyyy = dob[2].val().trim();
+        var inputDate = dd + '-' + mm + '-' + yyyy;
+
+        var dateformat = /^(0[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+        // Match the date format through regular expression
+        if(inputDate.match(dateformat)) {
+            
+            var pdate = inputDate.split('-');
+
+            
+            var dd = parseInt(pdate[0]);
+            var mm  = parseInt(pdate[1]);
+            var yy = parseInt(pdate[2]);
+
+            // Check if the date is in the future
+            var now = new Date();
+            var dobYear = new Date(yy, mm, dd);
+
+            if (dobYear.getTime() > now.getTime()) {
+                this.showDobFieldError(dob[2]);
+                return false;
+            } else {
+                this.hideDobFieldError(dob[2]);
+            }
+
+            // Create list of days of a month [assume there is no leap year by default]
+            var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
+            if (mm==1 || mm>2) {
+                if (dd>ListofDays[mm-1]) {
+                    // Faulty day
+                    this.showDobFieldError(dob[1]);
+                    return false;
+                } else {
+                    this.hideDobFieldError(dob[1]);
+                }
+            }
+            if (mm==2) {
+                var lyear = false;
+                if ( (!(yy % 4) && yy % 100) || !(yy % 400)) {
+                    lyear = true;
+                }
+                if ((lyear === false) && (dd>=29)) {
+                    this.showDobFieldError(dob[1]);
+                    return false;
+                }
+                if ((lyear === true) && (dd>29)) {
+                    this.showDobFieldError(dob[1]);
+                    return false;
+                }
+                this.hideDobFieldError(dob[1]);
+            }
+        } else {
+            // Not a valid date format
+            this.showDobFieldError(dob[0]);
+            this.showDobFieldError(dob[1]);
+            this.showDobFieldError(dob[2]);
+            return false;
+        }
+
+        this.hideDobFieldError(dob[0]);
+        this.hideDobFieldError(dob[1]);
+        this.hideDobFieldError(dob[2]);
+
+        return true;
+    };
+
+    this.showDobFieldError = function ($elem) {
+        $elem.addClass('qm-field-error');
+    };
+
+    this.hideDobFieldError = function ($elem) {
+        $elem.removeClass('qm-field-error');
+    };
+
+    this.setRequiredFieldsListener = function ($requiredFields, $saveBtn, $emailField, dob) {
         var self = this;
-        $requiredFields.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
-        $emailField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField));
+        $requiredFields.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, dob));
+        $emailField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, dob));
+        if (dob.length > 0) {
+            for(var i = 0; i < dob.length; i++) {
+                dob[i].on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, dob));
+            }
+        }
     }
 
     // the actual search function
@@ -525,6 +648,19 @@ var customer = new function() {
                                 case 'email':
                                     $("#" + prefix + property).val(value);
                                     break;
+                                case 'dateOfBirth': {
+                                    if(value) {
+                                        var dob = value.split('-');
+                                        var year = dob[0];
+                                        var month = dob[1];
+                                        var day = dob[2];
+                                        $("#" + prefix + property + 'Month').val(month);
+                                        $("#" + prefix + property + 'Month').trigger('chosen:updated');
+                                        
+                                        $("#" + prefix + property + 'Day').val(day);
+                                        $("#" + prefix + property + 'Year').val(year);
+                                    }
+                                }
                                 default:
                                     break;
                             }
@@ -595,7 +731,7 @@ var customer = new function() {
             if((field.name === 'firstName' || field.name === 'lastName') && sessvars.currentCustomer[field.name] !== field.value) {
                 isUpdated = true;
                 break;
-            } else if ((field.name === 'email' || field.name === 'phoneNumber') && sessvars.currentCustomer.properties[field.name] !== field.value) {
+            } else if ((field.name === 'email' || field.name === 'phoneNumber' || field.name === 'dobMonth' || field.name === 'dobDay' || field.name === 'dobYear') && sessvars.currentCustomer.properties[field.name] !== field.value) {
                 isUpdated = true;
                 break;
             }
@@ -667,13 +803,12 @@ var customer = new function() {
                 typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
                 sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
-                        
                         $linkedCustomerField.html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
                         $linkedCustomerField.css("display", "");
                         this.setAmountOfAdditionalCustomers();
                         $('#ticketNumber').removeClass('qm-card-header__highlighted');
             } else {
-                $linkedCustomerField.hide();
+                // $linkedCustomerField.hide();
             }
             if(shouldPop === true) {
                 if(sessvars.state.visit.customerIds[0] === sessvars.currentCustomer.id) {
@@ -718,13 +853,24 @@ var customer = new function() {
         
 		return spService.postParams("customers", params);
     };
+
+    var shouldIncludeDob = function (prop) {
+        return prop["dobMonth"] !== "-1" || prop["dobDay"] !== '' || prop["dobYear"] !== '' ? true : false;
+    }
     
     var jsonString = function (val) {
 		var main = val.$entity;
-		var prop = val.$entity.properties;
-		var j = '{';
-        j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '"'
-		j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '"}}';
+        var prop = val.$entity.properties;
+        var includeDob = shouldIncludeDob(prop);
+        
+        var j = '{';
+            j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '"'
+        if (includeDob === true) {    
+            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "dateOfBirth":"' + prop.dobYear + '-' + prop.dobMonth + '-' + prop.dobDay + '"}}'; 
+        } else {
+            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '"}}';
+        }
+        
 		return j;
     }
 

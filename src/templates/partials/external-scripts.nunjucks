@@ -57,7 +57,7 @@
         <script type="text/javascript" src="scripts/components/dropdown/index.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/BaseDropdownComponent.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/AddMarksDropdownComponent.js"></script>
-         <script type="text/javascript" src="scripts/components/dropdown/AddMarksDropdownComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/AddMarksDropdownComponent.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/branchSelection/branchSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
@@ -65,6 +65,9 @@
         <script type="text/javascript" src="scripts/components/dropdown/deliveredServicesSelection/deliveredServicesSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/singleOutcomeSelection/singleOutcomeSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/addServiceSelection/addServiceSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/createDobSelection/createDobSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/editDobSelection/editDobSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/editAttachedDobSelection/editAttachedDobSelection.js"></script>
 
         <script type="text/javascript" src="scripts/components/tableScroll/index.js"></script>
 
