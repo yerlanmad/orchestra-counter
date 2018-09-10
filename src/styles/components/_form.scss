@@ -119,6 +119,10 @@
         }
     }
 
+    &__block-label {
+        display: inline-block;
+    }
+
     &__input-container {
         width: 100%;
         position: relative;

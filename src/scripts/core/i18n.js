@@ -475,6 +475,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.js-label-month', 'info.label.month');
         i18nSafeSelectorAppend('.js-label-day', 'info.label.day');
         i18nSafeSelectorAppend('.js-label-year', 'info.label.year');
+        i18nSafeSelectorAppend('.js-label-year-placeholder', 'info.label.year.format');
+        i18nSafeSelectorAppend('.js-label-day-placeholder', 'info.label.day.format');
         i18nPlaceholder($('#createdateOfBirthDay'), 'info.placeholder.day');
         i18nPlaceholder($('#createdateOfBirthYear'), 'info.placeholder.year');
         i18nPlaceholder($('#editAttacheddateOfBirthDay'), 'info.placeholder.day');

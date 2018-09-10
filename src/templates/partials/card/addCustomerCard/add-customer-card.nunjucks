@@ -110,11 +110,17 @@
                                         </div>
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--day">
-                                        <label for="createdateOfBirthDay" class="qm-form-field__label js-label-day"></label>
+                                        <label for="createdateOfBirthDay" class="qm-form-field__label">
+                                            <span class="js-label-day"></span>
+                                            <span class="qm-form-field__block-label js-label-day-placeholder"></span>
+                                        </label>
                                         <input id="createdateOfBirthDay" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year">
-                                        <label for="createdateOfBirthYear" class="qm-form-field__label js-label-year"></label>
+                                        <label for="createdateOfBirthYear" class="qm-form-field__label">
+                                            <span class="js-label-year"></span>
+                                            <span class="qm-form-field__block-label js-label-year-placeholder"></span>
+                                        </label>
                                         <input id="createdateOfBirthYear" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
                                     </div>
                                 </div>
@@ -214,11 +220,17 @@
                                         </div>
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--day">
-                                        <label for="editdateOfBirthDay" class="qm-form-field__label js-label-day"></label>
+                                        <label for="editdateOfBirthDay" class="qm-form-field__label">
+                                            <span class="js-label-day"></span>
+                                            <span class="qm-form-field__block-label js-label-day-placeholder"></span>
+                                        </label>
                                         <input id="editdateOfBirthDay" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year">
-                                        <label for="editdateOfBirthYear" class="qm-form-field__label js-label-year"></label>
+                                        <label for="editdateOfBirthYear" class="qm-form-field__label">
+                                            <span class="js-label-year"></span>
+                                            <span class="qm-form-field__block-label js-label-year-placeholder"></span>
+                                        </label>
                                         <input id="editdateOfBirthYear" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
                                     </div>
                                 </div>
