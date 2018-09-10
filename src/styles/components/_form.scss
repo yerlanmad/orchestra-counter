@@ -70,7 +70,7 @@
         .qm-form-field__input-container {
             input {
                 text-align: center;
-                padding: rem(10px $global-standard-padding / 2 10px);
+                padding: rem(10px $global-standard-padding / 2 10px) !important;
             }
 
             .active-result:first-child {
@@ -103,6 +103,10 @@
         color: $dark-transparent42;
         font-weight: $font-weight-medium;
         margin-bottom: rem($global-standard-margin / 2);
+
+        @at-root [dir='rtl'] & {
+            text-align: right;
+        }
     }
 
     &__label {
