@@ -25,7 +25,7 @@ var util = new function () {
     this.updateServicesExpectedTransactionTimes = function () {
         if(sessvars.branchId !== null) {
             var t = new Date();
-            var url = "/branches/" + sessvars.branchId
+            var url = "branches/" + sessvars.branchId
                 + "/services?call=" + t;
             var services = spService.get(url);
             var expectedTransactionTimes = {};
@@ -37,11 +37,13 @@ var util = new function () {
     };
 
     this.setServiceExpectedTransactionTime = function () {
-        var serviceId = sessvars.state.visit.currentVisitService.serviceId;
-        var $expectedTransactionTime = $("#expectedTransactionTime");
-        if (serviceId) {
-            $expectedTransactionTime.empty().text('(' + this.secondsToMs(window.servicesExpectedTransactionTimes[serviceId]) + ')');
-            $expectedTransactionTime.attr('title', translate.msg('info.card.visitCard.expected.transaction.time'));
+        if(sessvars.state && sessvars.state.visit && sessvars.state.visit.currentVisitService) {
+            var serviceId = sessvars.state.visit.currentVisitService.serviceId;
+            var $expectedTransactionTime = $("#expectedTransactionTime");
+            if (serviceId) {
+                $expectedTransactionTime.empty().text('(' + this.secondsToMs(window.servicesExpectedTransactionTimes[serviceId]) + ')');
+                $expectedTransactionTime.attr('title', translate.msg('info.card.visitCard.expected.transaction.time'));
+            }
         }
     };
 
