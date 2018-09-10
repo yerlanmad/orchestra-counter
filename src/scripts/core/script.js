@@ -1765,7 +1765,8 @@ var servicePoint = new function () {
 			// Update and show appointmentTime in visit card
 			$('.js-appointment-time').css('display', '');
 			var date = new Date(sessvars.state.visit.appointmentTime);
-			$('#bookedAppointmentTime').text(date.getHours() + ':' + date.getMinutes());
+			var formattedDate = util.formatDateIntoHHMM(date);
+			$('#bookedAppointmentTime').text(formattedDate);
 		} else {
 			// Hide appointmentTime
 			$('.js-appointment-time').hide();

@@ -316,6 +316,17 @@ var util = new function () {
         return formatted;
     };
 
+    this.formatDateIntoHHMM = function (timeAsDateObject) {
+        if (timeAsDateObject == null) {
+            return "";
+        }
+        var hours = timeAsDateObject.getHours();
+        var minutes = timeAsDateObject.getMinutes();
+        var formatted = (hours < 10 ? "0" : "") + hours
+            + ":" + (minutes < 10 ? "0" : "") + minutes;
+        return formatted;
+    };
+
     this.validateProfile = function (profileSel) {
         if (profileSel.val() == -1) {
             util.showError(jQuery.i18n.prop("error.no.profile"));
