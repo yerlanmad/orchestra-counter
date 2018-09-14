@@ -110,6 +110,30 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Upgrade instructions</h3> 
 ----------
 
+**Date: 14/09/2018**
+ 
+**Build number: 016**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **160168779** | **Show Appointment Time in the visit card** Show appointment time in visit card |
+| **159847899** | **User-/servicepointpool name not visible** Added title on hover |
+| **158180727** | **Update regex for phone number when creating /edit customer** Updated validation of phone number |
+| **160168889** | **Show Serving Time info next to Transaction Time** Show expected Serving Time info next to Transaction Time |
+| **155973320** | **Date of birth add to Customer object** Add date of birth to create and edit customer and print date of birth in additional customer list |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **Story text** Story text |
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3> 
+----------
 
 <h3>Copyright notice</h3>
 
