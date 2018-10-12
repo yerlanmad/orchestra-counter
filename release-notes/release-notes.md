@@ -135,6 +135,27 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Upgrade instructions</h3> 
 ----------
 
+**Date: 12/10/2018**
+ 
+**Build number: 017**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **161047690** | **Make workstationterminal.war compatible between current Orchestra 7.0 (4.0.0.418) and future 7.1** Update web.xml |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **Story text** Story text |
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3> 
+----------
+
 <h3>Copyright notice</h3>
 
 The information in this document is subject to change without prior notice and does not represent a commitment on the part of Q-MATIC AB. All efforts have been made to ensure the accuracy of this manual, but Q-MATIC AB cannot assume any responsibility for any errors and their consequences. 
