@@ -1,6 +1,7 @@
 node_modules/
 dist/
-config.gulp.json
+config.gulp.json # this can be removed later
+gulp.config.json
 npm-debug.log
 *.utt
 .DS_Store

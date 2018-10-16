@@ -42,7 +42,7 @@ var remoteDeploymentPlatform = 'windows';
 require('events').EventEmitter.prototype._maxListeners = 100;
 
 try {
-  var config = require('./config.gulp.json');
+  var config = require('./gulp.config.json');
   
   // Needed for dev server
   var targetOrchestraIp = config.proxy.host ? config.proxy.host : "localhost";
