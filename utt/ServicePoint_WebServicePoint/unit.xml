@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.6    2018-10-16   XXL-NO - Added preselected multiservice joelan
     7.0.0.5    2018-09-03   Added expected transaction time param     joelan
 	  7.0.0.4    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
@@ -69,7 +70,7 @@
 
 <unit name="WebServicePoint"
       frameworkVersion="2"
-      unitVersion="7.0.0.5"
+      unitVersion="7.0.0.6"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -296,6 +297,14 @@
           description="Default service used for walk in"
           sortOrder="5026"
           label="Default walk in service"
+          type="Service"
+          writeLevel="profile"
+          privilege="branchAdmin"
+          multiSelection="false"/>
+        <parameter name="defAddService"
+          description="Default service to add as deliver service"
+          sortOrder="5026"
+          label="Default service to add as deliver service"
           type="Service"
           writeLevel="profile"
           privilege="branchAdmin"

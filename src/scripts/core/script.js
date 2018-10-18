@@ -214,6 +214,7 @@ var servicePoint = new function () {
 		$("#selectOutcome").css('pointer-events', 'auto');
 		$("#addCustomerIcon").css('pointer-events', 'auto');
 
+
 		if (servicePoint.hasValidSettings(true)) {
 
 			sessvars.state = servicePoint
@@ -785,6 +786,15 @@ var servicePoint = new function () {
 	};
 
 	this.addService = function (serviceId) {
+		servicePoint.addServiceToVisit(serviceId);
+		servicePoint.updateWorkstationStatus(false, false, true);
+		servicePoint.addMultiServicePressed();
+		if (sessvars.state) {
+			util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', [sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName]));
+		}
+	};
+
+	this.addServiceToVisit = function (serviceId) {
 		var addServiceId = serviceId;
 		addParams = servicePoint.createParams();
 		addParams.branchId = sessvars.branchId;
@@ -794,11 +804,6 @@ var servicePoint = new function () {
 			+ "/visits/" + addParams.visitId + "/services/"
 			+ addParams.serviceId);
 		sessvars.statusUpdated = new Date();
-		servicePoint.updateWorkstationStatus(false, false, true);
-		servicePoint.addMultiServicePressed();
-		if (sessvars.state) {
-			util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', [sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName]));
-		}
 	};
 
 	this.removeService = function (serviceId, index) {
@@ -942,6 +947,9 @@ var servicePoint = new function () {
 		}
 		if (servicePoint.command == 'endVisitPressed') {
 			servicePoint.endVisitPressed();
+		}
+		if (servicePoint.command === 'addServiceAndPick') {
+			servicePoint.addServiceAndPick();
 		}
 		if (servicePoint.command == 'handleClose') {
 			servicePoint.handleClose();
@@ -1212,6 +1220,37 @@ var servicePoint = new function () {
 					walkServiceClicked(undefined, buttonWalkDirectService);
 				}
 			}
+		}
+	};
+
+	this.callService = function (params) {
+		sessvars.state = servicePoint.getState(
+			spService.post("branches/" + params.branchId + "/servicePoints/"
+			+ params.servicePointId + "/visits/" + params.visitId)
+		);
+	}
+
+	this.addServiceAndPick = function () {
+		if (servicePoint.hasValidSettings()
+			&& (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP)
+			&& !servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+			var $deliverBtn = $('#deliverBtn');
+			$deliverBtn.prop('disabled', true);
+			this.addServiceToVisit(defaultServiceToAdd);
+			var params = servicePoint.createParams();
+			params.visitId = sessvars.state.visit.id;
+			sessvars.state = servicePoint.getState(spService
+				.putCallback("branches/" + params.branchId + "/visits/"
+				+ params.visitId + "/end"));
+			this.callService(params);
+			sessvars.statusUpdated = new Date();
+			spPoolUpdateNeeded = false;
+			userPoolUpdateNeeded = false;
+			queuesUpdateNeeded = false;
+			$deliverBtn.prop('disabled', false);
+			modalNavigationController.popAllModals();
+			servicePoint.updateWorkstationStatus();
+			sessvars.currentCustomer = null;
 		}
 	};
 
@@ -1532,6 +1571,13 @@ var servicePoint = new function () {
 					.prop('error.no.outcome.or.delivered.service')
 			});
 
+			var $deliverBtn = $("#deliverBtn");
+			$deliverBtn.prop('disabled', true);
+			tooltipController.init('deliver', $deliverBtn.closest('.button-tooltip'), {
+				text: jQuery.i18n
+					.prop('error.no.outcome.or.delivered.service')
+			});
+
 			var $wrapUpBtn = $("#wrapUpBtn");
 			$wrapUpBtn.prop('disabled', true);
 			tooltipController.init('wrapup', $wrapUpBtn.closest('.button-tooltip'), {
@@ -1643,6 +1689,12 @@ var servicePoint = new function () {
 			$("#transferBtn").prop('disabled', false);
 			tooltipController.dispose('transfer');
 			$("#parkBtn").prop('disabled', false);
+			var $deliverBtn = $("#deliverBtn");
+			$deliverBtn.prop('disabled', false);
+			tooltipController.init('deliver', $deliverBtn.closest('.button-tooltip'), {
+				text: jQuery.i18n
+					.prop('action.deliver.description')
+			});
 
 			$("#notesMessage").prop('disabled', false);
 
@@ -1995,6 +2047,7 @@ var servicePoint = new function () {
 		$("#callNextBtn").prop("disabled", false);
 		$("#walkDirectBtn").prop("disabled", false);
 		$("#endVisitBtn").prop("disabled", true);
+		$("#deliverBtn").prop("disabled", true);
 		$("#wrapUpBtn").prop("disabled", true);
 
 		$("#addMultiServiceLink").prop('disabled', true);
@@ -2658,6 +2711,7 @@ var servicePoint = new function () {
 			$("#walkDirectBtn").prop('disabled', true);
 			$("#closeBtn").prop('disabled', true);
 			$("#endVisitBtn").prop('disabled', true);
+			$("#deliverBtn").prop("disabled", true);
 			$("#wrapUpBtn").prop('disabled', true);
 
 			// Disalble links on cards

@@ -17,7 +17,7 @@
     }
 
     &__middle {
-        display: flex;
+        display: none;
         flex: 1 1 auto;
         min-width: 0;
         align-items: center;
@@ -26,8 +26,9 @@
 
     &__right {
         display: flex;
-        flex: 0 1 auto;
+        flex: 1 1 auto;
         text-align: right;
+        justify-content: flex-end;
         align-items: center;
     }
 
@@ -35,7 +36,7 @@
     &__home-btn,
     &__help-btn,
     &__logout-btn {
-        flex: 1 0 24px;
+        flex: 0 0 24px;
         color: $light-transparent50;
 
         .qm-action-btn__icon {
@@ -157,6 +158,19 @@
         &:hover,
         &:focus {
             color: $white;
+        }
+    }
+}
+
+@media screen and (min-width: #{map-get($grid-breakpoints, 'md')}) {
+    .qm-header {
+      
+        &__middle {
+            display: flex;
+        }
+
+        &__right {
+            flex: 0 1 auto;
         }
     }
 }

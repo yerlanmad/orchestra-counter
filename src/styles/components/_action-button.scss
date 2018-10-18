@@ -25,6 +25,10 @@
         color: $primary-action-button-disabled-color;
         cursor: auto;
 
+        .qm-action-btn__icon {
+            color: $primary-action-button-disabled-color;
+        }
+
         &:hover,
         &:focus {
             font-weight: $font-weight-light;
@@ -45,6 +49,10 @@
         display: block;
         font-size: rem(28px);
         margin: 0 auto 4px;
+
+        &--secondary {
+            color: $secondary-color;
+        }
     }
   
     &__text {
@@ -132,4 +140,9 @@
             }
         }
     }
+}
+
+#deliverBtn,
+#endVisitBtn {
+    overflow: visible;
 }

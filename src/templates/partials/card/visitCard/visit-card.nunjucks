@@ -144,6 +144,12 @@
     <div class="qm-card__footer-section qm-card__footer-section--space-between">
         <div class="qm-card-action-layout qm-card-action-layout-left">
             <div class="button-tooltip">
+                <button class="qm-action-btn" id="deliverBtn" onclick="servicePoint.checkServicesLeft('addServiceAndPick');this.blur();">
+                    <i class="qm-action-btn__icon qm-action-btn__icon--secondary icon-call-next-solid" aria-hidden="true"></i>
+                    <span class="qm-action-btn__text" title=""></span>
+                </button>
+            </div>
+            <div class="button-tooltip">
                 <button class="qm-action-btn" id="recallBtn" onclick="servicePoint.recall();this.blur();">
                     <i class="qm-action-btn__icon icon-recall" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>

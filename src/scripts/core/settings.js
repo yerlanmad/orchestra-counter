@@ -33,6 +33,7 @@ moduleChatEnabled = false;							// Chat Module
 minTimeBetweenCalls = '';
 singleSession = false;
 expectedTransactionTimeEnabled = false;
+defaultServiceToAdd = null;							// Default service to add when pressing deliver
 
 queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
@@ -204,6 +205,12 @@ function showModules() {
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 	}
+
+	if(defaultServiceToAdd) {
+		$('#deliverBtn').show();
+	} else {
+		$('#deliverBtn').hide();
+	}
   
 	if (moduleChatEnabled == true){
 		$('#chatModule').show();
@@ -287,6 +294,13 @@ function showModules() {
 			// Reset flag in the case this property doen't exist in the utt..
 			buttonWalkDirectService = "";	
 		}
+		if ( params.defAddService != undefined) {
+			defaultServiceToAdd = parseInt(params.defAddService, 10);				// Deliver Default Service
+		} else {
+			// Reset flag in the case this property doen't exist in the utt..
+			defaultServiceToAdd = null;	
+		}
+		
 		if ( params.btnQueueRemove != undefined) {
 			buttonRemoveFromQueueEnabled = params.btnQueueRemove ;		// Remove from Queue Button 
 		}

@@ -188,6 +188,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("visitWaitingTime", 'info.waiting.time');
         i18nSafe("visitTransactionTime", 'info.transaction.time');
         i18nSafe("visitCardAddMarksLbl", 'info.card.marksCard.addMarks');
+        i18nQmBtn("deliverBtn", 'action.deliver');
         i18nQmBtn("recallBtn", 'action.recall');
         i18nQmBtn("reinsertBtn", 'action.reinsert');
         i18nQmBtn("transferBtn", 'action.transfer');
