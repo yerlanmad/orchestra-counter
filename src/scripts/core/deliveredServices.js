@@ -140,9 +140,12 @@ var deliveredServices = new function () {
 /* Delivered time */   {
                     // "sClass": "qm-table__last-column",
                     "mDataProp": "eventTime",
+                    "mData": function (source, type, val) {
+                        return source['eventTime'] ? util.formatHHMMToTimeConvention(source['eventTime']) : source['eventTime'];
+                    },
                     "sDefaultContent": null,
                     "bSortable": false,
-                    "sWidth": "95px",
+                    "sWidth": "120px",
                     "sType": "qm-sort",
                     "createdCell": function (td, cellData, rowData, row, col) {
 
@@ -151,7 +154,7 @@ var deliveredServices = new function () {
                             + jQuery.i18n.prop("action.remove.ds.click")
                             + "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
                             + '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
-                            + '<span class="sr-only">delete button</span>'
+                            + '<span class="sr-only">' + jQuery.i18n.prop("action.remove.ds.click") + '</span>'
                             + '</button>' + "</span>");
 
                         $(td).find(".removeMarkBtn").click(function () {

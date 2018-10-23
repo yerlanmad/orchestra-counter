@@ -255,10 +255,14 @@ var util = new function () {
     };
 
     this.formatHHMMSSIntoHHMMA = function (time) {
-        var H = +time.substr(0, 2);
-        var h = H % 12 || 12;
-        var ampm = (H < 12 || H === 24) ? " AM" : " PM";
-        return h + time.substr(2, 3) + ampm;
+        if (sessvars.systemInformation.timeConvention === "AM/PM") {
+            var H = +time.substr(0, 2);
+            var h = H % 12 || 12;
+            var ampm = this.amPmFromHour(H);
+            return h + time.substr(2, 3) + ampm;
+        } else {
+            return time.substr(0, 5);
+        }
     }
 
     this.formatIntoHHMMSS = function (secsIn) {
@@ -274,6 +278,11 @@ var util = new function () {
             + ":" + (seconds < 10 ? "0" : "") + seconds;
         return formatted;
     };
+
+    this.amPmFromHour = function (hours) {
+        var ampm = (hours < 12 || hours === 24) ? " AM" : " PM";
+        return ampm;
+    }
 
     this.formatIntoHHMM = function (secsIn) {
         if (secsIn == -1) {
@@ -322,10 +331,23 @@ var util = new function () {
         }
         var hours = timeAsDateObject.getHours();
         var minutes = timeAsDateObject.getMinutes();
-        var formatted = (hours < 10 ? "0" : "") + hours
+        if(sessvars.systemInformation.timeConvention === "AM/PM") {
+            var ampm = this.amPmFromHour(hours);
+            var h = hours % 12 || 12;
+            return h + ":" + (minutes < 10 ? "0" : "") + minutes + ampm;
+        } else {
+            return (hours < 10 ? "0" : "") + hours
             + ":" + (minutes < 10 ? "0" : "") + minutes;
-        return formatted;
+        }
     };
+
+    this.formatHHMMToTimeConvention = function(dateAsHHMM) {
+        var time = dateAsHHMM.split(':');
+        var date = new Date();
+        date.setHours(time[0]);
+        date.setMinutes(time[1]);
+        return this.formatDateIntoHHMM(date);
+    }
 
     this.validateProfile = function (profileSel) {
         if (profileSel.val() == -1) {

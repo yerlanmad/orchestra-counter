@@ -153,7 +153,30 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Known issues</h3>
 
-<h3>Upgrade instructions</h3> 
+<h3>Upgrade instructions</h3>
+----------
+
+----------
+
+**Date: 22/10/2018**
+ 
+**Build number: 018**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **161107886** | **AM/PM & 24 Hour format** Now using orchestra setting for am/pm to determine how to display appointment times in queue and on visit card |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **Story text** Story text |
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3>
 ----------
 
 <h3>Copyright notice</h3>
@@ -162,6 +185,6 @@ The information in this document is subject to change without prior notice and d
 
 This manual is copyrighted and all rights are reserved. 
 Qmatic and Qmatic Orchestra are registered trademarks or trademarks of Q-MATIC AB. 
-Reproduction of any part of this manual, in any form, is not allowed, unless written permission is given by Q‑MATIC AB. 
-COPYRIGHT © Q-MATIC AB, 2018.
+Reproduction of any part of this manual, in any form, is not allowed, unless written permission is given by Q-MATIC AB.
+COPYRIGHT (c) Q-MATIC AB, 2018.
 

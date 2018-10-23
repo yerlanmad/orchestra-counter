@@ -194,6 +194,9 @@ var customMarks = new function () {
 			/* Delivered time */{
 					"sClass": "middleColumn",
 					"mDataProp": "eventTime",
+					"mData": function (source, type, val) {
+                        return source['eventTime'] ? util.formatHHMMToTimeConvention(source['eventTime']) : source['eventTime'];
+                    },
 					"sType": "qm-sort",
 					"sDefaultContent": null,
 					"sWidth": "auto",
