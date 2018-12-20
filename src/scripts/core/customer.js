@@ -499,8 +499,8 @@ var customer = new function() {
     		urlextra = '&breakcache=' + Math.random();
     	}
         var prev = $(this).data('enteredVal');
-        
-        $('#customerSearchTable').dataTable().fnClearTable();
+        var $customerSearchTable = $('#customerSearchTable').dataTable();
+        $customerSearchTable.fnClearTable();
         if(val !== prev) {
 
             if(val.indexOf("+") > -1) {
@@ -515,7 +515,7 @@ var customer = new function() {
                     customer.customerDbOnline = true;
                     $.map(data, function(item){
                         var transformedCustomer = transformCustomer(item, customer.COLUMN_NAMES);
-                        $('#customerSearchTable').dataTable().fnAddData(transformedCustomer);
+                        $customerSearchTable.fnAddData(transformedCustomer);
                     });
                     
                     window.$Qmatic.components.card.addCustomerCard.showAddForm();
@@ -529,17 +529,19 @@ var customer = new function() {
                     }
   			  }
             });
-            // add click listener to select a customer
-            $('#customerSearchTable tbody tr').click( function () {
-                var index = $('#customerSearchTable').dataTable().fnGetPosition( this );
-                customer.setSelectedCustomer(index);
-                $('#customerSearchTable tbody tr').unbind();
-                // hide table
-                util.hideModal("customerSearchDiv");
-            });
+            // add click listener to select a customer if table is not empty
+            if($customerSearchTable.fnGetData().length > 0) {
+                $('#customerSearchTable tbody tr').click( function () {
+                    var index = $customerSearchTable.fnGetPosition( this );
+                    customer.setSelectedCustomer(index);
+                    $('#customerSearchTable tbody tr').unbind();
+                    // hide table
+                    util.hideModal("customerSearchDiv");
+                });
+            }
             // add mouseover listener, to have the "selected" row follow the mouse pointer
             $('#customerSearchTable tbody tr').mouseover( function () {
-                var index = $('#customerSearchTable').dataTable().fnGetPosition( this );
+                var index = $customerSearchTable.fnGetPosition( this );
                 customer.setSelectedRow(index);
                 $("#customerInput").data('selectedRow', index);
             });
