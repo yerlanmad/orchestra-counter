@@ -424,6 +424,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.qm-pool__toggle-btn > span', 'application.sr.toggle');
         
         // Popover
+        i18nSafeSelectorAppend('.js-clear-input-label', 'application.sr.clear.field');
         i18nSafeSelectorAppend('.js-popover-transfer-header', 'info.transfer.selection.header');
         i18nSafeSelectorAppend('.js-popover-queue-header', 'info.transfer.queue.header');
         i18nSafeSelectorAppend('.js-popover-user-pool-header', 'info.transfer.user.pool.header');

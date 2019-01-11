@@ -162,40 +162,68 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     },
     _initQueuesTable: function (selector) {
         this.queueTable = transfer.buildTransferToQueueTable(this, selector, this.queueTable, this.ticketId, this.visitId);
+        var searchContainer = this.instance._tooltipNode.querySelector('.js-popover-filter-queue-container');
+        var searchClearButton = this.instance._tooltipNode.querySelector('.js-popover-filter-queue-clear-btn');
         var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-queue');
 
         this._setupAriaAttributes(this.queueTable, searchInput);
-        this._setupSearchListener(this.queueTable, searchInput);
+        this._setupSearchListener(this.queueTable, searchInput, searchContainer, searchClearButton);
         queueViewController.resetTimer();
     },
     _setupAriaAttributes: function (table, searchInput) {
         searchInput.setAttribute('aria-controls', table.attr('id'));
     },
-    _setupSearchListener: function (table, searchInput) {
+    _setupSearchListener: function (table, searchInput, searchContainer, searchClearButton) {
+        searchClearButton.removeEventListener('click', this._clearSearchField);
+        searchClearButton.addEventListener('click', this._clearSearchField.bind(this, searchInput));
         searchInput.removeEventListener('keyup', this._filterTable);
-        searchInput.addEventListener('keyup', this._filterTable.bind(this, table));
+        searchInput.addEventListener('keyup', this._filterTable.bind(this, table, searchContainer));
     },
-    _filterTable: function (table, e) {
+    _filterTable: function (table, searchContainer, e) {
         var val = e.target.value;
+        this._toggleClearButton(searchContainer, val);
         this._filter(table, val);
+    },
+    _toggleClearButton: function (searchContainer, val) {
+        if (val !== "") {
+            searchContainer.classList.add('qm-search-filter--show-clear-btn');
+        } else {
+            searchContainer.classList.remove('qm-search-filter--show-clear-btn');
+        }
+    },
+    _clearSearchField: function (searchInput) {
+        var event;
+        if (typeof(Event) === 'function') {
+            event = new Event('keyup');
+        } else {
+            // IE 11
+            event = document.createEvent('Event');
+            event.initEvent('keyup', true, true);
+        }
+        searchInput.value = "";
+        searchInput.dispatchEvent(event);
     },
     _filter: function (table, val) {
         table.fnFilter(val);
     },
     _initUserPoolTable: function (selector) {
         this.userPoolTable = transfer.buildTransferToUserPoolTable(this, selector, this.userPoolTable, this.ticketId, this.visitId);
+        var searchContainer = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool-container');
+        var searchClearButton = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool-clear-btn');
         var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool');
-
+        
         this._setupAriaAttributes(this.userPoolTable, searchInput);
-        this._setupSearchListener(this.userPoolTable, searchInput);
+        this._setupSearchListener(this.userPoolTable, searchInput, searchContainer, searchClearButton);
         queueViewController.resetTimer();
     },
     _initCounterPoolTable: function (selector) {
         this.counterPoolTable = transfer.buildTransferToCounterPoolTable(this, selector, this.counterPoolTable, this.ticketId, this.visitId);
+        var searchContainer = this.instance._tooltipNode.querySelector('.js-popover-filter-counter-pool-container');
+        var searchClearButton = this.instance._tooltipNode.querySelector('.js-popover-filter-counter-pool-clear-btn');
         var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-counter-pool');
 
         this._setupAriaAttributes(this.counterPoolTable, searchInput);
-        this._setupSearchListener(this.counterPoolTable, searchInput);
+        this._setupSearchListener(this.counterPoolTable, searchInput, searchContainer, searchClearButton);
         queueViewController.resetTimer();
     },
     _call: function () {

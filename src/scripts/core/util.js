@@ -196,14 +196,38 @@ var util = new function () {
             table = $('#' + config.tableId).dataTable(tableConfig);
         }
         if (config.filter && config.customFilter) {
-            $("#" + config.tableId + "_filter input").on('keyup change', function () {
-                table.api().search($(this).val()).draw();
-            })
+            var $searchableContainer = $("#" + config.tableId + "_filter");
+            var $searchInput = $searchableContainer.find("input");
+            var $clearBtn = $searchableContainer.find('.js-table-filter-clear-btn');
+            var _self = this;
+
+            $searchInput.off('keyup change', '**');
+            $searchInput.on('keyup change', function () {
+                var searchVal = $(this).val();
+                _self.toggleClearButton(searchVal, $searchableContainer);
+                table.api().search(searchVal).draw();
+            });
+            $clearBtn.off('click', this._clearSearchField);
+            $clearBtn.on('click', this._clearSearchField.bind(this, $searchInput));
         }
         $(window).bind('resize', function () {
             table.fnAdjustColumnSizing();
         });
         return table;
+    };
+
+    this.toggleClearButton = function (searchValue, searchContainer) {
+        if (searchValue !== "") {
+            searchContainer.addClass('qm-search-filter--show-clear-btn');
+        } else {
+            searchContainer.removeClass('qm-search-filter--show-clear-btn');
+        }
+    };
+    
+    this._clearSearchField = function ($searchInput) {
+        var event = $.Event('keyup');
+        $searchInput.val("");
+        $searchInput.trigger(event);
     };
 
     /**
