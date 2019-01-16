@@ -63,6 +63,11 @@
         transform: translateY(-50%);
         cursor: pointer;
 
+        @at-root [dir='rtl'] & {
+            right: auto;
+            left: rem(12px);
+        }
+
         &:hover {
             #{ $self }__clear-btn-icon {
                 color: $dark-transparent82;
