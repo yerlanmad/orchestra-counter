@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.6    2019-01-14   Added unit event for end service          joelan
     7.0.0.5    2018-09-03   Added expected transaction time param     joelan
     7.0.0.4    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
@@ -75,7 +76,7 @@
 
 <unit name="WebServicePoint_D924_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.0.5"
+      unitVersion="7.0.0.6"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -969,6 +970,19 @@
         }
         led.executeCommand(displayCommand)
       
+        ]]>
+      </unitEventHandler>
+    </unitEvent>
+    <unitEvent name="END_SERVICE">
+      <unitEventHandler type="GROOVY">
+        <![CDATA[
+        import com.qmatic.qp.api.device.DeviceCommand
+        if(!("VISIT_CALL" in event.getParameter("eventSiblings"))) {
+          // change the LED only if there is not a VISIT_CALL coming...
+          led = unit.getDevice("LED")
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          led.executeCommand(displayCommand)
+        }
         ]]>
       </unitEventHandler>
     </unitEvent>
