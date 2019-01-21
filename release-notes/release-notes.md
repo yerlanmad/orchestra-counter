@@ -220,6 +220,8 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **COUNTER-119** | **Filter text - transfer options** Color change on input fields and added clear button to search fields in transfer searches and walk in card. |
+| **COUNTER-120** | **Servicepoint LED does not switch to "open" message when ending visit after adding service** Changes to UTT for unitEvent END_SERVICE. |
+
 
 <h3>Known issues</h3>
 
