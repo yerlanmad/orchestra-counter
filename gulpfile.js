@@ -1,6 +1,4 @@
 const gulp = require('gulp');
-const gulpsync = require('gulp-sync')(gulp);
-const livereload = require('gulp-livereload');
 const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const del = require('del');
@@ -22,11 +20,9 @@ var rename = require('gulp-rename');
 
 var fs = require('fs');
 var path = require('path');
-var folders = require('gulp-folders');
+var folders = require('gulp-folders-4x');
 var ncmd = require('node-cmd');
 
-var isWindows = process.platform === 'win32';
-var chromeBrowser = isWindows ? 'Chrome' : 'Google Chrome';
 var uttsPath = './utt';
 
 // Remote Deployment Defaults
@@ -90,15 +86,21 @@ try {
 // Tasks
 // =====
 
-gulp.task('clean:build', function() {
-  return del(['./dist']);
-});
+function cleanBuild(done) {
+  del.sync(['./dist']);
+  done();
+}
 
-gulp.task('clean:war', function() {
-  return del(['./dist/*', '!./dist/webapp']);
-});
+gulp.task('clean:build', cleanBuild);
 
-gulp.task('compile:nunjucks', function() {
+function cleanWar(done) {
+  del.sync(['dist/*', '!dist/webapp']);
+  done();
+}
+
+gulp.task('clean:war', cleanWar);
+
+function compileNunjucks() {
   return gulp
     .src(['./src/templates/index.nunjucks'])
     .pipe(
@@ -108,39 +110,53 @@ gulp.task('compile:nunjucks', function() {
     )
     .pipe(gulp.dest('./dist'))
     .pipe(devServer.reload());
-});
+}
 
-gulp.task('index:concat:uglify', function() {
+gulp.task('compile:nunjucks', compileNunjucks);
+
+function indexConcatUglify() {
   return gulp
     .src(['./dist/index.html'])
     .pipe(lineEndCorrector({ verbose: true, eolc: 'LF', encoding: 'utf8' }))
     .pipe(useref())
     .pipe(gulpif('*.js', uglify()))
-    .pipe(gulpif('*.css', minifyCss()))
+    .pipe(gulpif('*.css', minifyCss({compatibility: 'ie11'})))
     .pipe(gulp.dest('./dist'));
-});
+  // console.log('before indexconcat done');
+  // done();
+}
 
-gulp.task('index:minify', function() {
+gulp.task('index:concat:uglify', indexConcatUglify);
+
+
+function indexMinify() {
   return gulp
-    .src(['./dist/index.html'])
-    .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest('./dist'));
-});
+  .src(['./dist/index.html'])
+  .pipe(htmlmin({ collapseWhitespace: true }))
+  .pipe(gulp.dest('./dist'));
+}
 
-gulp.task('clean:dist', function() {
-  return del([
+gulp.task('index:minify', indexMinify);
+
+function cleanDist(done) {
+  del.sync([
     './dist/css/**/*',
+    '!./dist/css/',
     '!./dist/css/bundle.css',
     './dist/scripts/**/*',
+    '!./dist/scripts/',
     '!./dist/scripts/bundle.js',
     '!./dist/scripts/json2.js',
     '!./dist/scripts/rest-ie.js',
     '!./dist/scripts/upgrades',
     '!./dist/scripts/upgrades/**/*'
   ]);
-});
+  done();
+}
 
-gulp.task('compile:scss', function() {
+gulp.task('clean:dist', cleanDist);
+
+function compileScss() {
   return gulp
     .src('./src/styles/**/*.scss')
     .pipe(sass().on('error', sass.logError))
@@ -152,44 +168,64 @@ gulp.task('compile:scss', function() {
     )
     .pipe(gulp.dest('./dist/css'))
     .pipe(devServer.reload());
-});
+}
 
-gulp.task('move:assets', function() {
+gulp.task('compile:scss', compileScss);
+
+function moveAssets() {
   return gulp.src('./src/assets/**').pipe(gulp.dest('./dist/assets'));
-});
+}
 
-gulp.task('move:images', function() {
+gulp.task('move:assets', moveAssets);
+
+function moveImages() {
   return gulp.src(['./src/images/**']).pipe(gulp.dest('./dist/images'));
-});
+}
 
-gulp.task('move:icons', function() {
-  return gulp.src('./src/icons/**').pipe(gulp.dest('./dist/css/icons'));
-});
+gulp.task('move:images', moveImages);
 
-gulp.task('move:js', function() {
+function moveIcons(done) {
+  // return gulp.src('./src/icons/**').pipe(gulp.dest('./dist/css/icons'));
+  done();
+}
+
+gulp.task('move:icons', moveIcons);
+
+function moveJs() {
   return gulp
     .src(['src/scripts/**/*.js'])
     .pipe(gulp.dest('./dist/scripts'))
     .pipe(devServer.reload());
-});
+}
 
-gulp.task('move:inf', function() {
+gulp.task('move:js', moveJs);
+
+function moveInf() {
   return gulp.src(['src/INF/**/*', 'src/ping.html']).pipe(gulp.dest('./dist'));
-});
+}
 
-gulp.task('move:lang', function() {
-  return gulp.src(['./src/lang/*']).pipe(gulp.dest('./dist/properties'));
-});
+gulp.task('move:inf', moveInf);
 
-gulp.task('move:config', function() {
+function moveLang(done) {
+  gulp.src(['./src/lang/*']).pipe(gulp.dest('./dist/properties'));
+  done();
+}
+
+gulp.task('move:lang', moveLang);
+
+function moveConfig() {
   return gulp.src(['./config.properties']).pipe(gulp.dest('./dist'));
-});
+}
 
-gulp.task('move:release-notes', function() {
+gulp.task('move:config', moveConfig);
+
+function moveReleaseNotes() {
   return gulp.src(['release-notes/**']).pipe(gulp.dest('dist/release-notes/'));
-});
+}
 
-gulp.task('build:artifactory:zip', function() {
+gulp.task('move:release-notes', moveReleaseNotes);
+
+function buildArtifactoryZip(done) {
   try {
     var appData = JSON.parse(fs.readFileSync('./app.json'));
     if (appData) {
@@ -203,28 +239,38 @@ gulp.task('build:artifactory:zip', function() {
     console.log(
       'There was an exception when trying to read the package.json! - ' + ex
     );
-    return false;
+    done(new Error('There was an exception when trying to read the package.json! - ' + ex))
   }
-});
+}
 
-gulp.task('build:artifactory:clean', function() {
-  return del(['./dist/**/*', '!./dist/*.zip']);
-});
+gulp.task('build:artifactory:zip', buildArtifactoryZip);
 
-gulp.task('util:war', function() {
+function buildArtifactoryClean(done) {
+  del.sync(['dist/*', '!dist/*.zip']);
+  done();
+}
+
+gulp.task('build:artifactory:clean', buildArtifactoryClean);
+
+function utilWar() {
   return gulp
     .src(['dist/**', '!dist/lang'])
     .pipe(zip('workstationterminal.war'))
     .pipe(gulp.dest('dist/webapp/'));
-});
+}
 
-gulp.task('watch:start', function() {
-  gulp.watch(['./src/styles/**/*.scss'], ['compile:scss']);
-  gulp.watch(['src/scripts/**/*.js'], ['move:js']);
-  gulp.watch('./src/templates/**/*.nunjucks', ['compile:nunjucks']);
-});
+gulp.task('util:war', utilWar);
 
-gulp.task('cache:killer', function() {
+function watchStart(done) {
+  gulp.watch(['./src/styles/**/*.scss'], gulp.parallel('compile:scss'));
+  gulp.watch(['src/scripts/**/*.js'], gulp.parallel('move:js'));
+  gulp.watch('./src/templates/**/*.nunjucks', gulp.parallel('compile:nunjucks'));
+  done();
+}
+
+gulp.task('watch:start', watchStart);
+
+function cacheBuster() {
   return gulp
     .src('dist/index.html')
     .pipe(
@@ -233,9 +279,11 @@ gulp.task('cache:killer', function() {
       })
     )
     .pipe(gulp.dest('dist'));
-});
+}
 
-gulp.task('connect', function() {
+gulp.task('cache:killer', cacheBuster);
+
+function connectDevServer(done) {
   devServer.server({
     root: ['./dist'],
     port: 1337,
@@ -263,10 +311,13 @@ gulp.task('connect', function() {
       ];
     }
   });
-});
+  done();
+}
 
-gulp.task('deploy:war', function() {
-  return gulp.src('./dist/webapp/workstationterminal.war').pipe(
+gulp.task('connect', connectDevServer);
+
+function deployWar(done) {
+  gulp.src('./dist/webapp/workstationterminal.war').pipe(
     sftp({
       remotePath: remoteDeploymentDefaultPath,
       remotePlatform: remoteDeploymentPlatform,
@@ -275,10 +326,13 @@ gulp.task('deploy:war', function() {
       pass: remoteDeployPassword
     })
   );
-});
+  done();
+}
 
-gulp.task('deploy:lang', function() {
-  return gulp
+gulp.task('deploy:war', deployWar);
+
+function deployLang(done) {
+  gulp
     .src('./dist/properties/workstationTerminalMessages.properties')
     .pipe(
       sftp({
@@ -289,9 +343,16 @@ gulp.task('deploy:lang', function() {
         pass: remoteDeployPassword
       })
     );
-});
+  done();
+}
+
+gulp.task('deploy:lang', deployLang);
 
 // Task to create utts files from their source files
+
+function buildUtts() {
+  return 
+}
 gulp.task(
   'build:utts',
   folders(uttsPath, function(folder) {
@@ -302,21 +363,39 @@ gulp.task(
   })
 );
 
-gulp.task('clean:utts', function() {
-  return del([path.join(uttsPath) + '/**/*.utt']);
-});
+function cleanUtts(done) {
+  del.sync([path.join(uttsPath) + '/**/*.utt']);
+  done();
+}
 
-gulp.task('move:utts', function() {
+gulp.task('clean:utts', cleanUtts);
+
+function moveUtts() {
   return gulp
     .src(uttsPath + '/**/*.utt')
     .pipe(rename({ dirname: '' }))
     .pipe(gulp.dest('./dist/utt'));
-});
+}
+
+gulp.task('move:utts', moveUtts);
+
+/**
+* Clean and rebuilt Utts
+*/
+function cleanBuildUtts(done) {
+  console.log(`Utt files created from source`);
+  done();
+}
+
+gulp.task(
+  'clean:build:utts',
+  gulp.series('clean:utts', 'build:utts', 'move:utts', 'clean:utts')
+);
 
 /**
  * Write to manifest file
  */
-gulp.task('write:manifest', function () {
+function writeManifest(done) {
   try {
     var versionInfo = getVersionInfo();
     if (versionInfo) {
@@ -325,15 +404,17 @@ gulp.task('write:manifest', function () {
       fileContent += 'Product-Name: Orchestra Web Counter' + '\r\n';
       fileContent += 'Build-Version: ' + versionInfo.version + '\r\n';
       fs.writeFileSync('src/INF/META-INF/MANIFEST.MF', fileContent);
-      return true;
+      done();
     }
   } catch (ex) {
     console.log(
       'There was an exception when trying to read the package.json! - ' + ex
     );
-    return false;
+    done(new Error('There was an exception when trying to read the package.json! - ' + ex));
   }
-});
+}
+
+gulp.task('write:manifest', writeManifest);
 
 function getVersionInfo() {
   var appData = JSON.parse(fs.readFileSync('./app.json'));
@@ -352,9 +433,14 @@ function getVersionInfo() {
 /**
  * Create customization build, for customization.
  */
+function buildCustom(done) {
+  console.log(`Build Created in folder ./dist`);
+  done();
+}
+
 gulp.task(
   'build:custom',
-  gulpsync.sync([
+  gulp.series(
     'clean:build',
     'compile:nunjucks',
     'compile:scss',
@@ -365,18 +451,27 @@ gulp.task(
     'cache:killer',
     'move:inf',
     'clean:build:utts'
-  ]),
-  function() {
-    return console.log(`Build Created in folder ./dist`);
-  }
+  ),
+  buildCustom
 );
+
+
+
 
 /**
  * Create development build in dist and start watching files for changes
  */
+
+function buildDev(done) {
+  console.log(
+    `Build Created in folder ./dist - Listening to changes in scripts/styles/templates...`
+  );
+  done();
+}
+
 gulp.task(
   'build:dev',
-  gulpsync.sync([
+  gulp.series(
     'clean:build',
     'compile:nunjucks',
     'compile:scss',
@@ -387,20 +482,24 @@ gulp.task(
     'cache:killer',
     'watch:start',
     'connect'
-  ]),
-  function() {
-    return console.log(
-      `Build Created in folder ./dist - Listening to changes in scripts/styles/templates...`
-    );
-  }
+  ),
+  buildDev
 );
 
 /**
  * Create developement war
  */
+
+function buildDevWar(done) {
+  console.log(
+    `workstationterminal.war(Development Build) file created in dist folder`
+  );
+  done();
+}
+
 gulp.task(
   'build:dev:war',
-  gulpsync.sync([
+  gulp.series(
     'clean:build',
     'compile:nunjucks',
     'compile:scss',
@@ -409,23 +508,19 @@ gulp.task(
     'move:images',
     'move:icons',
     'cache:killer',
-    'move:config',
     'util:war',
     'clean:war',
     'move:lang',
     'clean:build:utts'
-  ]),
-  function() {
-    return console.log(
-      `workstationterminal.war(Development Build) file created in dist folder`
-    );
-  }
+  ),
+  buildDevWar
 );
 
 /**
  * Create developement war
  */
-gulp.task('deploy:war:artifactory', function() {
+
+function deployWarArtifactory(done) {
   var warName = fs.readdirSync('./dist')[0];
   var fileExtension = warName.substring(warName.lastIndexOf('.') + 1);
   if (fileExtension === 'zip') {
@@ -434,22 +529,35 @@ gulp.task('deploy:war:artifactory', function() {
       function(err, data, stderr) {
         if (!err) {
           console.log(data);
+          done();
         } else {
           console.log(err);
+          done(new Error(err));
         }
       }
     );
   } else {
     console.log('Zip file not found!!');
+    done(new Error('Zip file not found!!'));
   }
-});
+}
+
+gulp.task('deploy:war:artifactory', deployWarArtifactory);
 
 /**
 * Create Production war
 */
+
+function buildProdWar(done) {
+  console.log(
+    `workstationterminal.war(Productiion Build) file created in dist folder`
+  );
+  done();
+}
+
 gulp.task(
   'build:prod:war',
-  gulpsync.sync([
+  gulp.series(
     'clean:build',
     'compile:scss',
     'move:js',
@@ -462,25 +570,28 @@ gulp.task(
     'move:icons',
     'cache:killer',
     'move:inf',
-    'move:config',
     'util:war',
     'clean:war',
     'move:lang',
     'clean:build:utts'
-  ]),
-  function() {
-    return console.log(
-      `workstationterminal.war(Productiion Build) file created in dist folder`
-    );
-  }
+  ),
+  buildProdWar
 );
 
 /**
 * Artifactory build
 */
+
+function buildArtifactory(done) {
+  console.log(
+    `workstationterminal.war(Productiion Build) file created in dist folder`
+  );
+  done();
+}
+
 gulp.task(
   'build:artifactory',
-  gulpsync.sync([
+  gulp.series(
     'clean:build',
     'write:manifest',
     'compile:scss',
@@ -494,7 +605,6 @@ gulp.task(
     'move:icons',
     'cache:killer',
     'move:inf',
-    'move:config',
     'util:war',
     'clean:war',
     'move:lang',
@@ -502,56 +612,49 @@ gulp.task(
     'move:release-notes',
     'build:artifactory:zip',
     'build:artifactory:clean'
-  ]),
-  function() {
-    return console.log(
-      `workstationterminal.war(Productiion Build) file created in dist folder`
-    );
-  }
+  ),
+  buildArtifactory
 );
 
-/**
-* Clean and rebuilt Utts
-*/
-gulp.task(
-  'clean:build:utts',
-  gulpsync.sync(['clean:utts', 'build:utts', 'move:utts', 'clean:utts']),
-  function() {
-    return console.log(`Utt files created from source`);
-  }
-);
 
 /**
  *  Deploy war and lang file to a remote Orchestra System
  *  Note - For this to work you need to have openssh installed on the remote server.
  */
+function deployRemote(done) {
+  console.log(`workstationterminal.war deployed!`);
+  done();
+}
+
 gulp.task(
   'deploy:remote',
-  gulpsync.sync([
+  gulp.series(
     'build:dev',
     'move:inf',
-    'move:config',
     'util:war',
     'clean:war',
     'move:lang',
     'deploy:war',
     'deploy:lang'
-  ]),
-  function() {
-    return console.log(`workstationterminal.war deployed!`);
-  }
+  ),
+  deployRemote
 );
 
 /**
  *  Deploy war and lang file to a remote Orchestra System
  *  Note - For this to work you need to have openssh installed on the remote server.
  */
+
+function buildArtifactoryDeploy(done) {
+  console.log(
+    `workstationterminal.zip deployed to artifactory server!`
+  );
+  done();
+}
+
 gulp.task(
   'build:artifactory:deploy',
-  gulpsync.sync(['build:artifactory', 'deploy:war:artifactory']),
-  function() {
-    return console.log(
-      `workstationterminal.zip deployed to artifactory server!`
-    );
-  }
+  gulp.series('build:artifactory', 'deploy:war:artifactory'),
+  buildArtifactoryDeploy
 );
+
