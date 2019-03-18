@@ -5,6 +5,10 @@
 
         &__header-section {
             text-align: center;
+
+            @at-root [dir='rtl'] & {
+                text-align: center;
+            }
         }
 
         &__content-section {

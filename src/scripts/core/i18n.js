@@ -262,6 +262,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 		i18nSafe("unServedName",'info.unserved.name');
 		i18nSafe("servedName",'info.served.name');
         i18nQmBtn("confirmServicesBtn",'button.confirm.services');
+        i18nQmBtn("discardConfirmServicesBtn",'button.cancel');
         i18nSafe("resortServicesBtn",'button.resort.services');
 		i18nSafe("selectedName",'info.selected.name');
 		i18nSafe("availableName",'info.available.name');

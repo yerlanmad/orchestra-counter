@@ -948,6 +948,10 @@ var servicePoint = new function () {
 		}
 	};
 
+	this.discardNeededServicesModal = function () {
+		modalNavigationController.popModal($Qmatic.components.modal.nextServices);
+	};
+
 	this.confirmServices = function () {
 		this.executeCommand();
 		modalNavigationController.popModal($Qmatic.components.modal.nextServices);

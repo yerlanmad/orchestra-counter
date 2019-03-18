@@ -11,9 +11,9 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Original release</h2>
 
-**Date: 10/01/2018** 
- 
-**Build number: 001** 
+**Date: 10/01/2018**
+
+**Build number: 001**
 
 <h3>Stories</h3>
 
@@ -41,7 +41,7 @@ This document describes the new features, bug corrections, known issues and reco
 <h2>Update 4.0.0.013</h2>
 
 **Date: 26/02/2018**
- 
+
 **Build number: 013**
 
 <h3>Stories</h3>
@@ -58,14 +58,14 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Known issues</h3>
 
-<h3>Upgrade instructions</h3> 
+<h3>Upgrade instructions</h3>
 ----------
 
 
 <h2>Update 4.0.0.014</h2>
 
 **Date: 27/06/2018**
- 
+
 **Build number: 014**
 
 <h3>Stories</h3>
@@ -82,7 +82,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Known issues</h3>
 
-<h3>Upgrade instructions</h3> 
+<h3>Upgrade instructions</h3>
 ----------
 
 
@@ -90,7 +90,7 @@ This document describes the new features, bug corrections, known issues and reco
 <h2>Update 4.0.0.015</h2>
 
 **Date: 31/08/2018**
- 
+
 **Build number: 015**
 
 <h3>Stories</h3>
@@ -107,11 +107,11 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Known issues</h3>
 
-<h3>Upgrade instructions</h3> 
+<h3>Upgrade instructions</h3>
 ----------
 
 **Date: 14/09/2018**
- 
+
 **Build number: 016**
 
 <h3>Stories</h3>
@@ -132,11 +132,11 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Known issues</h3>
 
-<h3>Upgrade instructions</h3> 
+<h3>Upgrade instructions</h3>
 ----------
 
 **Date: 12/10/2018**
- 
+
 **Build number: 017**
 
 <h3>Stories</h3>
@@ -159,7 +159,7 @@ This document describes the new features, bug corrections, known issues and reco
 ----------
 
 **Date: 22/10/2018**
- 
+
 **Build number: 018**
 
 <h3>Stories</h3>
@@ -182,7 +182,7 @@ This document describes the new features, bug corrections, known issues and reco
 ----------
 
 **Date: 20/12/2018**
- 
+
 **Build number: 019**
 
 <h3>Stories</h3>
@@ -206,7 +206,7 @@ This document describes the new features, bug corrections, known issues and reco
 ----------
 
 **Date: 11/01/2019**
- 
+
 **Build number: 020**
 
 <h3>Stories</h3>
@@ -228,12 +228,36 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Upgrade instructions</h3>
 ----------
 
+----------
+
+**Date: 18/03/2019**
+
+**Build number: 021**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **164398417** | **counter story** Add cancel button to multi service modal |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **xxx** xxx |
+
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3>
+----------
+
 <h3>Copyright notice</h3>
 
-The information in this document is subject to change without prior notice and does not represent a commitment on the part of Q-MATIC AB. All efforts have been made to ensure the accuracy of this manual, but Q-MATIC AB cannot assume any responsibility for any errors and their consequences. 
+The information in this document is subject to change without prior notice and does not represent a commitment on the part of Q-MATIC AB. All efforts have been made to ensure the accuracy of this manual, but Q-MATIC AB cannot assume any responsibility for any errors and their consequences.
 
-This manual is copyrighted and all rights are reserved. 
-Qmatic and Qmatic Orchestra are registered trademarks or trademarks of Q-MATIC AB. 
+This manual is copyrighted and all rights are reserved.
+Qmatic and Qmatic Orchestra are registered trademarks or trademarks of Q-MATIC AB.
 Reproduction of any part of this manual, in any form, is not allowed, unless written permission is given by Q-MATIC AB.
 COPYRIGHT (c) Q-MATIC AB, 2018.
 

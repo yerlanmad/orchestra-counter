@@ -15,6 +15,7 @@
             </div>
             <div class="qm-card__footer-section">
                 <div class="qm-generic-layout qm-generic-layout--align-center">
+                    {{button.render(id="discardConfirmServicesBtn", type="qm-btn--secondary", handler="servicePoint.discardNeededServicesModal();")}}
                     {{button.render(id="confirmServicesBtn", type="qm-btn--primary", handler="servicePoint.confirmServices();")}}
                 </div>
             </div>
