@@ -244,7 +244,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 | **Id** | **Release notes** |
 | --- | --- |
-| **xxx** | **xxx** xxx |
+| **COUNTER-122** | **Possible to press counter before a branch is selected** Removed outline for custom select |
 
 
 <h3>Known issues</h3>

@@ -12,6 +12,8 @@
         }
     }
     &__component {
+        outline: none !important;
+        
         &.optionSelected {
             .chosen-single {
                 span {
