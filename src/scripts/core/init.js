@@ -27,6 +27,9 @@ var init = new function () {
         if (typeof sessvars.systemInformation == "undefined" || sessvars.systemInformation == "" || null == sessvars.systemInformation) {
             sessvars.systemInformation = spService.get('systemInformation');
         }
+        
+        validateAndSetDateConvension(sessvars.systemInformation);
+
         jQuery.i18n.properties({
             name: 'workstationTerminalMessages',
             path: '/workstationterminal/bundle/',
@@ -106,6 +109,19 @@ var init = new function () {
 
             return bx.length - ax.length;
         };
+    }
+
+    var validateAndSetDateConvension = function (systemInformation) {
+        if (systemInformation 
+            && systemInformation.dateConvention 
+            && (systemInformation.dateConvention.toLowerCase().indexOf("y") > -1
+                || systemInformation.dateConvention.toLowerCase().indexOf("m") > -1
+                || systemInformation.dateConvention.toLowerCase().indexOf("d") > -1)) {
+            
+        } else {
+            // Default date convention
+            systemInformation.dateConvention = "YYYY-MM-DD";
+        }
     }
 
     var initSessvars = function () {

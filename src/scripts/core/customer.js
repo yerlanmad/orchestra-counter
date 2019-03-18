@@ -4,13 +4,13 @@
  * "Success, customer updated".
  */
 var customer = new function() {
-	
+
 	var customerDbOnline = true;
 
 	var isDefined = function(object) {
         return object !== null && object !== undefined;
     };
-    
+
     this.addUserPressed = function (e) {
         e.preventDefault();
         window.$Qmatic.components.card.addCustomerCard.showAddForm();
@@ -48,7 +48,7 @@ var customer = new function() {
         });
         $customerList.append(listItems);
     };
-    
+
     var createCustomerListItem = function (id, firstName, lastName, email, phoneNumber, dateOfBirth, index) {
         var entry = document.createElement('LI');
         entry.classList.add('qm-customer-list__item');
@@ -76,7 +76,7 @@ var customer = new function() {
         if(dateOfBirth) {
             var dobNode = document.createElement("P");
             dobNode.classList.add('qm-customer-list__information');
-            var dateOfBirthText = document.createTextNode(dateOfBirth);
+            var dateOfBirthText = document.createTextNode(util.formatDateToDateConvention(dateOfBirth));
             dobNode.appendChild(dateOfBirthText);
             entry.appendChild(dobNode);
         }
@@ -205,15 +205,15 @@ var customer = new function() {
                         $('.js-search-input__icon').show();
                         $('.qm-form-field--search .js-clear-field').hide();
                     }
-                    
+
                     sessvars.currentCustomer = null;
-                    
+
                     if (val.length >= 2) { //We want at least 2 characters entered.
                         $(this).data('enteredVal', val); //Store the previous value on the autocomplete object.
                         $(this).data('selectedRow', 0); // reset which row has been selected
                         // start a timer to prevent searching "too fast"
                         $(this).data('timer', setTimeout(function() {
-                            customer.filterList(val);                            
+                            customer.filterList(val);
                             var rowCount = $('#customerSearchTable').dataTable().fnGetData().length;
                             $("#customerInput").data('rowCount', rowCount);
                             if(customer.customerDbOnline) {
@@ -223,7 +223,7 @@ var customer = new function() {
                                     customer.setSelectedRow(0, true);
                                 }
     						}
-                            
+
                         },
                         300));
                         // less than 2 chars -> clear the table and hide it
@@ -257,6 +257,9 @@ var customer = new function() {
             $('td:eq(0)', nRow).html(aData.fullName.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
             $('td:eq(1)', nRow).html(aData.phoneNumber.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
             $('td:eq(2)', nRow).html(aData.email.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
+            if (aData.dateOfBirth) {
+                $('td:eq(3)', nRow).html(util.formatDateToDateConvention(aData.dateOfBirth))
+            }
         }
 
         // initialise datatable for the auto-complete customer search
@@ -314,7 +317,7 @@ var customer = new function() {
     }
 
     this.setSaveButtonState = function ($requiredFields, $saveBtn, $emailField, dob) {
-        var isValid = true; 
+        var isValid = true;
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
             if($reqField.val().trim() === "") {
@@ -350,11 +353,11 @@ var customer = new function() {
 
     this.initClearInputField = function () {
         $clearBtns = $('.js-clear-field');
-        $clearBtns.on('click', this.clearInput); 
+        $clearBtns.on('click', this.clearInput);
     }
 
     this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField, dob) {
-        var isValid = true;  
+        var isValid = true;
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
             if($reqField.val().trim() === "") {
@@ -412,10 +415,10 @@ var customer = new function() {
         var dateformat = /^(0[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
         // Match the date format through regular expression
         if(inputDate.match(dateformat)) {
-            
+
             var pdate = inputDate.split('-');
 
-            
+
             var dd = parseInt(pdate[0]);
             var mm  = parseInt(pdate[1]);
             var yy = parseInt(pdate[2]);
@@ -517,9 +520,9 @@ var customer = new function() {
                         var transformedCustomer = transformCustomer(item, customer.COLUMN_NAMES);
                         $customerSearchTable.fnAddData(transformedCustomer);
                     });
-                    
+
                     window.$Qmatic.components.card.addCustomerCard.showAddForm();
-                    
+
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     if(jqXHR.status == 503) {
@@ -578,7 +581,11 @@ var customer = new function() {
         var props = item.properties;
         for (var key in props) {
             if(props.hasOwnProperty(key)) {
-                cust[key] = props[key];
+                if( key === 'dateOfBirth' && props[key]) {
+                    cust[key] = props[key].substring(0, 10);
+                } else {
+                    cust[key] = props[key];
+                }
             }
         }
 
@@ -658,7 +665,7 @@ var customer = new function() {
                                         var day = dob[2];
                                         $("#" + prefix + property + 'Month').val(month);
                                         $("#" + prefix + property + 'Month').trigger('chosen:updated');
-                                        
+
                                         $("#" + prefix + property + 'Day').val(day);
                                         $("#" + prefix + property + 'Year').val(year);
                                     }
@@ -687,7 +694,7 @@ var customer = new function() {
             //customer might have been updated elsewhere, fetch from database before display
             var customerId = sessvars.state.visit.customerIds[index]
             sessvars.currentCustomer = spService.get("customers/"+customerId);
-            
+
             this.setEditFields(prefix, sessvars.currentCustomer)
             this.setFormButtonsState('#' + prefix + 'CustomerForm', false);
         }
@@ -700,7 +707,7 @@ var customer = new function() {
             //customer might have been updated elsewhere, fetch from database before display
             var params = {customerId : parseInt(sessvars.currentCustomer.id)};
             sessvars.currentCustomer = spService.get("customers/"+sessvars.currentCustomer.id);
-            
+
             this.setEditFields(prefix, sessvars.currentCustomer);
             this.setFormButtonsState('#' + prefix + 'CustomerForm', false);
             //window.$Qmatic.components.card.addCustomerCard.enableEditSave();
@@ -717,7 +724,7 @@ var customer = new function() {
 
     this.editAndSaveCustomer = function (prefix, formName) {
         var isUpdated = this.determineIfCustomerUpdated(formName);
-        
+
         if(isUpdated) {
              this.editCustomer(prefix, false);
         }
@@ -741,15 +748,6 @@ var customer = new function() {
         return isUpdated;
     }
 
-    this.createCustomerPressed = function() {
-        // util.showModal("createCustomerWindow");
-        // if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
-        //     $("#saveAndLinkCustomerLink").removeClass("customLinkDisabled").addClass("customLink");
-        // } else {
-        //     $("#saveAndLinkCustomerLink").removeClass("customLink").addClass("customLinkDisabled");
-        // }
-    };
-
     this.setAmountOfAdditionalCustomers = function () {
         var $amountOfAdditionalCustomers = $('#amountOfAdditionalCustomers');
 
@@ -768,12 +766,12 @@ var customer = new function() {
         if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
             var parameterizedCustomer = parameterizeCustomer("createCustomerForm");
             if(validateCustomerForm(parameterizedCustomer.$entity)) {
-                
+
                 var createdCustomer = createCustomer(parameterizedCustomer);
                 if(typeof createdCustomer !== "undefined") {
                     //validation ok, all fields nice and proper
                     linkCustomer(createdCustomer);
-                    
+
                     //$("#linkedCustomerField").html(createdCustomer.firstName + " " + createdCustomer.lastName);
                     this.setAmountOfAdditionalCustomers();
                     $('#ticketNumber').removeClass('qm-card-header__highlighted');
@@ -788,13 +786,13 @@ var customer = new function() {
     this.editCustomer = function(prefix, shouldPop) {
         var customerParameterized = parameterizeCustomer(prefix + "CustomerForm");
         if(validateCustomerForm(customerParameterized.$entity)) {
-			
+
             customerParameterized.customerId = sessvars.currentCustomer.id;
-			
+
 			var params = servicePoint.createParams();
             params.json =jsonString(customerParameterized);
             spService.putParams("customers/"+customerParameterized.customerId, params);
-            
+
             //update current customer i.e. the selected customer, NOT the linked customer
             sessvars.currentCustomer = customerParameterized.$entity;
             sessvars.currentCustomer.id = customerParameterized.customerId;
@@ -818,9 +816,9 @@ var customer = new function() {
                     updateParams.customerId = sessvars.currentCustomer.id;
                     updateParams.visitId = sessvars.state.visit.id;
                     updateParams.json = '{"customers":"' + customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName + '"}';
-                    spService.putParams("branches/" + params.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);        
+                    spService.putParams("branches/" + params.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
                 }
-                
+
                 cardNavigationController.pop();
             }
         }
@@ -852,27 +850,27 @@ var customer = new function() {
     var createCustomer = function(parameterizedCustomer) {
 		var params = servicePoint.createParams();
         params.json = jsonString(parameterizedCustomer);
-        
+
 		return spService.postParams("customers", params);
     };
 
     var shouldIncludeDob = function (prop) {
         return prop["dobMonth"] !== "-1" || prop["dobDay"] !== '' || prop["dobYear"] !== '' ? true : false;
     }
-    
+
     var jsonString = function (val) {
 		var main = val.$entity;
         var prop = val.$entity.properties;
         var includeDob = shouldIncludeDob(prop);
-        
+
         var j = '{';
             j += '"firstName":"' + main.firstName + '","lastName":"' + main.lastName + '"'
-        if (includeDob === true) {    
-            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "dateOfBirth":"' + prop.dobYear + '-' + prop.dobMonth + '-' + prop.dobDay + '"}}'; 
+        if (includeDob === true) {
+            j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '", "dateOfBirth":"' + prop.dobYear + '-' + prop.dobMonth + '-' + prop.dobDay + '"}}';
         } else {
             j +=',"properties":{"phoneNumber":"' + prop.phoneNumber + '","email":"' + prop.email + '"}}';
         }
-        
+
 		return j;
     }
 
@@ -899,7 +897,7 @@ var customer = new function() {
                 linkCustomer(sessvars.currentCustomer);
                 if(isFirstCustomerLinked()) {
                     $linkedCustomerField = $("#linkedCustomerField");
-                    $linkedCustomerField.html(sessvars.currentCustomer.firstName + " " + sessvars.currentCustomer.lastName); 
+                    $linkedCustomerField.html(sessvars.currentCustomer.firstName + " " + sessvars.currentCustomer.lastName);
                     $linkedCustomerField.css("display", "");
                 }
                 this.setAmountOfAdditionalCustomers();
@@ -911,9 +909,9 @@ var customer = new function() {
     };
 
     var isFirstCustomerLinked = function () {
-        if(sessvars.state 
-            && sessvars.state.visit 
-            && sessvars.state.visit.customerIds 
+        if(sessvars.state
+            && sessvars.state.visit
+            && sessvars.state.visit.customerIds
             && sessvars.state.visit.customerIds.length === 1) {
                 return true;
         }
@@ -964,7 +962,7 @@ var customer = new function() {
                 $linkedCustomerField.css("display", "");
                 this.setAmountOfAdditionalCustomers();
                 $('#ticketNumber').removeClass('qm-card-header__highlighted');
-                
+
             } else if(typeof sessvars.state.visit.customerIds !== "undefined" &&
                 sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0) {
                 var customer =spService.get("customers/"+sessvars.state.visit.customerIds[0]);

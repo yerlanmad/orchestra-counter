@@ -230,6 +230,45 @@ var util = new function () {
         $searchInput.trigger(event);
     };
 
+    this.dateReplacer = function(match, dateOfBirth) {
+        var numberOfChars = match.length;
+        if (match.toLocaleLowerCase().indexOf("y") > -1) {
+            // Year
+            if (numberOfChars === 2) {
+                return dateOfBirth[0].substring(2, 4);
+            }
+            return dateOfBirth[0].substring(0, 4);
+        } else if (match.toLocaleLowerCase().indexOf("m") > -1) {
+            // Month
+            if (numberOfChars === 1) {
+                return "" + parseInt(dateOfBirth[1], 10);
+            }
+            return dateOfBirth[1];
+        } else if (match.toLocaleLowerCase().indexOf("d") > -1) {
+            // Day
+            var day = dateOfBirth[2].substring(0, 2);
+            if (numberOfChars === 1) {
+                return "" + parseInt(day, 10);
+            }
+            return dateOfBirth[2];
+        }
+    }
+    
+    this.formatDateToDateConvention = function (dateOfBirth) {
+        if (dateOfBirth) {
+            var splitDate = dateOfBirth.split("-");
+            if (splitDate.length === 3) {
+                var dateFormatRegExp = new RegExp(/(y+)|(m+)|(d+)/, "gi");
+                return sessvars.systemInformation.dateConvention.replace(dateFormatRegExp, function (match) {
+                    return util.dateReplacer(match, splitDate);
+                });
+            } else {
+                return dateOfBirth.substring(0, 10);
+            }
+        }
+        return dateOfBirth;
+    }
+
     /**
      *
      * @param tableId

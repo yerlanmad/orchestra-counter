@@ -239,6 +239,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **164398417** | **counter story** Add cancel button to multi service modal |
+| **163318753** | **Use system parameter for date** Use system parameter when displaying date |
 
 <h3>Bug fixes</h3>
 
