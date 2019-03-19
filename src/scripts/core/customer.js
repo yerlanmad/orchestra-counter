@@ -253,7 +253,7 @@ var customer = new function() {
             if(searchTerm.indexOf('+') > -1) {
                 searchTerm = searchTerm.replace('+', '\\+');
             }
-            var pattern = new RegExp(searchTerm, "ig")
+            var pattern = new RegExp(searchTerm, "ig");
             $('td:eq(0)', nRow).html(aData.fullName.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
             $('td:eq(1)', nRow).html(aData.phoneNumber.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))
             $('td:eq(2)', nRow).html(aData.email.replace(pattern, "<span class='qm-table__highlight'>$&</span>"))

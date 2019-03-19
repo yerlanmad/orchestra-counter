@@ -223,7 +223,7 @@ var util = new function () {
             searchContainer.removeClass('qm-search-filter--show-clear-btn');
         }
     };
-    
+
     this._clearSearchField = function ($searchInput) {
         var event = $.Event('keyup');
         $searchInput.val("");
@@ -253,12 +253,12 @@ var util = new function () {
             return dateOfBirth[2];
         }
     }
-    
+
     this.formatDateToDateConvention = function (dateOfBirth) {
         if (dateOfBirth) {
             var splitDate = dateOfBirth.split("-");
             if (splitDate.length === 3) {
-                var dateFormatRegExp = new RegExp(/(y+)|(m+)|(d+)/, "gi");
+                var dateFormatRegExp = new RegExp("(y+)|(m+)|(d+)", "gi");
                 return sessvars.systemInformation.dateConvention.replace(dateFormatRegExp, function (match) {
                     return util.dateReplacer(match, splitDate);
                 });
