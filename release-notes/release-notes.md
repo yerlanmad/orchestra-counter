@@ -246,7 +246,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **COUNTER-122** | **Possible to press counter before a branch is selected** Removed outline for custom select |
-
+| **COUNTER-125** | **Expressia can still be used after the customer is transferred** UTT Changes to Expressia and Expressia_D924 |
 
 <h3>Known issues</h3>
 

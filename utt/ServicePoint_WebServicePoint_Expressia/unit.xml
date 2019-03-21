@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!--
-    
+
     All modifications to this unit type must be added here.
 
     The version number of the unit type template (utt) has the format X.Y.Z.n, for example 6.2.0.0, where:
@@ -32,11 +32,12 @@
     |         |         | 6.2.0  | G (only 6.2)        |
     | 6.0.1   | 6.1.1   | 6.2.1  | H (6.0, 6.1 and 6.2)|
 
-      
+
     Version history in descending order:
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.7    2019-03-20   Added correction for COUNTER-125          joelan
     7.0.0.6    2019-01-14   Added unit event for end service          joelan
     7.0.0.5    2018-09-03   Added expected transaction time param     joelan
     7.0.0.4    2018-08-31   Changed icon for UTT                      joelan
@@ -45,10 +46,10 @@
     7.0.0.2    2018-02-21   Handle Reset Event                        lakcal
 
     7.0.0.1    2018-02-12   Added parameter for default walkin        lakcal
-                            service 
-                            
+                            service
+
     7.0.0.0    2018-01-17   label and tooltip tweaks for reskin       lakcal
-	
+
     2.9.0      2016-12-02   Added correction for QP-5223              olacar
 
     2.8.0      2016-11-18   USER_SERVICE_POINT_SESSION_END is now     johper, marwah
@@ -73,7 +74,7 @@
 
 <unit name="WebServicePoint_Expressia"
       frameworkVersion="2"
-      unitVersion="7.0.0.6"
+      unitVersion="7.0.0.7"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -92,7 +93,7 @@
       privilege="install:adminAdmin"
       size="20"/>
 
-    
+
         <parameter name="minTimeBetweenCalls"
           sortOrder="6"
           type="Integer"
@@ -134,8 +135,8 @@
           label="Single session"
           description="Defines if more than one user can be logged in at the same service point."
           privilege="install:adminAdmin"/>
-      
-    
+
+
         <parameter name="mdCus"
           type="Boolean"
           defaultValue="true"
@@ -376,8 +377,8 @@
           label="Show expected transaction time"
           description="Show expected transaction time for current service"
           privilege="install:adminAdmin"/>
-      
-    
+
+
         <parameter name="idCodeExpressia"
           sortOrder="3"
           type="IdCode"
@@ -408,23 +409,23 @@
           sortOrder="4050"
           writeLevel="profile"
           privilege="install:adminAdmin" />
-      
+
 
     <parameter name="unitName"
       type="UnitName"
       label="Unit name"
       defaultValue="${unit:name} ${unit:index}" />
 
-    
-        <parameter name="deviceController" 
-          type="DeviceController" 
+
+        <parameter name="deviceController"
+          type="DeviceController"
           label="Device Controller"
           mandatory="true"
-          sortOrder="9999" 
-          writeLevel="profile" 
-          readLevel="branch" 
+          sortOrder="9999"
+          writeLevel="profile"
+          readLevel="branch"
           privilege="install:adminAdmin" />
-      
+
 
   </parameters>
 
@@ -437,7 +438,7 @@
         <deviceCommandHandler handlerType="GROOVY" name="SET_MARK">
           <![CDATA[
           isWebServicePoint = true
-          
+
         import com.qmatic.qp.api.device.DeviceEvent
         import com.qmatic.qp.api.device.DeviceCommand
         import com.qmatic.qp.api.connectors.device.ServicePointDeviceResource
@@ -466,7 +467,7 @@
         } catch(e) {
           device.log("ERROR", "Could not set mark! Does the mark code " + expressiaMarkCode + " exist? Does the mark name " + expressiaMarkName + " exist? Parameters used when trying to set mark: branchId: " + branchId + ", visitId: " + visitId + ", expressiaMarkCode: " + expressiaMarkCode + ", expressiaMarkName: " + expressiaMarkName + ", servicePointLogicId: " + servicePointLogicId + ".")
         }
-      
+
           ]]>
         </deviceCommandHandler>
       </deviceCommandHandlers>
@@ -480,7 +481,7 @@
         <deviceEventHandler name="KEY" handlerType="GROOVY">
           <![CDATA[
           String servicePointDevice = "Web service point"
-          
+
         import com.qmatic.qp.api.device.DeviceCommand
         import com.qmatic.qp.api.connectors.device.ServicePointDeviceResource
         timerToggleLED = device.getState("TIMER_LEDS_TOGGLE")
@@ -499,36 +500,36 @@
           cmdSETMARK.setParameter("markCode", expressiaMarkCode)
           device.executeCommand(cmdSETMARK)
         }
-      
+
           ]]>
         </deviceEventHandler>
       </deviceEventHandlers>
       <deviceCommandHandlers>
 				<deviceCommandHandler handlerType="GROOVY" name="LEDS_INIT">
 					<![CDATA[
-					
+
         import com.qmatic.qp.api.device.DeviceCommand
         device.setState("LED_VALUE", 1)
         device.setState("LEDS", "ON")
         DeviceCommand cmdLEDS = new DeviceCommand(device.getId(), "LEDS_OUTPUT")
         device.executeCommand(cmdLEDS)
-      
+
 					]]>
 				</deviceCommandHandler>
 				<deviceCommandHandler handlerType="GROOVY" name="LEDS_OFF">
 					<![CDATA[
-					
+
         import com.qmatic.qp.api.device.DeviceCommand
         device.setState("LED_VALUE", 0)
-        device.setState("LEDS", "ON")
+        device.setState("LEDS", "OFF")
         DeviceCommand cmdLEDS = new DeviceCommand(device.getId(), "LEDS_OUTPUT")
         device.executeCommand(cmdLEDS)
-      
+
 					]]>
 				</deviceCommandHandler>
         <deviceCommandHandler handlerType="GROOVY" name="LEDS_OUTPUT">
           <![CDATA[
-          
+
         import com.qmatic.qp.api.device.DeviceCommand
         import com.qmatic.qp.api.device.DeviceEvent
         import java.io.ByteArrayOutputStream
@@ -595,7 +596,7 @@
         LEDEvent.setParameter("info", info)
         LEDEvent.setParameter("output", outStream.toByteArray())
         device.sendEvent(LEDEvent)
-      
+
           ]]>
         </deviceCommandHandler>
       </deviceCommandHandlers>
@@ -607,7 +608,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
         try {
           deviceExpressia = unit.getDevice("Expressia")
           DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
@@ -615,7 +616,7 @@
         }  catch (e) {
           // not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -623,7 +624,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
         try {
           deviceExpressia = unit.getDevice("Expressia")
           DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
@@ -631,7 +632,7 @@
         }  catch (e) {
           // not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -640,7 +641,7 @@
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
           wsp = unit.getDevice("Web service point")
           DeviceEvent de = new DeviceEvent()
           de.setUnitId(wsp.getId())
@@ -651,8 +652,8 @@
           } catch(e) {
             //  not ok
           }
-      
-        
+
+
         try {
           deviceExpressia = unit.getDevice("Expressia")
           DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
@@ -660,7 +661,7 @@
         }  catch (e) {
           // not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -669,7 +670,7 @@
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
         wsp = unit.getDevice("Web service point")
         DeviceEvent de = new DeviceEvent()
         de.setUnitId(wsp.getId())
@@ -680,8 +681,8 @@
         } catch(e) {
           //  not ok
         }
-      
-        
+
+
         try {
           deviceExpressia = unit.getDevice("Expressia")
           DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
@@ -689,7 +690,7 @@
         }  catch (e) {
           // not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -710,7 +711,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
         try {
           deviceExpressia = unit.getDevice("Expressia")
           DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
@@ -718,7 +719,7 @@
         }  catch (e) {
           // not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -726,7 +727,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
         try {
           deviceExpressia = unit.getDevice("Expressia")
           DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_OFF")
@@ -734,7 +735,7 @@
         }  catch (e) {
           // not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -742,7 +743,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
         import com.qmatic.qp.api.device.DeviceUserEvent
         import com.qmatic.qp.constants.QPConstants
 
@@ -758,7 +759,7 @@
         } catch (Throwable t) {
           wsp.log("DEBUG", "Unable to send USER_SERVICE_POINT_SESSION_END event to web terminal, error:" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -768,7 +769,7 @@
         import com.qmatic.qp.api.device.DeviceEvent
         import com.qmatic.qp.api.device.DeviceCommand
         String servicePointDevice = "Web service point"
-        
+
         wsp = unit.getDevice("Web service point")
         DeviceEvent wspDeviceEvent = new DeviceEvent()
         wspDeviceEvent.setUnitId(wsp.getId())
@@ -781,22 +782,22 @@
           //  not ok
           result = false
         }
-      
-        
+
+
         spdExpressia = unit.getDevice(servicePointDevice)
         spdExpressia.setState("VISIT_ID", event.getParameter("visitId"))
         spdExpressia.setState("CFU_SELECTION", "0")
         deviceExpressia = unit.getDevice("Expressia")
         DeviceCommand cmdLEDS = new DeviceCommand(deviceExpressia.getId(), "LEDS_INIT")
         deviceExpressia.executeCommand(cmdLEDS)
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
     <unitEvent name="SET_WORK_PROFILE">
       <unitEventHandler type="GROOVY">
         <![CDATA[
-        
+
         import com.qmatic.qp.api.device.DeviceEvent
         wsp = unit.getDevice("Web service point")
         try {
@@ -817,16 +818,16 @@
         } catch (Throwable t) {
           wsp.log("WARN", "Unable to notify web terminal of changed work profile. throwable=" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
     <unitEvent name="CHAT_SEND">
       <unitEventHandler type="GROOVY">
         <![CDATA[
-        
-        import com.qmatic.qp.api.device.DeviceEvent                    		
-        wsp = unit.getDevice("Web service point")					
+
+        import com.qmatic.qp.api.device.DeviceEvent
+        wsp = unit.getDevice("Web service point")
         try{
           DeviceEvent receiveChatEvent = new DeviceEvent()
           receiveChatEvent.setParameters(event.getParameters())
@@ -836,13 +837,13 @@
         } catch (Throwable t) {
           wsp.log("WARN", "Unable to send CHAT_RECEIVE event to web terminal, error:" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
     <unitEvent name="RESET">
             <unitEventHandler type="GROOVY"><![CDATA[
-                 
+
                 import com.qmatic.qp.api.device.DeviceEvent
 
                 try {
@@ -853,7 +854,7 @@
                 } catch(e) {
                     unit.log("DEBUG", "Unable to send reset event to ConnectCounter_Expressia for unit " + unit.getUnitId())
                 }
-                                                                                                                            
+
             ]]></unitEventHandler>
         </unitEvent>
   </unitEvents>
