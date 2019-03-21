@@ -39,7 +39,7 @@ require('events').EventEmitter.prototype._maxListeners = 100;
 
 try {
   var config = require('./gulp.config.json');
-  
+
   // Needed for dev server
   var targetOrchestraIp = config.proxy.host ? config.proxy.host : "localhost";
   var targetOrchestraPort = config.proxy.port ? config.proxy.port : "8080";
@@ -351,13 +351,14 @@ gulp.task('deploy:lang', deployLang);
 // Task to create utts files from their source files
 
 function buildUtts() {
-  return 
+  return
 }
 gulp.task(
   'build:utts',
   folders(uttsPath, function(folder) {
+    const currentUttPath = uttsPath + '/' + folder + '/*';
     return gulp
-      .src(path.join(uttsPath, folder, '**/*'))
+      .src(currentUttPath)
       .pipe(zip(folder + '.utt'))
       .pipe(gulp.dest(path.join(uttsPath, folder)));
   })
