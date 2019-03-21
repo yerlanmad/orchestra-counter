@@ -240,6 +240,7 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **164398417** | **counter story** Add cancel button to multi service modal |
 | **163318753** | **Use system parameter for date** Use system parameter when displaying date |
+| **160344676** | **Update description for the Multisession counter utt** UTT changes, updated description of WebCounterMultiStaff |
 
 <h3>Bug fixes</h3>
 

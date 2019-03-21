@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!--
-    
+
     All modifications to this unit type must be added here.
 
     The version number of the unit type template (utt) has the format X.Y.Z.n, for example 6.2.0.0, where:
@@ -32,21 +32,22 @@
     |         |         | 6.2.0  | G (only 6.2)        |
     | 6.0.1   | 6.1.1   | 6.2.1  | H (6.0, 6.1 and 6.2)|
 
-      
+
     Version history in descending order:
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.7    2019-03-20   Changed UTT description                   joelan
     7.0.0.6    2018-09-03   Added expected transaction time param     joelan
 	  7.0.0.5    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.4    2018-03-28   MultiSession doesn't support store next   lakcal
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
 
     7.0.0.2    2018-02-21   Handle Reset Event                        lakcal
-                             
+
     7.0.0.1    2018-02-12   Added parameter for default walkin        lakcal
-                            service 
-    
+                            service
+
     7.0.0.0    2018-01-17   label and tooltip tweaks for reskin       lakcal
 
     2.8.0      2016-11-18   USER_SERVICE_POINT_SESSION_END is now     johper, marwah
@@ -70,11 +71,11 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.0.6"
+      unitVersion="7.0.0.7"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"
-      description="Web Servicepoint Terminal">
+      description="Web Servicepoint Terminal that can be used by multiple concurrent users">
 
   <parameters>
 
@@ -89,7 +90,7 @@
       privilege="install:adminAdmin"
       size="20"/>
 
-    
+
         <parameter name="minTimeBetweenCalls"
           sortOrder="6"
           type="Integer"
@@ -123,8 +124,8 @@
           label="Single session"
           description="Defines if more than one user can be logged in at the same service point."
           privilege="install:adminAdmin"/>
-      
-    
+
+
         <parameter name="mdCus"
           type="Boolean"
           defaultValue="true"
@@ -365,7 +366,7 @@
           label="Show expected transaction time"
           description="Show expected transaction time for current service"
           privilege="install:adminAdmin"/>
-      
+
 
     <parameter name="unitName"
       type="UnitName"
@@ -387,7 +388,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
           wsp = unit.getDevice("Web service point")
           DeviceEvent de = new DeviceEvent()
           de.setUnitId(wsp.getId())
@@ -398,7 +399,7 @@
           } catch(e) {
             //  not ok
           }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -406,7 +407,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
         wsp = unit.getDevice("Web service point")
         DeviceEvent de = new DeviceEvent()
         de.setUnitId(wsp.getId())
@@ -417,7 +418,7 @@
         } catch(e) {
           //  not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -425,7 +426,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
         import com.qmatic.qp.api.device.DeviceUserEvent
         import com.qmatic.qp.constants.QPConstants
 
@@ -441,7 +442,7 @@
         } catch (Throwable t) {
           wsp.log("DEBUG", "Unable to send USER_SERVICE_POINT_SESSION_END event to web terminal, error:" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -450,7 +451,7 @@
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
         wsp = unit.getDevice("Web service point")
         DeviceEvent wspDeviceEvent = new DeviceEvent()
         wspDeviceEvent.setUnitId(wsp.getId())
@@ -463,14 +464,14 @@
           //  not ok
           result = false
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
     <unitEvent name="SET_WORK_PROFILE">
       <unitEventHandler type="GROOVY">
         <![CDATA[
-        
+
         import com.qmatic.qp.api.device.DeviceEvent
         wsp = unit.getDevice("Web service point")
         try {
@@ -491,16 +492,16 @@
         } catch (Throwable t) {
           wsp.log("WARN", "Unable to notify web terminal of changed work profile. throwable=" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
     <unitEvent name="CHAT_SEND">
       <unitEventHandler type="GROOVY">
       <![CDATA[
-      
-        import com.qmatic.qp.api.device.DeviceEvent                    		
-        wsp = unit.getDevice("Web service point")					
+
+        import com.qmatic.qp.api.device.DeviceEvent
+        wsp = unit.getDevice("Web service point")
         try{
           DeviceEvent receiveChatEvent = new DeviceEvent()
           receiveChatEvent.setParameters(event.getParameters())
@@ -510,12 +511,12 @@
         } catch (Throwable t) {
           wsp.log("WARN", "Unable to send CHAT_RECEIVE event to web terminal, error:" + t.getMessage())
         }
-      
+
       ]]></unitEventHandler>
     </unitEvent>
     <unitEvent name="RESET">
             <unitEventHandler type="GROOVY"><![CDATA[
-                 
+
                 import com.qmatic.qp.api.device.DeviceEvent
 
                 try {
@@ -526,7 +527,7 @@
                 } catch(e) {
                     unit.log("DEBUG", "Unable to send reset event to ConnectCounter_MultiStaff for unit " + unit.getUnitId())
                 }
-                                                                                                                            
+
             ]]></unitEventHandler>
         </unitEvent>
   </unitEvents>
