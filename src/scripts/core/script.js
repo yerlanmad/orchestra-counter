@@ -1547,7 +1547,8 @@ var servicePoint = new function () {
 			tooltipController.init('closecounter', $closeBtn.closest('.button-tooltip'), {
 				text: jQuery.i18n
 					.prop('error.no.outcome.or.delivered.service')
-			});
+      });
+
 			var $transferBtn = $("#transferBtn");
 			$transferBtn.prop('disabled', false);
 
@@ -1635,7 +1636,8 @@ var servicePoint = new function () {
 			tooltipController.dispose('closecounter');
 			$("#transferBtn").prop('disabled', false);
 			tooltipController.dispose('transfer');
-			$("#parkBtn").prop('disabled', false);
+      $("#parkBtn").prop('disabled', false);
+
 
 			$("#notesMessage").prop('disabled', false);
 
@@ -1740,7 +1742,7 @@ var servicePoint = new function () {
 		updateSelectedDs("#visitAddDsLbl");
 		updateSelectedMarks("#visitAddMarksLbl");
 		if (moduleMultiServicesEnabled) {
-			updateNextAndPreviousServices();
+      updateNextAndPreviousServices();
 		} else {
 			$("#showServicesLink").hide();
 			$("#hideServicesLink").hide();
@@ -1869,12 +1871,40 @@ var servicePoint = new function () {
 				if (nextServices.length > 1) {
 					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item"><span>' + nextServices[0].serviceInternalName + '</span><span class="qm-services__service-item-count">+' + (parseInt(nextServices.length) - 1) + '</span>' + '</span>');
 				} else {
-					$("#nextVisitServicesList").hide();
-					$("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item"><span>' + nextServices[0].serviceInternalName + '</span></span>');
+          $("#nextVisitServicesList").hide();
+          var $serviceSpan = $('<span class="qm-services__service-item"></span>');
+          var $serviceNameSpan = $('<span>' + nextServices[0].serviceInternalName + '</span>');
+          $serviceSpan.append($serviceNameSpan);
+          if (buttonServeMultiService === true) {
+            var clickFunction = servicePoint.buildMultiServiceVisitServeFunction(nextServices[0]);
+            var $buttonTooltipContainer = $('<div class="button-tooltip qm-inline"></div>')
+            var $button = $('<button class="qm-services__service-list-item-serve-btn js-multi-service-serve-btn">'
+                      + ' - ' + jQuery.i18n.prop('info.card.visitCard.serve') + ' <span class="sr-only">'
+                      + nextServices[0].serviceInternalName + '</span></button>').on('click', clickFunction);
+            $buttonTooltipContainer.append($button);
+            $serviceSpan.append($buttonTooltipContainer);
+          }
+
+					// $("#nextVisitServices .qm-services__services-listing").append('<span class="qm-services__service-item"><span>' + nextServices[0].serviceInternalName + '</span></span>');
+          $("#nextVisitServices .qm-services__services-listing").append($serviceSpan);
+
 				}
 
-				nextServices.forEach(function (service) {
-					$("#nextVisitServicesList").append('<div class="qm-services__service-list-item"><span>' + service.serviceInternalName + '</span></div>');
+				nextServices.forEach(function (service, index) {
+          var $serviceDiv = $('<div class="qm-services__service-list-item"></div>');
+          var $serviceNameSpan = $('<span>' + service.serviceInternalName + '</span>');
+          $serviceDiv.append($serviceNameSpan);
+          if (buttonServeMultiService === true) {
+            var clickFunction = servicePoint.buildMultiServiceVisitServeFunction(service);
+            var $buttonTooltipContainer = $('<div class="button-tooltip qm-inline"></div>')
+            var $button = $('<button class="qm-services__service-list-item-serve-btn js-multi-service-serve-btn">'
+                      + ' - ' + jQuery.i18n.prop('info.card.visitCard.serve') + ' <span class="sr-only">'
+                      + service.serviceInternalName + '</span></button>').on('click', clickFunction);
+            $buttonTooltipContainer.append($button);
+            $serviceDiv.append($buttonTooltipContainer);
+          }
+					// $("#nextVisitServicesList").append('<div class="qm-services__service-list-item"><span>' + service.serviceInternalName + '</span>' + $button + '</div>');
+					$("#nextVisitServicesList").append($serviceDiv);
 				});
 
 			} else {
@@ -1901,9 +1931,45 @@ var servicePoint = new function () {
 			} else {
 				$("#previousVisitServices").hide();
 				$("#previousVisitServicesList").hide();
-			}
+      }
+      if (buttonServeMultiService === true) {
+        servicePoint.toggleMultiServiceServeButtonsEnabled();
+      }
 		}
-	}
+  }
+
+  this.toggleMultiServiceServeButtonsEnabled = function () {
+    tooltipController.disposeAllPrefixedWith('multiServiceServe_');
+    if(sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+      && (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP)
+      && servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+        var $multiServiceServeButtons = $('.js-multi-service-serve-btn');
+        $multiServiceServeButtons.each(function(index, button) {
+          var $button = $(button);
+          $button.prop('disabled', true);
+          var $tooltip = $button.closest('.button-tooltip');
+          tooltipController.init('multiServiceServe_' + index, $tooltip, {
+            text: jQuery.i18n
+              .prop('error.no.outcome.or.delivered.service')
+          });
+        });
+    } else {
+      var $multiServiceServeButtons = $('.js-multi-service-serve-btn');
+      $multiServiceServeButtons.prop('disabled', false);
+    }
+  }
+
+  this.buildMultiServiceVisitServeFunction = function (service) {
+    return function () {
+      var newState = servicePoint.getState(spService.putCallback("branches/" + sessvars.branchId
+				+ "/visits/" + sessvars.state.visit.id + "/services/"
+        + service.id + '/serve'));
+        sessvars.state = newState;
+        sessvars.statusUpdated = new Date();
+				servicePoint.updateWorkstationStatus();
+    }
+  }
+  // http://localhost:8080/rest/servicepoint/branches/branchId/visits/visitId/services/visitServiceId/serve/
 
 	// TODO: Remove this if state of the top bar shouldn't change
 	// var updateTop = function () {

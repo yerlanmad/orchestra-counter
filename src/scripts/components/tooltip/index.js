@@ -29,5 +29,12 @@ window.$Qmatic.components.TooltipController.prototype = {
                 this.dispose(key)
             }
         }
+    },
+    disposeAllPrefixedWith: function(prefix) {
+      for (var key in this.instances) {
+        if (key.indexOf(prefix) > -1) {
+          this.dispose(key);
+        }
+      }
     }
 }

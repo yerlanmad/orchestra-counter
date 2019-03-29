@@ -13,6 +13,7 @@ multiMarks = false ;								// feature to add a quantity for marks
 transferToQueueEnabled = true;						// Transfer to Queue
 transferToUserPoolEnabled = true;					// Transfer to User Pool
 transferToServicePointPoolEnabled = true;			// Transfer to ServicePoint Pool
+buttonServeMultiService = false;        // Serve multi servive direct from visit
 buttonTransferEnabled = true;						// Transfer button
 buttonRecycleEnabled = true;						// Recycle button
 allQueuesBtnEnabled = false;						// All queues tab button
@@ -23,9 +24,9 @@ buttonRecallEnabled = false;						// Recall Button
 buttonWrapUpEnabled = false;						// Wrap up Button
 buttonWalkDirectEnabled = true;						// Walk Direct Button
 buttonWalkDirectService = '';						// Default Walk Direct
-buttonRemoveFromQueueEnabled = true;				// Remove from Queue Button 
-buttonTransferFromQueueEnabled = true;				// Transfer from Queue Button 
-buttonCallFromQueueEnabled = false;					// Call from Queue Button 
+buttonRemoveFromQueueEnabled = true;				// Remove from Queue Button
+buttonTransferFromQueueEnabled = true;				// Transfer from Queue Button
+buttonCallFromQueueEnabled = false;					// Call from Queue Button
 buttonTransferFirstEnabled  = true;				// Transfer to first in Queue Button
 buttonTransferLastEnabled  = true; 				// Transfer to last in Queue Button
 buttonTransferSortEnabled  = true;					// Transfer Sorted in Queue Button
@@ -61,14 +62,14 @@ function showModules() {
 		$('#nextVisitServices').css("display", "none");
 		$('#previousVisitServices').css("display", "none");
 	}
-	
-	
+
+
 	if (moduleCustomMarksEnabled == true) {
 		$('#addCustomMarkLink').show();
 	} else {
 		$('#addCustomMarkLink').hide();
 	}
-	
+
 
 	if (moduleOutcomeEnabled == true) {
 		$('#selectOutcome').parent().show();
@@ -83,7 +84,7 @@ function showModules() {
 	} else {
 		$('#servicePointPoolModule').hide();
 	}
-	
+
 	if (moduleUserPoolEnabled == true) {
 		$('#userPoolModule').attr("style", "");
 		var userPool = $('#userPoolModule');
@@ -145,7 +146,7 @@ function showModules() {
 	} else {
 		$("#wrapUpBtn").hide();
 	}
-	
+
 	if (buttonRecycleEnabled == true) {
 		$('#reinsertBtn').show();
 		$('#reinsertOption').show();
@@ -175,7 +176,7 @@ function showModules() {
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
 		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.or"))).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append( 
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append(
 		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
@@ -193,7 +194,7 @@ function showModules() {
 		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append( 
+		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append(
 		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
@@ -204,7 +205,7 @@ function showModules() {
 		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 	}
-  
+
 	if (moduleChatEnabled == true){
 		$('#chatModule').show();
 	} else {
@@ -226,7 +227,10 @@ function showModules() {
 		}
 		if ( params.mdMultiServ != undefined) {
 			moduleMultiServicesEnabled = params.mdMultiServ;			// The Multi Services Panel and Popup
-		}
+    }
+    if (params.btnServMultiServ != undefined) {
+      buttonServeMultiService = params.btnServMultiServ;
+    }
 		if ( params.mdOutcome != undefined) {
 			moduleOutcomeEnabled = params.mdOutcome;					// Outcomes
 		}
@@ -285,16 +289,16 @@ function showModules() {
 			buttonWalkDirectService = params.wdService;				// Walk Direct Default Service
 		} else {
 			// Reset flag in the case this property doen't exist in the utt..
-			buttonWalkDirectService = "";	
+			buttonWalkDirectService = "";
 		}
 		if ( params.btnQueueRemove != undefined) {
-			buttonRemoveFromQueueEnabled = params.btnQueueRemove ;		// Remove from Queue Button 
+			buttonRemoveFromQueueEnabled = params.btnQueueRemove ;		// Remove from Queue Button
 		}
 		if ( params.btnQueueTransfer != undefined) {
-			buttonTransferFromQueueEnabled = params.btnQueueTransfer;	// Transfer from Queue Button 
+			buttonTransferFromQueueEnabled = params.btnQueueTransfer;	// Transfer from Queue Button
 		}
 		if ( params.btnQueueCall != undefined) {
-			buttonCallFromQueueEnabled = params.btnQueueCall ;			// Call from Queue Button 
+			buttonCallFromQueueEnabled = params.btnQueueCall ;			// Call from Queue Button
 		}
 		if ( params.btnTransferFirst != undefined) {
 			buttonTransferFirstEnabled  = params.btnTransferFirst;		// Transfer to first in Queue Button
@@ -329,6 +333,6 @@ function showModules() {
 		} else {
 			expectedTransactionTimeEnabled = false;
 		}
-		
+
 		showModules();
 }

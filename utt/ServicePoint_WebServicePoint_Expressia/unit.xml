@@ -37,6 +37,8 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.8    2019-03-29   Added parameter to call multi service     joelan
+                            from ongoing visit
     7.0.0.7    2019-03-20   Added correction for COUNTER-125          joelan
     7.0.0.6    2019-01-14   Added unit event for end service          joelan
     7.0.0.5    2018-09-03   Added expected transaction time param     joelan
@@ -74,7 +76,7 @@
 
 <unit name="WebServicePoint_Expressia"
       frameworkVersion="2"
-      unitVersion="7.0.0.7"
+      unitVersion="7.0.0.8"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -150,6 +152,14 @@
           defaultValue="false"
           label="Multi Services"
           description="The Multi Services Panel and Popup"
+          sortOrder="5012"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnServMultiServ"
+          type="Boolean"
+          defaultValue="false"
+          label="Serve Multi Services"
+          description="If setting is enabled it will allow the user to serve any of the multi services that the called visit holds"
           sortOrder="5012"
           writeLevel="profile"
           privilege="install:adminAdmin"/>

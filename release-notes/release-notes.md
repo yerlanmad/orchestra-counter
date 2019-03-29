@@ -11,7 +11,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h2>Version 4.0.0.022</h2>
 
-**Date: 05/04/2019**
+**Date: 15/04/2019**
 
 **Build number: 022**
 
@@ -19,7 +19,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 | **Id** | **Release notes** |
 | --- | --- |
-| **xxx** | **xxx** xxx |
+| **164824646** | **Call any service in a multi service visit** Add serve buttons to multi services in visit card |
 
 <h3>Bug fixes</h3>
 

@@ -36,7 +36,7 @@
         align-items: center;
         padding-bottom: rem(6px);
         padding-top: rem(4px);
-        
+
         &:hover,
         &:focus {
             text-decoration: none;
@@ -147,6 +147,29 @@
         @at-root [dir='rtl'] & {
             text-align: right;
         }
+    }
+    &__service-list-item-serve-btn {
+      background: none;
+      border: 0;
+      padding: 0;
+      margin-left: rem(4px);
+      color: $secondary-color;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        color: $dark-transparent82;
+      }
+
+      &[disabled] {
+        color: $dark-transparent42;
+        cursor: auto;
+      }
+
+      @at-root [dir='rtl'] & {
+        margin-left: 0;
+        margin-right: rem(4px);
+      }
     }
     &__expand-container-link-icon {
         color: $dark-transparent62;

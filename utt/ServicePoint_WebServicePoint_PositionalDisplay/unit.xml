@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 
 <!--
-    
+
     All modifications to this unit type must be added here.
 
     The version number of the unit type template (utt) has the format X.Y.Z.n, for example 6.2.0.0, where:
@@ -32,11 +32,13 @@
     |         |         | 6.2.0  | G (only 6.2)        |
     | 6.0.1   | 6.1.1   | 6.2.1  | H (6.0, 6.1 and 6.2)|
 
-      
+
     Version history in descending order:
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.6    2019-03-29   Added parameter to call multi service     joelan
+                            from ongoing visit
     7.0.0.5    2018-09-03   Added expected transaction time param     joelan
     7.0.0.4    2018-08-31   Changed icon for UTT                      joelan
     7.0.0.3    2018-02-23   Added wrap up param                       lakcal
@@ -44,10 +46,10 @@
     7.0.0.2    2018-02-21   Handle Reset Event                        lakcal
 
     7.0.0.1    2018-02-12   Added parameter for default walkin        lakcal
-                            service 
-                            
+                            service
+
     7.0.0.0    2018-01-17   label and tooltip tweaks for reskin       lakcal
-	
+
     2.11.0     2016-11-18   USER_SERVICE_POINT_SESSION_END is now     johper, marwah
                             only sent to the affected user
 
@@ -58,14 +60,14 @@
     2.9.0      2016-04-05   Added changes for story 113454543         malgus
 
     2.8.0      2015-11-10   Added support for Spotlight reset         olacar
-    
+
     2.7.0      2015-01-12   Changed device id to POSITIONAL because   esakem
 	                        this is a generic utt.
-	
+
     2.6.0      2014-12-18   Added changes for QP-4101                 olacar
 
     2.5.0      2014-12-11   Changed to generic resolutions            matbor
-	
+
     2.4.0      2014-02-25   Added support for configurable            olacar
                             reception and terminal
 
@@ -76,14 +78,14 @@
 
 <unit name="WebServicePoint_PositionalDisplay"
       frameworkVersion="2"
-      unitVersion="7.0.0.5"
+      unitVersion="7.0.0.6"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
       description="Web Servicepoint Terminal with a Positional Display">
 
   <parameters>
-  
+
     <parameter name="unitId"
       type="UnitId"
       defaultValue="ServicePoint_PositionalDisplay"
@@ -94,8 +96,8 @@
       readLevel="branch"
       privilege="install:adminAdmin"
       size="20"/>
-    
-    
+
+
         <parameter name="minTimeBetweenCalls"
           sortOrder="6"
           type="Integer"
@@ -137,8 +139,8 @@
           label="Single session"
           description="Defines if more than one user can be logged in at the same service point."
           privilege="install:adminAdmin"/>
-      
-    
+
+
         <parameter name="mdCus"
           type="Boolean"
           defaultValue="true"
@@ -152,6 +154,14 @@
           defaultValue="false"
           label="Multi Services"
           description="The Multi Services Panel and Popup"
+          sortOrder="5012"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnServMultiServ"
+          type="Boolean"
+          defaultValue="false"
+          label="Serve Multi Services"
+          description="If setting is enabled it will allow the user to serve any of the multi services that the called visit holds"
           sortOrder="5012"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
@@ -379,8 +389,8 @@
           label="Show expected transaction time"
           description="Show expected transaction time for current service"
           privilege="install:adminAdmin"/>
-      
-    
+
+
     <parameter name="surfaceApplication" description="Defines what surface application that should be used"
       label="Media Application"
       type="SurfaceApplication"
@@ -392,12 +402,12 @@
         <filter field="surfaceType.allowedDevice">65,69,81</filter>
       </filters>
     </parameter>
-    
+
     <parameter name="unitName"
       type="UnitName"
       label="Unit name"
       defaultValue="${unit:name} ${unit:index}" />
-  
+
   </parameters>
 
   <devices>
@@ -421,7 +431,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
           wsp = unit.getDevice("Web service point")
           DeviceEvent de = new DeviceEvent()
           de.setUnitId(wsp.getId())
@@ -432,7 +442,7 @@
           } catch(e) {
             //  not ok
           }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -440,7 +450,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
         wsp = unit.getDevice("Web service point")
         DeviceEvent de = new DeviceEvent()
         de.setUnitId(wsp.getId())
@@ -451,7 +461,7 @@
         } catch(e) {
           //  not ok
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -459,7 +469,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
         import com.qmatic.qp.api.device.DeviceUserEvent
         import com.qmatic.qp.constants.QPConstants
 
@@ -475,7 +485,7 @@
         } catch (Throwable t) {
           wsp.log("DEBUG", "Unable to send USER_SERVICE_POINT_SESSION_END event to web terminal, error:" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -484,7 +494,7 @@
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
         import com.qmatic.qp.api.device.DeviceCommand
-        
+
             pd = unit.getDevice("PositionalDisplay")
             DeviceEvent de = new DeviceEvent()
             de.setUnitId(pd.getId())
@@ -495,8 +505,8 @@
             } catch(e) {
               //  not ok
             }
-          
-        
+
+
         wsp = unit.getDevice("Web service point")
         DeviceEvent wspDeviceEvent = new DeviceEvent()
         wspDeviceEvent.setUnitId(wsp.getId())
@@ -509,14 +519,14 @@
           //  not ok
           result = false
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
     <unitEvent name="SET_WORK_PROFILE">
       <unitEventHandler type="GROOVY">
         <![CDATA[
-        
+
         import com.qmatic.qp.api.device.DeviceEvent
         wsp = unit.getDevice("Web service point")
         try {
@@ -537,16 +547,16 @@
         } catch (Throwable t) {
           wsp.log("WARN", "Unable to notify web terminal of changed work profile. throwable=" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
     <unitEvent name="CHAT_SEND">
       <unitEventHandler type="GROOVY">
         <![CDATA[
-        
-        import com.qmatic.qp.api.device.DeviceEvent                    		
-        wsp = unit.getDevice("Web service point")					
+
+        import com.qmatic.qp.api.device.DeviceEvent
+        wsp = unit.getDevice("Web service point")
         try{
           DeviceEvent receiveChatEvent = new DeviceEvent()
           receiveChatEvent.setParameters(event.getParameters())
@@ -556,7 +566,7 @@
         } catch (Throwable t) {
           wsp.log("WARN", "Unable to send CHAT_RECEIVE event to web terminal, error:" + t.getMessage())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
@@ -564,7 +574,7 @@
       <unitEventHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
         pos = unit.getDevice("PositionalDisplay")
         try {
           DeviceEvent reset_pos = new DeviceEvent()
@@ -574,8 +584,8 @@
         } catch (Throwable e) {
           // could not send event to Positional Display
         }
-      
-        
+
+
         sptl = unit.getDevice("SpotlightDisplay")
         try {
           DeviceEvent reset_sptl = new DeviceEvent()
@@ -596,18 +606,18 @@
         } catch(e) {
           unit.log("DEBUG", "Unable to send reset event to ConnectCounter__PositionalDisplay for unit " + unit.getUnitId())
         }
-      
+
         ]]>
       </unitEventHandler>
     </unitEvent>
   </unitEvents>
-	
+
   <unitCommands>
     <unitCommand name="USER_SERVICE_POINT_SESSION_END">
       <unitCommandHandler type="GROOVY">
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceEvent
-        
+
             pd = unit.getDevice("PositionalDisplay")
             DeviceEvent de = new DeviceEvent()
             de.setUnitId(pd.getId())
@@ -617,7 +627,7 @@
             } catch(e) {
               //  not ok
             }
-          
+
         ]]>
       </unitCommandHandler>
     </unitCommand>
