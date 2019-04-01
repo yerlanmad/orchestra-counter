@@ -52,52 +52,80 @@ var customMarks = new function () {
           + params.branchId + "/markTypes", true);
         markTypesArray = _.filter(markTypesArray, function(o) { return o.name !== "NPS" });
 
-        console.log('this is the marktypes Array: ', markTypesArray);
-        console.log('do we have lodash? ', _.contains);
+        markTypesArray = this.evaluateCustomMarkTypes(markTypesArray, customMarkTypeName);
+
         util.sortArrayCaseInsensitive(markTypesArray, "name");
 
 				util.populateSelect(markTypesArray, markTypeDropdownFilter);
         markTypeDropdownFilter.trigger("chosen:updated");
 
-				for (i = 0; i < markTypesArray.length; i++) {
-					if (markTypesArray[i].name == customMarkTypeName) {
-						markTypeId = markTypesArray[i].id;
-					}
-				}
+        // Make Mark dropdown disabled
+        dropdownFilter.prop('disabled', true);
+        dropdownFilter.trigger('chosen:updated');
+        window.lol1 = dropdownFilter;
+				// for (i = 0; i < markTypesArray.length; i++) {
+				// 	if (markTypesArray[i].name == customMarkTypeName) {
+				// 		markTypeId = markTypesArray[i].id;
+				// 	}
+				// }
 
-				// marks of type according to setting in settings.js
-				var url = "branches/" + sessvars.branchId
-					+ "/markTypes/" + markTypeId + "/marks";
-				var marksResponse = spService.get(url, true)
+				// // marks of type according to setting in settings.js
+				// var t = new Date();
+				// var url = "branches/" + sessvars.branchId
+				// 	+ "/markTypes/" + markTypeId + "/marks?call=" + t;
+				// var marksResponse = spService.get(url, true)
 
-				util.sortArrayCaseInsensitive(marksResponse, "name");
+				// util.sortArrayCaseInsensitive(marksResponse, "name");
 
-				util.populateSelect(marksResponse, dropdownFilter);
-				dropdownFilter.trigger("chosen:updated");
+				// util.populateSelect(marksResponse, dropdownFilter);
+				// dropdownFilter.trigger("chosen:updated");
 			}
 		}
   };
 
-  this.evaluateCustomMarkTypes = function (allMarks, customMarkTypes) {
-    var availableMarks = [];
+  this.updateSelectMarkDropdown = function (markTypeId) {
+    clearFilter(dropdownFilter);
+    dropdownFilter.prop('disabled', true);
+    dropdownFilter.trigger('chosen:updated');
+    var t = new Date();
+    var url = "branches/" + sessvars.branchId
+      + "/markTypes/" + markTypeId + "/marks?call=" + t;
+    var marksResponse = spService.get(url, true)
+
+    util.sortArrayCaseInsensitive(marksResponse, "name");
+
+    util.populateSelect(marksResponse, dropdownFilter);
+    dropdownFilter.prop('disabled', false);
+    dropdownFilter.trigger("chosen:updated");
+  }
+
+  this.evaluateCustomMarkTypes = function (allMarks, wantedMarkTypes) {
     var excludeMode = false;
     var allMode = false;
-    if (customMarkTypes.indexOf('exclude:') > -1) {
+    if (wantedMarkTypes.indexOf('exclude:') > -1) {
       excludeMode = true;
-    } else if (customMarkRemove.indexOf('*') > -1) {
+    } else if (wantedMarkTypes.indexOf('*') > -1) {
       allMode = true;
     }
 
-    customMarkTypes = customMarkTypes.split(/[,:]+/).map(function(value) {
-      return value.trim();
-    });
-
-    if (excludeMode) {
-      customMarkTypes = _.without(customMarkTypes, "exclude");
-    } else {
-
+    if (!allMode) {
+      wantedMarkTypes = wantedMarkTypes.split(/[,:]+/).map(function(value) {
+        return value.trim();
+      });
     }
 
+    if (excludeMode) {
+      wantedMarkTypes = _.without(wantedMarkTypes, "exclude");
+      return _.filter(allMarks, function(mark) {
+        return !_.includes(wantedMarkTypes, mark.name);
+      });
+    } else if (allMode) {
+      return allMarks;
+    } else {
+      return _.filter(allMarks, function(mark) {
+        return _.includes(wantedMarkTypes, mark.name);
+      });
+    }
   }
 
 	this.showAddedMarksTable = function () {

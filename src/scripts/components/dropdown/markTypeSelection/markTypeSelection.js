@@ -11,8 +11,6 @@ $(function() {
     });
 
   $('#markTypeFilter').on('change', function () {
-    // servicePoint.addService($(this).val())
-    console.log('element selected: ', $(this).val());
-    // $('#availableServicesFilter').val('').trigger('chosen:updated');
+    customMarks.updateSelectMarkDropdown($(this).val());
   });
 })
