@@ -7,7 +7,14 @@
     <header class="qm-card__header-section">
         <div class="qm-card-header">
             {{cardNav.render('visitCardAddMarksLbl')}}
-            <div class="qm-card-header__sub-heading"> 
+            <div class="qm-card-header__sub-heading">
+                <div class="qm-drop-down">
+                    <div class="qm-drop-down__component qm-drop-down__select-mark-type">
+                        <select id="markTypeFilter">
+                            <option value="-1"></option>
+                        </select>
+                    </div>
+                </div>
                 <div class="qm-drop-down">
                     <div class="qm-drop-down__component qm-drop-down__add-marks">
                         <div class="main">
@@ -27,7 +34,7 @@
                                         <label for="noMarkCount" class="display-text">
                                             <span id="noOfMarksLabel"></span>
                                         </label>
-                                        
+
                                         <input id="noMarkCount" class="count-input" type="number" min="1" max="10"/>
                                     </div>
 
@@ -68,6 +75,6 @@
             <tbody>
             </tbody>
         </table>
-    </div>    
+    </div>
     {{cardBackNav.render()}}
 {% endblock %}

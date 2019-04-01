@@ -39,7 +39,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     }
 
     this.teardownResizeListener = function () {
-        $(window).on('resize', this.onResize);
+        $(window).off('resize', this.onResize);
     }
 
     // =======================
@@ -55,7 +55,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     }
 
     this.teardownOpenListener = function () {
-        this.get$Elem().on('chosen:showing_dropdown', this.onOpen);
+        this.get$Elem().off('chosen:showing_dropdown', this.onOpen);
     }
 
     // =======================
@@ -75,7 +75,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     }
 
     this.teardownSetupUpdateListener = function () {
-        this.get$Elem().on('chosen:updated', this.onUpdate);
+        this.get$Elem().off('chosen:updated', this.onUpdate);
     }
 
     // =======================
@@ -96,7 +96,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     }
 
     this.teardownSetupChangeListener = function () {
-        this.get$Elem().on('change', this.onChange);
+        this.get$Elem().off('change', this.onChange);
     }
 
     // =======================
@@ -119,7 +119,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     }
 
     this.tearDownFocusListener = function () {
-        this.get$Elem().parent().on('keyup', this.onFocus);
+        this.get$Elem().parent().off('keyup', this.onFocus);
     }
 
     this.setChosenSingleFocusable = function () {

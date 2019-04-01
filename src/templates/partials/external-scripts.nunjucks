@@ -12,7 +12,7 @@
         <script type="text/javascript" src="scripts/vendor/popper.1.13.0.js"></script>
         <script type="text/javascript" src="scripts/vendor/tooltip.1.1.7.js"></script>
         <script type="text/javascript" src="scripts/vendor/chosen-1.8.2.js"></script>
-        
+
         <script type="text/javascript" src="scripts/cometd/cometd.js"></script>
         <script type="text/javascript" src="scripts/cometd/jquery.cometd.js"></script>
         <script type="text/javascript" src="scripts/cometd/qevents_cometd_v2.js"></script>
@@ -62,6 +62,7 @@
         <script type="text/javascript" src="scripts/components/dropdown/counterSelection/counterSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/profileSelection/profileSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/multiMarkSelection/multiMarkSelection.js"></script>
+        <script type="text/javascript" src="scripts/components/dropdown/markTypeSelection/markTypeSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/deliveredServicesSelection/deliveredServicesSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/singleOutcomeSelection/singleOutcomeSelection.js"></script>
         <script type="text/javascript" src="scripts/components/dropdown/addServiceSelection/addServiceSelection.js"></script>
@@ -91,13 +92,13 @@
         <script type="text/javascript" src="scripts/components/modal/nextServices/nextServices.js"></script>
         <script type="text/javascript" src="scripts/components/modal/logoutWindow/logoutWindow.js"></script>
         <script type="text/javascript" src="scripts/components/modal/wrapUp/wrapUp.js"></script>
-        
+
         <script type="text/javascript" src="scripts/components/queue/index.js"></script>
         <script type="text/javascript" src="scripts/components/notes/index.js"></script>
-        
+
         <script type="text/javascript" src="scripts/components/header/HeaderComponent.js"></script>
         <script type="text/javascript" src="scripts/components/header/applicationHeader/header.js"></script>
-        
+
 
         <script type="text/javascript" src="scripts/components/tooltip/index.js"></script>
 

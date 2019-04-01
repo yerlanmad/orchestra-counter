@@ -7,21 +7,21 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
     var i18nTitle = function(elemId, propName, mappingArray) {
         var translatedText = jQuery.i18n.prop(propName);
-        
+
         if (!translatedText)
         return;
-        
+
         mappingArray.forEach(function (value, index) {
             translatedText = translatedText.replace("{"+ index +"}", mappingArray[index]);
         });
-        
+
         $("#" + elemId).attr("title", translatedText);
     };
 
     var i18nPlaceholder = function(elem, propName) {
         elem.prop("placeholder", jQuery.i18n.prop(propName))
     };
-    
+
     var i18nSafe = function(elementName, propName, padding) {
         try {
             var value = propName;
@@ -171,12 +171,12 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeAppend("walkInSubHeader", 'info.card.sub.header.walkin');
         i18nQmBtn("cancelWalkIn", 'button.cancel');
         i18nPlaceholder($("#walkDirectServices_filter input"), "info.placeholder.walkdirect.search");
-        
+
         //card details
         // Card back
         i18nSafeSelectorBtnAppend(".qm-card--back-btn span", 'application.sr.back');
         i18nSafeSelectorBtnAppend(".js-card-back span", 'application.sr.back');
-        
+
         // Closed Card
         i18nSafe("closedCardTitle", 'info.card.closedCard.title');
         i18nSafe("closedCardSubTitle", 'info.card.closedCard.subTitle');
@@ -200,18 +200,18 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("wrapUpEndVisitBtn", 'action.finish.visit');
         i18nSafe("wrapUpText", 'info.wrapup.visit');
         i18nSafe("wrapUpTimerText", 'info.wrapup.timerText');
-        
+
         // Add Marks Card
         i18nQmBtn("addMarksToVisitBtn", 'button.add.markToVisit');
         i18nSafe("markNameColumn", 'info.custom.mark.name');
         i18nSafe("markTimeColumn", 'info.custom.mark.time');
         i18nTitle("noMarkCount", "info.custom.mark.add.validation", [0, 10]);
 
-        
+
         // Add Services Card
         i18nSafe("visitCardAddServicesLbl", 'info.card.addServicesCard.addServices');
         i18nSafe("unServedServicesLabel", 'info.unserved.name');
-         
+
 
         // Inactive Card
         i18nSafe("inactiveCardTitle", 'info.card.inactiveCard.title');
@@ -250,14 +250,14 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("dsNameColoumn","info.delivered.service.name");
         i18nSafe("outcomeNameColoumn","info.delivered.service.outcome");
         i18nSafe("dsTimeColoumn","info.delivered.service.time");
-        
+
         // Customer details card
         i18nSafeAppend("customerListLabel", 'info.customer.details.label');
-        
-		 // multi services 
+
+		 // multi services
 		 i18nSafeAppend("addMultiServicesHeader", 'info.multi.services');
         i18nSafe("multiServicesModuleLabel", 'info.multi.services');
-        i18nSafe("addMultiServiceLabel", 'button.add.multi.service');		
+        i18nSafe("addMultiServiceLabel", 'button.add.multi.service');
 		i18nSafe("nextServicesListHeader", "action.services.list");
 		i18nSafe("unServedName",'info.unserved.name');
 		i18nSafe("servedName",'info.served.name');
@@ -266,26 +266,26 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("resortServicesBtn",'button.resort.services');
 		i18nSafe("selectedName",'info.selected.name');
 		i18nSafe("availableName",'info.available.name');
-        
+
         i18nSafe("showServicesLinkText",'info.multi.services.show');
         i18nSafe("hideServicesLinkText",'info.multi.services.hide');
 
-        
 
-        i18nSafe("parkLabel", 'button.park');		
-		
+
+        i18nSafe("parkLabel", 'button.park');
+
 		i18nSafeAppend("addEditServicesHeader", 'edit.multi.services');
         //$("#closeResortServicesBtn").val(jQuery.i18n.prop('button.close.resort.services'));
 
-		
+
 		// custom marks
 		i18nSafeAppend("addCustomMarksHeader", 'add.custom.marks');
         i18nSafe("customMarksModuleLabel", 'info.custom.marks');
-        i18nSafe("addCustomMarkLabel", 'button.add.custom.marks');		
-		
-	
+        i18nSafe("addCustomMarkLabel", 'button.add.custom.marks');
+
+
         $("#closeServicesBtn").val(jQuery.i18n.prop('button.close.custom.marks'));
-		
+
         // delivered services
         i18nSafe("deliveredServicesModuleLabel", 'info.delivered.services');
         i18nSafe("addDeliveredServiceLabel", 'button.add.delivered.service');
@@ -372,7 +372,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         //buttons
         i18nSafe("editCustomerWindowLabel", "customer.save");
         i18nSafe("cancelEditCustomerWindowLabel", "customer.cancel");
-        
+
         //delete customer confirmation window
         i18nSafeAppend("deleteCustomerConfirmHeader", 'customer.delete.confirm');
         i18nSafe("confirmDeleteCustomerBtn", "customer.delete");
@@ -415,7 +415,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("reinsertPositionInputLabel", "info.reinsert.customer.position");
 
         i18nSafeAppend("displayQueueSpinnerText", "info.visit.in.display.queue");
-       
+
         // Header
         i18nSafeSelectorAppend('.qm-header__home-btn > span', 'button.home');
         i18nSafeSelectorAppend('.qm-header__help-btn > span', 'application.sr.help');
@@ -423,14 +423,14 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         // Pool
         i18nSafeSelectorAppend('.qm-pool__toggle-btn > span', 'application.sr.toggle');
-        
+
         // Popover
         i18nSafeSelectorAppend('.js-clear-input-label', 'application.sr.clear.field');
         i18nSafeSelectorAppend('.js-popover-transfer-header', 'info.transfer.selection.header');
         i18nSafeSelectorAppend('.js-popover-queue-header', 'info.transfer.queue.header');
         i18nSafeSelectorAppend('.js-popover-user-pool-header', 'info.transfer.user.pool.header');
         i18nSafeSelectorAppend('.js-popover-counter-pool-header', 'info.transfer.counter.pool.header');
-        
+
         i18nSafeSelectorAppend('#allQueuesTab .qm-tabs__tab-text', 'button.all.queues');
         i18nSafeSelectorAppend('#myQueuesTab .qm-tabs__tab-text', 'button.my.queues');
 
@@ -441,7 +441,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-popover-back > span', 'application.sr.back');
         i18nSafeSelectorBtnAppend('.js-add-customer > span', 'application.sr.add.customer');
         i18nSafeSelectorBtnAppend('#verticalMessageRow > span', 'application.sr.toggle.context.marketing');
-        
+
         i18nSafeSelectorBtnAppend('.js-popover-transferToQueue > span', 'action.transfer.to.queue');
         i18nSafeSelectorBtnAppend('.js-popover-transferToUserPool > span', 'action.transfer.to.user');
         i18nSafeSelectorBtnAppend('.js-popover-transferToCounterPool > span', 'action.transfer.to.counter');
@@ -456,12 +456,12 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('#transferUserPoolCard .qm-card-description', 'info.card.transferUserPoolCard.description');
         i18nSafeSelectorAppend('#transferCounterPoolCard .qm-card-description', 'info.card.transferCounterPoolCard.description');
         i18nPlaceholder($("#transferToQueues_filter input"), "info.placeholder.transfer.search");
-        
-        
+
+
         i18nSafeSelectorBtnAppend('.js-back-btn > .sr-only', 'application.sr.back');
         i18nSafeSelectorBtnAppend('.js-add-services-btn > .sr-only', 'application.sr.addServices');
         i18nSafeSelectorBtnAppend('.js-cancel-btn > span', 'button.cancel');
-        
+
         i18nSafeSelectorBtnAppend('.js-transferToQueue > span', 'action.transfer.to.queue');
         i18nSafeSelectorBtnAppend('.js-transferToUserPool > span', 'action.transfer.to.user');
         i18nSafeSelectorBtnAppend('.js-transferToCounterPool > span', 'action.transfer.to.counter');
@@ -508,6 +508,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         $Qmatic.components.dropdown.singleOutcomeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.visitCard.addOutcomes') });
         $Qmatic.components.dropdown.deliveredServicesSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.ds.selectDs') });
         $Qmatic.components.dropdown.multiMarkSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMark') });
+        $Qmatic.components.dropdown.markTypeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMarkType') });
         $Qmatic.components.dropdown.createDobSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addCustomerCard.selectMonth') });
         $Qmatic.components.dropdown.editDobSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addCustomerCard.selectMonth') });
         $Qmatic.components.dropdown.editAttachedDobSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addCustomerCard.selectMonth') });
@@ -516,14 +517,14 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         // Notes
         i18nSafeSelectorBtnAppend('.js-notes-save-btn > span', 'button.save.notes');
         i18nSafeSelectorBtnAppend('.js-notes-cancel-btn > span', 'button.cancel');
-        
+
         // Queue detail view
         i18nSafeSelectorBtnAppend('.qm-queue-detail__back-btn > span', 'application.sr.back');
 
         //footer
-        sessvars.footer = translate.msg("label.poweredBy", 
+        sessvars.footer = translate.msg("label.poweredBy",
         		["Qmatic " + sessvars.systemInformation.productName + " " + sessvars.systemInformation.releaseName + " [" + sessvars.systemInformation.productVersion + "]"]);
-        
+
         if(sessvars.systemInformation.licenseCompanyName == null || sessvars.systemInformation.licenseCompanyName == "") {
         	sessvars.footer += " " + translate.msg("label.notLicensed");
         } else {

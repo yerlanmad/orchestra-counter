@@ -8,17 +8,24 @@ var customMarks = new function () {
 	var customMarksParams;
 	var multiMarkCounter;
 	var multiMarkCounterIntial;
-	var dropdownFilter = null;
+  var dropdownFilter = null;
+  var markTypeDropdownFilter = null;
 	var markName = "";
+
+  function initMarkTypeDropdownFilter() {
+    if (markTypeDropdownFilter === null) {
+      markTypeDropdownFilter = $Qmatic.components.dropdown.markTypeSelection.get$Elem();
+    }
+  }
 
 	function initFilter() {
 		if (!dropdownFilter)
 			dropdownFilter = $Qmatic.components.dropdown.multiMarkSelection.get$Elem();
 	}
 
-	function clearFilter() {
-		util.clearSelect(dropdownFilter);
-		dropdownFilter.trigger("chosen:updated");
+	function clearFilter(dropdown) {
+		util.clearSelect(dropdown);
+		dropdown.trigger("chosen:updated");
 	}
 
 	function resetFilterSeleciton() {
@@ -26,8 +33,10 @@ var customMarks = new function () {
 	}
 
 	this.addCustomMarkPressed = function () {
-		initFilter()
-		clearFilter()
+    initFilter();
+    initMarkTypeDropdownFilter();
+    clearFilter(dropdownFilter);
+    clearFilter(markTypeDropdownFilter);
 		customMarksTable.fnAdjustColumnSizing();
 
 		if (servicePoint.hasValidSettings()
@@ -40,7 +49,16 @@ var customMarks = new function () {
 				var params = servicePoint.createParams();
 				params.branchId = sessvars.state.branchId;
 				var markTypesArray = spService.get("branches/"
-					+ params.branchId + "/markTypes", true);
+          + params.branchId + "/markTypes", true);
+        markTypesArray = _.filter(markTypesArray, function(o) { return o.name !== "NPS" });
+
+        console.log('this is the marktypes Array: ', markTypesArray);
+        console.log('do we have lodash? ', _.contains);
+        util.sortArrayCaseInsensitive(markTypesArray, "name");
+
+				util.populateSelect(markTypesArray, markTypeDropdownFilter);
+        markTypeDropdownFilter.trigger("chosen:updated");
+
 				for (i = 0; i < markTypesArray.length; i++) {
 					if (markTypesArray[i].name == customMarkTypeName) {
 						markTypeId = markTypesArray[i].id;
@@ -58,7 +76,29 @@ var customMarks = new function () {
 				dropdownFilter.trigger("chosen:updated");
 			}
 		}
-	};
+  };
+
+  this.evaluateCustomMarkTypes = function (allMarks, customMarkTypes) {
+    var availableMarks = [];
+    var excludeMode = false;
+    var allMode = false;
+    if (customMarkTypes.indexOf('exclude:') > -1) {
+      excludeMode = true;
+    } else if (customMarkRemove.indexOf('*') > -1) {
+      allMode = true;
+    }
+
+    customMarkTypes = customMarkTypes.split(/[,:]+/).map(function(value) {
+      return value.trim();
+    });
+
+    if (excludeMode) {
+      customMarkTypes = _.without(customMarkTypes, "exclude");
+    } else {
+
+    }
+
+  }
 
 	this.showAddedMarksTable = function () {
 		customMarksTable && customMarksTable.show();
