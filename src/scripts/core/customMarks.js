@@ -62,7 +62,6 @@ var customMarks = new function () {
         // Make Mark dropdown disabled
         dropdownFilter.prop('disabled', true);
         dropdownFilter.trigger('chosen:updated');
-        window.lol1 = dropdownFilter;
 				// for (i = 0; i < markTypesArray.length; i++) {
 				// 	if (markTypesArray[i].name == customMarkTypeName) {
 				// 		markTypeId = markTypesArray[i].id;
@@ -102,28 +101,31 @@ var customMarks = new function () {
   this.evaluateCustomMarkTypes = function (allMarks, wantedMarkTypes) {
     var excludeMode = false;
     var allMode = false;
-    if (wantedMarkTypes.indexOf('exclude:') > -1) {
+
+    wantedMarkTypes = wantedMarkTypes.split(/[,:]+/).map(function(value) {
+      return value.toLowerCase().trim();
+    });
+
+    var excludeIndex = wantedMarkTypes.indexOf('exclude');
+
+    if (excludeIndex > 0) {
+      wantedMarkTypes = wantedMarkTypes.slice(0, excludeIndex);
+    } else if (excludeIndex === 0) {
       excludeMode = true;
     } else if (wantedMarkTypes.indexOf('*') > -1) {
       allMode = true;
     }
 
-    if (!allMode) {
-      wantedMarkTypes = wantedMarkTypes.split(/[,:]+/).map(function(value) {
-        return value.trim();
-      });
-    }
-
     if (excludeMode) {
       wantedMarkTypes = _.without(wantedMarkTypes, "exclude");
       return _.filter(allMarks, function(mark) {
-        return !_.includes(wantedMarkTypes, mark.name);
+        return !_.includes(wantedMarkTypes, mark.name.toLowerCase());
       });
     } else if (allMode) {
       return allMarks;
     } else {
       return _.filter(allMarks, function(mark) {
-        return _.includes(wantedMarkTypes, mark.name);
+        return _.includes(wantedMarkTypes, mark.name.toLowerCase());
       });
     }
   }
