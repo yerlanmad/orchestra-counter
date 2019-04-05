@@ -48,9 +48,8 @@ var customMarks = new function () {
 				}
 
 				// marks of type according to setting in settings.js
-				var t = new Date();
 				var url = "branches/" + sessvars.branchId
-					+ "/markTypes/" + markTypeId + "/marks?call=" + t;
+					+ "/markTypes/" + markTypeId + "/marks";
 				var marksResponse = spService.get(url, true)
 
 				util.sortArrayCaseInsensitive(marksResponse, "name");
@@ -88,7 +87,7 @@ var customMarks = new function () {
 					+ customMarksParams.visitId + "/marks/"
 					+ customMarksParams.markId);
 				sessvars.state = servicePoint.getState(postResponse);
-				
+
 				if (postResponse) {
 				customMarks.getUserStateWorkaround(true);
 				util.showMessage(jQuery.i18n

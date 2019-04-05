@@ -8,22 +8,22 @@ var transfer = new function() {
     var transferQueueToServicePointPoolTable;
 
     this.transferPressed = function () {
-        if(transferToQueueEnabled 
+        if(transferToQueueEnabled
             && transferToUserPoolEnabled === false
             && transferToServicePointPoolEnabled === false) {
                 transfer.navigateToQueueView();
-        } else if(transferToUserPoolEnabled 
+        } else if(transferToUserPoolEnabled
             && transferToQueueEnabled === false
             && transferToServicePointPoolEnabled === false) {
                 transfer.navigateToUserPoolView();
-        } else if(transferToServicePointPoolEnabled 
+        } else if(transferToServicePointPoolEnabled
             && transferToUserPoolEnabled === false
             && transferToQueueEnabled === false) {
                 transfer.navigateToCounterPoolView();
         } else {
             cardNavigationController.push($Qmatic.components.card.transferOptionsCard);
         }
-        
+
         if(transferToQueueEnabled) {
             $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToQueue').attr('style', '');
         } else {
@@ -39,7 +39,7 @@ var transfer = new function() {
         } else {
             $($Qmatic.components.card.transferOptionsCard.getSelector()).find('.js-transferToCounterPool').css('display', 'none');
         }
-        
+
     }
 
     var transferCurrentVisitToQueueClicked = function(sortType, rowData) {
@@ -81,7 +81,7 @@ var transfer = new function() {
                 "visitId": sessvars.state.visit.id
             };
 			userPoolUpdateNeeded = false;
-			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + sessvars.state.visit.id + '}';			
+			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + sessvars.state.visit.id + '}';
  			spService.putParams('branches/' +  transferParams.branchId + '/servicePoints/' +  transferParams.servicePointId + '/visits/',transferParams);
             util.showMessage(translate.msg('info.successful.transfer', [sessvars.state.visit.ticketId, rowData.name]), false);
             sessvars.state = servicePoint.getState();
@@ -108,7 +108,7 @@ var transfer = new function() {
                 "visitId": sessvars.state.visit.id
             };
 			spPoolUpdateNeeded = false;
-			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + sessvars.state.visit.id + '}';			
+			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + sessvars.state.visit.id + '}';
             util.showMessage(translate.msg('info.successful.transfer', [sessvars.state.visit.ticketId, rowData.fullName]), false);
 			spService.putParams('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
             sessvars.state = servicePoint.getState();
@@ -160,8 +160,7 @@ var transfer = new function() {
                         "mData": null,
                         "sDefaultContent": ""}
                 ];
-                var t = new Date();
-                var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues?call=" + t;
+                var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues";
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     $(nHead).closest('thead, THEAD').find('.transferQueueName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.queue.name'));
@@ -171,17 +170,17 @@ var transfer = new function() {
                     if($('td:eq(0)', nRow).find('span').length == 0) {
                         var queueName = $('td:eq(0)', nRow).text();
                         $('td:eq(0)', nRow).empty().append("<span class=\"queueNameSpan\">" + queueName + "</span>");
-						if ( buttonTransferFirstEnabled  == true ) {	
+						if ( buttonTransferFirstEnabled  == true ) {
                             $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "'>"
                             + "<i class='qm-action-btn__icon icon-queue-first' aria-hidden='true'></i>"
                             + "<span class='sr-only'>" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "</span></button>");
 						}
-						if ( buttonTransferLastEnabled  == true ) {	
+						if ( buttonTransferLastEnabled  == true ) {
                             $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' title='" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "'>"
                                 + "<i class='qm-action-btn__icon icon-queue-last' aria-hidden='true'></i>"
                                 + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "</span></button>");
 						}
-						if ( buttonTransferSortEnabled  == true ) {	
+						if ( buttonTransferSortEnabled  == true ) {
                             $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "'>"
                                 + "<i class='qm-action-btn__icon icon-clock' aria-hidden='true'></i>"
                                 + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "</span></button>");
@@ -189,15 +188,15 @@ var transfer = new function() {
                     }
                     return nRow;
                 };
-                
+
                 table = util.buildTableJson({"tableSelector": selector, "url": url, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search"),
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "headerCallback": headerCallback, "emptySearchLabel": "info.transfer.queue.empty",
                     "scrollYHeight": "300px", "emptyTableLabel": "info.transfer.queue.empty", "filterData": filterQueues});
-                
+
                 table.fnSort([0, 'asc']);
             }
             //destroy old event handlers
-			if ( buttonTransferFirstEnabled  == true ) {	
+			if ( buttonTransferFirstEnabled  == true ) {
                 $(selector).off('click', 'tbody td button.transferTicketFirst');
                 $(selector).on('click', 'tbody td button.transferTicketFirst', function(){
 					var nTr = $(this).closest("tr").get(0);
@@ -206,7 +205,7 @@ var transfer = new function() {
                     popoverComponent.disposeInstance();
 				});
 			}
-			if ( buttonTransferLastEnabled  == true ) {	
+			if ( buttonTransferLastEnabled  == true ) {
                 $(selector).off('click', 'tbody td button.transferTicketLast');
                 $(selector).on('click', 'tbody td button.transferTicketLast', function(){
 					var nTr = $(this).closest("tr").get(0);
@@ -215,7 +214,7 @@ var transfer = new function() {
                     popoverComponent.disposeInstance();
 				});
 			}
-			if ( buttonTransferSortEnabled  == true ) {	
+			if ( buttonTransferSortEnabled  == true ) {
                 $(selector).off('click', 'tbody td button.transferTicketSort');
                 $(selector).on('click', 'tbody td button.transferTicketSort', function(){
 					var nTr = $(this).closest("tr").get(0);
@@ -234,7 +233,7 @@ var transfer = new function() {
         if(servicePoint.hasValidSettings()) {
             // ugly but working. used in the row callback to put the ticket number in the header.
             sessvars.ticketIdToTransfer = ticketId;
-        
+
             if(table != null) {
                 table.fnClearTable();
                 var callParams = servicePoint.createParams();
@@ -263,7 +262,7 @@ var transfer = new function() {
                 ];
                 var staffPoolUrl = "/rest/servicepoint/branches/" + sessvars.branchId + "/users/validForUserPoolTransfer/";
                 var staffPoolHeaderCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    
+
                     $(nHead).closest('thead, THEAD').find('.transferStaffPoolName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.staff.pool.username'));
                     });
@@ -334,7 +333,7 @@ var transfer = new function() {
                 ];
                 var servicePointUrl = "/rest/servicepoint/branches/" + sessvars.branchId + "/servicePoints/validForServicePointPoolTransfer/";
                 var servicePointHeaderCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    
+
                     $(nHead).closest('thead, THEAD').find('.transferServicePointPoolName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.servicepoint.pool.name'));
                     });
@@ -356,7 +355,7 @@ var transfer = new function() {
                     "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns,
                     "filter": true, "headerCallback": servicePointHeaderCallback, "scrollYHeight": "300px","customFilter": true, "infoFiltered": "info.filtered.fromEntries", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search"),
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
-                
+
             }
             table.fnSort([[3, 'desc'], [0, 'asc']]); // open counters first
             //destroy old event handlers
@@ -383,12 +382,12 @@ var transfer = new function() {
                 "visitId": visitId,
                 "sortPolicy" : sortType
             };
-			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + visitId + ',"sortPolicy":"'+sortType + '"}';			
+			transferParams.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + visitId + ',"sortPolicy":"'+sortType + '"}';
 			spService.putParams('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
             queues.updateQueues();
             queueViewController.navigateToOverview();
             util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
-            
+
         }
     };
 
@@ -412,7 +411,7 @@ var transfer = new function() {
     };
 
     var transferVisitInQueueToServicePointPoolClicked = function(sortType, aRowData, visitId) {
-        
+
         if(servicePoint.hasValidSettings()) {
             var transferParams = servicePoint.createParams();
             transferParams.servicePointId = aRowData.id;
@@ -481,8 +480,7 @@ var transfer = new function() {
                         "mData": null,
                         "sDefaultContent": ""}
                 ];
-                var t = new Date();
-                var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues?call=" + t;
+                var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues";
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     $(nHead).closest('thead, THEAD').find('.transferQueueName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.queue.name'));
@@ -495,17 +493,17 @@ var transfer = new function() {
                     if($('td:eq(0)', nRow).find('span').length == 0) {
                         var queueName = $('td:eq(0)', nRow).text();
                         $('td:eq(0)', nRow).empty().append("<span class=\"queueNameSpan\">" + queueName + "</span>");
-						if ( buttonTransferFirstEnabled  == true ) {	
+						if ( buttonTransferFirstEnabled  == true ) {
                             $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + "'>"
                             + "<i class='qm-action-btn__icon icon-queue-first' aria-hidden='true'></i>"
                             + "<span class='sr-only'>" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + "</span></button>");
 						}
-						if ( buttonTransferLastEnabled  == true ) {	
+						if ( buttonTransferLastEnabled  == true ) {
                             $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' title='" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "'>"
                                 + "<i class='qm-action-btn__icon icon-queue-last' aria-hidden='true'></i>"
                                 + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "</span></button>");
 						}
-						if ( buttonTransferSortEnabled  == true ) {	
+						if ( buttonTransferSortEnabled  == true ) {
                             $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "'>"
                                 + "<i class='qm-action-btn__icon icon-clock' aria-hidden='true'></i>"
                                 + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "</span></button>");
@@ -513,17 +511,17 @@ var transfer = new function() {
                     }
                     return nRow;
                 };
-                
+
                 transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url, "emptySearchLabel": "info.transfer.queue.empty",
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": headerCallback,
                     "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues, "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
-                
+
             }
             transferTable.fnSort([0, 'asc']);
-            
+
             var $jTable = $('#transferToQueues');
             //destroy old event handlers
-			if ( buttonTransferFirstEnabled  == true ) {	
+			if ( buttonTransferFirstEnabled  == true ) {
                 $jTable.off('click', 'tbody td button.transferTicketFirst');
                 $jTable.on('click', 'tbody td button.transferTicketFirst', function(){
 					var nTr = $(this).closest("tr").get(0);
@@ -531,7 +529,7 @@ var transfer = new function() {
                     transferCurrentVisitToQueueClicked("FIRST", aData);
 				});
 			}
-			if ( buttonTransferLastEnabled  == true ) {	
+			if ( buttonTransferLastEnabled  == true ) {
                 $jTable.off('click', 'tbody td button.transferTicketLast');
                 $jTable.on('click', 'tbody td button.transferTicketLast', function(){
                     var nTr = $(this).closest("tr").get(0);
@@ -539,7 +537,7 @@ var transfer = new function() {
                     transferCurrentVisitToQueueClicked("LAST", aData);
 				});
 			}
-			if ( buttonTransferSortEnabled  == true ) {	
+			if ( buttonTransferSortEnabled  == true ) {
                 $jTable.off('click', 'tbody td button.transferTicketSort');
                 $jTable.on('click', 'tbody td button.transferTicketSort', function(){
                     var nTr = $(this).closest("tr").get(0);
@@ -553,7 +551,7 @@ var transfer = new function() {
     // Transfer to queue from card
     this.renderCardTransferToUserPool = function () {
         if(servicePoint.hasValidSettings()) {
-        
+
             if(transferToStaffPoolTable != null) {
                 transferToStaffPoolTable.fnClearTable();
                 var callParams = servicePoint.createParams();
@@ -583,7 +581,7 @@ var transfer = new function() {
                 ];
                 var staffPoolUrl = "/rest/servicepoint/branches/" + sessvars.branchId + "/users/validForUserPoolTransfer/";
                 var staffPoolHeaderCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    
+
                     $(nHead).closest('thead, THEAD').find('.transferStaffPoolName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.staff.pool.username'));
                     });
@@ -647,7 +645,7 @@ var transfer = new function() {
                 ];
                 var servicePointUrl = "/rest/servicepoint/branches/" + sessvars.branchId + "/servicePoints/validForServicePointPoolTransfer/";
                 var servicePointHeaderCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-                    
+
                     $(nHead).closest('thead, THEAD').find('.transferServicePointPoolName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.servicepoint.pool.name'));
                     });
@@ -670,7 +668,7 @@ var transfer = new function() {
                 "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
             }
             transferToServicePointPoolTable.fnSort([[3, 'desc'], [0, 'asc']]);// open counters first
-            
+
             var $jTable = $("#transferTicketToCounterPoolTable");
             //destroy old event handlers
             $jTable.off('click', 'tbody tr td');

@@ -24,9 +24,8 @@ var util = new function () {
 
     this.updateServicesExpectedTransactionTimes = function () {
         if(sessvars.branchId !== null) {
-            var t = new Date();
             var url = "branches/" + sessvars.branchId
-                + "/services?call=" + t;
+                + "/services";
             var services = spService.get(url);
             var expectedTransactionTimes = {};
             for(var i = 0; i < services.length; i++) {

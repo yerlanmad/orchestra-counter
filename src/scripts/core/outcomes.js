@@ -10,7 +10,7 @@ var outcome = new function() {
                 selectOutcomeTable.fnClearTable();
                 var params = servicePoint.createParams();
                 params.serviceId = sessvars.state.visit.currentVisitService.serviceId;
-				var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes", true);				
+				var outcomes = spService.get("branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes", true);
                 selectOutcomeTable.fnAddData(outcomes);
             } else {
                 var columns = [
@@ -20,8 +20,7 @@ var outcome = new function() {
                      "bVisible": false,
                      "mDataProp": "code"}
                 ];
-				var t= new Date();
-                var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes?call="+t;
+                var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/outcomes";
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.outcome.name');
@@ -74,7 +73,7 @@ var outcome = new function() {
         outcomeSelect.parent().removeClass("optionSelected");
         outcomeSelect.parent().hide();
         util.clearSelect(outcomeSelect);
-        
+
         if(sessvars.state.userState == servicePoint.userState.SERVING && typeof sessvars.state.visit !== "undefined" &&
             sessvars.state.visit != null) {
             var params = servicePoint.createParams();

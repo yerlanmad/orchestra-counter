@@ -27,8 +27,7 @@ var deliveredServices = new function () {
             (sessvars.state.visit.currentVisitService.deliveredServiceExists == true)) {
 
             cardNavigationController.push($Qmatic.components.card.deliveredServicesCard)
-            var t = new Date();
-            var url = "branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/deliverableServices?call=" + t;
+            var url = "branches/" + sessvars.branchId + "/services/" + sessvars.state.visit.currentVisitService.serviceId + "/deliverableServices";
             var dsResponse = spService.get(url, true);
 
             util.sortArrayCaseInsensitive(dsResponse, "name")
@@ -158,7 +157,7 @@ var deliveredServices = new function () {
                             + '</button>' + "</span>");
 
                         $(td).find(".removeMarkBtn").click(function () {
-                            
+
                             removeDeliveredService(row, rowData.deliveredServiceName);
                         });
                     },
@@ -212,14 +211,14 @@ var deliveredServices = new function () {
                             params.visitId = sessvars.state.visit.id;
                             var nTr = $self.closest("tr").get(0);
                             var aData = deliveredServicesTable.fnGetData(nTr);
-                            
+
                             var outcomeName = $self.find(":selected").text()
                             params.visitDeliveredServiceId = parseInt(aData["id"]);
                             params.outcomeCode = $self.val();
-                            
+
                             sessvars.state = servicePoint.getState(spService.putCallback("branches/" + params.branchId + "/visits/" + params.visitId + "/deliveredServices/" + params.visitDeliveredServiceId + "/outcome/" + params.outcomeCode));
                             util.showMessage(translate.msg('info.ds.outcome.added', [outcomeName, aData.deliveredServiceName]), false);
-                            
+
                             servicePoint.updateWorkstationStatus(false, true);
                             $self.prev('div').text(outcomeName);
                         }

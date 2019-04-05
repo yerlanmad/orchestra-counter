@@ -39,7 +39,7 @@ var version = "5.3.16";
  * some parsing utils) to store branch, workstation and profile information. Do
  * not put any kind of sensitive information in this variable; it is possible to
  * access it from other browser windows.
- * 
+ *
  * Documentation and source code for the data table model used in e.g. the walk
  * direct table: www.datatables.net
  */
@@ -422,10 +422,9 @@ var servicePoint = new function () {
 					.val() != -1)) {
 					isBranchSelectShown = true;
 				}
-			}
+      }
+      branchSelect.trigger("chosen:updated");
 		}
-
-		branchSelect.trigger("chosen:updated");
 
 		return isBranchSelectShown;
 	};
@@ -790,9 +789,9 @@ var servicePoint = new function () {
 		addParams.branchId = sessvars.branchId;
 		addParams.visitId = sessvars.state.visit.id;
 		addParams.serviceId = addServiceId;
-		sessvars.state = spService.post("branches/" + addParams.branchId
+		sessvars.state = servicePoint.getState(spService.post("branches/" + addParams.branchId
 			+ "/visits/" + addParams.visitId + "/services/"
-			+ addParams.serviceId);
+			+ addParams.serviceId));
 		sessvars.statusUpdated = new Date();
 		servicePoint.updateWorkstationStatus(false, false, true);
 		servicePoint.addMultiServicePressed();
@@ -1155,9 +1154,8 @@ var servicePoint = new function () {
 				if (buttonWalkDirectService == "") {
 					cardNavigationController.push($Qmatic.components.card.walkInCard);
 					queueViewController.navigateToOverview();
-					var t = new Date();
 					var url = "/rest/servicepoint/branches/" + sessvars.branchId
-						+ "/services?call=" + t;
+						+ "/services";
 					var serivesList = servicePoint.servicesList;
 					if ((walkTable == undefined && prevBranchId == sessvars.branchId) || prevBranchId != sessvars.branchId) {
 						var columns = [
@@ -1417,11 +1415,11 @@ var servicePoint = new function () {
 	 * Updates the workstation status in case of user refresh (F5 pressed) or
 	 * programmatic refresh e.g. call next ticket. The object sessvars.state
 	 * corresponds the object QLWorkstationStatus, see api docs.
-	 * 
+	 *
 	 * @param isRefresh
 	 *            false if the call isn't a user refresh (F5); the queues shall
 	 *            only be updated and no timeout will be created
-	 * 
+	 *
 	 */
 	this.updateWorkstationStatus = function (isRefresh, blockCardChange, blockMesssagePopup) {
 		clearOngoingVisit();
@@ -1444,7 +1442,7 @@ var servicePoint = new function () {
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.WRAPUP) {
 				this.showWrapUpModal();
-		} 
+		}
 
 		if (sessvars.state.servicePointState == servicePoint.servicePointState.CLOSED) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.closed'));
@@ -1608,16 +1606,6 @@ var servicePoint = new function () {
 				// display spinner with text stating that the visit is about to
 				// be called
 				modalNavigationController.push($Qmatic.components.modal.visitInDisplayQueue);
-				var visitInDisplayQTimer = util.setIntervalCount(function () {
-					sessvars.state = servicePoint
-						.getState(spService
-							.get("user/status"));
-					if (sessvars.state.visitState != servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
-						clearInterval(visitInDisplayQTimer);
-						servicePoint
-							.updateWorkstationStatus(false);
-					}
-				}, visitInDisplayQInterval * 1000, visitInDisplayQMaxWait);
 			}
 
 			$("#ticketNumber").html(sessvars.state.visit.ticketId);
@@ -2264,20 +2252,20 @@ var servicePoint = new function () {
 	};
 	/*
 	 * Receive events from Jiql CometD style.
-	 * 
+	 *
 	 * VISIT_CALL, in the case of store next
 	 * {"M":"E","E":{"evnt":"VISIT_CALL","type":"DEVICE","ts":"2012-09-06T16:12:54.449","did":120106000001,
 	 * "prm":{"queue":1,"servicePointName":"Web service point
 	 * 1","ticket":"A001","servicePoint":1,"queueName":"Q1"}}}, on channel:
 	 * /events/GBG/ServicePoint1
-	 * 
+	 *
 	 * USER_SERVICE_POINT_SESSION_END, in the case of session ending (being
 	 * kicked off)
 	 * {"M":"E","E":{"evnt":"USER_SERVICE_POINT_SESSION_END","type":"DEVICE","ts":"2012-10-31T16:12:01.781+0100","did":220206000001,
 	 * "prm":{"user":"test","servicePointId":"2"}}}, on channel:
 	 * /events/BRA/ServicePoint2
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	var receiveEvent = function (event) {
 		var processedEvent;
@@ -2500,7 +2488,7 @@ var servicePoint = new function () {
 		} else {
 			sessvars.branchName = sessvarsInfo.branchName;
 		}
-		
+
 		sessvars.servicePointId = sessvarsInfo.servicePointId;
 		var params = {};
 		params.branchId = sessvars.branchId;
@@ -2614,7 +2602,7 @@ var servicePoint = new function () {
 	/**
 	 * Wrap any call to callService that returns state with this method to avoid
 	 * ending up in an undefined state.
-	 * 
+	 *
 	 * @param returnValue
 	 */
 	this.getState = function (returnValue) {

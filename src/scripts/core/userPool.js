@@ -3,10 +3,9 @@ var userPool = new function() {
     var userPoolTable;
 
     this.renderUserPool = function () {
-        var t = new Date();
-        var url = "branches/" + sessvars.branchId + "/users/" 
-                    + sessvars.currentUser.id + "/pool/visits?call=" + t;
-        
+        var url = "branches/" + sessvars.branchId + "/users/"
+                    + sessvars.currentUser.id + "/pool/visits";
+
 
         // Get DOM elements
         var userPool            = $('#userPoolModule'),
@@ -20,7 +19,7 @@ var userPool = new function() {
         var userPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
         var noResultTemplate = $('<li class="qm-pool__list-item qm-pool__list-item--auto-width"><span class="qm-pool__no-result-text">' + jQuery.i18n.prop('info.pools.no_customers_in_pool') + '</span></li>');
         var popoverTemplate = document.querySelector('.qm-popover--pool').outerHTML.trim();
-        
+
         // Popover options
         var options = {
             template: popoverTemplate
@@ -28,16 +27,16 @@ var userPool = new function() {
 
         // Get the data
         var userPoolData = spService.get(url);
-        if(userPoolData.length > 0) {
+        if(userPoolData && userPoolData.length > 0) {
             // Sort based on time in pool
             userPoolData.sort(util.compareTimeInPool);
             userPoolData.forEach(function(data, i) {
                 var template = userPoolItemTemplate.clone();
-                
+
                 template.find('.qm-pool-item__content--ticket').text(data.ticketId);
                 template.find('.qm-pool-item__content--wait').text(util.formatIntoMM(data.waitingTime));
                 userPoolList.append(template);
-                
+
                 // Popover options and initialization
                 options.popTarget = template.get(0).querySelector('.qm-pool-item__content--ticket');
                 if(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.servicePointState === "CLOSED") {
@@ -50,7 +49,7 @@ var userPool = new function() {
         } else {
             userPoolList.append(noResultTemplate);
         }
-        
+
         util.determineIfToggleNeeded(userPool, userPoolList, userPoolToggle);
     };
 
@@ -67,18 +66,18 @@ var userPool = new function() {
             sessvars.currentCustomer = null;
         }
     }
-	
+
 	this.parkPressed = function() {
 		if(servicePoint.hasValidSettings() && sessvars.state.userState == servicePoint.userState.SERVING) {
 	        var params = servicePoint.createParams();
 			params.userId = sessvars.currentUser.id;
 			spPoolUpdateNeeded = false;
-	        params.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + sessvars.state.visit.id + '}';		
+	        params.json='{"fromId":'+ sessvars.servicePointId + ',"fromBranchId":'+ sessvars.branchId + ',"visitId":' + sessvars.state.visit.id + '}';
 			spService.putParams('branches/' +  params.branchId + '/users/' +  params.userId + '/visits/',params);
             sessvars.state = servicePoint.getState();
 	        sessvars.statusUpdated = new Date();
 	        servicePoint.updateWorkstationStatus();
-		   
+
 		    sessvars.currentCustomer = null;
 		}
     };
