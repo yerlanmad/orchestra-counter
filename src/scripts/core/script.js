@@ -1876,11 +1876,12 @@ var servicePoint = new function () {
           var $serviceNameSpan = $('<span>' + nextServices[0].serviceInternalName + '</span>');
           $serviceSpan.append($serviceNameSpan);
           if (buttonServeMultiService === true) {
-            var clickFunction = servicePoint.buildMultiServiceVisitServeFunction(nextServices[0]);
+            $serviceNameSpan.append(' -');
+            var serveMultiVisitFunction = servicePoint.buildMultiServiceVisitServeFunction(nextServices[0]);
             var $buttonTooltipContainer = $('<div class="button-tooltip qm-inline"></div>')
             var $button = $('<button class="qm-services__service-list-item-serve-btn js-multi-service-serve-btn">'
-                      + ' - ' + jQuery.i18n.prop('info.card.visitCard.serve') + ' <span class="sr-only">'
-                      + nextServices[0].serviceInternalName + '</span></button>').on('click', clickFunction);
+                      + jQuery.i18n.prop('info.card.visitCard.serve') + ' <span class="sr-only">'
+                      + nextServices[0].serviceInternalName + '</span></button>').on('click', serveMultiVisitFunction);
             $buttonTooltipContainer.append($button);
             $serviceSpan.append($buttonTooltipContainer);
           }
@@ -1895,11 +1896,12 @@ var servicePoint = new function () {
           var $serviceNameSpan = $('<span>' + service.serviceInternalName + '</span>');
           $serviceDiv.append($serviceNameSpan);
           if (buttonServeMultiService === true) {
-            var clickFunction = servicePoint.buildMultiServiceVisitServeFunction(service);
+            $serviceNameSpan.append(' -');
+            var serveMultiVisitFunction = servicePoint.buildMultiServiceVisitServeFunction(service);
             var $buttonTooltipContainer = $('<div class="button-tooltip qm-inline"></div>')
             var $button = $('<button class="qm-services__service-list-item-serve-btn js-multi-service-serve-btn">'
-                      + ' - ' + jQuery.i18n.prop('info.card.visitCard.serve') + ' <span class="sr-only">'
-                      + service.serviceInternalName + '</span></button>').on('click', clickFunction);
+                      + jQuery.i18n.prop('info.card.visitCard.serve') + ' <span class="sr-only">'
+                      + service.serviceInternalName + '</span></button>').on('click', serveMultiVisitFunction);
             $buttonTooltipContainer.append($button);
             $serviceDiv.append($buttonTooltipContainer);
           }
@@ -1966,6 +1968,9 @@ var servicePoint = new function () {
         + service.id + '/serve'));
         sessvars.state = newState;
         sessvars.statusUpdated = new Date();
+        if (newState) {
+          util.showMessage(translate.msg("info.card.visitCard.serve.successful", [newState.visit.currentVisitService.serviceExternalName]), false)
+        }
 				servicePoint.updateWorkstationStatus();
     }
   }
