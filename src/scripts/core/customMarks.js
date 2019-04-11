@@ -53,7 +53,10 @@ var customMarks = new function () {
         markTypesArray = _.filter(markTypesArray, function(o) { return o.name !== "NPS" });
 
         markTypesArray = this.evaluateCustomMarkTypes(markTypesArray, customMarkTypeName);
-
+        if (markTypesArray !== undefined && markTypesArray.length === 0) {
+          markTypeDropdownFilter.prop('disabled', true);
+          $Qmatic.components.dropdown.markTypeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.no.markTypes.available') });
+        }
         util.sortArrayCaseInsensitive(markTypesArray, "name");
 
 				util.populateSelect(markTypesArray, markTypeDropdownFilter);
@@ -86,9 +89,8 @@ var customMarks = new function () {
     clearFilter(dropdownFilter);
     dropdownFilter.prop('disabled', true);
     dropdownFilter.trigger('chosen:updated');
-    var t = new Date();
     var url = "branches/" + sessvars.branchId
-      + "/markTypes/" + markTypeId + "/marks?call=" + t;
+      + "/markTypes/" + markTypeId + "/marks";
     var marksResponse = spService.get(url, true)
 
     util.sortArrayCaseInsensitive(marksResponse, "name");
@@ -116,18 +118,21 @@ var customMarks = new function () {
       allMode = true;
     }
 
+    var filterInMark = _.curry(this.filterIn, 2)(wantedMarkTypes);
+    var filterOutMark = _.negate(filterInMark);
+
     if (excludeMode) {
-      wantedMarkTypes = _.without(wantedMarkTypes, "exclude");
-      return _.filter(allMarks, function(mark) {
-        return !_.includes(wantedMarkTypes, mark.name.toLowerCase());
-      });
+      wantedMarkTypes = _.pull(wantedMarkTypes, "exclude");
+      return _.filter(allMarks, filterOutMark);
     } else if (allMode) {
       return allMarks;
     } else {
-      return _.filter(allMarks, function(mark) {
-        return _.includes(wantedMarkTypes, mark.name.toLowerCase());
-      });
+      return _.filter(allMarks, filterInMark);
     }
+  }
+
+  this.filterIn = function (wantedMarkTypes, mark) {
+    return _.includes(wantedMarkTypes, mark.name.toLowerCase());
   }
 
 	this.showAddedMarksTable = function () {
