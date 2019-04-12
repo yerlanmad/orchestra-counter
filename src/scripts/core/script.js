@@ -1349,14 +1349,15 @@ var servicePoint = new function () {
 	};
 
 	this.saveNotes = function () {
-		var newNotes = encodeURIComponent(document.getElementById("notesEdit").value);
+		var newNotes = document.getElementById("notesEdit").value;
 		var params = {};
 		params.branchId = sessvars.branchId;
 		params.visitId = sessvars.state.visit.id;
 		params.$entity = {
 			'custom1': newNotes
 		};
-		params.json = '{"custom1":"' + newNotes + '"}';
+		// params.json = '{"custom1":"' + newNotes + '"}';
+		params.json = JSON.stringify({custom1: newNotes});
 		newNotes = spService.putParams("branches/" + params.branchId + "/visits/"
 			+ params.visitId + "/parameters", params);
 
