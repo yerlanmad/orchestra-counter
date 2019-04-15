@@ -20,6 +20,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **164824646** | **Call any service in a multi service visit** Add serve buttons to multi services in visit card |
+| **COUNTER-126** | **Setting to set several Mark Types for a counter and show the marks grouped in the Counter** Add dropdown to select mark type before selecting mark |
 
 <h3>Bug fixes</h3>
 
