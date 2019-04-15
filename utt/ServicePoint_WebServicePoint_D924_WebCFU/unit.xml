@@ -38,7 +38,7 @@
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
     7.0.0.7    2019-03-29   Added parameter to call multi service     joelan
-                            from ongoing visit
+                            from ongoing visit, changed marks label
     7.0.0.6    2019-01-14   Added unit event for end service          joelan
     7.0.0.5    2018-09-03   Added expected transaction time param     joelan
     7.0.0.4    2018-08-31   Changed icon for UTT                      joelan
@@ -219,7 +219,7 @@
           type="String"
           defaultValue="Marks"
           label="Marks type"
-          description="Mark type to be used for the custom Marks"
+          description="Mark types to be used. Enter * to use all types, or list types to be used (&#60;type1&#62;, &#60;type2&#62;), or define what types to exclude (exclude: &#60;type 1&#62;, &#60;type 2&#62;)."
           sortOrder="5016"
           writeLevel="profile"
           privilege="install:adminAdmin"/>
