@@ -28,6 +28,7 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **COUNTER-134** | **Cannot call next visit** Removed loop checking visit state during visit in display queue, added checks for empty responses in queues and pools |
 | **COUNTER-137** | **custom_1 field includes too many characters and makes statistics end up in failed events** Removed encoding when saving notes |
+| **COUNTER-138** | *LED does not show called ticket after StoreNext call from WebServicepoint** UTT adjustments to REMOVE_USER_FROM_STORE_NEXT |
 
 <h3>Known issues</h3>
 
