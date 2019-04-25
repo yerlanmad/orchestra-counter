@@ -4,7 +4,7 @@ $(function() {
       allow_single_deselect: false,
       expand_dropdown_height: function (elem) {
         var heightOfContentSection = elem.closest('.qm-card').find(".qm-card__content-section").height()
-           - 25;
+           + 70;
 
         elem.parent().find(".chosen-results").css("max-height", heightOfContentSection);
       }
