@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.9    2019-04-24   Changes to REMOVE_USER_FROM_STORE_NEXT    joelan
     7.0.0.8    2019-03-29   Added parameter to call multi service     joelan
                             from ongoing visit, changed marks label
     7.0.0.7    2019-03-20   Added correction for COUNTER-125          joelan
@@ -84,7 +85,7 @@
 
 <unit name="WebServicePoint_Expressia_D924"
       frameworkVersion="2"
-      unitVersion="7.0.0.8"
+      unitVersion="7.0.0.9"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -1284,10 +1285,12 @@
         <![CDATA[
         import com.qmatic.qp.api.device.DeviceCommand
 
-        led = unit.getDevice("LED")
-        DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
-        displayCommand.setParameter("storeNext", false)
-        led.executeCommand(displayCommand)
+        if(!("VISIT_CALL" in event.getParameter("eventSiblings"))){
+          led = unit.getDevice("LED")
+          DeviceCommand displayCommand = new DeviceCommand(led.getId(), "DISPLAY_OPEN")
+          displayCommand.setParameter("storeNext", false)
+          led.executeCommand(displayCommand)
+        }
 
         ]]>
       </unitEventHandler>
