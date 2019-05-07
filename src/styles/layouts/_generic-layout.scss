@@ -18,4 +18,26 @@
     &--align-center {
         justify-content: center;
     }
+
+    &--align-bottom {
+      align-items: flex-end;
+    }
+
+    &--nowrap {
+      flex-wrap: nowrap;
+    }
+
+    &__adaptive {
+      flex: 0 1 auto;
+    }
+
+    &__fixed {
+      flex: 0 0 auto;
+      margin-left: rem($global-standard-margin / 2);
+
+      @at-root [dir='rtl'] & {
+        margin-left: 0;
+        margin-right: rem($global-standard-margin / 2);
+      }
+    }
 }

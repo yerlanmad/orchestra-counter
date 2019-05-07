@@ -18,7 +18,7 @@
     <div class="qm-app">
         <!-- Qmatic Header -->
         {% include "partials/global-header.nunjucks" %}
-       
+
         <!-- Qmatic Main -->
         <main class="qm-main">
 
@@ -27,7 +27,7 @@
                 <div class="qm-main__scroll-container">
                     <div class="qm-card-layout">
                         <div id="qm-card-nav" class="qm-hide qm-card-stack">
-                            {% include "partials/card/closeCard/close-card.nunjucks" %} 
+                            {% include "partials/card/closeCard/close-card.nunjucks" %}
                             {% include "partials/card/visitCard/visit-card.nunjucks" %}
                             {% include "partials/card/walkInCard/walk-in-card.nunjucks" %}
                             {% include "partials/card/inactiveCard/inactive-card.nunjucks" %}
@@ -36,12 +36,13 @@
                             {% include "partials/card/transferCard/views/transfer-queue.nunjucks" %}
                             {% include "partials/card/transferCard/views/transfer-user-pool.nunjucks" %}
                             {% include "partials/card/transferCard/views/transfer-counter-pool.nunjucks" %}
+                            {% include "partials/card/transferCard/views/transfer-delay.nunjucks" %}
                             {% include "partials/card/addServicesCard/add-services-card.nunjucks" %}
-                            {% include "partials/card/marksCard/marks-card.nunjucks" %} 
-                            {% include "partials/card/addCustomerCard/add-customer-card.nunjucks" %} 
+                            {% include "partials/card/marksCard/marks-card.nunjucks" %}
+                            {% include "partials/card/addCustomerCard/add-customer-card.nunjucks" %}
                             {% include "partials/card/editCustomerCard/edit-customer-card.nunjucks" %}
-                            {% include "partials/card/customerListCard/customer-list-card.nunjucks" %}  
-                            {% include "partials/card/messageCard/message-card.nunjucks" %} 
+                            {% include "partials/card/customerListCard/customer-list-card.nunjucks" %}
+                            {% include "partials/card/messageCard/message-card.nunjucks" %}
                         </div>
                     </div>
                 </div>
@@ -78,10 +79,10 @@
     {# {% include "partials/previous_counter.nunjucks" %} #}
     <div id="message"></div>
     <div id="error"></div>
-    
+
     <div class="ui-widget qm-customer-search-results" id="customerSearchDiv">
         <table id="customerSearchTable">
-        </table> 
+        </table>
     </div>
 
 
@@ -100,7 +101,7 @@
         {% include "partials/modals/genericConfirm/generic-confirm.nunjucks" %}
         {% include "partials/modals/wrapUp/wrap-up.nunjucks" %}
     </div>
-    
+
 
      {% include "partials/external-scripts.nunjucks" %}
 
@@ -128,7 +129,7 @@
                 var tabConfig = {
                     tabComponentId: 'js-qm-tabs'
                 };
-                
+
                 window.$Qmatic.components.tabs(tabConfig);
 			});
         </script>

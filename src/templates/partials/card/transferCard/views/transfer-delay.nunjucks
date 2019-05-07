@@ -1,0 +1,48 @@
+{% extends "partials/card/fill-parent-card.nunjucks" %}
+
+{% block id %}id="transferDelayCard"{% endblock %}
+{% block cardModifier %}qm-card--transfer qm-card--more-than-one{% endblock %}
+
+{% block header %}
+  <header class="qm-card__header-section">
+    {{cardNav.render('transferVisitDelayLabel')}}
+    <span class="qm-card-description js-transfer-delay-description"></span>
+  </header>
+{% endblock %}
+
+{% block content %}
+  <div class="qm-card__content-section qm-card__content-section-flex-grow">
+    <div class="qm-card__content-narrow">
+      <button type="button" class="qm-btn qm-btn--secondary qm-btn--full js-transfer-delay-btn js-transfer-delay-shortest" data-delay="5">
+        <span class="qm-btn__text"></span>
+      </button>
+      <button type="button" class="qm-btn qm-btn--secondary qm-btn--full js-transfer-delay-btn js-transfer-delay-medium" data-delay="10">
+        <span class="qm-btn__text"></span>
+      </button>
+      <button type="button" class="qm-btn qm-btn--secondary qm-btn--full js-transfer-delay-btn js-transfer-delay-longest" data-delay="15">
+        <span class="qm-btn__text"></span>
+      </button>
+      <div class="qm-form-field qm-generic-layout qm-generic-layout--nowrap qm-generic-layout--align-bottom qm-mt-4">
+        <div class="qm-generic-layout__adaptive">
+          <label for="customDelayCardInput" class="qm-form-field__label js-label-custom-delay"></label>
+          <div class="qm-form-field__input-container">
+            <input id="customDelayCardInput" class="qm-form-field__text-input js-transfer-delay-input" type="text" pattern="[0-9]+" placeholder="" name="customDelay" maxlength="3">
+            <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+              <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+              <span class="sr-only"></span>
+            </button>
+          </div>
+        </div>
+        <div class="qm-generic-layout__fixed">
+          <button type="button" class="qm-btn qm-btn--primary js-transfer-delay-submit-btn">
+            <span class="qm-btn__text"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {{cardBackNav.render()}}
+{% endblock %}

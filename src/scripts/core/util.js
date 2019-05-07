@@ -223,6 +223,26 @@ var util = new function () {
         }
     };
 
+    this.validateTransferInput = function (e) {
+      var allowedChars = '0123456789';
+      function contains(stringValue, charValue) {
+        return stringValue.indexOf(charValue) > -1;
+      }
+      var invalidKey = e.key.length === 1 && !contains(allowedChars, e.key);
+      invalidKey && e.preventDefault();
+    };
+
+    this.createEvent = function (type) {
+      var event;
+      if (typeof(Event) === 'function') {
+          event = new Event(type);
+      } else {
+          event = document.createEvent('Event');
+          event.initEvent(type, true, true);
+      }
+      return event;
+    }
+
     this._clearSearchField = function ($searchInput) {
         var event = $.Event('keyup');
         $searchInput.val("");
@@ -402,6 +422,27 @@ var util = new function () {
             + ":" + (minutes < 10 ? "0" : "") + minutes;
         }
     };
+
+    this.setTransferDelayTitle = function ($cardDescriptionElement, queueType, data) {
+      $cardDescriptionElement.text("");
+      switch(queueType) {
+        case "counterPool": {
+          $cardDescriptionElement.text(translate.msg("info.transfer.to.name", [data.name]))
+          break;
+        }
+        case "staffPool": {
+          $cardDescriptionElement.text(translate.msg("info.transfer.to.name", [data.fullName]))
+          break;
+        }
+        case "queue": {
+          $cardDescriptionElement.text(translate.msg("info.transfer.to.name", [data.name]))
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    }
 
     this.formatHHMMToTimeConvention = function(dateAsHHMM) {
         var time = dateAsHHMM.split(':');

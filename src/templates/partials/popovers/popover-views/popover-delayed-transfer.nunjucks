@@ -1,0 +1,50 @@
+<div class="qm-popover-delayed-transfer">
+  <div class="qm-popover__layout">
+    <div class="qm-card-nav qm-card-nav--popover">
+      <div class="qm-card-nav__left">
+        <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__back-btn js-popover-back">
+          <i class="qm-action-btn__icon icon-caret-left" aria-hidden="true"></i>
+          <span class="sr-only"></span>
+        </button>
+      </div>
+      <div class="qm-card-nav__middle">
+        <h2 class="qm-card-nav__title js-popover-transfer-delay-header"></h2>
+      </div>
+      <div class="qm-card-nav__right">
+        <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__close-btn js-popover-close">
+          <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+          <span class="sr-only"></span>
+        </button>
+      </div>
+    </div>
+    <div class="qm-popover__content">
+      <span class="qm-popover__description js-transfer-delay-popover-description"></span>
+      <button type="button" class="qm-btn qm-btn--secondary qm-btn--full js-transfer-delay-btn js-transfer-delay-shortest" data-delay="5">
+        <span class="qm-btn__text"></span>
+      </button>
+      <button type="button" class="qm-btn qm-btn--secondary qm-btn--full js-transfer-delay-btn js-transfer-delay-medium" data-delay="10">
+        <span class="qm-btn__text"></span>
+      </button>
+      <button type="button" class="qm-btn qm-btn--secondary qm-btn--full js-transfer-delay-btn js-transfer-delay-longest" data-delay="15">
+        <span class="qm-btn__text"></span>
+      </button>
+      <div class="qm-form-field qm-generic-layout qm-generic-layout--nowrap qm-generic-layout--align-bottom qm-mt-4">
+        <div class="qm-generic-layout__adaptive">
+          <label class="qm-form-field__label js-label-custom-delay"></label>
+          <div class="qm-form-field__input-container">
+            <input class="qm-form-field__text-input js-transfer-delay-input" type="text" pattern="[0-9]+" placeholder="" name="customDelay" maxlength="3">
+            <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
+              <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
+              <span class="sr-only"></span>
+            </button>
+          </div>
+        </div>
+        <div class="qm-generic-layout__fixed">
+          <button type="button" class="qm-btn qm-btn--primary js-transfer-delay-submit-btn">
+            <span class="qm-btn__text"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

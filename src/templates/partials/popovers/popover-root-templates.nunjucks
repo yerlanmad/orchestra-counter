@@ -12,6 +12,7 @@
     {% include "partials/popovers/popover-views/popover-queue.nunjucks" %}
     {% include "partials/popovers/popover-views/popover-user-pool.nunjucks" %}
     {% include "partials/popovers/popover-views/popover-counter-pool.nunjucks" %}
+    {% include "partials/popovers/popover-views/popover-delayed-transfer.nunjucks" %}
     <div class="tooltip__inner">
     </div>
 </div>

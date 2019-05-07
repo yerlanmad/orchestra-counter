@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.7    2019-05-02   Added parameter to transfer with delay    joelan
     7.0.0.6    2019-03-29   Added parameter to call multi service     joelan
                             from ongoing visit, changed marks label
     7.0.0.5    2018-09-03   Added expected transaction time param     joelan
@@ -72,7 +73,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.0.6"
+      unitVersion="7.0.0.7"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -356,6 +357,14 @@
           defaultValue="true"
           label="Transfer Sorted"
           description="Transfer sorted according to enter time into the queue"
+          sortOrder="5033"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnTransferDelayed"
+          type="Boolean"
+          defaultValue="false"
+          label="Transfer with delay"
+          description="Enable/disable option to transfer a visit with a delay time"
           sortOrder="5033"
           writeLevel="profile"
           privilege="install:adminAdmin"/>

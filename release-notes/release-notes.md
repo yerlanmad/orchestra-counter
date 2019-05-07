@@ -21,6 +21,7 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **164824646** | **Call any service in a multi service visit** Add serve buttons to multi services in visit card |
 | **COUNTER-126** | **Setting to set several Mark Types for a counter and show the marks grouped in the Counter** Add dropdown to select mark type before selecting mark |
+| **COUNTER-129** | **Transfer with delay for visit/multi-service visit (GAP BNLX)** Add option to transfer with delay from queue |
 
 <h3>Bug fixes</h3>
 

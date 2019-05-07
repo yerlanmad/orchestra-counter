@@ -30,6 +30,7 @@ buttonCallFromQueueEnabled = false;					// Call from Queue Button
 buttonTransferFirstEnabled  = true;				// Transfer to first in Queue Button
 buttonTransferLastEnabled  = true; 				// Transfer to last in Queue Button
 buttonTransferSortEnabled  = true;					// Transfer Sorted in Queue Button
+buttonTransferDelayedEnabled = false;     // Transfer delayed
 moduleChatEnabled = false;							// Chat Module
 minTimeBetweenCalls = '';
 singleSession = false;
@@ -308,6 +309,9 @@ function showModules() {
 		}
 		if ( params.btnTransferSort != undefined) {
 			buttonTransferSortEnabled  = params.btnTransferSort;		// Transfer Sorted in Queue Button
+    }
+    if ( params.btnTransferSort != undefined) {
+			buttonTransferDelayedEnabled  = params.btnTransferDelayed;		// Transfer with delay
 		}
 		if (params.mdChat != undefined){
 			moduleChatEnabled = params.mdChat;

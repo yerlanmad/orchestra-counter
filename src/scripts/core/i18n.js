@@ -456,6 +456,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('#transferUserPoolCard .qm-card-description', 'info.card.transferUserPoolCard.description');
         i18nSafeSelectorAppend('#transferCounterPoolCard .qm-card-description', 'info.card.transferCounterPoolCard.description');
         i18nPlaceholder($("#transferToQueues_filter input"), "info.placeholder.transfer.search");
+        i18nSafe("transferVisitDelayLabel", "action.title.transfer.with.delay.headline")
 
 
         i18nSafeSelectorBtnAppend('.js-back-btn > .sr-only', 'application.sr.back');
@@ -499,6 +500,16 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.js-label-email', 'field.email');
         i18nSafeSelectorAppend('.js-label-phone', 'field.phoneNumber');
         i18nSafeSelectorAppend('.js-label-required', 'field.required');
+
+        // Transfer delay popover
+        i18nSafeSelectorAppend('.js-popover-transfer-delay-header', 'action.title.transfer.with.delay.headline');
+        i18nSafeSelectorBtnAppend('.js-transfer-delay-shortest span', 'action.title.transfer.delayed.shortest');
+        i18nSafeSelectorBtnAppend('.js-transfer-delay-medium span', 'action.title.transfer.delayed.medium');
+        i18nSafeSelectorBtnAppend('.js-transfer-delay-longest span', 'action.title.transfer.delayed.longest');
+        i18nSafeSelectorBtnAppend('.js-transfer-delay-submit-btn span', 'action.title.transfer.custom.delayed.submit');
+        i18nSafeSelectorAppend('.js-label-custom-delay', 'action.title.transfer.custom.delayed.input.label');
+        i18nPlaceholder($('.js-transfer-delay-input'), 'action.title.transfer.custom.delayed.input.placeholder');
+
 
         // Chosen Select drop down placeholder text...
         $Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') });

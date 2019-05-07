@@ -16,7 +16,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent = function(options) {
     this.userPoolTable      = null;
     this.counterPoolTable   = null;
 
-    this.isRTL              = document.getElementsByTagName("html")[0].getAttribute("dir") 
+    this.isRTL              = document.getElementsByTagName("html")[0].getAttribute("dir")
                                 && document.getElementsByTagName("html")[0].getAttribute("dir")
                                                 .indexOf('rtl') > -1 ? true : false;
     this.views          = {
@@ -24,18 +24,20 @@ window.$Qmatic.components.popover.QueuePopoverComponent = function(options) {
         TRANSFER_SELECTION: 'transfer-selection-view',
         QUEUE: 'queue-view',
         USER_POOL: 'user-pool-view',
-        COUNTER_POOL: 'counter-pool-view'
+        COUNTER_POOL: 'counter-pool-view',
+        DELAYED_TRANSFER: 'delayed-transfer-view',
     }
+    this.enhancedTransferDelayButtons = [];
 }
 
-window.$Qmatic.components.popover.QueuePopoverComponent.prototype 
+window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     = Object.create(window.$Qmatic.components.popover.BasePopoverComponent.prototype);
 
 // correct the constructor pointer
-window.$Qmatic.components.popover.QueuePopoverComponent.prototype.constructor 
+window.$Qmatic.components.popover.QueuePopoverComponent.prototype.constructor
     = window.$Qmatic.components.popover.QueuePopoverComponent;
 
-window.$Qmatic.components.popover.QueuePopoverComponent.prototype 
+window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     = $.extend(window.$Qmatic.components.popover.QueuePopoverComponent.prototype, {
     init: function () {
         this._attachTargetEventListeners();
@@ -60,11 +62,11 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
 
             popoverController.pushPopover(this);
 
-            var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true; 
-            
+            var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true;
+
             this._toggleInstance();
             this._navigateTo(this.views.ACTION_BAR);
-    
+
             if(shouldAttachTemplateEvents) {
                 this._attachTemplateEvents();
             }
@@ -108,16 +110,16 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         if(this.disableTransfer) {
             transferBtn.disabled = true;
         } else {
-            if(transferToQueueEnabled 
+            if(transferToQueueEnabled
                 && transferToUserPoolEnabled === false
                 && transferToServicePointPoolEnabled === false) {
                     transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.QUEUE, this._initQueuesTable.bind(this, popoverQueueTable)));
             }
-            else if(transferToUserPoolEnabled 
+            else if(transferToUserPoolEnabled
                 && transferToQueueEnabled === false
                 && transferToServicePointPoolEnabled === false) {
                     transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.USER_POOL, this._initUserPoolTable.bind(this, popoverUserPoolTable)));
-            } else if(transferToServicePointPoolEnabled 
+            } else if(transferToServicePointPoolEnabled
                 && transferToUserPoolEnabled === false
                 && transferToQueueEnabled === false) {
                     transferBtn.addEventListener('click', this._navigateTo.bind(this, this.views.COUNTER_POOL, this._initCounterPoolTable.bind(this, popoverCounterPoolTable)));
@@ -151,7 +153,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         if (transferToUserPoolEnabled === false) {
             transferToUserPoolBtn.parentNode.removeChild(transferToUserPoolBtn);
         }
-    
+
         if (transferToServicePointPoolEnabled === false) {
             transferToCounterPoolBtn.parentNode.removeChild(transferToCounterPoolBtn);
         }
@@ -173,6 +175,91 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
     _setupAriaAttributes: function (table, searchInput) {
         searchInput.setAttribute('aria-controls', table.attr('id'));
     },
+    _showTransferWithDelay: function (transferTo, aData) {
+      this._navigateTo(this.views.DELAYED_TRANSFER);
+      this._initTransferWithDelay(transferTo, aData);
+    },
+    _initTransferWithDelay: function (transferTo, aData) {
+      var transferButtons = this.instance._tooltipNode.querySelectorAll('.js-transfer-delay-btn');
+      var transferInput = this.instance._tooltipNode.querySelector('.js-transfer-delay-input');
+      var transferInputSubmit = this.instance._tooltipNode.querySelector('.js-transfer-delay-submit-btn');
+      var transferInputLabel = this.instance._tooltipNode.querySelector('.js-label-custom-delay');
+      var clearInputButton = this.instance._tooltipNode.querySelector('.js-clear-field');
+
+      transferInput.setAttribute('id', 'popoverDelayInput');
+      transferInputLabel.setAttribute('for', 'popoverDelayInput');
+      transferInput.removeEventListener('keydown', util.validateTransferInput);
+      transferInput.removeEventListener('input', this._clearInputToggler);
+      transferInput.addEventListener('keydown', util.validateTransferInput);
+      transferInput.addEventListener('input', this._clearInputToggler);
+
+      if (this.clearInputFunction !== undefined) {
+        clearInputButton.removeEventListener('click', this.clearInputFunction);
+      }
+      this.clearInputFunction = this._getClearInputFunction(transferInput);
+      clearInputButton.addEventListener('click', this.clearInputFunction);
+
+      util.setTransferDelayTitle($(this.instance._tooltipNode.querySelector('.js-transfer-delay-popover-description')), transferTo, aData);
+      if (this.transferSubmitFunction !== undefined) {
+        transferInputSubmit.removeEventListener('click', this.transferSubmitFunction);
+      }
+      this.transferSubmitFunction = this._getTransferDelaySubmitFunction(transferInput, transferTo, aData).bind(this);
+
+      transferInputSubmit.addEventListener('click', this.transferSubmitFunction);
+
+      this._removeTransferDelayListeners();
+      for(var i = 0; i < transferButtons.length; i++) {
+        var delay = transferButtons[i].getAttribute('data-delay');
+        var transferFn = this._getTransferDelayFunction(transferTo, delay, aData).bind(this);
+        transferButtons[i].addEventListener('click', transferFn);
+        this.enhancedTransferDelayButtons.push({
+          element: transferButtons[i],
+          elementListener: transferFn
+        });
+      }
+    },
+    _getClearInputFunction: function (transferInput) {
+      return function clearInput(e) {
+        transferInput.value = "";
+        var event = util.createEvent('input');
+        transferInput.dispatchEvent(event);
+      }
+    },
+    _getTransferDelaySubmitFunction: function (transferInput, transferTo, aData) {
+      return function delaySubmitFunction(e) {
+        if (transferInput.value.trim() !== '') {
+          this._getTransferDelayFunction(transferTo, transferInput.value, aData).bind(this)(e);
+        }
+      }
+    },
+    _removeTransferDelayListeners: function () {
+      this.enhancedTransferDelayButtons.forEach(function(item) {
+        item.element.removeEventListener('click', item.elementListener);
+      });
+      this.enhancedTransferDelayButtons = [];
+    },
+    _clearInputToggler: function (e) {
+      e.target.value = e.target.value.replace(/[^0-9]/g, '');
+      if (e.target.value !== '') {
+        e.target.nextElementSibling.style.display = "block";
+      } else {
+        e.target.nextElementSibling.style.display = "none";
+      }
+    },
+    _getTransferDelayFunction: function (transferTo, delay, aData) {
+      return function transferFunction(e) {
+        e.preventDefault();
+        var delayInMinutes = +delay * 60;
+        if (transferTo === 'counterPool') {
+          transfer._transferVisitInQueueToServicePointPoolClicked("FIRST", aData, this.visitId, delayInMinutes);
+        } else if (transferTo === 'staffPool') {
+          transfer._transferVisitInQueueToStaffPoolClicked("FIRST", aData, this.visitId, delayInMinutes);
+        } else if (transferTo === 'queue') {
+          transfer._transferTicketToQueue(null, aData, this.visitId, delayInMinutes);
+        }
+      }
+    },
+
     _setupSearchListener: function (table, searchInput, searchContainer, searchClearButton) {
         searchClearButton.removeEventListener('click', this._clearSearchField);
         searchClearButton.addEventListener('click', this._clearSearchField.bind(this, searchInput));
@@ -211,7 +298,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         var searchContainer = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool-container');
         var searchClearButton = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool-clear-btn');
         var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool');
-        
+
         this._setupAriaAttributes(this.userPoolTable, searchInput);
         this._setupSearchListener(this.userPoolTable, searchInput, searchContainer, searchClearButton);
         queueViewController.resetTimer();
@@ -250,6 +337,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         this.queueTable         = null;
         this.userPoolTable      = null;
         this.counterPoolTable   = null;
+        this._removeTransferDelayListeners();
         this.instance && this.instance.dispose();
         this.popoverOverlay.style.display = "none";
     }

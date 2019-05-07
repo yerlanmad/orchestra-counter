@@ -29,3 +29,11 @@
 .qm-inline {
   display: inline;
 }
+
+.qm-mb-4 {
+  margin-bottom: rem($global-standard-margin);
+}
+
+.qm-mt-4 {
+  margin-top: rem($global-standard-margin);
+}

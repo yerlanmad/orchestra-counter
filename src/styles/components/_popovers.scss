@@ -11,8 +11,18 @@
         }
     }
 
+    &__description {
+      display: block;
+      font-size: rem(20px);
+      font-weight: $font-weight-light;
+      margin: rem(0 0 $global-standard-margin 0);
+      @at-root [dir='rtl'] & {
+          text-align: right;
+      }
+    }
+
     &__content {
-        max-width: 400px;
+        max-width: 430px;
         width: 100%;
 
         &--narrow {
@@ -47,7 +57,7 @@
             &:hover {
                 color: $dark-transparent82;
             }
-            
+
             .qm-action-btn__icon {
                 font-size: rem(16px);
                 margin-bottom: 0;
@@ -60,7 +70,8 @@
     .qm-popover-transfer-selection,
     .qm-popover-queue,
     .qm-popover-user-pool,
-    .qm-popover-counter-pool {
+    .qm-popover-counter-pool,
+    .qm-popover-delayed-transfer {
         display: none;
     }
 
@@ -75,7 +86,7 @@
             display: block;
             .qm-btn {
                 padding: rem($global-standard-padding / 2 $global-standard-padding);
-            
+
                 &__text{
                     white-space: normal;
                 }
@@ -101,31 +112,41 @@
         }
     }
 
-    .qm-popover-queue,
-    .qm-popover-user-pool,
-    .qm-popover-counter-pool {
-        width: 400px;
-    }
+    &.popover-show--delayed-transfer-view {
+      .qm-popover-delayed-transfer {
+          display: block;
+      }
+  }
 
-    .qm-popover-user-pool,
-    .qm-popover-counter-pool {
-        .qm-table__body {
-            td {
-                cursor: pointer;
-            }
-        }
-    }
+  .qm-popover-user-pool,
+  .qm-popover-counter-pool,
+  .qm-popover-delayed-transfer {
+      width: 400px;
+  }
 
-    &-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 100;
-    }
-    
+  .qm-popover-queue {
+    width: 430px;
+  }
+
+  .qm-popover-user-pool,
+  .qm-popover-counter-pool {
+      .qm-table__body {
+          td {
+              cursor: pointer;
+          }
+      }
+  }
+
+  &-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+  }
+
 }
 
 .qm-rendered-popovers {

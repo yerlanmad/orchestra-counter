@@ -107,6 +107,7 @@
         <script type="text/javascript" src="scripts/components/card/WalkInCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/VisitCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/TransferCardComponent.js"></script>
+        <script type="text/javascript" src="scripts/components/card/TransferDelayCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/CustomerCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/CustomerListCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/MarksCardComponent.js"></script>
@@ -124,6 +125,7 @@
         <script type="text/javascript" src="scripts/components/card/transferCards/transferQueueCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferUserPoolCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/transferCards/transferCounterPoolCard.js"></script>
+        <script type="text/javascript" src="scripts/components/card/transferCards/transferDelayCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/marksCard/marksCard.js"></script>
         <script type="text/javascript" src="scripts/components/card/MessageCardComponent.js"></script>
         <script type="text/javascript" src="scripts/components/card/messageCard/messageCard.js"></script>
