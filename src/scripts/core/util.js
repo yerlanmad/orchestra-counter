@@ -200,8 +200,8 @@ var util = new function () {
             var $clearBtn = $searchableContainer.find('.js-table-filter-clear-btn');
             var _self = this;
 
-            $searchInput.off('keyup change', '**');
-            $searchInput.on('keyup change', function () {
+            $searchInput.off('input');
+            $searchInput.on('input', function () {
                 var searchVal = $(this).val();
                 _self.toggleClearButton(searchVal, $searchableContainer);
                 table.api().search(searchVal).draw();

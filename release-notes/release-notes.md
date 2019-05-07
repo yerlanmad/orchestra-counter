@@ -31,6 +31,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **COUNTER-137** | **custom_1 field includes too many characters and makes statistics end up in failed events** Removed encoding when saving notes |
 | **COUNTER-138** | **LED does not show called ticket after StoreNext call from WebServicepoint** UTT adjustments to REMOVE_USER_FROM_STORE_NEXT |
 | **COUNTER-140** | **Hard to see Mark Types options on small screens** Adjustment of dropdown heights for marks dropdowns |
+| **COUNTER-143** | **Need to click TWICE after search** Fixed event listener for custom search |
 
 <h3>Known issues</h3>
 
