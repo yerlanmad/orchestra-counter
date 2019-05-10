@@ -1,0 +1,13 @@
+<table id="workProfileVisitsTable" class="qm-table qm-table--simple" aria-labelledby="workProfileVisitsTab">
+  <thead class="qm-table__header">
+    <tr>
+      <th id="ticketVisitId"></th>
+      <th id="ticketTicketId"></th>
+      <th id="ticketCustomerName"></th>
+      <th id="ticketActions"></th>
+      <th id="ticketAppointmentTime"></th>
+      <th id="ticketWaitingTime"></th>
+    </tr>
+  </thead>
+  <tbody class="qm-table__body"></tbody>
+</table>

@@ -17,6 +17,7 @@ buttonServeMultiService = false;        // Serve multi servive direct from visit
 buttonTransferEnabled = true;						// Transfer button
 buttonRecycleEnabled = true;						// Recycle button
 allQueuesBtnEnabled = false;						// All queues tab button
+workprofileVisitsBtnEnabled = false;    // Workprofile visits tab button
 buttonParkEnabled = false;							// Park Button
 buttonNotesEnabled = false;							// Edit/Add Notes Button
 buttonNoShowsEnabled = true;						// No Shows Button
@@ -110,9 +111,19 @@ function showModules() {
 
 	if(allQueuesBtnEnabled == true) {
 		$('#allQueuesTab').attr("style", "");
+		$('#allQueuesTab').attr("data-activated", true);
 	} else {
 		$('#allQueuesTab').hide();
-	}
+		$('#allQueuesTab').attr("data-activated", false);
+  }
+
+  if(workprofileVisitsBtnEnabled == true) {
+    $('#workProfileVisitsTab').attr("style", "");
+		$('#workProfileVisitsTab').attr("data-activated", true);
+	} else {
+		$('#workProfileVisitsTab').hide();
+		$('#workProfileVisitsTab').attr("data-activated", false);
+  }
 
 	if (buttonTransferEnabled == true) {
 		$('#transferBtn').show();
@@ -246,7 +257,10 @@ function showModules() {
 		}
 		if ( params.btnAllQueues != undefined) {
 			allQueuesBtnEnabled = params.btnAllQueues;						// Show all queues
-		}
+    }
+    if ( params.btnWorkProfileVisits != undefined) {
+      workprofileVisitsBtnEnabled = params.btnWorkProfileVisits;
+    }
 		if ( params.mdMarks != undefined) {
 			moduleCustomMarksEnabled = params.mdMarks ;					// Custom Marks
 		}

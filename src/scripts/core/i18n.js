@@ -433,6 +433,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         i18nSafeSelectorAppend('#allQueuesTab .qm-tabs__tab-text', 'button.all.queues');
         i18nSafeSelectorAppend('#myQueuesTab .qm-tabs__tab-text', 'button.my.queues');
+        i18nSafeSelectorAppend('#workProfileVisitsTab .qm-tabs__tab-text', 'button.workprofile.visits');
 
         i18nSafeSelectorBtnAppend('.js-popover-call > span', 'action.pool.call');
         i18nSafeSelectorBtnAppend('.js-popover-transfer > span', 'action.pool.transfer');

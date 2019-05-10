@@ -3,7 +3,7 @@ window.$Qmatic.components = window.$Qmatic.components || {};
 
 // Dropdown Component
 window.$Qmatic.components.tabs = (function(){
-    
+
     var tablist, tabs, panels;
 
     var keys = {
@@ -30,7 +30,7 @@ window.$Qmatic.components.tabs = (function(){
         // Build an array with all tabs (<button>s) in it
         tabs[index].index = index;
     };
-    
+
       // When a tab is clicked, activateTab is fired to activate it
      function clickEventListener (event) {
         var tab = event.target;
@@ -48,7 +48,7 @@ window.$Qmatic.components.tabs = (function(){
                 break;
         };
     };
-    
+
     // Handle keydown on tabs
     function keydownEventListener (event) {
         var key = event.keyCode;
@@ -174,7 +174,7 @@ window.$Qmatic.components.tabs = (function(){
         var delay = 0;
         setTimeout(checkTabFocus, delay, target);
     };
-    
+
     // Only activate tab on focus if it still has focus after the delay
     function checkTabFocus (target) {
         var focused = document.activeElement;
@@ -192,12 +192,11 @@ window.$Qmatic.components.tabs = (function(){
         var tabComponent = document.getElementById(config.tabComponentId);
 
         tablist = tabComponent.querySelector('[role="tablist"]');
-        tabs = tabComponent.querySelectorAll('[role="tab"]');
+        tabs = tabComponent.querySelectorAll('[role="tab"][data-activated="true"]');
         panels = tabComponent.querySelectorAll('[role="tabpanel"]');
-        
         // Bind listeners
         for (var i = 0; i < tabs.length; ++i) {
             addListeners(i);
         }
-    }  
+    }
 })();

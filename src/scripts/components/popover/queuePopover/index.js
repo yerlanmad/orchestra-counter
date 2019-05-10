@@ -10,6 +10,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent = function(options) {
     this.disableCall        = _.isBoolean(options.disableCall) ? options.disableCall : false;
     this.disableTransfer    = _.isBoolean(options.disableTransfer) ? options.disableTransfer : false;
     this.disableDelete      = _.isBoolean(options.disableDelete) ? options.disableDelete : false;
+    this.isWorkProfileQueue = _.isBoolean(options.isWorkProfileQueue) ? options.isWorkProfileQueue : false;
 
     //Tables
     this.queueTable         = null;
@@ -163,7 +164,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
 
     },
     _initQueuesTable: function (selector) {
-        this.queueTable = transfer.buildTransferToQueueTable(this, selector, this.queueTable, this.ticketId, this.visitId);
+        this.queueTable = transfer.buildTransferToQueueTable(this, selector, this.queueTable, this.ticketId, this.visitId, this.isWorkProfileQueue);
         var searchContainer = this.instance._tooltipNode.querySelector('.js-popover-filter-queue-container');
         var searchClearButton = this.instance._tooltipNode.querySelector('.js-popover-filter-queue-clear-btn');
         var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-queue');
@@ -251,15 +252,14 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         e.preventDefault();
         var delayInMinutes = +delay * 60;
         if (transferTo === 'counterPool') {
-          transfer._transferVisitInQueueToServicePointPoolClicked("FIRST", aData, this.visitId, delayInMinutes);
+          transfer._transferVisitInQueueToServicePointPoolClicked("FIRST", aData, this.visitId, delayInMinutes, this.isWorkProfileQueue);
         } else if (transferTo === 'staffPool') {
-          transfer._transferVisitInQueueToStaffPoolClicked("FIRST", aData, this.visitId, delayInMinutes);
+          transfer._transferVisitInQueueToStaffPoolClicked("FIRST", aData, this.visitId, delayInMinutes, this.isWorkProfileQueue);
         } else if (transferTo === 'queue') {
-          transfer._transferTicketToQueue(null, aData, this.visitId, delayInMinutes);
+          transfer._transferTicketToQueue(null, aData, this.visitId, delayInMinutes, this.isWorkProfileQueue);
         }
       }
     },
-
     _setupSearchListener: function (table, searchInput, searchContainer, searchClearButton) {
         searchClearButton.removeEventListener('click', this._clearSearchField);
         searchClearButton.addEventListener('click', this._clearSearchField.bind(this, searchInput));
@@ -294,7 +294,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         table.fnFilter(val);
     },
     _initUserPoolTable: function (selector) {
-        this.userPoolTable = transfer.buildTransferToUserPoolTable(this, selector, this.userPoolTable, this.ticketId, this.visitId);
+        this.userPoolTable = transfer.buildTransferToUserPoolTable(this, selector, this.userPoolTable, this.ticketId, this.visitId, this.isWorkProfileQueue);
         var searchContainer = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool-container');
         var searchClearButton = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool-clear-btn');
         var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-user-pool');
@@ -304,7 +304,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         queueViewController.resetTimer();
     },
     _initCounterPoolTable: function (selector) {
-        this.counterPoolTable = transfer.buildTransferToCounterPoolTable(this, selector, this.counterPoolTable, this.ticketId, this.visitId);
+        this.counterPoolTable = transfer.buildTransferToCounterPoolTable(this, selector, this.counterPoolTable, this.ticketId, this.visitId, this.isWorkProfileQueue);
         var searchContainer = this.instance._tooltipNode.querySelector('.js-popover-filter-counter-pool-container');
         var searchClearButton = this.instance._tooltipNode.querySelector('.js-popover-filter-counter-pool-clear-btn');
         var searchInput = this.instance._tooltipNode.querySelector('.js-popover-filter-counter-pool');
@@ -319,6 +319,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         queueViewController.navigateToOverview();
     },
     _delete: function () {
+      var _self = this;
         this.disposeInstance();
         var visitId = this.visitId;
         var ticketId = this.ticketId;
@@ -328,6 +329,10 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
                 queues.removeTicket(visitId, ticketId);
                 modalNavigationController.pop();
                 queueViewController.navigateToOverview();
+                if (_self.isWorkProfileQueue) {
+                  var $tableScrollContainer = $('#workProfileVisitsTable_wrapper').find('dataTables_scrollBody');
+                  util.updateTableAndRestoreScrollPosition($tableScrollContainer, queues.loadWorkProfileVisits);
+                }
             }
         });
         modalNavigationController.push(deleteConfirmation);
