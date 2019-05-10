@@ -200,13 +200,13 @@ var util = new function () {
             var $clearBtn = $searchableContainer.find('.js-table-filter-clear-btn');
             var _self = this;
 
-            $searchInput.off('input');
-            $searchInput.on('input', function () {
+            $searchInput.off('input keyup');
+            $searchInput.on('input keyup', function () {
                 var searchVal = $(this).val();
                 _self.toggleClearButton(searchVal, $searchableContainer);
                 table.api().search(searchVal).draw();
             });
-            $clearBtn.off('click', this._clearSearchField);
+            $clearBtn.off('click');
             $clearBtn.on('click', this._clearSearchField.bind(this, $searchInput));
         }
         $(window).bind('resize', function () {
