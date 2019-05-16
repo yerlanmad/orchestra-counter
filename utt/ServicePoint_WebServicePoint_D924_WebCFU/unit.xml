@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.10   2019-05-15   Added parameter for force logout          joelan
     7.0.0.9    2019-05-02   Added parameter to transfer with delay    joelan
     7.0.0.8    2019-04-25   Added ADD_USER_TO_STORE_NEXT and          joelan
                             REMOVE_USER_FROM_STORE_NEXT
@@ -81,7 +82,7 @@
 
 <unit name="WebServicePoint_D924_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.0.9"
+      unitVersion="7.0.0.10"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -409,6 +410,14 @@
           writeLevel="profile"
           label="Show expected transaction time"
           description="Show expected transaction time for current service"
+          privilege="install:adminAdmin"/>
+        <parameter name="forceLogoutEnabled"
+          sortOrder="5036"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Force logout"
+          description="If enabled the user can forcefully logout another user that has an ongoing visit"
           privilege="install:adminAdmin"/>
 
 

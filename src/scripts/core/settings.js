@@ -31,6 +31,7 @@ buttonTransferFirstEnabled  = true;				// Transfer to first in Queue Button
 buttonTransferLastEnabled  = true; 				// Transfer to last in Queue Button
 buttonTransferSortEnabled  = true;					// Transfer Sorted in Queue Button
 buttonTransferDelayedEnabled = false;     // Transfer delayed
+forceLogoutEnabled = false;               // Allow forcing logout of other user
 moduleChatEnabled = false;							// Chat Module
 minTimeBetweenCalls = '';
 singleSession = false;
@@ -336,7 +337,13 @@ function showModules() {
 			expectedTransactionTimeEnabled = params.expectedTransactionTimeEnabled;
 		} else {
 			expectedTransactionTimeEnabled = false;
-		}
+    }
+
+    if (params.forceLogoutEnabled != undefined) {
+      forceLogoutEnabled = params.forceLogoutEnabled;
+    } else {
+      forceLogoutEnabled = false;
+    }
 
 		showModules();
 }

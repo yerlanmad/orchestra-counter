@@ -85,6 +85,8 @@ var servicePoint = new function () {
 	var visitInDisplayQInterval = 5 // 5 seconds
 	var visitInDisplayQMaxWait = 50 // 50 x visitInDisplayQInterval interval
 
+  var forceLogoutFunction = null;
+
 	// Service point states
 	this.servicePointState = {
 		OPEN: 'OPEN',
@@ -575,9 +577,13 @@ var servicePoint = new function () {
 		if (typeof wantedWorkstation !== 'undefined'
 			&& null != wantedWorkstation) {
 			if (wantedWorkstation.parameters.singleSession && warnUser) {
-				isHijacking = isHijack(wantedWorkstation, settings);
+        if(sessvars.state.userState === servicePoint.userState.NO_STARTED_USER_SESSION && wantedWorkstation.parameters && wantedWorkstation.parameters.forceLogoutEnabled !== undefined) {
+          forceLogoutEnabled = wantedWorkstation.parameters.forceLogoutEnabled;
+        }
+        isHijacking = isHijack(wantedWorkstation, settings);
 			}
 			if (!isHijacking) {
+        prepareWantedWorkstation();
 				// unsubscribe to events for old unit id if changed to avoid
 				// being thrown out
 				if (typeof sessvars.servicePointUnitId !== 'undefined' && sessvars.servicePointUnitId != null
@@ -612,8 +618,9 @@ var servicePoint = new function () {
 			if (usersOnWantedServicePoint != null
 				&& usersOnWantedServicePoint.length > 0
 				&& usersOnWantedServicePoint[0].id != currentUser.id) {
-				// the user wants to login to an occupied counter; display
-				// warning message.
+        forceLogoutFunction = util.getForceLogoutFunction(params.branchId, usersOnWantedServicePoint[0].userName);
+        // the user wants to login to an occupied counter; display
+        // warning message.
 				$Qmatic.components.modal.hijack.updateLoggedInUser(usersOnWantedServicePoint[0].userName)
 				modalNavigationController.push($Qmatic.components.modal.hijack)
 				isHijacking = true;
@@ -714,7 +721,18 @@ var servicePoint = new function () {
 		} else {
 			util.showError(jQuery.i18n.prop("info.call.recall.to.quick"));
 		}
-	};
+  };
+
+  var prepareWantedWorkstation = function () {
+    var userWasLoggedOut = false;
+    if (forceLogoutEnabled && typeof forceLogoutFunction === 'function') {
+      forceLogoutFunction();
+      userWasLoggedOut = true;
+    }
+    // Reset forceLogoutFunction
+    forceLogoutFunction = null;
+    return userWasLoggedOut;
+  };
 
 	var setProfile = function (params) {
 		sessvars.state = servicePoint.getState(spService.put('branches/'

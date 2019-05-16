@@ -223,6 +223,12 @@ var util = new function () {
         }
     };
 
+    this.getForceLogoutFunction = function (branchId, userName) {
+      return function forceLogoutFunction() {
+        return spService.del('branches/' + branchId + '/users/' + userName + '/?force=true');
+      }
+    };
+
     this.validateTransferInput = function (e) {
       var allowedChars = '0123456789';
       function contains(stringValue, charValue) {

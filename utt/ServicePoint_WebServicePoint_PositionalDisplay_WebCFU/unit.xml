@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.8    2019-05-15   Added parameter for force logout          joelan
     7.0.0.7    2019-05-02   Added parameter to transfer with delay    joelan
     7.0.0.6    2019-03-29   Added parameter to call multi service     joelan
                             from ongoing visit, changed marks label
@@ -73,7 +74,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.0.7"
+      unitVersion="7.0.0.8"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -391,6 +392,14 @@
           writeLevel="profile"
           label="Show expected transaction time"
           description="Show expected transaction time for current service"
+          privilege="install:adminAdmin"/>
+        <parameter name="forceLogoutEnabled"
+          sortOrder="5037"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Force logout"
+          description="If enabled the user can forcefully logout another user that has an ongoing visit"
           privilege="install:adminAdmin"/>
 
 
