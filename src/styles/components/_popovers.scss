@@ -134,6 +134,17 @@
           td {
               cursor: pointer;
           }
+          .qm-table__first-column {
+            a {
+              color: $dark-transparent82;
+              &:hover,
+              &:focus,
+              &:visited {
+                text-decoration: none;
+                color: $dark-transparent82;
+              }
+            }
+          }
       }
   }
 

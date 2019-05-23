@@ -1,14 +1,16 @@
 <header class="qm-header" id="header">
     <div class="qm-header__left">
-        <a id="homeLink" href="/" onclick="return servicePoint.handleHome();" class="qm-action-btn qm-action-btn--only-icon qm-header__home-btn">
-            <i class="qm-action-btn__icon icon-home" aria-hidden="true"></i>
-            <span class="sr-only"></span>
-        </a>
-        <a class="qm-header__brand-logo-container" href="/" onclick="return servicePoint.handleHome();">
-            <img class="qm-header__brand-logo" src="./images/brand_logo_header.png" alt="" role="presentation"/>
-            <span class="sr-only"></span>
-        </a>
-        <span id="appName" class="qm-header__application-name"></span>
+      <a class="qm-header__home-link" href="/" onclick="return servicePoint.handleHome();">
+        <span id="homeLink" class="qm-action-btn qm-action-btn--only-icon qm-header__home-btn">
+          <i class="qm-action-btn__icon icon-home" aria-hidden="true"></i>
+          <span class="sr-only"></span>
+        </span>
+        <span class="qm-header__brand-logo-container">
+          <img class="qm-header__brand-logo" src="./images/brand_logo_header.png" alt="" role="presentation"/>
+          {# <span class="sr-only"></span> #}
+        </span>
+      </a>
+      <span id="appName" class="qm-header__application-name"></span>
     </div>
     <div class="qm-header__middle">
         <div class="qm-header__profile-setting qm-header__profile-setting--branch">
@@ -25,14 +27,24 @@
         </div>
     </div>
     <div class="qm-header__right">
-        <a href="/help" target="_blank" class="qm-action-btn qm-action-btn--only-icon qm-header__help-btn">
-            <i class="qm-action-btn__icon icon-help" aria-hidden="true"></i>
-            <span class="sr-only"></span>
-        </a>
-        <a href="#" id="userName" class="qm-header__user-name" onclick="servicePoint.showSettingsWindow();this.blur();"></a>
-        <a href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);" class="qm-action-btn qm-action-btn--only-icon qm-header__logout-btn">
-            <i class="qm-action-btn__icon icon-exit" aria-hidden="true"></i>
-            <span class="sr-only"></span>
-        </a>
+      <nav class="qm-header__nav">
+        <ul class="qm-header__nav-list">
+          <li class="qm-header__nav-list-item">
+            <a href="/help" target="_blank" class="qm-action-btn qm-action-btn--only-icon qm-header__help-btn">
+                <i class="qm-action-btn__icon icon-help" aria-hidden="true"></i>
+                <span class="sr-only"></span>
+            </a>
+          </li>
+          <li class="qm-header__nav-list-item">
+            <a href="#" id="userName" class="qm-header__user-name" onclick="servicePoint.showSettingsWindow();this.blur();"></a>
+          </li>
+          <li class="qm-header__nav-list-item">
+            <a href="/logout.jsp" onclick="return servicePoint.handleLogoutQES(true, false);" class="qm-action-btn qm-action-btn--only-icon qm-header__logout-btn">
+                <i class="qm-action-btn__icon icon-exit" aria-hidden="true"></i>
+                <span class="sr-only"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
 </header>

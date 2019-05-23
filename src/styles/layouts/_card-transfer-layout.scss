@@ -1,14 +1,3 @@
-// #transferOptionsCard.qm-card-fill {
-//     .qm-card--transfer {
-//         justify-content: initial;
-//         .qm-card__content-section {
-//             flex: 1 1 100%;
-//         }
-//         .qm-card__footer-section {
-//             justify-self: flex-end;
-//         }
-//     }
-// }
 #transferOptionsCard {
     .qm-btn__text {
         overflow: hidden;
@@ -43,6 +32,18 @@
     .qm-table__body {
         td {
             cursor: pointer;
+
+            &.qm-table__first-column {
+              a {
+                color: $dark-transparent82;
+                &:hover,
+                &:focus,
+                &:visited {
+                  text-decoration: none;
+                  color: $dark-transparent82;
+                }
+              }
+            }
         }
     }
 }

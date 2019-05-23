@@ -4,7 +4,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
     this.visitId        = options.visitId;
     this.disableCall    = _.isBoolean(options.disableCall) ? options.disableCall : false;
-    this.isRTL          = document.getElementsByTagName("html")[0].getAttribute("dir") 
+    this.isRTL          = document.getElementsByTagName("html")[0].getAttribute("dir")
                         && document.getElementsByTagName("html")[0].getAttribute("dir")
                                                 .indexOf('rtl') > -1 ? true : false;
     this.views          = {
@@ -12,14 +12,14 @@ window.$Qmatic.components.popover.PoolPopoverComponent = function(options) {
     }
 }
 
-window.$Qmatic.components.popover.PoolPopoverComponent.prototype 
+window.$Qmatic.components.popover.PoolPopoverComponent.prototype
     = Object.create(window.$Qmatic.components.popover.BasePopoverComponent.prototype);
 
 // correct the constructor pointer
-window.$Qmatic.components.popover.PoolPopoverComponent.prototype.constructor 
+window.$Qmatic.components.popover.PoolPopoverComponent.prototype.constructor
     = window.$Qmatic.components.popover.PoolPopoverComponent;
 
-window.$Qmatic.components.popover.PoolPopoverComponent.prototype 
+window.$Qmatic.components.popover.PoolPopoverComponent.prototype
     = $.extend(window.$Qmatic.components.popover.BasePopoverComponent.prototype, {
     init: function () {
         this._attachTargetEventListeners();
@@ -40,14 +40,14 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
                 template: this.template,
                 offset: '0, 10'
             });
-            
+
             popoverController.pushPopover(this);
 
-            var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true; 
-            
+            var shouldAttachTemplateEvents = this.instance._tooltipNode ? false : true;
+
             this._toggleInstance();
             this._navigateTo(this.views.ACTION_BAR);
-    
+
             if(shouldAttachTemplateEvents) {
                 this._attachTemplateEvents();
             }
@@ -79,6 +79,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
     },
     disposeInstance: function () {
         this.navigationStack = [];
+        this.target.focus();
         this.instance && this.instance.dispose();
         this.popoverOverlay.style.display = "none";
     }

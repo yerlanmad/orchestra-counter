@@ -47,7 +47,6 @@ var init = new function () {
         } catch (e) {
             //nothing found; rtl prop not set
         }
-
         initDataTablesConfiguration()
         initSessvars();
         customer.init != undefined && typeof customer.init == "function" && customer.init();

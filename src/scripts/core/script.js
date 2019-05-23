@@ -1206,7 +1206,11 @@ var servicePoint = new function () {
 								"bVisible": false,
 								"mDataProp": "externalDescription",
 								"sType": "qm-sort"
-							}];
+              }];
+            var walkinHeaderCallback = function(nHead, aData, iStart, iEnd, aiDisplay) {
+              $('th:eq(0)').empty().append('<span class="sr-only">' + jQuery.i18n.prop('info.walk.direct.table.header') + "</span>")
+
+            };
 						var rowCallback = function (nRow, aData, iDisplayIndex) {
 							/* Set onclick action */
 							nRow.onclick = walkServiceClicked;
@@ -1215,7 +1219,8 @@ var servicePoint = new function () {
 						};
 						walkTable = util.buildTableJson({
 							"tableId": "walkDirectServices",
-							"url": url,
+              "url": url,
+              "headerCallback": walkinHeaderCallback,
 							"rowCallback": rowCallback,
 							"columns": columns,
 							"filter": true,
@@ -1851,7 +1856,8 @@ var servicePoint = new function () {
 		$("#showServicesLink").hide();
 		$("#hideServicesLink").css("display", "");
 		$("#nextVisitServices").find(".qm-services__service-item").hide();
-		$("#previousVisitServices").find(".qm-services__service-item").hide();
+    $("#previousVisitServices").find(".qm-services__service-item").hide();
+    $("#multiServicesComponent").focus();
 	}
 
 	this.hideCollapsedServices = function () {
@@ -1861,7 +1867,8 @@ var servicePoint = new function () {
 		$("#showServicesLink").css("display", "");
 		$("#hideServicesLink").hide();
 		$("#nextVisitServices").find(".qm-services__service-item").css("display", "");
-		$("#previousVisitServices").find(".qm-services__service-item").css("display", "");
+    $("#previousVisitServices").find(".qm-services__service-item").css("display", "");
+    $("#multiServicesComponent").focus();
 	}
 
 	var updateNextAndPreviousServices = function () {
@@ -2168,7 +2175,7 @@ var servicePoint = new function () {
 			var verticalMessage = spService.get("branches/" + sessvars.branchId
 				+ "/services/"
 				+ sessvars.state.visit.currentVisitService.serviceId
-				+ "/journey");
+        + "/journey");
 			if (typeof verticalMessage !== 'undefined'
 				&& verticalMessage != null
 				&& typeof verticalMessage.workstationMessage !== 'undefined'

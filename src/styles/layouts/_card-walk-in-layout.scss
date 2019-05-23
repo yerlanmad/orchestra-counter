@@ -78,5 +78,13 @@
         &-action-layout {
             margin-top: 0;
         }
+
+        #walkDirectServices_wrapper {
+          .dataTables_scrollHead {
+            #walkServiceInternalName {
+              display: none;
+            }
+          }
+        }
     }
 }

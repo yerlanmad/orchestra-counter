@@ -8,7 +8,7 @@
         <div class="qm-card-header">
             <div class="qm-card-header__headline" id="walkInHeader">
             </div>
-            <div class="qm-card-header__sub-heading" id="walkInSubHeader"> 
+            <div class="qm-card-header__sub-heading" id="walkInSubHeader">
             </div>
         </div>
         <div id="walkDirectServices_filter" class="search-filter qm-table-filter">
@@ -38,7 +38,7 @@
             </thead>
             <tbody></tbody>
         </table>
-    </div>    
+    </div>
 {% endblock %}
 
 {% block footer %}

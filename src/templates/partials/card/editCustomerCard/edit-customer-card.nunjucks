@@ -84,14 +84,14 @@
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
+                                        <label for="editAttacheddateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <label for="editAttacheddateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                             <select id="editAttacheddateOfBirthMonth" class="qm-date-select" dob dobmonth name="dobMonth">
                                                 <option value="-1"></option>
                                             </select>
                                         </div>
                                         <div class="qm-drop-down__error invisible-on-load" id="editDobMonthErrorMsg">
-                                                
+
                                         </div>
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--day">

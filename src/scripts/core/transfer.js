@@ -307,6 +307,7 @@ var transfer = new function() {
                         "mDataProp": "locale"},
                         /* Actions */      {
                         "sClass": "qm-table__last-column",
+                        "bVisible": false,
                         "bSearchable": false,
                         "sType": "qm-sort",
                         "mData": null,
@@ -325,9 +326,9 @@ var transfer = new function() {
                     });
                 };
                 var staffPoolRowCallback = function(nRow, aData, iDisplayIndex) {
-                    if($('td:eq(0)', nRow).find('span').length == 0) {
+                    if($('td:eq(0)', nRow).find('a').length == 0) {
                         var staffName = $('td:eq(0)', nRow).text();
-                        $('td:eq(0)', nRow).empty().append("<span class=\"staffNameSpan\" title=\"" + translate.msg("action.title.transfer.staff.pool", [sessvars.ticketIdToTransfer, staffName]) + "\">" + staffName + "</span>");
+                        $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"staffNameSpan\" title=\"" + translate.msg("action.title.transfer.staff.pool", [sessvars.ticketIdToTransfer, staffName]) + "\">" + staffName + "</a>");
                         // Transfer with delay: Uncomment this when pools support transfer with delay
                         // if (buttonTransferDelayedEnabled === true) {
                         //   $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "'>"
@@ -374,7 +375,6 @@ var transfer = new function() {
         if(servicePoint.hasValidSettings()) {
             // ugly but working. used in the row callback to put the ticket number in the header.
             sessvars.ticketIdToTransfer = ticketId;
-
             if(table != null) {
                 table.fnClearTable();
                 var params = servicePoint.createParams();
@@ -402,6 +402,7 @@ var transfer = new function() {
                     /* Actions */      {
                           "sClass": "qm-table__last-column",
                           "bSearchable": false,
+                          "bVisible": false,
                           "sType": "qm-sort",
                           "mData": null,
                           "sDefaultContent": ""},
@@ -418,14 +419,14 @@ var transfer = new function() {
                     });
                 };
                 var servicePointRowCallback = function(nRow, aData, iDisplayIndex) {
-                    if($('td:eq(0)', nRow).find('span').length == 0) {
+                    if($('td:eq(0)', nRow).find('a').length == 0) {
                         var servicePointName = $('td:eq(0)', nRow).text();
                         if(aData.state === "CLOSED") {
-                            $('td:eq(0)', nRow).empty().append("<span class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
-                            "</span> <i class='qm-table__lock-icon icon-lock' aria-hidden='true'></i>");
+                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
+                            "</a> <i class='qm-table__lock-icon icon-lock' aria-hidden='true'></i>");
                         } else {
-                            $('td:eq(0)', nRow).empty().append("<span class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
-                            "</span>");
+                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
+                            "</a>");
                         }
                         // Transfer with delay: Uncomment this when pools support transfer with delay
                         // if (buttonTransferDelayedEnabled === true) {
@@ -447,7 +448,7 @@ var transfer = new function() {
             // Transfer with delay: Change selector to tbody tr td:first-child when transfer with delay is supported
             $(selector).off('click', 'tbody tr td');
             //make new ones
-            $(selector).on('click', 'tbody tr td', function(){
+            $(selector).on('click', 'tbody tr td', function(e){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
                 transferVisitInQueueToServicePointPoolClicked("FIRST", aData, visitId);
@@ -717,6 +718,7 @@ var transfer = new function() {
                         "bVisible": false,
                         "mDataProp": "locale"},
                     /* Actions */      {
+                      "bVisible": false,
                       "sClass": "qm-table__last-column",
                       "bSearchable": false,
                       "sType": "qm-sort",
@@ -735,9 +737,9 @@ var transfer = new function() {
                     });
                 };
                 var staffPoolRowCallback = function(nRow, aData, iDisplayIndex) {
-                    if($('td:eq(0)', nRow).find('span').length == 0) {
+                    if($('td:eq(0)', nRow).find('a').length == 0) {
                         var staffName = $('td:eq(0)', nRow).text();
-                        $('td:eq(0)', nRow).empty().append("<span class=\"staffNameSpan\" title=\"" + translate.msg("action.title.transfer.staff.pool", [sessvars.state.visit.ticketId, staffName]) + "\">" + staffName + "</span>");
+                        $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"staffNameSpan\" title=\"" + translate.msg("action.title.transfer.staff.pool", [sessvars.state.visit.ticketId, staffName]) + "\">" + staffName + "</a>");
 
                         // Transfer with delay: Uncomment this when pools support transfer with delay
                         // if (buttonTransferDelayedEnabled === true) {
@@ -804,6 +806,7 @@ var transfer = new function() {
                         "mDataProp": "unitId"},
                         /* Actions */      {
                       "sClass": "qm-table__last-column",
+                      "bVisible": false,
                       "bSearchable": false,
                       "sType": "qm-sort",
                       "mData": null,
@@ -824,14 +827,14 @@ var transfer = new function() {
                     });
                 };
                 var servicePointRowCallback = function(nRow, aData, iDisplayIndex) {
-                    if($('td:eq(0)', nRow).find('span').length == 0) {
+                    if($('td:eq(0)', nRow).find('a').length == 0) {
                         var servicePointName = $('td:eq(0)', nRow).text();
                         if(aData.state === "CLOSED") {
-                            $('td:eq(0)', nRow).empty().append("<span class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
-                            "</span> <i class='qm-table__lock-icon icon-lock' aria-hidden='true'></i>");
+                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
+                            "</a> <i class='qm-table__lock-icon icon-lock' aria-hidden='true'></i>");
                         } else {
-                            $('td:eq(0)', nRow).empty().append("<span class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
-                            "</span>");
+                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
+                            "</a>");
                         }
                         // Transfer with delay: Uncomment this when pools support transfer with delay
                         // if (buttonTransferDelayedEnabled === true) {

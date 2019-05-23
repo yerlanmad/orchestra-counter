@@ -16,6 +16,9 @@
 
 <body>
     <div class="qm-app">
+        <!-- Content links -->
+        {% include "partials/content-links.nunjucks" %}
+
         <!-- Qmatic Header -->
         {% include "partials/global-header.nunjucks" %}
 
@@ -25,7 +28,7 @@
             <!-- Qmatic Main Left -->
             <div class="qm-main__left">
                 <div class="qm-main__scroll-container">
-                    <div class="qm-card-layout">
+                    <div class="qm-card-layout" id="cardContainer" tabindex="-1">
                         <div id="qm-card-nav" class="qm-hide qm-card-stack">
                             {% include "partials/card/closeCard/close-card.nunjucks" %}
                             {% include "partials/card/visitCard/visit-card.nunjucks" %}

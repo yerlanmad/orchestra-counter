@@ -99,14 +99,14 @@
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
+                                        <label for="createdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <label for="createdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                             <select id="createdateOfBirthMonth" class="qm-date-select" dob dobmonth name="dobMonth">
                                                 <option value="-1"></option>
                                             </select>
                                         </div>
                                         <div class="qm-drop-down__error invisible-on-load" id="createdateOfBirthMonthErrorMsg">
-                                                
+
                                         </div>
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--day">
@@ -209,14 +209,14 @@
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
+                                        <label for="editdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <label for="editdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                             <select id="editdateOfBirthMonth" class="qm-date-select" dob dobmonth name="dobMonth">
                                                 <option value="-1"></option>
                                             </select>
                                         </div>
                                         <div class="qm-drop-down__error invisible-on-load" id="editdateOfBirthMonthErrorMsg">
-                                                
+
                                         </div>
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--day">

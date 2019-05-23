@@ -1,4 +1,4 @@
-<div class="qm-action-bar">
+<div class="qm-action-bar" id="globalActionPanel" tabindex="-1">
     <div class="qm-action-bar__left">
         <div class="button-tooltip">
             <button class="qm-action-btn qm-action-btn--large" id="walkDirectBtn" name="walkDirectButton"

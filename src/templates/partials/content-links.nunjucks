@@ -1,0 +1,4 @@
+<div class="qm-content-links">
+  <a id="cardContentLink" class="qm-content-links__link" href="#cardContainer"></a>
+  <a id="actionPanelContentLink" class="qm-content-links__link" href="#globalActionPanel"></a>
+</div>

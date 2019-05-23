@@ -1,0 +1,35 @@
+.qm-content-links {
+  position: absolute;
+  top: 0;
+  left: rem(8px);
+  z-index: 120;
+
+  @at-root [dir='rtl'] & {
+    left: auto;
+    right: rem(8px);
+  }
+
+  &__link {
+    display: block;
+    padding: 0;
+    font-size: rem(18px);
+    background: linear-gradient(254.96deg, $background-gradient-stop1 0%, $background-gradient-stop2 34.9%, $background-gradient-stop3 62.87%, $background-gradient-stop4 77.12%, $background-gradient-stop5 100%);
+    color: $white;
+    position: absolute!important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+
+    &:active,
+    &:focus {
+      padding: rem(15px $global-standard-padding);
+      color: $white;
+      position: static!important;
+      height: auto;
+      width: auto;
+      overflow: visible;
+      clip: auto;
+    }
+  }
+}

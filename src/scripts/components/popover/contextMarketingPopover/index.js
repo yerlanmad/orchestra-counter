@@ -6,7 +6,7 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController = function (
         options = {};
     }
     this.instances = {};
-    
+
 }
 
 //  Base Context marketing Class Methods
@@ -20,8 +20,8 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
         if(!_.isEmpty(config.placement) && config.placement === "right" && this.isRTL) {
             config.placement = "left";
         }
-        
-        this.isRTL     = document.getElementsByTagName("html")[0].getAttribute("dir") 
+
+        this.isRTL     = document.getElementsByTagName("html")[0].getAttribute("dir")
                         && document.getElementsByTagName("html")[0].getAttribute("dir")
                                                 .indexOf('rtl') > -1 ? true : false;
 
@@ -76,17 +76,27 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
     open: function (key) {
         if(this._hasInstance(key)) {
             this.instances[key].show();
+            this.moveFocus(key);
         }
     },
     close: function (key) {
         if(this._hasInstance(key)) {
             this.instances[key].hide();
+            this.moveFocus(key);
         }
     },
     toggle: function (key) {
         if(this._hasInstance(key)) {
             this.instances[key].toggle();
+            this.moveFocus(key);
         }
+    },
+    moveFocus: function (key) {
+      if (util.hasProp.call(this.instances[key], '_isOpen') && this.instances[key]._isOpen) {
+        this.instances[key]._tooltipNode.focus();
+      } else {
+        this.instances[key].reference.focus();
+      }
     },
     dispose: function (key) {
         if(this._hasInstance(key)) {

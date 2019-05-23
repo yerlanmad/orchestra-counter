@@ -8,7 +8,7 @@
 
 {% block content %}
     <div class="qm-card__content-section">
-        <p class="qm-card__text" id="inactiveCardSubTitle">
+        <p class="qm-card__text">
             <span id="cardCustomMessage"></span>
         </p>
     </div>

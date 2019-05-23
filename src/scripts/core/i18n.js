@@ -510,6 +510,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('.js-label-custom-delay', 'action.title.transfer.custom.delayed.input.label');
         i18nPlaceholder($('.js-transfer-delay-input'), 'action.title.transfer.custom.delayed.input.placeholder');
 
+        // Content navigation links
+        i18nSafe('cardContentLink', 'info.card.content.link.label');
+        i18nSafe('actionPanelContentLink', 'info.action.panel.content.link.label');
 
         // Chosen Select drop down placeholder text...
         $Qmatic.components.dropdown.addServiceSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.addServicesCard.selectAService') });

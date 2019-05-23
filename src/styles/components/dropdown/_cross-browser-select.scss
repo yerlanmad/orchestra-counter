@@ -13,12 +13,18 @@
         z-index: 99;
         opacity: 0;
         height: 100%;
+
+        &:focus {
+          & + .native-like-select {
+            outline: 1px dotted;
+            outline-style: dotted;
+            outline: -webkit-focus-ring-color auto 5px;
+          }
+        }
     }
     select,
     .native-like-select {
-        background: $white;
-        border-radius: 3;
-        border: 0;
+        background: transparent;
         border: 1px solid $dark-transparent12;
         width: 100%;
         -webkit-box-sizing: border-box;

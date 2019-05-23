@@ -9,7 +9,7 @@
             {{cardNav.render('visitCardAddMarksLbl')}}
             <div class="qm-card-header__sub-heading">
                 <div class="qm-drop-down">
-                    <div class="qm-drop-down__component qm-drop-down__select-mark-type">
+                    <div class="qm-drop-down__component qm-drop-down__select-mark-type" tabindex="0">
                         <select id="markTypeFilter">
                             <option value="-1"></option>
                         </select>

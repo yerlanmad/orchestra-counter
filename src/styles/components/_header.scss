@@ -6,7 +6,7 @@
     display: flex;
     justify-content: space-between;
     z-index: 90;
-    
+
     background: $header-background-color;
     padding: rem(0 24px);
 
@@ -31,7 +31,31 @@
         align-items: center;
     }
 
-    
+    &__home-link {
+      display: flex;
+      align-items: center;
+
+      &:hover,
+      &:focus {
+        text-decoration: none;
+      }
+    }
+
+    &__nav {
+      display: block;
+    }
+
+    &__nav-list {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    &__nav-list-item {
+      display: flex;
+    }
+
     &__home-btn,
     &__help-btn,
     &__logout-btn {
@@ -76,7 +100,7 @@
         font-size: rem(21px);
         color: $white;
         margin-left: rem($global-standard-margin);
-    
+
         @at-root [dir='rtl'] & {
             margin-left: 0;
             margin-right: rem($global-standard-margin);
@@ -163,7 +187,7 @@
 
 @media screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) {
     .qm-header {
-      
+
         &__brand-logo {
             width: 95px;
         }

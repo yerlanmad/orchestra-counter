@@ -9,7 +9,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
     var $markCountInputField = null
     var $marksAddBtn = null
     var $mainOverlayContainer = null
-    
+
 
     // @Override
     this.onInit = function (selector, choosenConfig) {
@@ -67,6 +67,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
 
     this.setSelectedText = function (text) {
         $mainOverlayContainer.show();
+        $marksAddBtn.focus();
         customMarks.hideAddedMarksTable();
         $mainOverlayContainer.find(".selected-text").text(text);
     }
@@ -80,7 +81,7 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
         $markCountInputField.val(1)
         $mainOverlayContainer.hide();
     }
-    
+
     this.onInit.apply(this, arguments);
 }
 

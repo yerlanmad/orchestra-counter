@@ -26,14 +26,14 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
     _navigateTo: function (view, initFn) {
         this.navigationStack.push(view);
         this._navigate();
-        
+
         if(_.isFunction(initFn)) {
             initFn();
         }
     },
     _navigate: function () {
         var nextView = this._getLatestAddedView();
-        var lastView = this._stackHasPreviousView() ? 
+        var lastView = this._stackHasPreviousView() ?
                         this.navigationStack[this.navigationStack.length - 2] : '';
 
         this._hideView(lastView);
@@ -48,6 +48,7 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
     },
     _toggleInstance: function () {
         if(this.instance._isOpen) {
+            this.target.focus();
             // Clean up navigation
             this.disposeInstance();
             this.popoverOverlay.style.display = "none";
@@ -55,5 +56,6 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
         }
         this.popoverOverlay.style.display = "block";
         this.instance.toggle();
+        this.instance._tooltipNode.focus();
     }
 }

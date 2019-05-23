@@ -226,7 +226,7 @@ var deliveredServices = new function () {
 
                     $('td:eq(1)', nRow).html(html);
                     html.wrap("<div class='cross-browser-select " + ((!html.val() || html.val() == -1)  ? "invalid" : "") + "'></div>")
-                    html.before($("<div class='native-like-select select-carrot-icon'>" + html.find(":selected").text() + "</div>")
+                    html.after($("<div class='native-like-select select-carrot-icon'>" + html.find(":selected").text() + "</div>")
                     );
                 }
             };

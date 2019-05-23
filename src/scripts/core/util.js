@@ -223,6 +223,10 @@ var util = new function () {
         }
     };
 
+    this.hasProp = function () {
+      return ({}).hasOwnProperty;
+    }
+
     this.getForceLogoutFunction = function (branchId, userName) {
       return function forceLogoutFunction() {
         return spService.del('branches/' + branchId + '/users/' + userName + '/?force=true');

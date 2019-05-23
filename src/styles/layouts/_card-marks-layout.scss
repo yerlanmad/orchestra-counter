@@ -11,7 +11,7 @@
                 .qm-card-nav {
                     margin-bottom: rem($global-standard-margin);
                 }
-                
+
                 &__sub-heading {
                     color: $dark-transparent82;
                     font-size: rem(20px);
@@ -40,11 +40,6 @@
             }
         }
         &__content-section {
-            * {
-                &:focus {
-                    outline: 0;
-                }
-            }
             flex-grow: 1;
             overflow: auto;
             .dataTables_scrollHead{
@@ -169,14 +164,14 @@
                                 i {
                                     width: rem(24px);
                                     height: rem(24px);
-                                    color: $dark-transparent12;
+                                    color: $dark-transparent42;
                                     font-size: rem(22px);
                                 }
                             }
                             &:hover {
                                 i {
                                     &:before {
-                                        color: $dark-transparent42;
+                                        color: $dark-transparent82;
                                     }
                                 }
                             }

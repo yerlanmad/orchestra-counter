@@ -6,7 +6,7 @@ window.$Qmatic.components.popover.PopoverController = function() {
     this.instances = [];
 }
 
-window.$Qmatic.components.popover.PopoverController.prototype.constructor 
+window.$Qmatic.components.popover.PopoverController.prototype.constructor
     = window.$Qmatic.components.popover.PopoverController
 
 window.$Qmatic.components.popover.PopoverController.prototype = {

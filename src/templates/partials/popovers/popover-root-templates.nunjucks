@@ -1,11 +1,11 @@
-<div class="qm-popover qm-popover--pool tooltip">
+<div class="qm-popover qm-popover--pool tooltip" tabindex="-1">
     <div class="tooltip__arrow"></div>
     {% include "partials/popovers/popover-views/popover-pool-action-bar.nunjucks" %}
     <div class="tooltip__inner">
     </div>
 </div>
 
-<div class="qm-popover qm-popover--queue tooltip">
+<div class="qm-popover qm-popover--queue tooltip" tabindex="-1">
     <div class="tooltip__arrow"></div>
     {% include "partials/popovers/popover-views/popover-queue-action-bar.nunjucks" %}
     {% include "partials/popovers/popover-views/popover-transfer-selection.nunjucks" %}
@@ -17,7 +17,7 @@
     </div>
 </div>
 
-<div class="qm-popover qm-popover--context-marketing tooltip">
+<div class="qm-popover qm-popover--context-marketing tooltip" tabindex="-1">
     <div class="tooltip__arrow"></div>
     {% include "partials/popovers/popover-views/popover-context-marketing.nunjucks" %}
     <div class="tooltip__inner"></div>
