@@ -22,7 +22,7 @@
                     <div class="qm-services__current-services">
                         <div class="qm-services__current-service-title-container">
                             <span id="serviceId" class="qm-services__current-service-title"></span>
-                            <a href="#" class="qm-services__add-service js-add-services-btn" id="addMultiServiceLink" onclick="servicePoint.addMultiServicePressed();this.blur();">
+                            <a href="#" class="qm-services__add-service js-add-services-btn" id="addMultiServiceLink" onclick="servicePoint.addMultiServicePressed();util.moveFocusToCardTop();">
                                 <i class="qm-services__add-service-icon icon-add-circle-solid" aria-hidden="true"></i>
                                 <span class="qm-services__add-service-text" id="addServicesLbl"></span>
                             </a>
@@ -92,11 +92,11 @@
 
         <!-- Navigation to screens -->
         <div class="qm-task-items">
-            <a href="#" class="qm-task-item" id="deliveredServicesModule" onclick="deliveredServices.addDeliveredServicePressed();this.blur();">
+            <a href="#" class="qm-task-item" id="deliveredServicesModule" onclick="deliveredServices.addDeliveredServicePressed();util.moveFocusToCardTop();">
                 <i class="qm-task-item__icon icon-briefcase" aria-hidden="true"></i>
                 <span class="qm-task-item__text" id="visitAddDsLbl"></span>
             </a>
-            <a href="#" class="qm-task-item" id="addCustomMarkLink" onclick="customMarks.addCustomMarkPressed();this.blur();">
+            <a href="#" class="qm-task-item" id="addCustomMarkLink" onclick="customMarks.addCustomMarkPressed();util.moveFocusToCardTop();">
                 <i class="qm-task-item__icon icon-mark" aria-hidden="true"></i>
                 <span class="qm-task-item__text" id="visitAddMarksLbl"></span>
             </a>

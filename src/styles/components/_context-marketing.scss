@@ -26,10 +26,10 @@
         border-radius: $standard-border-radius;
         padding: rem($global-standard-padding 48px $global-standard-padding $global-standard-padding);
         width: 100%;
-        background: $pale-aquamarine;
+        background: $secondary-color;
 
         @at-root [dir='rtl'] & {
-            padding: rem($global-standard-padding $global-standard-padding $global-standard-padding 48px); 
+            padding: rem($global-standard-padding $global-standard-padding $global-standard-padding 48px);
         }
 
         &__text {

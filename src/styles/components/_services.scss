@@ -123,7 +123,7 @@
     }
     &__expand-container-link {
         text-decoration: none;
-        color: $pale-aquamarine;
+        color: $secondary-color;
         display: flex;
         align-items: center;
         justify-content: flex-end;
@@ -136,7 +136,7 @@
         &:hover {
             text-decoration: none;
             font-weight: normal;
-            color: $pale-aquamarine;
+            color: $secondary-color;
         }
     }
     &__service-list-item {

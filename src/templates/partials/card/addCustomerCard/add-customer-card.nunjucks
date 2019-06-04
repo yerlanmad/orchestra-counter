@@ -42,12 +42,13 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="createfirstName" class="qm-form-field__text-input" type="text" name="firstName" maxlength="50" required />
+                                        <input id="createfirstName" class="qm-form-field__text-input" aria-describedby="createfirstName_error" type="text" name="firstName" maxlength="50" required />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="createfirstName_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                             <div class="qm-form-column-6">
@@ -57,12 +58,13 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="createlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required />
+                                        <input id="createlastName" class="qm-form-field__text-input" aria-describedby="createlastName_error" type="text" name="lastName" maxlength="50" required />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="createlastName_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -71,12 +73,13 @@
                                 <div class="qm-form-field">
                                     <label for="createemail" class="qm-form-field__label js-label-email"></label>
                                     <div class="qm-form-field__input-container">
-                                        <input id="createemail" class="qm-form-field__text-input" type="email" name="email" />
+                                        <input id="createemail" class="qm-form-field__text-input" aria-describedby="createemail_error" type="email" name="email" />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="createemail_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -85,12 +88,13 @@
                                 <div class="qm-form-field">
                                     <label for="createphoneNumber" class="qm-form-field__label js-label-phone"></label>
                                     <div class="qm-form-field__input-container">
-                                        <input id="createphoneNumber" class="qm-form-field__text-input" type="tel" name="phoneNumber" />
+                                        <input id="createphoneNumber" class="qm-form-field__text-input" aria-describedby="createphoneNumber_error" type="tel" name="phoneNumber" />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="createphoneNumber_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +105,7 @@
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="createdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <select id="createdateOfBirthMonth" class="qm-date-select" dob dobmonth name="dobMonth">
+                                            <select id="createdateOfBirthMonth" aria-describedby="createdateOfBirth_error" class="qm-date-select" dob dobmonth name="dobMonth">
                                                 <option value="-1"></option>
                                             </select>
                                         </div>
@@ -114,15 +118,16 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="createdateOfBirthDay" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
+                                        <input id="createdateOfBirthDay" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year">
                                         <label for="createdateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="createdateOfBirthYear" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
+                                        <input id="createdateOfBirthYear" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
                                     </div>
+                                    <span id="createdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -152,12 +157,13 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="editfirstName" class="qm-form-field__text-input" type="text" name="firstName" maxlength="50" required />
+                                        <input id="editfirstName" class="qm-form-field__text-input" aria-describedby="editfirstName_error" type="text" name="firstName" maxlength="50" required />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="editfirstName_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                             <div class="qm-form-column-6">
@@ -167,12 +173,13 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="editlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required />
+                                        <input id="editlastName" class="qm-form-field__text-input" aria-describedby="editlastName_error" type="text" name="lastName" maxlength="50" required />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="editlastName_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -181,12 +188,13 @@
                                 <div class="qm-form-field">
                                     <label for="editemail" class="qm-form-field__label js-label-email"></label>
                                     <div class="qm-form-field__input-container">
-                                        <input id="editemail" class="qm-form-field__text-input" type="email" name="email"/>
+                                        <input id="editemail" class="qm-form-field__text-input" aria-describedby="editemail_error" type="email" name="email"/>
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="editemail_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -195,12 +203,13 @@
                                 <div class="qm-form-field">
                                     <label for="editphoneNumber" class="qm-form-field__label js-label-phone"></label>
                                     <div class="qm-form-field__input-container">
-                                        <input id="editphoneNumber" class="qm-form-field__text-input" type="tel" name="phoneNumber" />
+                                        <input id="editphoneNumber" class="qm-form-field__text-input" aria-describedby="editphoneNumber_error" type="tel" name="phoneNumber" />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
+                                    <span id="editphoneNumber_error" class="qm-form-field__error-label js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>
@@ -211,12 +220,11 @@
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="editdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <select id="editdateOfBirthMonth" class="qm-date-select" dob dobmonth name="dobMonth">
+                                            <select id="editdateOfBirthMonth" aria-describedby="editdateOfBirth_error" class="qm-date-select" dob dobmonth name="dobMonth">
                                                 <option value="-1"></option>
                                             </select>
                                         </div>
                                         <div class="qm-drop-down__error invisible-on-load" id="editdateOfBirthMonthErrorMsg">
-
                                         </div>
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--day">
@@ -224,15 +232,16 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="editdateOfBirthDay" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
+                                        <input id="editdateOfBirthDay" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year">
                                         <label for="editdateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="editdateOfBirthYear" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
+                                        <input id="editdateOfBirthYear" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
                                     </div>
+                                    <span id="editdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>
                             </div>
                         </div>

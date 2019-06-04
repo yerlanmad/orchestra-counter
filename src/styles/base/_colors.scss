@@ -5,6 +5,7 @@ $pale-blue: #334366;
 
 $qmatic-bordeaux: #E50046;
 $pale-aquamarine: #03996C;
+$qmatic-aquamarine: #017C65;
 
 $qmatic-yellow: #ECC208;
 
@@ -16,6 +17,7 @@ $soft-gray: #e0e0e0;
 $validation-error: $qmatic-bordeaux;
 
 $white: #FFFFFF;
+$light-transparent82: rgba(255, 255, 255, 0.82);
 $light-transparent75: rgba(255, 255, 255, 0.75);
 $light-transparent50: rgba(255, 255, 255, 0.5);
 $light-transparent42: rgba(255, 255, 255, 0.42);
@@ -44,7 +46,7 @@ $context-marketing-color: #4D6599;
 
 // Application specific colors
 $primary-color: $qmatic-bordeaux;
-$secondary-color: $pale-aquamarine;
+$secondary-color: $qmatic-aquamarine;
 $tertiary-color: $midnight-blue;
 
 $h1-color: $primary-color;

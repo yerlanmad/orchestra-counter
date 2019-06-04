@@ -162,11 +162,11 @@
         right: rem(8px);
         top: 50%;
         transform: translateY(-50%);
-        color: $dark-transparent42;
+        color: $dark-transparent62;
 
         &:hover,
         &:focus {
-            color: $dark-transparent62;
+            color: $dark-transparent82;
         }
 
         .qm-action-btn__icon {
@@ -205,6 +205,22 @@
         font-size: rem(22px);
         color: $input-border-color;
     }
+
+    &__error-label {
+      position: absolute;
+      font-size: rem(12px);
+      color: $primary-color;
+
+      &--dob {
+        bottom: -2px;
+        left: rem(4px);
+
+        @at-root [dir='rtl'] & {
+          left: auto;
+          right: rem(4px);
+        }
+      }
+    }
 }
 
 .qm-fieldset {
@@ -217,7 +233,7 @@
     font-weight: $font-weight-medium;
     color: $dark-transparent42;
     text-align: center;
-    
+
     &:before {
         content: "";
         border-top: 1px solid $dark-transparent12;
@@ -252,7 +268,7 @@
     &__icon {
         position: absolute;
         font-size: rem(28px);
-        color: $dark-transparent42;
+        color: $dark-transparent62;
         top: 50%;
         right: 10px;
         transform: translateY(-50%);

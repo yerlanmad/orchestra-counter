@@ -8,7 +8,7 @@
                 right: -11px;
             }
             &:focus {
-              background: rgba($pale-aquamarine, 0.04);;
+              background: rgba($secondary-color, 0.04);;
             }
             .chosen-single {
                 div {
@@ -27,7 +27,7 @@
                         position: relative;
                         margin-right: rem(5px);
                         top: 4px;
-                        color: $pale-aquamarine;
+                        color: $secondary-color;
                         @at-root [dir='rtl'] & {
                             margin-left: rem(5px);
                             display: inline-block;
@@ -40,7 +40,7 @@
                 }
                 &.chosen-default {
                     span {
-                        color: $pale-aquamarine;
+                        color: $secondary-color;
                     }
                 }
             }
@@ -60,7 +60,7 @@
             }
             .chosen-container {
                 .chosen-single:hover {
-                    background: rgba($pale-aquamarine, 0.04) !important;
+                    background: rgba($secondary-color, 0.04) !important;
                 }
             }
             .chosen-disabled {

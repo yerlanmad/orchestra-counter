@@ -2,7 +2,7 @@
     <div class="qm-action-bar__left">
         <div class="button-tooltip">
             <button class="qm-action-btn qm-action-btn--large" id="walkDirectBtn" name="walkDirectButton"
-            onclick="servicePoint.checkServicesLeft('walkDirectPressed');this.blur();">
+            onclick="servicePoint.checkServicesLeft('walkDirectPressed');util.moveFocusToCardTop();">
                 <i class="qm-action-btn__icon icon-walk-in" aria-hidden="true"></i>
                 <span class="qm-action-btn__text" title=""></span>
             </button>
@@ -11,7 +11,7 @@
     <div class="qm-action-bar__middle">
         <div class="qm-action-bar__super">
             <div class="button-tooltip">
-                <button class="qm-action-btn qm-action-btn--huge" name="callNextButton" id="callNextBtn" onclick="servicePoint.checkServicesLeft('callNext');this.blur();">
+                <button class="qm-action-btn qm-action-btn--huge" name="callNextButton" id="callNextBtn" onclick="servicePoint.checkServicesLeft('callNext');util.moveFocusToCardTop();">
                     <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
                     <span class="qm-action-btn__text" title=""></span>
                 </button>

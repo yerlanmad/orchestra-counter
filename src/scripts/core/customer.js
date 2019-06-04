@@ -134,9 +134,21 @@ var customer = new function() {
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
         this.initClearInputField();
+        $('input[type="tel"]').keyup(function(e) {
+            // Backspace and programmatically reset
+            if(e.which === 8 || e.which === undefined) {
+              toggleErrorLabel(false, $(this));
+            }
+        });
         $('input[type="tel"]').keypress(function(e) {
             var phonePattern = /^[0-9\+\s]+$/;
-            if (!phonePattern.test(String.fromCharCode(e.which))) { return false; };
+            var passedTest = phonePattern.test(String.fromCharCode(e.which));
+            if (!passedTest) {
+              toggleErrorLabel(true, $(this));
+              return false;
+            } else {
+              toggleErrorLabel(false, $(this));
+            };
         });
         /*
          * Functionality below for autocomplete customer-search.
@@ -363,7 +375,9 @@ var customer = new function() {
             if($reqField.val().trim() === "") {
                 isValid = false;
                 $reqField.addClass('qm-field-error');
-            } else {
+                toggleErrorLabel(true, $reqField);
+              } else {
+                toggleErrorLabel(false, $reqField);
                 $reqField.removeClass('qm-field-error');
             }
         });
@@ -374,16 +388,61 @@ var customer = new function() {
         }
 
         if($emailField.val() !== "" && !isEmailValid($emailField.val())) {
+            toggleErrorLabel(true, $emailField);
             $emailField.addClass('qm-field-error');
             $saveBtn.prop('disabled', true);
-        } else {
+          } else {
+            toggleErrorLabel(false, $emailField);
             $emailField.removeClass('qm-field-error');
         }
 
         if(customer.validateDateOfBirth(dob) !== true) {
+            // toggleErrorLabel(true, dob[1]);
             $saveBtn.prop('disabled', true);
+        } else {
+            toggleErrorLabel(false, dob[1]);
         }
     };
+
+    var toggleErrorLabel = function (showError, $field, errorMessage) {
+      var fieldName = $field.prop('name');
+      switch(fieldName) {
+        case 'firstName': {
+          var $errorLabel = findErrorLabel($field);
+          showError ? $errorLabel.text(jQuery.i18n.prop('error.first.name.mandatory')) : $errorLabel.text('');
+          break;
+        }
+        case 'lastName': {
+          var $errorLabel = findErrorLabel($field);
+          showError ? $errorLabel.text(jQuery.i18n.prop('error.last.name.mandatory')) : $errorLabel.text('');
+          break;
+        }
+        case 'email': {
+          var $errorLabel = findErrorLabel($field);
+          showError ? $errorLabel.text(jQuery.i18n.prop('error.validate.email.with.example')) : $errorLabel.text('');
+          break;
+        }
+        case 'phoneNumber': {
+          var $errorLabel = findErrorLabel($field);
+          showError ? $errorLabel.text(jQuery.i18n.prop('error.validate.phone.number')) : $errorLabel.text('');
+          break;
+        }
+        case 'dobDay': {
+          var $errorLabel = findErrorLabel($field);
+          showError ?
+            (errorMessage ? $errorLabel.text(errorMessage) : $errorLabel.text(jQuery.i18n.prop('error.validate.dateOfBirth')))
+            : $errorLabel.text('');
+          break;
+        }
+        default: {
+
+        }
+      }
+    }
+
+    var findErrorLabel = function($formField) {
+      return $formField.closest('.qm-form-field').find('.js-form-field-error');
+    }
 
     this.validateDateOfBirth = function (dob) {
         var mm = dob[0].val();
@@ -415,9 +474,7 @@ var customer = new function() {
         var dateformat = /^(0[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
         // Match the date format through regular expression
         if(inputDate.match(dateformat)) {
-
             var pdate = inputDate.split('-');
-
 
             var dd = parseInt(pdate[0]);
             var mm  = parseInt(pdate[1]);
@@ -429,6 +486,7 @@ var customer = new function() {
 
             if (dobYear.getTime() > now.getTime()) {
                 this.showDobFieldError(dob[2]);
+                toggleErrorLabel(true, dob[1], jQuery.i18n.prop('error.validate.dob.date.in.future'));
                 return false;
             } else {
                 this.hideDobFieldError(dob[2]);
@@ -440,6 +498,7 @@ var customer = new function() {
                 if (dd>ListofDays[mm-1]) {
                     // Faulty day
                     this.showDobFieldError(dob[1]);
+                    toggleErrorLabel(true, dob[1], jQuery.i18n.prop('error.validate.dob.invalid.day'));
                     return false;
                 } else {
                     this.hideDobFieldError(dob[1]);
@@ -452,19 +511,55 @@ var customer = new function() {
                 }
                 if ((lyear === false) && (dd>=29)) {
                     this.showDobFieldError(dob[1]);
+                    toggleErrorLabel(true, dob[1], jQuery.i18n.prop('error.validate.dob.invalid.day'));
                     return false;
                 }
                 if ((lyear === true) && (dd>29)) {
                     this.showDobFieldError(dob[1]);
+                    toggleErrorLabel(true, dob[1], jQuery.i18n.prop('error.validate.dob.invalid.day'));
                     return false;
                 }
                 this.hideDobFieldError(dob[1]);
             }
         } else {
-            // Not a valid date format
-            this.showDobFieldError(dob[0]);
-            this.showDobFieldError(dob[1]);
-            this.showDobFieldError(dob[2]);
+            var splitRegex = [/^(0[1-9]|[12][0-9]|3[01])$/, /^(0?[1-9]|1[012])$/, /^\d{4}$/];
+            var validDay = dd.match(splitRegex[0]);
+            var validMonth = mm.match(splitRegex[1]);
+            var validYear = yyyy.match(splitRegex[2]);
+            var errorLabels = [];
+
+            if (validMonth) {
+              this.hideDobFieldError(dob[0]);
+            } else {
+              this.showDobFieldError(dob[0]);
+              errorLabels.push(jQuery.i18n.prop('error.validate.dob.month'));
+            }
+            if (validDay) {
+              this.hideDobFieldError(dob[1]);
+            } else {
+              this.showDobFieldError(dob[1]);
+              errorLabels.push(jQuery.i18n.prop('error.validate.dob.day'));
+            }
+            if (validYear) {
+              this.hideDobFieldError(dob[2]);
+            } else {
+              this.showDobFieldError(dob[2]);
+              errorLabels.push(jQuery.i18n.prop('error.validate.dob.year'));
+            }
+            if (errorLabels.length > 0) {
+              var shouldSeparate = errorLabels.length > 1;
+              var message = errorLabels.reduce(function(combinedMessage, currentError, index, errorLabels) {
+                if (index === errorLabels.length - 1) {
+                  return combinedMessage + (shouldSeparate ? (" " + jQuery.i18n.prop('error.validate.dob.separator')) : "") + " " + currentError;
+                } else if (shouldSeparate && index === errorLabels.length - 2) {
+                  return combinedMessage + " " + currentError;
+                } else {
+                  return combinedMessage + " " + currentError + ","
+                }
+              }, jQuery.i18n.prop('error.validate.dob.invalid'));
+              toggleErrorLabel(true, dob[1], message);
+            }
+
             return false;
         }
 

@@ -24,14 +24,14 @@
         border-top: 1px solid $light-transparent42;
     }
 
-    // Elements 
+    // Elements
     &__layout {
         display: flex;
         justify-content: space-between;
         align-items: center;
         position: relative;
     }
-  
+
     &__message {
         flex: 1 1 auto;
         padding-right: rem($global-standard-padding * 2);
@@ -42,12 +42,12 @@
             padding-left: rem($global-standard-padding * 2);
         }
     }
-  
+
     &__close-btn {
         flex: 0 0 20px;
-        color: $light-transparent42;
+        color: $light-transparent82;
         cursor: pointer;
-        
+
         &:hover,
         &:focus,
         &:active {
@@ -60,15 +60,15 @@
             font-size: rem(16px);
         }
     }
-  
+
     // Modifiers
     &--success {
         background: $toast-success-background-color;
     }
-  
+
     &--danger {
         background: $toast-error-background-color;
     }
 }
-  
+
 

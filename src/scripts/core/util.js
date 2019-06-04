@@ -157,6 +157,10 @@ var util = new function () {
             "bDestroy": true,
             "sScrollX": "100%",
             "sScrollY": (config.scrollYHeight ? config.scrollYHeight : "158px"),
+            "infoCallback": function ( settings, start, end, max, total, pre) {
+              var message = translate.msg('info.filtered.table.results.label', [total, max]);
+              return message;
+            },
             "oLanguage": {
                 "sEmptyTable": typeof config.emptyTableLabel !== 'undefined' ? translate.msg(config.emptyTableLabel) : "",
                 "sInfo": "",
@@ -232,6 +236,10 @@ var util = new function () {
         return spService.del('branches/' + branchId + '/users/' + userName + '/?force=true');
       }
     };
+
+    this.moveFocusToCardTop = function () {
+      $('#cardContainer').focus();
+    }
 
     this.validateTransferInput = function (e) {
       var allowedChars = '0123456789';

@@ -1,12 +1,12 @@
 .qm-tooltip {
-    
+
 }
 
 .button-tooltip {
     & + & {
         .qm-action-btn {
             margin-left: rem(12px);
-            
+
             @at-root [dir='rtl'] & {
                 margin-left: 0;
                 margin-right: rem(12px);
@@ -39,7 +39,7 @@
             .tooltip-arrow,
             .popper__arrow,
             .popper-arrow {
-                bottom: -20px;     
+                bottom: -20px;
                 left: calc(50% - 24px);
             }
         }
@@ -63,7 +63,7 @@
                 top: calc(50% - 24px);
             }
         }
-        
+
         &[x-placement^='bottom'] {
             .tooltip__arrow,
             .tooltip-arrow,
@@ -77,12 +77,12 @@
         &--context-marketing {
             border-radius: $standard-border-radius;
             z-index: 80;
-            
+
             .tooltip__arrow,
             .tooltip-arrow,
             .popper__arrow,
             .popper-arrow {
-                background: $pale-aquamarine;
+                background: $secondary-color;
             }
         }
     }
@@ -114,7 +114,7 @@
             position: absolute;
             margin: 10px;
         }
-    
+
         &[x-placement^='top'] {
             margin-bottom: 10px;
 
@@ -132,7 +132,7 @@
                 left: calc(50% - 10px);
             }
         }
-    
+
         &[x-placement^='right'] {
             margin-left: 10px;
 
@@ -150,7 +150,7 @@
                 top: calc(50% - 10px);
             }
         }
-    
+
         &[x-placement^='left'] {
             margin-right: 10px;
 
@@ -168,7 +168,7 @@
                 top: calc(50% - 10px);
             }
         }
-        
+
         &[x-placement^='bottom'] {
             margin-top: 10px;
 
