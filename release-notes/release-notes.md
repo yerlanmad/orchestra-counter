@@ -8,6 +8,32 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+<h2>Version 4.0.0.027</h2>
+
+**Date: 05/06/2019**
+
+**Build number: 027**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **166081841** | **WCAG - CP10 - Contrast between foreground and background** Change colors, added validation messages to customer forms |
+| **166026887** | **WCAG - Tabbing NL20/NL30** Improve tabbing, change focus to popovers on initialization and destruction, change styling to indicate focus on custom tabable elements, group links in header |
+| **166080611** | **WCAG - Bypass Blocks - NL50** Add anchor link shortcuts to card and action panel |
+| **166030010** | **WCAG - SW60 - Move Focus ** Move focus to card top when pressing WALK-IN, Add service to visit, Add marks, Call next, Add Ds/Outcome |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **xxx** | **xxx** xxx |
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3>
+----------
+
 
 <h2>Version 4.0.0.022</h2>
 
@@ -23,6 +49,10 @@ This document describes the new features, bug corrections, known issues and reco
 | **COUNTER-126** | **Setting to set several Mark Types for a counter and show the marks grouped in the Counter** Add dropdown to select mark type before selecting mark |
 | **COUNTER-127** | **Remove users active session (GAP BNLX/UK)** Add option to force logout |
 | **COUNTER-129** | **Transfer with delay for visit/multi-service visit (GAP BNLX)** Add option to transfer with delay from queue |
+| **166081841** | **WCAG - CP10 - Contrast between foreground and background** Change colors, added validation messages to customer forms |
+| **166026887** | **WCAG - Tabbing NL20/NL30** Improve tabbing, change focus to popovers on initialization and destruction, change styling to indicate focus on custom tabable elements, group links in header |
+| **166080611** | **WCAG - Bypass Blocks - NL50** Add anchor link shortcuts to card and action panel |
+| **166030010** | **WCAG - SW60 - Move Focus ** Move focus to card top when pressing WALK-IN, Add service to visit, Add marks, Call next, Add Ds/Outcome |
 
 <h3>Bug fixes</h3>
 
