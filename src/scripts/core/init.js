@@ -64,7 +64,28 @@ var init = new function () {
         if (moduleChatEnabled == true) {
             chat.init();
         }
+
+        attachReconnectEvents();
     };
+
+    var attachReconnectEvents = function() {
+
+      function updateOnlineStatus() {
+        var status = navigator.onLine ? "online" : "offline";
+        if("online" === status) {
+          console.log("==== BROWSER WENT ONLINE ====");
+          if (!sessvars || typeof sessvars.state === 'undefined' || sessvars.state == null) {
+            console.log("==== USER STATE WAS CORRUPT, REFETCHING STATE ====");
+            sessvars.state = spService.get("user/status");
+          }
+        } else {
+          console.log("==== BROWSER WENT OFFLINE ====");
+        }
+      }
+
+      window.addEventListener("online", updateOnlineStatus);
+      window.addEventListener("offline", updateOnlineStatus);
+    }
 
     var initDataTablesConfiguration = function () {
         // qm-sort ASCENDING
