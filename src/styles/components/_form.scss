@@ -40,6 +40,15 @@
     outline-color: $primary-color !important;
 }
 
+.qm-form-field-label-error {
+    color: $primary-color !important;;
+}
+
+.qm-required-label-error {
+    color: $primary-color !important;;
+}
+
+
 .qm-form-field {
     position: relative;
     margin-bottom: rem($global-standard-margin * 2);
@@ -214,7 +223,7 @@
       &--dob {
         bottom: -2px;
         left: rem(4px);
-
+        top: rem(60px);
         @at-root [dir='rtl'] & {
           left: auto;
           right: rem(4px);

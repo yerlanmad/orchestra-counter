@@ -521,6 +521,24 @@ var util = new function () {
         });
     }
 
+    this.getMonthName = function (month) {
+        var months = ['info.month.january' ,
+            'info.month.february' ,
+            'info.month.march' ,
+            'info.month.april' ,
+            'info.month.may' ,
+            'info.month.june' ,
+            'info.month.july' ,
+            'info.month.august' ,
+            'info.month.september' ,
+            'info.month.october' ,
+            'info.month.november' ,
+            'info.month.december'];
+
+            return translate.msg(months[month]);
+
+    }
+
 
 
     this.showMessage = function (text, isError) {
