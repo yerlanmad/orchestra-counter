@@ -1,9 +1,11 @@
-<div class="qm-modal qm-hide" id="no-customers-waiting">
+<div class="qm-modal qm-hide" id="no-customers-waiting" aria-live="true">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
-        <div class="qm-card">
-            <div class="qm-card__header-section">NOOOOOO CUUUUUSTOMEEEEEEEEEERRRRRR WAIIIIIIITNG</div>
-            <div class="qm-card__content-section">
+        <div class="qm-card" role="alertdialog" aria-modal="true"
+                           aria-labelledby="waiting-customer-header"  
+                           aria-describedby="waiting-customer-content">
+            <div id="waiting-customer-header" class="qm-card__header-section">NOOOOOO CUUUUUSTOMEEEEEEEEEERRRRRR WAIIIIIIITNG</div>
+            <div id="waiting-customer-content" class="qm-card__content-section" tabindex="0">
                 Content
             </div>
             <div class="qm-card__footer-section"></div>

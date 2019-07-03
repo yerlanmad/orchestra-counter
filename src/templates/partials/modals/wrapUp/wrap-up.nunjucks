@@ -1,17 +1,18 @@
 <!-- Imported partials -->
 {% import "./../../button.nunjucks" as button  %}
 
-<div class="qm-modal qm-hide" id="wrap-up-modal">
+<div class="qm-modal qm-hide" id="wrap-up-modal" aria-live="true">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
-        <div class="qm-card">
+        <div class="qm-card" role="alertdialog" aria-modal="true"
+        aria-labelledby="wrapUpText" aria-describedby="wrapUpTimerBoxContent">
             <div class="qm-card__header-section"></div>
-            <div class="qm-card__content-section">
+            <div class="qm-card__content-section qm-modal-focus-init" tabindex="0">
                 <p class="dialogueMessage">
                     <span id="wrapUpText">
                     </span>
                 </p>
-                <p class="wrapUpTimerBox">
+                <p class="wrapUpTimerBox" id="wrapUpTimerBoxContent">
                     <span class="wrapUpTimerBox__text">
                         <span id="wrapUpTimerText" class="wrapUpTimerBox__text-content"></span>
                         <span class="wrapUpTimerBox__text-colon">:</span>
