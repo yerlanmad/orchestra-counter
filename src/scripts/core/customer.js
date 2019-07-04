@@ -134,13 +134,21 @@ var customer = new function() {
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
         this.initClearInputField();
+       var saveBtn =  $('[save-btn]')
         $('input[type="tel"]').keyup(function(e) {
             var phonePattern = /^[0-9\+\s]+$/;
             var passedTest = phonePattern.test($(this).val());
             if (!passedTest) {
-              toggleErrorLabel(true, $(this));
+                if($(this).val().length > 0){
+                    toggleErrorLabel(true, $(this));
+                    saveBtn.prop('disabled', true);
+                }else{
+                    toggleErrorLabel(false, $(this));
+                    saveBtn.prop('disabled', false);
+                }
             } else {
               toggleErrorLabel(false, $(this));
+              saveBtn.prop('disabled', false);
             };
         });
         /*
@@ -395,6 +403,9 @@ var customer = new function() {
             $saveBtn.prop('disabled', true);
         } else {
             toggleErrorLabel(false, dob[1]);
+            this.hideDobFieldError(dob[0]);
+            this.hideDobFieldError(dob[1]);
+            this.hideDobFieldError(dob[2]);
         }
     };
 
