@@ -24,7 +24,7 @@ window.$Qmatic.components.NavController = function (navSelector) {
             modalComponent.show();
        
         }
-        setTimeout(()=> {
+        setTimeout(function() {
             $('.qm-modal__layout .qm-modal-focus-init:visible').focus();
         }, 1000);   
     }

@@ -6,7 +6,7 @@
     <div class="qm-modal__layout">
         <div class="qm-card" role="alertdialog" aria-modal="true" aria-describedby="customerOptionsText">
             <div class="qm-card__header-section"></div>
-            <div class="qm-card__content-section >
+            <div class="qm-card__content-section">
                 <p class="dialogueMessage">
                     <span id="customerOptionsText" class="qm-modal-focus-init" tabindex="0">
                     </span>
