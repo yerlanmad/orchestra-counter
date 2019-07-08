@@ -1,7 +1,7 @@
 <!-- Imported partials -->
 {% import "./../../button.nunjucks" as button  %}
 
-<div class="qm-modal qm-hide" id="logout-window-modal" aria-live="true">
+<div class="qm-modal qm-hide" id="logout-window-modal" aria-live="assertive">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
         <div class="qm-card" role="alertdialog" aria-modal="true"

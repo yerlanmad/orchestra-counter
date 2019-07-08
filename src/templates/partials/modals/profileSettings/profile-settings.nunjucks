@@ -4,7 +4,7 @@
 <div class="qm-modal qm-hide" id="profile-settings-modal">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
-        <div class="qm-card" aria-live="true" role="alertdialog" aria-modal="true"
+        <div class="qm-card" aria-live="assertive" role="alertdialog" aria-modal="true"
                            aria-labelledby="workstationSettingsHeader"  
                            aria-describedby="qm-card__content-section">
             <h1 class="qm-card__header-section qm-modal-focus-init" id="workstationSettingsHeader" tabindex="0"></h1>

@@ -31,15 +31,11 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
                     // Forward
                     elem = this.getNextTabbaleElement();
                 }
-
-                if ($(elem).hasClass("chosen-search-input")) {
-                    $($(elem).parent().parent().parent().parent().children()[0]).trigger("chosen:open");
-                } else {
-                    $(elem).focus();
-                }
-
-                e.preventDefault();
-                e.stopPropagation();
+               
+                $(elem).focus();
+                
+                //e.preventDefault();
+                //e.stopPropagation();
             }
         }).bind(this);
 
