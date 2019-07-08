@@ -41,6 +41,12 @@
         font-size: rem(12px);
         color: $dark-transparent62;
     }
+
+    &__error-label {
+        font-size: rem(12px);
+        color: $primary-color;
+        margin-bottom: 0;
+    }
 }
 
 .qm-notes-btn {

@@ -25,6 +25,7 @@ window.$Qmatic.components.NotesController.prototype = {
             this.maxCharacters              = this.notesInputView.querySelector('.js-notes-max-characters');
             this.cancelBtn                  = this.notesInputView.querySelector('.js-notes-cancel-btn');
             this.saveBtn                    = this.notesInputView.querySelector('.js-notes-save-btn');
+            this.errorLabel                 = document.querySelector('.qm-notes__error-label');
             
             this.maxCharacters.innerText = "/" + this.numberOfAllowedCharacters;
             this._attachEventListeners();
@@ -46,6 +47,11 @@ window.$Qmatic.components.NotesController.prototype = {
     _updateNotesInput: function () {
         this.numberOfWrittenChar.innerText = this._getNumberOfCharacters()
         this._setButtonState();
+        if(this._getNumberOfTrimmedCharacters() === this.numberOfAllowedCharacters){
+            this._toggleErrorLabel(true);
+        }else{
+            this._toggleErrorLabel(false);
+        }
     },
     _getNumberOfCharacters: function () {
         return this.notesInput.value.length;
@@ -64,6 +70,7 @@ window.$Qmatic.components.NotesController.prototype = {
         this.notesInput.focus();
     },
     reload: function (text) {
+        this._toggleErrorLabel(false);
         this.navigateToPresentational();
         this.notesPresentationalBtnText.innerText = text;
         this.notesInput.value = text;
@@ -71,10 +78,15 @@ window.$Qmatic.components.NotesController.prototype = {
     },
     _save: function () {
         // Save and set presentational
+        this._toggleErrorLabel(false);
         servicePoint.saveNotes();
         this.navigateToPresentational();
     },
     _cancel: function () {
+        this._toggleErrorLabel(false);
         this.navigateToPresentational();
+    },
+    _toggleErrorLabel: function (value) {
+        value ? this.errorLabel.innerHTML =  translate.msg('error.validate.notes.maxlength', [this.numberOfAllowedCharacters]) : this.errorLabel.innerHTML = '';
     }
 }

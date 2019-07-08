@@ -118,7 +118,7 @@
                         <span class="qm-notes__characters js-notes-max-characters"></span>
                     </div>
                 </div>
-                <textarea id="notesEdit" class="qm-notes__textarea" maxlength="255" rows="5"></textarea>
+                <textarea id="notesEdit" class="qm-notes__textarea" maxlength="255" rows="5" aria-describedby="notesMaxLengthError"></textarea>
                 <div class="qm-action-container qm-action-container--align-right">
                     <button class="qm-btn qm-btn--secondary qm-btn--small js-notes-cancel-btn">
                         <span class="qm-btn__text"></span>
@@ -134,6 +134,11 @@
                     <i class="qm-notes-btn__icon icon-edit" aria-hidden="true"></i>
                 </button>
             </div>
+             
+            <div>
+               <span id="notesMaxLengthError" class="qm-notes__error-label"></span>
+            </div>
+
         </div>
     </div>
 
