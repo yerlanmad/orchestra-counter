@@ -819,7 +819,7 @@ var util = new function () {
             "bPaginate": false,
             "aoColumns": config.columns,
             "bProcessing": true,
-            "data": config.data
+            "data": [config.data]
         });
         $(window).bind('resize', function () {
             table.fnAdjustColumnSizing();

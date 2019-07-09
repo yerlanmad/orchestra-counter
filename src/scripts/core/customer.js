@@ -134,7 +134,7 @@ var customer = new function() {
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
         this.initClearInputField();
-       var saveBtn =  $('[save-btn]')
+       var saveBtn =  $('.save-btn')
         $('input[type="tel"]').keyup(function(e) {
             var phonePattern = /^[0-9\+\s]+$/;
             var passedTest = phonePattern.test($(this).val());
@@ -314,11 +314,11 @@ var customer = new function() {
         var $form = $(formSelector);
         var $inputs = $form.find('input');
         var $requiredFields = $form.find('[required]');
-        var $saveBtn = $form.find('[save-btn]');
+        var $saveBtn = $form.find('.save-btn');
         var $emailField = $form.find('[name="email"]');
-        var $dobMonth = $form.find('[dobmonth]');
-        var $dobDay = $form.find('[dobday]');
-        var $dobYear = $form.find('[dobyear]');
+        var $dobMonth = $form.find('[data-dobmonth]');
+        var $dobDay = $form.find('[data-dobday]');
+        var $dobYear = $form.find('[data-dobyear]');
         var dob = [$dobMonth, $dobDay, $dobYear];
 
         $form.find('.qm-field-error').removeClass('qm-field-error');

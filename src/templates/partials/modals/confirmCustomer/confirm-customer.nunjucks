@@ -2,7 +2,7 @@
 {% import "./../../button.nunjucks" as button  %}
 
 <div class="qm-modal qm-hide" id="confirm-customer-modal" aria-live="assertive">
-    <div class="qm-modal__overlay" tab></div>
+    <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
         <div class="qm-card" role="alertdialog" aria-modal="true"
                              aria-describedby="confirmCustomerPrompt">

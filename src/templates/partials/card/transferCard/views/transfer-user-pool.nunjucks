@@ -9,13 +9,13 @@
         <span class="qm-card-description"></span>
         <div id="transferTicketToUserPoolTable_filter" class="search-filter qm-table-filter">
             <label class="qm-search-filter">
-                <input class="js-table-filter-input" type="search" placeholder="" aria-controls="transferTicketToUserPoolTable">
-                <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
-                <button type="button" class="qm-search-filter__clear-btn js-table-filter-clear-btn">
-                    <i class="qm-search-filter__clear-btn-icon icon icon-close" aria-hidden="true"></i>
-                    <span class="sr-only js-clear-input-label"></span>
-                </button>
+            <input class="js-table-filter-input" type="search" placeholder="" aria-controls="transferTicketToUserPoolTable">
             </label>
+            <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
+            <button type="button" class="qm-search-filter__clear-btn js-table-filter-clear-btn">
+                <i class="qm-search-filter__clear-btn-icon icon icon-close" aria-hidden="true"></i>
+                <span class="sr-only js-clear-input-label"></span>
+            </button>
         </div>
     </header>
 {% endblock %}

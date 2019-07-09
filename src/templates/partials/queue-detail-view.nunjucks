@@ -6,22 +6,22 @@
             <span class="sr-only"></span>
         </button>
         <h2 id="ticketListHeader" class="qm-queue-detail__headline"></h2>
-        <div class="qm-tab-information">
+        <span class="qm-tab-information">
             <i class="qm-tab-information__icon icon-customer-solid" aria-hidden="true"></i>
             <span class="qm-tab-information__text"></span>
-        </div>
+        </span>
     </div>
 
     <div class="qm-queue-detail__content">
         <table id="tickets" class="qm-table qm-table--simple" aria-labelledby="ticketListHeader">
             <thead class="qm-table__header">
                 <tr>
-                    <th id="ticketVisitId"></th>
-                    <th id="ticketTicketId"></th>
-                    <th id="ticketCustomerName"></th>
-                    <th id="ticketActions"></th>
-                    <th id="ticketAppointmentTime"></th>
-                    <th id="ticketWaitingTime"></th>
+                    <th class="ticketVisitId"></th>
+                    <th class="ticketTicketId"></th>
+                    <th class="ticketCustomerName"></th>
+                    <th class="ticketActions"></th>
+                    <th class="ticketAppointmentTime"></th>
+                    <th class="ticketWaitingTime"></th>
                 </tr>
             </thead>
             <tbody class="qm-table__body"></tbody>

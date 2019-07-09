@@ -108,7 +108,7 @@
 
      {% include "partials/external-scripts.nunjucks" %}
 
-    <script type="text/javascript">
+    <script>
             $(document).ready(function() {
                 // If we ever, ever, end up with a 401, we are either timedout due to inactivity
                 // or just plain evil. Anyway we should be logged out.

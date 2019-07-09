@@ -14,7 +14,7 @@
         <div class="qm-customer">
             <div class="qm-customer__detail-container">
                 <!-- Customer details -->
-                <form id="editAttachedCustomerForm" action="" class="js-edit-customer-form" novalidate>
+                <form id="editAttachedCustomerForm" class="js-edit-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend sr-only">
                             <span class="qm-legend__text js-legend-customer-details"></span>
@@ -90,8 +90,8 @@
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="editAttacheddateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <select id="editAttacheddateOfBirthMonth" aria-describedby="editAttacheddateOfBirth_error" class="qm-date-select" dob dobmonth name="dobMonth">
-                                                <option value="-1"></option>
+                                            <select id="editAttacheddateOfBirthMonth" aria-describedby="editAttacheddateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
+                                                <option value="-1" label="default"></option>
                                             </select>
                                         </div>
                                         <div class="qm-drop-down__error invisible-on-load" id="editDobMonthErrorMsg">
@@ -103,14 +103,14 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="editAttacheddateOfBirthDay" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
+                                        <input id="editAttacheddateOfBirthDay" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year">
                                         <label for="editAttacheddateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="editAttacheddateOfBirthYear" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
+                                        <input id="editAttacheddateOfBirthYear" aria-describedby="editAttacheddateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" />
                                     </div>
                                     <span id="editAttacheddateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>
@@ -121,7 +121,7 @@
                                 <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button type="submit" class="qm-btn qm-btn--primary js-update-customer-save" save-btn onclick="customer.editAttachedCustomer(event);this.blur();">
+                                <button type="submit" class="qm-btn qm-btn--primary js-update-customer-save save-btn"  onclick="customer.editAttachedCustomer(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>

@@ -11,7 +11,7 @@
                 <div class="qm-drop-down">
                     <div class="qm-drop-down__component">
                         <select id="availableServicesFilter">
-                            <option value="-1"></option>
+                            <option value="-1" label="default"></option>
                         </select>
                     </div>
                 </div>

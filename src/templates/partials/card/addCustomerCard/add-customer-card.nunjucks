@@ -29,7 +29,7 @@
                 </fieldset>
             </div>
             <div class="qm-customer__detail-container">
-                <form id="createCustomerForm" action="" class="js-add-new-customer-form" novalidate>
+                <form id="createCustomerForm" class="js-add-new-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend">
                             <span class="qm-legend__text js-legend-add-customer"></span>
@@ -105,8 +105,8 @@
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="createdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <select id="createdateOfBirthMonth" aria-describedby="createdateOfBirth_error" class="qm-date-select" dob dobmonth name="dobMonth">
-                                                <option value="-1"></option>
+                                            <select id="createdateOfBirthMonth" aria-describedby="createdateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
+                                                <option value="-1" label="default"></option>
                                             </select>
                                         </div>
                                         <div class="qm-drop-down__error invisible-on-load" id="createdateOfBirthMonthErrorMsg">
@@ -118,14 +118,14 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="createdateOfBirthDay" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
+                                        <input id="createdateOfBirthDay" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year">
                                         <label for="createdateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="createdateOfBirthYear" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
+                                        <input id="createdateOfBirthYear" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" />
                                     </div>
                                     <span id="createdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>
@@ -136,7 +136,7 @@
                                 <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button type="submit" class="qm-btn qm-btn--primary js-add-customer-save" save-btn onclick="customer.saveAndLinkCustomer(event);this.blur();">
+                                <button type="submit" class="qm-btn qm-btn--primary js-add-customer-save save-btn"  onclick="customer.saveAndLinkCustomer(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>
@@ -144,7 +144,7 @@
                     </fieldset>
                 </form>
                 <!-- Customer details -->
-                <form id="editCustomerForm" action="" class="qm-hide js-edit-customer-form" novalidate>
+                <form id="editCustomerForm" class="qm-hide js-edit-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend">
                             <span class="qm-legend__text js-legend-customer-details"></span>
@@ -220,8 +220,8 @@
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="editdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
                                         <div class="qm-drop-down__component">
-                                            <select id="editdateOfBirthMonth" aria-describedby="editdateOfBirth_error" class="qm-date-select" dob dobmonth name="dobMonth">
-                                                <option value="-1"></option>
+                                            <select id="editdateOfBirthMonth" aria-describedby="editdateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
+                                                <option value="-1" label="default"></option>
                                             </select>
                                         </div>
                                         <div class="qm-drop-down__error invisible-on-load" id="editdateOfBirthMonthErrorMsg">
@@ -232,14 +232,14 @@
                                             <span class="js-label-day"></span>
                                             <span class="qm-form-field__block-label js-label-day-placeholder"></span>
                                         </label>
-                                        <input id="editdateOfBirthDay" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobday name="dobDay" />
+                                        <input id="editdateOfBirthDay" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobday name="dobDay" />
                                     </div>
                                     <div class="qm-form-field__input-container qm-form-field__input-container--year">
                                         <label for="editdateOfBirthYear" class="qm-form-field__label">
                                             <span class="js-label-year"></span>
                                             <span class="qm-form-field__block-label js-label-year-placeholder"></span>
                                         </label>
-                                        <input id="editdateOfBirthYear" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" dob dobyear name="dobYear" />
+                                        <input id="editdateOfBirthYear" aria-describedby="editdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" />
                                     </div>
                                     <span id="editdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
                                 </div>
@@ -250,7 +250,7 @@
                                 <button type="button" class="qm-btn qm-btn--secondary js-cancel-btn" onclick="event.preventDefault();cardNavigationController.pop();this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
-                                <button type="submit" class="qm-btn qm-btn--primary js-edit-customer-save" save-btn onclick="customer.editAndLink(event);this.blur();">
+                                <button type="submit" class="qm-btn qm-btn--primary js-edit-customer-save save-btn"  onclick="customer.editAndLink(event);this.blur();">
                                     <span class="qm-action-btn__text"></span>
                                 </button>
                             </div>

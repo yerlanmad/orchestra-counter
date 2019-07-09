@@ -18,7 +18,7 @@
                         <div class="qm-drop-down__component">
                             <select id="branchListModal" onchange="javascript:servicePoint.selectBranch($(this).val());">
                                 {#<option id="chooseBranch" value="-1"></option>#}
-                                <option value="-1"></option>
+                                <option value="-1" label="default"></option>
                             </select>
                         </div>
                     <div class="qm-drop-down__error invisible-on-load" id="branchListModalErrorMsg">
@@ -34,7 +34,7 @@
                         <div class="qm-drop-down__component">
                             <select id="workstationListModal" onchange="javascript:servicePoint.selectWorkstation($(this).val());">
                                 {#<option id="chooseWorkstation" value="-1"></option>#}
-                                <option value="-1"></option>
+                                <option value="-1" label="default"></option>
                             </select>
                         </div>
                     <div class="qm-drop-down__error invisible-on-load" id="workstationListModalErrorMsg">
@@ -50,7 +50,7 @@
                         <div class="qm-drop-down__component">
                             <select id="prioListModal" onchange="javascript:servicePoint.selectProfile($(this).val());">
                                 {#<option id="chooseProfile" value="-1"></option>#}
-                                <option value="-1"></option>
+                                <option value="-1" label="default"></option>
                             </select>
                         </div>
                     <div class="qm-drop-down__error invisible-on-load" id="prioListModalErrorMsg">

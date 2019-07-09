@@ -251,9 +251,9 @@
                                     <table id="servicePointPool" class="display">
                                         <thead>
                                             <tr>
-                                                <th id="servicePointPoolTicketId"></th>
-                                                <th id="servicePointPoolTicketTicketId"></th>
-                                                <th id="servicePointPoolTicketWaitingTime"></th>
+                                                <th class="servicePointPoolTicketId"></th>
+                                                <th class="servicePointPoolTicketTicketId"></th>
+                                                <th class="servicePointPoolTicketWaitingTime"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -272,9 +272,9 @@
                                     <table id="userPool" class="display">
                                         <thead>
                                             <tr>
-                                                <th id="userPoolTicketId"></th>
-                                                <th id="userPoolTicketTicketId"></th>
-                                                <th id="userPoolTicketWaitingTime"></th>
+                                                <th class="userPoolTicketId"></th>
+                                                <th class="userPoolTicketTicketId"></th>
+                                                <th class="userPoolTicketWaitingTime"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -342,10 +342,10 @@
                         <table id="tickets" class="display" cellpadding="0" cellspacing="0" border="0">
                             <thead>
                                 <tr>
-                                    <th id="ticketVisitId"></th>
-                                    <th id="ticketTicketId"></th>
-                                    <th id="ticketActions"></th>
-                                    <th id="ticketWaitingTime"></th>
+                                    <th class="ticketVisitId"></th>
+                                    <th class="ticketTicketId"></th>
+                                    <th class="ticketActions"></th>
+                                    <th class="ticketWaitingTime"></th>
                                 </tr>
                             </thead>
                             <tbody></tbody>

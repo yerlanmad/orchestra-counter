@@ -11,7 +11,7 @@
                 <div class="qm-drop-down">
                     <div class="qm-drop-down__component qm-drop-down__select-mark-type" tabindex="0">
                         <select id="markTypeFilter">
-                            <option value="-1"></option>
+                            <option value="-1" label="default"></option>
                         </select>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <select id="marksFilter">
-                            <option value="-1"></option>
+                            <option value="-1" label="default"></option>
                         </select>
                     </div>
                 </div>

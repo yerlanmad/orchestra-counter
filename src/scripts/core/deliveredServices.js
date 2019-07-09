@@ -182,7 +182,7 @@ var deliveredServices = new function () {
                 var outcomeDataIndex = "visitOutcome";
                 if (aData["outcomeExists"] == true || null != aData[outcomeDataIndex]) {
                     var html;
-                    html = $('<select id="outcomeList_' + iDisplayIndex + '"' + '><option value="-1"></option></select>');
+                    html = $('<select id="outcomeList_' + iDisplayIndex + '"' + '><option value="-1" label="default"></option></select>');
                     $("option[value='-1']", html).text(translate.msg("info.choose.outcome.for.delivered.service")).attr('disabled', 'disabled');
                     var params = servicePoint.createParams();
                     params.serviceId = sessvars.state.visit.currentVisitService.serviceId;

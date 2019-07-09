@@ -22,12 +22,12 @@
             <div class="search-filter qm-table-filter">
                 <label class="qm-search-filter js-popover-filter-queue-container">
                     <input class="js-table-filter-input js-popover-filter-queue" type="search" placeholder="">
-                    <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
-                    <button type="button" class="qm-search-filter__clear-btn js-popover-filter-queue-clear-btn">
-                        <i class="qm-search-filter__clear-btn-icon icon icon-close" aria-hidden="true"></i>
-                        <span class="sr-only js-clear-input-label"></span>
-                    </button>
                 </label>
+                <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
+                <button type="button" class="qm-search-filter__clear-btn js-popover-filter-queue-clear-btn">
+                    <i class="qm-search-filter__clear-btn-icon icon icon-close" aria-hidden="true"></i>
+                    <span class="sr-only js-clear-input-label"></span>
+                </button>
             </div>
 
             <table class="qm-table qm-table--small js-popover-table-queues">
