@@ -114,11 +114,13 @@ var queues = new function() {
                     "columns": columns, "filter": false, "headerCallback": headerCallback, "emptyTableLabel": "info.queues.none", "scrollYHeight": "100%", "initFn": allQueuesInitFn});
                 queuesTable.fnSort(SORTING);
                 queuesTable.fnAdjustColumnSizing();
+                $('#queues').prepend("<caption class='sr-only'>Other Queues </caption>");
 
                 myQueuesTable = util.buildTableJson({"tableId": "myQueuesTable", "url": url, "rowCallback": rowCallbackMyQueues,
                 "columns": columns, "filter": false, "headerCallback": headerCallback, "emptyTableLabel": "info.queues.none", "scrollYHeight": "100%", "filterData": myQueuesFilterFn, "initFn": myQueuesInitFn});
                 myQueuesTable.fnSort(SORTING);
                 myQueuesTable.fnAdjustColumnSizing();
+                $('#myQueuesTable').prepend("<caption class='sr-only'>My Queues</caption>");
             }
 
             tableScrollController.initTableScroll("queues");
@@ -326,6 +328,8 @@ var queues = new function() {
                     "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "100%",
                     "emptyTableLabel": "info.queue.tickets.empty", "initFn": queueDetailInitFn});
                 // ticketsTable.fnSort([[1, 'asc']]);
+                $('#tickets').prepend("<caption class='sr-only'>Queue details</caption>");
+                
 
                 tableScrollController.initTableScroll("tickets");
             }
