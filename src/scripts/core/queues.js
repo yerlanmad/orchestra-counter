@@ -114,7 +114,7 @@ var queues = new function() {
                     "columns": columns, "filter": false, "headerCallback": headerCallback, "emptyTableLabel": "info.queues.none", "scrollYHeight": "100%", "initFn": allQueuesInitFn});
                 queuesTable.fnSort(SORTING);
                 queuesTable.fnAdjustColumnSizing();
-                $('#queues').prepend("<caption class='sr-only'>Other Queues </caption>");
+                $('#queues').prepend("<caption class='sr-only'>Other Queues</caption>");
 
                 myQueuesTable = util.buildTableJson({"tableId": "myQueuesTable", "url": url, "rowCallback": rowCallbackMyQueues,
                 "columns": columns, "filter": false, "headerCallback": headerCallback, "emptyTableLabel": "info.queues.none", "scrollYHeight": "100%", "filterData": myQueuesFilterFn, "initFn": myQueuesInitFn});

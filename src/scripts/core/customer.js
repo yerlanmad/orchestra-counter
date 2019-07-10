@@ -292,6 +292,7 @@ var customer = new function() {
             aoColumns : columnDefs,
             fnRowCallback: rowCallback
         });
+        $('#customerSearchTable').prepend("<caption class='sr-only'>customer search</caption>");
 
         util.hideModal('customerSearchDiv');
 

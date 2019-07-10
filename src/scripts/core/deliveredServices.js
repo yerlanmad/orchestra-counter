@@ -253,6 +253,7 @@ var deliveredServices = new function () {
                     sessvars.state.visit.currentVisitService.visitDeliveredServices !== null ?
                     sessvars.state.visit.currentVisitService.visitDeliveredServices : null)
             });
+            $('#deliveredServices').prepend("<caption class='sr-only'>Delivered services</caption>");
             deliveredServicesTable.fnSort(SORTING);
             $(window).bind('resize', function () {
                 deliveredServicesTable.fnAdjustColumnSizing();

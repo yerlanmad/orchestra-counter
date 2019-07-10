@@ -325,6 +325,7 @@ var customMarks = new function () {
 						&& sessvars.state.visit.visitMarks !== null ? sessvars.state.visit.visitMarks
 						: null)
 				});
+			$('#customMarks').prepend("<caption class='sr-only'>Add marks</caption>");
 		}
 		var sorting = [[1, 'desc']];
 		customMarksTable.fnSort(sorting);

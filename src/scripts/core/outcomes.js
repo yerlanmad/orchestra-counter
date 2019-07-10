@@ -31,6 +31,7 @@ var outcome = new function() {
                     return nRow;
                 };
                 selectOutcomeTable = util.buildTable("selectOutcomeTable", url, rowCallback, columns, true, headerCallback, true);
+                $('#selectOutcomeTable').prepend("<caption class='sr-only'>Select Outcomes</caption>");
             }
         }
     };
@@ -156,6 +157,7 @@ var outcome = new function() {
                     [sessvars.state.visit.currentVisitService.visitOutcome] : null)
             });
         }
+        $('#outcomes').prepend("<caption class='sr-only'>Outcomes</caption>");
         var sorting = [[2, 'desc']];
         outcomeTable.fnSort(sorting);
     };

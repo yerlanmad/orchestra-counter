@@ -649,6 +649,7 @@ var transfer = new function() {
                 transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url, "emptySearchLabel": "info.transfer.queue.empty",
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": headerCallback,
                     "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.queue.empty", "filterData": filterQueues, "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
+                    $('#transferToQueues').prepend("<caption class='sr-only'>Transfer to queue</caption>");
 
             }
             transferTable.fnSort([0, 'asc']);
@@ -753,6 +754,7 @@ var transfer = new function() {
                 transferToStaffPoolTable = util.buildTableJson({"tableId": "transferTicketToUserPoolTable", "url": staffPoolUrl, "emptySearchLabel": "info.transfer.staff.pool.empty",
                 "rowCallback": staffPoolRowCallback, "columns": staffPoolColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": staffPoolHeaderCallback,
                 "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.staff.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
+                $('#transferTicketToUserPoolTable').prepend("<caption class='sr-only'>Transfer to staff member</caption>");
             }
             transferToStaffPoolTable.fnSort([1, 'asc']);
             //destroy old event handlers
@@ -848,6 +850,7 @@ var transfer = new function() {
                 transferToServicePointPoolTable = util.buildTableJson({"tableId": "transferTicketToCounterPoolTable", "emptySearchLabel": "info.transfer.servicepoint.pool.empty",
                 "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": servicePointHeaderCallback,
                 "scrollYHeight": "auto", "emptyTableLabel":"info.transfer.servicepoint.pool.empty", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search")});
+                $('#transferTicketToCounterPoolTable').prepend("<caption class='sr-only'>transfer to counter pool</caption>");
             }
             transferToServicePointPoolTable.fnSort([[3, 'desc'], [0, 'asc']]);// open counters first
 
