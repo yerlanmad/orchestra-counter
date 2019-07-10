@@ -11,7 +11,7 @@
 
         <script src="scripts/vendor/popper.1.13.0.js"></script>
         <script src="scripts/vendor/tooltip.1.1.7.js"></script>
-        <script src="scripts/vendor/chosen-1.8.2.js"></script>
+        <script src="scripts/vendor/chosen.jquery.js"></script>
 
         <script src="scripts/cometd/cometd.js"></script>
         <script src="scripts/cometd/jquery.cometd.js"></script>
