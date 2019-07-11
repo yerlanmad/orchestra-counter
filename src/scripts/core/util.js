@@ -6,7 +6,6 @@ var util = new function () {
 
     var hideErrorTime;
     var hideMessageTime;
-    this.isAutoCloseToast = true;
 
     this.disableOnChange = function (select) {
         //Temporarily remove selection box event listeners to avoid firing the onchange event...
@@ -574,7 +573,7 @@ var util = new function () {
         };
 
         // Hide after 5s
-        if(this.isAutoCloseToast) {
+        if(this.getIsAutoCloseToast()) {
             hideMessageTime = setTimeout(removeFunction, 10000);
             toast.data('timeout', hideMessageTime);
         }
@@ -590,7 +589,7 @@ var util = new function () {
         toast.find('.qm-toast__message').text(text);
         // Append auto close button
         toast.find('.qm-toast__layout').append('<label class="qm-checkbox">' +
-        '<input id="qm-autoclose" onchange="util.onToggleAutoClose(this)" class="qm-checkbox__input"' + (this.isAutoCloseToast ? 'checked': '') +' type="checkbox">' +
+        '<input id="qm-autoclose" onchange="util.onToggleAutoClose(this)" class="qm-checkbox__input"' + (this.getIsAutoCloseToast() ? 'checked': '') +' type="checkbox">' +
         '<i class="qm-checkbox__icon icon-font"></i>' +
         '<label for="qm-autoclose" class="qm-checkbox__input-text">'+ jQuery.i18n.prop('info.toast.autoclose') + '</label>'+
       '</label>');
@@ -639,8 +638,16 @@ var util = new function () {
             }
         }
 
-        this.isAutoCloseToast = isAutoCloseChecked;
+        this.setIsAutoCloseToast(isAutoCloseChecked);
     };
+
+    this.getIsAutoCloseToast = function() {
+        return localStorage.getItem('isAutoCloseToast') === 'true';
+    }
+
+    this.setIsAutoCloseToast = function(value) {
+        localStorage.setItem('isAutoCloseToast', value);
+    }
 
     this.removeMe = function (toBeRemovedId, hideMessageTime) {
         var $elem = $(toBeRemovedId);
