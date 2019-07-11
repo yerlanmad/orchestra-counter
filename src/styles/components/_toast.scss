@@ -2,9 +2,7 @@
 #message, #error {
     position: fixed;
     z-index: 140;
-    visibility: hidden;
-    overflow-y: hidden;
-    overflow-x: hidden;
+
     margin: rem(0 16px 0 16px);
     width: 100%;
 }
@@ -32,9 +30,23 @@
         position: relative;
     }
 
+    &__layout {
+        .qm-toast__preceding-icon {
+            font-size: 40px;
+            margin-right: 32px;
+        }
+    }
+
     &__message {
         flex: 1 1 auto;
         padding-right: rem($global-standard-padding * 2);
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.43;
+        letter-spacing: 0.25px;
+        color: #ebeaea;
 
         @at-root [dir='rtl'] & {
             text-align: right;
@@ -71,4 +83,53 @@
     }
 }
 
+.qm-checkbox-label {
+    margin: auto;
+    height: 106%;
+}
+
+label {
+
+    &.qm-checkbox { 
+        margin-bottom: 0;
+        display: flex;
+        
+    }
+
+    .qm-checkbox {
+        &__input {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            -webkit-clip-path: inset(50%);
+            clip-path: inset(50%);
+            border: 0; 
+        }
+
+        &__input-text {
+            font-size: 14px;
+            margin-bottom: 0;
+            line-height: 24px;
+            margin-left: 12px;
+            margin-right: 32px;
+        }
+
+        &__input ~ .qm-checkbox__icon {
+            font-size: 24px;
+        }
+    
+        &__input:checked ~ .qm-checkbox__icon:before {
+            content: "\e95e";
+        }   
+    
+        &__input ~ .qm-checkbox__icon:before {
+            content: "\e961";
+        }  
+    }
+    
+} 
 

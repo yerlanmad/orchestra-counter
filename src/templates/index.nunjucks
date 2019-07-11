@@ -80,7 +80,7 @@
     </div>
     <div id="renderedPopovers" class="qm-rendered-popovers"></div>
     {# {% include "partials/previous_counter.nunjucks" %} #}
-    <div id="message" aria-live="polite"></div>
+    <div id="message" role="alertdialog" aria-live="assertive"></div>
     <div id="error"></div>
 
     <div class="ui-widget qm-customer-search-results" id="customerSearchDiv">

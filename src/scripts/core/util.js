@@ -6,6 +6,7 @@ var util = new function () {
 
     var hideErrorTime;
     var hideMessageTime;
+    this.isAutoCloseToast = true;
 
     this.disableOnChange = function (select) {
         //Temporarily remove selection box event listeners to avoid firing the onchange event...
@@ -543,17 +544,19 @@ var util = new function () {
 
     this.showMessage = function (text, isError) {
         // Build toast
-        var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><span class="qm-toast__message"></span></div></div>');
+        var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><div class="qm-toast__message"></div> </div></div>');
 
         if (isError) {
+            toast.find('.qm-toast__layout').prepend('<i class="qm-toast__preceding-icon icon-alert-star" aria-hidden="true"></i>');
             toast.addClass("qm-toast--danger");
         } else {
+            toast.find('.qm-toast__layout').prepend('<i class="qm-toast__preceding-icon icon-complete" aria-hidden="true"></i>');
             toast.addClass("qm-toast--success");
         }
 
         // Do not show more than 3 messages
         var $messageContainer = $('#message');
-        if ($messageContainer.children().length > 2) {
+        if ($messageContainer.children().length == 3) {
             $messageContainer.children().last().remove();
         }
 
@@ -564,41 +567,104 @@ var util = new function () {
             toast.fadeOut(400, function () {
                 toast.remove();
                 if ($messageContainer.children().length == 0) {
-                    $messageContainer.css("visibility", "hidden");
+                    $messageContainer.css("display", "none");
                     $messageContainer.css("top", 0);
                 }
             });
         };
 
         // Hide after 5s
-        hideMessageTime = setTimeout(removeFunction, 5000);
+        if(this.isAutoCloseToast) {
+            hideMessageTime = setTimeout(removeFunction, 10000);
+            toast.data('timeout', hideMessageTime);
+        }
+        else {
+            hideMessageTime = null;
+        } 
+
 
         // set id to one bigger than last
-        var messageId = "message_" + hideMessageTime;
+        var messageId = "message_" + this.generateId();
         toast.prop('id', messageId);
         // Append text
         toast.find('.qm-toast__message').text(text);
+        // Append auto close button
+        toast.find('.qm-toast__layout').append('<label class="qm-checkbox">' +
+        '<input id="qm-autoclose" onchange="util.onToggleAutoClose(this)" class="qm-checkbox__input"' + (this.isAutoCloseToast ? 'checked': '') +' type="checkbox">' +
+        '<i class="qm-checkbox__icon icon-font"></i>' +
+        '<label for="qm-autoclose" class="qm-checkbox__input-text">'+ jQuery.i18n.prop('info.toast.autoclose') + '</label>'+
+      '</label>');
+   
         // Append close button
         toast.find('.qm-toast__layout').append('<button class="qm-action-btn qm-action-btn--only-icon qm-toast__close-btn" onClick="util.removeMe(' + messageId + ', ' + hideMessageTime + ');"><i class="qm-action-btn__icon icon-close" aria-hidden="true"></i><span class="sr-only">' + jQuery.i18n.prop('application.sr.close') + '</span></button>');
-        $messageContainer.css("visibility", "visible");
+        $messageContainer.css("display", "block");
 
         // Prepend and fadeIn
         toast.prependTo($messageContainer);
-        toast.fadeIn();
+        toast.fadeIn();       
+    };
+
+    this.onToggleAutoClose = function(target) {
+        var $messageContainer = $('#message');
+        var isAutoCloseChecked = $(target).prop('checked');
+
+        if($messageContainer.children.length > 1) {
+            $messageContainer.find('.qm-checkbox__input').prop('checked', isAutoCloseChecked);
+        }
+
+        if(isAutoCloseChecked){
+            for (let index = 0; index < $messageContainer.children.length; index++) {
+                const toast = $messageContainer.children().eq(index);
+                if(toast.data('timeout')) {
+                    window.clearTimeout(toast.data('timeout'));
+                }
+ 
+                toast.data('timeout', setTimeout((function(t) {return (function () {
+                    t.fadeOut(400, function () {
+                        t.remove();
+                        if ($messageContainer.children().length == 0) {
+                            $messageContainer.css("display", "none");
+                            $messageContainer.css("top", 0);
+                        }
+                    });
+                }); 
+            })(toast), 10000));                
+            }
+        } else {
+            for (let index = 0; index < $messageContainer.children.length; index++) {
+                var toast = $messageContainer.children().eq(index);
+                if(toast.data('timeout')) {
+                    window.clearTimeout(toast.data('timeout'));
+                }              
+            }
+        }
+
+        this.isAutoCloseToast = isAutoCloseChecked;
     };
 
     this.removeMe = function (toBeRemovedId, hideMessageTime) {
-        window.clearTimeout(hideMessageTime);
         var $elem = $(toBeRemovedId);
+        hideMessageTime = $elem.data('timeout');
+
+        if(hideMessageTime) {
+            window.clearTimeout(hideMessageTime);
+        }
 
         $elem.fadeOut(400, function () {
             $elem.remove();
             if ($("#message").children().length == 0) {
-                $("#message").css("visibility", "hidden");
+                $("#message").css("display", "none");
                 $("#message").css("top", 0);
-            }
+            } 
         });
     };
+
+    this.generateId = (function(){
+        var id = 0;
+        return function() {
+            return id++;
+        }
+    })();
 
     this.compareTimeInPool = function (a, b) {
         var a1 = a.waitingTime;
