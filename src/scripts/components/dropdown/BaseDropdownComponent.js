@@ -129,9 +129,14 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
     }
 
     this.onError = function (msg) {
-        $(this.getSelector()).next().addClass("drop-has-error");
-        $(this.getSelector()).parent().next().removeClass("invisible-on-load");
-        $(this.getSelector()).parent().next().text(msg);
+        this.clearError();
+        var selector =   $(this.getSelector());
+        setTimeout(function () {
+            selector.next().addClass("drop-has-error");
+            selector.parent().next().removeClass("invisible-on-load");
+            selector.parent().next().text(msg);
+        },100);
+
     }
 
     this.clearError = function () {
