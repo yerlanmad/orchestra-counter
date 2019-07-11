@@ -539,11 +539,9 @@ var util = new function () {
 
     }
 
-
-
     this.showMessage = function (text, isError) {
         // Build toast
-        var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><div class="qm-toast__message"></div> </div></div>');
+        var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><div class="qm-toast__message" role="alert" aria-live="assertive"></div> </div></div>');
 
         if (isError) {
             toast.find('.qm-toast__layout').prepend('<i class="qm-toast__preceding-icon icon-alert-star" aria-hidden="true"></i>');
@@ -574,7 +572,7 @@ var util = new function () {
 
         // Hide after 5s
         if(this.getIsAutoCloseToast()) {
-            hideMessageTime = setTimeout(removeFunction, 10000);
+            hideMessageTime = setTimeout(removeFunction, 5000);
             toast.data('timeout', hideMessageTime);
         }
         else {
@@ -627,7 +625,7 @@ var util = new function () {
                         }
                     });
                 }); 
-            })(toast), 10000));                
+            })(toast), 5000));                
             }
         } else {
             for (let index = 0; index < $messageContainer.children.length; index++) {
@@ -732,7 +730,7 @@ var util = new function () {
 
         var $messageContainer = $('#error');
 
-        if ($messageContainer.children().length > 2) {
+        if ($messageContainer.children().length > 3) {
             $messageContainer.children().last().remove();
         }
 
@@ -750,7 +748,7 @@ var util = new function () {
         };
 
         // Hide after 15s
-        hideErrorTime = setTimeout(removeFunction, 15000);
+        hideErrorTime = setTimeout(removeFunction, 1500);
 
         // Set id
         var messageId = "cometdErrorMessage_" + hideErrorTime;

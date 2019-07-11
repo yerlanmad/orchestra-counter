@@ -34,6 +34,11 @@
         .qm-toast__preceding-icon {
             font-size: 40px;
             margin-right: 32px;
+
+            @at-root [dir='rtl'] & { 
+                margin-right: auto;
+                margin-left: 32px;
+            }
         }
     }
 
@@ -47,6 +52,7 @@
         line-height: 1.43;
         letter-spacing: 0.25px;
         color: #ebeaea;
+        max-width: 55%;
 
         @at-root [dir='rtl'] & {
             text-align: right;
@@ -89,11 +95,10 @@
 }
 
 label {
-
     &.qm-checkbox { 
         margin-bottom: 0;
         display: flex;
-        
+        align-items: center;
     }
 
     .qm-checkbox {
@@ -116,18 +121,42 @@ label {
             line-height: 24px;
             margin-left: 12px;
             margin-right: 32px;
+
+            @at-root [dir='rtl'] & {
+                margin-left: 32px;
+                margin-right: 12px;
+            } 
         }
 
         &__input ~ .qm-checkbox__icon {
-            font-size: 24px;
+            font-size: 16px;
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #ebeaea;
+            padding: 2px;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        &__input:checked ~ .qm-checkbox__icon { 
+            background-color: #ebeaea;
+            color: $qmatic-aquamarine;
         }
     
         &__input:checked ~ .qm-checkbox__icon:before {
-            content: "\e95e";
+            content: "\e906";
+            display: inline-block;
+            position: absolute;
+            left: -1px;
+            top: -1px;
+            @at-root [dir='rtl'] &  {
+                content: "\e93f";
+            }
         }   
     
         &__input ~ .qm-checkbox__icon:before {
-            content: "\e961";
+            content: "";
         }  
     }
     
