@@ -177,6 +177,7 @@ var deliveredServices = new function () {
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.delivered.service.outcome');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.delivered.service.time');
                 // }
+                $(nHead).find('th').attr('scope', 'col');
             };
             var rowCallback = function (nRow, aData, iDisplayIndex) {
                 var outcomeDataIndex = "visitOutcome";

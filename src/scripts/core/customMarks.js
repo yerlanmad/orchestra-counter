@@ -312,7 +312,7 @@ var customMarks = new function () {
 					},
 					"bFilter": false,
 					"fnRowCallback": null,
-					"fnHeaderCallback": null,
+					"fnHeaderCallback": headerCallback,
 					"bLengthChange": false,
 					"bProcessing": true,
 					"bPaginate": false,
@@ -345,6 +345,10 @@ var customMarks = new function () {
 
 	this.getDataTable = function () {
 		return customMarksTable;
+	}
+
+	var headerCallback = function (nHead, aasData, iStart, iEnd, aiDisplay) {
+		$(nHead).find('th').attr('scope', 'col');
 	}
 
 };

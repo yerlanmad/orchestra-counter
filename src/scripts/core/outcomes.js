@@ -24,6 +24,7 @@ var outcome = new function() {
                 var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
                     nHead.style.borderBottom = "1px solid #c0c0c0";
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.outcome.name');
+                    $(nHead).find('th').attr('scope', 'col');
                 };
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
                     /* Set onclick action */
@@ -133,6 +134,7 @@ var outcome = new function() {
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.outcome.name');
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.outcome.time');
                 }
+                $(nHead).find('th').attr('scope', 'col');
             };
             outcomeTable = $('#outcomes').dataTable( {
                 "bDestroy": true,

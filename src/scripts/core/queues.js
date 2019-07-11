@@ -57,6 +57,7 @@ var queues = new function() {
                     nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.name');
                     nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.waiting');
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+                    $(nHead).find('th').attr('scope', 'col');
                 };
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues";
                 var rowCallbackAllQueues = function(nRow, aData, iDisplayIndex) {
@@ -252,6 +253,7 @@ var queues = new function() {
                     nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.service.name');
                     nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
                     nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+                    $(nHead).find('th').attr('scope', 'col');
                 };
                 var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/queues/" + sessvars.clickedQueueId + "/visits/full";
                 var rowCallback = function(nRow, aData, iDisplayIndex) {

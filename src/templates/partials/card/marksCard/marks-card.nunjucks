@@ -52,9 +52,9 @@
             </div>
         </div>
         <div class="custom-list-header">
-            <div class="custom-list-header-col" id="markNameColumn">
+            <div class="custom-list-header-col" id="markNameColumn" scope="col">
             </div>
-            <div class="custom-list-header-col" id="markTimeColumn">
+            <div class="custom-list-header-col" id="markTimeColumn" scope="col">
             </div>
         </div>
     </header>

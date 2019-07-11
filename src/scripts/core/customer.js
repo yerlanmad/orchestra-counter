@@ -275,6 +275,10 @@ var customer = new function() {
             }
         }
 
+        var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
+            $(nHead).find('th').attr('scope', 'col');
+        };
+
         // initialise datatable for the auto-complete customer search
         $("#customerSearchTable").dataTable({
             aaData : [],
@@ -290,7 +294,8 @@ var customer = new function() {
                 sEmptyTable: jQuery.i18n.prop('customer.not.found')
             },
             aoColumns : columnDefs,
-            fnRowCallback: rowCallback
+            fnRowCallback: rowCallback,
+            fnHeaderCallback: headerCallback,
         });
         $('#customerSearchTable').prepend("<caption class='sr-only'>customer search</caption>");
 
