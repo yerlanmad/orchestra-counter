@@ -587,9 +587,9 @@ var util = new function () {
         toast.find('.qm-toast__message').text(text);
         // Append auto close button
         toast.find('.qm-toast__layout').append('<label class="qm-checkbox">' +
-        '<input id="qm-autoclose" onchange="util.onToggleAutoClose(this)" class="qm-checkbox__input"' + (this.getIsAutoCloseToast() ? 'checked': '') +' type="checkbox">' +
+        '<input id="qm-autoclose__'+ messageId +'" onchange="util.onToggleAutoClose(this)" class="qm-checkbox__input"' + (this.getIsAutoCloseToast() ? 'checked': '') +' type="checkbox">' +
         '<i class="qm-checkbox__icon icon-font" aria-hidden="true"></i>' +
-        '<label for="qm-autoclose" class="qm-checkbox__input-text">'+ jQuery.i18n.prop('info.toast.autoclose') + '</label>'+
+        '<label for="qm-autoclose__'+ messageId +'" class="qm-checkbox__input-text">'+ jQuery.i18n.prop('info.toast.autoclose') + '</label>'+
       '</label>');
    
         // Append close button
@@ -597,8 +597,13 @@ var util = new function () {
         $messageContainer.css("display", "block");
 
         // Prepend and fadeIn
-        toast.prependTo($messageContainer);
-        toast.fadeIn();       
+        //toast.prependTo($messageContainer);
+        //toast.fadeIn(); 
+        setTimeout(function(){
+            toast.prependTo($messageContainer);
+            toast.fadeIn(); 
+            toast.find('.qm-toast__close-btn').focus();        
+        }, 500);
     };
 
     this.onToggleAutoClose = function(target) {
