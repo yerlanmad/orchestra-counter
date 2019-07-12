@@ -597,8 +597,6 @@ var util = new function () {
         $messageContainer.css("display", "block");
 
         // Prepend and fadeIn
-        //toast.prependTo($messageContainer);
-        //toast.fadeIn(); 
         setTimeout(function(){
             toast.prependTo($messageContainer);
             toast.fadeIn(); 
