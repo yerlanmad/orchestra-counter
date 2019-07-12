@@ -33,9 +33,9 @@ var queues = new function() {
 
                 // WCAG update queue changes
                 var queueUpdatesLabelText = '';
-                for (let index = 0; index < existingData.length; index++) {
-                    const oldRow = existingData[index];
-                    const newRow = myQueuesData.find(function(d) {
+                for (var index = 0; index < existingData.length; index++) {
+                    var oldRow = existingData[index];
+                    var newRow = myQueuesData.find(function(d) {
                         return d.name === oldRow.name;
                     });
                     if(newRow && oldRow.customersWaiting !== newRow.customersWaiting) {
