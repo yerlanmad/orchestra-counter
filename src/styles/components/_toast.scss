@@ -86,6 +86,14 @@
 
     &--danger {
         background: $toast-error-background-color;
+
+        label { 
+            .qm-checkbox {
+                &__input:checked ~ .qm-checkbox__icon {
+                    color: $toast-error-background-color;
+                }
+            }
+        }
     }
 }
 

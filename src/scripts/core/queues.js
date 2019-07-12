@@ -12,9 +12,10 @@ var queues = new function() {
      */
     this.updateQueues = function(keepCalling) {
         if(!servicePoint.getWorkstationOffline() && servicePoint.hasValidSettings()) {
-
+            
             if(typeof queuesTable !== 'undefined' && typeof myQueuesTable !== 'undefined') {
                 // All Queues
+                var existingData = queuesTable.fnGetData();
                 queuesTable.fnClearTable();
                 var queuesData = spService.get("branches/" + sessvars.branchId + "/queues")
                 if(queuesData && queuesData.length > 0) {
@@ -29,6 +30,20 @@ var queues = new function() {
                     myQueuesTable.fnAddData(myQueuesData);
                 }
                 myQueuesInitFn(myQueuesData);
+
+                // WCAG update queue changes
+                var queueUpdatesLabelText = '';
+                for (let index = 0; index < existingData.length; index++) {
+                    const oldRow = existingData[index];
+                    const newRow = myQueuesData.find(function(d) {
+                        return d.name === oldRow.name;
+                    });
+                    if(newRow && oldRow.customersWaiting !== newRow.customersWaiting) {
+                        queueUpdatesLabelText += newRow.name + ' have ' + newRow.customersWaiting + ' customers waiting. '
+                    }                    
+                }
+
+                $('#qm-queue-updates').text(queueUpdatesLabelText);
 
             } else {
                 var columns = [

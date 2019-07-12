@@ -541,7 +541,7 @@ var util = new function () {
 
     this.showMessage = function (text, isError) {
         // Build toast
-        var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><div class="qm-toast__message" role="alert" aria-live="assertive"></div> </div></div>');
+        var toast = $('<div class="qm-toast"><div class="qm-toast__layout"><div class="qm-toast__message" role="alert" aria-live="polite"></div></div></div>');
 
         if (isError) {
             toast.find('.qm-toast__layout').prepend('<i class="qm-toast__preceding-icon icon-alert-star" aria-hidden="true"></i>');
@@ -588,7 +588,7 @@ var util = new function () {
         // Append auto close button
         toast.find('.qm-toast__layout').append('<label class="qm-checkbox">' +
         '<input id="qm-autoclose" onchange="util.onToggleAutoClose(this)" class="qm-checkbox__input"' + (this.getIsAutoCloseToast() ? 'checked': '') +' type="checkbox">' +
-        '<i class="qm-checkbox__icon icon-font"></i>' +
+        '<i class="qm-checkbox__icon icon-font" aria-hidden="true"></i>' +
         '<label for="qm-autoclose" class="qm-checkbox__input-text">'+ jQuery.i18n.prop('info.toast.autoclose') + '</label>'+
       '</label>');
    
