@@ -1230,6 +1230,7 @@ var servicePoint = new function () {
 							"placeholder": jQuery.i18n.prop("info.placeholder.walkdirect.search"),
 							"data": serivesList
 						});
+						$('#walkDirectServices').prepend("<caption class='sr-only'>Walk in Customer services</caption>");
 						var sorting = [[1, 'asc']];
 						walkTable.fnSort(sorting);
 					}

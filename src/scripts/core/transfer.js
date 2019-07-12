@@ -235,6 +235,8 @@ var transfer = new function() {
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "headerCallback": headerCallback, "emptySearchLabel": "info.transfer.queue.empty",
                     "scrollYHeight": "300px", "emptyTableLabel": "info.transfer.queue.empty", "filterData": filterQueues});
 
+                    $(selector).prepend("<caption class='sr-only'>Transfer to queue</caption>");
+
                 table.fnSort([0, 'asc']);
             }
             //destroy old event handlers
@@ -343,6 +345,8 @@ var transfer = new function() {
                     "filter": true, "headerCallback": staffPoolHeaderCallback, "scrollYHeight": "300px",
                     "emptyTableLabel":"info.transfer.staff.pool.empty"});
 
+                    $(selector).prepend("<caption class='sr-only'>Transfer to staff member</caption>");
+
                 table.fnSort([1, 'asc']);
             }
             //destroy old event handlers
@@ -441,6 +445,8 @@ var transfer = new function() {
                     "url": servicePointUrl, "rowCallback": servicePointRowCallback, "columns": servicePointColumns,
                     "filter": true, "headerCallback": servicePointHeaderCallback, "scrollYHeight": "300px","customFilter": true, "infoFiltered": "info.filtered.fromEntries", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search"),
                     "emptyTableLabel":"info.transfer.servicepoint.pool.empty"});
+
+                    $(selector).prepend("<caption class='sr-only'>transfer to counter pool</caption>");
 
             }
             table.fnSort([[3, 'desc'], [0, 'asc']]); // open counters first

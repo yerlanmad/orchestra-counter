@@ -610,8 +610,8 @@ var util = new function () {
         }
 
         if(isAutoCloseChecked){
-            for (let index = 0; index < $messageContainer.children.length; index++) {
-                const toast = $messageContainer.children().eq(index);
+            for (var index = 0; index < $messageContainer.children.length; index++) {
+                var toast = $messageContainer.children().eq(index);
                 if(toast.data('timeout')) {
                     window.clearTimeout(toast.data('timeout'));
                 }
@@ -628,7 +628,7 @@ var util = new function () {
             })(toast), 5000));                
             }
         } else {
-            for (let index = 0; index < $messageContainer.children.length; index++) {
+            for (var index = 0; index < $messageContainer.children.length; index++) {
                 var toast = $messageContainer.children().eq(index);
                 if(toast.data('timeout')) {
                     window.clearTimeout(toast.data('timeout'));
