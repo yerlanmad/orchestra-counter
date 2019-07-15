@@ -613,7 +613,7 @@ var util = new function () {
         }
 
         if(isAutoCloseChecked){
-            for (var index = 0; index < $messageContainer.children.length; index++) {
+            for (var index = 0; index < $messageContainer.children().length; index++) {
                 var toast = $messageContainer.children().eq(index);
                 if(toast.data('timeout')) {
                     window.clearTimeout(toast.data('timeout'));

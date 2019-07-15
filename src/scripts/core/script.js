@@ -814,7 +814,7 @@ var servicePoint = new function () {
 		servicePoint.updateWorkstationStatus(false, false, true);
 		servicePoint.addMultiServicePressed();
 		if (sessvars.state) {
-			util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', [sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName]));
+			util.showMessage(translate.msg('info.card.addServicesCard.successfully.added', ['"' + sessvars.state.visit.unservedVisitServices[sessvars.state.visit.unservedVisitServices.length - 1].serviceInternalName + '"']));
 		}
 	};
 
