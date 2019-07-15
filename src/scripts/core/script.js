@@ -763,7 +763,7 @@ var servicePoint = new function () {
 					'<span class="list--item-icon">' +
 					'<button class="qm-action-btn qm-action-btn--only-icon" onClick="servicePoint.removeService(' + opt.value + ', ' + i + ')">' +
 					'<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>' +
-					'<span class="sr-only">delete button</span>' +
+					'<span class="sr-only">Remove this service from the current visit</span>' +
 					'</button>' +
 					'</span>' +
 					'</div>'

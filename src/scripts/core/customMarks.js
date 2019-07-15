@@ -282,7 +282,7 @@ var customMarks = new function () {
 							+ jQuery.i18n.prop("action.remove.mark.click")
 							+ "\"> " + '<button class="qm-action-btn qm-action-btn--only-icon">'
 							+ '<i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>'
-							+ '<span class="sr-only">delete button</span>'
+							+ '<span class="sr-only">Remove this mark from the current visit</span>'
 							+ '</button>' + "</span>");
 
 						$(td).find(".removeMarkBtn").click(function () {
