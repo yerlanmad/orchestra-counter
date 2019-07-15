@@ -17,7 +17,7 @@
                 <form id="editAttachedCustomerForm" class="js-edit-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend sr-only">
-                            <span class="qm-legend__text js-legend-customer-details"></span>
+                            <h2 class="qm-legend__text js-legend-customer-details"></h2>
                         </legend>
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">

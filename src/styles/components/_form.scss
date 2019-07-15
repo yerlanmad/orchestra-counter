@@ -255,9 +255,15 @@
     }
 
     &__text {
+        display: inline-block;
         background: $white;
         padding: rem(0 $global-standard-padding / 2);
         position: relative;
+        font-size: rem(18px);
+        font-weight: $font-weight-medium;
+        color: $dark-transparent42;
+        text-align: center;
+        margin: 0;
     }
 }
 

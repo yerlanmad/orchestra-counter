@@ -6,8 +6,7 @@
 {% block header %}
     <header class="qm-card__header-section">
         <div class="qm-card-header">
-            <div class="qm-card-header__headline" id="walkInHeader">
-            </div>
+            <h1 class="qm-card-header__headline" id="walkInHeader"></h1>
             <div class="qm-card-header__sub-heading" id="walkInSubHeader">
             </div>
         </div>

@@ -15,7 +15,7 @@
             <div class="qm-customer__link-container">
                 <fieldset class="qm-fieldset js-customer-search-view">
                     <legend class="qm-legend">
-                        <span class="qm-legend__text js-legend-link-existing-customer"></span>
+                        <h2 class="qm-legend__text js-legend-link-existing-customer"></h2>
                     </legend>
                     <div class="qm-form-field qm-form-field--search">
                         <label for="customerInput" class="sr-only js-label-search-customer"></label>
@@ -32,7 +32,7 @@
                 <form id="createCustomerForm" class="js-add-new-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend">
-                            <span class="qm-legend__text js-legend-add-customer"></span>
+                            <h2 class="qm-legend__text js-legend-add-customer"></h2>
                         </legend>
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">
@@ -147,7 +147,7 @@
                 <form id="editCustomerForm" class="qm-hide js-edit-customer-form" novalidate>
                     <fieldset class="qm-fieldset">
                         <legend class="qm-legend">
-                            <span class="qm-legend__text js-legend-customer-details"></span>
+                            <h2 class="qm-legend__text js-legend-customer-details"></h2>
                         </legend>
                         <div class="qm-form-row">
                             <div class="qm-form-column-6">

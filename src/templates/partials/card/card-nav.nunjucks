@@ -7,7 +7,7 @@
             </button>
         </div>
         <div class="qm-card-nav__middle">
-            <h2 {% if id %}id="{{id}}"{% endif %} class="qm-card-nav__title"></h2>
+            <h1 {% if id %}id="{{id}}"{% endif %} class="qm-card-nav__title"></h1>
         </div>
     </div>
 {% endmacro %}

@@ -26,6 +26,7 @@
         font-size: rem(28px);
         font-weight: $font-weight-light;
         margin-bottom: 0;
+        color: $text-primary-color;
 
         @at-root [dir='rtl'] & {
             text-align: right;
