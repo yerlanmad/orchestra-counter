@@ -202,6 +202,7 @@ var transfer = new function() {
                     $(nHead).closest('thead, THEAD').find('.transferQueueName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.queue.name'));
                     });
+                    $(nHead).find('th').attr('scope', 'col');
                 };
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
                   if($('td:eq(0)', nRow).find('span').length == 0) {
@@ -326,6 +327,7 @@ var transfer = new function() {
                     $(nHead).closest('thead, THEAD').find('.transferStaffPoolName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.staff.pool.username'));
                     });
+                    $(nHead).find('th').attr('scope', 'col');
                 };
                 var staffPoolRowCallback = function(nRow, aData, iDisplayIndex) {
                     if($('td:eq(0)', nRow).find('a').length == 0) {
@@ -421,6 +423,7 @@ var transfer = new function() {
                     $(nHead).closest('thead, THEAD').find('.transferServicePointPoolName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.servicepoint.pool.name'));
                     });
+                    $(nHead).find('th').attr('scope', 'col');
                 };
                 var servicePointRowCallback = function(nRow, aData, iDisplayIndex) {
                     if($('td:eq(0)', nRow).find('a').length == 0) {
