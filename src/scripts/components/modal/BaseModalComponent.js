@@ -31,11 +31,10 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
                     // Forward
                     elem = this.getNextTabbaleElement();
                 }
-               
+                e.preventDefault();
+                e.stopPropagation();
                 $(elem).focus();
-                
-                //e.preventDefault();
-                //e.stopPropagation();
+                       
             }
         }).bind(this);
 
@@ -47,8 +46,8 @@ window.$Qmatic.components.modal.BaseModalComponent = function (selector) {
     }
 
     this.tabFilterFunc = function (i, item) {
-        if ($(item).hasClass("chosen-search-input")) {
-            if ($($(item).parent().parent().parent().parent().children()[0]).is(':disabled')) {
+        if ($(item).hasClass("qm-tab")) {
+            if ($($(item).children()[0]).is(':disabled')) {
                 return false;
             }
         } else if ($(item).is(':hidden')) {

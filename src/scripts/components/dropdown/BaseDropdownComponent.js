@@ -124,8 +124,7 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
 
     this.setChosenSingleFocusable = function () {
         this.get$Elem().parent().attr("tabIndex", "0");
-        this.get$Elem().parent().find('.chosen-search-input').attr("tabIndex", "0");
-        this.get$Elem().parent().find('.chosen-search-input').addClass("qm-tab");
+        this.get$Elem().parent().addClass("qm-tab");
     }
 
     this.onError = function (msg) {
