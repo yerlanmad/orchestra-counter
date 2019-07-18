@@ -8,7 +8,7 @@
         </button>
       </div>
       <div class="qm-card-nav__middle">
-        <h2 class="qm-card-nav__title js-popover-transfer-delay-header"></h2>
+        <h1 class="qm-card-nav__title js-popover-transfer-delay-header"></h1>
       </div>
       <div class="qm-card-nav__right">
         <button class="qm-action-btn qm-action-btn--only-icon qm-card-nav__close-btn js-popover-close">
