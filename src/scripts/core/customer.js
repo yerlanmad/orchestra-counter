@@ -512,7 +512,7 @@ var customer = new function() {
 
             if (dobYear.getTime() > now.getTime()) {
                 this.showDobFieldError(dob[2]);
-                toggleErrorLabel(true, dob[1], jQuery.i18n.prop('error.validate.dob.date.in.future'));
+                toggleErrorLabel(true, dob[1], '<br>'+jQuery.i18n.prop('error.validate.dob.date.in.future'));
                 return false;
             } else {
                 this.hideDobFieldError(dob[2]);
@@ -524,7 +524,7 @@ var customer = new function() {
                 if (dd>ListofDays[mm-1]) {
                     // Faulty day
                     this.showDobFieldError(dob[1]);
-                    toggleErrorLabel(true, dob[1], translate.msg('error.validate.dob.invalid.day', [ListofDays[mm-1], util.getMonthName(mm-1)]));
+                    toggleErrorLabel(true, dob[1], '<br>'+translate.msg('error.validate.dob.invalid.day', [ListofDays[mm-1], util.getMonthName(mm-1)]));
                     return false;
                 } else {
                     this.hideDobFieldError(dob[1]);
@@ -537,12 +537,12 @@ var customer = new function() {
                 }
                 if ((lyear === false) && (dd>=29)) {
                     this.showDobFieldError(dob[1]);
-                    toggleErrorLabel(true, dob[1], translate.msg('error.validate.dob.invalid.day', [ListofDays[mm-1], util.getMonthName(mm-1)]));
+                    toggleErrorLabel(true, dob[1], '<br>'+translate.msg('error.validate.dob.invalid.day', [ListofDays[mm-1], util.getMonthName(mm-1)]));
                     return false;
                 }
                 if ((lyear === true) && (dd>29)) {
                     this.showDobFieldError(dob[1]);
-                    toggleErrorLabel(true, dob[1], translate.msg('error.validate.dob.invalid.day',[29, util.getMonthName(mm-1)]));
+                    toggleErrorLabel(true, dob[1], '<br>'+translate.msg('error.validate.dob.invalid.day',[29, util.getMonthName(mm-1)]));
                     return false;
                 }
                 this.hideDobFieldError(dob[1]);
