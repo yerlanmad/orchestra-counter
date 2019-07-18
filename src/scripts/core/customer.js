@@ -134,23 +134,6 @@ var customer = new function() {
         this.setFormButtonsState("#editAttachedCustomerForm", true);
 
         this.initClearInputField();
-       var saveBtn =  $('.save-btn')
-        $('input[type="tel"]').keyup(function(e) {
-            var phonePattern = /^[0-9\+\s]+$/;
-            var passedTest = phonePattern.test($(this).val());
-            if (!passedTest) {
-                if($(this).val().length > 0){
-                    toggleErrorLabel(true, $(this));
-                    saveBtn.prop('disabled', true);
-                }else{
-                    toggleErrorLabel(false, $(this));
-                    saveBtn.prop('disabled', false);
-                }
-            } else {
-              toggleErrorLabel(false, $(this));
-              saveBtn.prop('disabled', false);
-            };
-        });
         /*
          * Functionality below for autocomplete customer-search.
          * uses a simple input text field and jQuery datatable
@@ -322,6 +305,7 @@ var customer = new function() {
         var $requiredFields = $form.find('[required]');
         var $saveBtn = $form.find('.save-btn');
         var $emailField = $form.find('[name="email"]');
+        var $phoneField = $form.find('input[type="tel"]');
         var $dobMonth = $form.find('[data-dobmonth]');
         var $dobDay = $form.find('[data-dobday]');
         var $dobYear = $form.find('[data-dobyear]');
@@ -330,7 +314,7 @@ var customer = new function() {
         $form.find('.qm-field-error').removeClass('qm-field-error');
         this.setSaveButtonState($requiredFields, $saveBtn, $emailField, dob);
         if(setListeners) {
-            this.setRequiredFieldsListener($requiredFields, $saveBtn, $emailField, dob);
+            this.setRequiredFieldsListener($requiredFields, $saveBtn, $emailField, $phoneField, dob);
             this.handleShowResetButton($inputs);
         }
     }
@@ -359,8 +343,13 @@ var customer = new function() {
             $emailField.removeClass('qm-field-error');
         }
 
-        if(customer.validateDateOfBirth(dob) !== true) {
+       if(customer.validateDateOfBirth(dob) !== true) {
             $saveBtn.prop('disabled', true);
+        } else {
+            toggleErrorLabel(false, dob[1]);
+            this.hideDobFieldError(dob[0]);
+            this.hideDobFieldError(dob[1]);
+            this.hideDobFieldError(dob[2]);
         }
     };
 
@@ -376,24 +365,43 @@ var customer = new function() {
         $clearBtns.on('click', this.clearInput);
     }
 
-    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField, dob) {
-        var isValid = true;
+    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField, $phoneField, dob) {
+        var isFirstNameValid = false;
+        var isLastNameValid = false;
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
-            if($reqField.val().trim() === "") {
-                isValid = false;
-                $reqField.addClass('qm-field-error');
-                toggleErrorLabel(true, $reqField);
-              } else {
-                toggleErrorLabel(false, $reqField);
-                $reqField.removeClass('qm-field-error');
-            }
+                if($reqField.val().trim() === "") {
+                    if(i == 0){
+                        isFirstNameValid = false;
+                    }else if(i== 1){
+                        isLastNameValid = false;
+                    }
+                    if($reqField.parent().find(document.activeElement).length > 0){
+                        $reqField.addClass('qm-field-error');
+                        toggleErrorLabel(true, $reqField);
+                    }
+    
+                  } else {
+                    if(i == 0){
+                        isFirstNameValid = true;
+                    }else if(i== 1){
+                        isLastNameValid = true;
+                    }
+                    if($reqField.parent().find(document.activeElement).length > 0){
+                        toggleErrorLabel(false, $reqField);
+                        $reqField.removeClass('qm-field-error');
+                    }   
+                }
+  
         });
-        if(!isValid) {
-            $saveBtn.prop('disabled', true);
-        } else {
+        if(isFirstNameValid && isLastNameValid) {
             $saveBtn.prop('disabled', false);
+        } else {
+            $saveBtn.prop('disabled', true);
         }
+
+     
+
 
         if($emailField.val() !== "" && !isEmailValid($emailField.val())) {
             toggleErrorLabel(true, $emailField);
@@ -403,6 +411,24 @@ var customer = new function() {
             toggleErrorLabel(false, $emailField);
             $emailField.removeClass('qm-field-error');
         }
+
+        var phonePattern = /^[0-9\+\s]+$/;
+        var passedTest = phonePattern.test($phoneField.val());
+        if (!passedTest) {
+            if($phoneField.val().length > 0){
+                toggleErrorLabel(true, $phoneField);
+                $phoneField.addClass('qm-field-error');
+                $saveBtn.prop('disabled', true);
+            }else{
+                toggleErrorLabel(false, $phoneField);
+                $phoneField.removeClass('qm-field-error');
+               // saveBtn.prop('disabled', false);
+            }
+        } else {
+          toggleErrorLabel(false, $phoneField);
+          $phoneField.removeClass('qm-field-error');
+         // saveBtn.prop('disabled', false);
+        };
 
         if(customer.validateDateOfBirth(dob) !== true) {
             // toggleErrorLabel(true, dob[1]);
@@ -479,7 +505,7 @@ var customer = new function() {
         if (mm !== "-1" || dd !== '' || yyyy !== '') {
             hasStartedDob = true;
         } else {
-            hasDobStarted = false;
+            hasStartedDob = false;
         }
 
         if(hasStartedDob) {
@@ -497,7 +523,7 @@ var customer = new function() {
         var yyyy = dob[2].val().trim();
         var inputDate = dd + '-' + mm + '-' + yyyy;
 
-        var dateformat = /^(0[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
+        var dateformat = /^(0?[1-9]|[12]\d|30|31)[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/;
         // Match the date format through regular expression
         if(inputDate.match(dateformat)) {
             var pdate = inputDate.split('-');
@@ -548,7 +574,7 @@ var customer = new function() {
                 this.hideDobFieldError(dob[1]);
             }
         } else {
-            var splitRegex = [/^(0[1-9]|[12][0-9]|3[01])$/, /^(0?[1-9]|1[012])$/, /^\d{4}$/];
+            var splitRegex = [/^(0?[1-9]|[12]\d|30|31)$/, /^(0?[1-9]|1[012])$/, /^\d{4}$/];
             var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];
             var validDay = dd.match(splitRegex[0]);
             var validMonth = mm.match(splitRegex[1]);
@@ -571,12 +597,25 @@ var customer = new function() {
               this.showDobFieldError(dob[1]);
               if(mm > 0){
                 if(parseInt(dd)){
-                    errorString = errorString + ' <br> '+ translate.msg('error.validate.dob.invalid.day', [ListofDays[mm-1], util.getMonthName(mm-1)]);
+                    if (mm==2) {
+                        var lyear = false;
+                        if ( (!(yy % 4) && yy % 100) || !(yy % 400)) {
+                            lyear = true;
+                        }
+                        if ((lyear === false) && (dd>=29)) {
+                            errorString = errorString + ' <br> '+ translate.msg('error.validate.dob.invalid.day', [ListofDays[mm-1], util.getMonthName(mm-1)]);
+                        }
+                        if ((lyear === true) && (dd>29)) {
+                            errorString = errorString + ' <br> '+ translate.msg('error.validate.dob.invalid.day', [29, util.getMonthName(mm-1)]);
+                        }
+                    }else{
+                        errorString = errorString + ' <br> '+ translate.msg('error.validate.dob.invalid.day', [ListofDays[mm-1], util.getMonthName(mm-1)]);
+                    }
                  }else{
                 errorLabels.push(jQuery.i18n.prop('error.validate.dob.day'));
                  }
               }else{
-
+                this.showDobFieldError(dob[0]);
                 errorString = errorString + ' <br> '+ translate.msg('error.validate.dob.invalid.month');        
               }
 
@@ -631,14 +670,20 @@ var customer = new function() {
         $elem.removeClass('qm-field-error');
     };
 
-    this.setRequiredFieldsListener = function ($requiredFields, $saveBtn, $emailField, dob) {
+    this.setRequiredFieldsListener = function ($requiredFields, $saveBtn, $emailField, $phoneField, dob) {
         var self = this;
-        $requiredFields.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, dob));
-        $emailField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, dob));
+        $requiredFields.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, $phoneField, dob));
+        $emailField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, $phoneField, dob));
+        $phoneField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, $phoneField, dob));
+
         if (dob.length > 0) {
             for(var i = 0; i < dob.length; i++) {
-                dob[i].on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, dob));
+                dob[i].on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, $phoneField, dob));
+
             }
+            dob[0].chosen().change(function () {
+                customer.setSaveButtonStateWithError( $requiredFields, $saveBtn, $emailField, $phoneField, dob)
+            });
         }
     }
 

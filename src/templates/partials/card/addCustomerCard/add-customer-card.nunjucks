@@ -48,7 +48,7 @@
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
-                                    <span id="createfirstName_error" class="qm-form-field__error-label js-form-field-error"></span>
+                                    <span id="createfirstName_error" class="qm-form-field__error-label js-form-field-error" role="alert"></span>
                                 </div>
                             </div>
                             <div class="qm-form-column-6">
@@ -64,7 +64,7 @@
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
-                                    <span id="createlastName_error" class="qm-form-field__error-label js-form-field-error"></span>
+                                    <span id="createlastName_error" class="qm-form-field__error-label js-form-field-error" role="alert"></span>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
-                                    <span id="createemail_error" class="qm-form-field__error-label js-form-field-error"></span>
+                                    <span id="createemail_error" class="qm-form-field__error-label js-form-field-error" role="alert"></span>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                             <span class="sr-only"></span>
                                         </button>
                                     </div>
-                                    <span id="createphoneNumber_error" class="qm-form-field__error-label js-form-field-error"></span>
+                                    <span id="createphoneNumber_error" class="qm-form-field__error-label js-form-field-error" role="alert"></span>
                                 </div>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="createdateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
-                                        <div class="qm-drop-down__component">
+                                        <div class="qm-drop-down__component" aria-describedby="createdateOfBirth_error">
                                             <select id="createdateOfBirthMonth" aria-describedby="createdateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
                                                 <option value="-1" label="default"></option>
                                             </select>
@@ -127,7 +127,7 @@
                                         </label>
                                         <input id="createdateOfBirthYear" aria-describedby="createdateOfBirth_error" class="qm-form-field__text-input" type="text" data-dob data-dobyear name="dobYear" />
                                     </div>
-                                    <span id="createdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error"></span>
+                                    <span id="createdateOfBirth_error" class="qm-form-field__error-label qm-form-field__error-label--dob js-form-field-error" role="alert"></span>
                                 </div>
                             </div>
                         </div>
