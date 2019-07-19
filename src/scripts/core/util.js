@@ -567,6 +567,9 @@ var util = new function () {
                     $messageContainer.css("display", "none");
                     $messageContainer.css("top", 0);
                 }
+                else {
+
+                }
             });
         };
 
@@ -663,7 +666,10 @@ var util = new function () {
             if ($("#message").children().length == 0) {
                 $("#message").css("display", "none");
                 $("#message").css("top", 0);
-            } 
+            }
+            else {
+                $('.qm-toast__close-btn').first().focus();
+            }
         });
     };
 
