@@ -20,14 +20,15 @@
     
         <div class="qm-popover__content">
             <div class="search-filter qm-table-filter">
+                <input class="js-table-filter-input js-popover-filter-counter-pool" type="search" placeholder="">
                 <label class="qm-search-filter js-popover-filter-counter-pool-container">
-                    <input class="js-table-filter-input js-popover-filter-counter-pool" type="search" placeholder="">
+                    <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
+                    <button type="button" class="qm-search-filter__clear-btn js-popover-filter-counter-pool-clear-btn">
+                        <i class="qm-search-filter__clear-btn-icon icon icon-close" aria-hidden="true"></i>
+                        <span class="sr-only js-clear-input-label"></span>
+                    </button>
                 </label>
-                <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
-                <button type="button" class="qm-search-filter__clear-btn js-popover-filter-counter-pool-clear-btn">
-                    <i class="qm-search-filter__clear-btn-icon icon icon-close" aria-hidden="true"></i>
-                    <span class="sr-only js-clear-input-label"></span>
-                </button>
+                
             </div>
             <table class="qm-table qm-table--small js-popover-table-counter-pool">
                 <thead class="qm-table__header">

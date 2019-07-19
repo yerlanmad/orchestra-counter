@@ -1,29 +1,39 @@
  .search-filter {
     padding-left: 0px;
     padding-right: 0px;
+    position: relative;
+
+    input {
+        width: inherit;
+        box-sizing: border-box;
+        height: rem(45px);
+        border: 1px solid $dark-transparent12;
+        box-shadow: 0 0 4px 0 $dark-transparent04;
+        color: $dark-transparent82;
+        font-size: rem(18px);
+        padding: rem(10px) 0;
+        font-weight: 300;
+        padding-right: rem(35px);
+        padding-left: rem(10px);
+        width: 100%;
+
+        @at-root [dir='rtl'] & {
+            padding-left: rem(35px);
+            padding-right: rem(10px);
+        }
+    }
 
     label {
-        position: relative;
-        width: 100%;
         margin: 0;
+        position: absolute;
+        right: rem(12px);
+        left: auto;
+        top: 50%;
+        transform: translateY(-50%);
 
-        input {
-            width: inherit;
-            box-sizing: border-box;
-            height: rem(45px);
-            border: 1px solid $dark-transparent12;
-            box-shadow: 0 0 4px 0 $dark-transparent04;
-            color: $dark-transparent82;
-            font-size: rem(18px);
-            padding: rem(10px) 0;
-            font-weight: 300;
-            padding-right: rem(35px);
-            padding-left: rem(10px);
-
-            @at-root [dir='rtl'] & {
-                padding-left: rem(35px);
-                padding-right: rem(10px);
-            }
+        @at-root [dir='rtl'] & {
+            right: auto;
+            left: rem(12px);
         }
     }
 }
@@ -34,11 +44,7 @@
     &__icon {
         font-size: rem(24px);
         color: $dark-transparent42;
-        position: absolute;
-        right: rem(12px);
-        left: auto;
-        top: 50%;
-        transform: translateY(-50%);
+
 
         @at-root [dir='rtl'] & {
             left: rem(12px);
@@ -53,7 +59,7 @@
         height: rem(18px);
         background: transparent;
         position: absolute;
-        right: rem(12px);
+        right: 0;
         left: auto;
         top: 50%;
         transform: translateY(-50%);
@@ -61,7 +67,7 @@
 
         @at-root [dir='rtl'] & {
             right: auto;
-            left: rem(12px);
+            left: 0;
         }
 
         &:hover {
