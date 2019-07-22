@@ -32,4 +32,15 @@
             }
         }
     }
+
+    #createdateOfBirthMonth {
+        @include sr-only();
+        display: inline !important;
+    }
+}
+
+
+#editdateOfBirthMonth {
+    @include sr-only();
+    display: inline !important;
 }

@@ -115,7 +115,11 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
             }
         }).bind(this);
 
-        this.get$Elem().parent().on("keyup", this.onFocus);
+        this.get$Elem().on("focus", function(e){
+            this.get$Elem().trigger("chosen:open");
+            e.preventDefault();
+            e.stopPropagation();
+        }.bind(this));
     }
 
     this.tearDownFocusListener = function () {

@@ -88,9 +88,9 @@
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
-                                        <label for="editAttacheddateOfBirthMonth" class="qm-form-field__label js-label-month"></label>
+                                        <label for="editAttacheddateOfBirthMonth" class="qm-form-field__label"><span class="qm-form-field--dob-sr-text sr-only"></span><span class="js-label-month"></span></label>
                                         <div class="qm-drop-down__component">
-                                            <select id="editAttacheddateOfBirthMonth" aria-describedby="editAttacheddateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
+                                            <select id="editAttacheddateOfBirthMonth" tabIndex="-1" aria-describedby="editAttacheddateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
                                                 <option value="-1" label="default"></option>
                                             </select>
                                         </div>

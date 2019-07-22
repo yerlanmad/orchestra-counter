@@ -56,6 +56,7 @@ window.$Qmatic.components.card.CustomerCardComponent = function (selector) {
         this.clearEditForm();
     }
 
+
     this.onInit.apply(this, arguments);
 }
 

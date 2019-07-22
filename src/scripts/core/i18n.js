@@ -475,6 +475,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorBtnAppend('.js-update-customer-save > span', 'action.update.info');
         i18nSafeSelectorAppend('.js-clear-field > .sr-only', 'application.sr.clear.field');
         i18nSafeSelectorAppend('.js-label-dob', 'info.label.dob');
+        i18nSafeSelectorAppend('.qm-form-field--dob-sr-text', 'info.label.dob');
         i18nSafeSelectorAppend('.qm-form-field--dob option:first-child', 'info.card.addCustomerCard.selectMonth');
         i18nSafeSelectorAppend('.js-label-month', 'info.label.month');
         i18nSafeSelectorAppend('.js-label-day', 'info.label.day');
