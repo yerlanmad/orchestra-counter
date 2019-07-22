@@ -105,7 +105,7 @@
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="createdateOfBirthMonth" class="qm-form-field__label"><span class="qm-form-field--dob-sr-text sr-only"></span><span class="js-label-month"></span></label>
                                         <div class="qm-drop-down__component" aria-describedby="createdateOfBirth_error">
-                                            <select id="createdateOfBirthMonth" tabIndex="-1" aria-describedby="createdateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
+                                            <select id="createdateOfBirthMonth" tabIndex="-1" aria-describedby="createdateOfBirth_error" class="qm-date-select qm-open-onfocus" data-dob data-dobmonth name="dobMonth">
                                                 <option value="-1" label="default"></option>
                                             </select>
                                         </div>
@@ -220,7 +220,7 @@
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
                                         <label for="editdateOfBirthMonth" class="qm-form-field__label"><span class="qm-form-field--dob-sr-text sr-only"></span><span class="js-label-month"></span></label>
                                         <div class="qm-drop-down__component">
-                                            <select id="editdateOfBirthMonth" aria-describedby="editdateOfBirth_error" class="qm-date-select" data-dob data-dobmonth name="dobMonth">
+                                            <select id="editdateOfBirthMonth" aria-describedby="editdateOfBirth_error" class="qm-date-select qm-open-onfocus" data-dob data-dobmonth name="dobMonth">
                                                 <option value="-1" label="default"></option>
                                             </select>
                                         </div>
