@@ -389,9 +389,11 @@ var queues = new function() {
             var params = servicePoint.createParams();
             params.queueId = sessvars.clickedQueueId;
             params.visitId = visitId;
-            spService.del("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId);
+            var deletePromise = spService.delPromised("branches/"+params.branchId+"/servicePoints/"+params.servicePointId+"/visits/"+params.visitId);
             queues.updateQueues(false);
-            util.showMessage(translate.msg("info.successful.delete", [ticketId]), false);
+            deletePromise.done(function() {
+                util.showMessage(translate.msg("info.successful.delete", [ticketId]), false);
+            });
         }
     };
 

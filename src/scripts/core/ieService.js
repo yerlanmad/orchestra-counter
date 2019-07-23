@@ -22,7 +22,7 @@ var spService = (function ($) {
 	}
 
 	function _del(resource) {
-		$.ajax({
+		return $.ajax({
 			type: 'DELETE',
 			url: restConnector + resource,
 			dataType: 'json',
@@ -84,7 +84,7 @@ var spService = (function ($) {
 	}
 
 	function _putParams(resource, params) {
-		$.ajax({
+		return $.ajax({
 			type: 'PUT',
 			url: restConnector + resource,
 			data: params.json,
@@ -163,7 +163,7 @@ var spService = (function ($) {
 			err = translate.msg('error.server_error', [text]);
 		} else {
 			err = translate.msg('error.server_error_' + errorCode);
-			if (err == 'error.server.error_' + errorCode) {
+			if (err == 'error.server.error_' + errorCode || err == '[error.server_error_' + errorCode + ']') {
 				err = translate.msg('error.server_error', [errorCode]);
 			}
 		}
@@ -202,6 +202,10 @@ var spService = (function ($) {
 			return delResult;
 		},
 
+		delPromised: function (resource) {
+			return _del(resource);
+		},
+
 		post: function (resource) {
 			_post(resource);
 			return postResult;
@@ -234,6 +238,10 @@ var spService = (function ($) {
 		putParams: function (resource, params) {
 			_putParams(resource, params);
 			return putResult;
+		},
+
+		putParamsPromised: function (resource, params) {
+			return _putParams(resource, params);
 		},
 
 		putCallback: function (resource) {

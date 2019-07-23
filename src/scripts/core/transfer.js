@@ -525,14 +525,17 @@ var transfer = new function() {
         }
         transferParams.json = JSON.stringify(transferParams.$entity);
         spPoolUpdateNeeded = false;
-        spService.putParams('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
+        var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
         queues.updateQueues();
         queueViewController.navigateToOverview();
-        if (delay) {
-          util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.ticketIdToTransfer, aRowData.fullName, (delay / 60)]), false);
-        } else {
-          util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.fullName]), false);
-        }
+
+        requestStatus.done(function(err) {
+            if (delay) {
+                util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.ticketIdToTransfer, aRowData.fullName, (delay / 60)]), false);
+            } else {
+                util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.fullName]), false);
+            }
+        });
       }
     };
 
