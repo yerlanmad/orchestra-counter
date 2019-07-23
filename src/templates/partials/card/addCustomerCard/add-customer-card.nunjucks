@@ -103,8 +103,9 @@
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
-                                        <label for="createdateOfBirthMonth" class="qm-form-field__label"><span class="qm-form-field--dob-sr-text sr-only"></span><span class="js-label-month"></span></label>
+                                        <label for="createdateOfBirthMonth" class="qm-form-field__label"><span class="js-label-month"></span></label>
                                         <div class="qm-drop-down__component" aria-describedby="createdateOfBirth_error">
+                                            <span class="qm-form-field--dob-sr-text sr-only"></span>
                                             <select id="createdateOfBirthMonth" tabIndex="-1" aria-describedby="createdateOfBirth_error" class="qm-date-select qm-open-onfocus" data-dob data-dobmonth name="dobMonth">
                                                 <option value="-1" label="default"></option>
                                             </select>
@@ -218,8 +219,9 @@
                                 <p class="qm-form-field__headline js-label-dob"></p>
                                 <div class="qm-form-field qm-form-field--flex qm-form-field--dob">
                                     <div class="qm-form-field__input-container qm-form-field__input-container--month">
-                                        <label for="editdateOfBirthMonth" class="qm-form-field__label"><span class="qm-form-field--dob-sr-text sr-only"></span><span class="js-label-month"></span></label>
+                                        <label for="editdateOfBirthMonth" class="qm-form-field__label"><span class="js-label-month"></span></label>
                                         <div class="qm-drop-down__component">
+                                            <span class="qm-form-field--dob-sr-text sr-only"></span>
                                             <select id="editdateOfBirthMonth" aria-describedby="editdateOfBirth_error" class="qm-date-select qm-open-onfocus" data-dob data-dobmonth name="dobMonth">
                                                 <option value="-1" label="default"></option>
                                             </select>
