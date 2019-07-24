@@ -33,10 +33,12 @@ window.$Qmatic.components.card.CustomerCardComponent = function (selector) {
     this.showEditForm = function () {
         this.get$Elem().find('.js-edit-customer-form').removeClass('qm-hide');
         this.get$Elem().find('.js-add-new-customer-form').addClass('qm-hide');
+        this.get$Elem().find('input').removeClass('qm-touched');
     }
 
     this.showAddForm = function () {
         this.get$Elem().find('.js-add-new-customer-form').removeClass('qm-hide');
+        this.get$Elem().find('input').removeClass('qm-touched');
         this.get$Elem().find('.js-edit-customer-form').addClass('qm-hide');
     }
 

@@ -14,6 +14,7 @@ var customer = new function() {
     this.addUserPressed = function (e) {
         e.preventDefault();
         window.$Qmatic.components.card.addCustomerCard.showAddForm();
+        window.$Qmatic.components.card.addCustomerCard.cle
         this.setFormButtonsState('#createCustomerForm', false);
         cardNavigationController.push(window.$Qmatic.components.card.addCustomerCard);
     };
@@ -365,23 +366,23 @@ var customer = new function() {
         $clearBtns.on('click', this.clearInput);
     }
 
-    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField, $phoneField, dob) {
+    this.setSaveButtonStateWithError = function ($requiredFields, $saveBtn, $emailField, $phoneField, dob, $event) {
         var isFirstNameValid = false;
         var isLastNameValid = false;
         $.each($requiredFields, function (i, requiredField) {
             var $reqField = $(requiredField);
-                if($reqField.val().trim() === "") {
+                if($reqField.val().trim() === "" && $reqField.hasClass('qm-touched')) {
                     if(i == 0){
                         isFirstNameValid = false;
                     }else if(i== 1){
                         isLastNameValid = false;
                     }
-                    if($reqField.parent().find(document.activeElement).length > 0){
+                    //if($reqField.parent().find(document.activeElement).length > 0){
                         $reqField.addClass('qm-field-error');
                         toggleErrorLabel(true, $reqField);
-                    }
-    
-                  } else {
+                    //}    
+                  }
+                  else {
                     if(i == 0){
                         isFirstNameValid = true;
                     }else if(i== 1){
@@ -391,7 +392,7 @@ var customer = new function() {
                         toggleErrorLabel(false, $reqField);
                         $reqField.removeClass('qm-field-error');
                     }   
-                }
+                } 
   
         });
         if(isFirstNameValid && isLastNameValid) {
@@ -672,7 +673,12 @@ var customer = new function() {
 
     this.setRequiredFieldsListener = function ($requiredFields, $saveBtn, $emailField, $phoneField, dob) {
         var self = this;
+        $requiredFields.on('blur', function() {
+            $(this).addClass('qm-touched'); 
+            self.setSaveButtonStateWithError.call(self, $requiredFields, $saveBtn, $emailField, $phoneField, dob);
+        });
         $requiredFields.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, $phoneField, dob));
+
         $emailField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, $phoneField, dob));
         $phoneField.on('keyup keydown input', this.setSaveButtonStateWithError.bind(this, $requiredFields, $saveBtn, $emailField, $phoneField, dob));
 
