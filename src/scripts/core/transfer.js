@@ -140,12 +140,16 @@ var transfer = new function() {
             }
             transferParams.json = JSON.stringify(transferParams.$entity);
             spPoolUpdateNeeded = false;
-            if (delay) {
-              util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.state.visit.ticketId, rowData.fullName, (delay / 60)]), false);
-            } else {
-              util.showMessage(translate.msg('info.successful.transfer', [sessvars.state.visit.ticketId, rowData.fullName]), false);
-            }
-			      spService.putParams('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
+    
+			var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
+            requestStatus.done(function() {
+                if (delay) {
+                    util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.state.visit.ticketId, rowData.fullName, (delay / 60)]), false);
+                  } else {
+                    util.showMessage(translate.msg('info.successful.transfer', [sessvars.state.visit.ticketId, rowData.fullName]), false);
+                }
+            });
+            
             sessvars.state = servicePoint.getState();
             sessvars.statusUpdated = new Date();
             servicePoint.updateWorkstationStatus(false);
@@ -495,14 +499,17 @@ var transfer = new function() {
           transferParams.$entity.delay = delay;
         }
         transferParams.json = JSON.stringify(transferParams.$entity);
-        spService.putParams('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
+        var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
         queues.updateQueues();
         queueViewController.navigateToOverview();
-        if (delay) {
-          util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.ticketIdToTransfer, aRowData.name, (delay / 60)]), false);
-        } else {
-          util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
-        }
+
+        requestStatus.done(function() {
+            if (delay) {
+                util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.ticketIdToTransfer, aRowData.name, (delay / 60)]), false);
+              } else {
+                util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
+              }
+        });
       }
     };
 
