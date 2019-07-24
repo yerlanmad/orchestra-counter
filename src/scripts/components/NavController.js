@@ -21,7 +21,10 @@ window.$Qmatic.components.NavController = function (navSelector) {
             
             this.navigationStack.push(modalComponent)
             // Modal components are hidden by default when initialized, so nav controller needs to show it now!
+           
+           setTimeout(function() {
             modalComponent.show();
+           }, 1); 
        
         }
         setTimeout(function() {

@@ -311,6 +311,8 @@ var servicePoint = new function () {
 	// display modal popup with settings
 	this.showSettingsWindow = function () {
 
+		setTimeout(function() {
+			
 		$Qmatic.components.dropdown.branchSelection.update({ no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound') })
 		$Qmatic.components.dropdown.counterSelection.update({ no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound') })
 		$Qmatic.components.dropdown.profileSelection.update({ no_results_text: jQuery.i18n.prop('dropdown.search.nothingFound') })
@@ -371,6 +373,7 @@ var servicePoint = new function () {
 				modalNavigationController.push($Qmatic.components.modal.profileSettings)
 			}
 		}
+	}, 0);
 	};
 
 	/**

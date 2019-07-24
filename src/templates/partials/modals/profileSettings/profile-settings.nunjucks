@@ -7,8 +7,8 @@
         <div class="qm-card" aria-live="assertive" role="alertdialog" aria-modal="true"
                            aria-labelledby="workstationSettingsHeader"  
                            aria-describedby="qm-card__content-section">
-            <h1 class="qm-card__header-section qm-modal-focus-init" id="workstationSettingsHeader" tabindex="0"></h1>
-            <div class="qm-card__content-section" tabindex="0" id="qm-card__content-section">
+            <h1 class="qm-card__header-section qm-modal-focus-init" id="workstationSettingsHeader"></h1>
+            <div class="qm-card__content-section" id="qm-card__content-section">
 
                 <div class="error-message"></div>
                 <div class="qm-drop-down">
