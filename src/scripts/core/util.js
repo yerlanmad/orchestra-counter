@@ -604,7 +604,7 @@ var util = new function () {
             toast.prependTo($messageContainer);
             toast.fadeIn(); 
             toast.find('.qm-toast__close-btn').focus();        
-        }, 500);
+        }, 0);
     };
 
     this.onToggleAutoClose = function(target) {
