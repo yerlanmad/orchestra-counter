@@ -41,7 +41,7 @@ try {
   var config = require('./gulp.config.json');
 
   // Needed for dev server
-  var targetOrchestraIp = config.proxy.host ? config.proxy.host : "10.2.3.188";
+  var targetOrchestraIp = config.proxy.host ? config.proxy.host : "localhost";
   var targetOrchestraPort = config.proxy.port ? config.proxy.port : "8080";
   var targetOrchestraProtocol = config.proxy.protocol ? config.proxy.protocol : "http";
   var targetOrchestraUrl = targetOrchestraProtocol + '://' + targetOrchestraIp + ':' + targetOrchestraPort;
@@ -78,7 +78,7 @@ try {
   // For those who don't provide an external configuration file, use the following default.
   // Assuming Orchestra is running on local machine
   if(targetOrchestraUrl === undefined) {
-    var targetOrchestraUrl = "http://10.2.3.188:8080";
+    var targetOrchestraUrl = "http://localhost:8080";
   }
   console.log('No gulp.config.json found. Assuming orchestra is running on local machine at port 8080');
 }

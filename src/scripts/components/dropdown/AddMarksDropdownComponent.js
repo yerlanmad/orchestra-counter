@@ -54,13 +54,15 @@ window.$Qmatic.components.dropdown.AddMarksDropdownComponent = function (selecto
             }
         });
 
-        $markCountInputField.change(function() {
-            if ($(this).val() <= 1) {
+        $markCountInputField.on('change blur keyup', function() {
+            if (!$(this).val() || parseInt($(this).val(), 10) < 1) {
                 $(this).addClass("invalid")
                  parentContext.noOfMarksToBeAdded = 1;
+                 $marksAddBtn.prop('disabled', true);
             } else {
                 $(this).removeClass("invalid")
-                parentContext.noOfMarksToBeAdded = $(this).val()
+                parentContext.noOfMarksToBeAdded = $(this).val();
+                $marksAddBtn.prop('disabled', false);
             }
         });
     }
