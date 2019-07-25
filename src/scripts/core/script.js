@@ -1073,7 +1073,9 @@ var servicePoint = new function () {
 	};
 
 	this.customerConfirmed = function () {
-		modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer);
+		setTimeout(function() {
+			modalNavigationController.popModal($Qmatic.components.modal.confirmCustomer);
+		});
 		if (servicePoint.hasValidSettings()) {
 			var params = servicePoint.createParams();
 			params.visitId = sessvars.state.visit.id;

@@ -1,6 +1,6 @@
 {% extends "partials/card/scroll-card.nunjucks" %}
 
-{% block id %}id="addCustomerCard"{% endblock %}
+{% block id %}id="addCustomerCard" aria-live="polite" role="dialog" aria-describedby="addCustomerLabel"{% endblock %}
 {% block cardModifier %}qm-card--more-than-one{% endblock %}
 
 {% block header %}

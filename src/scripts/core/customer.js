@@ -17,6 +17,9 @@ var customer = new function() {
         window.$Qmatic.components.card.addCustomerCard.cle
         this.setFormButtonsState('#createCustomerForm', false);
         cardNavigationController.push(window.$Qmatic.components.card.addCustomerCard);
+        setTimeout(function() {
+            $('#addCustomerCard').focus();
+        }, 500);
     };
 
     this.editUserPressed = function (e, index) {
