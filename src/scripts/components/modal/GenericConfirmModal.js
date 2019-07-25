@@ -24,7 +24,10 @@ window.$Qmatic.components.modal.GenericConfirmModal = function (selector, config
     }
 
     this.bindMessage = function (text) {
-        $(this.getSelector()).find("#genericConfirmPrompt").empty().text(text);
+        var self = this;
+        setTimeout(function() {
+            $(self.getSelector()).find("#genericConfirmPrompt").empty().text(text);
+        });
     }
 
     this.bindYesText = function (yesText) {

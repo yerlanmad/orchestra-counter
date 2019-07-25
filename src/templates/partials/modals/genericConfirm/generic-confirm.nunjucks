@@ -4,7 +4,7 @@
 <div class="qm-modal qm-hide" id="generic-confirm-modal" aria-live="assertive">
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
-        <div class="qm-card" role="alertdialog" aria-modal="true"
+        <div class="qm-card" role="dialog" aria-modal="true"
                              aria-describedby="genericConfirmPrompt">
             <div class="qm-card__header-section qm-modal-focus-init" tabindex="0"></div>
             <div class="qm-card__content-section">
