@@ -553,10 +553,7 @@ var util = new function () {
 
         // Do not show more than 3 messages
         var $messageContainer = $('#message');
-        if ($messageContainer.children().length == 3) {
-            $messageContainer.children().last().remove();
-        }
-
+  
         $messageContainer.css('left', 0);
         $messageContainer.css("top", (parseInt($("#header").height())) + "px");
 
@@ -601,6 +598,11 @@ var util = new function () {
 
         // Prepend and fadeIn
         setTimeout(function(){
+            var $messageContainer = $('#message');
+            if ($messageContainer.children().length == 3) {
+                $messageContainer.children().last().remove();
+            }
+            
             toast.prependTo($messageContainer);
             toast.fadeIn(); 
             toast.find('.qm-toast__close-btn').focus();        
