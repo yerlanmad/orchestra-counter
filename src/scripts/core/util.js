@@ -588,6 +588,7 @@ var util = new function () {
         // Append auto close button
         toast.find('.qm-toast__layout').append('<label class="qm-checkbox">' +
         '<input id="qm-autoclose__'+ messageId +'" onchange="util.onToggleAutoClose(this)" class="qm-checkbox__input"' + (this.getIsAutoCloseToast() ? 'checked': '') +' type="checkbox">' +
+        '<span class="qm-checkbox__background"></span>' +
         '<i class="qm-checkbox__icon icon-font" aria-hidden="true"></i>' +
         '<label for="qm-autoclose__'+ messageId +'" class="qm-checkbox__input-text">'+ jQuery.i18n.prop('info.toast.autoclose') + '</label>'+
       '</label>');

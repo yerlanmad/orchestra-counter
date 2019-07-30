@@ -107,6 +107,24 @@ label {
         margin-bottom: 0;
         display: flex;
         align-items: center;
+        position: relative;
+    }
+
+    &:hover {
+        .qm-checkbox__background {
+                width: 42px;
+                height: 42px;
+                background-color: rgba(255,255,255, 0.2);   
+                display: inline-block;         
+        }
+    }
+
+    &:active {
+        .qm-checkbox__background {
+                background-color: rgba(255,255,255, 0.4);
+                background-size: 100%;
+                transition: background 0s;
+        }
     }
 
     .qm-checkbox {
@@ -115,12 +133,27 @@ label {
             width: 1px;
             height: 1px;
             padding: 0;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
+           
+            //clip: rect(0, 0, 0, 0);
             white-space: nowrap;
-            -webkit-clip-path: inset(50%);
-            clip-path: inset(50%);
+            //-webkit-clip-path: inset(50%);
+            //clip-path: inset(50%);
             border: 0; 
+            -webkit-appearance: none;
+        }
+
+        &__background {
+            width: 42px;
+            display: inline-block;
+            height: 42px;
+            content: "";
+            position: absolute;
+            left: -12px;
+            top: -9px;
+            border-radius: 50%;
+            background-position: center;
+            transition: background 0.5s;
+            background-color: transparent;
         }
 
         &__input-text {
@@ -134,6 +167,17 @@ label {
                 margin-left: 32px;
                 margin-right: 12px;
             } 
+        }
+
+        &__input:focus ~ .qm-checkbox__background {
+            background-color: rgba(255,255,255, 0.2);   
+            display: inline-block;  
+        }
+
+        &__input:checked ~ .qm-checkbox__background {
+            background-color: rgba(255,255,255, 0.4);
+            background-size: 100%;
+            transition: background 0s;
         }
 
         &__input ~ .qm-checkbox__icon {
@@ -166,7 +210,6 @@ label {
         &__input ~ .qm-checkbox__icon:before {
             content: "";
         }  
-    }
-    
+    }    
 } 
 

@@ -35,9 +35,15 @@ var queues = new function() {
                 var queueUpdatesLabelText = '';
                 for (var index = 0; index < existingData.length; index++) {
                     var oldRow = existingData[index];
-                    var newRow = myQueuesData.find(function(d) {
-                        return d.name === oldRow.name;
-                    });
+                    var newRow = null;
+
+                    for (var x = 0; x < myQueuesData.length; x++) { 
+                        if(myQueuesData[x].name === oldRow.name) {
+                            newRow = oldRow;
+                            break;
+                        }
+                    }
+
                     if(newRow && oldRow.customersWaiting !== newRow.customersWaiting) {
                         queueUpdatesLabelText += newRow.name + ' have ' + newRow.customersWaiting + ' customers waiting. '
                     }                    
