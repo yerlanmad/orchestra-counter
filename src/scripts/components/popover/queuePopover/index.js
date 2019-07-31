@@ -337,7 +337,7 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         this.queueTable         = null;
         this.userPoolTable      = null;
         this.counterPoolTable   = null;
-        this.target.focus();
+        //this.target.focus();
         this._removeTransferDelayListeners();
         this.instance && this.instance.dispose();
         this.popoverOverlay.style.display = "none";
