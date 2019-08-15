@@ -36,7 +36,9 @@ var customMarks = new function () {
     initFilter();
     initMarkTypeDropdownFilter();
     clearFilter(dropdownFilter);
-    clearFilter(markTypeDropdownFilter);
+	clearFilter(markTypeDropdownFilter);
+	$Qmatic.components.dropdown.markTypeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.selectMarkType') });
+	markTypeDropdownFilter.trigger("chosen:updated");
 		customMarksTable.fnAdjustColumnSizing();
 
 		if (servicePoint.hasValidSettings()
@@ -49,18 +51,20 @@ var customMarks = new function () {
 				var params = servicePoint.createParams();
 				params.branchId = sessvars.state.branchId;
 				var markTypesArray = spService.get("branches/"
-          + params.branchId + "/markTypes", true);
-        markTypesArray = _.filter(markTypesArray, function(o) { return o.name !== "NPS" });
+					+ params.branchId + "/markTypes", true);
+				markTypesArray = _.filter(markTypesArray, function (o) { return o.name !== "NPS" });
 
-        markTypesArray = this.evaluateCustomMarkTypes(markTypesArray, customMarkTypeName);
-        if (markTypesArray !== undefined && markTypesArray.length === 0) {
-          markTypeDropdownFilter.prop('disabled', true);
-          $Qmatic.components.dropdown.markTypeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.no.markTypes.available') });
-        }
-        util.sortArrayCaseInsensitive(markTypesArray, "name");
-
-				util.populateSelect(markTypesArray, markTypeDropdownFilter);
-        markTypeDropdownFilter.trigger("chosen:updated");
+				markTypesArray = this.evaluateCustomMarkTypes(markTypesArray, customMarkTypeName);
+				if (markTypesArray !== undefined && markTypesArray.length === 0) {
+					markTypeDropdownFilter.prop('disabled', true);
+					$Qmatic.components.dropdown.markTypeSelection.update({ placeholder_text_single: jQuery.i18n.prop('info.card.marksCard.no.markTypes.available') });
+					markTypeDropdownFilter.trigger("chosen:updated");
+				} else {
+					util.sortArrayCaseInsensitive(markTypesArray, "name");
+					util.populateSelect(markTypesArray, markTypeDropdownFilter);
+					markTypeDropdownFilter.prop('disabled', false);
+					markTypeDropdownFilter.trigger("chosen:updated");
+				}
 
         // Make Mark dropdown disabled
         dropdownFilter.prop('disabled', true);
