@@ -154,6 +154,11 @@ label {
             background-position: center;
             transition: background 0.5s;
             background-color: transparent;
+
+            @at-root [dir='rtl'] & {
+                left: auto;
+                right: -12px;
+            } 
         }
 
         &__input-text {
