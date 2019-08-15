@@ -39,7 +39,7 @@ var queues = new function() {
 
                     for (var x = 0; x < myQueuesData.length; x++) { 
                         if(myQueuesData[x].name === oldRow.name) {
-                            newRow = oldRow;
+                            newRow = myQueuesData[x];
                             break;
                         }
                     }
