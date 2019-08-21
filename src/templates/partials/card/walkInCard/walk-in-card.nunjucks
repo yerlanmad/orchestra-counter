@@ -10,7 +10,7 @@
             <div class="qm-card-header__sub-heading" id="walkInSubHeader">
             </div>
         </div>
-        <div id="walkDirectServices_filter_wrapper" class="search-filter qm-table-filter">
+        <div id="walkDirectServices_filter" class="search-filter qm-table-filter">
             <input type="search" placeholder="" aria-controls="walkDirectServices">
             <label class="qm-search-filter">
                 <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
