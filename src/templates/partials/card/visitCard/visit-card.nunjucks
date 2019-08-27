@@ -102,7 +102,7 @@
             </a>
             <div class="qm-drop-down">
                 <div class="qm-drop-down__component selectOutcome">
-                    <select id="selectOutcome" onchange="javascript:outcome.selectOutcome($(this).val(), $(this).find('option:selected').text()); this.blur()">
+                    <select id="selectOutcome" onchange="javascript:outcome.selectOutcome($(this).val(), $(this).find('option:selected').text()); this.blur(); console.log('test)">
                         <option value="-1" label="default"></option>
                     </select>
                 </div>

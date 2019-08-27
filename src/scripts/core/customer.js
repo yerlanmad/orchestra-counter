@@ -220,11 +220,11 @@ var customer = new function() {
                             customer.filterList(val);
                             var rowCount = $('#customerSearchTable').dataTable().fnGetData().length;
                             if($('#noOfSearchResults').length == 0) {
-                                $('#customerSearchTable').prepend(`<p class='sr-only' aria-live="polite" id="noOfSearchResults"> ${rowCount} customers found </p>`);
+                                $('#customerSearchTable').prepend("<p class='sr-only' aria-live='polite' id='noOfSearchResults'>" +  rowCount + ' ' + "customers found </p>");
                             } else {
-                                $('#noOfSearchResults').text(``);
+                                $('#noOfSearchResults').text("");
                                 setTimeout(() => {
-                                    $('#noOfSearchResults').text(`${rowCount} customers found`);
+                                    $('#noOfSearchResults').text( rowCount + ' ' +  "customers found");
                                 }, 100);
                                
                             }
