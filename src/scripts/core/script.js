@@ -1478,10 +1478,14 @@ var servicePoint = new function () {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.closed'));
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.IN_STORE_NEXT) {
-			modalNavigationController.push($Qmatic.components.modal.storeNext)
-			// $("#ticketNumber").html(
-				// jQuery.i18n.prop('info.waiting.for.customer'));
-			showStoreNextCard();
+				showStoreNextCard();	
+				setTimeout(function () {
+					modalNavigationController.push($Qmatic.components.modal.storeNext);
+					// $("#ticketNumber").html(
+						// jQuery.i18n.prop('info.waiting.for.customer'));
+			
+				},1500);
+
 		} else if (sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
 			&& sessvars.state.userState == servicePoint.userState.INACTIVE) {
 			$("#ticketNumber").html(jQuery.i18n.prop('info.inactive'));
@@ -1632,7 +1636,10 @@ var servicePoint = new function () {
 			$("#addCustomMarkLink").prop('disabled', false);
 		} else {
 			if (sessvars.state.visitState == servicePoint.visitState.CONFIRM_NEEDED) {
-				modalNavigationController.push($Qmatic.components.modal.confirmCustomer)
+				setTimeout(function () {
+					modalNavigationController.push($Qmatic.components.modal.confirmCustomer);
+				},100);
+
 			} else if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				// display spinner with text stating that the visit is about to
 				// be called
