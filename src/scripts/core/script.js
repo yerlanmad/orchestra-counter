@@ -1180,6 +1180,7 @@ var servicePoint = new function () {
 					var url = "/rest/servicepoint/branches/" + sessvars.branchId
 						+ "/services";
 					var serivesList = servicePoint.servicesList;
+					
 					if ((walkTable == undefined && prevBranchId == sessvars.branchId) || prevBranchId != sessvars.branchId) {
 						var columns = [
 				/* Service ext name */{
@@ -1239,6 +1240,7 @@ var servicePoint = new function () {
 						var sorting = [[1, 'asc']];
 						walkTable.fnSort(sorting);
 					}
+				
 				} else {
 					walkServiceClicked(undefined, buttonWalkDirectService);
 				}

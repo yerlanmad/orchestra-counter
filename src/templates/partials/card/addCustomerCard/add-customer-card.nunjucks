@@ -42,7 +42,7 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="createfirstName" class="qm-form-field__text-input" aria-describedby="createfirstName_error" type="text" name="firstName" maxlength="50" required />
+                                        <input id="createfirstName" class="qm-form-field__text-input" aria-describedby="createfirstName_error" type="text" name="firstName" maxlength="50" required aria-invalid="false" />
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
@@ -58,7 +58,7 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="createlastName" class="qm-form-field__text-input" aria-describedby="createlastName_error" type="text" name="lastName" maxlength="50" required />
+                                        <input id="createlastName" class="qm-form-field__text-input" type="text" name="lastName" maxlength="50" required aria-invalid="false"/>
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
@@ -158,7 +158,7 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="editfirstName" class="qm-form-field__text-input" aria-describedby="editfirstName_error" type="text" name="firstName" maxlength="50" required />
+                                        <input id="editfirstName" class="qm-form-field__text-input" aria-describedby="editfirstName_error" type="text" name="firstName" maxlength="50" required aria-invalid="false"/>
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>
@@ -174,7 +174,7 @@
                                         <span class="qm-form-field__required-text js-label-required"></span>
                                     </div>
                                     <div class="qm-form-field__input-container">
-                                        <input id="editlastName" class="qm-form-field__text-input" aria-describedby="editlastName_error" type="text" name="lastName" maxlength="50" required />
+                                        <input id="editlastName" class="qm-form-field__text-input" aria-describedby="editlastName_error" type="text" name="lastName" maxlength="50" required aria-invalid="false"/>
                                         <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field">
                                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                                             <span class="sr-only"></span>

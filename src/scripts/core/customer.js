@@ -150,7 +150,11 @@ var customer = new function() {
                 }
                 var row = parseInt($(this).data('selectedRow'));
                 var rowCount = parseInt($(this).data('rowCount'));
+                // if(rowCount) {
+                    // 
+                // }
                 // prevent using TAB key if we're in "search mode"
+            
                 if (event.keyCode === $.ui.keyCode.TAB) {
                     event.preventDefault();
                     // step up or down in the list
@@ -215,6 +219,15 @@ var customer = new function() {
                         $(this).data('timer', setTimeout(function() {
                             customer.filterList(val);
                             var rowCount = $('#customerSearchTable').dataTable().fnGetData().length;
+                            if($('#noOfSearchResults').length == 0) {
+                                $('#customerSearchTable').prepend(`<p class='sr-only' aria-live="polite" id="noOfSearchResults"> ${rowCount} customers found </p>`);
+                            } else {
+                                $('#noOfSearchResults').text(``);
+                                setTimeout(() => {
+                                    $('#noOfSearchResults').text(`${rowCount} customers found`);
+                                }, 100);
+                               
+                            }
                             $("#customerInput").data('rowCount', rowCount);
                             if(customer.customerDbOnline) {
                             	util.showModal('customerSearchDiv');
@@ -285,6 +298,8 @@ var customer = new function() {
             fnHeaderCallback: headerCallback,
         });
         $('#customerSearchTable').prepend("<caption class='sr-only'>customer search</caption>");
+     
+      
 
         util.hideModal('customerSearchDiv');
 
@@ -808,7 +823,6 @@ var customer = new function() {
 
         var rows = $("#customerSearchTable").dataTable().fnGetNodes();
         $(rows[index]).addClass('row_selected');
-
         // scroll to selected index if its outside the visible area
         // only do this if its called by the key listener, scrolling when mouseover is called makes it jump around
         if (doScroll) {
