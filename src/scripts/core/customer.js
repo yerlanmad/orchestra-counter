@@ -223,7 +223,7 @@ var customer = new function() {
                                 $('#customerSearchTable').prepend("<p class='sr-only' aria-live='polite' id='noOfSearchResults'>" +  rowCount + ' ' + "customers found </p>");
                             } else {
                                 $('#noOfSearchResults').text("");
-                                setTimeout(() => {
+                                setTimeout(function(){
                                     $('#noOfSearchResults').text( rowCount + ' ' +  "customers found");
                                 }, 100);
                                
