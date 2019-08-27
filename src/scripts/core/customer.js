@@ -321,7 +321,7 @@ var customer = new function() {
     this.setFormButtonsState = function (formSelector, setListeners) {
         var $form = $(formSelector);
         var $inputs = $form.find('input');
-        var $requiredFields = $form.find('[required]');
+        var $requiredFields = $form.find('[aria-required]');
         var $saveBtn = $form.find('.save-btn');
         var $emailField = $form.find('[name="email"]');
         var $phoneField = $form.find('input[type="tel"]');
