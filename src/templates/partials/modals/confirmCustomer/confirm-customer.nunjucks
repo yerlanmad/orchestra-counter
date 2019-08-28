@@ -1,12 +1,12 @@
 <!-- Imported partials -->
 {% import "./../../button.nunjucks" as button  %}
 
-<div class="qm-modal qm-hide" id="confirm-customer-modal" aria-live="assertive"    role="alertdialog" aria-modal="true" aria-describedby="confirmCustomerPrompt" >
+<div class="qm-modal qm-hide" id="confirm-customer-modal" aria-modal="true" aria-describedby="confirmCustomerPrompt" >
     <div class="qm-modal__overlay"></div>
     <div class="qm-modal__layout">
-        <div class="qm-card"  >
+        <div class="qm-card" id="confirmCustomerModal" >
             <div class="qm-card__header-section"></div>
-            <div class="qm-card__content-section qm-modal-focus-init" tabindex="0">
+            <div class="qm-card__content-section qm-modal-focus-init" tabindex="0"   >
                 <span id="confirmCustomerPrompt"></span>
             </div>
             <div class="qm-card__footer-section">
