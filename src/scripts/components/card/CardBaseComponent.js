@@ -3,6 +3,9 @@ window.$Qmatic.components.card.CardBaseComponent = function (selector) {
 
     // @Override
     this.onInit = function (selector) {
+        if(selector == "#inactiveCard"){
+            util.hideGotoCardLink();
+        }
         if (selector) {
             window.$Qmatic.components.card.CardBaseComponent.prototype.onInit.call(this, selector);
             this.hide();

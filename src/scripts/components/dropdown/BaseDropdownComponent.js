@@ -19,11 +19,20 @@ window.$Qmatic.components.dropdown.BaseDropdownComponent = function (selector, c
             this.setupFocusListener();
             this.setupChangeListener();
             this.setupUpdateListener();
+            this.setupCloseListener();
             if (this.chosenConfig.expand_dropdown_height) {
                 this.setupOpenListener();
                 this.setupWindowResizeListener();
             }
         }
+    }
+
+    this.setupCloseListener = function () {
+        this.onClose = (function (evt) {
+           $ (evt.target).parent().focus();
+        }).bind(this);
+
+        this.get$Elem().on("chosen:hiding_dropdown", this.onClose);
     }
 
     // =======================

@@ -1012,4 +1012,11 @@ var util = new function () {
             }
         }, delay);
     };
+
+    this.hideGotoCardLink = function () {
+        $('#cardContentLink').hide();
+    }
+    this.showGotoCardLink = function () {
+        $('#cardContentLink').show();
+    }
 };

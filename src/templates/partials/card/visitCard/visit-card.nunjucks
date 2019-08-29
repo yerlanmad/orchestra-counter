@@ -19,6 +19,12 @@
             </div>
             <div class="qm-services">
                 <div class="qm-services__current-service-container">
+
+                    <a href="#" class="qm-context-marketing" id="verticalMessageRow" tabindex="-1">
+                        <i class="qm-context-marketing__icon icon-announce" aria-hidden="true" tabindex="0"></i>
+                        <span class="sr-only"></span>
+                    </a>
+
                     <div class="qm-services__current-services">
                         <div class="qm-services__current-service-title-container">
                             <span id="serviceId" class="qm-services__current-service-title"></span>
@@ -28,10 +34,7 @@
                             </a>
                         </div>
                     </div>
-                    <a href="#" class="qm-context-marketing" id="verticalMessageRow">
-                        <i class="qm-context-marketing__icon icon-announce" aria-hidden="true"></i>
-                        <span class="sr-only"></span>
-                    </a>
+
                 </div>
                 <div id="multiServicesComponent" class="qm-services__component" tabindex="-1">
                     <div id="nextVisitServices" class="qm-services__upcoming-services-container">
