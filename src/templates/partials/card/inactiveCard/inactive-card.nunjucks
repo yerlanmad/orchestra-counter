@@ -12,7 +12,7 @@
 
 {% block content %}
     <div class="qm-card__content-section">
-        <p class="qm-card__text" id="inactiveCardSubTitle"></p>
+        <p class="qm-card__text" id="inactiveCardSubTitle" aria-live="polite" role="alert"></p>
     </div>
 {% endblock %}
 

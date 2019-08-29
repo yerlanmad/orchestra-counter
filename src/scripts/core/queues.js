@@ -86,7 +86,7 @@ var queues = new function() {
                         !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
                         var queueName = $('td:eq(0)', nRow).text();
                         $('td:eq(0)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
-                            "title=\"" + jQuery.i18n.prop("action.title.queue.click") + "\">" + queueName + "</a>");
+                            ">" + queueName + "</a>");
 
                         $('td:eq(0) > a.qm-table__queue-name', nRow).click(function(e) {
                             e.preventDefault();
@@ -112,7 +112,7 @@ var queues = new function() {
                         !(servicePoint.isOutcomeOrDeliveredServiceNeeded() /*&& sessvars.forceMark && !hasMark()*/)) {
                         var queueName = $('td:eq(0)', nRow).text();
                         $('td:eq(0)', nRow).empty().append("<a href='' class=\"qm-table__queue-name\" " +
-                            "title=\"" + jQuery.i18n.prop("action.title.queue.click") + "\">" + queueName + "</a>");
+                        ">" + queueName + "</a>");
 
                         $('td:eq(0) > a.qm-table__queue-name', nRow).click(function(e) {
                             e.preventDefault();

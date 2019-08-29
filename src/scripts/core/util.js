@@ -75,7 +75,12 @@ var util = new function () {
     this.twinkleTicketNumber = function () {
         var $ticketNumber = $('#ticketNumber'),
             lengthOfAnimation = 3000;
-
+            var ticketNumStr = $ticketNumber.text();
+            $ticketNumber.text('');
+            setTimeout(function () {
+                $ticketNumber.text(ticketNumStr);
+            });
+            
         $ticketNumber.addClass('qm-twinkle-animation');
         setTimeout(function () {
             $ticketNumber.removeClass('qm-twinkle-animation');

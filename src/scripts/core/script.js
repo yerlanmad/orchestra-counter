@@ -965,6 +965,18 @@ var servicePoint = new function () {
 		}
 		if (servicePoint.command == 'handleClose') {
 			servicePoint.handleClose();
+			var $closedCardSubTitle = $('#closedCardSubTitle');
+			var inactiveCardSubTitleText = $closedCardSubTitle.text();
+            $closedCardSubTitle.text('');
+            setTimeout(function () {
+                $closedCardSubTitle.text(inactiveCardSubTitleText);
+			},100);
+			var $closedCardTitle = $('#closedCardTitle');
+			var inactiveCardTitleText = $closedCardTitle.text();
+            $closedCardTitle.text('');
+            // setTimeout(function () {
+                $closedCardTitle.text(inactiveCardTitleText);
+            // });
 		}
 	};
 
