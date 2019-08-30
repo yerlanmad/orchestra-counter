@@ -20,11 +20,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **167084467** | **Indicate charachter limit to user** |
-| **165996251** | **WCAG - SW70 -Status Change** |
-| **166058021** | **WCAG - Validation Errors  - HC30** |
-| **166029245** | **WCAG - Toasts (NL140)** |
-| **166081900** | **WCAG - CP20 - Graphical Objects contrasts** |
-| **166081900** | **WCAG - CP20 - Graphical Objects contrasts** |
+| **000000000** | **Added WCAG support** |
 
 <h3>Bug fixes</h3>
 
