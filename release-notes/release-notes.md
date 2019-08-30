@@ -9,7 +9,7 @@ This document describes the new features, bug corrections, known issues and reco
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
 
-<h2>Version 4.0.0.028</h2>
+<h2>Version 4.0.0.029</h2>
 
 **Date: 30/08/2019**
 
