@@ -8,6 +8,36 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
+
+<h2>Version 4.0.0.028</h2>
+
+**Date: 30/08/2019**
+
+**Build number: 028**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **167084467** | **Indicate charachter limit to user** |
+
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **167338530** | **GUI issue in create customer form** |
+| **167338834** | **Create customer form validation issues** |
+| **167776865** | **Visit card > After add a service to the visit, user will see the visit card behind the add service window.** |
+| **167776866** | **When there is no Mark type is set from UTT, not to show 'Add a mark' link in the visit card.** |
+| **167993307** | **Walk in customer > service search is not working.** |
+| **168070913** | **Serve Page / Note field character limit exceed message** |
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3>
+----------
+
 <h2>Version 4.0.0.027</h2>
 
 **Date: 05/06/2019**
