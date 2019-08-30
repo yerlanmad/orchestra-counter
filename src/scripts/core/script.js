@@ -974,9 +974,9 @@ var servicePoint = new function () {
 			var $closedCardTitle = $('#closedCardTitle');
 			var inactiveCardTitleText = $closedCardTitle.text();
             $closedCardTitle.text('');
-            // setTimeout(function () {
+            setTimeout(function () {
                 $closedCardTitle.text(inactiveCardTitleText);
-            // });
+            },20);
 		}
 	};
 
