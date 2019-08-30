@@ -20,7 +20,11 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **167084467** | **Indicate charachter limit to user** |
-
+| **165996251** | **WCAG - SW70 -Status Change** |
+| **166058021** | **WCAG - Validation Errors  - HC30** |
+| **166029245** | **WCAG - Toasts (NL140)** |
+| **166081900** | **WCAG - CP20 - Graphical Objects contrasts** |
+| **166081900** | **WCAG - CP20 - Graphical Objects contrasts** |
 
 <h3>Bug fixes</h3>
 
@@ -32,6 +36,9 @@ This document describes the new features, bug corrections, known issues and reco
 | **167776866** | **When there is no Mark type is set from UTT, not to show 'Add a mark' link in the visit card.** |
 | **167993307** | **Walk in customer > service search is not working.** |
 | **168070913** | **Serve Page / Note field character limit exceed message** |
+| **167421044** | **date of birth" field label text is not reading from screen reader (NVDA)** |
+| **167452543** | **WCAG - Add customer > mandatory fields are getting red once user tab on it.** |
+| **167479893** | **Add Marks > validation issues in no of marks field** |
 
 <h3>Known issues</h3>
 
