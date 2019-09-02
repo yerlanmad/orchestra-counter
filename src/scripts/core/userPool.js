@@ -64,6 +64,13 @@ var userPool = new function() {
 
             servicePoint.updateWorkstationStatus();
             sessvars.currentCustomer = null;
+            var $ticketNumber = $('#ticketNumber');
+            var ticketNumStr = $ticketNumber.text();
+            $ticketNumber.text('');
+            setTimeout(function () {
+                $ticketNumber.text(ticketNumStr);
+            });        ``
+            
         }
     }
 

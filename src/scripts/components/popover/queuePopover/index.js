@@ -317,6 +317,12 @@ window.$Qmatic.components.popover.QueuePopoverComponent.prototype
         this.disposeInstance();
         queues.callFromQueue(this.visitId);
         queueViewController.navigateToOverview();
+        var $ticketNumber = $('#ticketNumber');
+        var ticketNumStr = $ticketNumber.text();
+        $ticketNumber.text('');
+        setTimeout(function () {
+            $ticketNumber.text(ticketNumStr);
+        });        
     },
     _delete: function () {
         this.disposeInstance();
