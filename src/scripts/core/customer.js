@@ -156,7 +156,7 @@ var customer = new function() {
                 // prevent using TAB key if we're in "search mode"
             
                 if (event.keyCode === $.ui.keyCode.TAB) {
-                    event.preventDefault();
+                  //  event.preventDefault();
                     // step up or down in the list
                 } else if (event.keyCode === $.ui.keyCode.DOWN) {
                     row++;
@@ -193,9 +193,9 @@ var customer = new function() {
 
                     // cancel search
                 } else if (event.keyCode === $.ui.keyCode.ESCAPE) {
-                    util.hideModal('customerSearchDiv');
-                    event.preventDefault();
-                    return;
+                    // util.hideModal('customerSearchDiv');
+                     event.preventDefault();
+                    // return;
                 } else {
                     // stop any timers running
                     var timer = $(this).data('timer');
@@ -249,6 +249,17 @@ var customer = new function() {
                     }
                 }
             });
+
+            this.escapreSearchMode = function (event) {
+            
+                if($(event.relatedTarget)[0]  != $('.qm-form-field--search .js-clear-field')[0] ){
+                    $('#customerInput').val('');
+                    util.hideModal('customerSearchDiv');
+                    $('.js-search-input__icon').show();
+                    $('.qm-form-field--search .js-clear-field').hide();
+                }
+ 
+            }
 
         // column header definitions for the data table
         // read them from i18n to get the visible names
@@ -377,6 +388,7 @@ var customer = new function() {
         var $input = $(this).siblings('input');
         $input.val("");
         $input.trigger('keyup');
+        $input.focus();
     }
 
     this.initClearInputField = function () {
