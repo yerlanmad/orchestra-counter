@@ -250,16 +250,22 @@ var customer = new function() {
                 }
             });
 
-            this.escapreSearchMode = function (event) {
-            
-                if($(event.relatedTarget)[0]  != $('.qm-form-field--search .js-clear-field')[0] ){
-                    $('#customerInput').val('');
-                    util.hideModal('customerSearchDiv');
-                    $('.js-search-input__icon').show();
-                    $('.qm-form-field--search .js-clear-field').hide();
-                }
- 
+        this.escapreSearchMode = function (event) {
+            var realtedTarget;
+            //IE11 fix
+            if (event.relatedTarget === null) {
+                realtedTarget = document.activeElement;
+            } else {
+                realtedTarget = event.realtedTarget;
             }
+
+            if ($(realtedTarget)[0] != $('.qm-form-field--search .js-clear-field')[0]) {
+                $('#customerInput').val('');
+                util.hideModal('customerSearchDiv');
+                $('.js-search-input__icon').show();
+                $('.qm-form-field--search .js-clear-field').hide();
+            }
+        }
 
         // column header definitions for the data table
         // read them from i18n to get the visible names
