@@ -69,7 +69,7 @@ var userPool = new function() {
             $ticketNumber.text('');
             setTimeout(function () {
                 $ticketNumber.text(ticketNumStr);
-            });        ``
+            }); 
             
         }
     }
