@@ -41,9 +41,12 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
         this._setText(key, config.text);
     },
     _attachTemplateEvents: function (key) {
-        if(this._hasInstance(key)) {
+        if (this._hasInstance(key)) {
             var closeBtn = this.instances[key]._tooltipNode.querySelector('.js-popover-close');
             closeBtn.addEventListener('click', this.close.bind(this, key));
+            $(closeBtn).bind('keydown', $.proxy(function (event) {
+                this.closeTabFocus(key, event);
+            },this));
         }
     },
     _getInstance: function (key) {
@@ -93,7 +96,8 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
     },
     moveFocus: function (key) {
       if (util.hasProp.call(this.instances[key], '_isOpen') && this.instances[key]._isOpen) {
-        this.instances[key]._tooltipNode.focus();
+   this.instances[key]._tooltipNode.querySelector('.js-popover-close').focus();
+       // this.instances[key]._tooltipNode.focus();
       } else {
         this.instances[key].reference.focus();
       }
@@ -103,5 +107,18 @@ window.$Qmatic.components.popover.ContextMarketingPopoverController.prototype = 
             this.instances[key].dispose();
             delete this.instances[key];
         }
+    },
+    closeTabFocus: function ( key,event) {
+        if(this._hasInstance(key)) {
+        if(event.shiftKey && event.keyCode == $.ui.keyCode.TAB){
+                event.preventDefault();
+                this.instances[key].reference.focus();
+              }
+            else if(event.keyCode == $.ui.keyCode.TAB){
+                event.preventDefault();
+                $('#addMultiServiceLink').focus();
+              }
+        }
+
     }
 };

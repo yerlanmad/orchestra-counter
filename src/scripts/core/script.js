@@ -2227,6 +2227,32 @@ var servicePoint = new function () {
 		}
 	};
 
+	this.visitCardTabOrder = function (event) {
+		switch (event.target.id) {
+			case 'addMultiServiceLink':
+				if (event.shiftKey && event.keyCode == $.ui.keyCode.TAB) {
+					if ($('.qm-popover-context-marketing').is(":visible")) {
+						event.preventDefault();
+						contextMarketingController.moveFocus("contextmarketing");
+					}
+				}
+				break;
+
+			case 'verticalMessageRow':
+					if (event.keyCode == $.ui.keyCode.TAB && !event.shiftKey) {
+						if ($('.qm-popover-context-marketing').is(":visible")) {
+							event.preventDefault();
+							contextMarketingController.moveFocus("contextmarketing");
+						}
+					}
+				break
+
+			case '':
+				break
+
+		}
+
+	}
 	// Update user name, workstation name, branch name and profile drop down box
 	// in the UI
 	var updateWorkstationSettings = function () {

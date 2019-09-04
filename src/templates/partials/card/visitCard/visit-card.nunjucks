@@ -20,7 +20,7 @@
             <div class="qm-services">
                 <div class="qm-services__current-service-container">
 
-                    <a href="#" class="qm-context-marketing" id="verticalMessageRow"    >
+                    <a href="#" class="qm-context-marketing" id="verticalMessageRow"  onkeydown ="servicePoint.visitCardTabOrder(event)"  >
                         <i class="qm-context-marketing__icon icon-announce" aria-hidden="true"></i>
                         <span class="sr-only"></span>
                     </a>
@@ -28,7 +28,7 @@
                     <div class="qm-services__current-services">
                         <div class="qm-services__current-service-title-container">
                             <span id="serviceId" class="qm-services__current-service-title"></span>
-                            <a href="#" class="qm-services__add-service js-add-services-btn" id="addMultiServiceLink" onclick="servicePoint.addMultiServicePressed();util.moveFocusToCardTop();">
+                            <a href="#" class="qm-services__add-service js-add-services-btn" id="addMultiServiceLink" onkeydown ="servicePoint.visitCardTabOrder(event)" onclick="servicePoint.addMultiServicePressed();util.moveFocusToCardTop();">
                                 <i class="qm-services__add-service-icon icon-add-circle-solid" aria-hidden="true"></i>
                                 <span class="qm-services__add-service-text" id="addServicesLbl"></span>
                             </a>
