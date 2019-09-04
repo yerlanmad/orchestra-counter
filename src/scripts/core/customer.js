@@ -251,15 +251,15 @@ var customer = new function() {
             });
 
         this.escapreSearchMode = function (event) {
-            var realtedTarget;
+            var relatedTarget;
             //IE11 fix
             if (event.relatedTarget === null) {
-                realtedTarget = document.activeElement;
+                relatedTarget = document.activeElement;
             } else {
-                realtedTarget = event.realtedTarget;
+                relatedTarget = event.relatedTarget;
             }
 
-            if ($(realtedTarget)[0] != $('.qm-form-field--search .js-clear-field')[0]) {
+            if ($(relatedTarget)[0] != $('.qm-form-field--search .js-clear-field')[0]) {
                 $('#customerInput').val('');
                 util.hideModal('customerSearchDiv');
                 $('.js-search-input__icon').show();
