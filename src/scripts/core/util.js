@@ -40,7 +40,7 @@ var util = new function () {
             var serviceId = sessvars.state.visit.currentVisitService.serviceId;
             var $expectedTransactionTime = $("#expectedTransactionTime");
             if (serviceId) {
-                $expectedTransactionTime.empty().text('(' + this.secondsToMs(window.servicesExpectedTransactionTimes[serviceId]) + ')');
+                $expectedTransactionTime.empty().html('(<span class="sr-only">00:</span>' + this.secondsToMs(window.servicesExpectedTransactionTimes[serviceId]) + ')');
                 $expectedTransactionTime.attr('title', translate.msg('info.card.visitCard.expected.transaction.time'));
             }
         }
