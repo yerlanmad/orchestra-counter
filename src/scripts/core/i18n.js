@@ -200,6 +200,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nQmBtn("wrapUpEndVisitBtn", 'action.finish.visit');
         i18nSafe("wrapUpText", 'info.wrapup.visit');
         i18nSafe("wrapUpTimerText", 'info.wrapup.timerText');
+        i18nSafe("wrapUpTimeText", 'info.wrapup.timerText');
 
         // Add Marks Card
         i18nQmBtn("addMarksToVisitBtn", 'button.add.markToVisit');
@@ -215,6 +216,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         // Inactive Card
         i18nSafe("inactiveCardTitle", 'info.card.inactiveCard.title');
+        i18nSafe("inactiveCardTitleClick", 'info.card.inactiveCard.title');
         i18nSafe("inactiveCardSubTitle", 'info.card.inactiveCard.subTitle');
 
         //transfer form

@@ -14,6 +14,21 @@ window.$Qmatic.components.card.CardBaseComponent = function (selector) {
 
     this.show = function () {
         window.$Qmatic.components.card.CardBaseComponent.prototype.show.call(this);
+        if(selector == "#inactiveCard"){
+            // var inactiveCardTitleText = $('#inactiveCardTitle').text();
+            // $('#inactiveCardTitle').text(' ');
+            // setTimeout(function () {
+            //     $('#inactiveCardTitle').text(inactiveCardTitleText);
+			// },100);
+			// var inactiveCardSubTitleText = $('#inactiveCardSubTitle').text();
+            // $('#inactiveCardSubTitle').text(' ');
+            // setTimeout(function () {
+            //     $('#inactiveCardSubTitle').text(inactiveCardSubTitleText);
+			// },100);
+		
+            
+    }
+        
         if (window.jQuery) {
             $(".qm-card__content-section").scrollTop(0);
         }

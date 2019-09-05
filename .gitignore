@@ -5,3 +5,4 @@ gulp.config.json
 npm-debug.log
 *.utt
 .DS_Store
+.vscode/

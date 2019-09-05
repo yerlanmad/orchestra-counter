@@ -11,8 +11,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="qm-card__content-section">
-        <p class="qm-card__text" id="inactiveCardSubTitle" aria-live="polite" role="alert"></p>
+    <div class="qm-card__content-section" aria-live="polite">
+        <div id="inactiveCardTitleClick" class="sr-only"></div>    
+        <p class="qm-card__text" id="inactiveCardSubTitle"  ></p>
     </div>
 {% endblock %}
 
