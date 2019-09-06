@@ -15,16 +15,13 @@ window.$Qmatic.components.card.CardBaseComponent = function (selector) {
     this.show = function () {
         window.$Qmatic.components.card.CardBaseComponent.prototype.show.call(this);
         if(selector == "#inactiveCard"){
-            // var inactiveCardTitleText = $('#inactiveCardTitle').text();
-            // $('#inactiveCardTitle').text(' ');
-            // setTimeout(function () {
-            //     $('#inactiveCardTitle').text(inactiveCardTitleText);
-			// },100);
-			// var inactiveCardSubTitleText = $('#inactiveCardSubTitle').text();
-            // $('#inactiveCardSubTitle').text(' ');
-            // setTimeout(function () {
-            //     $('#inactiveCardSubTitle').text(inactiveCardSubTitleText);
-			// },100);
+            var inactiveCardTitleText = $('#inactiveCardTitle').text();
+			var inactiveCardSubTitleText = $('#inactiveCardSubTitle').text();
+            $('#inactiveCardSubTitleSrOnly').text(' ');
+            setTimeout(function () {
+                $('#inactiveCardSubTitleSrOnly').text(inactiveCardTitleText + ' ' + inactiveCardSubTitleText);
+                // $('#inactiveCardTitle').text(inactiveCardTitleText)
+			},10);
 		
             
     }

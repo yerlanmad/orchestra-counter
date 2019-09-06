@@ -220,6 +220,8 @@ function showModules() {
 		var params = "";
 		if (val != undefined) {
 			params = val.parameters;
+			// console.log(params);
+			
 		}
 		if ( params.mdCus != undefined) {
 			moduleCustomerEnabled = params.mdCus ;						// Customer information edit/selection

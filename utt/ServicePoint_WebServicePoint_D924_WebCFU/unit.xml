@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.12   2019-09-06   Added parameter to serve transaction time udaban
     7.0.0.11   2019-09-03   updated description for store next param  chamut
     7.0.0.10   2019-05-15   Added parameter for force logout          joelan
     7.0.0.9    2019-05-02   Added parameter to transfer with delay    joelan
@@ -177,6 +178,14 @@
           defaultValue="false"
           label="Serve Multi Services"
           description="If setting is enabled it will allow the user to serve any of the multi services that the called visit holds"
+          sortOrder="5011"
+          writeLevel="profile"
+          privilege="install:adminAdmin"/>
+        <parameter name="mdServicetransactiontime"
+          type="Boolean"
+          defaultValue="true"
+          label="Service transaction time"
+          description="Show transaction time for multi-service visits"
           sortOrder="5011"
           writeLevel="profile"
           privilege="install:adminAdmin"/>

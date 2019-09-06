@@ -186,7 +186,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("previousServiceLbl", 'info.card.visitCard.previousServiceLbl');
         i18nSafe("addServicesLbl", 'info.card.visitCard.addServiceLbl');
         i18nSafe("visitWaitingTime", 'info.waiting.time');
-        i18nSafe("visitTransactionTime", 'info.transaction.time');
+        i18nSafe("visitTransactionTime", 'info.total.transaction.time');
         i18nSafe("visitCardAddMarksLbl", 'info.card.marksCard.addMarks');
         i18nQmBtn("recallBtn", 'action.recall');
         i18nQmBtn("reinsertBtn", 'action.reinsert');
