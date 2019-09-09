@@ -33,6 +33,11 @@
         color: $card-label-color;
         font-weight: $font-weight-light;
     }
+    &__total {
+        color: $pale-aquamarine;
+        padding: 0 5px;
+        font-weight: 500;
+    }
 
     &__time {
         color: $card-label-color;

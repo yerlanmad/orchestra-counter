@@ -1916,7 +1916,7 @@ var servicePoint = new function () {
 
 			if (nextServices.length > 0) {
 				$("#nextVisitServices").css("display", "");
-
+				
 				$("#nextVisitServices .qm-services__services-listing").html("");
 				$("#nextVisitServicesList").html("");
 
@@ -1969,7 +1969,10 @@ var servicePoint = new function () {
 			if (previousServices.length > 0) {
 				previousServices.reverse();
 				$("#previousVisitServices").css("display", "");
-
+				if(ServiceTransactionTimeEnabled) {
+					$("#ServiceTransactionTime").show();
+				}
+				
 				$("#previousVisitServices .qm-services__services-listing").html("");
 				$("#previousVisitServicesList").html("");
 
@@ -1985,6 +1988,7 @@ var servicePoint = new function () {
 			} else {
 				$("#previousVisitServices").hide();
 				$("#previousVisitServicesList").hide();
+				$("#ServiceTransactionTime").hide();
       }
       if (buttonServeMultiService === true) {
         servicePoint.toggleMultiServiceServeButtonsEnabled();
@@ -2097,6 +2101,7 @@ var servicePoint = new function () {
 			$("#countTransactionTime").empty();
 			util.clearServiceExpectedTransactionTime();
 			$('#countTransactionTime').countdown('destroy');
+			$('#serviceTrasactionTimeCount').countdown('destroy');
 		}
 		var $linkedCustomerField = $("#linkedCustomerField");
 		$linkedCustomerField.empty();
@@ -2146,6 +2151,7 @@ var servicePoint = new function () {
 
 	var updateTransactionTime = function () {
 		var timeRelativeToCallNext = -1;
+		var timeRelativeToLastServe = -1;
 		if (sessvars.state.userState == servicePoint.userState.SERVING || sessvars.state.userState == servicePoint.userState.WRAPUP) {
 			if (sessvars.state.visitState == servicePoint.visitState.VISIT_IN_DISPLAY_QUEUE) {
 				$("#countTransactionTime").empty().text(
@@ -2161,20 +2167,32 @@ var servicePoint = new function () {
 					now = new Date();
 					timeRelativeToCallNext = sessvars.statusUpdated.getTime()
 						- now.getTime();
+					// get time for last serve #165239364
+					timeRelativeToLastServe = sessvars.statusUpdated.getTime()
+						- now.getTime();
+					
 					// Has the ticket has been called in the future?
 					if (timeRelativeToCallNext > 0) {
 						timeRelativeToCallNext = 0;
 					} else {
 						timeRelativeToCallNext = timeRelativeToCallNext / 1000;
 					}
+					// if ticket is severed in future  #165239364
+					if (timeRelativeToLastServe > 0) {
+						timeRelativeToLastServe = 0;
+					} else {
+						timeRelativeToLastServe = timeRelativeToLastServe / 1000;
+					}
 					// add (or subtract, since we're counting up) no of seconds
 					// given from the server to the time spent in the client
 					// since the status was retrieved
 					timeRelativeToCallNext -= sessvars.state.visit.timeSinceCalled;
+					timeRelativeToLastServe -= sessvars.state.visit.timeSinceCurrentServiceCalled;
 				}
 			}
 		} else {
 			timeRelativeToCallNext = -1;
+			timeRelativeToLastServe = -1;
 		}
 		if (timeRelativeToCallNext != -1) {
 			jQuery('#countTransactionTime').countdown({
@@ -2184,6 +2202,16 @@ var servicePoint = new function () {
 			});
 			util.setServiceExpectedTransactionTime();
 		}
+		if (timeRelativeToLastServe != -1 && ServiceTransactionTimeEnabled) {
+			jQuery('#serviceTrasactionTimeCount').countdown({
+				since: timeRelativeToLastServe,
+				compact: true,
+				format: 'HMS'
+			});
+		} else {
+		}
+		
+		
 	};
 
 	var htmlEncodeNewLines = function (text) {

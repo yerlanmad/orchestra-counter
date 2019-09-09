@@ -1,15 +1,15 @@
 // Enable/disable functionality
 
-moduleCustomerEnabled = true ;						// Customer information edit/selection
+moduleCustomerEnabled = true;						// Customer information edit/selection
 moduleDeliveredServicesEnabled = true;				// Delivered services Panel
 moduleMultiServicesEnabled = false;					// The Multi Services Panel and Popup
 moduleOutcomeEnabled = true;						// Outcomes
 moduleServicePointPoolEnabled = true;				// Service Point Pool overview
 moduleUserPoolEnabled = true;						// User Pool overview
 moduleQueuesEnabled = true;							// Queues overview
-moduleCustomMarksEnabled = false ;					// Custom Marks
-customMarkTypeName = 'custom'	;					// name of the custom mark set in the admin
-multiMarks = false ;								// feature to add a quantity for marks
+moduleCustomMarksEnabled = false;					// Custom Marks
+customMarkTypeName = 'custom';					// name of the custom mark set in the admin
+multiMarks = false;								// feature to add a quantity for marks
 transferToQueueEnabled = true;						// Transfer to Queue
 transferToUserPoolEnabled = true;					// Transfer to User Pool
 transferToServicePointPoolEnabled = true;			// Transfer to ServicePoint Pool
@@ -27,15 +27,16 @@ buttonWalkDirectService = '';						// Default Walk Direct
 buttonRemoveFromQueueEnabled = true;				// Remove from Queue Button
 buttonTransferFromQueueEnabled = true;				// Transfer from Queue Button
 buttonCallFromQueueEnabled = false;					// Call from Queue Button
-buttonTransferFirstEnabled  = true;				// Transfer to first in Queue Button
-buttonTransferLastEnabled  = true; 				// Transfer to last in Queue Button
-buttonTransferSortEnabled  = true;					// Transfer Sorted in Queue Button
+buttonTransferFirstEnabled = true;				// Transfer to first in Queue Button
+buttonTransferLastEnabled = true; 				// Transfer to last in Queue Button
+buttonTransferSortEnabled = true;					// Transfer Sorted in Queue Button
 buttonTransferDelayedEnabled = false;     // Transfer delayed
 forceLogoutEnabled = false;               // Allow forcing logout of other user
 moduleChatEnabled = false;							// Chat Module
 minTimeBetweenCalls = '';
 singleSession = false;
 expectedTransactionTimeEnabled = false;
+ServiceTransactionTimeEnabled = true;
 
 queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
@@ -80,7 +81,7 @@ function showModules() {
 		$('#selectOutcome').parent().hide();
 	}
 	if (moduleServicePointPoolEnabled == true) {
-		$('#servicePointPoolModule').attr("style","");
+		$('#servicePointPoolModule').attr("style", "");
 		var counterPool = $('#userPoolModule');
 		util.poolResizeHandler(counterPool);
 	} else {
@@ -95,21 +96,21 @@ function showModules() {
 		$('#userPoolModule').hide();
 	}
 
-	if(moduleServicePointPoolEnabled == false && moduleUserPoolEnabled == false) {
+	if (moduleServicePointPoolEnabled == false && moduleUserPoolEnabled == false) {
 		$main.addClass('qm-main--no-pools');
 	} else {
 		$main.removeClass('qm-main--no-pools');
 	}
 
 	if (moduleQueuesEnabled == true) {
-		$('#queuesModule').attr("style","");
+		$('#queuesModule').attr("style", "");
 		$main.removeClass('qm-main--no-queues');
 	} else {
 		$main.addClass('qm-main--no-queues');
 		$('#queuesModule').hide();
 	}
 
-	if(allQueuesBtnEnabled == true) {
+	if (allQueuesBtnEnabled == true) {
 		$('#allQueuesTab').attr("style", "");
 	} else {
 		$('#allQueuesTab').hide();
@@ -170,182 +171,190 @@ function showModules() {
 	} else {
 		$('#expectedTransactionTime').hide();
 	}
+	if(ServiceTransactionTimeEnabled == true) {
+		$('ServiceTransactionTime').show();
+	} else {
+		$('ServiceTransactionTime').hide();
+	}
 
 	if (buttonRecallEnabled && buttonRecycleEnabled) {
 		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
-		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.or"))).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append(
-		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+			$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
+				$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
+					$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.or"))).append(
+						$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
+							$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append(
+								$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
+									$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+										$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 
 	} else if (buttonRecallEnabled) {
 		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
-		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.or"))).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+			$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall") + " ")).append(
+				$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.customer"))).append(
+					$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.recall.append.or"))).append(
+						$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+							$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 
 	} else if (buttonRecycleEnabled) {
 		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append(
-		$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+			$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert") + " ")).append(
+				$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.into.queue"))).append(
+					$("<span></span>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.reinsert.append.or"))).append(
+						$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+							$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 
 	} else {
 		$("#customerOptionsText").empty();
 		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options")).append(
-		$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
-		$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
+			$("<strong></strong>").text(" " + jQuery.i18n.prop("info.not.confirmed.customer.options.callnext") + " ")).append(
+				$("<span></span>").text(jQuery.i18n.prop("info.not.confirmed.customer.options.callnext.append.customer"))).appendTo("#customerOptionsText");
 	}
 
-	if (moduleChatEnabled == true){
+	if (moduleChatEnabled == true) {
 		$('#chatModule').show();
 	} else {
 		$('#chatModule').hide();
 	}
-  }
+}
 
 
-  function setUnitTypeModules(val) {
-		var params = "";
-		if (val != undefined) {
-			params = val.parameters;
-			// console.log(params);
-			
-		}
-		if ( params.mdCus != undefined) {
-			moduleCustomerEnabled = params.mdCus ;						// Customer information edit/selection
-		}
-		if ( params.mdDelServ != undefined) {
-			moduleDeliveredServicesEnabled = params.mdDelServ;			// Delivered services Panel
-		}
-		if ( params.mdMultiServ != undefined) {
-			moduleMultiServicesEnabled = params.mdMultiServ;			// The Multi Services Panel and Popup
-    }
-    if (params.btnServMultiServ != undefined) {
-      buttonServeMultiService = params.btnServMultiServ;
-    }
-		if ( params.mdOutcome != undefined) {
-			moduleOutcomeEnabled = params.mdOutcome;					// Outcomes
-		}
-		if ( params.mdServPool != undefined) {
-			moduleServicePointPoolEnabled = params.mdServPool;			// Service Point Pool overview
-		}
-		if ( params.mdUserPool != undefined) {
-			moduleUserPoolEnabled = params.mdUserPool;					// User Pool overview
-		}
-		if ( params.mdQueues != undefined) {
-			moduleQueuesEnabled = params.mdQueues;						// Queues overview
-		}
-		if ( params.btnAllQueues != undefined) {
-			allQueuesBtnEnabled = params.btnAllQueues;						// Show all queues
-		}
-		if ( params.mdMarks != undefined) {
-			moduleCustomMarksEnabled = params.mdMarks ;					// Custom Marks
-		}
-		if ( params.marksType != undefined) {
-			customMarkTypeName = params.marksType	;					// name of the custom mark set in the admin
-		}
-		if ( params.multiMarks != undefined) {
-			multiMarks = params.multiMarks								// feature to add a quantity for marks
-		}
-		if ( params.trQueue != undefined ) {
-			transferToQueueEnabled = params.trQueue;								// Transfer to Queue
-		}
-		if ( params.trUserPool != undefined) {
-			transferToUserPoolEnabled = params.trUserPool;				// Transfer to User Pool
-		}
-		if ( params.trServPool != undefined) {
-			transferToServicePointPoolEnabled = params.trServPool;		// Transfer to ServicePoint Pool
-		}
-		if ( params.btnTransfer != undefined) {
-			buttonTransferEnabled = params.btnTransfer;					// Transfer button
-		}
-		if ( params.btnRecycle != undefined) {
-			buttonRecycleEnabled = params.btnRecycle;					// Recycle button
-		}
-		if ( params.btnRecall != undefined) {
-			buttonRecallEnabled = params.btnRecall;						// Recall button
-		}
-		if ( params.btnPark != undefined) {
-			buttonParkEnabled = params.btnPark;							// Park Button
-		}
-		if ( params.btnNotes != undefined) {
-			buttonNotesEnabled = params.btnNotes;						// Notes Button
-		}
-		if ( params.btnNoShows != undefined) {
-			buttonNoShowsEnabled = params.btnNoShows ;					// No Shows Button
-		}
-		if ( params.btnWalkDirect != undefined) {
-			buttonWalkDirectEnabled = params.btnWalkDirect;				// Walk Direct Button
-		}
-		if ( params.wdService != undefined) {
-			buttonWalkDirectService = params.wdService;				// Walk Direct Default Service
-		} else {
-			// Reset flag in the case this property doen't exist in the utt..
-			buttonWalkDirectService = "";
-		}
-		if ( params.btnQueueRemove != undefined) {
-			buttonRemoveFromQueueEnabled = params.btnQueueRemove ;		// Remove from Queue Button
-		}
-		if ( params.btnQueueTransfer != undefined) {
-			buttonTransferFromQueueEnabled = params.btnQueueTransfer;	// Transfer from Queue Button
-		}
-		if ( params.btnQueueCall != undefined) {
-			buttonCallFromQueueEnabled = params.btnQueueCall ;			// Call from Queue Button
-		}
-		if ( params.btnTransferFirst != undefined) {
-			buttonTransferFirstEnabled  = params.btnTransferFirst;		// Transfer to first in Queue Button
-		}
-		if ( params.btnTransferLast != undefined) {
-			buttonTransferLastEnabled  = params.btnTransferLast; 		// Transfer to last in Queue Button
-		}
-		if ( params.btnTransferSort != undefined) {
-			buttonTransferSortEnabled  = params.btnTransferSort;		// Transfer Sorted in Queue Button
-    }
-    if ( params.btnTransferSort != undefined) {
-			buttonTransferDelayedEnabled  = params.btnTransferDelayed;		// Transfer with delay
-		}
-		if (params.mdChat != undefined){
-			moduleChatEnabled = params.mdChat;
-		}
-		if (params.minTimeBetweenCalls != undefined){
-			minTimeBetweenCalls = params.minTimeBetweenCalls;
-		}
+function setUnitTypeModules(val) {
+	var params = "";
+	console.log(params);
+	
+	if (val != undefined) {
+		params = val.parameters;
+	}
+	if (params.mdCus != undefined) {
+		moduleCustomerEnabled = params.mdCus;						// Customer information edit/selection
+	}
+	if (params.mdDelServ != undefined) {
+		moduleDeliveredServicesEnabled = params.mdDelServ;			// Delivered services Panel
+	}
+	if (params.mdMultiServ != undefined) {
+		moduleMultiServicesEnabled = params.mdMultiServ;			// The Multi Services Panel and Popup
+	}
+	if (params.btnServMultiServ != undefined) {
+		buttonServeMultiService = params.btnServMultiServ;
+	}
+	if (params.mdOutcome != undefined) {
+		moduleOutcomeEnabled = params.mdOutcome;					// Outcomes
+	}
+	if (params.mdServPool != undefined) {
+		moduleServicePointPoolEnabled = params.mdServPool;			// Service Point Pool overview
+	}
+	if (params.mdUserPool != undefined) {
+		moduleUserPoolEnabled = params.mdUserPool;					// User Pool overview
+	}
+	if (params.mdQueues != undefined) {
+		moduleQueuesEnabled = params.mdQueues;						// Queues overview
+	}
+	if (params.btnAllQueues != undefined) {
+		allQueuesBtnEnabled = params.btnAllQueues;						// Show all queues
+	}
+	if (params.mdMarks != undefined) {
+		moduleCustomMarksEnabled = params.mdMarks;					// Custom Marks
+	}
+	if (params.marksType != undefined) {
+		customMarkTypeName = params.marksType;					// name of the custom mark set in the admin
+	}
+	if (params.multiMarks != undefined) {
+		multiMarks = params.multiMarks								// feature to add a quantity for marks
+	}
+	if (params.trQueue != undefined) {
+		transferToQueueEnabled = params.trQueue;								// Transfer to Queue
+	}
+	if (params.trUserPool != undefined) {
+		transferToUserPoolEnabled = params.trUserPool;				// Transfer to User Pool
+	}
+	if (params.trServPool != undefined) {
+		transferToServicePointPoolEnabled = params.trServPool;		// Transfer to ServicePoint Pool
+	}
+	if (params.btnTransfer != undefined) {
+		buttonTransferEnabled = params.btnTransfer;					// Transfer button
+	}
+	if (params.btnRecycle != undefined) {
+		buttonRecycleEnabled = params.btnRecycle;					// Recycle button
+	}
+	if (params.btnRecall != undefined) {
+		buttonRecallEnabled = params.btnRecall;						// Recall button
+	}
+	if (params.btnPark != undefined) {
+		buttonParkEnabled = params.btnPark;							// Park Button
+	}
+	if (params.btnNotes != undefined) {
+		buttonNotesEnabled = params.btnNotes;						// Notes Button
+	}
+	if (params.btnNoShows != undefined) {
+		buttonNoShowsEnabled = params.btnNoShows;					// No Shows Button
+	}
+	if (params.btnWalkDirect != undefined) {
+		buttonWalkDirectEnabled = params.btnWalkDirect;				// Walk Direct Button
+	}
+	if (params.wdService != undefined) {
+		buttonWalkDirectService = params.wdService;				// Walk Direct Default Service
+	} else {
+		// Reset flag in the case this property doen't exist in the utt..
+		buttonWalkDirectService = "";
+	}
+	if (params.btnQueueRemove != undefined) {
+		buttonRemoveFromQueueEnabled = params.btnQueueRemove;		// Remove from Queue Button
+	}
+	if (params.btnQueueTransfer != undefined) {
+		buttonTransferFromQueueEnabled = params.btnQueueTransfer;	// Transfer from Queue Button
+	}
+	if (params.btnQueueCall != undefined) {
+		buttonCallFromQueueEnabled = params.btnQueueCall;			// Call from Queue Button
+	}
+	if (params.btnTransferFirst != undefined) {
+		buttonTransferFirstEnabled = params.btnTransferFirst;		// Transfer to first in Queue Button
+	}
+	if (params.btnTransferLast != undefined) {
+		buttonTransferLastEnabled = params.btnTransferLast; 		// Transfer to last in Queue Button
+	}
+	if (params.btnTransferSort != undefined) {
+		buttonTransferSortEnabled = params.btnTransferSort;		// Transfer Sorted in Queue Button
+	}
+	if (params.btnTransferSort != undefined) {
+		buttonTransferDelayedEnabled = params.btnTransferDelayed;		// Transfer with delay
+	}
+	if (params.mdChat != undefined) {
+		moduleChatEnabled = params.mdChat;
+	}
+	if (params.mdServicetransactiontime != undefined) {
+		ServiceTransactionTimeEnabled = params.mdServicetransactiontime;
+	}
+	if (params.minTimeBetweenCalls != undefined) {
+		minTimeBetweenCalls = params.minTimeBetweenCalls;
+	}
 
-		if (params.singleSession != undefined) {
-			singleSession = params.singleSession;
-		} else {
-			singleSession = false;
-		}
+	if (params.singleSession != undefined) {
+		singleSession = params.singleSession;
+	} else {
+		singleSession = false;
+	}
 
-		if ( params.btnWrapUp != undefined) {
-			buttonWrapUpEnabled = params.btnWrapUp;
-		} else {
-			buttonWrapUpEnabled = false;
-		}
+	if (params.btnWrapUp != undefined) {
+		buttonWrapUpEnabled = params.btnWrapUp;
+	} else {
+		buttonWrapUpEnabled = false;
+	}
 
-		if ( params.expectedTransactionTimeEnabled != undefined) {
-			expectedTransactionTimeEnabled = params.expectedTransactionTimeEnabled;
-		} else {
-			expectedTransactionTimeEnabled = false;
-    }
+	if (params.expectedTransactionTimeEnabled != undefined) {
+		expectedTransactionTimeEnabled = params.expectedTransactionTimeEnabled;
+	} else {
+		expectedTransactionTimeEnabled = false;
+	}
 
-    if (params.forceLogoutEnabled != undefined) {
-      forceLogoutEnabled = params.forceLogoutEnabled;
-    } else {
-      forceLogoutEnabled = false;
-    }
+	if (params.forceLogoutEnabled != undefined) {
+		forceLogoutEnabled = params.forceLogoutEnabled;
+	} else {
+		forceLogoutEnabled = false;
+	}
 
-		showModules();
+	showModules();
 }
