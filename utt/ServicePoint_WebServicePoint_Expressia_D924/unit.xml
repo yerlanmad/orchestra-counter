@@ -89,7 +89,7 @@
 
 <unit name="WebServicePoint_Expressia_D924"
       frameworkVersion="2"
-      unitVersion="7.0.0.12"
+      unitVersion="7.0.0.13"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"

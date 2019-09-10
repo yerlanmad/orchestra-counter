@@ -85,7 +85,7 @@
 
 <unit name="WebServicePoint_D924"
       frameworkVersion="2"
-      unitVersion="7.0.0.11"
+      unitVersion="7.0.0.12"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"

@@ -76,7 +76,7 @@
 
 <unit name="WebServicePoint_PositionalDisplay_WebCFU"
       frameworkVersion="2"
-      unitVersion="7.0.0.8"
+      unitVersion="7.0.0.10"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
