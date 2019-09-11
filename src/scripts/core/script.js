@@ -1970,6 +1970,11 @@ var servicePoint = new function () {
 				previousServices.reverse();
 				$("#previousVisitServices").css("display", "");
 				if(ServiceTransactionTimeEnabled) {
+					setTimeout(function () {
+					var	srOnlyText = jQuery.i18n.prop('info.total')+' '+jQuery.i18n.prop('info.transaction.time')+' '+periodsToHHMMSS($('#countTransactionTime').countdown('getTimes'));
+						$('#transactionTimerSrOnly').text(srOnlyText);
+					},2000);
+
 					$("#ServiceTransactionTime").show();
 				}
 				
@@ -2213,6 +2218,11 @@ var servicePoint = new function () {
 		
 		
 	};
+
+	function periodsToHHMMSS(periods) {
+		return (periods[4].toString().length == 1 ? '0'+periods[4].toString() : periods[4])+':'
+		+(periods[5].toString().length == 1 ? '0'+periods[5].toString() : periods[5])+':'+(periods[6].toString().length == 1 ? '0'+periods[6].toString() : periods[6]);
+	}
 
 	var htmlEncodeNewLines = function (text) {
 		return text.replace(/\n/g, '<br />');

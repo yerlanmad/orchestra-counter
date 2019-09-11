@@ -69,6 +69,9 @@
     <div class="qm-card__content-section qm-card__content-section-flex-grow qm-flex">
         <!-- Waiting time and transaction time -->
         <div class="qm-timer">
+                            <div id="transactionTimerSrOnly" class="sr-only" aria-live="assertive" >
+                    00 min 00 seconds
+                    </div>
             <div class="qm-timer__item" id="waitingTimeContainer">
                 <i class="qm-timer__icon icon-clock-solid" aria-hidden="true"></i>
                 <div class="qm-timer__text">
@@ -90,7 +93,7 @@
                 <div class="qm-timer__text">
                     <span class="qm-timer__total" id="visitTransactionTotal"> </span> 
                     <span class="qm-timer__label"><span id="visitTransactionTime"></span><span>:</span></span>
-                    <span id="countTransactionTime" class="qm-timer__time"></span>
+                    <span id="countTransactionTime" class="qm-timer__time"  aria-hidden="true"></span>
                     <span id="expectedTransactionTime" class="qm-timer__time qm-timer__time--expected-time"></span>
                 </div>
             </div>
