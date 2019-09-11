@@ -171,10 +171,10 @@ function showModules() {
 	} else {
 		$('#expectedTransactionTime').hide();
 	}
-	if(ServiceTransactionTimeEnabled == true) {
-		$('ServiceTransactionTime').show();
+	if(ServiceTransactionTimeEnabled && moduleMultiServicesEnabled) {
+		$('#ServiceTransactionTime').show();
 	} else {
-		$('ServiceTransactionTime').hide();
+		$('#ServiceTransactionTime').hide();
 	}
 
 	if (buttonRecallEnabled && buttonRecycleEnabled) {
@@ -224,7 +224,7 @@ function showModules() {
 
 function setUnitTypeModules(val) {
 	var params = "";
-	console.log(params);
+	console.log(val);
 	
 	if (val != undefined) {
 		params = val.parameters;

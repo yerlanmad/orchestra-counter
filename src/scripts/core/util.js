@@ -45,6 +45,23 @@ var util = new function () {
             }
         }
     };
+    this.setServiceTimeExpectedTransactionTime = function () {
+        if(sessvars.state && sessvars.state.visit && sessvars.state.visit.currentVisitService) {
+            var serviceId = sessvars.state.visit.currentVisitService.serviceId;
+            var $expectedTransactionTime = $("#expectedServiceTransactionTime");
+            if (serviceId) {
+                $expectedTransactionTime.empty().html('(<span class="sr-only">00:</span>' + this.secondsToMs(window.servicesExpectedTransactionTimes[serviceId]) + ')');
+                $expectedTransactionTime.attr('title', translate.msg('info.card.visitCard.expected.transaction.time'));
+            }
+        }
+    };
+    this.clearServiceTimeExpectedTransactionTime = function () {
+        var $expectedTransactionTime = $("#expectedTransactionTime");
+        $expectedTransactionTime.empty();
+        $expectedTransactionTime.attr('title', null);
+
+    };
+
 
     this.clearServiceExpectedTransactionTime = function () {
         var $expectedTransactionTime = $("#expectedTransactionTime");

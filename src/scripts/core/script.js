@@ -1686,7 +1686,7 @@ var servicePoint = new function () {
 			tooltipController.dispose('closecounter');
 			$("#transferBtn").prop('disabled', false);
 			tooltipController.dispose('transfer');
-      $("#parkBtn").prop('disabled', false);
+			$("#parkBtn").prop('disabled', false);
 
 
 			$("#notesMessage").prop('disabled', false);
@@ -1969,13 +1969,14 @@ var servicePoint = new function () {
 			if (previousServices.length > 0) {
 				previousServices.reverse();
 				$("#previousVisitServices").css("display", "");
-				if(ServiceTransactionTimeEnabled) {
+				if(ServiceTransactionTimeEnabled  && moduleMultiServicesEnabled) {
 					setTimeout(function () {
 					var	srOnlyText = jQuery.i18n.prop('info.total')+' '+jQuery.i18n.prop('info.transaction.time')+' '+periodsToHHMMSS($('#countTransactionTime').countdown('getTimes'));
 						$('#transactionTimerSrOnly').text(srOnlyText);
 					},2000);
 
 					$("#ServiceTransactionTime").show();
+					util.clearServiceExpectedTransactionTime();
 				}
 				
 				$("#previousVisitServices .qm-services__services-listing").html("");
@@ -2105,6 +2106,7 @@ var servicePoint = new function () {
 		if (trtUpdateNeeded) {
 			$("#countTransactionTime").empty();
 			util.clearServiceExpectedTransactionTime();
+			util.clearServiceTimeExpectedTransactionTime();
 			$('#countTransactionTime').countdown('destroy');
 			$('#serviceTrasactionTimeCount').countdown('destroy');
 		}
@@ -2207,12 +2209,13 @@ var servicePoint = new function () {
 			});
 			util.setServiceExpectedTransactionTime();
 		}
-		if (timeRelativeToLastServe != -1 && ServiceTransactionTimeEnabled) {
+		if (timeRelativeToLastServe != -1 && ServiceTransactionTimeEnabled && moduleMultiServicesEnabled) {
 			jQuery('#serviceTrasactionTimeCount').countdown({
 				since: timeRelativeToLastServe,
 				compact: true,
 				format: 'HMS'
 			});
+			util.setServiceTimeExpectedTransactionTime();
 		} else {
 		}
 		
