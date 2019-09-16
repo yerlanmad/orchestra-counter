@@ -37,6 +37,7 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.0.11   2019-09-16   Added parameter to workprofile visit view chamut
     7.0.0.10   2019-09-06   Added parameter to serve transaction time udaban
     7.0.0.9    2019-05-02   Added parameter to transfer with delay    joelan
     7.0.0.8    2019-03-29   Added parameter to call multi service     joelan
@@ -75,7 +76,7 @@
 
 <unit name="WebCounterMultiStaff"
       frameworkVersion="2"
-      unitVersion="7.0.0.10"
+      unitVersion="7.0.0.11"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="1"
@@ -183,6 +184,14 @@
           defaultValue="false"
           label="Show All Queues"
           description="If enabled, show all queues on the branch."
+          sortOrder="5014"
+          writeLevel="branch"
+          privilege="install:adminAdmin"/>
+        <parameter name="btnWorkProfileVisits"
+          type="Boolean"
+          defaultValue="false"
+          label="Show workprofile visits"
+          description="If enabled, show all visits for the current workprofile."
           sortOrder="5014"
           writeLevel="branch"
           privilege="install:adminAdmin"/>

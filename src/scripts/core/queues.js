@@ -3,6 +3,7 @@ var queues = new function() {
     var myQueuesTable;
     var queuesTable;
     var ticketsTable;
+    var workProfileTable;
     var SORTING = [[3, 'desc'], [2, 'desc'], [0, 'asc']];
     var queuePopovers = [];
 
@@ -191,6 +192,11 @@ var queues = new function() {
         setNumberOfWaitingCustomers('#myQueuesTab .qm-tab-information__text', waitingCustomers);
     };
 
+    var workProfileQueueInitFn = function (visits) {
+      var waitingCustomers = visits ? visits.length : 0;
+      setNumberOfWaitingCustomers('#workProfileVisitsTab .qm-tab-information__text', waitingCustomers);
+    }
+
     var queueDetailInitFn = function (queues) {
       if (queues !== null && queues !== undefined) {
         var waitingCustomers = queues.length;
@@ -363,6 +369,155 @@ var queues = new function() {
 
             adjustHeightOfTableScrollWrapper('#queueDetailView');
         }
+    };
+
+    this.loadWorkProfileVisits = function() {
+      var _self = this;
+      if(servicePoint.hasValidSettings() && sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
+        /*!(servicePoint.isOutcomeOrDeliveredServiceNeeded() && sessvars.forceMark && !hasMark()*/) {
+
+        // queueViewController.navigateToWorkProfileVisits();
+
+        if (typeof workProfileTable !== 'undefined') {
+          //empty the tickets table and populate with new data from server if table is not created
+          workProfileTable.fnClearTable();
+          workProfileTable.fnSort([]);
+          var params = {};
+          params.branchId = sessvars.branchId;
+          var visits = spService.get("branches/" + params.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/");
+
+          if(visits && visits.length > 0) {
+            workProfileTable.fnAddData(visits);
+          }
+          workProfileQueueInitFn(visits);
+        } else {
+          var columns = [
+              /* Id mData: id */                {"bSearchable": false,
+                  "bVisible": false,
+                  "sType": "qm-sort",
+                  "mDataProp": "visitId"},
+
+              /* Ticket id */         {"sClass": "qm-table__first-column",
+              "sType": "qm-sort",
+              "sWidth": "",
+                  "mDataProp": "ticketId"},
+              /* Customer name */
+                  {"sClass": "qm-table__middle-column",
+                  "sType": "qm-sort",
+                  "mData": null,
+                  "sWidth": "",
+                  "sDefaultContent": ""},
+              /* Service name: currentVisitService.serviceExternalName */      {"sClass": "qm-table__middle-column",
+                  "mDataProp": null,
+                  "sWidth": ""
+              },
+                  /* Appointment time */      {"sClass": "qm-table__app-column",
+                  // "bVisible": false,
+              "sType": "qm-sort",
+              "sWidth": "",
+                  "mDataProp": "appointmentTime"},
+              /* Waiting time */      {"sClass": "qm-table__last-column",
+              "sType": "qm-sort",
+              "sWidth": "",
+                  "mDataProp": "waitingTime"}
+
+          ];
+          var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
+            nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.ticket');
+            nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
+            nHead.getElementsByTagName('th')[2].innerHTML = jQuery.i18n.prop('info.service.name');
+            nHead.getElementsByTagName('th')[3].innerHTML = jQuery.i18n.prop('info.queue.appointment.time');
+            nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
+          };
+
+          var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/";
+          var rowCallback = function(nRow, aData, iDisplayIndex) {
+
+            if($('td:eq(0)', nRow).find('a').length == 0) {
+              if(iDisplayIndex === 0) {
+                clearQueuePopovers();
+              }
+              //format ticket number
+              var ticketNumSpan = $("<a href='#' class='qm-table__ticket-code'>" + aData.ticketId + "</a>")
+              $('td:eq(0)', nRow).html(ticketNumSpan);
+
+              setSLAIcon(5, aData.waitingTime, nRow);
+
+              if(!buttonCallFromQueueEnabled && !buttonTransferFromQueueEnabled && !buttonRemoveFromQueueEnabled) {
+                ticketNumSpan.addClass('qm-table__ticket-code--disabled');
+              } else {
+                // Templates
+                var popoverTemplate = document.querySelector('.qm-popover--queue').outerHTML.trim();
+
+                // Popover options
+                var options = {
+                    template: popoverTemplate,
+                    popTarget: ticketNumSpan.get(0),
+                    ticketId: aData.ticketId,
+                    visitId: aData.visitId,
+                    isWorkProfileQueue: true
+                };
+
+                // Popover options and initialization
+                if ( buttonTransferFromQueueEnabled  == true ) {
+                    options.showTransferBtn = true;
+                } else {
+                    options.showTransferBtn = false;
+                }
+                if ( buttonRemoveFromQueueEnabled == true ) {
+                    options.showDeleteBtn = true;
+                } else {
+                    options.showDeleteBtn = false;
+                }
+                if ( buttonCallFromQueueEnabled == true ) {
+                    options.showCallBtn = true;
+                } else {
+                    options.showCallBtn = false;
+                }
+
+                if(servicePoint.isOutcomeOrDeliveredServiceNeeded()) {
+                    options.disableCall = true;
+                    options.disableTransfer = true;
+                    options.disableDelete = true;
+                }
+
+                var popover = new window.$Qmatic.components.popover.QueuePopoverComponent(options);
+                popover.init();
+
+                queuePopovers.push(popover);
+              }
+
+              var formattedTime = util.formatIntoMM(parseInt(aData.waitingTime));
+            }
+
+            if(aData.parameterMap && aData.parameterMap['customers'] !== undefined) {
+                $('td:eq(1)', nRow).html(aData.parameterMap['customers']);
+            }
+            if(aData.appointmentTime) {
+                $('td:eq(3)', nRow).html(util.formatHHMMSSIntoHHMMA(aData.appointmentTime.split("T")[1]));
+            }
+
+            $('td:eq(4)', nRow).html(formattedTime);
+            return nRow;
+          };
+
+          //create new table since not defined
+          workProfileTable = util.buildTableJson({"tableId": "workProfileVisitsTable", "url": url, "rowCallback": rowCallback,
+              "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "100%",
+              "emptyTableLabel": "info.queue.tickets.empty", "initFn": workProfileQueueInitFn});
+
+          tableScrollController.initTableScroll("workProfileVisitsTable", function refreshWorkProfileVisits() {
+            tableScrollController.getInstance("workProfileVisitsTable").disableRefreshButton();
+            _self.loadWorkProfileVisits();
+           });
+        }
+
+        // var $ticketListHeader = $("#ticketListHeader");
+        // $ticketListHeader.empty();
+        // $ticketListHeader.html(queueTableContainingRow.fnGetData(rowClicked).name);
+
+        adjustHeightOfTableScrollWrapper('#workProfileVisitsTable_wrapper');
+      }
     };
 
     var adjustHeightOfTableScrollWrapper = function (id) {

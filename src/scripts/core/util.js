@@ -63,6 +63,25 @@ var util = new function () {
     };
 
 
+    this.updateTableAndRestoreScrollPosition = function ($wrapper, updateFn) {
+      var scrollTopBeforeUpdate = $wrapper.scrollTop();
+      updateFn();
+      $wrapper.scrollTop(scrollTopBeforeUpdate);
+    };
+
+    this.startQueuePoll = function () {
+      if (sessvars.queueTimer === undefined) {
+        queues.updateQueues(true);
+      }
+    };
+
+    this.stopQueuePoll = function () {
+      if (sessvars.queueTimer !== undefined ) {
+        clearTimeout(sessvars.queueTimer);
+        sessvars.queueTimer = undefined;
+      }
+    };
+
     this.clearServiceExpectedTransactionTime = function () {
         var $expectedTransactionTime = $("#expectedTransactionTime");
         $expectedTransactionTime.empty();

@@ -290,7 +290,10 @@ var servicePoint = new function () {
 				}
 			}
 
-			queues.updateQueues(true);
+      queues.updateQueues(true);
+      if (workprofileVisitsBtnEnabled === true) {
+        queues.loadWorkProfileVisits();
+      }
 			if (typeof projectedVisits != "undefined") {
 				projectedVisits.updateProjectedVisits(true);
 			}
@@ -1759,7 +1762,10 @@ var servicePoint = new function () {
 
 		if (!isRefresh) {
 			if (queuesUpdateNeeded) {
-				queues.updateQueues(false);
+        queues.updateQueues(false);
+        if (workprofileVisitsBtnEnabled) {
+          queues.loadWorkProfileVisits();
+        }
 			} else {
 				queuesUpdateNeeded = true;
 			}

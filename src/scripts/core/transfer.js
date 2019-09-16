@@ -165,7 +165,7 @@ var transfer = new function() {
 
     var transferCurrentVisitToUserPoolClicked = this._transferCurrentVisitToUserPoolClicked.bind(this);
 
-    this.buildTransferToQueueTable = function (popoverComponent, selector, table, ticketId, visitId) {
+    this.buildTransferToQueueTable = function (popoverComponent, selector, table, ticketId, visitId, isWorkProfileQueue) {
         var filterQueues = function(queuesData){
             var i = queuesData.length;
             while(i--){
@@ -250,7 +250,7 @@ var transfer = new function() {
               $(selector).on('click', 'tbody td button.transferTicketFirst', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
-                transferTicketToQueue("FIRST", aData, visitId);
+                transferTicketToQueue("FIRST", aData, visitId, null, isWorkProfileQueue);
                 popoverComponent.disposeInstance();
               });
             }
@@ -259,7 +259,7 @@ var transfer = new function() {
               $(selector).on('click', 'tbody td button.transferTicketLast', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
-                transferTicketToQueue("LAST", aData, visitId);
+                transferTicketToQueue("LAST", aData, visitId, null, isWorkProfileQueue);
                 popoverComponent.disposeInstance();
               });
             }
@@ -268,7 +268,7 @@ var transfer = new function() {
               $(selector).on('click', 'tbody td button.transferTicketSort', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
-                transferTicketToQueue("SORTED", aData, visitId);
+                transferTicketToQueue("SORTED", aData, visitId, null, isWorkProfileQueue);
                 popoverComponent.disposeInstance();
               });
             }
@@ -286,7 +286,7 @@ var transfer = new function() {
     };
 
     // Transfer to User pool
-    this.buildTransferToUserPoolTable = function (popoverComponent, selector, table, ticketId, visitId) {
+    this.buildTransferToUserPoolTable = function (popoverComponent, selector, table, ticketId, visitId, isWorkProfileQueue) {
         if(servicePoint.hasValidSettings()) {
             // ugly but working. used in the row callback to put the ticket number in the header.
             sessvars.ticketIdToTransfer = ticketId;
@@ -362,7 +362,7 @@ var transfer = new function() {
             $(selector).on('click', 'tbody tr td', function(){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
-                transferVisitInQueueToStaffPoolClicked("FIRST", aData, visitId);
+                transferVisitInQueueToStaffPoolClicked("FIRST", aData, visitId, null, isWorkProfileQueue);
                 popoverComponent.disposeInstance();
             });
             // Transfer with delay: Uncomment this when pools support transfer with delay
@@ -381,7 +381,7 @@ var transfer = new function() {
 
 
     // Transfer to Counter pool
-    this.buildTransferToCounterPoolTable = function (popoverComponent, selector, table, ticketId, visitId) {
+    this.buildTransferToCounterPoolTable = function (popoverComponent, selector, table, ticketId, visitId, isWorkProfileQueue) {
         if(servicePoint.hasValidSettings()) {
             // ugly but working. used in the row callback to put the ticket number in the header.
             sessvars.ticketIdToTransfer = ticketId;
@@ -464,7 +464,7 @@ var transfer = new function() {
             $(selector).on('click', 'tbody tr td', function(e){
                 var nTr = $(this).closest("tr").get(0);
                 var aData = table.fnGetData(nTr);
-                transferVisitInQueueToServicePointPoolClicked("FIRST", aData, visitId);
+                transferVisitInQueueToServicePointPoolClicked("FIRST", aData, visitId, null, isWorkProfileQueue);
                 popoverComponent.disposeInstance();
             });
 
@@ -483,7 +483,7 @@ var transfer = new function() {
     };
 
     //transfer icon pressed
-    this._transferTicketToQueue = function(sortType, aRowData, visitId, delay) {
+    this._transferTicketToQueue = function(sortType, aRowData, visitId, delay, isWorkProfileQueue) {
       if (servicePoint.hasValidSettings()) {
         var transferParams = servicePoint.createParams();
         transferParams.queueId = aRowData.id;
@@ -509,13 +509,17 @@ var transfer = new function() {
               } else {
                 util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
               }
+              if (isWorkProfileQueue) {
+                var $tableWrapper = $('#workProfileVisitsTable').closest('.dataTables_scrollBody');
+                util.updateTableAndRestoreScrollPosition($tableWrapper, queues.loadWorkProfileVisits);
+              }
         });
       }
     };
 
     var transferTicketToQueue = this._transferTicketToQueue.bind(this);
 
-    this._transferVisitInQueueToStaffPoolClicked = function(sortType, aRowData, visitId, delay) {
+    this._transferVisitInQueueToStaffPoolClicked = function(sortType, aRowData, visitId, delay, isWorkProfileQueue) {
       if(servicePoint.hasValidSettings()) {
         var transferParams = servicePoint.createParams();
         transferParams.userId = aRowData.id;
@@ -542,13 +546,17 @@ var transfer = new function() {
             } else {
                 util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.fullName]), false);
             }
+            if (isWorkProfileQueue) {
+                var $tableWrapper = $('#workProfileVisitsTable').closest('.dataTables_scrollBody');
+                util.updateTableAndRestoreScrollPosition($tableWrapper, queues.loadWorkProfileVisits);
+              }
         });
       }
     };
 
     var transferVisitInQueueToStaffPoolClicked = this._transferVisitInQueueToStaffPoolClicked.bind(this);
 
-    this._transferVisitInQueueToServicePointPoolClicked = function(sortType, aRowData, visitId, delay) {
+    this._transferVisitInQueueToServicePointPoolClicked = function(sortType, aRowData, visitId, delay, isWorkProfileQueue) {
       if(servicePoint.hasValidSettings()) {
         var transferParams = servicePoint.createParams();
         transferParams.servicePointId = aRowData.id;
@@ -572,6 +580,10 @@ var transfer = new function() {
           util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.ticketIdToTransfer, aRowData.name, (delay / 60)]), false);
         } else {
           util.showMessage(translate.msg('info.successful.transfer', [sessvars.ticketIdToTransfer, aRowData.name]), false);
+        }
+        if (isWorkProfileQueue) {
+          var $tableWrapper = $('#workProfileVisitsTable').closest('.dataTables_scrollBody');
+          util.updateTableAndRestoreScrollPosition($tableWrapper, queues.loadWorkProfileVisits);
         }
       }
     };

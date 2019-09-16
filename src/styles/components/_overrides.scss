@@ -21,7 +21,8 @@
     }
     #queues_wrapper,
     #myQueuesTable_wrapper,
-    #tickets_wrapper {
+    #tickets_wrapper,
+    #workProfileVisitsTable_wrapper {
         height: 100%;
     }
     .dataTables_scroll {
@@ -56,7 +57,8 @@
     }
 }
 
-#queueDetailView {
+#queueDetailView,
+#workProfileVisitsTable_wrapper {
     .dataTables_scrollBody {
         height: calc(100% - 30px) !important;
     }

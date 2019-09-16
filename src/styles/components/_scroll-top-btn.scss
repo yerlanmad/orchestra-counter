@@ -23,3 +23,48 @@
         left: rem(24px);
     }
 }
+
+.qm-queue-actions-wrapper {
+  .qm-scroll-top-btn {
+    bottom: rem(80px);
+  }
+}
+
+.qm-refresh-queue-countdown {
+  font-size: rem(13px);
+  position: absolute;
+  top: 15px;
+  left: 17px;
+  color: $dark-transparent82;
+}
+
+.qm-refresh-queue-btn {
+  position: absolute;
+  bottom: rem($global-standard-margin);
+  right: rem(24px);
+  font-size: rem(38px);
+  height: 50px;
+  width: 50px;
+  color: $tertiary-color;
+  background: $white;
+  border-radius: 50%;
+  border: 1px solid $dark-transparent12;
+  box-shadow: 0 0 8px 0 $dark-transparent12;
+  opacity: 0.4;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+      opacity: 1;
+  }
+
+  @at-root [dir='rtl'] & {
+      right: auto;
+      left: rem(24px);
+  }
+
+  &__wrapper {
+    position: relative;
+    display: block;
+  }
+}
