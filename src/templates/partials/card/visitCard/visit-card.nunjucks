@@ -82,7 +82,6 @@
             <div class="qm-timer__item" id="ServiceTransactionTime">
                 <i class="qm-timer__icon icon-service-solid" aria-hidden="true"></i>
                 <div class="qm-timer__text">
-                    <span class="qm-timer__total" id="visitTransactionService"> </span> 
                     <span class="qm-timer__label"><span id="visitServiceTransactionTime"></span><span>:</span></span>
                       <span id="serviceTrasactionTimeCount" class="qm-timer__time"></span>
                       <span id="expectedServiceTransactionTime" class="qm-timer__time qm-timer__time--expected-time"></span>
@@ -91,7 +90,6 @@
             <div class="qm-timer__item">
                 <i class="qm-timer__icon icon-hourglass" aria-hidden="true"></i>
                 <div class="qm-timer__text">
-                    <span class="qm-timer__total" id="visitTransactionTotal"> </span> 
                     <span class="qm-timer__label"><span id="visitTransactionTime"></span><span>:</span></span>
                     <span id="countTransactionTime" class="qm-timer__time"  aria-hidden="true"></span>
                     <span id="expectedTransactionTime" class="qm-timer__time qm-timer__time--expected-time"></span>

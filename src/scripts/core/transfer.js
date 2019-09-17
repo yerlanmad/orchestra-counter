@@ -213,22 +213,22 @@ var transfer = new function() {
                     var queueName = $('td:eq(0)', nRow).text();
                     $('td:eq(0)', nRow).empty().append("<span class=\"queueNameSpan\">" + queueName + "</span>");
                     if ( buttonTransferFirstEnabled  == true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' id='icon-queue-first' title='" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "'>"
                       + "<i class='qm-action-btn__icon icon-queue-first' aria-hidden='true'></i>"
                       + "<span class='sr-only'>" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }
                     if ( buttonTransferLastEnabled  == true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' title='" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' id='icon-queue-last' title='" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "'>"
                         + "<i class='qm-action-btn__icon icon-queue-last' aria-hidden='true'></i>"
                         + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }
                     if ( buttonTransferSortEnabled  == true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' id='icon-queue-sort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "'>"
                         + "<i class='qm-action-btn__icon icon-clock' aria-hidden='true'></i>"
                         + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }
                     if (buttonTransferDelayedEnabled === true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' id='icon-queue-delay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "'>"
                         + "<i class='qm-action-btn__icon icon-wrap-up' aria-hidden='true'></i>"
                         + "<span class='sr-only'>" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }

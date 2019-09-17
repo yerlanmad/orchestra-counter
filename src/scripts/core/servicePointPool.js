@@ -7,6 +7,9 @@ var servicePointPool = new function() {
         var url = "branches/" + sessvars.branchId + "/servicePoints/"
                     + sessvars.servicePointId + "/pool/visits";
 
+        
+                    
+
         // Get DOM elements
         var counterPool         = $('#servicePointPoolModule'),
             counterPoolList     = counterPool.find('.qm-pool__list'),

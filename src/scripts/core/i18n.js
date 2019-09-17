@@ -174,8 +174,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
 
         //card details
         // Card back
-        i18nSafeSelectorBtnAppend(".qm-card--back-btn span", 'application.sr.back');
-        i18nSafeSelectorBtnAppend(".js-card-back span", 'application.sr.back');
+        i18nSafeSelectorBtnAppend(".qm-card--back-btn span", 'application.sr.done');
+        i18nSafeSelectorBtnAppend(".js-card-back span", 'application.sr.done');
 
         // Closed Card
         i18nSafe("closedCardTitle", 'info.card.closedCard.title');
@@ -186,10 +186,8 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("previousServiceLbl", 'info.card.visitCard.previousServiceLbl');
         i18nSafe("addServicesLbl", 'info.card.visitCard.addServiceLbl');
         i18nSafe("visitWaitingTime", 'info.waiting.time');
-        i18nSafe("visitTransactionTotal", 'info.total');
-        i18nSafe("visitTransactionService", 'info.service');
         i18nSafe("visitTransactionTime", 'info.transaction.time');
-        i18nSafe("visitServiceTransactionTime", 'info.transaction.time');
+        i18nSafe("visitServiceTransactionTime", 'info.service.time');
         i18nSafe("visitCardAddMarksLbl", 'info.card.marksCard.addMarks');
         i18nQmBtn("recallBtn", 'action.recall');
         i18nQmBtn("reinsertBtn", 'action.reinsert');
