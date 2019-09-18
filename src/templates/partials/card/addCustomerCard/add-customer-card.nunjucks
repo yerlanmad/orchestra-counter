@@ -19,9 +19,9 @@
                     </legend>
                     <div class="qm-form-field qm-form-field--search">
                         <label for="customerInput" class="sr-only js-label-search-customer"></label>
-                        <input id="customerInput" type="search" class="qm-search-input" onblur="customer.escapreSearchMode(event)"/>
+                        <input id="customerInput" type="search" class="qm-search-input" onblur="customer.escapeSearchMode(event)"/>
                         <i class="qm-search-input__icon icon-search js-search-input__icon" aria-hidden="true"></i>
-                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field" onblur="customer.escapreSearchMode(event)">
+                        <button type="button" class="qm-action-btn qm-action-btn--only-icon qm-form-field__clear-btn js-clear-field" onblur="customer.escapeSearchMode(event)">
                             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
                             <span class="sr-only"></span>
                         </button>

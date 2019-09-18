@@ -205,9 +205,9 @@
         <parameter name="btnWorkProfileVisits"
           type="Boolean"
           defaultValue="false"
-          label="Show workprofile visits"
-          description="If enabled, show all visits for the current workprofile."
-          sortOrder="5015"
+          label="Show work profile visits"
+          description="Enable to show visits according to work profile in the queue view"
+          sortOrder="5014"
           writeLevel="branch"
           privilege="install:adminAdmin"/>
         <parameter name="mdQueues"

@@ -250,7 +250,7 @@ var customer = new function() {
                 }
             });
 
-        this.escapreSearchMode = function (event) {
+        this.escapeSearchMode = function (event) {
             var relatedTarget;
             //IE11 fix
             if (event.relatedTarget === null) {
@@ -260,10 +260,13 @@ var customer = new function() {
             }
 
             if ($(relatedTarget)[0] != $('.qm-form-field--search .js-clear-field')[0]) {
-                $('#customerInput').val('');
-                util.hideModal('customerSearchDiv');
-                $('.js-search-input__icon').show();
-                $('.qm-form-field--search .js-clear-field').hide();
+                setTimeout(function () {
+                    $('#customerInput').val('');
+                    util.hideModal('customerSearchDiv');
+                    $('.js-search-input__icon').show();
+                    $('.qm-form-field--search .js-clear-field').hide();
+                },500);
+
             }
         }
 

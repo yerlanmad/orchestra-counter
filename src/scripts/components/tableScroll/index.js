@@ -79,16 +79,11 @@ window.$Qmatic.components.TableScroll.prototype = {
         }
     },
     disableRefreshButton: function () {
-      var t = new Date();
-      t.setSeconds(t.getSeconds() + 30);
       var $refreshButton = this.$tableWrapperInner.find('.js-refresh-queue-btn');
-      var $refreshCountdown = this.$tableWrapperInner.find('.js-refresh-queue-countdown');
       $refreshButton.attr('disabled', true);
-      $refreshCountdown.countdown('destroy');
-      $refreshCountdown.countdown({until: t, compact: true, format: "S", onExpiry: function() {
+      setTimeout(function () {
         $refreshButton.attr('disabled', false);
-        $refreshCountdown.countdown('destroy');
-      }});
+      }, 30*1000);
     },
     _showScroll: function (e) {
         if(this.$scrollContainer.scrollTop() > this.SCROLL_THRESHOLD) {
@@ -154,12 +149,6 @@ window.$Qmatic.components.TableScroll.prototype = {
       refreshIcon.className += "icon-refresh";
       refreshIcon.setAttribute('aria-hidden', true);
       buttonInnerWrapper.appendChild(refreshIcon);
-
-      // Refresh counter
-      var refreshCountdown = document.createElement('P');
-      refreshCountdown.className += "qm-refresh-queue-countdown js-refresh-queue-countdown";
-
-      buttonInnerWrapper.appendChild(refreshCountdown);
 
       // SR text
       var refreshSRElem = document.createElement('SPAN');

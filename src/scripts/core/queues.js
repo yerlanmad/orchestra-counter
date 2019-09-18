@@ -384,44 +384,55 @@ var queues = new function() {
           workProfileTable.fnSort([]);
           var params = {};
           params.branchId = sessvars.branchId;
-          var visits = spService.get("branches/" + params.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/");
+          var visits = spService.get("branches/" + params.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/full");
 
           if(visits && visits.length > 0) {
             workProfileTable.fnAddData(visits);
           }
           workProfileQueueInitFn(visits);
         } else {
-          var columns = [
-              /* Id mData: id */                {"bSearchable": false,
-                  "bVisible": false,
-                  "sType": "qm-sort",
-                  "mDataProp": "visitId"},
+            var columns = [
+              /* Id */                {
+                    "bSearchable": false,
+                    "bVisible": false,
+                    "sType": "qm-sort",
+                    "mDataProp": "id"
+                },
 
-              /* Ticket id */         {"sClass": "qm-table__first-column",
-              "sType": "qm-sort",
-              "sWidth": "",
-                  "mDataProp": "ticketId"},
-              /* Customer name */
-                  {"sClass": "qm-table__middle-column",
-                  "sType": "qm-sort",
-                  "mData": null,
-                  "sWidth": "",
-                  "sDefaultContent": ""},
-              /* Service name: currentVisitService.serviceExternalName */      {"sClass": "qm-table__middle-column",
-                  "mDataProp": null,
-                  "sWidth": ""
-              },
-                  /* Appointment time */      {"sClass": "qm-table__app-column",
-                  // "bVisible": false,
-              "sType": "qm-sort",
-              "sWidth": "",
-                  "mDataProp": "appointmentTime"},
-              /* Waiting time */      {"sClass": "qm-table__last-column",
-              "sType": "qm-sort",
-              "sWidth": "",
-                  "mDataProp": "waitingTime"}
+              /* Ticket id */         {
+                    "sClass": "qm-table__first-column",
+                    "sType": "qm-sort",
+                    "sWidth": "",
+                    "mDataProp": "ticketId"
+                },
+                /* Customer name */
+                {
+                    "sClass": "qm-table__middle-column",
+                    "sType": "qm-sort",
+                    "mData": null,
+                    "sWidth": "",
+                    "sDefaultContent": ""
+                },
+                /* Service name */
+                {
+                    "sClass": "qm-table__middle-column",
+                    "mDataProp": "currentVisitService.serviceExternalName",
+                    "sWidth": ""
+                },
+                  /* Appointment time */      {
+                    "sClass": "qm-table__app-column",
+                    "sType": "qm-sort",
+                    "sWidth": "",
+                    "mDataProp": "appointmentTime"
+                },
+              /* Waiting time */      {
+                    "sClass": "qm-table__last-column",
+                    "sType": "qm-sort",
+                    "sWidth": "",
+                    "mDataProp": "waitingTime"
+                }
 
-          ];
+            ];
           var headerCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
             nHead.getElementsByTagName('th')[0].innerHTML = jQuery.i18n.prop('info.queue.ticket');
             nHead.getElementsByTagName('th')[1].innerHTML = jQuery.i18n.prop('info.queue.customer.name');
@@ -430,7 +441,7 @@ var queues = new function() {
             nHead.getElementsByTagName('th')[4].innerHTML = jQuery.i18n.prop('info.queue.waiting.time');
           };
 
-          var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/";
+          var url = "/rest/servicepoint/branches/" + sessvars.branchId + "/workProfiles/" + sessvars.workProfileId + "/visits/full";
           var rowCallback = function(nRow, aData, iDisplayIndex) {
 
             if($('td:eq(0)', nRow).find('a').length == 0) {
@@ -454,7 +465,7 @@ var queues = new function() {
                     template: popoverTemplate,
                     popTarget: ticketNumSpan.get(0),
                     ticketId: aData.ticketId,
-                    visitId: aData.visitId,
+                    visitId: aData.id,
                     isWorkProfileQueue: true
                 };
 
