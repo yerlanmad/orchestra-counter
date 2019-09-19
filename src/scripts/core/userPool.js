@@ -4,7 +4,7 @@ var userPool = new function() {
 
     this.renderUserPool = function () {
         var url = "branches/" + sessvars.branchId + "/users/"
-                    + sessvars.currentUser.id + "/pool/visits";
+                    + sessvars.currentUser.id + "/pool/visits/full";
 
 
         // Get DOM elements
@@ -16,7 +16,7 @@ var userPool = new function() {
         userPoolList.empty();
 
         // Templates
-        var userPoolItemTemplate = $('<li class="qm-pool__list-item"><div class="qm-pool-item"><a href="#" class="qm-pool-item__content qm-pool-item__content--ticket"></a><span class="qm-pool-item__content qm-pool-item__content--wait"></span></div></li>')
+        var userPoolItemTemplate = $('<li class="qm-pool__list-item"> <div class="qm-pool-item"> <a href="#" class="qm-pool-item__content qm-pool-item__content--ticket"></a> <i class="qm-pool-item__content--app-icon icon-clock" aria-hidden="true"></i> <span class="qm-pool-item__content qm-pool-item__content--app-time"></span> <span class="qm-pool-item__content qm-pool-item__content--wait"></span> </div> </li>')
         var noResultTemplate = $('<li class="qm-pool__list-item qm-pool__list-item--auto-width"><span class="qm-pool__no-result-text">' + jQuery.i18n.prop('info.pools.no_customers_in_pool') + '</span></li>');
         var popoverTemplate = document.querySelector('.qm-popover--pool').outerHTML.trim();
 
@@ -35,6 +35,12 @@ var userPool = new function() {
 
                 template.find('.qm-pool-item__content--ticket').text(data.ticketId);
                 template.find('.qm-pool-item__content--wait').text(util.formatIntoMM(data.waitingTime));
+                if(data.appointmentTime){
+                    template.find('.qm-pool-item__content--app-time').text(util.formatDateIntoHHMM(new Date(data.appointmentTime)));
+                }else{
+                    template.find('.qm-pool-item__content--app-icon').hide();
+                    template.find('.qm-pool-item__content--app-time').hide();
+                }
                 userPoolList.append(template);
 
                 // Popover options and initialization
@@ -42,7 +48,9 @@ var userPool = new function() {
                 if(servicePoint.isOutcomeOrDeliveredServiceNeeded() || sessvars.state.servicePointState === "CLOSED") {
                     options.disableCall = true;
                 }
-                options.visitId = data.visitId;
+                options.visitId = data.id;
+                options.serviceName = data.currentVisitService.serviceExternalName;
+                options.customerName = data.parameterMap.customers;
                 var popover = new window.$Qmatic.components.popover.UserPoolPopoverComponent(options);
                 popover.init();
             });

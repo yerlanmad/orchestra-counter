@@ -3,6 +3,8 @@
 window.$Qmatic.components.popover.PoolPopoverComponent = function(options) {
     window.$Qmatic.components.popover.BasePopoverComponent.call(this, options);
     this.visitId        = options.visitId;
+    this.serviceName = options.serviceName;
+    this.customerName = options.customerName;
     this.disableCall    = _.isBoolean(options.disableCall) ? options.disableCall : false;
     this.isRTL          = document.getElementsByTagName("html")[0].getAttribute("dir")
                         && document.getElementsByTagName("html")[0].getAttribute("dir")
@@ -51,6 +53,7 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
             if(shouldAttachTemplateEvents) {
                 this._attachTemplateEvents();
             }
+            this.updateContent();
         }
     },
     _attachOverlayEvent: function () {
@@ -77,6 +80,14 @@ window.$Qmatic.components.popover.PoolPopoverComponent.prototype
             callBtn.addEventListener('click', this._call.bind(this));
         }
     },
+        updateContent: function () {
+            $(this.instance._tooltipNode.querySelectorAll('.pool-popover-content-col-content')[0]).text(this.serviceName);
+            if (this.customerName) {
+                $(this.instance._tooltipNode.querySelectorAll('.pool-popover-content-col-content')[1]).text(this.customerName);
+            } else {
+                $(this.instance._tooltipNode.querySelectorAll('.pool-popover-content-col')[1]).hide();
+            }
+        },
     disposeInstance: function () {
         this.navigationStack = [];
         this.target.focus();

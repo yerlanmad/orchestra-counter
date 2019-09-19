@@ -33,6 +33,34 @@
             }
         }
 
+        &--app-icon {
+            font-size: rem(20px);
+            margin: 1px 0 0 10px ;
+            color: $dark-transparent82;
+
+            @at-root [dir='rtl'] & {
+                margin: 1px 10px 0 0;
+            }
+        }
+
+        &--app-time {
+            font-size: rem(16px);
+            width: 41px;
+            margin: 0 5px 0 3px;
+            font-family: Roboto;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.5;
+            letter-spacing: normal;
+            color: $dark-transparent82;
+
+            
+            @at-root [dir='rtl'] & {
+                margin: 0 3px 0 5px;
+            }
+        }
+
         &--wait {
             font-size: rem(14px);
             color: $dark-transparent62;

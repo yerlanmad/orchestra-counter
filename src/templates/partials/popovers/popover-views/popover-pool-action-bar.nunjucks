@@ -1,13 +1,25 @@
 
 <div class="qm-popover-action-bar">
     <div class="qm-popover__layout qm-popover__layout--flex-horizontal">
-        <button class="qm-action-btn qm-action-btn--laying js-popover-call">
+        <button class="qm-action-btn qm-action-btn--laying js-popover-call js-pool pool-popover-action-button-call">
             <i class="qm-action-btn__icon icon-call-next-solid" aria-hidden="true"></i>
             <span class="qm-action-btn__text"></span>
         </button>
-        <button class="qm-action-btn qm-popover__close--small js-popover-close">
+        <button class="qm-action-btn qm-popover__close--small js-popover-close pool-popover-action-button-close">
             <i class="qm-action-btn__icon icon-close" aria-hidden="true"></i>
             <span class="sr-only"></span>
         </button>
+    </div>
+    <span class="pool-popover-line"> </span>
+    <div class="pool-popover-content">
+        <div class="pool-popover-content-col">
+         <span id="popoverPoolActionbarService" class="pool-popover-content-col-heading"></span>
+         <span class="pool-popover-content-col-content"></span>
+        </div>
+
+        <div class="pool-popover-content-col">
+               <span id="popoverPoolActionbarCustomer" class="pool-popover-content-col-heading"></span>
+               <span class="pool-popover-content-col-content"></span>
+        </div>
     </div>
 </div>

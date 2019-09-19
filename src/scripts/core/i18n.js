@@ -439,6 +439,9 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafeSelectorAppend('#workProfileVisitsTab .qm-tabs__tab-text', 'button.workprofile.visits');
 
         i18nSafeSelectorBtnAppend('.js-popover-call > span', 'action.pool.call');
+        i18nSafeSelectorBtnAppend('.js-pool > span', 'action.userandcounterpool.call');
+        i18nSafe('popoverPoolActionbarService', 'info.userandcounterpool.service');
+        i18nSafe('popoverPoolActionbarCustomer', 'info.userandcounterpool.customer.name');
         i18nSafeSelectorBtnAppend('.js-popover-transfer > span', 'action.pool.transfer');
         i18nSafeSelectorBtnAppend('.js-popover-delete > span', 'action.pool.delete');
         i18nSafeSelectorBtnAppend('.js-popover-close > span', 'application.sr.close');
