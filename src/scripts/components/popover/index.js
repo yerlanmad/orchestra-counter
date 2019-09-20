@@ -57,5 +57,36 @@ window.$Qmatic.components.popover.BasePopoverComponent.prototype = {
         this.popoverOverlay.style.display = "block";
         this.instance.toggle();
         this.instance._tooltipNode.focus();
+        this.tabFocus();
+    },
+    //manage tabbing 
+    tabFocus: function () {
+        $(this.instance._tooltipNode).on('keydown', $.proxy(function (event) {
+            if (event.shiftKey && event.keyCode == $.ui.keyCode.TAB) {
+                if ($(event.target).is($(this.instance._tooltipNode).find(':tabbable').first())) {
+                    event.preventDefault();
+                    this._toggleInstance();
+                    this.target.focus();
+                } else if ($(event.target).is($(this.instance._tooltipNode))) {
+                    event.preventDefault();
+                    this._toggleInstance();
+                    this.target.focus();
+                }
+            } else if (event.keyCode == $.ui.keyCode.TAB) {
+                if ($(event.target).is($(this.instance._tooltipNode).find(':tabbable').last())) {
+                    event.preventDefault();
+                    this._toggleInstance();
+                    var index = $(':tabbable').index(this.target);
+                    var fields = $(':tabbable');
+                    if (index > -1 && (index + 1) < fields.length) {
+                        fields.eq(index + 1).focus();
+                    } else {
+                        fields.eq(0).focus();
+                    }
+                } else {
+
+                }
+            }
+        }, this));
     }
 }
