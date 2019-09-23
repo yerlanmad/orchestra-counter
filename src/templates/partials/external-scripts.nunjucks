@@ -33,6 +33,7 @@
         <script src="scripts/core/i18n-util.js"></script>
         <script src="scripts/core/jquery/jquery.countdown.js"></script>
         <script src="scripts/core/jquery/jquery.dataTables.js"></script>
+        <script src="scripts/core/jquery/dataTables.keyTable.min.js"></script>
         <script src="scripts/core/i18n.js"></script>
         <script src="scripts/core/sessvars.js"></script>
         <script src="scripts/core/ieCache.js"></script>

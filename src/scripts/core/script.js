@@ -1202,12 +1202,13 @@ var servicePoint = new function () {
 								"bSearchable": false,
 								"bVisible": false,
 								"mDataProp": "externalName",
-								"sType": "qm-sort"
+								"sType": "qm-sort",
+								
 							},
 				/* Service int name */{
 								"sClass": "firstColumn",
 								"mDataProp": "internalName",
-								"sType": "qm-sort"
+								"sType": "qm-sort",
 							},
 				/* Service id */{
 								"bSearchable": false,
@@ -1231,17 +1232,19 @@ var servicePoint = new function () {
             var walkinHeaderCallback = function(nHead, aData, iStart, iEnd, aiDisplay) {
               $('th:eq(0)').empty().append('<span class="sr-only">' + jQuery.i18n.prop('info.walk.direct.table.header') + "</span>")
 
-            };
+			};
+						var i = 0;
 						var rowCallback = function (nRow, aData, iDisplayIndex) {
 							/* Set onclick action */
 							nRow.onclick = walkServiceClicked;
-							$(nRow).find("td").html($("<a href='#'></a>").text($(nRow).find("td").text()));
+							$(nRow).find("td").html($("<a href='#' id='walk-in-"+ i +"'></a>").text($(nRow).find("td").text()));
+							i = i + 1;
 							return nRow;
 						};
 						walkTable = util.buildTableJson({
 							"tableId": "walkDirectServices",
-              "url": url,
-              "headerCallback": walkinHeaderCallback,
+							  "url": url,
+              				"headerCallback": walkinHeaderCallback,
 							"rowCallback": rowCallback,
 							"columns": columns,
 							"filter": true,
@@ -1254,6 +1257,7 @@ var servicePoint = new function () {
 						$('#walkDirectServices').prepend("<caption class='sr-only'>Walk in Customer services</caption>");
 						var sorting = [[1, 'asc']];
 						walkTable.fnSort(sorting);
+
 					}
 				
 				} else {
@@ -1262,6 +1266,7 @@ var servicePoint = new function () {
 			}
 		}
 	};
+
 
 	this.endVisitPressed = function () {
 		if (servicePoint.hasValidSettings()

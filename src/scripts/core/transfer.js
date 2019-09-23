@@ -208,34 +208,35 @@ var transfer = new function() {
                     });
                     $(nHead).find('th').attr('scope', 'col');
                 };
+                var i = 0;
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
                   if($('td:eq(0)', nRow).find('span').length == 0) {
                     var queueName = $('td:eq(0)', nRow).text();
                     $('td:eq(0)', nRow).empty().append("<span class=\"queueNameSpan\">" + queueName + "</span>");
                     if ( buttonTransferFirstEnabled  == true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' id='icon-queue-first' title='" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "' id = 'queue-transfer-" + i + "-1'  >"
                       + "<i class='qm-action-btn__icon icon-queue-first' aria-hidden='true'></i>"
                       + "<span class='sr-only'>" + translate.msg("action.title.transfer.first", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }
                     if ( buttonTransferLastEnabled  == true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' id='icon-queue-last' title='" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' id='icon-queue-last' title='" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "'id = 'queue-transfer-" + i + "-2'>"
                         + "<i class='qm-action-btn__icon icon-queue-last' aria-hidden='true'></i>"
                         + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }
                     if ( buttonTransferSortEnabled  == true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' id='icon-queue-sort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' id='icon-queue-sort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "'id = 'queue-transfer-" + i + "-3'>"
                         + "<i class='qm-action-btn__icon icon-clock' aria-hidden='true'></i>"
                         + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }
                     if (buttonTransferDelayedEnabled === true ) {
-                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' id='icon-queue-delay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "'>"
+                      $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' id='icon-queue-delay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "'id = 'queue-transfer-" + i + "-4'>"
                         + "<i class='qm-action-btn__icon icon-wrap-up' aria-hidden='true'></i>"
                         + "<span class='sr-only'>" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "</span></button>");
                     }
+                    i +=1;
                   }
                   return nRow;
                 };
-
                 table = util.buildTableJson({"tableSelector": selector, "url": url, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "placeholder": jQuery.i18n.prop("info.placeholder.transfer.search"),
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "headerCallback": headerCallback, "emptySearchLabel": "info.transfer.queue.empty",
                     "scrollYHeight": "300px", "emptyTableLabel": "info.transfer.queue.empty", "filterData": filterQueues});
@@ -650,33 +651,79 @@ var transfer = new function() {
                     });
                     $(nHead).find('th').attr('scope', 'col');
                 };
+                var i = 0;
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
+                    
                     if($('td:eq(0)', nRow).find('span').length == 0) {
                         var queueName = $('td:eq(0)', nRow).text();
                         $('td:eq(0)', nRow).empty().append("<span class=\"queueNameSpan\">" + queueName + "</span>");
                         if ( buttonTransferFirstEnabled  == true ) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + "'>"
+                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + " ' id='queue-transfer-" + i + "-1'>"
                           + "<i class='qm-action-btn__icon icon-queue-first' aria-hidden='true'></i>"
-                          + "<span class='sr-only'>" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + "</span></button>");
+                          + "<span class='sr-only' >" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
+                            FocusMove(event.keyCode,this.firstChild.id[15],1);
+                            console.log('first line');
+                          });
                         }
                         if ( buttonTransferLastEnabled  == true ) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' title='" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "'>"
+                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' title='" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "' id='queue-transfer-" + i + "-2'>"
                               + "<i class='qm-action-btn__icon icon-queue-last' aria-hidden='true'></i>"
-                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "</span></button>");
+                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
+                                // FocusMove(event.keyCode,this.firstChild.id[15],2);
+                                console.log('second line');
+                              });
                         }
                         if ( buttonTransferSortEnabled  == true ) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "'>"
+                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "' id='queue-transfer-" + i + "-3'>"
                               + "<i class='qm-action-btn__icon icon-clock' aria-hidden='true'></i>"
-                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "</span></button>");
+                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
+                                // FocusMove(event.keyCode,this.firstChild.id[15],3);
+                                console.log('third line');
+                              });;
                         }
                         if (buttonTransferDelayedEnabled === true) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "'>"
+                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "'  id='queue-transfer-" + i + "-4'>"
                             + "<i class='qm-action-btn__icon icon-wrap-up' aria-hidden='true'></i>"
-                            + "<span class='sr-only'>" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "</span></button>");
+                            + "<span class='sr-only'>" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
+                                // FocusMove(event.keyCode,this.firstChild.id[15],4);
+                                console.log('fouth line');
+                              });;
                         }
+                        i = i + 1;
                     }
                     return nRow;
                 };
+
+                // arrow key navigation to queue transfer
+                var FocusMove = function(keyCode,k,j) {
+                    if(keyCode == 40) {
+                        if(document.getElementById('queue-transfer-' + ( parseInt(k) + 1) + '-' + j)) {
+                            document.getElementById('queue-transfer-' + (parseInt(k) + 1) + '-' + j).focus();
+                            console.log('queue-transfer-' + (parseInt(k) + 1) + '-' + j);
+                            
+                        }
+                    } else if (keyCode == 38) {
+                        if(document.getElementById('queue-transfer-' + ( parseInt(k) - 1) + '-' + j)) {
+                            document.getElementById('queue-transfer-' + (parseInt(k) - 1) + '-' + j).focus();
+                        }
+                    }
+                    // else if (keyCode == 39) {
+                    //     for (m = (parseInt(j) + 1) ; m < 5 ; m++) {
+                    //         if(document.getElementById('queue-transfer-' + k + '-' + m)) {
+                    //             document.getElementById('queue-transfer-' + k + '-' + m).focus();
+                    //             break;
+                    //         }
+                    //     } 
+                    // }
+                    // else if (keyCode == 37) {
+                    //     for (m = (parseInt(j) - 1) ; m > 0 ; m--) {
+                    //         if(document.getElementById('queue-transfer-' + k + '-' + m)) {
+                    //             document.getElementById('queue-transfer-' + k + '-' + m).focus();
+                    //             break;
+                    //         }
+                    //     } 
+                    // }
+                }
 
                 transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url, "emptySearchLabel": "info.transfer.queue.empty",
                     "rowCallback": rowCallback, "columns": columns, "filter": true, "customFilter": true, "infoFiltered": "info.filtered.fromEntries", "headerCallback": headerCallback,
