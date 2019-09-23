@@ -82,6 +82,19 @@ var util = new function () {
       }
     };
 
+    this.startWorkProfilePoll = function () {
+        if (sessvars.workProfileTimer === undefined) {
+          queues.loadWorkProfileVisits(true);
+        }
+      };
+  
+      this.stopWorkProfilePoll = function () {
+        if (sessvars.workProfileTimer !== undefined ) {
+          clearTimeout(sessvars.workProfileTimer);
+          sessvars.workProfileTimer = undefined;
+        }
+      };
+
     this.clearServiceExpectedTransactionTime = function () {
         var $expectedTransactionTime = $("#expectedTransactionTime");
         $expectedTransactionTime.empty();

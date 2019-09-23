@@ -190,11 +190,15 @@ var queues = new function() {
     var myQueuesInitFn = function (queues) {
         var waitingCustomers = getNumberOfWaitingCustomers(queues);
         setNumberOfWaitingCustomers('#myQueuesTab .qm-tab-information__text', waitingCustomers);
+        //update the workprofile tab as well
+        setNumberOfWaitingCustomers('#workProfileVisitsTab .qm-tab-information__text', waitingCustomers);
     };
 
     var workProfileQueueInitFn = function (visits) {
       var waitingCustomers = visits ? visits.length : 0;
       setNumberOfWaitingCustomers('#workProfileVisitsTab .qm-tab-information__text', waitingCustomers);
+      //update the myqueues tab as well
+      setNumberOfWaitingCustomers('#myQueuesTab .qm-tab-information__text', waitingCustomers);
     }
 
     var queueDetailInitFn = function (queues) {
@@ -371,7 +375,7 @@ var queues = new function() {
         }
     };
 
-    this.loadWorkProfileVisits = function() {
+    this.loadWorkProfileVisits = function(keepCalling) {
       var _self = this;
       if(servicePoint.hasValidSettings() && sessvars.state.servicePointState == servicePoint.servicePointState.OPEN
         /*!(servicePoint.isOutcomeOrDeliveredServiceNeeded() && sessvars.forceMark && !hasMark()*/) {
@@ -517,18 +521,21 @@ var queues = new function() {
               "columns": columns, "filter": false, "headerCallback": headerCallback, "scrollYHeight": "100%",
               "emptyTableLabel": "info.queue.tickets.empty", "initFn": workProfileQueueInitFn});
 
-          tableScrollController.initTableScroll("workProfileVisitsTable", function refreshWorkProfileVisits() {
-            tableScrollController.getInstance("workProfileVisitsTable").disableRefreshButton();
-            _self.loadWorkProfileVisits();
-           });
+          tableScrollController.initTableScroll("workProfileVisitsTable");
         }
-
-        // var $ticketListHeader = $("#ticketListHeader");
-        // $ticketListHeader.empty();
-        // $ticketListHeader.html(queueTableContainingRow.fnGetData(rowClicked).name);
 
         adjustHeightOfTableScrollWrapper('#workProfileVisitsTable_wrapper');
       }
+
+      if(keepCalling) {
+        if(sessvars.workProfileTimer !== undefined) {
+            clearTimeout(sessvars.workProfileTimer);
+            sessvars.workProfileTimer = undefined;
+        }
+        sessvars.workProfileTimer = setTimeout(function() {
+            queues.loadWorkProfileVisits(true);
+        }, queueRefreshTime*1000);
+    }
     };
 
     var adjustHeightOfTableScrollWrapper = function (id) {

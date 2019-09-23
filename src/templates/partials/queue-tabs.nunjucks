@@ -7,7 +7,7 @@
               aria-selected="true"
               aria-controls="myQueuesPanel"
               data-activated="true"
-              onfocus="util.startQueuePoll();"
+              onfocus="util.startQueuePoll();util.stopWorkProfilePoll();  "
               id="myQueuesTab">
               <span class="qm-tabs__tab-text"></span>
               <div class="qm-tab-information">
@@ -21,7 +21,7 @@
               aria-controls="allQueuesPanel"
               id="allQueuesTab"
               data-activated="true"
-              onfocus="util.startQueuePoll();"
+              onfocus="util.startQueuePoll(); util.stopWorkProfilePoll();"
               tabindex="-1">
               <span class="qm-tabs__tab-text"></span>
               <div class="qm-tab-information">
@@ -36,7 +36,7 @@
               id="workProfileVisitsTab"
               tabindex="-1"
               data-activated="true"
-              onfocus="queues.loadWorkProfileVisits();util.stopQueuePoll();">
+              onfocus="util.startWorkProfilePoll();util.stopQueuePoll();">
               <span class="qm-tabs__tab-text"></span>
               <div class="qm-tab-information">
                 <i class="qm-tab-information__icon icon-customer-solid" aria-hidden="true"></i>
