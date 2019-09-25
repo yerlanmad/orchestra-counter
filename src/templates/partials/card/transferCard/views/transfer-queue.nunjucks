@@ -30,7 +30,7 @@
                     <th class="transferQueueActions"></th>
                 </tr>
             </thead>
-            <tbody class="qm-table__body"></tbody>
+            <tbody class="qm-table__body" id="transferToQueueTableBody" tabindex="0"></tbody>
         </table>
     </div>
 {% endblock %}

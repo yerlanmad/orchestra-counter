@@ -337,7 +337,7 @@ var transfer = new function() {
                 var staffPoolRowCallback = function(nRow, aData, iDisplayIndex) {
                     if($('td:eq(0)', nRow).find('a').length == 0) {
                         var staffName = $('td:eq(0)', nRow).text();
-                        $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"staffNameSpan\" title=\"" + translate.msg("action.title.transfer.staff.pool", [sessvars.ticketIdToTransfer, staffName]) + "\">" + staffName + "</a>");
+                        $('td:eq(0)', nRow).empty().append("<a href=\"#\" id=\" " + nRow + "\"  class=\"staffNameSpan\" title=\"" + translate.msg("action.title.transfer.staff.pool", [sessvars.ticketIdToTransfer, staffName]) + "\">" + staffName + "</a>");
                         // Transfer with delay: Uncomment this when pools support transfer with delay
                         // if (buttonTransferDelayedEnabled === true) {
                         //   $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "'>"
@@ -652,41 +652,42 @@ var transfer = new function() {
                     $(nHead).find('th').attr('scope', 'col');
                 };
                 var i = 0;
+            
                 var rowCallback = function(nRow, aData, iDisplayIndex) {
                     
                     if($('td:eq(0)', nRow).find('span').length == 0) {
                         var queueName = $('td:eq(0)', nRow).text();
                         $('td:eq(0)', nRow).empty().append("<span class=\"queueNameSpan\">" + queueName + "</span>");
                         if ( buttonTransferFirstEnabled  == true ) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + " ' id='queue-transfer-" + i + "-1'>"
+                          $('td:eq(1)', nRow).append("<button tabindex='-1' class='qm-action-btn qm-action-btn--only-icon transferTicketFirst' title='" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + " ' id='queue-transfer-" + i + "-1'>"
                           + "<i class='qm-action-btn__icon icon-queue-first' aria-hidden='true'></i>"
-                          + "<span class='sr-only' >" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
-                            FocusMove(event.keyCode,this.firstChild.id[15],1);
-                            console.log('first line');
+                          + "<span class='sr-only' >" + translate.msg("action.title.transfer.first", [sessvars.state.visit.ticketId]) + "</span></button>")
+                          $('td:eq(1)', nRow).find('button').keydown( function(event) {
+                            FocusMove(event.keyCode,this.id.substring(15,16),1,event);
                           });
                         }
                         if ( buttonTransferLastEnabled  == true ) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketLast' title='" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "' id='queue-transfer-" + i + "-2'>"
+                          $('td:eq(1)', nRow).append("<button tabindex='-1' class='qm-action-btn qm-action-btn--only-icon transferTicketLast' title='" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "' id='queue-transfer-" + i + "-2'>"
                               + "<i class='qm-action-btn__icon icon-queue-last' aria-hidden='true'></i>"
-                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
-                                // FocusMove(event.keyCode,this.firstChild.id[15],2);
-                                console.log('second line');
+                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.last", [sessvars.state.visit.ticketId]) + "</span></button>")
+                              $('td:eq(1)', nRow).find('button:nth-child(2)').keydown( function(event) {
+                                FocusMove(event.keyCode,this.id.substring(15,16),2,event);
                               });
                         }
                         if ( buttonTransferSortEnabled  == true ) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketSort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "' id='queue-transfer-" + i + "-3'>"
+                          $('td:eq(1)', nRow).append("<button tabindex='-1' class='qm-action-btn qm-action-btn--only-icon transferTicketSort' title='" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "' id='queue-transfer-" + i + "-3'>"
                               + "<i class='qm-action-btn__icon icon-clock' aria-hidden='true'></i>"
-                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
-                                // FocusMove(event.keyCode,this.firstChild.id[15],3);
-                                console.log('third line');
+                              + "<span class='sr-only'>" + translate.msg("action.title.transfer.sorted.lifetime", [sessvars.state.visit.ticketId]) + "</span></button>")
+                              $('td:eq(1)', nRow).find('button:nth-child(3)').keydown( function(event) {
+                                FocusMove(event.keyCode,this.id.substring(15,16),3,event);
                               });;
                         }
                         if (buttonTransferDelayedEnabled === true) {
-                          $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "'  id='queue-transfer-" + i + "-4'>"
+                          $('td:eq(1)', nRow).append("<button tabindex='-1' class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "'  id='queue-transfer-" + i + "-4'>"
                             + "<i class='qm-action-btn__icon icon-wrap-up' aria-hidden='true'></i>"
-                            + "<span class='sr-only'>" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "</span></button>").keydown( function(event) {
-                                // FocusMove(event.keyCode,this.firstChild.id[15],4);
-                                console.log('fouth line');
+                            + "<span class='sr-only'>" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "</span></button>")
+                            $('td:eq(1)', nRow).find('button:nth-child(4)').keydown( function(event) {
+                                FocusMove(event.keyCode,this.id.substring(15,16),4,event);
                               });;
                         }
                         i = i + 1;
@@ -694,35 +695,35 @@ var transfer = new function() {
                     return nRow;
                 };
 
+                // $('td:eq(1)').find('button::first-child').attr('tabindex','0');
+
                 // arrow key navigation to queue transfer
-                var FocusMove = function(keyCode,k,j) {
+                var FocusMove = function(keyCode,k,j,event) {
                     if(keyCode == 40) {
                         if(document.getElementById('queue-transfer-' + ( parseInt(k) + 1) + '-' + j)) {
-                            document.getElementById('queue-transfer-' + (parseInt(k) + 1) + '-' + j).focus();
-                            console.log('queue-transfer-' + (parseInt(k) + 1) + '-' + j);
-                            
+                            document.getElementById('queue-transfer-' + (parseInt(k) + 1) + '-' + j).focus();     
                         }
                     } else if (keyCode == 38) {
                         if(document.getElementById('queue-transfer-' + ( parseInt(k) - 1) + '-' + j)) {
                             document.getElementById('queue-transfer-' + (parseInt(k) - 1) + '-' + j).focus();
                         }
                     }
-                    // else if (keyCode == 39) {
-                    //     for (m = (parseInt(j) + 1) ; m < 5 ; m++) {
-                    //         if(document.getElementById('queue-transfer-' + k + '-' + m)) {
-                    //             document.getElementById('queue-transfer-' + k + '-' + m).focus();
-                    //             break;
-                    //         }
-                    //     } 
-                    // }
-                    // else if (keyCode == 37) {
-                    //     for (m = (parseInt(j) - 1) ; m > 0 ; m--) {
-                    //         if(document.getElementById('queue-transfer-' + k + '-' + m)) {
-                    //             document.getElementById('queue-transfer-' + k + '-' + m).focus();
-                    //             break;
-                    //         }
-                    //     } 
-                    // }
+                    else if (keyCode == 39) {
+                        for (m = (parseInt(j) + 1) ; m < 5 ; m++) {
+                            if(document.getElementById('queue-transfer-' + k + '-' + m)) {
+                                document.getElementById('queue-transfer-' + k + '-' + m).focus();
+                                break;
+                            }
+                        } 
+                    }
+                    else if (keyCode == 37) {
+                        for (m = (parseInt(j) - 1) ; m > 0 ; m--) {
+                            if(document.getElementById('queue-transfer-' + k + '-' + m)) {
+                                document.getElementById('queue-transfer-' + k + '-' + m).focus();
+                                break;
+                            }
+                        } 
+                    }
                 }
 
                 transferTable = util.buildTableJson({"tableId": "transferToQueues", "url": url, "emptySearchLabel": "info.transfer.queue.empty",
@@ -817,11 +818,25 @@ var transfer = new function() {
                     });
                     $(nHead).find('th').attr('scope', 'col');
                 };
+                var i = 0;
                 var staffPoolRowCallback = function(nRow, aData, iDisplayIndex) {
                     if($('td:eq(0)', nRow).find('a').length == 0) {
                         var staffName = $('td:eq(0)', nRow).text();
-                        $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"staffNameSpan\" title=\"" + translate.msg("action.title.transfer.staff.pool", [sessvars.state.visit.ticketId, staffName]) + "\">" + staffName + "</a>");
-
+                        $('td:eq(0)', nRow).empty().append("<a href=\"#\"  id=\"staff-" + i + "\"  class=\"staffNameSpan\"  tabindex='-1' title=\"" + 
+                        translate.msg("action.title.transfer.staff.pool", [sessvars.state.visit.ticketId, staffName]) + "\">" + staffName + "</a>").keydown( function(event) {
+                            if(event.keyCode == 40) {
+                                var currentId = parseInt(this.firstChild.id.substring(6,7));
+                                if(document.getElementById('staff-' +(currentId+1))) {
+                                    document.getElementById('staff-' +(currentId+1)).focus();
+                                }
+                            } else if(event.keyCode == 38) {
+                                var currentId = parseInt(this.firstChild.id.substring(6,7));
+                                if(document.getElementById('staff-' +(currentId-1))) {
+                                    document.getElementById('staff-' +(currentId-1)).focus();
+                                }
+                            }
+                          });
+                        i += 1;
                         // Transfer with delay: Uncomment this when pools support transfer with delay
                         // if (buttonTransferDelayedEnabled === true) {
                         //   $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.state.visit.ticketId]) + "'>"
@@ -901,24 +916,54 @@ var transfer = new function() {
                         "bVisible": false,
                         "mDataProp": "parameters"}
                 ];
+                var i = 0;
                 var servicePointUrl = "/rest/servicepoint/branches/" + sessvars.branchId + "/servicePoints/validForServicePointPoolTransfer/";
                 var servicePointHeaderCallback = function(nHead, aasData, iStart, iEnd, aiDisplay) {
-
+                    i = 0;
                     $(nHead).closest('thead, THEAD').find('.transferServicePointPoolName').each( function (i, item) {
                         $(item).html(jQuery.i18n.prop('info.transfer.servicepoint.pool.name'));
                     });
                     $(nHead).find('th').attr('scope', 'col');
                 };
+               
                 var servicePointRowCallback = function(nRow, aData, iDisplayIndex) {
+
                     if($('td:eq(0)', nRow).find('a').length == 0) {
                         var servicePointName = $('td:eq(0)', nRow).text();
                         if(aData.state === "CLOSED") {
-                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
-                            "</a> <i class='qm-table__lock-icon icon-lock' aria-hidden='true'></i>");
+                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" tabindex='-1' class=\"servicePointNameSpan\" id = \"servicePoint-" + i +"\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
+                            "</a> <i class='qm-table__lock-icon icon-lock' aria-hidden='true'></i>").keydown( function(event) {
+                                if(event.keyCode == 40) {
+                                    var currentId = parseInt(this.firstChild.id.substring(13,14));
+                                    if(document.getElementById('servicePoint-' +(currentId+1))) {
+                                        document.getElementById('servicePoint-' +(currentId+1)).focus();
+                                    }
+                                } else if(event.keyCode == 38) {
+                                    var currentId = parseInt(this.firstChild.id.substring(13,14));
+                                    if(document.getElementById('servicePoint-' +(currentId-1))) {
+                                        document.getElementById('servicePoint-' +(currentId-1)).focus();
+                                    }
+                                }
+                              });
+                              i += 1;
                         } else {
-                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" class=\"servicePointNameSpan\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
-                            "</a>");
+                            $('td:eq(0)', nRow).empty().append("<a href=\"#\" tabindex='-1' class=\"servicePointNameSpan\" id = \"servicePoint-" + i +"\" title=\"" + translate.msg("action.title.transfer.servicepoint.pool", [sessvars.ticketIdToTransfer, servicePointName]) + "\">" + servicePointName +
+                            "</a>").keydown( function(event) {
+                                if(event.keyCode == 40) {
+                                    var currentId = parseInt(this.firstChild.id.substring(13,14));
+                                    if(document.getElementById('servicePoint-' +(currentId+1))) {
+                                        document.getElementById('servicePoint-' +(currentId+1)).focus();
+                                    }
+                                } else if(event.keyCode == 38) {
+                                    var currentId = parseInt(this.firstChild.id.substring(13,14));
+                                    if(document.getElementById('servicePoint-' +(currentId-1))) {
+                                        document.getElementById('servicePoint-' +(currentId-1)).focus();
+                                    }
+                                }
+                              });;
+                              i += 1;
                         }
+                        
                         // Transfer with delay: Uncomment this when pools support transfer with delay
                         // if (buttonTransferDelayedEnabled === true) {
                         //   $('td:eq(1)', nRow).append("<button class='qm-action-btn qm-action-btn--only-icon transferTicketDelay' title='" + translate.msg("action.title.transfer.with.delay", [sessvars.ticketIdToTransfer]) + "'>"
@@ -958,4 +1003,68 @@ var transfer = new function() {
             // }
         }
     };
+    // Transfer to the queue list focus the first button when press tab from the search input box
+    $("#transferToQueueTableBody").focus(function(){
+            setTimeout( function() {
+                $('#transferToQueues').find('button')[0].focus();
+            }, 10);        
+        }
+      );
+    //   ransfer to the counter pool list focus the first button when press tab from the search input box
+    $("#transferTicketToCounterPoolTableBody").focus(function(){
+        setTimeout( function() {
+            $('#transferTicketToCounterPoolTableBody').find('a')[0].focus();
+            }, 10);        
+        }
+    );
+    $("#transferTicketToUserPoolTableBody").focus(function(){
+        setTimeout( function() {
+            $('#transferTicketToUserPoolTableBody').find('a')[0].focus();
+            }, 10);        
+        }
+    );
+    //   transfer back to the inputbox from the buttons
+    var map = {16: false, 09: false};
+      $("#transferToQueueTableBody").keydown(function(e) {
+          if (e.keyCode in map) {
+              map[e.keyCode] = true;
+          }
+      }).keyup(function(e) {
+          if (e.keyCode in map) {
+            if (map[16] && map[9]) {
+                  $('#search-queues-input').focus();             
+            }
+              map[e.keyCode] = false;
+          }
+        
+      });
+
+      $("#transferTicketToCounterPoolTableBody").keydown(function(e) {
+        if (e.keyCode in map) {
+            map[e.keyCode] = true;
+        }
+    }).keyup(function(e) {
+        if (e.keyCode in map) {
+          if (map[16] && map[9]) {
+                $('#transferTicketToCounterPoolTableInput').focus();
+          }
+            map[e.keyCode] = false;
+        }
+      
+    });
+
+    $("#transferTicketToUserPoolTableBody").keydown(function(e) {
+        if (e.keyCode in map) {
+            map[e.keyCode] = true;
+        }
+    }).keyup(function(e) {
+        if (e.keyCode in map) {
+          if (map[16] && map[9]) {
+                $('#transferTicketToUserPoolTableInput').focus();
+          }
+            map[e.keyCode] = false;
+        }
+      
+    });
+
 };

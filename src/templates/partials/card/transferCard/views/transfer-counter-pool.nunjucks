@@ -8,7 +8,7 @@
         {{cardNav.render('transferVisitToCounterPoolLabel')}}
         <span class="qm-card-description"></span>
         <div id="transferTicketToCounterPoolTable_filter" class="search-filter qm-table-filter">
-            <input class="js-table-filter-input" type="search" placeholder="" aria-controls="transferTicketToCounterPoolTable">
+            <input class="js-table-filter-input" type="search" placeholder="" aria-controls="transferTicketToCounterPoolTable" id="transferTicketToCounterPoolTableInput">
             <label class="qm-search-filter">
                 <i class="qm-search-filter__icon icon icon-search" aria-hidden="true"></i>
                 <button type="button" class="qm-search-filter__clear-btn js-table-filter-clear-btn">
@@ -31,7 +31,7 @@
                     <th class="transferQueueToStaffPoolStaffDirection"></th>
                 </tr>
             </thead>
-            <tbody class="qm-table__body"></tbody>
+            <tbody class="qm-table__body" id="transferTicketToCounterPoolTableBody"   tabindex="0"></tbody>
         </table>
     </div>
 {% endblock %}

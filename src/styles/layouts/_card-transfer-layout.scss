@@ -53,3 +53,10 @@
         justify-content: flex-start;
     }
 }
+
+a[tabindex="-1"]:focus{
+    outline: auto 5px -webkit-focus-ring-color !important
+}
+button[tabindex="-1"]:focus{
+    outline: auto 5px -webkit-focus-ring-color !important
+}

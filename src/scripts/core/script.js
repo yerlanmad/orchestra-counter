@@ -1228,19 +1228,44 @@ var servicePoint = new function () {
 								"bVisible": false,
 								"mDataProp": "externalDescription",
 								"sType": "qm-sort"
-              }];
+			  }];
+			  var i = 0;
             var walkinHeaderCallback = function(nHead, aData, iStart, iEnd, aiDisplay) {
               $('th:eq(0)').empty().append('<span class="sr-only">' + jQuery.i18n.prop('info.walk.direct.table.header') + "</span>")
-
+			  i = 0;
 			};
-						var i = 0;
+						i = 0;
 						var rowCallback = function (nRow, aData, iDisplayIndex) {
 							/* Set onclick action */
 							nRow.onclick = walkServiceClicked;
-							$(nRow).find("td").html($("<a href='#' id='walk-in-"+ i +"'></a>").text($(nRow).find("td").text()));
+							$(nRow).find("td").html($("<a href='#' tabindex='" + checkFirstLine(i) +"' id='walk-in-"+ i +"'></a>").text($(nRow).find("td").text())).keydown( function(event) {
+                                if(event.keyCode == 40) {
+                                    var currentId = parseInt(this.firstChild.id.substring(8,9));
+                                    if(document.getElementById('walk-in-' +(currentId+1))) {
+                                        document.getElementById('walk-in-' +(currentId+1)).focus();
+                                    }
+                                } else if(event.keyCode == 38) {
+                                    var currentId = parseInt(this.firstChild.id.substring(8,9));
+                                    if(document.getElementById('walk-in-' +(currentId-1))) {
+                                        document.getElementById('walk-in-' +(currentId-1)).focus();
+                                    }
+                                }
+                              });;
 							i = i + 1;
 							return nRow;
 						};
+
+						i = 0;
+
+						var checkFirstLine = function(line) {
+							// console.log(line)
+							// console.log(document.getElementById('walkDirectServices').getElementsByClassName("odd")[0])
+							if(line.toString() == '0' ) {
+								return 0
+							} else {
+								return -1
+							}
+						}
 						walkTable = util.buildTableJson({
 							"tableId": "walkDirectServices",
 							  "url": url,
@@ -1257,7 +1282,7 @@ var servicePoint = new function () {
 						$('#walkDirectServices').prepend("<caption class='sr-only'>Walk in Customer services</caption>");
 						var sorting = [[1, 'asc']];
 						walkTable.fnSort(sorting);
-
+						
 					}
 				
 				} else {

@@ -4584,6 +4584,7 @@
 				'class': settings.oClasses.sInfo,
 				'id': ! nodes ? tid+'_info' : null
 			} );
+			
 	
 		if ( ! nodes ) {
 			// Update display on each draw
