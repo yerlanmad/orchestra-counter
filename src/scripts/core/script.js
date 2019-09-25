@@ -180,6 +180,10 @@ var servicePoint = new function () {
 		UNSUPPORTED: "UNSUPPORTED"
 	};
 
+	this.calledFrom = {
+		NONE: "NONE"
+	}
+
 	this.SW_SERVICE_POINT = "SW_SERVICE_POINT";
 
 	this.init = function () {
@@ -1498,7 +1502,7 @@ var servicePoint = new function () {
 	 *            only be updated and no timeout will be created
 	 *
 	 */
-	this.updateWorkstationStatus = function (isRefresh, blockCardChange, blockMesssagePopup) {
+	this.updateWorkstationStatus = function (isRefresh, blockCardChange, blockMesssagePopup,calledFrom) {
 		clearOngoingVisit();
 
 		if (!blockCardChange) {
@@ -1792,10 +1796,10 @@ var servicePoint = new function () {
 
 		if (!isRefresh) {
 			if (queuesUpdateNeeded) {
-        queues.updateQueues(false);
-        if (workprofileVisitsBtnEnabled) {
-          queues.loadWorkProfileVisits();
-        }
+					queues.updateQueues(false);
+				if (workprofileVisitsBtnEnabled && sessvars.workProfileTimer) {
+					queues.loadWorkProfileVisits();
+				}
 			} else {
 				queuesUpdateNeeded = true;
 			}
@@ -1811,6 +1815,15 @@ var servicePoint = new function () {
 			$("#ticketNumber").removeClass("qm-card-header__highlighted");
 		} else {
 			$("#linkedCustomerField").removeClass("qm-card-header__highlighted");
+		}
+
+		switch (calledFrom) {
+			case servicePoint.calledFrom.NONE:
+				//this is a general call to avoid all updates
+				spPoolUpdateNeeded = false;
+				userPoolUpdateNeeded = false;
+				queuesUpdateNeeded = false;
+				break;
 		}
 
 		if (spPoolUpdateNeeded) {
