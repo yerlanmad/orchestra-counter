@@ -180,7 +180,7 @@ var servicePoint = new function () {
 		UNSUPPORTED: "UNSUPPORTED"
 	};
 
-	this.calledFrom = {
+	this.update = {
 		NONE: "NONE"
 	}
 
@@ -1502,7 +1502,7 @@ var servicePoint = new function () {
 	 *            only be updated and no timeout will be created
 	 *
 	 */
-	this.updateWorkstationStatus = function (isRefresh, blockCardChange, blockMesssagePopup,calledFrom) {
+	this.updateWorkstationStatus = function (isRefresh, blockCardChange, blockMesssagePopup,update) {
 		clearOngoingVisit();
 
 		if (!blockCardChange) {
@@ -1817,13 +1817,11 @@ var servicePoint = new function () {
 			$("#linkedCustomerField").removeClass("qm-card-header__highlighted");
 		}
 
-		switch (calledFrom) {
-			case servicePoint.calledFrom.NONE:
-				//this is a general call to avoid all updates
-				spPoolUpdateNeeded = false;
-				userPoolUpdateNeeded = false;
-				queuesUpdateNeeded = false;
-				break;
+		if (update == servicePoint.update.NONE) {
+			//this is a general call to avoid all updates
+			spPoolUpdateNeeded = false;
+			userPoolUpdateNeeded = false;
+			queuesUpdateNeeded = false;
 		}
 
 		if (spPoolUpdateNeeded) {

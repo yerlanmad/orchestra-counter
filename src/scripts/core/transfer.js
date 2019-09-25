@@ -109,7 +109,7 @@ var transfer = new function() {
             }
             sessvars.state = servicePoint.getState();
             sessvars.statusUpdated = new Date();
-            servicePoint.updateWorkstationStatus(false,null,null,servicePoint.calledFrom.NONE);
+            servicePoint.updateWorkstationStatus(false,null,null,servicePoint.update.NONE);
             if(sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
                 util.showError(jQuery.i18n.prop("error.not.loggedin"));
                 return;
@@ -152,7 +152,7 @@ var transfer = new function() {
             
             sessvars.state = servicePoint.getState();
             sessvars.statusUpdated = new Date();
-            servicePoint.updateWorkstationStatus(false,null,null,servicePoint.calledFrom.NONE);
+            servicePoint.updateWorkstationStatus(false,null,null,servicePoint.update.NONE);
             if(sessvars.state.userState == servicePoint.userState.NO_STARTED_USER_SESSION) {
                 util.showError(jQuery.i18n.prop("error.not.loggedin"));
                 return;
