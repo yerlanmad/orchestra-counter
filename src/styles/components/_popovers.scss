@@ -160,11 +160,15 @@
   }
 
   .pool-popover-action-button-call{
-      width:75%;
+      width:85%;
   }
 
   .pool-popover-action-button-close{
     width:auto;
+    margin-left: 5px;
+    @at-root [dir='rtl'] & {
+        margin-right: 10px ;
+    }
 }
 
   .pool-popover-content{
