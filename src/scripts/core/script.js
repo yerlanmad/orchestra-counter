@@ -2585,11 +2585,11 @@ var servicePoint = new function () {
 				break;
 			case servicePoint.publicEvents.VISIT_TRANSFER_TO_SERVICE_POINT_POOL:
 				sessvars.cfuSelectionSet = true;
-				servicePointPool.renderCounterPool();
+				servicePoint.updateWorkstationStatus(false);
 				break;
 			case servicePoint.publicEvents.VISIT_TRANSFER_TO_USER_POOL:
 				sessvars.cfuSelectionSet = true;
-				userPool.renderUserPool();
+				servicePoint.updateWorkstationStatus(false);
 				break;
 			case servicePoint.publicEvents.USER_SERVICE_POINT_WORK_PROFILE_SET:
 				// If someone else (e.g. an administrator) sets the work profile for
