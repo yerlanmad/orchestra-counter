@@ -501,7 +501,7 @@ var transfer = new function() {
         }
         transferParams.json = JSON.stringify(transferParams.$entity);
         var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/queues/' +  transferParams.queueId + '/visits/',transferParams);
-        queues.updateQueues();
+        queues.updateQueues(true);
         queueViewController.navigateToOverview();
 
         requestStatus.done(function() {
@@ -538,7 +538,7 @@ var transfer = new function() {
         transferParams.json = JSON.stringify(transferParams.$entity);
         spPoolUpdateNeeded = false;
         var requestStatus = spService.putParamsPromised('branches/' +  transferParams.branchId + '/users/' +  transferParams.userId + '/visits/',transferParams);
-        queues.updateQueues();
+        queues.updateQueues(true);
         queueViewController.navigateToOverview();
 
         requestStatus.done(function(err) {
@@ -575,7 +575,7 @@ var transfer = new function() {
         transferParams.json = JSON.stringify(transferParams.$entity);
         userPoolUpdateNeeded = false;
         spService.putParams('branches/' +  transferParams.branchId + '/servicePoints/' +  transferParams.servicePointId + '/visits/',transferParams);
-        queues.updateQueues();
+        queues.updateQueues(true);
         queueViewController.navigateToOverview();
         if (delay) {
           util.showMessage(translate.msg('info.successful.transfer.with.delay', [sessvars.ticketIdToTransfer, aRowData.name, (delay / 60)]), false);
