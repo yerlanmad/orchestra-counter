@@ -206,7 +206,6 @@
           label="Show work profile visits"
           description="Enable to show visits according to work profile in the queue view"
           sortOrder="5014"
-          writeLevel="branch"
           privilege="install:adminAdmin"/>
         <parameter name="mdQueues"
           type="Boolean"
