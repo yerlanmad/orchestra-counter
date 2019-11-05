@@ -9,11 +9,39 @@ This document describes the new features, bug corrections, known issues and reco
 **Note:** Several of the remarks refer to a Jira number (Jira is Qmatic&#39;s internal registration system for bugs), or Pivotal Tracker (internal system for improvements and other issues).
 
 
+<h2>Version 4.0.0.031</h2>
+
+**Date: 05/11/2019**
+
+**Build number: 031**
+
+<h3>Stories</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **165239364** | **Transaction / Service Time** |
+| **164825164** | **Presentation of visits (tickets) by work profile (GAP Spain)** |
+| **164861500** | **Present additional information per visit in user pool/counter pool (GAP BNLX))** |
+| **168215794** | **Arrow key navigation in lists** |
+
+<h3>Bug fixes</h3>
+
+| **Id** | **Release notes** |
+| --- | --- |
+| **169444525** | **Counter UI > User cannot see visits at the bottom of the visit list.** |
+
+
+<h3>Known issues</h3>
+
+<h3>Upgrade instructions</h3>
+
+----------
+
 <h2>Version 4.0.0.029</h2>
 
 **Date: 30/08/2019**
 
-**Build number: 028**
+**Build number: 029**
 
 <h3>Stories</h3>
 
@@ -39,6 +67,7 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
+
 ----------
 
 <h2>Version 4.0.0.027</h2>
@@ -58,15 +87,11 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Bug fixes</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **xxx** xxx |
-
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
+----------
 
 <h2>Version 4.0.0.022</h2>
 
@@ -101,7 +126,6 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -129,7 +153,6 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -140,10 +163,6 @@ This document describes the new features, bug corrections, known issues and reco
 **Build number: 020**
 
 <h3>Stories</h3>
-
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **xxx** xxx |
 
 <h3>Bug fixes</h3>
 
@@ -156,7 +175,6 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -168,10 +186,6 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Stories</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **xxx** xxx |
-
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
@@ -182,7 +196,6 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -200,14 +213,9 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Bug fixes</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Story text** Story text |
-
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -225,14 +233,9 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Bug fixes</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Story text** Story text |
-
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -254,14 +257,9 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Bug fixes</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Story text** Story text |
-
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -279,14 +277,9 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Bug fixes</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Story text** Story text |
-
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -298,10 +291,6 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Stories</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Story header** Story text |
-
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
@@ -311,7 +300,6 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -323,10 +311,6 @@ This document describes the new features, bug corrections, known issues and reco
 
 <h3>Stories</h3>
 
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Story header** Story text |
-
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
@@ -336,7 +320,6 @@ This document describes the new features, bug corrections, known issues and reco
 <h3>Known issues</h3>
 
 <h3>Upgrade instructions</h3>
-----------
 
 ----------
 
@@ -360,6 +343,7 @@ This document describes the new features, bug corrections, known issues and reco
 
 
 <h3>Known issues</h3>
+
 **Orchestra Web Counter**
 
 | **Id/Jira** | **Description** |
@@ -367,6 +351,7 @@ This document describes the new features, bug corrections, known issues and reco
 | **xxx** | **Bug header** Bug text |
 
 <h3>Upgrade Instructions</h3>
+
 ----------
 
 <h3>Copyright notice</h3>
