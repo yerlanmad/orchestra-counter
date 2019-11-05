@@ -370,6 +370,7 @@ var queues = new function() {
             var $ticketListHeader = $("#ticketListHeader");
             $ticketListHeader.empty();
             $ticketListHeader.html(queueTableContainingRow.fnGetData(rowClicked).name);
+            $ticketListHeader.attr('title',queueTableContainingRow.fnGetData(rowClicked).name);
 
             adjustHeightOfTableScrollWrapper('#queueDetailView');
         }

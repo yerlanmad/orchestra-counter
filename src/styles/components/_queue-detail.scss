@@ -20,6 +20,10 @@
         text-transform: uppercase;
         margin: rem(0 $global-standard-margin / 2 0 $global-standard-margin / 2);
         color: $dark-transparent82;
+        max-width: 700px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
     }
 
     &__back-btn {
