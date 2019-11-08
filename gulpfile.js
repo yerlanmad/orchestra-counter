@@ -302,9 +302,9 @@ function connectDevServer(done) {
           changeOrigin: false,
           ws: true
         }),
-        proxy('/workstationterminal/bundle', {
+        proxy('/bundle', {
           target: targetOrchestraUrl,
-          route: '/workstationterminal/bundle',
+          route: '/bundle',
           changeOrigin: true,
           ws: true
         })

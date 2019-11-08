@@ -32,7 +32,7 @@ var init = new function () {
 
         jQuery.i18n.properties({
             name: 'workstationTerminalMessages',
-            path: '/workstationterminal/bundle/',
+            path: '/bundle/',
             mode: 'map',
             language: sessvars.currentUser.locale == " " ? sessvars.systemInformation.defaultLanguage : sessvars.currentUser.locale,
             callback: function () {

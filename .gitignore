@@ -6,3 +6,15 @@ npm-debug.log
 *.utt
 .DS_Store
 .vscode/
+
+# Ignore IDEA project structure
+.idea
+*.iml
+*.ipr
+*.ids
+*.iws
+out
+*bin
+*target
+*.settings
+atlassian-ide-plugin.xml
