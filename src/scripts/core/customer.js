@@ -925,13 +925,37 @@ var customer = new function() {
     }
 
     this.populateEditAttachedCustomerFields = function (prefix, index) {
-        if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit.customerIds != null) {
+        if(typeof sessvars.state.visit !== "undefined" && sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0) {
             // clear form to not have old values in there
             $('#' + prefix + 'CustomerForm input').val("");
             //customer might have been updated elsewhere, fetch from database before display
             var customerId = sessvars.state.visit.customerIds[index]
             sessvars.currentCustomer = spService.get("customers/"+customerId);
 
+            this.setEditFields(prefix, sessvars.currentCustomer)
+            this.setFormButtonsState('#' + prefix + 'CustomerForm', false);
+        } else if (typeof sessvars.state.visit !== "undefined" && typeof sessvars.state.visit.parameterMap.customers !== "undefined") {
+            var firstName;
+            var lastName;
+            if (sessvars.state.visit.parameterMap.primaryCustomerFirstName !== undefined || sessvars.state.visit.parameterMap.primaryCustomerLastName !== undefined) {
+                firstName = sessvars.state.visit.parameterMap.primaryCustomerFirstName;
+                lastName = sessvars.state.visit.parameterMap.primaryCustomerLastName
+            } else {
+                var customerName = sessvars.state.visit.parameterMap.customers;
+                var namePart = customerName.split(' ');
+                firstName = namePart[0];
+                namePart.shift();
+                lastName = namePart.join(' ');
+            }
+            var tempCustomer = {    firstName : firstName,
+                                    lastName : lastName,
+                                    properties : {
+                                        email : sessvars.state.visit.parameterMap.email,
+                                        phoneNumber : sessvars.state.visit.parameterMap.phoneNumber,
+                                        dateOfBirth : sessvars.state.visit.parameterMap.dateOfBirth
+                                    }
+                                }
+            sessvars.currentCustomer = tempCustomer;
             this.setEditFields(prefix, sessvars.currentCustomer)
             this.setFormButtonsState('#' + prefix + 'CustomerForm', false);
         }
@@ -1026,37 +1050,53 @@ var customer = new function() {
 
             customerParameterized.customerId = sessvars.currentCustomer.id;
 
-			var params = servicePoint.createParams();
-            params.json =jsonString(customerParameterized);
-            spService.putParams("customers/"+customerParameterized.customerId, params);
+            if (sessvars.currentCustomer.id !== undefined) {
+                var params = servicePoint.createParams();
+                params.json =jsonString(customerParameterized);
+                spService.putParams("customers/"+customerParameterized.customerId, params);
 
-            //update current customer i.e. the selected customer, NOT the linked customer
-            sessvars.currentCustomer = customerParameterized.$entity;
-            sessvars.currentCustomer.id = customerParameterized.customerId;
+                //update current customer i.e. the selected customer, NOT the linked customer
+                sessvars.currentCustomer = customerParameterized.$entity;
+                sessvars.currentCustomer.id = customerParameterized.customerId;
 
-            //update linked customer field if the customer is linked to the current transaction
-            var $linkedCustomerField = $("#linkedCustomerField");
-            if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
-                typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
-                sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
-                sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
+                //update linked customer field if the customer is linked to the current transaction
+                var $linkedCustomerField = $("#linkedCustomerField");
+                if(servicePoint.hasValidSettings(false) && sessvars.state.userState == servicePoint.userState.SERVING &&
+                    typeof sessvars.state.visit !== "undefined" && sessvars.state.visit != null &&
+                    sessvars.state.visit.customerIds != null && sessvars.state.visit.customerIds.length > 0 &&
+                    sessvars.state.visit.customerIds[0] == customerParameterized.customerId) {
                         $linkedCustomerField.html(customerParameterized.$entity.firstName + " " + customerParameterized.$entity.lastName);
                         $linkedCustomerField.css("display", "");
                         this.setAmountOfAdditionalCustomers();
                         $('#ticketNumber').removeClass('qm-card-header__highlighted');
-            } else {
-                // $linkedCustomerField.hide();
-            }
-            if(shouldPop === true) {
-                if(sessvars.state.visit.customerIds[0] === sessvars.currentCustomer.id) {
-                    var updateParams = servicePoint.createParams();
-                    updateParams.customerId = sessvars.currentCustomer.id;
-                    updateParams.visitId = sessvars.state.visit.id;
-                    updateParams.json = '{"customers":"' + customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName + '"}';
-                    spService.putParams("branches/" + params.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+                } else {
+                    // $linkedCustomerField.hide();
                 }
+                if(shouldPop === true) {
+                    if(sessvars.state.visit.customerIds[0] === sessvars.currentCustomer.id) {
+                        var updateParams = servicePoint.createParams();
+                        updateParams.customerId = sessvars.currentCustomer.id;
+                        updateParams.visitId = sessvars.state.visit.id;
+                        updateParams.json = '{"customers":"' + customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName + '"}';
+                        spService.putParams("branches/" + params.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+                    }
 
-                cardNavigationController.pop();
+                    cardNavigationController.pop();
+                }
+            } else if (typeof sessvars.state.visit !== "undefined" && typeof sessvars.state.visit.parameterMap.customers !== "undefined") {
+                var tempCustomer = {    customers : customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName,
+                                        email : customerParameterized.$entity.properties.email,
+                                        phoneNumber : customerParameterized.$entity.properties.phoneNumber,
+                                        dateOfBirth : customerParameterized.$entity.properties.dateOfBirth,
+                                        primaryCustomerFirstName : customerParameterized.$entity.firstName,
+                                        primaryCustomerLastName : customerParameterized.$entity.lastName,
+                                        primaryCustomerEmail : customerParameterized.$entity.properties.email,
+                                        primaryCustomerPhoneNumber : customerParameterized.$entity.properties.phoneNumber,
+                                        primaryCustomerDateOfBirth : customerParameterized.$entity.properties.dateOfBirth,
+                }
+                var updateParams = {};
+                updateParams.json = JSON.stringify(tempCustomer);
+                spService.putParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
             }
         }
     };
