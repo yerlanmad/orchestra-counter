@@ -1434,10 +1434,10 @@ var servicePoint = new function () {
 		params.branchId = sessvars.branchId;
 		params.visitId = sessvars.state.visit.id;
 		params.$entity = {
-			'custom1': newNotes
+			'custom1': encodeURIComponent(newNotes)
 		};
 		// params.json = '{"custom1":"' + newNotes + '"}';
-		params.json = JSON.stringify({custom1: newNotes});
+		params.json = JSON.stringify({custom1:  encodeURIComponent(newNotes)});
 		newNotes = spService.putParams("branches/" + params.branchId + "/visits/"
 			+ params.visitId + "/parameters", params);
 
