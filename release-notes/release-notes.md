@@ -30,11 +30,6 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **169444525** | **Counter UI > User cannot see visits at the bottom of the visit list.** |
 
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
-
 ----------
 
 <h2>Version 4.0.0.029</h2>
@@ -64,10 +59,6 @@ This document describes the new features, bug corrections, known issues and reco
 | **167452543** | **WCAG - Add customer > mandatory fields are getting red once user tab on it.** |
 | **167479893** | **Add Marks > validation issues in no of marks field** |
 
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
-
 ----------
 
 <h2>Version 4.0.0.027</h2>
@@ -84,12 +75,6 @@ This document describes the new features, bug corrections, known issues and reco
 | **166026887** | **WCAG - Tabbing NL20/NL30** Improve tabbing, change focus to popovers on initialization and destruction, change styling to indicate focus on custom tabable elements, group links in header |
 | **166080611** | **WCAG - Bypass Blocks - NL50** Add anchor link shortcuts to card and action panel |
 | **166030010** | **WCAG - SW60 - Move Focus ** Move focus to card top when pressing WALK-IN, Add service to visit, Add marks, Call next, Add Ds/Outcome |
-
-<h3>Bug fixes</h3>
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
 
 ----------
 
@@ -123,10 +108,6 @@ This document describes the new features, bug corrections, known issues and reco
 | **COUNTER-143** | **Need to click TWICE after search** Fixed event listener for custom search |
 | **COUNTER-145** | **workstationTerminalMessages.properties > spelling mistakes in English phases** Corrected spelling |
 
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
-
 ----------
 
 <h2>Version 4.0.0.021</h2>
@@ -150,10 +131,6 @@ This document describes the new features, bug corrections, known issues and reco
 | **COUNTER-122** | **Possible to press counter before a branch is selected** Removed outline for custom select |
 | **COUNTER-125** | **Expressia can still be used after the customer is transferred** UTT Changes to Expressia and Expressia_D924 |
 
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
-
 ----------
 
 <h2>Version 4.0.0.020</h2>
@@ -162,19 +139,12 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Build number: 020**
 
-<h3>Stories</h3>
-
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
 | **COUNTER-119** | **Filter text - transfer options** Color change on input fields and added clear button to search fields in transfer searches and walk in card. |
 | **COUNTER-120** | **Servicepoint LED does not switch to "open" message when ending visit after adding service** Changes to UTT for unitEvent END_SERVICE. |
-
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
 
 ----------
 
@@ -184,18 +154,12 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Build number: 019**
 
-<h3>Stories</h3>
-
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
 | **COUNTER-116** | **Undefined Undefined selected when user click "No Customer found text"** Not setting click listener when result array is empty. |
 | **COUNTER-117** | **Update readme instruction on github** Added fallback proxy url to orchestra and assuming it is running on localhost port 8080, updated readme with changed filename of gulp config. |
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
 
 ----------
 
@@ -211,12 +175,6 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **161107886** | **AM/PM & 24 Hour format** Now using orchestra setting for am/pm to determine how to display appointment times in queue and on visit card |
 
-<h3>Bug fixes</h3>
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
-
 ----------
 
 <h2>Version 4.0.0.017</h2>
@@ -230,12 +188,6 @@ This document describes the new features, bug corrections, known issues and reco
 | **Id** | **Release notes** |
 | --- | --- |
 | **161047690** | **Make workstationterminal.war compatible between current Orchestra 7.0 (4.0.0.418) and future 7.1** Update web.xml |
-
-<h3>Bug fixes</h3>
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
 
 ----------
 
@@ -255,12 +207,6 @@ This document describes the new features, bug corrections, known issues and reco
 | **160168889** | **Show Serving Time info next to Transaction Time** Show expected Serving Time info next to Transaction Time |
 | **155973320** | **Date of birth add to Customer object** Add date of birth to create and edit customer and print date of birth in additional customer list |
 
-<h3>Bug fixes</h3>
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
-
 ----------
 
 <h2>Version 4.0.0.015</h2>
@@ -275,12 +221,6 @@ This document describes the new features, bug corrections, known issues and reco
 | --- | --- |
 | **160163513** | **Update icons for Counter** Update icons for Counter and UTTs |
 
-<h3>Bug fixes</h3>
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
-
 ----------
 
 <h2>Version 4.0.0.014</h2>
@@ -289,17 +229,11 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Build number: 014**
 
-<h3>Stories</h3>
-
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
 | **158627159** | **Search customer with phone number with + does not return any response** |
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
 
 ----------
 
@@ -309,17 +243,11 @@ This document describes the new features, bug corrections, known issues and reco
 
 **Build number: 013**
 
-<h3>Stories</h3>
-
 <h3>Bug fixes</h3>
 
 | **Id** | **Release notes** |
 | --- | --- |
 | **157141258** | **Transferring visits does not update the order in the queue GUI** |
-
-<h3>Known issues</h3>
-
-<h3>Upgrade instructions</h3>
 
 ----------
 
@@ -328,29 +256,6 @@ This document describes the new features, bug corrections, known issues and reco
 **Date: 10/01/2018**
 
 **Build number: 001**
-
-<h3>Stories</h3>
-
-| **Id** | **Release notes** |
-| :--- | :--- |
-| **xxx** | **Story header** Story text |
-
-<h3>Bug fixes</h3>
-
-| **Id** | **Release notes** |
-| --- | --- |
-| **xxx** | **Bug header** Bug text |
-
-
-<h3>Known issues</h3>
-
-**Orchestra Web Counter**
-
-| **Id/Jira** | **Description** |
-| --- | --- |
-| **xxx** | **Bug header** Bug text |
-
-<h3>Upgrade Instructions</h3>
 
 ----------
 
