@@ -262,6 +262,7 @@ var queues = new function() {
                         "sType": "qm-sort",
                         "mData": null,
                         "sWidth": "",
+                        "mDataProp": "parameterMap.customers",
                         "sDefaultContent": ""},
                     /* Actions */      {"sClass": "qm-table__middle-column",
                         "mDataProp": "currentVisitService.serviceExternalName",
@@ -416,6 +417,7 @@ var queues = new function() {
                     "sType": "qm-sort",
                     "mData": null,
                     "sWidth": "",
+                    "mDataProp": "parameterMap.customers",
                     "sDefaultContent": ""
                 },
                 /* Service name */
