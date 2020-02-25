@@ -968,8 +968,8 @@ var customer = new function() {
             var tempCustomer = {    firstName : firstName,
                                     lastName : lastName,
                                     properties : {
-                                        email : sessvars.state.visit.parameterMap.email,
-                                        phoneNumber : sessvars.state.visit.parameterMap.phoneNumber,
+                                        email : sessvars.state.visit.parameterMap.email !== undefined ? sessvars.state.visit.parameterMap.email : sessvars.state.visit.parameterMap.primaryCustomerEmail,
+                                        phoneNumber : sessvars.state.visit.parameterMap.phoneNumber !== undefined ? sessvars.state.visit.parameterMap.phoneNumber : sessvars.state.visit.parameterMap.primaryCustomerPhoneNumber,
                                         dateOfBirth : sessvars.state.visit.parameterMap.primaryCustomerDateOfBirth
                                     }
                                 }
@@ -1118,7 +1118,11 @@ var customer = new function() {
                 }
                 var updateParams = {};
                 updateParams.json = JSON.stringify(tempCustomer);
-                spService.putParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+                sessvars.state.visit = spService.putParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+
+                $linkedCustomerField = $("#linkedCustomerField");
+                $linkedCustomerField.html(tempCustomer.customers);
+                $linkedCustomerField.css("display", "");
 
                 cardNavigationController.pop();
             }
