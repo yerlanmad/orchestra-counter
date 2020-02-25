@@ -72,6 +72,9 @@ var init = new function () {
             var multiplier = 0;
             var ax = [], bx = [];
 
+            if (a === null) { a = 0 }
+            if (b === null) { b = 0 }
+
             var a = multiplier ? (parseFloat(a) * multiplier).toString() : a.toString();
             var b = multiplier ? (parseFloat(b) * multiplier).toString() : b.toString();
 
@@ -92,6 +95,9 @@ var init = new function () {
         jQuery.fn.dataTableExt.oSort['qm-sort-desc'] = function (a, b) {
             var multiplier = 0;
             var ax = [], bx = [];
+
+            if (a === null) { a = 0 }
+            if (b === null) { b = 0 }
 
             var a = multiplier ? (parseFloat(a) * multiplier).toString() : a.toString();
             var b = multiplier ? (parseFloat(b) * multiplier).toString() : b.toString();

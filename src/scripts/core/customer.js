@@ -921,7 +921,7 @@ var customer = new function() {
                                         $("#" + prefix + property + 'Month').val(month);
                                         $("#" + prefix + property + 'Month').trigger('chosen:updated');
 
-                                        $("#" + prefix + property + 'Day').val(day);
+                                        $("#" + prefix + property + 'Day').val(day.split('T')[0]);
                                         $("#" + prefix + property + 'Year').val(year);
                                     }
                                 }
@@ -970,7 +970,7 @@ var customer = new function() {
                                     properties : {
                                         email : sessvars.state.visit.parameterMap.email,
                                         phoneNumber : sessvars.state.visit.parameterMap.phoneNumber,
-                                        dateOfBirth : sessvars.state.visit.parameterMap.dateOfBirth
+                                        dateOfBirth : sessvars.state.visit.parameterMap.primaryCustomerDateOfBirth
                                     }
                                 }
             sessvars.currentCustomer = tempCustomer;
@@ -1102,6 +1102,10 @@ var customer = new function() {
                     cardNavigationController.pop();
                 }
             } else if (typeof sessvars.state.visit !== "undefined" && typeof sessvars.state.visit.parameterMap.customers !== "undefined") {
+                var dob = "";
+                if (customerParameterized.$entity.properties.dobYear) {
+                    dob = new Date(customerParameterized.$entity.properties.dobYear + '-' + customerParameterized.$entity.properties.dobMonth + '-' + customerParameterized.$entity.properties.dobDay);
+                }
                 var tempCustomer = {    customers : customerParameterized.$entity.firstName + ' ' + customerParameterized.$entity.lastName,
                                         email : customerParameterized.$entity.properties.email,
                                         phoneNumber : customerParameterized.$entity.properties.phoneNumber,
@@ -1110,11 +1114,13 @@ var customer = new function() {
                                         primaryCustomerLastName : customerParameterized.$entity.lastName,
                                         primaryCustomerEmail : customerParameterized.$entity.properties.email,
                                         primaryCustomerPhoneNumber : customerParameterized.$entity.properties.phoneNumber,
-                                        primaryCustomerDateOfBirth : customerParameterized.$entity.properties.dateOfBirth,
+                                        primaryCustomerDateOfBirth : dob,
                 }
                 var updateParams = {};
                 updateParams.json = JSON.stringify(tempCustomer);
                 spService.putParams("branches/" + sessvars.state.branchId + "/visits/" + sessvars.state.visit.id + "/parameters", updateParams);
+
+                cardNavigationController.pop();
             }
         }
     };
