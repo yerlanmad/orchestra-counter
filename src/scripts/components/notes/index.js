@@ -73,7 +73,7 @@ window.$Qmatic.components.NotesController.prototype = {
         this._toggleErrorLabel(false);
         this.navigateToPresentational();
         this.notesPresentationalBtnText.innerText = text;
-        this.notesInput.value = text;
+        this.notesInput.value = decodeURIComponent(text);
         this._updateNotesInput();
     },
     _save: function () {
