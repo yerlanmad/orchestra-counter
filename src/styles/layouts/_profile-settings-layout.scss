@@ -9,4 +9,19 @@
             }
         }
     }
+
+    .qm-notification-selection {
+        width: 100%;
+        margin-top: 1rem;
+        display: none !important;
+        &__checkbox {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          vertical-align: -webkit-baseline-middle;
+          padding-right: 16px;
+          margin-right: 0.7rem;
+    
+        }
+      }
 }

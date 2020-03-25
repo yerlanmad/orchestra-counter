@@ -664,6 +664,11 @@ var util = new function () {
         }, 0);
     };
 
+    this.onToggleNotificationStatus = function(target) {
+        var isNotificationEnable = $(target).prop('checked');
+        this.setNotificationStatus(isNotificationEnable);
+    }
+
     this.onToggleAutoClose = function(target) {
         var $messageContainer = $('#message');
         var isAutoCloseChecked = $(target).prop('checked');
@@ -708,6 +713,60 @@ var util = new function () {
 
     this.setIsAutoCloseToast = function(value) {
         localStorage.setItem('isAutoCloseToast', value);
+    }
+
+    this.setNotificationStatus = function(value) {
+        if(value) {
+            if(Notification.permission === 'default') {
+                Notification.requestPermission().then(function (permission) {
+                    // If the user accepts, let's create a notification
+                    if (permission === "granted") {
+                        this.setNotificationInStorage(value);
+                    } else {
+                        util.updateUINofiticationStatus(false);
+                    }
+                });
+            } else if(Notification.permission === 'granted') {
+                this.setNotificationInStorage(value);
+            } else {
+                util.updateUINofiticationStatus(false);
+                util.showMessage(jQuery.i18n
+					.prop('info.notification.enable.error'), true);
+            }
+        } else {
+            this.setNotificationInStorage(value);
+        }
+    }
+
+    this.updateUINofiticationStatus = function(value) {
+        document.getElementById("qmNotificationSelection").checked = value;
+    }
+
+    this.getNotificationStatus = function() {
+        var status = this.getNotificationInStorage();
+        return status === null ? false : status.notificationStatus;
+    }
+
+    this.getNotificationAvailablity = function() {
+        return ("Notification" in window);
+    }
+
+    this.setNotificationInStorage = function(isNotificationEnable) {
+        this.getNotificationInStorage();
+        var notificationStatusObj = {
+            userId : sessvars.userId,
+            notificationStatus : isNotificationEnable
+        }
+        localStorage.setItem("notificationStatus", JSON.stringify(notificationStatusObj))
+    }
+
+    this.getNotificationInStorage = function() {
+        var notificationStatusObj = JSON.parse(localStorage.getItem("notificationStatus"));
+        if (notificationStatusObj && notificationStatusObj.userId === sessvars.userId) {
+            return notificationStatusObj;
+        } else {
+            return null;
+        }
     }
 
     this.removeMe = function (toBeRemovedId, hideMessageTime) {

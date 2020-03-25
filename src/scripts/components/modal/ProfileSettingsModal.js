@@ -7,6 +7,11 @@ window.$Qmatic.components.modal.ProfileSettingsModal = function (selector) {
             window.$Qmatic.components.modal.ProfileSettingsModal.prototype.onInit.call(this, selector);
             this.hide()
         }
+
+        var notificationPanel = document.getElementById("qmNotificaitonContainer");
+        notificationPanel.style.display = util.getNotificationAvailablity() ? "block" : "none";
+
+        util.updateUINofiticationStatus(util.getNotificationStatus());
     }
 
     this.cleanUp = function () {

@@ -57,6 +57,15 @@
 
                     </div>
                 </div>
+
+                <div id="qmNotificaitonContainer" class="qm-notification-selection">
+                    <label class="qm-checkbox">
+                        <input id="qmNotificationSelection" onchange="util.onToggleNotificationStatus(this)" onclick="this.blur()" class="qm-checkbox__input" type="checkbox">
+                            <span class="qm-checkbox__background qm-checkbox__background__extend"></span>
+                            <i class="qm-checkbox__icon qm-checkbox__icon-extend icon-font" aria-hidden="true"></i>
+                            <label for="qmNotificationSelection" id="selectNotificationModal" class="qm-checkbox__input-text"></label>
+                    </label>
+                </div>
             </div>
             <div class="qm-card__footer-section">
                 <div class="qm-generic-layout qm-generic-layout--align-right">

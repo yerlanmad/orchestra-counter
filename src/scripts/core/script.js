@@ -177,7 +177,11 @@ var servicePoint = new function () {
 		VISIT_TRANSFER_TO_USER_POOL: "VISIT_TRANSFER_TO_USER_POOL",
 		VISIT_RECYCLE: "VISIT_RECYCLE",
 		CFU_SELECTION_DONE: "CFU_SELECTION_DONE",
-		UNSUPPORTED: "UNSUPPORTED"
+		UNSUPPORTED: "UNSUPPORTED",
+		APPOINTMENT_QUEUE_POPULATED: "APPOINTMENT_QUEUE_POPULATED",
+        QUEUE_POPULATED: "QUEUE_POPULATED",
+        USER_POOL_POPULATED: "USER_POOL_POPULATED",
+        SP_POOL_POPULATED: "SP_POOL_POPULATED"
 	};
 
 	this.update = {
@@ -512,6 +516,8 @@ var servicePoint = new function () {
 		if (unitId != "-1") {
 			$Qmatic.components.dropdown.counterSelection.clearError()
 		}
+
+		setTempUnitTypeModules();
 	};
 
 	// show profiles in settings window and in status row
@@ -2360,6 +2366,38 @@ var servicePoint = new function () {
 		window.$Qmatic.components.header.setInformation(sessvars.branchName, sessvars.servicePointName, sessvars.state.workProfileName);
 	};
 
+	var queuePopulated = function (event) {
+		if(util.getNotificationAvailablity() && util.getNotificationStatus()) {
+			if(Notification.permission === 'granted') {
+				var queueId = parseInt(event.E.prm.queueId/100000000000);
+                var queueIndex = window.myQueueIds.indexOf(queueId);
+                if (queueIndex >= 0) {
+					var message = "";
+					var img = './images/application.png';
+                    if (event.E.evnt == servicePoint.publicEvents.APPOINTMENT_QUEUE_POPULATED) {
+                        message = jQuery.i18n.prop('info.notification.appoinmentMessage');
+                    } else {
+                        message = jQuery.i18n.prop('info.notification.message');
+					}
+
+					var isMacPlatform = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);i
+				
+					var notification;
+					if (isMacPlatform){
+						notification = new Notification(message);
+					} else {
+						notification = new Notification(message, {icon : img});
+					}
+					
+					notification.onclick(function(){
+						servicePoint.updateWorkstationStatus(false);
+					});
+                }
+				
+			}
+		}
+	}
+
 	var doEndUserSession = function () {
 		try {
 			var params = servicePoint.createParams();
@@ -2626,6 +2664,8 @@ var servicePoint = new function () {
 				sessvars.cfuSelectionSet = true;
 				servicePoint.updateWorkstationStatus();
 				break;
+			case servicePoint.publicEvents.QUEUE_POPULATED:
+				queuePopulated(processedEvent);
 			default:
 				break;
 		}

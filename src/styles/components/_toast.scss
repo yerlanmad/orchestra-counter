@@ -116,7 +116,11 @@ label {
                 width: 42px;
                 height: 42px;
                 background-color: rgba(255,255,255, 0.2);   
-                display: inline-block;         
+                display: inline-block;    
+                
+                &__extend {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
         }
     }
 
@@ -125,6 +129,10 @@ label {
                 background-color: rgba(255,255,255, 0.4);
                 background-size: 100%;
                 transition: background 0s;
+
+                &__extend {
+                    background-color: rgba(0, 0, 0, 0.4);
+                }
         }
     }
 
@@ -160,6 +168,10 @@ label {
                 left: auto;
                 right: -12px;
             } 
+
+            &__extend {
+                background-color: transparent;
+            }
         }
 
         &__input-text {
@@ -186,6 +198,17 @@ label {
             transition: background 0s;
         }
 
+        &__input:focus ~ .qm-checkbox__background__extend {
+            background-color: rgba(255,255,255, 0.2);   
+            display: inline-block;  
+        }
+
+        &__input:checked:focus ~ .qm-checkbox__background__extend {
+            background-color: rgba(255,255,255, 0.4);
+            background-size: 100%;
+            transition: background 0s;
+        }
+
         &__input ~ .qm-checkbox__icon {
             font-size: 16px;
             display: inline-block;
@@ -197,8 +220,17 @@ label {
             position: relative;
         }
 
+        &__input ~ .qm-checkbox__icon-extend {
+            border: 2px solid rgba(0,0,0,.38);
+        }
+
         &__input:checked ~ .qm-checkbox__icon { 
             background-color: #ebeaea;
+            color: $qmatic-aquamarine;
+        }
+
+        &__input:checked ~ .qm-checkbox__icon-extend {
+            background-color:transparent;
             color: $qmatic-aquamarine;
         }
     

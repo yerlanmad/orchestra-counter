@@ -38,6 +38,7 @@ minTimeBetweenCalls = '';
 singleSession = false;
 expectedTransactionTimeEnabled = false;
 ServiceTransactionTimeEnabled = true;
+enableNotificationUtt = false;
 
 queueRefreshTime = 30;								// refresh time in seconds, please note that lowering this value can decrease performance
 
@@ -49,6 +50,12 @@ function showModules() {
 		$('.js-add-customer').attr("style", "");
 	} else {
 		$('.js-add-customer').hide();
+	}
+
+	if (enableNotificationUtt == true && location.protocol === 'https:') {
+		$('#qmNotificaitonContainer').attr("style", "display:block !important");
+	} else {
+		$('#qmNotificaitonContainer').hide();
 	}
 
 	if (moduleDeliveredServicesEnabled == true) {
@@ -232,6 +239,15 @@ function showModules() {
 	}
 }
 
+function setTempShowModule() {
+
+}
+
+function setTempUnitTypeModules(val) {
+	
+
+	setTempShowModule();
+}
 
 function setUnitTypeModules(val) {
 	var params = "";
@@ -368,6 +384,10 @@ function setUnitTypeModules(val) {
 		forceLogoutEnabled = params.forceLogoutEnabled;
 	} else {
 		forceLogoutEnabled = false;
+	}
+
+	if (params.notificationOpt != undefined) {
+		enableNotificationUtt = params.notificationOpt;					
 	}
 
 	showModules();

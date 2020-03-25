@@ -37,6 +37,9 @@
     ====================================
     Version    Date         Comments                                  Signature
     =========  ===========  ========================================  =========
+    7.0.14     2020-03-18   Added parameter to enable/diable          kasran
+                            notification 
+
     7.0.0.13   2019-09-16   Added parameter to workprofile visit view chamut
     7.0.0.12   2019-09-06   Added parameter to serve transaction time udaban
     7.0.0.11   2019-09-03   updated description for store next param  chamut
@@ -86,7 +89,7 @@
 
 <unit name="WebServicePoint_D924"
       frameworkVersion="2"
-      unitVersion="7.0.0.13"
+      unitVersion="7.0.14"
       type="SERVICE_POINT"
       defaultNoUnits="1"
       maxNoUnits="127"
@@ -427,6 +430,14 @@
           writeLevel="profile"
           label="Force logout"
           description="If enabled the user can forcefully logout another user that has an ongoing visit"
+          privilege="install:adminAdmin"/>
+        <parameter name="notificationOpt"
+          sortOrder="5038"
+          type="Boolean"
+          defaultValue="false"
+          writeLevel="profile"
+          label="Enable notification"
+          description="If enabled, the user is notified when a queue goes from 0 to 1 visit. This setting can only be used when https is enabled."
           privilege="install:adminAdmin"/>
 
 
@@ -1025,6 +1036,94 @@
         ]]>
       </unitEventHandler>
     </unitEvent>
+    <unitEvent name="PUBLIC.APPOINTMENT_QUEUE_POPULATED">
+			<unitEventHandler type="GROOVY">
+				<![CDATA[
+				
+				import com.qmatic.qp.api.device.DeviceEvent
+				
+        wsp = unit.getDevice("Web service point")
+        DeviceEvent wspDeviceEvent = new DeviceEvent()
+        wspDeviceEvent.setUnitId(wsp.getId())
+        wspDeviceEvent.setEventName("APPOINTMENT_QUEUE_POPULATED")
+        wspDeviceEvent.setParameters(event.getParameters())
+        try {
+          wsp.sendEvent(wspDeviceEvent)
+          result = true
+        } catch(e) {
+          //  not ok
+          result = false
+        }
+      
+				]]>
+			</unitEventHandler>
+        </unitEvent>
+		<unitEvent name="PUBLIC.QUEUE_POPULATED">
+			<unitEventHandler type="GROOVY">
+				<![CDATA[
+		
+				import com.qmatic.qp.api.device.DeviceEvent
+				
+        wsp = unit.getDevice("Web service point")
+        DeviceEvent wspDeviceEvent = new DeviceEvent()
+        wspDeviceEvent.setUnitId(wsp.getId())
+        wspDeviceEvent.setEventName("QUEUE_POPULATED")
+        wspDeviceEvent.setParameters(event.getParameters())
+        try {
+          wsp.sendEvent(wspDeviceEvent)
+          result = true
+        } catch(e) {
+          //  not ok
+          result = false
+        }
+      
+				]]>
+			</unitEventHandler>
+        </unitEvent>
+		<unitEvent name="PUBLIC.USER_POOL_POPULATED">
+			<unitEventHandler type="GROOVY">
+				<![CDATA[
+		
+				import com.qmatic.qp.api.device.DeviceEvent
+				
+        wsp = unit.getDevice("Web service point")
+        DeviceEvent wspDeviceEvent = new DeviceEvent()
+        wspDeviceEvent.setUnitId(wsp.getId())
+        wspDeviceEvent.setEventName("USER_POOL_POPULATED")
+        wspDeviceEvent.setParameters(event.getParameters())
+        try {
+          wsp.sendEvent(wspDeviceEvent)
+          result = true
+        } catch(e) {
+          //  not ok
+          result = false
+        }
+      
+				]]>
+			</unitEventHandler>
+        </unitEvent>
+		<unitEvent name="PUBLIC.SP_POOL_POPULATED">
+			<unitEventHandler type="GROOVY">
+				<![CDATA[
+		
+				import com.qmatic.qp.api.device.DeviceEvent
+				
+        wsp = unit.getDevice("Web service point")
+        DeviceEvent wspDeviceEvent = new DeviceEvent()
+        wspDeviceEvent.setUnitId(wsp.getId())
+        wspDeviceEvent.setEventName("SP_POOL_POPULATED")
+        wspDeviceEvent.setParameters(event.getParameters())
+        try {
+          wsp.sendEvent(wspDeviceEvent)
+          result = true
+        } catch(e) {
+          //  not ok
+          result = false
+        }
+      
+				]]>
+			</unitEventHandler>
+        </unitEvent>
     <unitEvent name="ADD_USER_TO_STORE_NEXT">
       <unitEventHandler type="GROOVY">
         <![CDATA[

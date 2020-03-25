@@ -108,6 +108,7 @@ var i18n = new function () {// helper method (that doesnt bomb) for setting inne
         i18nSafe("selectBranchModal", 'object.branch');
         i18nSafe("selectWorkstationModal", 'object.logicWorkstation');
         i18nSafe("selectProfileModal", 'object.profile');
+        i18nSafe("selectNotificationModal", 'object.notification');
 //		i18nSafe("selectSkillModal", 'object.skill');
         i18nSafe("chooseBranch", 'field.chooseBranch');
         i18nSafe("chooseWorkstation", 'field.chooseCounter');
